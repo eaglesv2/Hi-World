@@ -151,14 +151,14 @@
 			<version>2.7.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+		<!-- aop이용 -->
 		<dependency>
 			<groupId>aopalliance</groupId>
 			<artifactId>aopalliance</artifactId>
 			<version>1.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
+		<!-- Spring aop이용 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
