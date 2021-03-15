@@ -6,5 +6,6 @@
 <configuration>
 	<typeAliases>
 		<!-- 저 type명을 별명으로 간단히 사용하겠다. -->
+		<typeAlias type="com.hiworld.vo.ClientVO" alias="clientVO"/>
 	</typeAliases>
 </configuration>
