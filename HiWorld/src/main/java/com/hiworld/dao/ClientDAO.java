@@ -26,4 +26,5 @@ public interface ClientDAO {
 	/* 회원 정보 삭제 */
 	int deleteClient(ClientVO clientVO);
 	
+	
 }

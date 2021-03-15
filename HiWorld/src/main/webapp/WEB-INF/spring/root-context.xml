@@ -8,8 +8,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- DB연결하는 커넥트 -->
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mariadb://jdbc:mariadb://hi-world.cvlf2noxnadn.ap-northeast-2.rds.amazonaws.com:3306/Hi_World"></property>
 		<property name="username" value="Hi_World"></property>
@@ -35,7 +34,7 @@
 	<!-- mapper interface: mapping파일의 sql call을 위한 interface 즉, mapping 파일의 sql을 java interface로 호출하게 해줌 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 이 패키지 아래 모든 인터페이스를 mapper 인터페이스로 인식 -->
-		<property name="basePackage" value="com.test.test" />
+		<property name="basePackage" value="com.hiworld" />
 	</bean>
 	
 	<!-- DataSourceTransactionManager: 주로 jdbc나 mybatis로 db접근시 사용 -->
