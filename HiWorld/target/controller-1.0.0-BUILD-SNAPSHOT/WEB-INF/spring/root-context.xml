@@ -60,5 +60,22 @@
 	<!-- @Transactional 사용해서 트랜잭션 처리 가능하게 함(자동 롤백) -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="SqlSessionFectory" />
+	</bean> 
+
+	<!-- mapper interface : mapping파일의 sql call을 위한 interface -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hiworld.user.service.dao" />
+			<!-- 이 패키지 아래 모든 interface가 mapper interface로 인식 -->
+	</bean>
+	
+	<!-- DataSourceTransactionManager : 주로 jdbc나 mybatis로 db에 접근시 사용 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 이거 때문에 dataSource 에러 뜸 이유는 모름 -->
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
 </beans>
 
