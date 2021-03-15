@@ -22,7 +22,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+
 	<!-- 이 패키지 아래에 있는것들 전부 다 빈객체 자동생성 -->
 	<context:component-scan base-package="com.hiworld.controller" />
 	
@@ -30,6 +30,7 @@
 	<mvc:annotation-driven/>
 	<!-- 스프링에서 처리할 수 없는 요청은 tomcat에 위임 -->
 	<mvc:default-servlet-handler/>
+
 	
 	
 	

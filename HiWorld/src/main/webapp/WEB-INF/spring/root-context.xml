@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -9,8 +10,7 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- DB연결하는 커넥트 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
@@ -19,6 +19,7 @@
         <property name="password" value="Hi_World"></property>
     </bean>
  
+
  	<!-- SqlSessionFactory(자바와 마이바티스를 연결해주며 환결설정파일 등록하는 곳) -->
 	<bean id="SqlSessionFectory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 마이바티스에 DB값 등록 -->
@@ -51,3 +52,29 @@
 	<!-- <tx:annotation-driven transaction-manager="transactionManager"/>
 	 얘를 사용하면 dataSource에러 뜸 이유? 몰라!그딴거-->
 </beans>
+
+   <!-- value는 값을 지정 ref는 이미 지정한 값을 가져오는 것 -->
+	<bean id="SqlSessionFectory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:/mappers/*Mapper.xml" />
+	</bean>
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="SqlSessionFectory" />
+	</bean> 
+
+	<!-- mapper interface : mapping파일의 sql call을 위한 interface -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.hiworld.user.service.dao" />
+			<!-- 이 패키지 아래 모든 interface가 mapper interface로 인식 -->
+	</bean>
+	
+	<!-- DataSourceTransactionManager : 주로 jdbc나 mybatis로 db에 접근시 사용 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 이거 때문에 dataSource 에러 뜸 이유는 모름 -->
+	<tx:annotation-driven transaction-manager="transactionManager" /> 
+</beans>
+

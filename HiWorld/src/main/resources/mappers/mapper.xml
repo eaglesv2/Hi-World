@@ -43,3 +43,4 @@
 		<!-- ALTER 를 이용해서 table구조 바꾸기도 가능 -->
 	</delete>
 </mapper>
+
