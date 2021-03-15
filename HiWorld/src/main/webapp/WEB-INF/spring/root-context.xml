@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- DB -->
+	<!-- DB연결하는 커넥트 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
         <property name="url" value="jdbc:mariadb://jdbc:mariadb://hi-world.cvlf2noxnadn.ap-northeast-2.rds.amazonaws.com:3306/Hi_World"></property>
@@ -12,30 +19,35 @@
         <property name="password" value="Hi_World"></property>
     </bean>
  
-   <!-- value는 값을 지정 ref는 이미 지정한 값을 가져오는 것 -->
-
+ 	<!-- SqlSessionFactory(자바와 마이바티스를 연결해주며 환결설정파일 등록하는 곳) -->
 	<bean id="SqlSessionFectory" class="org.mybatis.spring.SqlSessionFactoryBean">
-
+		<!-- 마이바티스에 DB값 등록 -->
 		<property name="dataSource" ref="dataSource" />
-
+		<!-- 마이바티스 환결설정 파일 등록 -->
 		<property name="configLocation" value="classpath:/mybatis-config.xml" />
-
+		<!-- 자바와 오라클 사이에 매핑하는 환경설정 등록 -->
 		<property name="mapperLocations" value="classpath:/mappers/*Mapper.xml" />
-
 	</bean>
 
-
-
+	<!-- SqlSessionTemplate : Spring과 myBatis 연동, SqlSession 생성에 관여함 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
-
 		destroy-method="clearCache">
-
 		<constructor-arg name="sqlSessionFactory" ref="SqlSessionFectory" />
-
 	</bean> 
+	
+	<!-- DataSourceTransactionManager : DB연결 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- 마아바티스에 등록한 DB값을 가져와 디비랑 연결 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
    
-
-
-
-
+	<!-- mapper interface : 매핑하는 파일에서  자바 interface를 mapper하여 Sql을 불러옴 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 이 패키지 아래에 모든 인터페이스를 mapper 인터페이스로 인식함 -->
+		<property name="basePackage" value="com.hiworld.client.dao"></property>
+	</bean>
+	
+	<!-- @Transactional를 사용가능하게 함 sql실패시 자동 롤백 시켜줌 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/>
+	 얘를 사용하면 dataSource에러 뜸 이유? 몰라!그딴거-->
 </beans>
