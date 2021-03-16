@@ -92,6 +92,7 @@ $(function(){
 						<!-- Setting menu beginning -->
 							<span id="rightMenu">
 							</span>
+
 							<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpPicture.do?menu=menu3')">사진첩</div>
@@ -99,6 +100,7 @@ $(function(){
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpSetting.do?menu=menu7')">관&nbsp;리</div>
+
 						<!-- Setting menu ending -->	
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
