@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	views 클리어
+
+	<h1>메인 페이지 입니다.</h1>
+	<hr>
+	<br>
+	<a href="login.do">로그인 하러 가기 </a>
+	<hr>
+	
+
 </body>
 </html>
