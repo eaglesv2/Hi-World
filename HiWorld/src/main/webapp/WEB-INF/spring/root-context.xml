@@ -22,7 +22,7 @@
 		<!-- 마이바티스 환결설정 파일 등록 -->
 		<property name="configLocation"	value="classpath:/mybatis-config.xml" />
 		<!-- 자바와 오라클 사이에 매핑하는 환경설정 등록 -->
-		<property name="mapperLocations" value="classpath:/mappers/*Mapper.xml" />
+		<property name="mapperLocations" value="classpath:/mappers/*.xml" />
 	</bean>
 
 
