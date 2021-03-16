@@ -81,7 +81,9 @@ $(function(){
 						<td align="center" width="480" height="450" background="/root/resources/images/bg_center_rect.jpg">
 										
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="470" height="430" src="MiniHP_Right.do"></iframe> 
+							<span id="bodyContents">
+								<iframe frameborder="0" width="470" height="430" src="MiniHP_Right.do"></iframe> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 							
 						</td>
@@ -90,13 +92,15 @@ $(function(){
 						<!-- Setting menu beginning -->
 							<span id="rightMenu">
 							</span>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_home.action?menu=menu1';">홈</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_profile.action?menu=menu2';">프로필</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_picture.action?menu=menu3';">사진첩</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_board.action?menu=menu4';">게시판</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_video.action?menu=menu5';">동영상</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Guest.do?menu=menu6';">방명록</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_setting.action?menu=menu7';">관&nbsp;리</div>
+
+							<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpPicture.do?menu=menu3')">사진첩</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpBoard.do?menu=menu4')">게시판</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
+							<div align="center" class="selected-Menu" onclick="movePage('miniHpSetting.do?menu=menu7')">관&nbsp;리</div>
+
 						<!-- Setting menu ending -->	
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
@@ -111,4 +115,26 @@ $(function(){
 		</tr>
 	</table>
 </body>
+<!-- ajax -->
+<script>
+ 
+    function movePage(url){
+        // ajax option
+        var ajaxOption = {
+                url : url,
+                async : true,
+                type : "GET",
+                dataType : "html",
+                cache : false
+        };
+        
+        $.ajax(ajaxOption).done(function(data){
+            // Contents 영역 삭제
+            $('#bodyContents').children().remove();
+            // Contents 영역 교체
+            $('#bodyContents').html(data);
+        });
+    }
+ 
+</script>
 </html>
