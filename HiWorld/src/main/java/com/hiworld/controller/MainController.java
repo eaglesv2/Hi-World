@@ -3,6 +3,7 @@ package com.hiworld.controller;
 
 import java.util.ArrayList;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 import com.hiworld.service.ClientService;
 import com.hiworld.vo.ClientVO;
@@ -20,10 +23,17 @@ public class MainController {
 	
 	/* log를 더욱 자세히 알아볼수 있게 해서 에러를 찾기 쉬워짐 */
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
-	
+		
 	/* ClientService를 부르기 위해 정의 */
 	@Autowired
 	private ClientService clientService;
+	
+	/* 처음 페이지로 이동하는곳 */
+	@GetMapping("/")
+	public String Main() throws Exception{
+		return "login";
+	}
+	
 	
 	/* 회원 전체 조회 */
 	/* getAllClient 라는 요청이 들어오면 여기로 옴 */
@@ -72,5 +82,8 @@ public class MainController {
 		return "";
 	}
 	
+	
+	
+
 
 }
