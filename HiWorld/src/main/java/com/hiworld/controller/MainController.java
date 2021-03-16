@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.service.ClientService;
@@ -72,5 +73,23 @@ public class MainController {
 		return "";
 	}
 	
-
+	@RequestMapping("/MiniHP_Home.do")
+	public String miniHp_Home() {
+		return "/MiniHP/MiniHP_Home";
+	}
+	
+	@RequestMapping("/MiniHP_TopTitle.do")
+	public String miniHp_TopTitle() {
+		return "/MiniHP/MiniHP_TopTitle";
+	}
+	
+	@RequestMapping("/MiniHP_Left.do")
+	public String miniHp_Left() {
+		return "/MiniHP/MiniHP_Left";
+	}
+	
+	@RequestMapping("/MiniHP_Right.do")
+	public String miniHp_Right() {
+		return "/MiniHP/MiniHP_Right";
+	}
 }
