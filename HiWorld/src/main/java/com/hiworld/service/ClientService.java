@@ -27,4 +27,6 @@ public interface ClientService {
 	/* 회원 정보 삭제 */
 	String deleteClinet(ClientVO clientVO);
 	
+	/* 로그인 */
+	String userLogin(ClientVO clientVO);
 }

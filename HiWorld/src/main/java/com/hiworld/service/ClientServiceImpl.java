@@ -50,10 +50,18 @@ public class ClientServiceImpl implements ClientService {
 		
 		return checkJoin;
 	}
+	/* 로그인*/
+	@Override
+	public String userLogin(ClientVO clientVO) {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
 	
 	/* 회원 회원 가입 */
 	@Override
 	public String insertClient(ClientVO clientVO) {
+		System.out.println("여긴 왔니?");
 		int checkNumber = dao.insertClient(clientVO);
 		String checkJoin = "";
 		
