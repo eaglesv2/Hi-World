@@ -1,6 +1,8 @@
-package com.hiworld.controller;
+package com.hiworld.client.controller;
 
 import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -8,10 +10,14 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.hiworld.client.service.ClientService;
+import com.hiworld.client.vo.ClientVO;
 
 @Controller
 public class NaverController {
@@ -20,11 +26,83 @@ public class NaverController {
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
 
+	/* ClientService를 부르기 위해 정의 */
+	@Autowired
+	private ClientService clientService;
+	
+	/* BO자동으로 등록 */
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
 
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자체 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	/* 회원가입페이지로 이동 */
+	@GetMapping("userInsertForm.do")
+	public String userInsertForm() {
+		return "Login/userInsert";
+	}
+	
+	/* 회원가입 */
+	@PostMapping("insertClient.do")
+	public String insertClient(ClientVO clientVO) {
+		
+		/* tel을 다 가져와서 하나로 묶어서 setter하기 */
+		String tel = clientVO.getUserTel1()+"-"+clientVO.getUserTel2()+"-"+clientVO.getUserTel3();
+		clientVO.setUserTel(tel);
+		
+		/* address는 선택사항이므로 아무것도 입력안할시 없음 값 추가 */
+		String address = clientVO.getUserAddress();
+		if(address.length()<1) {
+			address = "없음";
+			clientVO.setUserAddress(address);
+		}
+		
+		/* service를 통해 dao호출 */
+		String checkJoin = clientService.insertClient(clientVO);
+		
+		return checkJoin;
+	}
+	
+	
+	/* 로그인 */
+	@PostMapping("checkClient.do")
+	public String checkClient(ClientVO clientVO, HttpSession session) {
+		
+		ClientVO vo = clientService.checkClient(clientVO);
+		
+		if(vo!=null) {
+			/* 이름하고 아이디를 세션 화 */
+			session.setAttribute("UserName", vo.getUserName());
+			session.setAttribute("UserID", vo.getUserID());
+			return "Login/naverLogin";
+		}else {
+			return "Login/naverLogin";	
+		}
+	}
+	
+	/* 내 정보 보기 */
+	@GetMapping("getOneClient.do")
+	public String getOneClient(HttpServletRequest request, Model model) {
+		String UserID = request.getParameter("UserID");
+		ClientVO vo = clientService.getOneClient(UserID);
+		System.out.println(vo.getUserCash());
+		model.addAttribute("clientVO",vo);
+		
+		return "Login/userOneView";
+	}
+	
+	
+	
+	
+	
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 네이버 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	
 	/* 로그인 첫 화면 요청 메소드 */
 	@RequestMapping(value = "/login.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model, HttpSession session) {
@@ -39,7 +117,7 @@ public class NaverController {
 		
 		/* 네이버  url 값을 사용하기 위해서 저장 */
 		model.addAttribute("url", naverAuthUrl);
-		return "naverLogin";
+		return "Login/naverLogin";
 	}
 
 	/* 네이버 로그인 성공시 developer에 설정한 callback URL로 인해 여기로 오게됨 /callback */	
@@ -70,28 +148,40 @@ public class NaverController {
 		/* 이름을 다시 내가 사용하기 위해서 파싱 */
 		String id = (String) response_obj.get("id");
 		String name = (String) response_obj.get("name");
-		String gender = (String) response_obj.get("gender");
 		/* id+name의 형태로 홈페이지내에서 id저장되며 회원가입을 했었는지 확인을 하기 위한 로직 */
-		String checkID = id+name;
+		String checkID = name+id;
 		
-		System.out.println(id+","+name+","+gender);
+		System.out.println(checkID);
 		
-		/* id값이 있을경우 1 없을경우 0반환 */
-		int check = 1;
-		if(check==1) {
+		/* 네이버 회원 체크 */
+		ClientVO vo = clientService.NaverCheckClient(checkID);
+		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
-			session.setAttribute("name", name);
-			session.setAttribute("id", checkID);
-			return "naverLogin";
+			session.setAttribute("UserName", vo.getUserName());
+			session.setAttribute("UserID", vo.getUserID());
+			return "Login/naverLogin";
 		}else {
-			
-			return "회원가입";	
+			model.addAttribute("UserID",checkID);
+			model.addAttribute("UserName",name);
+			return "Login/userInsert";	
 			
 		}
 		
 		
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/* 로그아웃 */
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
@@ -102,6 +192,6 @@ public class NaverController {
 		
 		/* redirect:/login.jsp
 		 * redirect를 이용하면 views가 아닌 그 밖의 폴더에도 접근가능 또한 .do를 호출해서 컨트롤러를 호출도 가능 */
-		return "login";
+		return "redirect:/login.do";
 	}
 }
