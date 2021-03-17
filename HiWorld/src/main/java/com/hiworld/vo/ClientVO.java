@@ -77,10 +77,5 @@ public class ClientVO {
 	public ClientVO() {
 		super();
 	}
-	
-   
-	
 
-	
-	
 }
