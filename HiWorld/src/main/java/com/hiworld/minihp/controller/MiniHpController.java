@@ -1,19 +1,23 @@
 package com.hiworld.minihp.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.minihp.service.MiniHpService;
+import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 
 @Controller
 public class MiniHpController {
 	
 	@Autowired
 	private MiniHpService service;
-	
+
 	@RequestMapping("/MiniHP_Home.do")
 	public String miniHp_Home() {
 		
@@ -77,5 +81,64 @@ public class MiniHpController {
 		model.addAttribute("menu",menu);
 		return "MiniHP/MiniHP_Menu_Setting";
 	}
-
+	
+	@ResponseBody
+	@GetMapping("/miniHp_check_profile.do")
+	public int miniHpCheckProfile(HttpServletRequest request) {
+		System.out.println("프로필 확인 컨트롤러");
+		String id = request.getParameter("userId");
+		System.out.println(id);
+		int result = service.checkProfile(id);
+		System.out.println("프로필 확인 서비스 갔다옴");
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/miniHp_get_profile.do")
+	public String miniHpGetProfile(HttpServletRequest request) {
+		System.out.println("프로필 출력 컨트롤러");
+		String id = request.getParameter("userId");
+		String result = service.getProfile(id);
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/miniHp_insert_profile.do")
+	public String miniHpInsertProfile(MiniHP_ProfileVO profileVO) {
+		System.out.println("프로필 작성 컨트롤러");
+		int result = service.insertProfile(profileVO);
+		
+		System.out.println("프로필 작성 서비스 갔다옴");
+		String check = "";
+		
+		if(result == 0) {
+			check = "fail";
+		} else if(result == -1) {
+			check = "error";
+		} else {
+			check = "success";
+		}
+		
+		return check;
+	}
+	
+	@ResponseBody
+	@GetMapping("/miniHp_update_profile.do")
+	public String miniHpUpdateProfile(MiniHP_ProfileVO profileVO) {
+		System.out.println("프로필 수정 컨트롤러");
+		int result = service.updateProfile(profileVO);
+		
+		System.out.println("프로필 수정 서비스 갔다옴");
+		String check = "";
+		
+		if(result == 0) {
+			check = "fail";
+		} else if(result == -1) {
+			check = "error";
+		} else {
+			check = "success";
+		}
+		
+		return check;
+	}
 }
