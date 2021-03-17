@@ -104,4 +104,75 @@ public class MainController {
 	}
 	
 
+	
+	
+
+
+//	@RequestMapping("/MiniHP_Left.do")
+//	public String miniHp_Left() {
+//		return "/MiniHP/MiniHP_Left";
+//	}
+//	
+//	@RequestMapping("/MiniHP_Right.do")
+//	public String miniHp_Right() {
+//		return "/MiniHP/MiniHP_Right";
+//	}
+//	
+//	@RequestMapping(value="/MiniHP_Guest.do", method = {RequestMethod.GET,RequestMethod.POST})
+//	public String m4(HttpServletRequest request, String menu) {
+//		request.setAttribute("menu", menu);
+//		return "/MiniHP/MiniHP_Guest_Menu";
+//	}
+//	
+//	@RequestMapping(value="/MiniHP_Guest_Right.do", method= {RequestMethod.GET,RequestMethod.POST})
+//	public String r_guest(HttpServletRequest request) {
+//		String cp = request.getContextPath();
+//		
+//		/*HttpSession session = request.getSession();
+//		cyUserDTO = (CyUserDTO) session.getAttribute("session");
+//		
+//		String pageNum = request.getParameter("pageNum");
+//		int currentPage = 1;
+//		
+//		if(pageNum != null) {
+//			currentPage = Integer.parseInt(pageNum);
+//		}
+//		
+//		int numPerPage = 3;
+//		int totalData = cyGuestDAO.getMyTotalData(cyUserDTO.getUserId());
+//		int totalPage = myUtil.getPageCount(numPerPage, totalData);
+//		if(currentPage > totalPage) {
+//			currentPage = totalPage;
+//		}
+//		int start = (currentPage -1) * numPerPage + 1;
+//		int end = currentPage * numPerPage;
+//		List<CyGuestDTO> list = cyGuestDAO.getMyDataList(cyUserDTO.getUserId(),start,end);
+//		Iterator<CyGuestDTO> it = list.iterator();
+//		int listNum = 0, num = 0;
+//		String[] minimiArray = new String[list.size()];
+//		while (it.hasNext()) {
+//			CyGuestDTO temp = it.next();
+//			listNum = totalData - (start + num - 1);
+//			temp.setListNum(listNum);
+//			if (temp.getContent() != null) {
+//				temp.setContent(temp.getContent().replaceAll("\r\n", "<br/>"));
+//			}
+//			CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(temp.getMemberId());
+//			minimiArray[num] = vo.getOriginalFileName();
+//			num++;
+//		}
+//		String listUrl = cp + "/cy/my_r_guest.action";
+//		if(list.size() == 0 ) 
+//			request.setAttribute("length", 0);
+//		else
+//			request.setAttribute("length", 1);
+//		request.setAttribute("list", list);
+//		request.setAttribute("pageIndexList", myUtil.pageIndexList(currentPage, totalPage, listUrl));
+//		request.setAttribute("totalData", totalData);
+//		request.setAttribute("minimiArray", minimiArray);
+//		request.setAttribute("length", list.size());
+//		request.setAttribute("currentPage", currentPage);*/
+//		return "/MiniHP/MiniHP_Right_Guest";
+//	}
+
 }
