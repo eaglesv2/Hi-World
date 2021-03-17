@@ -74,7 +74,9 @@ $(function(){
 						<td align="center" width="178" height="450" background="/root/resources/images/bg_left_rect.jpg">
 
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
+							<span id="sideContents">
 								<iframe frameborder="0" width="160" height="440" src="MiniHP_Left.do"></iframe> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
@@ -95,8 +97,8 @@ $(function(){
 
 							<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpPicture.do?menu=menu3')">사진첩</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpBoard.do?menu=menu4')">게시판</div>
+							<div align="center" class="selected-Menu" onclick="movePicture('miniHpBoard.do?menu=menu3')">사진첩</div>
+							<div align="center" class="selected-Menu" onclick="moveBoard('miniHpBoard.do?menu=menu4')">게시판</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpSetting.do?menu=menu7')">관&nbsp;리</div>
@@ -136,5 +138,7 @@ $(function(){
         });
     }
  
+    $('#bodyContents').css("overflow", "auto");
 </script>
+<script src="resources/js/miniHP/ajaxMovePage.js"></script>
 </html>

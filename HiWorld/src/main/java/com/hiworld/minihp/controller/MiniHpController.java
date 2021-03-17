@@ -11,8 +11,8 @@ import com.hiworld.minihp.service.MiniHpService;
 @Controller
 public class MiniHpController {
 	
-	@Autowired
-	private MiniHpService service;
+//	@Autowired
+//	private MiniHpService service;
 	
 	@RequestMapping("/MiniHP_Home.do")
 	public String miniHp_Home() {
@@ -45,17 +45,17 @@ public class MiniHpController {
 	
 	@GetMapping("/miniHpPicture.do")
 	public String miniHpPicture(String menu, Model model) {
-		System.out.println("사진첩");
+		System.out.println("사진첩1");
 		model.addAttribute("menu",menu);
 		return "MiniHP/MiniHP_Menu_Picture";
 	}
-	
-	@GetMapping("/miniHpBoard.do")
-	public String miniHpBoard(String menu, Model model) {
-		System.out.println("게시판");
-		model.addAttribute("menu",menu);
-		return "MiniHP/MiniHP_Menu_Board";
+	@GetMapping("/MiniHpPicutreSide.do")
+	public String miniHpPictureSide(Model model) {
+		System.out.println("사진첩2");
+		return "MiniHP/MiniHP_Menu_Picture_Side";
 	}
+	
+	
 	
 	@GetMapping("/miniHpVideo.do")
 	public String miniHpVideo(String menu, Model model) {
