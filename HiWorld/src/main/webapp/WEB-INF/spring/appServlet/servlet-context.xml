@@ -26,8 +26,8 @@
 	</beans:bean>
 
 	<!-- 이 패키지 아래에 있는것들 전부 다 빈객체 자동생성 -->
-
 	<context:component-scan base-package="com.hiworld.controller,com.hiworld.minihp.controller,com.hiworld.minihp.service" />
+	<!--<context:component-scan base-package="com.hiworld.client.controller,com.hiworld.client.service,com.hiworld.minihp.controller,com.hiworld.minihp.service" />-->
 
 	<!-- Ajax 주석문 허가 -->
 	<mvc:annotation-driven />

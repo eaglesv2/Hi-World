@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import com.hiworld.service.ClientService;
+import com.hiworld.service.ClientServiceImpl;
 import com.hiworld.vo.ClientVO;
 
 /* 여기가 컨트롤러라고 정의 */
@@ -64,6 +66,8 @@ public class MainController {
 	
 	/* 회원 정보 확인 */
 	@GetMapping("/checkClient.do")
+	
+	
 	/* 에이젝스를 이용하기 위해서 리턴형태를 바꿈 */
 	@ResponseBody
 	public String checkClient(ClientVO clientVO) throws Exception{
@@ -71,10 +75,20 @@ public class MainController {
 		return "";
 	}
 	
+	/* 로그인*/
+	@GetMapping("/UserLogin.do")
+	public String userLogin(ClientVO clientVO)throws Exception{
+		boolean result;
+		return "";
+	}
+	
+	
 	/* 회원 회원 가입 */
 	@GetMapping("/insertClient.do")
-	public String insertClient() throws Exception{
-		return "";
+	public String insertClient(ClientVO vo) throws Exception{
+		System.out.println("나 저장할거야");
+		clientService.insertClient(vo);
+		return "index";
 	}
 	
 	/* 회원 정보 수정 */
@@ -89,6 +103,7 @@ public class MainController {
 		return "";
 	}
 	
+
 	
 	
 

@@ -9,14 +9,15 @@
 %>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head>
+<%-- <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
+<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/> --%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
 <style type="text/css">
 
-ul{
+ul {
     display: inline-block;
     vertical-align: middle;
     padding: 0px 0px 0px 30px;
@@ -24,8 +25,8 @@ ul{
 
 }
 
-body
-	{scrollbar-face-color: #FFFFFF;
+body {
+	 scrollbar-face-color: #FFFFFF;
 	 scrollbar-highlight-color: #DBDBDB;
 	 scrollbar-3dlight-color: #FFFFFF;
 	 scrollbar-shadow-color: #9C92FF;
@@ -33,22 +34,119 @@ body
 	 scrollbar-track-color: #FFFFFF;
 	 scrollbar-arrow-color: #9C92FF}
 	 
- a{ 
+ a { 
  color: black; text-decoration: none;
  }
  
 </style>
- </head>
- <script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
- <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
- <script type="text/javascript">
+</head>
+<!-- <script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+var content = "";
+$(document).ready(function(){
+	console.log('page load');
+	checkProfile();
+});
+function checkProfile() {
+	console.log('checkProfile');
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_check_profile.do',
+		/* userId session 받기 */
+		data : { userId : 'tester' },
+		
+		success : function(result) {
+			if(result == 1) { //프로필 존재 시
+				$("#insert").hide();
+				$("#insert_ok").hide();
+				$("#change").show();
+				$("#change_ok").hide();
+				displayProfile();
+			} else { //프로필 존재 x
+				$("#insert").show();
+				$("#insert_ok").hide();
+				$("#change").hide();
+				$("#change_ok").hide();
+			}
+		}
+	});
+}
+function displayProfile() {
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_get_profile.do',
+		/* userId session 받기 */
+		data : { userId : 'tester'},
+		
+		success : function(result) {
+			content = result;
+			$("#appendContent").innerHTML = content;
+		}
+	});
+}
+
+function insert() {
+	$("#insert").hide();
+	$("#insert_ok").show();
+}
+
+function insert_ok() {
+	$("#insert_ok").hide();
+	$("#change").show();
+	content = $("#insertContent").val();
+	
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_insert_profile.do',
+		/* userId session 받기 */
+		data : { userId : 'tester', content : content },
+		
+		success : function(result) {
+			if(result == success) {
+				/* $("#appendContent").innerHTML = content; */
+				displayProfile();
+			} else {
+				alert("다시 한 번 시도해주세요");
+			}
+		},
+		error : function(){
+			alert("다시 한 번 시도해주세요");
+		}
+	});
+}
+
+function change() {
+	$("#change").hide();
+	$("#change_ok").show();
+}
+
+function change_ok() {
+	$("#change").show();
+	$("#change_ok").hide();
+	content = $("#textContent").val();
+	
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_update_profile.do',
+		/* userId session 받기 */
+		data : { userId : 'tester', content : content },
+		
+		success : function(result) {
+			if(result == success) {
+				displayProfile();
+				/* $("#appendContent").innerHTML = content; */
+			} else {
+				alert("다시 한 번 시도해주세요");
+			}
+		},
+		error : function(){
+			alert("다시 한 번 시도해주세요");
+		}
+	});
+}
  
-/*  $(document).ready(function(){
-	    initSet();
-	}); */
- 
- 
- </script>
+</script>
 
  <body leftmargin="5" topmargin="0">
 		<table border="0" width="420" cellpadding="0" cellspacing="0">
@@ -57,23 +155,63 @@ body
 		</tr>
 		<tr>
 			<td align="center">
-				<div id="change"><div align="right"><input type="button" value="수정하기" onclick="change();"></div>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				<font>
-					<span id="appendContent" align="center"></span>
-				</font>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				<div id="insert">
+					<div align="right">
+						<input type="button" value="작성하기" onclick="insert();">
+					</div>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				
+					<font>
+						<span id="noContent" align="center">작성된 프로필이 없습니다</span>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
-				<div id="change_ok"><div align="right"><input type="button" value="수정완료" onclick="change_ok();"></div>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				<font>
-					<textarea rows="50" cols="30" style="width: 400px; height: 300px;resize: none;" id="textContent">
-						내 눈을 바라바
-						
-						넌 행복해지고
-					</textarea>
-				</font>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				
+				<div id="insert_ok">
+					<div align="right">
+						<input type="button" value="작성완료" onclick="insert_ok();">
+					</div>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				
+					<font>
+						<textarea rows="50" cols="30" style="width: 400px; height: 300px; resize: none;" id="insertContent">
+						</textarea>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				</div>
+				
+				<div id="change">
+					<div align="right">
+						<input type="button" value="수정하기" onclick="change();">
+					</div>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				
+					<font>
+						<span id="appendContent" align="center"></span>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				</div>
+				
+				<div id="change_ok">
+					<div align="right">
+						<input type="button" value="수정완료" onclick="change_ok();">
+					</div>
+					
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+					
+					<font>
+						<textarea rows="50" cols="30" style="width: 400px; height: 300px; resize: none;" id="textContent">
+
+						</textarea>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
 			</td>
 		</tr>
