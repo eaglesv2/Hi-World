@@ -1,4 +1,4 @@
-package com.hiworld.controller;
+package com.hiworld.client.controller;
 
 import com.github.scribejava.core.builder.api.DefaultApi20;
 

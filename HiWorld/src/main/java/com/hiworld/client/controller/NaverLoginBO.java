@@ -1,4 +1,4 @@
-package com.hiworld.controller;
+package com.hiworld.client.controller;
 
 import java.io.IOException;
 import java.util.UUID;

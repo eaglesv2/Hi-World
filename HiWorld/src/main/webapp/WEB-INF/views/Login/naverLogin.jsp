@@ -25,10 +25,11 @@
 		<!-- otherwise는 만약 조건에 맞아 떨어지는것이 하나도 없을경우 실행 -->
 		<c:choose>
 		
-			<c:when test="${name != null}">
+			<c:when test="${UserName != null}">
 				<h2>네이버 아이디 로그인 성공하셨습니다!!</h2>
-				<h3>${name} 님 환영합니다!</h3>
+				<h3>${UserName} 님 환영합니다!</h3>
 				<h3>
+					<a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
 					<a href="logout.do">로그아웃</a>
 				</h3>
 			</c:when>
@@ -36,13 +37,13 @@
 			<c:otherwise>
 			
 				<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
-				<form action="login.userdo" method="post" name="frm"
-					style="width: 470px;">
-					<h2>로그인</h2>
-					<input type="text" name="id" id="id" class="w3-input w3-border" placeholder="아이디" > <br> 
-					<input type="password" id="pwd" name="pwd" class="w3-input w3-border" placeholder="비밀번호"> <br>
-					<input type="submit" value="로그인" onclick="#"> <br>
+				<h2>로그인</h2>
+				<form action="checkClient.do" method="post">
+					<input type="text" name="UserID" id="UserID" placeholder="아이디" > <br> 
+					<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호"> <br>
+					<input type="submit" value="로그인"> <br>
 				</form>
+				<a href="userInsertForm.do">회원가입</a>
 				<br>
 				
 				<!-- 네이버 로그인 창으로 이동 -->
