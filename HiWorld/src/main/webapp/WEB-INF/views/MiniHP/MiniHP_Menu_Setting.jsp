@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	views 클리어
+<h1>관리 페이지</h1>
 </body>
 </html>
