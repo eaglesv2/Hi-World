@@ -3,5 +3,4 @@
 <mapper namespace="com.hiworld.minihp.dao.MiniHpDAO">
 
 
-
 </mapper>

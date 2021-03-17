@@ -93,7 +93,7 @@ public class MainController {
 	
 
 
-	@RequestMapping("/MiniHP_Left.do")
+	/*@RequestMapping("/MiniHP_Left.do")
 	public String miniHp_Left() {
 		return "/MiniHP/MiniHP_Left";
 	}
@@ -113,7 +113,7 @@ public class MainController {
 	public String r_guest(HttpServletRequest request) {
 		String cp = request.getContextPath();
 		
-		/*HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		cyUserDTO = (CyUserDTO) session.getAttribute("session");
 		
 		String pageNum = request.getParameter("pageNum");
@@ -156,8 +156,8 @@ public class MainController {
 		request.setAttribute("totalData", totalData);
 		request.setAttribute("minimiArray", minimiArray);
 		request.setAttribute("length", list.size());
-		request.setAttribute("currentPage", currentPage);*/
+		request.setAttribute("currentPage", currentPage);
 		return "/MiniHP/MiniHP_Right_Guest";
 	}
-
+*/
 }

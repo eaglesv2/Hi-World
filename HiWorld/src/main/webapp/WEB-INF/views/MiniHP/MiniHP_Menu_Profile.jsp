@@ -9,7 +9,9 @@
 %>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head>
+<link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -38,11 +40,14 @@ body
  }
  
 </style>
- </head>
- <script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
- <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
- <script type="text/javascript">
- 
+</head>
+<script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+		$("#change_ok").style.display="none";	
+		/* sendRequest("my_get_profile.action",null,displayInfo,"GET"); */
+	});
 /*  $(document).ready(function(){
 	    initSet();
 	}); */
@@ -57,23 +62,36 @@ body
 		</tr>
 		<tr>
 			<td align="center">
-				<div id="change"><div align="right"><input type="button" value="수정하기" onclick="change();"></div>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				<font>
-					<span id="appendContent" align="center"></span>
-				</font>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				<div id="change">
+					<div align="right">
+						<input type="button" value="수정하기" onclick="change();">
+					</div>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+				
+					<font>
+						<span id="appendContent" align="center"></span>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
-				<div id="change_ok"><div align="right"><input type="button" value="수정완료" onclick="change_ok();"></div>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				<font>
-					<textarea rows="50" cols="30" style="width: 400px; height: 300px;resize: none;" id="textContent">
-						내 눈을 바라바
+				
+				<div id="change_ok">
+					<div align="right">
+						<input type="button" value="수정완료" onclick="change_ok();">
+					</div>
+					
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+					
+					<font>
+						<textarea rows="50" cols="30" style="width: 400px; height: 300px; resize: none;" id="textContent">
+							내 눈을 바라바
 						
-						넌 행복해지고
-					</textarea>
-				</font>
-				<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
+							넌 행복해지고
+						</textarea>
+					</font>
+				
+					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
 			</td>
 		</tr>
