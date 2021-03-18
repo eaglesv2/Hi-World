@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.service.ClientService;
@@ -69,6 +71,7 @@ public class ClientController {
 	}
 	
 	
+
 	/* 로그인 */
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
@@ -80,9 +83,9 @@ public class ClientController {
 			session.setAttribute("UserName", vo.getUserName());
 			session.setAttribute("UserID", vo.getUserID());
 			session.setAttribute("UserSerial", vo.getUserSerial());
-			return "Login/userLogin";
+			return "Login/mainPage";
 		}else {
-			return "Login/userLogin";	
+			return "Login/mainPage";	
 		}
 	}
 	
@@ -129,7 +132,7 @@ public class ClientController {
 		
 		/* 네이버  url 값을 사용하기 위해서 저장 */
 		model.addAttribute("url", naverAuthUrl);
-		return "Login/userLogin";
+		return "Login/mainPage";
 	}
 
 	/* 네이버 로그인 성공시 developer에 설정한 callback URL로 인해 여기로 오게됨 /callback */	
@@ -185,9 +188,7 @@ public class ClientController {
 
 	
 	
-	
-	
-	
+
 	
 	
 	
@@ -207,4 +208,31 @@ public class ClientController {
 		 * redirect를 이용하면 views가 아닌 그 밖의 폴더에도 접근가능 또한 .do를 호출해서 컨트롤러를 호출도 가능 */
 		return "redirect:/login.do";
 	}
+	
+	/*메인페이지 AJAX*/
+	@GetMapping("/noticePage.do")
+	public String noticeAjax() {
+		System.out.println("1111243");
+		return "Login/noticePage";
+		
+	}
+	
+	@GetMapping("/shoppingPage.do")
+	public String shoppingAjax() {
+		System.out.println("   ");
+		return "Login/shoppingPage";
+	}
+	
+	@GetMapping("/boardPage.do")
+	public String boardAjax() {
+		System.out.println("   ");
+		return "Login/boardPage";
+	}
+	
+	@GetMapping("/questionPage.do")
+	public String questionAjax() {
+		System.out.println("   ");
+		return "Login/questionPage";
+	}
+	
 }

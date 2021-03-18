@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="resources/js/mainPage.js"></script>
     <title>Document</title>
-    <script type="text/javascript" language="javascript">
+    <script type="text/javascript">
                 
         $(document).ready(function(){    
               $("#header").load("header");
@@ -21,70 +21,85 @@
           });
       
           function notice(){
-              $.ajax({
-                   type: "GET",
-                   url : "noticePage",
-                   dataType : "text",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-							alert("성공")
-                          $('#bodyContext').html(babo);
-                     
-                      } 
-                  })
- 
-             };
+             //ajax option
+              console.log("1234") 
+             var ajaxOption={
+            		 type: "GET",
+                     url : "noticePage.do",
+                     dataType : "html", 
+                     async:true,
+                     cache:false
+            		 
+             }
+        	  $.ajax(ajaxOption).done(function(data){
+        		  //Contents 영역삭제
+        		  $('#bodyContext').children().remove();
+        		  console.log("1111") 
+        		  //Contents 영역 교체
+        		  $('#bodyContext').html(data);
+        	  }).fail(function(error) {
+                  alert(JSON.stringify(error));
+                  console.log("에러를 찾자");
+              });
+            };
+        	
              
              function shopping(){
-              $.ajax({
-                   type: "GET",
-                   url : "Login/shoppingPage.jsp",
-                   dataType : "html",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('#bodyContext').html(babo);
-                     
-                      }
-                  })
- 
+                 console.log("1234") 
+                 var ajaxOption2={
+                		 type: "GET",
+                         url : "shoppingPage.do",
+                         dataType : "html", 
+                         async:true,
+                         cache:false
+                		 
+                 }
+            	  $.ajax(ajaxOption2).done(function(data){
+            		  //Contents 영역삭제
+            		  $('#bodyContext').children().remove();
+            		  console.log("1111") 
+            		  //Contents 영역 교체
+            		  $('#bodyContext').html(data);
+            	  })
              };
 
              function board(){
-              $.ajax({
-                   type: "GET",
-                   url : "Login/boardPage.jsp",
-                   dataType : "html",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('#bodyContext').html(babo);
-                     
-                      }
-                  })
+            	 console.log("1234") 
+                 var ajaxOption3={
+                		 type: "GET",
+                         url : "boardPage.do",
+                         dataType : "html", 
+                         async:true,
+                         cache:false
+                		 
+                 }
+            	  $.ajax(ajaxOption3).done(function(data){
+            		  //Contents 영역삭제
+            		  $('#bodyContext').children().remove();
+            		  console.log("1111") 
+            		  //Contents 영역 교체
+            		  $('#bodyContext').html(data);
+            	  })
  
              };
              
              function question(){
-              $.ajax({
-                   type: "GET",
-                   url : "Login/questionPage.jsp",
-                   dataType : "html",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-                            console.log("성공")
-                          $('#bodyContext').html(babo);
-
-                      }
-                  })
+             	 console.log("1234") 
+                 var ajaxOption4={
+                		 type: "GET",
+                         url : "questionPage.do",
+                         dataType : "html", 
+                         async:true,
+                         cache:false
+                		 
+                 }
+            	  $.ajax(ajaxOption4).done(function(data){
+            		  //Contents 영역삭제
+            		  $('#bodyContext').children().remove();
+            		  console.log("1111") 
+            		  //Contents 영역 교체
+            		  $('#bodyContext').html(data);
+            	  })
  
              };
              
@@ -139,7 +154,7 @@
 						        <div id="jang">
 						            <div id="jang-top">
 						                <a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
-						                <a href="">내이웃보기</a>
+						                <a href="BamTolCharge.do">밤톨충전</a>
 						            </div>
 						            <div id="jang-bottom">
 						                <a href="">장바구니</a>

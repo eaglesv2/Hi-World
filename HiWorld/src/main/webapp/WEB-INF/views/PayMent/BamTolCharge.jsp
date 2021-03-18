@@ -13,7 +13,7 @@
 
 	//생략가능
 	var IMP = window.IMP;
-	IMP.init('imp49542832');
+	IMP.init('imp57678627');
 	
     function requestPay() {
       // IMP.request_pay(param, callback) 호출
