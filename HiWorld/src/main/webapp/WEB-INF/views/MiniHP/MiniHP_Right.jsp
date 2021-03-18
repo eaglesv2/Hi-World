@@ -38,10 +38,9 @@ body
  }
  
 </style>
- </head>
- <script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
- <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
- <script type="text/javascript">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
  
  $(document).ready(function(){
 	    initSet();
@@ -116,7 +115,7 @@ body
 	</table>
 
 	<br/>
-	<img src="/root/resources/images/bar.jpg" width="440" height="6" border="0" alt="라인">
+	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="440" height="6" border="0" alt="라인">
 
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
@@ -126,7 +125,7 @@ body
 		</tr>
 		<tr bgcolor="#FFFFFF">
 			<td align="center" colspan="2">  
-				<img <%-- src="${resourcePath}/img${useStoryRoom}" --%> src= "/root/resources/images/r_myhome.gif" width="389" height="192" border="0" alt="">
+				<img <%-- src="${resourcePath}/img${useStoryRoom}" --%> src= "${pageContext.request.contextPath}/resources/images/r_myhome.gif" width="389" height="192" border="0" alt="">
 				<img src="${resourcePath}/img${useMinimi.getOriginalFileName()}" alt="" style="position: absolute; top :${useMinimi.getImgY()}; left : ${useMinimi.getImgX()};"/>
 			</td>
 		</tr>

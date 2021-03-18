@@ -17,13 +17,12 @@
 </style>
 <form name="poto">
 
-	<!-- 상단 사진올리기 버튼 -->
 	<div id="top">
 		<input type="button" value="글쓰기"> &nbsp;&nbsp;&nbsp;
 	</div>
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 	
-	<!-- 사진첩 -->
+	<!-- 게시판 -->
 	<div id="main">
 	<c:choose>
 		<c:when test="${list==null}">

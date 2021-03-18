@@ -70,7 +70,7 @@ $(function(){
 					<tr>
 						<td width="10"> </td>
 
-						<td align="center" width="178" height="450" background="/root/resources/images/bg_left_rect.jpg">
+						<td align="center" width="178" height="450" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="sideContents">
@@ -79,7 +79,7 @@ $(function(){
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
-						<td align="center" width="480" height="450" background="/root/resources/images/bg_center_rect.jpg">
+						<td align="center" width="480" height="450" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 										
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="bodyContents">
