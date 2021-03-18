@@ -7,6 +7,9 @@ import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 @Repository
 public interface MiniHP_ProfileDAO {
 	
+	/*회원 미니홈피 프로필 존재 확인*/
+	MiniHP_ProfileVO checkProfile(String userId); 
+	
 	/*회원 미니홈피 프로필 불러오기*/
 	MiniHP_ProfileVO getProfile(String userId);
 	
@@ -14,5 +17,7 @@ public interface MiniHP_ProfileDAO {
 	int updateProfile(MiniHP_ProfileVO profileVO);
 	
 	/*회원 미니홈피 프로필 작성*/
-	int insertProfile(MiniHP_ProfileVO profileVO); 
+	int insertProfile(MiniHP_ProfileVO profileVO);
+
+	
 }

@@ -40,7 +40,6 @@ body {
  
 </style>
 </head>
-<!-- <script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 var content = "";
@@ -58,6 +57,7 @@ function checkProfile() {
 		
 		success : function(result) {
 			if(result == 1) { //프로필 존재 시
+				console.log('ajax 1');
 				$("#insert").hide();
 				$("#insert_ok").hide();
 				$("#change").show();
@@ -68,11 +68,13 @@ function checkProfile() {
 				$("#insert_ok").hide();
 				$("#change").hide();
 				$("#change_ok").hide();
+				console.log('ajax 0');
 			}
 		}
 	});
 }
 function displayProfile() {
+	console.log('display profile');
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_get_profile.do',
@@ -80,8 +82,10 @@ function displayProfile() {
 		data : { userId : 'tester'},
 		
 		success : function(result) {
+			console.log('ajax success');
+			console.log(result);
 			content = result;
-			$("#appendContent").innerHTML = content;
+			$("#appendContent").html(content);
 		}
 	});
 }
@@ -99,8 +103,8 @@ function insert_ok() {
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_insert_profile.do',
-		/* userId session 받기 */
-		data : { userId : 'tester', content : content },
+		/* user serial userId session 받기 */
+		data : { UserSerial : 2, UserID : 'tester', ProfileContent : content },
 		
 		success : function(result) {
 			if(result == success) {
@@ -129,11 +133,11 @@ function change_ok() {
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_update_profile.do',
-		/* userId session 받기 */
-		data : { userId : 'tester', content : content },
+		/* user serial userId session 받기 */
+		data : { UserSerial : 2, UserID : 'tester', ProfileContent : content },
 		
 		success : function(result) {
-			if(result == success) {
+			if(result == 'success') {
 				displayProfile();
 				/* $("#appendContent").innerHTML = content; */
 			} else {

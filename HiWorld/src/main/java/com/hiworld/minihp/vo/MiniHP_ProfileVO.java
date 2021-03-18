@@ -2,19 +2,28 @@ package com.hiworld.minihp.vo;
 
 public class MiniHP_ProfileVO {
 	
-	private String userId;
-	private String content;
+	private int UserSerial;
+	private String UserID;
+	private String ProfileContent;
 	
-	public String getUserId() {
-		return userId;
+	public int getUserSerial() {
+		return UserSerial;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserSerial(int userSerial) {
+		UserSerial = userSerial;
 	}
-	public String getContent() {
-		return content;
+	public String getUserID() {
+		return UserID;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setUserID(String userID) {
+		UserID = userID;
 	}
+	public String getProfileContent() {
+		return ProfileContent;
+	}
+	public void setProfileContent(String profileContent) {
+		ProfileContent = profileContent;
+	}
+	
+
 }

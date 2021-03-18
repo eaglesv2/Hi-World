@@ -11,10 +11,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
-<link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
-<script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
-<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
+<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 var str_i="";
 
@@ -97,16 +96,22 @@ height:100px;
  <body bgcolor="#FFFFFF">	
 	<table border="0" width="130" bgcolor="#FFFFFF">
 		<tr >
-			<td bgcolor="#FFFFFF" align="center"><font><div id="profile_status"></div></font></td>
+			<td bgcolor="#FFFFFF" align="center">
+				<font><div id="profile_status"></div></font>
+			</td>
 		</tr>
 		<tr >
 			<td>
 				<table bgcolor="#FFFFFF" width="130" cellpadding="1" cellspacing="1">
 					<tr bgcolor="#FFFFFF">
-						<td><img <%-- src="${resourcePath}/img/${imageFilePath}" --%> src="/root/resources/images/profile.png" width="128" height="128" border="0" alt=""/></td>
+						<td>
+							<img <%-- src="${resourcePath}/img/${imageFilePath}" --%> src="${pageContext.request.contextPath}/resources/images/profile.png" width="128" height="128" border="0" alt=""/>
+						</td>
 					</tr>
 					<tr bgcolor="#FFFFFF">
-						<td><img src="/root/resources/images/admin/editBtn.jpg" onclick="window.open('my_pic_upload.action','','width=400,height=200,location=no,status=no,scrollbars=no');"></td>
+						<td>
+							<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="window.open('my_pic_upload.action','','width=400,height=200,location=no,status=no,scrollbars=no');">
+						</td>
 					</tr>
 				</table>
 			</td>
@@ -115,13 +120,19 @@ height:100px;
 		<tr>
 			<td> 
 				<font>
-					<div id="profile_info"><span id="infoTxt" style="font-size:13px;"></span><img src="/root/resources/images/admin/bar.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/></div>
-					<div id="profile_info_ok"><textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;" ></textarea><img src="/root/resources/images/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/></div>
-					<img src="/root/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
+					<div id="profile_info">
+						<span id="infoTxt" style="font-size:13px;"></span>
+						<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/>
+					</div>
+					<div id="profile_info_ok">
+						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;" ></textarea>
+						<img src="${pageContext.request.contextPath}/resources/images/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/>
+					</div>
+					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
 				</font>
 				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>재영<%-- ${session.getUserName()} --%></b>
 				<!-- 성별에 따름 성별표시 마크 --> 
-				<img src="/root/resources/images/admin/male.jpg">
+				<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
 				<%-- <c:if test="${session.getUserGender() eq '남자'}">
 				<img src="/root/resources/images/admin/male.jpg">
 				</c:if>
@@ -129,8 +140,8 @@ height:100px;
 				<img src="/root/resources/images/admin/female.jpg">
 				</c:if> --%>
 				<font style="font-size: 7pt;">1994.10.14<%-- ${session.getUserBirth()} --%></font>
-				<br/>
-				<img src="/root/resources/images/admin/member_check_btn.jpg" onclick="window.open('my_member_list.action','${session.getUserId()}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');"/>
+					<br/>
+					<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('my_member_list.action','${session.getUserId()}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');"/>
 				</font>
 				<select id="mySelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser();">
 					<option value="">★이웃 바람타기</option>
@@ -141,7 +152,7 @@ height:100px;
 					</c:forEach>
 					</c:if> --%>
 				</select>
-				<img src="/root/resources/images/admin/randomBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="random();"/>
+				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="random();"/>
 			</td>
 		</tr>
 	</table>	

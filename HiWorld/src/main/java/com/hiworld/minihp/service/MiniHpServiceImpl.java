@@ -1,36 +1,32 @@
-/*package com.hiworld.minihp.service;
+package com.hiworld.minihp.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.hiworld.client.vo.ClientVO;
 import com.hiworld.minihp.dao.MiniHP_ProfileDAO;
-import com.hiworld.minihp.dao.MiniHpDAO;
 import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 
 @Service("MiniHpService")
-@Transactional
 public class MiniHpServiceImpl implements MiniHpService {
-	
-	@Autowired
-	private MiniHpDAO dao;
 	
 	@Autowired
 	private MiniHP_ProfileDAO profileDAO;
 	
-	@Autowired
 	private MiniHP_ProfileVO profileVO;
 	
+	/*private ClientVO clientVO;*/
+	
 	@Override
-	public int checkProfile(String userId) {
-		System.out.println("프로필 체크 서비스");
-		int checkNumber = 0;
-		profileVO = profileDAO.getProfile(userId);
+	public String checkProfile(String userId) {
+		System.out.println("프로필 확인 서비스");
+		String checkNumber = "0";
+		profileVO = profileDAO.checkProfile(userId);
 		
 		if(profileVO != null) {
-			checkNumber = 1;
+			checkNumber = "1";
 		} else {
-			checkNumber = 0;
+			checkNumber = "0";
 		}
 		return checkNumber;
 	}
@@ -38,8 +34,10 @@ public class MiniHpServiceImpl implements MiniHpService {
 	@Override
 	public String getProfile(String userId) {
 		System.out.println("프로필 가져오기 서비스");
+		System.out.println(userId);
 		profileVO = profileDAO.getProfile(userId);
-		String content = profileVO.getContent();
+		String content = profileVO.getProfileContent();
+		System.out.println(content);
 		return content;
 	}
 	
@@ -47,6 +45,7 @@ public class MiniHpServiceImpl implements MiniHpService {
 	public int insertProfile(MiniHP_ProfileVO profileVO) {
 		System.out.println("프로필 작성 서비스");
 		int checkNumber = profileDAO.insertProfile(profileVO);
+		System.out.println(profileVO.getProfileContent());
 		return checkNumber;
 	}
 	
@@ -54,8 +53,8 @@ public class MiniHpServiceImpl implements MiniHpService {
 	public int updateProfile(MiniHP_ProfileVO profileVO) {
 		System.out.println("프로필 수정 서비스");
 		int checkNumber = profileDAO.updateProfile(profileVO);
+		System.out.println(profileVO.getUserID());
+		System.out.println(profileVO.getProfileContent());
 		return checkNumber;
 	}
 }
-
-*/

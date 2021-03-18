@@ -16,8 +16,8 @@ import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 public class MiniHpController {
 	
 
-//	@Autowired
-//	private MiniHpService service;
+	@Autowired
+	private MiniHpService service;
 	
 
 	@RequestMapping("/MiniHP_Home.do")
@@ -84,63 +84,65 @@ public class MiniHpController {
 		return "MiniHP/MiniHP_Menu_Setting";
 	}
 	
-//	@ResponseBody
-//	@GetMapping("/miniHp_check_profile.do")
-//	public int miniHpCheckProfile(HttpServletRequest request) {
-//		System.out.println("프로필 확인 컨트롤러");
-//		String id = request.getParameter("userId");
-//		System.out.println(id);
-//		int result = service.checkProfile(id);
-//		System.out.println("프로필 확인 서비스 갔다옴");
-//		return result;
-//	}
+	@ResponseBody
+	@GetMapping("/miniHp_check_profile.do")
+	public String miniHpCheckProfile(HttpServletRequest request) {
+		System.out.println("프로필 확인 컨트롤러");
+		String id = request.getParameter("userId");
+		System.out.println(id);
+		String result = service.checkProfile(id);
+		System.out.println("프로필 확인 서비스 갔다옴");
+		System.out.println(result);
+		return result;
+	}
 	
-//	@ResponseBody
-//	@GetMapping("/miniHp_get_profile.do")
-//	public String miniHpGetProfile(HttpServletRequest request) {
-//		System.out.println("프로필 출력 컨트롤러");
-//		String id = request.getParameter("userId");
-//		String result = service.getProfile(id);
-//		return result;
-//	}
-//	
-//	@ResponseBody
-//	@GetMapping("/miniHp_insert_profile.do")
-//	public String miniHpInsertProfile(MiniHP_ProfileVO profileVO) {
-//		System.out.println("프로필 작성 컨트롤러");
-//		int result = service.insertProfile(profileVO);
-//		
-//		System.out.println("프로필 작성 서비스 갔다옴");
-//		String check = "";
-//		
-//		if(result == 0) {
-//			check = "fail";
-//		} else if(result == -1) {
-//			check = "error";
-//		} else {
-//			check = "success";
-//		}
-//		
-//		return check;
-//	}
-//	
-//	@ResponseBody
-//	@GetMapping("/miniHp_update_profile.do")
-//	public String miniHpUpdateProfile(MiniHP_ProfileVO profileVO) {
-//		System.out.println("프로필 수정 컨트롤러");
-//		int result = service.updateProfile(profileVO);
-//		
-//		System.out.println("프로필 수정 서비스 갔다옴");
-//		String check = "";
-//		
-//		if(result == 0) {
-//			check = "fail";
-//		} else if(result == -1) {
-//			check = "error";
-//		} else {
-//			check = "success";
-//		}
-//		
-//		return check;
-//	}
+	@ResponseBody
+	@GetMapping(value = "/miniHp_get_profile.do", produces ="application/text;charset=utf8")
+	public String miniHpGetProfile(HttpServletRequest request) {
+		System.out.println("프로필 가져오기 컨트롤러");
+		String id = request.getParameter("userId");
+		String result = service.getProfile(id);
+		return result;
+	}
+	
+	@ResponseBody
+	@GetMapping("/miniHp_insert_profile.do")
+	public String miniHpInsertProfile(MiniHP_ProfileVO profileVO) {
+		System.out.println("프로필 작성 컨트롤러");
+		int result = service.insertProfile(profileVO);
+		
+		System.out.println("프로필 작성 서비스 갔다옴");
+		String check = "";
+		
+		if(result == 0) {
+			check = "fail";
+		} else if(result == -1) {
+			check = "error";
+		} else {
+			check = "success";
+		}
+		
+		return check;
+	}
+	
+	@ResponseBody
+	@GetMapping("/miniHp_update_profile.do")
+	public String miniHpUpdateProfile(MiniHP_ProfileVO profileVO) {
+		System.out.println("프로필 수정 컨트롤러");
+		int result = service.updateProfile(profileVO);
+		System.out.println(result);
+		
+		System.out.println("프로필 수정 서비스 갔다옴");
+		String check = "";
+		
+		if(result == 0) {
+			check = "fail";
+		} else if(result == -1) {
+			check = "error";
+		} else {
+			check = "success";
+		}
+		
+		return check;
+	}
 }
