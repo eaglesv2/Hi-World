@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
@@ -77,9 +79,9 @@ public class NaverController {
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("UserName", vo.getUserName());
 			session.setAttribute("UserID", vo.getUserID());
-			return "Login/naverLogin";
+			return "Login/mainPage";
 		}else {
-			return "Login/naverLogin";	
+			return "Login/mainPage";	
 		}
 	}
 	
@@ -117,7 +119,7 @@ public class NaverController {
 		
 		/* 네이버  url 값을 사용하기 위해서 저장 */
 		model.addAttribute("url", naverAuthUrl);
-		return "Login/naverLogin";
+		return "Login/mainPage";
 	}
 	
 
@@ -194,5 +196,11 @@ public class NaverController {
 		/* redirect:/login.jsp
 		 * redirect를 이용하면 views가 아닌 그 밖의 폴더에도 접근가능 또한 .do를 호출해서 컨트롤러를 호출도 가능 */
 		return "redirect:/login.do";
+	}
+	
+	@RequestMapping(value="/noticePage", method=RequestMethod.GET)
+	@ResponseBody
+	public void noticeajax() {
+		
 	}
 }
