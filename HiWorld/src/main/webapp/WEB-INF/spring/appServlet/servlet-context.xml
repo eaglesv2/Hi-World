@@ -36,7 +36,7 @@
 
 
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
-	<beans:bean id="naverLoginBO" class="com.hiworld.controller.NaverLoginBO" />
+	<beans:bean id="naverLoginBO" class="com.hiworld.client.controller.NaverLoginBO" />
 
 
 </beans:beans>

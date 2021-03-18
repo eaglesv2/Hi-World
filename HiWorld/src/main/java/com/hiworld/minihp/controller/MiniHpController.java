@@ -94,7 +94,8 @@ public class MiniHpController {
 //		System.out.println("프로필 확인 서비스 갔다옴");
 //		return result;
 //	}
-//	
+
+	
 //	@ResponseBody
 //	@GetMapping("/miniHp_get_profile.do")
 //	public String miniHpGetProfile(HttpServletRequest request) {

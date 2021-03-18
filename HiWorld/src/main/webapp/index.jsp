@@ -1,14 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		location.href="MiniHP_Home.do"
-	</script>
+	
+	<a href="login.do">로그인</a>
+	
+	<a href="MiniHP_Home.do">미니홈피들어가기</a>
 </body>
 </html>
