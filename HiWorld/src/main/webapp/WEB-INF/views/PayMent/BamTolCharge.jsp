@@ -13,32 +13,90 @@
 
 	//생략가능
 	var IMP = window.IMP;
-	IMP.init('imp49542832');
+	IMP.init('imp39966716');
+	
+	// 로그인한사람 정보
+	var id ="${vo.userID}"
+	var name = "${vo.userName}"
+	var tel = "${vo.userTel}"
+	var addr = "${vo.userAddress}"
+	var userCash = ${vo.userCash}
 	
     function requestPay() {
-      // IMP.request_pay(param, callback) 호출
-      IMP.request_pay({ // param
-          pg: "html5_inicis",
-          pay_method: "card",
-          merchant_uid: "ORD20180131-0000011",
-          name: "노르웨이 회전 의자",
-          amount: 100,
-          buyer_email: "gildong@gmail.com",
-          buyer_name: "홍길동",
-          buyer_tel: "010-4242-4242",
-          buyer_addr: "서울특별시 강남구 신사동",
-          buyer_postcode: "01181"
-      }, function (rsp) { // callback
-          if (rsp.success) {
-              // 결제 성공 시 로직,
-              console.log("성공")
-              
-          } else {
-              console.log("실패")
-        	  // 결제 실패 시 로직,
-             
-          }
-      });
+    	
+    	// 체크박스 체크여부
+		var check = $('input[name=check]:checked').val()
+		var bamTol
+		var sell
+		var count
+
+		if (check == '10000') {
+			bamTol = '밤톨충전10개'
+			sell = 10000;
+			count = 10
+		} else if (check == '28000') {
+			bamTol = '밤톨충전30개'
+			sell = 29900;
+			count = 30
+		} else if (check == '45000') {
+			bamTol = '밤톨충전50개'
+			sell = 48900;
+			count = 50
+		} else if (check == '90000') {
+			bamTol = '밤톨충전100개'
+			sell = 90000;
+			count = 100
+		} else {
+			sell = 0;
+		}
+    	
+    	if(sell!=0){
+    		 // IMP.request_pay(param, callback) 호출
+    	      IMP.request_pay({ // param
+    	          pg: "html5_inicis",
+    	          pay_method: "card",
+    	          merchant_uid: "ORD20180131-0000011",
+    	          name: bamTol,
+    	          amount: sell,
+    	          buyer_name: name,
+    	          buyer_tel: tel,
+    	          buyer_addr: addr
+    	      }, function (rsp) { // callback
+    	          if (rsp.success) {
+    	              // 결제 성공 시 로직,
+					  $.ajax({
+						  type: "GET",
+						  url: "userCash.do",
+						  dataType: "int",
+						  data: {"count":count,"UserCash":userCash},
+						  error: function(data) {
+							alert("실패")
+						},
+						  success: function(data) {
+							alert("결제 성공")
+						}
+					  })
+    	              
+    	          } else {
+					  alert("결제 실패")
+    	        	  // 결제 실패 시 로직,
+    	             $.ajax({
+						  type: "GET",
+						  url: "userCash.do",
+						  dataType: "int",
+						  data: {"UserCash":count},
+						  error: function(data) {
+							alert("실패")
+						},
+						  success: function(data) {
+							alert("결제 성공")
+						}
+					  })
+    	        	  
+    	          }
+    	      });
+   	}
+     
     }
     
 </script>
@@ -47,6 +105,10 @@
 </head>
 <body>
 
+	<input type="radio" name="check" value="10000" />밤톨 10개 구매 10000원 <br />
+	<input type="radio" name="check" value="28000" />밤톨 30개 구매 28000원 <br />
+	<input type="radio" name="check" value="45000" />밤톨 50개 구매 45000원 <br />
+	<input type="radio" name="check" value="90000" />밤톨 100개 구매 90000원 <br />
 
 	 <button onclick="requestPay()">결제하기</button>
 
