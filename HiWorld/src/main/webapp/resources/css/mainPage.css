@@ -1,0 +1,135 @@
+@charset "UTF-8";
+
+.MainContainer{
+    border: 2px solid black;
+    width: 1080px;
+    margin:0 auto;
+    height: 950px;
+    position: relative;
+    border-radius: 10px;
+
+}
+
+#header{
+    
+    width: 1080px;
+    height: 150px;
+}
+
+.leftCon{
+    
+    float: left;
+    width: 75%;
+    height: 800px;
+}
+.leftCon #Nav #Navmenu{
+    
+    
+    
+    float: top;
+}
+
+.leftCon #bodyContext{
+    margin: 50px 50px 50px 50px;
+    outline: solid black;
+    height: 600px;
+}
+
+.rightCon{
+    
+    float: right;
+    width: 25%;
+    height: 800px;
+    
+}
+.rightCon #jang {
+    
+    height: 10px;
+}
+
+.rightCon #jang #jang-top{
+   display: flex;
+   justify-content: space-around;
+   margin-top: 20px;
+   margin-bottom: 20px;
+}
+.rightCon #jang #jang-bottom{
+    display: flex;
+    justify-content: space-around;
+    
+}
+.rightCon #minimi{
+    border: 1px solid black;
+    float:top;
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.rightCon #minimi label{
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.rightCon #id label{
+    margin-right: 15px;
+    margin-top: 50px;
+}
+.rightCon #password label{
+    margin-bottom: 30px;
+}
+.rightCon #minimi input{
+    width: 150px;
+    margin-bottom: 5px;
+}
+.rightCon #minimi #icon{
+    border: 1px solid black;
+    height: 50%;
+    
+}
+.rightCon #minimi #icon img{
+    height: 100%;
+    width: 100px;
+    float: left;
+}
+.rightCon  #minihome{
+    border: 1px solid black;
+    height: 50px;
+    text-align: center;
+    display: table;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.rightCon #minihome a{
+    display: table-cell;
+    vertical-align: middle;
+    
+}
+#Nav{
+    height: 100%;  
+    border: 1px solid black;
+    border-right: 0px;
+    margin: auto 0px;
+}
+
+#Nav #Navmenu{
+    border: 1px solid black;
+}
+
+#Nav li {
+    display: inline-block;
+    font-size: 30px;
+    margin-left: 90px;
+    height: 40px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    cursor: pointer;
+    
+}
+
+#add {
+    margin-top: 10px;
+    border: 1px solid black;
+    height: 515px;
+}

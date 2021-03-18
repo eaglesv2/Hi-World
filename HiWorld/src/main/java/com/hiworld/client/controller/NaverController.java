@@ -119,6 +119,7 @@ public class NaverController {
 		model.addAttribute("url", naverAuthUrl);
 		return "Login/naverLogin";
 	}
+	
 
 	/* 네이버 로그인 성공시 developer에 설정한 callback URL로 인해 여기로 오게됨 /callback */	
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })

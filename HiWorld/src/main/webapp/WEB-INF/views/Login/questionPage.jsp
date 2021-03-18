@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<a href="login.do">로그인</a>
-	
-	<a href="MiniHP_Home.do">미니홈피들어가기</a>
-	
-	<a href="mainPage.do">메인페이지로가기</a>
+
 </body>
 </html>
