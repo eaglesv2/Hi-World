@@ -121,4 +121,12 @@ public class ClientServiceImpl implements ClientService {
 		return dao.getOneClient(UserID);
 	}
 	
+	
+	/* 밤톨 충전 */
+	@Override
+	public int userCash(ClientVO clientVO) {
+		System.out.println("밤톨충전");	
+		return dao.userCash(clientVO);
+	}
+	
 }

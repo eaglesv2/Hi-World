@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hiworld.minihp.service.MiniHpService;
+import com.hiworld.minihp.service.MiniHpProfileService;
 import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 
 @Controller
-public class MiniHpController {
+public class MiniHpProfileController {
 	
 
 	@Autowired
-	private MiniHpService service;
+	private MiniHpProfileService service;
 	
 
 	@RequestMapping("/MiniHP_Home.do")
@@ -81,14 +81,14 @@ public class MiniHpController {
 	public String miniHpSetting(String menu, Model model) {
 		System.out.println("관리");
 		model.addAttribute("menu",menu);
-		return "MiniHP/MiniHP_Menu_Setting";
+		return "MiniHP/MiniHP_Setting";
 	}
 	
 	@ResponseBody
 	@GetMapping("/miniHp_check_profile.do")
 	public String miniHpCheckProfile(HttpServletRequest request) {
 		System.out.println("프로필 확인 컨트롤러");
-		String id = request.getParameter("userId");
+		String id = request.getParameter("UserID");
 		System.out.println(id);
 		String result = service.checkProfile(id);
 		System.out.println("프로필 확인 서비스 갔다옴");
@@ -100,7 +100,7 @@ public class MiniHpController {
 	@GetMapping(value = "/miniHp_get_profile.do", produces ="application/text;charset=utf8")
 	public String miniHpGetProfile(HttpServletRequest request) {
 		System.out.println("프로필 가져오기 컨트롤러");
-		String id = request.getParameter("userId");
+		String id = request.getParameter("UserID");
 		String result = service.getProfile(id);
 		return result;
 	}

@@ -53,7 +53,7 @@ function checkProfile() {
 		type : 'GET',
 		url : 'miniHp_check_profile.do',
 		/* userId session 받기 */
-		data : { userId : 'tester' },
+		data : { UserID : 'tester' },
 		
 		success : function(result) {
 			if(result == 1) { //프로필 존재 시
@@ -79,7 +79,7 @@ function displayProfile() {
 		type : 'GET',
 		url : 'miniHp_get_profile.do',
 		/* userId session 받기 */
-		data : { userId : 'tester'},
+		data : { UserID : 'tester'},
 		
 		success : function(result) {
 			console.log('ajax success');

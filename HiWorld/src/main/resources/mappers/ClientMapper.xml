@@ -53,6 +53,13 @@
 		SELECT * FROM HW_USERLIST WHERE UserID = #{UserID}		
 	</select>
 	
+	<!-- 밤톨 충전 -->
+	<update id="userCash">
+		UPDATE HW_USERLIST 
+		SET UserCash = #{UserCash}
+		WHERE UserID = #{UserID}
+	</update>
+	
 	
 </mapper>
 
