@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,24 +15,24 @@
     <script type="text/javascript" language="javascript">
                 
         $(document).ready(function(){    
-              $("#header").load("header.html");
+              $("#header").load("header");
     
     
           });
       
-          function Notice(){
+          function notice(){
               $.ajax({
                    type: "GET",
-                   url : "NoticePage.html",
+                   url : "noticePage",
                    dataType : "text",
                       error : function(){
                           alert("통신실패!!!!");
                       },
                       success : function(babo){
-
+							alert("성공")
                           $('#bodyContext').html(babo);
                      
-                      }
+                      } 
                   })
  
              };
@@ -39,8 +40,8 @@
              function shopping(){
               $.ajax({
                    type: "GET",
-                   url : "ShoppingPage.html",
-                   dataType : "text",
+                   url : "Login/shoppingPage.jsp",
+                   dataType : "html",
                       error : function(){
                           alert("통신실패!!!!");
                       },
@@ -56,8 +57,8 @@
              function board(){
               $.ajax({
                    type: "GET",
-                   url : "BoardPage.html",
-                   dataType : "text",
+                   url : "Login/boardPage.jsp",
+                   dataType : "html",
                       error : function(){
                           alert("통신실패!!!!");
                       },
@@ -73,8 +74,8 @@
              function question(){
               $.ajax({
                    type: "GET",
-                   url : "QuestionPage.html",
-                   dataType : "text",
+                   url : "Login/questionPage.jsp",
+                   dataType : "html",
                       error : function(){
                           alert("통신실패!!!!");
                       },
@@ -87,9 +88,9 @@
  
              };
              
-             
-    
 
+    
+	
                 
       </script>
 </head>
@@ -102,17 +103,17 @@
         <div class="leftCon">
             <div id="Nav">
                 <div id="Navmenu">
-                        <li id="kong" onclick="Notice()">
-                            공지사항
+                        <li id="kong" onclick="notice()">
+                         	   공지사항
                         </li>
                         <li id="shopping" onclick="shopping()">
-                            쇼핑
+                 		           쇼핑
                         </li>
                         <li id="board" onclick="board()">
-                            게시판
+                           	 게시판
                         </li>
                         <li id="question" onclick="question()">
-                            문의
+                           	 문의
                         </li>
                 </div>
 
@@ -123,27 +124,54 @@
         </div>
 
         <div class="rightCon">
-            <div id="minimi">
+          <div id="minimi">
 
-                <form action="">    
-                    <div id="id">
-                            <label for="id">아이디</label> 
-                            <input type="text" id="id">
-                    </div>
-                    
-                    <div id="password">
-                            <label for="password">비밀번호</label>
-                            <input type="text" id="password">
-                    </div>
-
-                    <div>
-                        <input type="submit" id="loginbutton" value="로그인">
-                        <input type="button"  id="signup" value="회원가입">
-                    </div>
-                </form>
+		    <c:choose>
+				
+					<c:when test="${UserName != null}">
+							<div id="minimi">
+						        <div id="icon">
+						            <img src="bb.jpg" alt="">
+						            <div>
+						                ${UserName}
+						            </div>
+						        </div>
+						        <div id="jang">
+						            <div id="jang-top">
+						                <a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
+						                <a href="">내이웃보기</a>
+						            </div>
+						            <div id="jang-bottom">
+						                <a href="">장바구니</a>
+						                <a href="logout.do">로그아웃</a>
+						        </div>
+						        </div>
+						    </div>
+					</c:when>
+					
+				<c:otherwise>
+					
+						<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
+						<h2>로그인</h2>
+						<form action="checkClient.do" method="post">
+							<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br> 
+							<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
+							<input type="submit" value="로그인" id="loginCheck"> <br>
+						</form>
+						<a href="userInsertForm.do">회원가입</a>
+						<br>
+						
+						<!-- 네이버 로그인 창으로 이동 -->
+						<div id="naver_id_login" style="text-align: center">
+							<!-- 네아 확인 url주소가 넘어옴 -->
+							<a href="${url}"> <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+						</div>
+						<br>
+						</c:otherwise>
+					</c:choose>
             </div>
                 <div id="minihome">
-                    <a href="">미니홈피 들어가기</a>
+                    <a href="MiniHP_Home.do">미니홈피 들어가기</a>
                 </div>
 
                 <div id="add">
