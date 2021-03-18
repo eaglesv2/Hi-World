@@ -17,6 +17,7 @@ public class ClientVO {
 	private int UserCash;
 	private int Admin;
 	private int Ban;
+	private int count;
 	
 	
 	public ClientVO() {
@@ -164,4 +165,15 @@ public class ClientVO {
 		Ban = ban;
 	}
 
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+	
+	
 }

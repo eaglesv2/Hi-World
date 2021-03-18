@@ -39,4 +39,7 @@ public interface ClientDAO {
 	/* 회원 한명 보기 */
 	/* ()안에 넣은 VO값을 가지고 mapper에서 get해서 사용가능 */
 	ClientVO getOneClient(String UserID);
+	
+	/* 밤톨 충전 */
+	int userCash(ClientVO clientVO);
 }

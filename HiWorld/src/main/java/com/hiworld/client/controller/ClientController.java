@@ -10,11 +10,14 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.service.ClientService;
@@ -105,10 +108,26 @@ public class ClientController {
 	@GetMapping("BamTolCharge.do")
 	public String BamTolPayMent(HttpSession session, Model model) {
 		System.out.println("결제창으로 이동");
-//		String UserID = (String)session.getAttribute("UserID");
-//		ClientVO vo = clientService.getOneClient(UserID);
-//		model.addAttribute("vo",vo);
+		String UserID = (String)session.getAttribute("UserID");
+		ClientVO vo = clientService.getOneClient(UserID);
+		model.addAttribute("vo",vo);
 		return "PayMent/BamTolCharge";
+	}
+	
+	
+	/* 밤톨 충전 */
+	@GetMapping("userCash.do")
+	@ResponseBody
+	public String userCash(ClientVO clientVO, HttpSession session) {
+		System.out.println("밤톨충전");
+		String UserID = (String)session.getAttribute("UserID");
+		int UserCash = clientVO.getUserCash()+clientVO.getCount();
+		System.out.println(clientVO.getCount());
+		System.out.println(UserCash);
+		clientVO.setUserCash(UserCash);
+		clientVO.setUserID(UserID);
+		clientService.userCash(clientVO);
+		return "success";
 	}
 	
 	
