@@ -31,17 +31,17 @@
 		<c:otherwise>
 			<table>
 				<tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>작성자</td>
-					<td>날짜</td>
+					<th style="width: 30%;">제목</th>
+					<th style="width: 30%">작성자</th>
+					<th style="width: 30%">작성일</th>
+					<th style="width: 10%">조회</th>
 				</tr>
 				<c:forEach items="${list}" var="l">
 				<tr>
-					<td>${l.boardSerial}</td>
-					<td>${l.title}</td>
-					<td>${l.userName}</td>
-					<td>${l.cDate}</td>
+					<td style="width: 30%; height: 5px;word-break:break-all;">${l.title}</td>
+					<td style="width: 30%; height: 5px;word-break:break-all;">${l.userName}</td>
+					<td style="width: 30%; height: 5px;word-break:break-all;">${l.cDate}</td>
+					<td style="width: 10%; height: 5px;word-break:break-all;">${l.hit}</td>
 				</tr>
 				</c:forEach>
 			</table>
