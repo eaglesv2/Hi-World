@@ -6,13 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.hiworld.minihp.service.MiniHpBoardService;
-import com.hiworld.minihp.service.MiniHpBoardServiceImpl;
 
 @Controller
 public class MiniHpBoardContoller {
 	
 	@Autowired
-	private MiniHpBoardServiceImpl service;
+	private MiniHpBoardService service;
 	
 	@GetMapping("/miniHpBoard.do")
 	public String miniHpBoard(String menu, Model model) {

@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
 
 @Controller
-public class NaverController {
+public class ClientController {
+	
 	
 	/* 네이버 */
 	private NaverLoginBO naverLoginBO;
@@ -48,7 +50,7 @@ public class NaverController {
 	/* 회원가입 */
 	@PostMapping("insertClient.do")
 	public String insertClient(ClientVO clientVO) {
-		
+		System.out.println("회원가입");
 		/* tel을 다 가져와서 하나로 묶어서 setter하기 */
 		String tel = clientVO.getUserTel1()+"-"+clientVO.getUserTel2()+"-"+clientVO.getUserTel3();
 		clientVO.setUserTel(tel);
@@ -70,25 +72,26 @@ public class NaverController {
 	/* 로그인 */
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
-		
+		System.out.println("로그인");
 		ClientVO vo = clientService.checkClient(clientVO);
 		
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("UserName", vo.getUserName());
 			session.setAttribute("UserID", vo.getUserID());
-			return "Login/naverLogin";
+			session.setAttribute("UserSerial", vo.getUserSerial());
+			return "Login/userLogin";
 		}else {
-			return "Login/naverLogin";	
+			return "Login/userLogin";	
 		}
 	}
 	
 	/* 내 정보 보기 */
 	@GetMapping("getOneClient.do")
 	public String getOneClient(HttpServletRequest request, Model model) {
+		System.out.println("내정보보기");
 		String UserID = request.getParameter("UserID");
 		ClientVO vo = clientService.getOneClient(UserID);
-		System.out.println(vo.getUserCash());
 		model.addAttribute("clientVO",vo);
 		
 		return "Login/userOneView";
@@ -97,7 +100,16 @@ public class NaverController {
 	
 	
 	
-	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 결제 창으로 이동 */
+	@GetMapping("BamTolCharge.do")
+	public String BamTolPayMent(HttpSession session, Model model) {
+		System.out.println("결제창으로 이동");
+//		String UserID = (String)session.getAttribute("UserID");
+//		ClientVO vo = clientService.getOneClient(UserID);
+//		model.addAttribute("vo",vo);
+		return "PayMent/BamTolCharge";
+	}
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 네이버 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -117,7 +129,7 @@ public class NaverController {
 		
 		/* 네이버  url 값을 사용하기 위해서 저장 */
 		model.addAttribute("url", naverAuthUrl);
-		return "Login/naverLogin";
+		return "Login/userLogin";
 	}
 
 	/* 네이버 로그인 성공시 developer에 설정한 callback URL로 인해 여기로 오게됨 /callback */	
@@ -159,7 +171,8 @@ public class NaverController {
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("UserName", vo.getUserName());
 			session.setAttribute("UserID", vo.getUserID());
-			return "Login/naverLogin";
+			session.setAttribute("UserCash",vo.getUserCash());
+			return "Login/userLogin";
 		}else {
 			model.addAttribute("UserID",checkID);
 			model.addAttribute("UserName",name);
