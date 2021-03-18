@@ -11,5 +11,7 @@
 	<a href="login.do">로그인</a>
 	
 	<a href="MiniHP_Home.do">미니홈피들어가기</a>
+	
+	<a href="miniHp_menuList.do">미니홈피관리</a>
 </body>
 </html>

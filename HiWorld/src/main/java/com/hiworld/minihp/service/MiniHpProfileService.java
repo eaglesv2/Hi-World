@@ -2,8 +2,7 @@ package com.hiworld.minihp.service;
 
 import com.hiworld.minihp.vo.MiniHP_ProfileVO;
 
-
-public interface MiniHpService {
+public interface MiniHpProfileService {
 	
 	/*미니홈피 프로필 존재 확인*/
 	String checkProfile(String id);

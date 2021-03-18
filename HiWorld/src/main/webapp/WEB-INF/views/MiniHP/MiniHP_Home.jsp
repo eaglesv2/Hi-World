@@ -22,7 +22,7 @@ body
  scrollbar-track-color: #FFFFFF;
  scrollbar-arrow-color: #9C92FF
  }
- 
+ 	
 .selected-Menu{
 	border: 1px solid;
 	border-left: 0px;
@@ -100,7 +100,7 @@ $(function(){
 							<div align="center" class="selected-Menu" onclick="moveBoard('miniHpBoard.do?menu=menu4')">게시판</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
 							<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpSetting.do?menu=menu7')">관&nbsp;리</div>
+							<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
 
 						<!-- Setting menu ending -->	
 						</td>
