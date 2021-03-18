@@ -26,15 +26,16 @@
 		<c:choose>
 		
 			<c:when test="${UserName != null}">
-				<h2>네이버 아이디 로그인 성공하셨습니다!!</h2>
 				<h3>${UserName} 님 환영합니다!</h3>
 				<h3>
 					<a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
+					<a href="MiniHP_Home.do">미니홈피들어가기</a>
 					<a href="logout.do">로그아웃</a>
+					<a href="BamTolCharge.do">밤톨충전</a>
 				</h3>
 			</c:when>
 			
-			<c:otherwise>
+		<c:otherwise>
 			
 				<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
 				<h2>로그인</h2>
