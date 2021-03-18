@@ -15,6 +15,10 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	
 	@Override
 	public List<MiniHpBoardVO> getAll() {
-		return dao.getAll();
+		List<MiniHpBoardVO> list = dao.getAll();
+		if(list==null || list.size()==0)
+			return null;
+		else
+			return list;
 	}
 }

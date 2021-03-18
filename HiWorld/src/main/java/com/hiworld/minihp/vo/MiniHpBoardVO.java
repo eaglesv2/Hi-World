@@ -9,18 +9,20 @@ public class MiniHpBoardVO {
 	private String folderName;
 	private String title;
 	private String content;
+	private int hit;
 	private Date cDate;
 	private Date uDate;
 	
 	public MiniHpBoardVO() {}
 	public MiniHpBoardVO(int boardSerial, int userSerial, String userName, String folderName, String title,
-			String content, Date cDate, Date uDate) {
+			String content, int hit, Date cDate, Date uDate) {
 		this.boardSerial = boardSerial;
 		this.userSerial = userSerial;
 		this.userName = userName;
 		this.folderName = folderName;
 		this.title = title;
 		this.content = content;
+		this.hit = hit;
 		this.cDate = cDate;
 		this.uDate = uDate;
 	}
@@ -60,6 +62,12 @@ public class MiniHpBoardVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public Date getcDate() {
 		return cDate;
 	}
@@ -75,7 +83,7 @@ public class MiniHpBoardVO {
 	@Override
 	public String toString() {
 		return "MiniHpBoardVO [boardSerial=" + boardSerial + ", userSerial=" + userSerial + ", userName=" + userName
-				+ ", folderName=" + folderName + ", title=" + title + ", content=" + content + ", cDate=" + cDate
-				+ ", uDate=" + uDate + "]";
+				+ ", folderName=" + folderName + ", title=" + title + ", content=" + content + ", hit=" + hit
+				+ ", cDate=" + cDate + ", uDate=" + uDate + "]";
 	}
 }
