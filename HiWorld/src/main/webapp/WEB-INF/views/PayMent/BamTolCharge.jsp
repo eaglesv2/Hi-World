@@ -13,6 +13,7 @@
 
 	//생략가능
 	var IMP = window.IMP;
+
 	IMP.init('imp39966716');
 	
 	// 로그인한사람 정보
@@ -21,6 +22,7 @@
 	var tel = "${vo.userTel}"
 	var addr = "${vo.userAddress}"
 	var userCash = ${vo.userCash}
+
 	
     function requestPay() {
     	
