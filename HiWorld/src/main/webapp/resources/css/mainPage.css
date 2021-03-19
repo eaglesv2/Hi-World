@@ -17,7 +17,7 @@
 }
 
 .leftCon{
-    
+    margin-top:10px;
     float: left;
     width: 75%;
     height: 800px;
@@ -36,7 +36,7 @@
 }
 
 .rightCon{
-    
+    margin-top:10px;
     float: right;
     width: 25%;
     height: 800px;
@@ -79,10 +79,15 @@
 .rightCon #password label{
     margin-bottom: 30px;
 }
-.rightCon #minimi input{
+.rightCon #minimi #UserID{
+    width: 150px;
+    margin-bottom: 10px;
+}
+.rightCon #minimi #UserPW{
     width: 150px;
     margin-bottom: 5px;
 }
+
 .rightCon #minimi #icon{
     border: 1px solid black;
     height: 50%;
@@ -132,4 +137,14 @@
     margin-top: 10px;
     border: 1px solid black;
     height: 515px;
+}
+
+
+#login{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#login #loginCheck{
+	width: 80px;
 }
