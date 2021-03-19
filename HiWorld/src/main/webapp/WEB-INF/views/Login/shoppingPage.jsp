@@ -7,82 +7,106 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="resources/css/ShoppingPage.css">
+    <link rel="stylesheet" href="resources/css/shoppingPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
       function shop_character(){
-          $.ajax({
-                 type: "GET",
-                 url : "shop_character.jsp",
-                  dataType : "text",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('.sangpum').html(babo);
-                     
-                      }
-                  })
- 
+              //ajax option
+               console.log("1234") 
+              var ajaxOption={
+             		 type: "GET",
+                      url : "shop_character.do",
+                      dataType : "html", 
+                      async:true,
+                      cache:false
+             		 
+              }
+         	  $.ajax(ajaxOption).done(function(data){
+         		  //Contents 영역삭제
+         		  $('.sangpum').children().remove();
+         		  console.log("1111") 
+         		  //Contents 영역 교체
+         		  $('.sangpum').html(data);
+         	  }).fail(function(error) {
+                   alert(JSON.stringify(error));
+                   console.log("에러를 찾자");
+               });
              };
     function shop_background(){
-          $.ajax({
-                 type: "GET",
-                 url : "shop_bacground.jsp",
-                  dataType : "text",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('.sangpum').html(babo);
-                     
-                      }
-                  })
- 
-             };
+		        //ajax option
+		        console.log("1234") 
+		       var ajaxOption2={
+		      		 type: "GET",
+		               url : "shop_background.do",
+		               dataType : "html", 
+		               async:true,
+		               cache:false
+		      		 
+		       }
+		  	  $.ajax(ajaxOption2).done(function(data){
+		  		  //Contents 영역삭제
+		  		  $('.sangpum').children().remove();
+		  		  console.log("1111") 
+		  		  //Contents 영역 교체
+		  		  $('.sangpum').html(data);
+		  	  }).fail(function(error) {
+		            alert(JSON.stringify(error));
+		            console.log("에러를 찾자");
+		        });
+		      };
 
      function shop_music(){
-          $.ajax({
-                 type: "GET",
-                 url : "shop_music.jsp",
-                  dataType : "text",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('.sangpum').html(babo);
-                     
-                      }
-                  })
- 
-             };
+		         //ajax option
+		         console.log("1234") 
+		        var ajaxOption3={
+		       		 type: "GET",
+		                url : "shop_music.do",
+		                dataType : "html", 
+		                async:true,
+		                cache:false
+		       		 
+		        }
+		   	  $.ajax(ajaxOption3).done(function(data){
+		   		  //Contents 영역삭제
+		   		  $('.sangpum').children().remove();
+		   		  console.log("1111") 
+		   		  //Contents 영역 교체
+		   		  $('.sangpum').html(data);
+		   	  }).fail(function(error) {
+		             alert(JSON.stringify(error));
+		             console.log("에러를 찾자");
+		         });
+		       };
 
 
     function shop_mouse(){
-          $.ajax({
-                 type: "GET",
-                 url : "shop_mouse.jsp",
-                  dataType : "text",
-                      error : function(){
-                          alert("통신실패!!!!");
-                      },
-                      success : function(babo){
-
-                          $('.sangpum').html(babo);
-                     
-                      }
-                  })
- 
-             };
+		        //ajax option
+		        console.log("1234") 
+			       var ajaxOption4={
+			      		 type: "GET",
+			               url : "shop_mouse.do",
+			               dataType : "html", 
+			               async:true,
+			               cache:false
+		      		 
+		       }
+		  	  $.ajax(ajaxOption4).done(function(data){
+		  		  //Contents 영역삭제
+		  		  $('.sangpum').children().remove();
+		  		  console.log("1111") 
+		  		  //Contents 영역 교체
+		  		  $('.sangpum').html(data);
+		  	  }).fail(function(error) {
+		            alert(JSON.stringify(error));
+		            console.log("에러를 찾자");
+		        });
+		      };
     </script>
 </head>
 <body>
     <div class="Navi">
         <div onclick="shop_character()">캐릭터</div>
-        <div onclick="shop_bacground()">배경화면</div>
+        <div onclick="shop_background()">배경화면</div>
         <div onclick="shop_music()">음악</div>
         <div onclick="shop_mouse()">마우스모양</div>
     </div>

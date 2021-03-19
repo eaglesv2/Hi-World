@@ -229,27 +229,44 @@ public class ClientController {
 	/*메인페이지 AJAX*/
 	@GetMapping("/noticePage.do")
 	public String noticeAjax() {
-		System.out.println("1111243");
 		return "Login/noticePage";
 		
 	}
 	
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
-		System.out.println("   ");
 		return "Login/shoppingPage";
 	}
 	
 	@GetMapping("/boardPage.do")
 	public String boardAjax() {
-		System.out.println("   ");
 		return "Login/boardPage";
 	}
 	
 	@GetMapping("/questionPage.do")
 	public String questionAjax() {
-		System.out.println("   ");
 		return "Login/questionPage";
 	}
 	
+	/*쇼핑 ajax*/
+	@GetMapping("/shop_character.do")
+	public String shop_character() {
+		return "Login/shop_character";
+	}
+	
+	@GetMapping("/shop_background.do")
+	public String shop_background() {
+		return "Login/shop_background";
+	}
+	
+	@GetMapping("/shop_music.do")
+	public String shop_music() {
+		return "Login/shop_music";
+	}
+	
+	@GetMapping("/shop_mouse.do")
+	public String shop_mouse() {
+		return "Login/shop_mouse";
+	}
+
 }
