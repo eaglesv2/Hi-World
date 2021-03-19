@@ -15,50 +15,54 @@
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-var str_i="";
-
 $(document).ready(function(){
-	document.getElementById("profile_info_ok").style.display="none";
-	sendRequest("my_get_Info.action",null,displayInfo,"GET");
+	$("#profile_info_ok").hide();
+	displayInfo();
+	/* sendRequest("my_get_Info.action",null,displayInfo,"GET"); */
 });
 
 
 function change_i(){
-	document.getElementById("profile_info").style.display="none";
-	document.getElementById("profile_info_ok").style.display="block";
-	str_i = str_i.replace(/<br\/>/ig, "\n");
-	document.getElementById("infoTxt_ok").value=str_i;
-	
+	var info = $("#infoTxt").val();
+	$("#profile_info").hide();
+	$("#profile_info_ok").show();
+	$("#infoTxt_ok").val(info);
 }
 
 function change_i_ok(){
-	document.getElementById("profile_info").style.display="block";
-	document.getElementById("profile_info_ok").style.display="none";
-	var newInfo = document.getElementById("infoTxt_ok").value;
-	newInfo = newInfo.replace(/(<([^>]+)>)/gi, "");
-	newInfo = newInfo.replace(/\n/gi, "<br/>");
-	var params = "newInfo="+newInfo;
-	var url = "my_get_Info.action?"+params;
-	url = encodeURI(url);
-	sendRequest(url,null,displayInfo,"GET");
-}
-
-function initSet(){
-	document.getElementById("profile_info_ok").style.display="none";
-	sendRequest("my_get_Info.action",null,displayInfo,"GET");
+	$("#profile_info").show();
+	$("#profile_info_ok").hide();
+	var newInfo = $("#infoTxt_ok").val();
+	
+	$.ajax({
+		type : 'POST',
+		url : 'miniHp_updateIntroInfo.do',
+		data : { UserID : '${sessionVO.UserID}', hpInfo : newInfo },
+		
+		success : function(result) {
+			console.log('ajax success');
+			displayInfo();
+		}
+	})
 }
 
 function displayInfo(){
-	if(httpRequest.readyState==4){
-		if(httpRequest.status==200){
-			str_i = httpRequest.responseText;
-			var infoTxt = document.getElementById("infoTxt");
-			infoTxt.innerHTML = str_i;	
+	console.log('display info');
+	
+	$.ajax({
+		type : 'POST',
+		url : 'miniHp_getIntroInfo.do',
+		data : { UserID : '${sessionVO.UserID}'},
+		
+		success : function(result) {
+			console.log('ajax success2');
+			console.log(result);
+			$("#infoTxt").html(result);
 		}
-	}
+	})
 }
 
-function random(){
+/* function random(){
 	sendRequest("random.action",null,sendRandom,"GET");
 }
 
@@ -76,7 +80,7 @@ function moveToUser(){
 	if(userId == "") return;
 	document.getElementById("mySelect")[0].selected;
 	window.open("user_main.action?userId="+userId,userId,"width=1090,height=600,location=no,status=no,scrollbars=no");
-}
+} */
 
 </script>
 <style type="text/css">
@@ -125,7 +129,7 @@ height:100px;
 						<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/>
 					</div>
 					<div id="profile_info_ok">
-						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;" ></textarea>
+						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;"></textarea>
 						<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/>
 					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
