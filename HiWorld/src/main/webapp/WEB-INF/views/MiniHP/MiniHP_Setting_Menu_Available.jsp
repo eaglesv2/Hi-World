@@ -63,9 +63,14 @@ input::placeholder {
 		var menu6=$("#menu6-${miniHpUserMenuVO.menu6}");
 		menu6.checked = true;
 		
-		$('.menu').css('background-color', '#'+$("#menuBackground").val());
-		$('.menu').css('color', '#'+$("#menuFontColor").val());
+		$('.menu').css('background-color', '#' + '${miniHpUserMenuVO.menuBGColor}');
+		$('.menu').css('color', '#' + '${miniHpUserMenuVO.menuBGFontColor}');
+		$('.menu').css('border-color', '#' + '${miniHpUserMenuVO.menuBorderColor}');
+		/* 
+		$('.menu').css('color', '#' + $("#menuBackground").val());
+		$('.menu').css('color', '#' + $("#menuFontColor").val());
 		$('.menu').css('border-color', '#'+$("#menuBorder").val());
+		 */
 	});
 	
 	$(document).ready(function(){
