@@ -37,9 +37,16 @@
 		VALUES(#{UserName},#{UserID},#{UserPW},#{UserGender},#{UserBirth},#{UserTel},#{UserAddress})
 	</insert>
 	
+	<!-- 회원가입시 미니홈피 기본값 등록 -->
+	<insert id="insertMiniHP">
+		INSERT INTO MiniHP_UserMenu (UserSerial, UserID)
+		VALUES(#{UserSerial},#{UserID})
+	</insert>
+	
+	
 	<!-- 네이버 회원 확인 -->
-	<select id="NaverCheckClient" resultType="clientVO">
-		SELECT * FROM HW_USERLIST WHERE UserID = #{UserID}
+	<select id="NaverCheckClient" resultType="sessionVO">
+		SELECT UserSerial, UserID, UserName, UserCash, UserBirth FROM HW_USERLIST WHERE UserID = #{UserID}
 	</select>
 	
 	<!-- 회원 로그인 확인 -->

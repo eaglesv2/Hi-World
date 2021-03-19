@@ -3,6 +3,7 @@ package com.hiworld.client.dao;
 import java.util.ArrayList;
 
 import com.hiworld.client.vo.ClientVO;
+import com.hiworld.client.vo.sessionVO;
 
 /* myBatis에서 메소드를 가져와서 사용하기 위해서 */
 public interface ClientDAO {
@@ -30,8 +31,11 @@ public interface ClientDAO {
 	/* 회원 정보 입력 성공시 성공한 갯수 나옴 1 */
 	int insertClient(ClientVO clientVO);
 	
+	/* 회원가입시 미니홈피 기본값 등록 */
+	int insertMiniHP(ClientVO clientVO);
+	
 	/* 네이버 회원 체크 */
-	ClientVO NaverCheckClient(String UserID);
+	sessionVO NaverCheckClient(String UserID);
 	
 	/* 회원 로그인 확인 */
 	ClientVO checkClient(ClientVO clientVO);

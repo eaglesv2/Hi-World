@@ -22,6 +22,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
+import com.hiworld.client.vo.sessionVO;
 
 @Controller
 public class ClientController {
@@ -68,9 +69,14 @@ public class ClientController {
 		/* service를 통해 dao호출 */
 		String checkJoin = clientService.insertClient(clientVO);
 		
+		/* 시리얼번호를 가져오기 위해 내 정보 호출 */
+		String UserID = clientVO.getUserID();
+		ClientVO vo = clientService.getOneClient(UserID);
+		/* 회원가입시 기본으로 홈페이지 데이터 등록 */
+		clientService.insertMiniHP(vo);
+		
 		return checkJoin;
 	}
-	
 	
 
 	/* 로그인 */
@@ -186,13 +192,11 @@ public class ClientController {
 		System.out.println(checkID);
 		
 		/* 네이버 회원 체크 */
-		ClientVO vo = clientService.NaverCheckClient(checkID);
+		sessionVO vo = clientService.NaverCheckClient(checkID);
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
-			session.setAttribute("UserName", vo.getUserName());
-			session.setAttribute("UserID", vo.getUserID());
-			session.setAttribute("UserCash",vo.getUserCash());
-			return "Login/userLogin";
+			session.setAttribute("sessionVO", vo);
+			return "redirect:/login.do";
 		}else {
 			model.addAttribute("UserID",checkID);
 			model.addAttribute("UserName",name);

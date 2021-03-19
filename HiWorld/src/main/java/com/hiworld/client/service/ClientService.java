@@ -3,6 +3,7 @@ package com.hiworld.client.service;
 import java.util.ArrayList;
 
 import com.hiworld.client.vo.ClientVO;
+import com.hiworld.client.vo.sessionVO;
 
 /* 이 서비스를 호출하면 serviceimpl이 작동함 */
 /* controller -> service -> serviceimpl -> dao -> mybatis */
@@ -25,8 +26,11 @@ public interface ClientService {
 	/* 회원 정보 입력 */
 	String insertClient(ClientVO clientVO);
 	
+	/* 회원가입시 미니홈피 기본값 등록 */
+	String insertMiniHP(ClientVO clientVO);
+	
 	/* 네이버 회원 정보 확인 */
-	ClientVO NaverCheckClient(String UserID);
+	sessionVO NaverCheckClient(String UserID);
 	
 	/* 회원 정보 확인 */
 	ClientVO checkClient(ClientVO clientVO);
@@ -37,4 +41,6 @@ public interface ClientService {
 	
 	/* 밤톨 충전 */
 	int userCash(ClientVO clientVO);
+	
+	
 }
