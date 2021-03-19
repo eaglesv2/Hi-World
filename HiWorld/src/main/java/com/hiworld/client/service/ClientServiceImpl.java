@@ -89,6 +89,16 @@ public class ClientServiceImpl implements ClientService {
 		return checkJoin;
 	}
 	
+	/*아이디 중복 체크*/
+	@Override
+	public int idCheck(String userId) {
+		// TODO Auto-generated method stub
+		System.out.println("아이디중복 체크");
+		int result = dao.idCheck(userId);
+		System.out.println(result);
+		return result;
+	}
+	
 	/* 회원 가입시 미니홈피 기본값 생성 */
 	@Override
 	public String insertMiniHP(ClientVO clientVO) {

@@ -77,8 +77,17 @@ public class ClientController {
 		
 		return checkJoin;
 	}
+	//id 중복 확인 을 할경우
+			@PostMapping("idCheck.do")
+			@ResponseBody
+			public String idCheck(HttpServletRequest request) {
+				System.out.println("아이디중복확인");
+				String userid = request.getParameter("userID");
+				System.out.println(userid);
+				int result = clientService.idCheck(userid);
+				return Integer.toString(result);
+			}
 	
-
 	/* 로그인 */
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {

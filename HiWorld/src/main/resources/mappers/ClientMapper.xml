@@ -43,6 +43,11 @@
 		VALUES(#{UserSerial},#{UserID})
 	</insert>
 	
+	<!-- 아이디 중복 체크 구현 -->
+	<select id="idCheck" resultType="int">
+		SELECT count(*) FROM HW_USERLIST
+		WHERE UserID=#{UserID}
+	</select>
 	
 	<!-- 네이버 회원 확인 -->
 	<select id="NaverCheckClient" resultType="sessionVO">
