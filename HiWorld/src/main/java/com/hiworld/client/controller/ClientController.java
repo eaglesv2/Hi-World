@@ -81,6 +81,7 @@ public class ClientController {
 		
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
+			session.setAttribute("UserSerial", vo.getUserSerial());
 			session.setAttribute("UserName", vo.getUserName());
 			session.setAttribute("UserID", vo.getUserID());
 			session.setAttribute("UserSerial", vo.getUserSerial());

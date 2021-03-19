@@ -12,7 +12,7 @@
 %>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -62,10 +62,10 @@ input::placeholder {
 		
 		var menu6=$("#menu6-${miniHpUserMenuVO.menu6}");
 		menu6.checked = true;
-		
+	/* 	
 		$('.menu').css('background-color', '#' + '${miniHpUserMenuVO.menuBGColor}');
 		$('.menu').css('color', '#' + '${miniHpUserMenuVO.menuBGFontColor}');
-		$('.menu').css('border-color', '#' + '${miniHpUserMenuVO.menuBorderColor}');
+		$('.menu').css('border-color', '#' + '${miniHpUserMenuVO.menuBorderColor}'); */
 		/* 
 		$('.menu').css('color', '#' + $("#menuBackground").val());
 		$('.menu').css('color', '#' + $("#menuFontColor").val());
@@ -90,11 +90,10 @@ input::placeholder {
 				url : "miniHp_menuAvailable_ok.do",
 				data : allData,
 				success : function(result){
-					params = "menu=menu7";
 					$.ajax({
 						type : "POST",
-						url : "miniHp_rightMenu.action",
-						data : params,
+						url : "miniHp_rightMenu.do",
+						data : { menu : menu7 },
 						success : function(result){
 							$("#rightMenu").html(result);
 						},
@@ -120,18 +119,18 @@ input::placeholder {
 		 });
 		 $("#basicMenuColor").click(function(){
 			$('#menuBackground').value="238db3";
-			$('#menuBackground').style.backgroundColor="#238DB3";
-			$('#menuBackground').style.color="#FFFFFF"
+			$('#menuBackground').css('backgroundColor','#238DB3');
+			$('#menuBackground').css('color', 'FFFFFF');
 		    $('.menu').css('background-color', '#238db3');
 				 
 			$('#menuFontColor').value="000000"
-			$('#menuFontColor').style.backgroundColor="#000000";
-			$('#menuFontColor').style.color="#FFFFFF"
+			$('#menuFontColor').css('backgroundColor','#000000');
+			$('#menuFontColor').css('color', 'FFFFFF');
 			$('.menu').css('color', '#000000');
 				 
 			$('#menuBorder').value="000000"
-			$('#menuBorder').style.backgroundColor="#000000";
-			$('#menuBorder').style.color="#FFFFFF"
+			$('#menuBorder').css('backgroundColor','#000000');
+			$('#menuBorder').css('color', 'FFFFFF');
 			$('.menu').css('border-color', '#000000');
 		 });
 	});
@@ -181,28 +180,28 @@ input::placeholder {
 				바탕 색상
 			</div>
 			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuBackground" value="${cyMenuDTO.menuBGColor}" placeholder="바탕 색상" 
-					style="width: 30%;">
+				<input class="form-control jscolor" id="menuBackground" value="${miniHpUserMenuVOO.menuBGColor}" placeholder="바탕 색상" 
+					style="width: 30%; cursor: pointer">
 			</div>
 			<div align="left" style="padding-left: 228px;">
 				글씨 색상
 			</div>
 			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuFontColor" value="${cyMenuDTO.menuFontColor}" placeholder="글씨 색상"
-					style="width: 30%;">
+				<input class="form-control jscolor" id="menuFontColor" value="${miniHpUserMenuVO.menuFontColor}" placeholder="글씨 색상"
+					style="width: 30%; cursor: pointer">
 			</div>
 			<div align="left" style="padding-left: 228px;">
 				테두리 색상
 			</div>
 			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuBorder" value="${cyMenuDTO.menuBorderColor}" placeholder="테두리 색상"
-					style="width: 30%;">
+				<input class="form-control jscolor" id="menuBorder" value="${miniHpUserMenuVO.menuBorderColor}" placeholder="테두리 색상"
+					style="width: 30%; cursor: pointer">
 			</div>
 		</div>
 		<div align="right" style="border: 0px solid black;height: 28px;padding-top: 5px;padding-left: 75px;padding-right: 27px;">
 			<font  style="font-size:8pt;color: #1294AB;font-weight: bold;">
 				<span id="basicMenuColor" onmouseover="this.style.color='#FF5E00';" onmouseout="this.style.color='#1294AB';"
-					style="padding-right: 61px;">
+					style="padding-right: 61px; cursor: pointer">
 						■ 기본 색상
 				</span>
 			</font>

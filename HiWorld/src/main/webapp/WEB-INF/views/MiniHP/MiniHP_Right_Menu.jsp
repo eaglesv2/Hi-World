@@ -8,7 +8,7 @@
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 .unselected-Menu{
@@ -41,78 +41,77 @@
 <script type="text/javascript">
 
 $(function(){
-	$('.unselected-Menu').css('background-color', '#${cyMenuDTO.menuBackgroundColor }');
-	$('.unselected-Menu').css('color', '#${cyMenuDTO.menuFontColor }');
-	$('.unselected-Menu').css('border-color', '#${cyMenuDTO.menuBorderColor }');
-	$('.selected-Menu').css('color', '#${cyMenuDTO.menuFontColor }');
-	$('.selected-Menu').css('border-color', '#${cyMenuDTO.menuBorderColor }');
+	$('.unselected-Menu').css('background-color', '#${miniHpUserMenuVO.menuBGColor }');
+	$('.unselected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
+	$('.unselected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
+	$('.selected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
+	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
 });
-
 
 </script>
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${cyMenuDTO.menu1=='0' }">
-		<c:if test="${menu=='menu1' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_home.action?menu=menu1';">홈</div>
+	<c:if test="${miniHpUserMenuVO.menu1==1}">
+		<c:if test="${menu=='menu1'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
 		</c:if>
-		<c:if test="${menu!='menu1' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_home.action?menu=menu1';">홈</div>
-		</c:if>
-	</c:if>
-	
-	<c:if test="${cyMenuDTO.menu2=='0' }">
-		<c:if test="${menu=='menu2' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_profile.action?menu=menu2';">프로필</div>
-		</c:if>
-		<c:if test="${menu!='menu2' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_profile.action?menu=menu2';">프로필</div>
+		<c:if test="${menu!='menu1'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
 		</c:if>
 	</c:if>
 	
-	<c:if test="${cyMenuDTO.menu3=='0' }">
-		<c:if test="${menu=='menu3' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_picture.action?menu=menu3';">사진첩</div>
+	<c:if test="${miniHpUserMenuVO.menu2==1}">
+		<c:if test="${menu=='menu2'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpProfile.do?menu=menu2';">프로필</div>
 		</c:if>
-		<c:if test="${menu!='menu3' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_picture.action?menu=menu3';">사진첩</div>
-		</c:if>
-	</c:if>
-	
-	<c:if test="${cyMenuDTO.menu4=='0' }">
-		<c:if test="${menu=='menu4' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_board.action?menu=menu4';">게시판</div>
-		</c:if>
-		<c:if test="${menu!='menu4' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_board.action?menu=menu4';">게시판</div>
+		<c:if test="${menu!='menu2'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpProfile.do?menu=menu2';">프로필</div>
 		</c:if>
 	</c:if>
 	
-	<c:if test="${cyMenuDTO.menu5=='0' }">
-		<c:if test="${menu=='menu5' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_video.action?menu=menu5';">동영상</div>
+	<c:if test="${miniHpUserMenuVO.menu3==1}">
+		<c:if test="${menu=='menu3'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpPicture.do?menu=menu3';">사진첩</div>
 		</c:if>
-		<c:if test="${menu!='menu5' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_video.action?menu=menu5';">동영상</div>
-		</c:if>
-	</c:if>
-	
-	<c:if test="${cyMenuDTO.menu6=='0' }">
-		<c:if test="${menu=='menu6' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_guest.action?menu=menu6';">방명록</div>
-		</c:if>
-		<c:if test="${menu!='menu6' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_guest.action?menu=menu6';">방명록</div>
+		<c:if test="${menu!='menu3'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpPicture.do?menu=menu3';">사진첩</div>
 		</c:if>
 	</c:if>
 	
-	<c:if test="${cyMenuDTO.menu7=='0' }">
-		<c:if test="${menu=='menu7' }">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='my_setting.action?menu=menu7';">관&nbsp;리</div>
+	<c:if test="${miniHpUserMenuVO.menu4==1}">
+		<c:if test="${menu=='menu4'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpBoard.do?menu=menu4';">게시판</div>
 		</c:if>
-		<c:if test="${menu!='menu7' }">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='my_setting.action?menu=menu7';">관&nbsp;리</div>
+		<c:if test="${menu!='menu4'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpBoard.do?menu=menu4';">게시판</div>
+		</c:if>
+	</c:if>
+	
+	<c:if test="${miniHpUserMenuVO.menu5==1}">
+		<c:if test="${menu=='menu5'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpVideo.do?menu=menu5';">동영상</div>
+		</c:if>
+		<c:if test="${menu!='menu5'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpVideo.do?menu=menu5';">동영상</div>
+		</c:if>
+	</c:if>
+	
+	<c:if test="${miniHpUserMenuVO.menu6==1}">
+		<c:if test="${menu=='menu6'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpGuest.do?menu=menu6';">방명록</div>
+		</c:if>
+		<c:if test="${menu!='menu6'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpGuest.do?menu=menu6';">방명록</div>
+		</c:if>
+	</c:if>
+	
+	<c:if test="${miniHpUserMenuVO.menu7==1}">
+		<c:if test="${menu=='menu7'}">
+			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
+		</c:if>
+		<c:if test="${menu!='menu7'}">
+			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
 		</c:if>
 	</c:if>
 </body>

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
@@ -83,5 +82,19 @@ public class MiniHpSettingController {
 
 		return settingMenuAvailable(model, userMenuVO);
 	}
+	
+	@RequestMapping("miniHp_rightMenu.do")
+	public String rightMenu(HttpServletRequest request, String menu) {
+
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("UserID");
+		MiniHpUserMenuVO miniHpUserMenuVO = service.getMenuAvailable(userId);
+
+		request.setAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
+		request.setAttribute("menu", menu);
+
+		return "MiniHP/MiniHP_Right_Menu";
+	}
+	
 	
 }
