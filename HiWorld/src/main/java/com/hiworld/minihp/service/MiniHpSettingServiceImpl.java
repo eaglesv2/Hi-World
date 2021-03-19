@@ -27,7 +27,13 @@ public class MiniHpSettingServiceImpl implements MiniHpSettingService {
 	}
 	
 	@Override
+	public MiniHpUserMenuVO getMenuAvailable(String UserID) {
+		return settingDAO.getMenuAvailable(UserID);
+	}
+	
+	@Override
 	public void updateMenuAvailable(MiniHpUserMenuVO userMenuVO) {
 		settingDAO.updateMenuAvailable(userMenuVO);
 	}
+	
 }

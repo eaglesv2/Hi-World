@@ -7,6 +7,18 @@
 		FROM HW_USERLIST
 		WHERE UserID = #{id}
 	</select>
-
+	
+	<select id="getMenuAvailable" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpUserMenuVO">
+		SELECT menu3, menu4, menu5, menu6, menuBGColor, menuFontColor, menuBorderColor
+		FROM MiniHP_UserMenu
+		WHERE UserID = #{UserID}
+	</select>
+	
+	<update id="updateMenuAvailable" parameterType="com.hiworld.minihp.vo.MiniHpUserMenuVO">
+		UPDATE MiniHP_UserMenu
+		SET menu3 = #{menu3}, menu4 = #{menu4}, menu5 = #{menu5}, menu6 = #{menu6},
+		    menuBGColor = #{menuBGColor}, menuFontColor = #{menuFontColor}, menuBorderColor = #{menuBorderColor}
+		WHERE UserID = #{UserID}
+	</update>
 
 </mapper>

@@ -8,5 +8,7 @@ public interface MiniHpSettingService {
 	int pwCheck(String id, String pw);
 
 	void updateMenuAvailable(MiniHpUserMenuVO userMenuVO);
+
+	MiniHpUserMenuVO getMenuAvailable(String userID);
 	
 }
