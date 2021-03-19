@@ -105,7 +105,7 @@ public class ClientServiceImpl implements ClientService {
 	/* 네이버 회원 체크 */
 	@Override
 	public sessionVO NaverCheckClient(String UserID) {
-		System.out.println("네이버 회원 체크");
+		System.out.println("회원 체크");
 		sessionVO vo = dao.NaverCheckClient(UserID);
 		if(vo==null) {
 			return null;
@@ -117,9 +117,9 @@ public class ClientServiceImpl implements ClientService {
 	
 	/* 회원 로그인 확인 */
 	@Override
-	public ClientVO checkClient(ClientVO clientVO) {
+	public sessionVO checkClient(ClientVO clientVO) {
 		System.out.println("회원 로그인 확인");
-		ClientVO vo = dao.checkClient(clientVO);
+		sessionVO vo = dao.checkClient(clientVO);
 		if(vo==null) {
 			return null;
 		}else {
