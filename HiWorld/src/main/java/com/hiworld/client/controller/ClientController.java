@@ -92,7 +92,7 @@ public class ClientController {
 			session.setAttribute("UserID", vo.getUserID());
 			session.setAttribute("UserSerial", vo.getUserSerial());
 			return "Login/mainPage";
-		}else {
+		} else {
 			return "Login/mainPage";	
 		}
 	}

@@ -14,7 +14,7 @@
 <script type="text/javascript">
 var str;
 
-$(document).ready(function(){
+/* $(document).ready(function(){
     initSet();
 });
 
@@ -50,7 +50,7 @@ function displayTitle(){
 			listData.innerHTML = str;				
 		}
 	}
-}
+} */
 
 </script>
 <body style="overflow:hidden;">
