@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>회원가입 폼</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style type="text/css"></style>
 </head>
 <body>
 	<h1>회원가입</h1>
