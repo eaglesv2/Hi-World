@@ -34,6 +34,25 @@ function movePicture(url){
     });
 }
 
+
+//게시판 사이드 불러오기
+function getBoardSide() {
+	
+	var ajaxSide = {
+            url : "MiniHpBoardSide.do",
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxSide).done(function(data){
+        // Contents 영역 삭제
+        $('#sideContents').children().remove();
+        // Contents 영역 교체
+        $('#sideContents').html(data);
+    });
+}
 //게시판 이동
 function moveBoard(url){
 	
@@ -51,23 +70,11 @@ function moveBoard(url){
         $('#bodyContents').children().remove();
         // Contents 영역 교체
         $('#bodyContents').html(data);
+        //사이드 불러오기
+        getBoardSide();
     });
     
-    //사이드(폴더) 불러오기
-	var ajaxSide = {
-            url : "MiniHpBoardSide.do",
-            async : true,
-            type : "GET",
-            dataType : "html",
-            cache : false
-    };
-    
-    $.ajax(ajaxSide).done(function(data){
-        // Contents 영역 삭제
-        $('#sideContents').children().remove();
-        // Contents 영역 교체
-        $('#sideContents').html(data);
-    });
+	
 }
 
 

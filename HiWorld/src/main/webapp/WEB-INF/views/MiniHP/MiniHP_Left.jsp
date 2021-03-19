@@ -122,26 +122,26 @@ height:100px;
 				<font>
 					<div id="profile_info">
 						<span id="infoTxt" style="font-size:13px;"></span>
-						<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/>
+						<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/>
 					</div>
 					<div id="profile_info_ok">
 						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;" ></textarea>
-						<img src="${pageContext.request.contextPath}/resources/images/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/>
+						<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/>
 					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
 				</font>
-				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>재영<%-- ${session.getUserName()} --%></b>
+				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>재영<%-- ${sessionVO.getUserName()} --%></b>
 				<!-- 성별에 따름 성별표시 마크 --> 
 				<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
-				<%-- <c:if test="${session.getUserGender() eq '남자'}">
+				<%-- <c:if test="${sessionVO.getUserGender() eq '남자'}">
 				<img src="/root/resources/images/admin/male.jpg">
 				</c:if>
-				<c:if test="${session.getUserGender() eq '여자'}">
+				<c:if test="${sessionVO.getUserGender() eq '여자'}">
 				<img src="/root/resources/images/admin/female.jpg">
 				</c:if> --%>
-				<font style="font-size: 7pt;">1994.10.14<%-- ${session.getUserBirth()} --%></font>
+				<font style="font-size: 7pt;">1994.10.14<%-- ${sessionVO.getUserBirth()} --%></font>
 					<br/>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('my_member_list.action','${session.getUserId()}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');"/>
+					<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('my_member_list.action','${sessionVO.getUserId()}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');"/>
 				</font>
 				<select id="mySelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser();">
 					<option value="">★이웃 바람타기</option>

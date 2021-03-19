@@ -5,7 +5,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-	
 	String pathUserId=(String)request.getAttribute("pathUserId");
 %>
 <%
@@ -83,7 +82,7 @@ input::placeholder {
 			var menuFontColor = $("#menuFontColor").val();
 			var menuBorderColor = $("#menuBorder").val();
 			
-			var allData = { "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
+			var allData = { "UserID" : '${sessionVO.UserID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
 							"menuBGColor" : menuBGColor, "menuFontColor" : menuFontColor, "menuBorderColor" : menuBorderColor }
 			$.ajax({
 				type : "POST",
@@ -118,19 +117,19 @@ input::placeholder {
 			$('.menu').css('border-color', '#'+$("#menuBorder").val());
 		 });
 		 $("#basicMenuColor").click(function(){
-			$('#menuBackground').value="238db3";
+			$('#menuBackground').val('238db3');
 			$('#menuBackground').css('backgroundColor','#238DB3');
 			$('#menuBackground').css('color', 'FFFFFF');
 		    $('.menu').css('background-color', '#238db3');
 				 
-			$('#menuFontColor').value="000000"
+			$('#menuFontColor').val('000000')
 			$('#menuFontColor').css('backgroundColor','#000000');
-			$('#menuFontColor').css('color', 'FFFFFF');
+			$('#menuFontColor').css('color', '#FFFFFF');
 			$('.menu').css('color', '#000000');
 				 
-			$('#menuBorder').value="000000"
+			$('#menuBorder').val('000000');
 			$('#menuBorder').css('backgroundColor','#000000');
-			$('#menuBorder').css('color', 'FFFFFF');
+			$('#menuBorder').css('color', '#FFFFFF');
 			$('.menu').css('border-color', '#000000');
 		 });
 	});

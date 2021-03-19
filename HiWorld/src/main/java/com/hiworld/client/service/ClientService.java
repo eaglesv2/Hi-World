@@ -39,6 +39,9 @@ public interface ClientService {
 	/* ()안에 넣은 VO값을 가지고 mapper에서 get해서 사용가능 */
 	ClientVO getOneClient(String UserID);
 	
+	/* 아이디 중복 체크 */
+	int idCheck(String userId);
+	
 	/* 밤톨 충전 */
 	int userCash(ClientVO clientVO);
 	
