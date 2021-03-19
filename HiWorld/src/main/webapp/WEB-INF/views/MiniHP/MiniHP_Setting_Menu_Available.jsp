@@ -5,7 +5,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-	
 	String pathUserId=(String)request.getAttribute("pathUserId");
 %>
 <%
@@ -83,7 +82,7 @@ input::placeholder {
 			var menuFontColor = $("#menuFontColor").val();
 			var menuBorderColor = $("#menuBorder").val();
 			
-			var allData = { "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
+			var allData = { "UserID" : '${sessionVO.UserID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
 							"menuBGColor" : menuBGColor, "menuFontColor" : menuFontColor, "menuBorderColor" : menuBorderColor }
 			$.ajax({
 				type : "POST",

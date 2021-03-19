@@ -64,19 +64,19 @@ input::placeholder {
 				아이디
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="text" value="${cyUserDTO.userId }" disabled="disabled"> 
+				<input type="text" value="${cyUserDTO.userId}" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				패스워드
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="password" id="userPw" value="${cyUserDTO.userPw }" disabled="disabled"> 
+				<input type="password" id="userPw" value="${cyUserDTO.userPw}" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				이름
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="text" value="${cyUserDTO.userName }" disabled="disabled"> 
+				<input type="text" value="${cyUserDTO.userName}" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				생년월일
