@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,13 +44,13 @@ public class MiniHpSettingController {
 	}
 	
 	@RequestMapping("miniHp_setBasicInformation_pw.do")
-	public String setBasicInformation_pw(HttpServletRequest request) throws Exception{
+	public String setBasicInformation_pw(HttpServletRequest request) {
 		System.out.println("미니홈피 기본정보 탭");
 		return "MiniHP/MiniHP_Setting_BasicInfo_pwCheck";
 	}
 	
 	@RequestMapping("miniHp_setBasicInformation_pw_ok.do")
-	public String setBasicInformation_pw_ok(HttpServletRequest request) throws Exception{
+	public String setBasicInformation_pw_ok(HttpServletRequest request) {
 		System.out.println("미니홈피 기본정보 비밀번호 확인");
 		String id = request.getParameter("UserID");
 		String pw = request.getParameter("UserPW");
@@ -64,12 +65,23 @@ public class MiniHpSettingController {
 	}
 	
 	@RequestMapping("miniHp_menuAvailable.do")
-	public String settingMenuAvailable(HttpServletRequest request, MiniHpUserMenuVO userMenuVO) {
+	public String settingMenuAvailable(Model model, MiniHpUserMenuVO userMenuVO) {
 		System.out.println("미니홈피 메뉴 설정");
-		HttpSession session = request.getSession();
-		service.updateMenuAvailable(userMenuVO);
 		
+		MiniHpUserMenuVO miniHpUserMenuVO = service.getMenuAvailable(userMenuVO.getUserID());
+		
+		model.addAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
 
-		return /*settingMenuAvailable(request);*/ "";
+		return "MiniHP/MiniHP_Setting_Menu_Available";
 	}
+	
+	@RequestMapping("miniHp_menuAvailable_ok.do")
+	public String settingMenuAvailable_ok(Model model, MiniHpUserMenuVO userMenuVO) {
+		System.out.println("미니홈피 메뉴 설정 확인 컨트롤러");
+		
+		service.updateMenuAvailable(userMenuVO);
+
+		return settingMenuAvailable(model, userMenuVO);
+	}
+	
 }
