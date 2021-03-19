@@ -89,7 +89,8 @@
 						url : "userCash.do",
 						dataType : "int",
 						data : {
-							"UserCash" : count
+							"count" : count,
+							"UserCash" : userCash
 						},
 						error : function(data) {
 							alert("실패")

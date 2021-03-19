@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.vo.ClientVO;
+import com.hiworld.client.vo.sessionVO;
 
 /* ClientService에서 호출된것들이 여기서 관리 dao 호출 */
 @Service("ClientService")
@@ -88,11 +89,24 @@ public class ClientServiceImpl implements ClientService {
 		return checkJoin;
 	}
 	
+	/* 회원 가입시 미니홈피 기본값 생성 */
+	@Override
+	public String insertMiniHP(ClientVO clientVO) {
+		System.out.println("미니홈피 등록");
+		int checkNumber = dao.insertMiniHP(clientVO);
+		
+		if(checkNumber==0) {
+			return "실패";
+		}else {
+			return "성공";
+		}
+	}
+	
 	/* 네이버 회원 체크 */
 	@Override
-	public ClientVO NaverCheckClient(String UserID) {
+	public sessionVO NaverCheckClient(String UserID) {
 		System.out.println("네이버 회원 체크");
-		ClientVO vo = dao.NaverCheckClient(UserID);
+		sessionVO vo = dao.NaverCheckClient(UserID);
 		if(vo==null) {
 			return null;
 		}else {			
@@ -128,5 +142,7 @@ public class ClientServiceImpl implements ClientService {
 		System.out.println("밤톨충전");	
 		return dao.userCash(clientVO);
 	}
+	
+	
 	
 }

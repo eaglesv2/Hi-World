@@ -25,10 +25,10 @@
 		<!-- otherwise는 만약 조건에 맞아 떨어지는것이 하나도 없을경우 실행 -->
 		<c:choose>
 		
-			<c:when test="${UserName != null}">
-				<h3>${UserName} 님 환영합니다!</h3>
+			<c:when test="${vo.getuserName != null}">
+				<h3>${vo.getuserSerial} 님 환영합니다!</h3>
 				<h3>
-					<a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
+					<a href="getOneClient.do?UserID=${vo.userID}">내정보보기</a>
 					<a href="MiniHP_Home.do">미니홈피들어가기</a>
 					<a href="logout.do">로그아웃</a>
 					<a href="BamTolCharge.do">밤톨충전</a>
