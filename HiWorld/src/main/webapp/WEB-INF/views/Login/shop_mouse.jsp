@@ -7,12 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<a href="login.do">로그인</a>
-	
-	
-	<a href="login2.do">카카오</a>
-	
-	
+33333
 </body>
 </html>

@@ -11,8 +11,8 @@ public interface MiniHpBoardService {
 	int insert(MiniHpBoardVO vo);
 	
 	//폴더 관련-------
-	List<MiniHPBoardFolderVO> getAllFolder();
+	List<MiniHPBoardFolderVO> getAllFolder(int userSerial);
 	int addFolder(MiniHPBoardFolderVO vo);
 	int deleteFolder(int serial);
-	int updateFolder(int serial, String folderName);
+	int updateFolder(MiniHPBoardFolderVO vo);
 }

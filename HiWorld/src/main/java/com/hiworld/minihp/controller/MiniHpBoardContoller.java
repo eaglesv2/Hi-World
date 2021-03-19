@@ -1,5 +1,7 @@
 package com.hiworld.minihp.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +26,20 @@ public class MiniHpBoardContoller {
 	@GetMapping("/miniHpBoard.do")
 	public String miniHpBoard(String menu, Model model) {
 		System.out.println("게시판 main");
+		
+		
+		
 		model.addAttribute("list",service.getAll());
 		return "MiniHP/MiniHP_Menu_Board";
 	}
 	//게시판 사이드 부분
 	@GetMapping("/MiniHpBoardSide.do")
-	public String miniHpBoardSide(Model model) {
+	public String miniHpBoardSide(Model model, HttpSession session) {
 		System.out.println("게시판 side");
-		model.addAttribute("folderList",service.getAllFolder());
+		
+		int userSerial = (Integer)session.getAttribute("UserSerial");
+		
+		model.addAttribute("folderList",service.getAllFolder(userSerial));
 		return "MiniHP/MiniHP_Menu_Board_Side";
 	}
 	//폴더 추가
@@ -59,7 +67,10 @@ public class MiniHpBoardContoller {
 	@ResponseBody
 	public void updateFolder(@PathVariable int serial,@PathVariable String folderName) {
 		System.out.println("updateFolder");
-		int result = service.updateFolder(serial, folderName);
+		MiniHPBoardFolderVO vo = new MiniHPBoardFolderVO();
+		vo.setSerial(serial);
+		vo.setFolderName(folderName);
+		int result = service.updateFolder(vo);
 		if(result>0) System.out.println("폴더 수정 성공!");
 		else System.out.println("폴더 수정 실패!");
 	}

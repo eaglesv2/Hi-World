@@ -20,6 +20,10 @@
     
           });
       
+        function signUp(){
+        	location.href="userInsertForm.do";
+        }
+        
           function notice(){
              //ajax option
               console.log("1234") 
@@ -143,17 +147,17 @@
 
 		    <c:choose>
 				
-					<c:when test="${UserName != null}">
+					<c:when test="${sessionVO.userName != null}">
 							<div id="minimi">
 						        <div id="icon">
 						            <img src="bb.jpg" alt="">
 						            <div>
-						                ${UserName}
+						                ${sessionVO.userName}
 						            </div>
 						        </div>
 						        <div id="jang">
 						            <div id="jang-top">
-						                <a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
+						                <a href="getOneClient.do?UserID=${sessionVO.userID}">내정보보기</a>
 						                <a href="BamTolCharge.do">밤톨충전</a>
 						            </div>
 						            <div id="jang-bottom">
@@ -167,19 +171,19 @@
 				<c:otherwise>
 					
 						<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
-						<h2>로그인</h2>
+						<div id="login">로그인</div>
 						<form action="checkClient.do" method="post">
 							<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br> 
 							<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
-							<input type="submit" value="로그인" id="loginCheck"> <br>
+							<input type="submit" value="로그인" id="loginCheck"> 
+							<input type="button" onclick="signUp()" value="회원가입" id="signup">
 						</form>
-						<a href="userInsertForm.do">회원가입</a>
-						<br>
 						
+						<hr />
 						<!-- 네이버 로그인 창으로 이동 -->
 						<div id="naver_id_login" style="text-align: center">
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}"> <img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 						</div>
 						<br>
 						</c:otherwise>
