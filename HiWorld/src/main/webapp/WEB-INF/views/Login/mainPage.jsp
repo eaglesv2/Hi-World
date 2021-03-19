@@ -147,17 +147,17 @@
 
 		    <c:choose>
 				
-					<c:when test="${UserName != null}">
+					<c:when test="${sessionVO.userName != null}">
 							<div id="minimi">
 						        <div id="icon">
 						            <img src="bb.jpg" alt="">
 						            <div>
-						                ${UserName}
+						                ${sessionVO.userName}
 						            </div>
 						        </div>
 						        <div id="jang">
 						            <div id="jang-top">
-						                <a href="getOneClient.do?UserID=${UserID}">내정보보기</a>
+						                <a href="getOneClient.do?UserID=${sessionVO.userID}">내정보보기</a>
 						                <a href="BamTolCharge.do">밤톨충전</a>
 						            </div>
 						            <div id="jang-bottom">

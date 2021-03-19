@@ -1,16 +1,21 @@
 package com.hiworld.client.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.hiworld.client.dao.ClientDAO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
@@ -31,7 +35,8 @@ public class ClientController {
 	/* 네이버 */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
-
+	
+	
 	/* ClientService를 부르기 위해 정의 */
 	@Autowired
 	private ClientService clientService;
@@ -92,16 +97,13 @@ public class ClientController {
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
 		System.out.println("로그인");
-		ClientVO vo = clientService.checkClient(clientVO);
-		
+		sessionVO vo = clientService.checkClient(clientVO);			
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
-			session.setAttribute("UserSerial", vo.getUserSerial());
-			session.setAttribute("UserName", vo.getUserName());
-			session.setAttribute("UserID", vo.getUserID());
-			session.setAttribute("UserSerial", vo.getUserSerial());
-			return "Login/mainPage";
-		} else {
+			session.setAttribute("sessionVO", vo);
+			return "redirect:/login.do";
+		}else {
+
 			return "Login/mainPage";	
 		}
 	}
@@ -118,6 +120,18 @@ public class ClientController {
 	}
 	
 	
+	/* 로그아웃 */
+	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
+	public String logout(HttpSession session) throws IOException {
+		System.out.println("여기는 logout");
+		
+		/* 등록된 세션값 전부 삭제 */
+		session.invalidate();
+		
+		/* redirect:/login.jsp
+		 * redirect를 이용하면 views가 아닌 그 밖의 폴더에도 접근가능 또한 .do를 호출해서 컨트롤러를 호출도 가능 */
+		return "redirect:/login.do";
+	}
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -219,26 +233,37 @@ public class ClientController {
 
 	
 	
-
-	
-	
-	
-	
-	
-	
-	
-	/* 로그아웃 */
-	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpSession session) throws IOException {
-		System.out.println("여기는 logout");
-		
-		/* 등록된 세션값 전부 삭제 */
-		session.invalidate();
-		
-		/* redirect:/login.jsp
-		 * redirect를 이용하면 views가 아닌 그 밖의 폴더에도 접근가능 또한 .do를 호출해서 컨트롤러를 호출도 가능 */
-		return "redirect:/login.do";
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/login2.do")
+	public String login2() {
+		return "Login/kakaoLogin";
 	}
+	
+	@GetMapping("/kakaoLogin.do")
+	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
+		System.out.println("카카오로그인");
+		String id = (String)request.getParameter("UserID");
+		String name = (String)request.getParameter("UserName");
+		
+		String checkID = id+name;
+		
+		System.out.println(checkID);
+		/* 카카오 회원 체크 */
+		sessionVO vo = clientService.NaverCheckClient(checkID);
+		if(vo!=null) {
+			/* 이름하고 아이디를 세션 화 */
+			session.setAttribute("sessionVO", vo);
+			return "redirect:/login.do";
+		}else {
+			model.addAttribute("UserID",checkID);
+			model.addAttribute("UserName",name);
+			return "Login/userInsert";	
+			
+		}
+	}
+	
+	
+	
 	
 	/*메인페이지 AJAX*/
 	@GetMapping("/noticePage.do")
