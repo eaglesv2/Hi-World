@@ -117,19 +117,19 @@ input::placeholder {
 			$('.menu').css('border-color', '#'+$("#menuBorder").val());
 		 });
 		 $("#basicMenuColor").click(function(){
-			$('#menuBackground').value="238db3";
+			$('#menuBackground').val('238db3');
 			$('#menuBackground').css('backgroundColor','#238DB3');
 			$('#menuBackground').css('color', 'FFFFFF');
 		    $('.menu').css('background-color', '#238db3');
 				 
-			$('#menuFontColor').value="000000"
+			$('#menuFontColor').val('000000')
 			$('#menuFontColor').css('backgroundColor','#000000');
-			$('#menuFontColor').css('color', 'FFFFFF');
+			$('#menuFontColor').css('color', '#FFFFFF');
 			$('.menu').css('color', '#000000');
 				 
-			$('#menuBorder').value="000000"
+			$('#menuBorder').val('000000');
 			$('#menuBorder').css('backgroundColor','#000000');
-			$('#menuBorder').css('color', 'FFFFFF');
+			$('#menuBorder').css('color', '#FFFFFF');
 			$('.menu').css('border-color', '#000000');
 		 });
 	});
