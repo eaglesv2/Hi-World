@@ -38,7 +38,7 @@
 						type="password"></td>
 				</tr>
 				<tr>
-					<td colspan=3 id="pwCheck"></td>
+					<td colspan=3 id="pwCheck1"></td>
 				</tr>
 				<tr>
 					<td>패스워드 확인</td>

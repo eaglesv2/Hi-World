@@ -60,7 +60,7 @@ $(document)
 											$('#idCheck').empty();
 											$('#idCheck').append(html);
 										} else {
-											var html = "<tr><td colspan='3' style='color: red'>사용가능한 아이디입니다.</td></tr>";
+											var html = "<tr><td colspan='3' style='color: green'>사용가능한 아이디입니다.</td></tr>";
 											$('#idCheck').empty();
 											$('#idCheck').append(html);
 										}
@@ -88,7 +88,7 @@ $(document)
 															$('#userID').attr(
 																	"readonly",
 																	true);
-															var html = "<tr><td colspan='3' style='color: green'>사용가능</td></tr>";
+															var html = "<tr><td colspan='3' style='color: green'>중복 확인 사용가능 한 아이디입니다.</td></tr>";
 															$('#idCheck')
 																	.empty();
 															$('#idCheck')
@@ -131,7 +131,7 @@ $(document)
 											$('#nameCheck').empty();
 											$('#nameCheck').append(html);
 										} else {
-											var html = "<tr><td colspan='3' style='color: red'>사용가능한 아이디입니다.</td></tr>";
+											var html = "<tr><td colspan='3' style='color: green'>사용가능한 아이디입니다.</td></tr>";
 											$('#nameCheck').empty();
 											$('#nameCheck').append(html);
 										}
@@ -145,20 +145,20 @@ $(document)
 										var pwCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
 										if (userpw.search(/\s/) != -1) {
 											var html = "<tr><td colspan='3' style='color: red'>비번을 공백없이 입력해 주세용</td></tr>";
-											$('#pwCheck').empty();
-											$('#pwCheck').append(html);
+											$('#pwCheck1').empty();
+											$('#pwCheck1').append(html);
 										} else if (userpw == "") {
 											var html = "<tr><td colspan='3' style='color: red'>비번을 공백없이 입력해 주세용</td></tr>";
-											$('#pwCheck').empty();
-											$('#pwCheck').append(html);
+											$('#pwCheck1').empty();
+											$('#pwCheck1').append(html);
 										} else if (!pwCheck.test(userpw)) {
 											var html = "<tr><td colspan='3' style='color: red'>패스워드는 영문 대문자 소문자, 숫자, 특수문자 하나 이상 포함하여 8자에서 16자 안으로 적어주세용</td></tr>";
-											$('#pwCheck').empty();
-											$('#pwCheck').append(html);
+											$('#pwCheck1').empty();
+											$('#pwCheck1').append(html);
 										} else {
-											var html = "<tr><td colspan='3' style='color: red'>사용가능한 아이디입니다.</td></tr>";
-											$('#pwCheck').empty();
-											$('#pwCheck').append(html);
+											var html = "<tr><td colspan='3' style='color: green'>사용가능한 아이디입니다.</td></tr>";
+											$('#pwCheck1').empty();
+											$('#pwCheck1').append(html);
 										}
 									});
 
@@ -178,7 +178,7 @@ $(document)
 											$('#birthCheck').empty();
 											$('#birthCheck').append(html);
 										} else {
-											var html = "<tr><td colspan='3' style='color: red'>사용가능한 생일입니다.</td></tr>";
+											var html = "<tr><td colspan='3' style='color: green'>사용가능한 생일입니다.</td></tr>";
 											$('#birthCheck').empty();
 											$('#birthCheck').append(html);
 										}
