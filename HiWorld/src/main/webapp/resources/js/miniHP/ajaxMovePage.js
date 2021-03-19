@@ -55,6 +55,8 @@ function getBoardSide() {
 }
 //게시판 이동
 function moveBoard(url){
+	//사이드 불러오기
+	getBoardSide();
 	
     // 메인 불러오기
     var ajaxMain = {
@@ -70,8 +72,6 @@ function moveBoard(url){
         $('#bodyContents').children().remove();
         // Contents 영역 교체
         $('#bodyContents').html(data);
-        //사이드 불러오기
-        getBoardSide();
     });
     
 	

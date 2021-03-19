@@ -5,11 +5,6 @@
 	Border
 	<hr>
 	<ul>
-		<li><font size="2pt"> 
-			<a href="javascript:void(0)" onclick="sendFolder('${menuList.get(i).getFolderName() }','${userId }')">
-					기본 폴더
-			</a>
-		</font></li>
 		<c:forEach var="i" items="${folderList}">
 			<li><font size="2pt"> 
 				<span id="folder-${i.serial}">

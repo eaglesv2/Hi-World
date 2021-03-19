@@ -11,9 +11,9 @@ public interface MiniHpBoardDAO {
 	int insert(MiniHpBoardVO vo);
 	
 	//폴더 부분
-	List<MiniHPBoardFolderVO> getAllFolder();
+	List<MiniHPBoardFolderVO> getAllFolder(int userSerial);
 	int addFolder(MiniHPBoardFolderVO vo);
 	int deleteFolder(int serial);
 	int moveAllBoard(int serial);//폴더 삭제시 해당 폴더 게시물 전부 "기본 폴더"로 이동
-	int updateFolder(int serial, String folderName);
+	int updateFolder(MiniHPBoardFolderVO vo);
 }

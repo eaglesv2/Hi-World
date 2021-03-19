@@ -36,13 +36,14 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	
 	//폴더 관련------------
 	@Override
-	public List<MiniHPBoardFolderVO> getAllFolder() {
-		return dao.getAllFolder();
+	public List<MiniHPBoardFolderVO> getAllFolder(int userSerial) {
+		return dao.getAllFolder(userSerial);
 	}
 	@Override
 	public int addFolder(MiniHPBoardFolderVO vo) {
 		return dao.addFolder(vo);
 	}
+	
 	//해당 폴더의 모든 게시글 "기본 폴더"로 이동 + 해당 폴더 삭제 를 하나의 트랜잭션으로 처리
 	@Override
 	@Transactional
@@ -51,7 +52,7 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 		return dao.deleteFolder(serial);
 	}
 	@Override
-	public int updateFolder(int serial, String folderName) {
-		return dao.updateFolder(serial, folderName);
+	public int updateFolder(MiniHPBoardFolderVO vo) {
+		return dao.updateFolder(vo);
 	}
 }
