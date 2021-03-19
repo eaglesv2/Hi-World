@@ -36,9 +36,9 @@ public class MiniHpBoardContoller {
 	@GetMapping("/MiniHpBoardSide.do")
 	public String miniHpBoardSide(Model model, HttpSession session) {
 		System.out.println("게시판 side");
-		
-		int userSerial = (Integer)session.getAttribute("UserSerial");
-		
+		//세션 관련 임시 보류
+		//int userSerial = (Integer)session.getAttribute("UserSerial");
+		int userSerial = 2;
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
 		return "MiniHP/MiniHP_Menu_Board_Side";
 	}
