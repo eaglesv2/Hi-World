@@ -176,7 +176,18 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+			<!-- json 하는법 -->
+		 <dependency>
+		      <groupId>com.fasterxml.jackson.core</groupId>
+		      <artifactId>jackson-databind</artifactId>
+		      <version>2.9.4</version>
+		  </dependency>
+		  <!-- java8 date/time -->
+		  <dependency>
+		      <groupId>com.fasterxml.jackson.datatype</groupId>
+		      <artifactId>jackson-datatype-jsr310</artifactId>
+		      <version>2.9.4</version>
+		  </dependency>
 
 
 	</dependencies>
