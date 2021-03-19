@@ -118,7 +118,7 @@ $(function(){
 </body>
 <!-- ajax -->
 <script>
- 
+ 	
     function movePage(url){
         // ajax option
         var ajaxOption = {
