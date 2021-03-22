@@ -27,7 +27,6 @@
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" id="userID" name="userID"></td>
-					<td><input type="button" id="check" value="중복체크"></td>
 				</tr>
 				<tr>
 					<td colspan=3 id="idCheck"></td>
@@ -38,7 +37,7 @@
 						type="password"></td>
 				</tr>
 				<tr>
-					<td colspan=3 id="pwCheck"></td>
+					<td colspan=3 id="pwCheck1"></td>
 				</tr>
 				<tr>
 					<td>패스워드 확인</td>
@@ -56,7 +55,7 @@
 				<tr>
 					<td>생일</td>
 					<td colspan="2"><input id="userBirth" name="userBirth"
-						type="text"></td>
+						type="text" size="8" maxlength="8" placeholder="예)20210322"></td>
 				</tr>
 				<tr>
 					<td colspan=3 id="birthCheck"></td>
@@ -64,9 +63,9 @@
 				<tr>
 					<td>연락처</td>
 					<td colspan="2"><input id="userTel1" name="userTel1"
-						type="text">- <input id="userTel2" name="userTel2"
-						type="text">- <input id="userTel3" name="userTel3"
-						type="text"></td>
+						type="text" required>- <input id="userTel2" name="userTel2"
+						type="text" required>- <input id="userTel3" name="userTel3"
+						type="text" required></td>
 				</tr>
 				<tr>
 					<td colspan=3 id="telCheck"></td>
@@ -74,7 +73,7 @@
 				<tr>
 					<td>주소</td>
 					<td colspan="2"><input id="userAddress" name="userAddress"
-						type="text"></td>
+						type="text" required></td>
 				</tr>
 
 
