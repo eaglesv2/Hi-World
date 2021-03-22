@@ -15,6 +15,37 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Autowired
 	private MiniHpBoardDAO dao;
 	
+	//폴더 관련------------
+	//폴더 selectAll
+	@Override
+	public List<MiniHPBoardFolderVO> getAllFolder(int userSerial) {
+		return dao.getAllFolder(userSerial);
+	}
+	//insert
+	@Override
+	public int addFolder(MiniHPBoardFolderVO vo) {
+		return dao.addFolder(vo);
+	}
+	//delete
+	//폴더안에 게시글이 있는지 확인, 게시글이 하나도 없을시만 삭제 가능
+	@Override
+	@Transactional
+	public int deleteFolder(int serial) {
+		int count = dao.countInsideFolder(serial);
+		if(count==0)
+			return dao.deleteFolder(serial);
+		else
+			return 0;
+	}
+	//update
+	@Override
+	@Transactional
+	public int updateFolder(MiniHPBoardFolderVO vo) {
+		return dao.updateFolder(vo);
+	}
+	
+	
+	// 게시판 관련-------------
 	@Override
 	public List<MiniHpBoardVO> getAll() {
 		List<MiniHpBoardVO> list = dao.getAll();
@@ -34,25 +65,4 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 		return dao.insert(vo);
 	}
 	
-	//폴더 관련------------
-	@Override
-	public List<MiniHPBoardFolderVO> getAllFolder(int userSerial) {
-		return dao.getAllFolder(userSerial);
-	}
-	@Override
-	public int addFolder(MiniHPBoardFolderVO vo) {
-		return dao.addFolder(vo);
-	}
-	
-	//해당 폴더의 모든 게시글 "기본 폴더"로 이동 + 해당 폴더 삭제 를 하나의 트랜잭션으로 처리
-	@Override
-	@Transactional
-	public int deleteFolder(int serial) {
-		dao.moveAllBoard(serial);
-		return dao.deleteFolder(serial);
-	}
-	@Override
-	public int updateFolder(MiniHPBoardFolderVO vo) {
-		return dao.updateFolder(vo);
-	}
 }
