@@ -234,10 +234,7 @@ public class ClientController {
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	@GetMapping("/login2.do")
-	public String login2() {
-		return "Login/kakaoLogin";
-	}
+
 	
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {

@@ -8,10 +8,10 @@
 </head>
 <body>
 	
-	<a href="login.do">로그인</a>
+	<a href="login.do">메인페이지가기</a>
 	
 	
-	<a href="login2.do">카카오</a>
+
 	
 	
 </body>
