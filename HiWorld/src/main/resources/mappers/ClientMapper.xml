@@ -55,8 +55,8 @@
 	</select>
 	
 	<!-- 회원 로그인 확인 -->
-	<select id="checkClient" resultType="clientVO">
-		SELECT * FROM HW_USERLIST WHERE UserID = #{UserID} AND UserPW = #{UserPW}
+	<select id="checkClient" resultType="sessionVO">
+		SELECT UserSerial, UserID, UserName, UserCash, UserBirth FROM HW_USERLIST WHERE UserID = #{UserID} AND UserPW = #{UserPW}
 	</select>
 	
 	<!-- 회원 한명 조회 -->

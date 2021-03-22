@@ -13,7 +13,7 @@
 	//생략가능
 	var IMP = window.IMP;
 
-	IMP.init('imp39966716');
+	IMP.init('imp29852102');
 
 	// 로그인한사람 정보
 	var id = "${vo.userID}"
