@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
@@ -68,5 +70,17 @@ public class MiniHpIntroController {
 		System.out.println("미니홈피 타이틀 수정 서비스 갔다옴");
 		
 		return "MiniHP/MiniHP_TopTitle";
+	}
+	
+	@RequestMapping("/miniHp_uploadIntroPicture.do")
+	public String miniHpUploadIntroPicture() {
+		
+		return "MiniHP/MiniHP_MyPic_Update";
+	}
+	
+	@RequestMapping(value = "miniHp_updateIntroPicture.do", method = RequestMethod.POST)
+	public String miniHpUpdateIntroPicture() {
+		
+		return ""; 
 	}
 }
