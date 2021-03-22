@@ -36,7 +36,7 @@ public class MiniHpBoardContoller {
 	@GetMapping("/MiniHpBoardSide.do")
 	public String miniHpBoardSide(Model model, HttpSession session) {
 		System.out.println("게시판 side");
-		//세션 관련 임시 보류
+		//세션 관련 임시 보류, 일단 2로 통일
 		//int userSerial = (Integer)session.getAttribute("UserSerial");
 		int userSerial = 2;
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
@@ -47,6 +47,11 @@ public class MiniHpBoardContoller {
 	@ResponseBody
 	public void addFolder(@RequestBody MiniHPBoardFolderVO vo) {
 		System.out.println("addFolder");
+		
+		//세션에서 현재 유저 가져오기(일단 2로 고정)
+		int userSerial = 2;
+		vo.setUserSerial(userSerial);
+		
 		System.out.println(vo);
 		int result = service.addFolder(vo);
 		if(result>0) System.out.println("폴더 등록 성공!");
@@ -55,21 +60,24 @@ public class MiniHpBoardContoller {
 	//폴더 삭제
 	@DeleteMapping("/MiniHpBoardSide.do/{serial}")
 	@ResponseBody
-	public void deleteFolder(@PathVariable int serial) {
+	public String deleteFolder(@PathVariable int serial) {
 		System.out.println("deleteFolder");
 		System.out.println(serial);
 		int result = service.deleteFolder(serial);
-		if(result>0) System.out.println("폴더 삭제 성공!");
-		else System.out.println("폴더 삭제 실패!");
+		if(result>0) return ("폴더 삭제 성공!");
+		else return ("폴더 삭제 실패, 빈 폴더만 삭제할 수 있습니다.");
 	}
 	//폴더 수정
-	@PutMapping("/MiniHpBoardSide.do/{serial}/{folderName}")
+	@PutMapping("/MiniHpBoardSide.do/{serial}/{folderName}/{scope}")
 	@ResponseBody
-	public void updateFolder(@PathVariable int serial,@PathVariable String folderName) {
+	public void updateFolder(@PathVariable int serial,@PathVariable String folderName,@PathVariable int scope) {
 		System.out.println("updateFolder");
 		MiniHPBoardFolderVO vo = new MiniHPBoardFolderVO();
 		vo.setSerial(serial);
 		vo.setFolderName(folderName);
+		vo.setScope(scope);
+		System.out.println(vo);
+		
 		int result = service.updateFolder(vo);
 		if(result>0) System.out.println("폴더 수정 성공!");
 		else System.out.println("폴더 수정 실패!");

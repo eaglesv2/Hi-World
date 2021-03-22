@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpBoardDAO">
+	
+	<!-- 폴더 관련 -->
+	<!-- 기본 폴더를 제외한 모든 폴더 찾기 -->
+	<select id="getAllFolder" resultType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
+		SELECT * FROM MiniHP_Board_Folder WHERE UserSerial=#{userSerial}
+	</select>
+	<insert id="addFolder" parameterType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
+		INSERT INTO MiniHP_Board_Folder(UserSerial,folderName,scope)
+		VALUES(#{userSerial},#{folderName},#{scope})
+	</insert>
+	
+	<select id="countInsideFolder" resultType="int">
+		SELECT COUNT(folderSerial) FROM MiniHP_Board_View
+		WHERE folderSerial=#{serial};
+	</select>
+	<delete id="deleteFolder">
+		DELETE FROM MiniHP_Board_Folder
+		WHERE serial = #{serial}
+	</delete>
+
+	<update id="updateFolder" parameterType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
+		UPDATE MiniHP_Board_Folder
+		SET folderName=#{folderName},scope=#{scope}
+		WHERE serial=#{serial}
+	</update>
+	
+	
+	
+	<!-- 게시판 관련 -->
 	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
 		SELECT * FROM MiniHP_Board_View
 	</select>
@@ -15,28 +44,4 @@
 		VALUES(2,#{title},#{content})
 	</insert>
 	
-	
-	<!-- 폴더 관련 -->
-	<!-- 기본 폴더를 제외한 모든 폴더 찾기 -->
-	<select id="getAllFolder" resultType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
-		SELECT * FROM MiniHP_Board_Folder WHERE UserSerial=#{userSerial}
-	</select>
-	<insert id="addFolder" parameterType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
-		INSERT INTO MiniHP_Board_Folder(UserSerial,folderName,scope)
-		VALUES(#{userSerial},#{folderName},#{scope})
-	</insert>
-	<delete id="deleteFolder">
-		DELETE FROM MiniHP_Board_Folder
-		WHERE serial = #{serial}
-	</delete>
-	<update id="moveAllBoard">
-		UPDATE MiniHP_Board
-		SET folderSerial=1
-		WHERE folderSerial=#{serial}
-	</update>
-	<update id="updateFolder" parameterType="com.hiworld.minihp.vo.MiniHPBoardFolderVO">
-		UPDATE MiniHP_Board_Folder
-		SET folderName=#{folderName}
-		WHERE serial=#{serial}
-	</update>
 </mapper>
