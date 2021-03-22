@@ -14,52 +14,60 @@
 <script type="text/javascript">
 var str;
 
-/* $(document).ready(function(){
-    initSet();
+$(document).ready(function(){
+	$("#titleName_alter").hide();
+	displayTitle();
 });
 
 function change(){
-	document.getElementById("titleName").style.display="none";
-	document.getElementById("titleName_alter").style.display="block";
-	document.getElementById("title_Txt").value=str;
-	
+	$("#titleName").hide();
+	$("#titleName_alter").show();
+	/* $("#title_Txt").val(str); */
 }
 
 function change_ok(){
-	document.getElementById("titleName").style.display="block";
-	document.getElementById("titleName_alter").style.display="none";
-	var newTitle = document.getElementById("title_Txt").value;
-	newTitle = newTitle.replace(/(<([^>]+)>)/gi, "");
-	newTitle = newTitle.replace(/\n/gi, "<br/>");
-	var params = "newTitle="+newTitle;
-	var url = "my_get_Title.action?"+params;
-	url = encodeURI(url);
-	sendRequest(url,null,displayTitle,"GET");
-}
-
-function initSet(){
-	document.getElementById("titleName_alter").style.display="none";
-	sendRequest("my_get_Title.action",null,displayTitle,"GET");
+	console.log('change_ok');
+	$("#titleName").show();
+	$("#titleName_alter").hide();
+	var newTitle = $("#title_Txt").val();
+	console.log(newTitle);
+	
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_updateIntroTitle.do',
+		data : { UserID : '${sessionVO.userID}', hpTitle : newTitle },
+		
+		success : function(result) {
+			console.log('ajax success3');
+			displayTitle();
+		}
+	})
 }
 
 function displayTitle(){
-	if(httpRequest.readyState==4){
-		if(httpRequest.status==200){
-			str = httpRequest.responseText;
-			var listData = document.getElementById("inText");
-			listData.innerHTML = str;				
+	console.log('display title');
+	
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_getIntroTitle.do',
+		data : { UserID : '${sessionVO.userID}'},
+		
+		success : function(result) {
+			console.log('ajax success4');
+			console.log(result);
+			$("#inText").html(result);
 		}
-	}
-} */
+	})
+}
 
 </script>
 <body style="overflow:hidden;">
 	<div id="titleName" style="padding-top:12px;">
-		<span style="font-weight:bold; font-size: 15px; color: #4B9687;" id="inText" onclick="change();">난 가끔 눔물을 흘린ㄷr. . ★</span>
+		<span style="font-weight:bold; font-size: 15px; color: #4B9687; cursor: pointer;" id="inText" onclick="change();"><!-- 난 가끔 눔물을 흘린ㄷr. . ★ --></span>
 	</div>
 	<div id="titleName_alter">
-		<input type="text" id="title_Txt" value=""/>
-		<img src="/root/resources/images/editOkBtn.jpg" onclick="change_ok();"/>
+		<input type="text" id="title_Txt" />
+		<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" onclick="change_ok();"/>
 	</div>
 </body>
 </html>
