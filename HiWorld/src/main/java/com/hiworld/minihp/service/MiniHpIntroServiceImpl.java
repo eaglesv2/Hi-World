@@ -13,6 +13,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	@Autowired
 	private MiniHpIntroDAO introDAO;
 	
+	/*소개글 가져오기*/
 	@Override
 	public String getIntroInfo(String UserID) {
 		System.out.println("미니홈피 인트로 가져오기 서비스");
@@ -29,12 +30,14 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 		return info;
 	}
 
+	/*소개글 수정*/
 	@Override
 	public void updateIntroInfo(MiniHpIntroVO introVO) {
 		System.out.println("미니홈피 인트로 수정 서비스");
 		introDAO.updateInfo(introVO);
 	}
 	
+	/*제목 가져오기*/
 	@Override
 	public String getIntroTitle(sessionVO sessionVO) {
 		System.out.println("미니홈피 타이틀 가져오기 서비스");
@@ -52,6 +55,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 		return title;
 	}
 	
+	/*제목 수정*/
 	@Override
 	public void updateIntroTitle(MiniHpIntroVO introVO) {
 		System.out.println("미니홈피 타이틀 수정 서비스");

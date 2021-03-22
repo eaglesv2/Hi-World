@@ -117,7 +117,7 @@ height:100px;
 					</tr>
 					<tr bgcolor="#FFFFFF">
 						<td>
-							<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="window.open('my_pic_upload.action','','width=400,height=200,location=no,status=no,scrollbars=no');">
+							<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="window.open('miniHp_uploadIntroPicture.do','','width=400,height=200,location=no,status=no,scrollbars=no');">
 						</td>
 					</tr>
 				</table>
