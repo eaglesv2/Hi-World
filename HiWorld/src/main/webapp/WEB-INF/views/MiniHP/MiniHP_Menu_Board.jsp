@@ -2,9 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-	#top{
-		text-align: right;
-	}
 	#main{
 		height: 350px;
 		width: 450px;
@@ -16,9 +13,12 @@
 	}
 </style>
 <form name="poto">
-
-	<div id="top">
-		<input type="button" value="글쓰기" onclick="moveInsertPage();">&nbsp;&nbsp;&nbsp;
+	
+	<div id="nowFolder" style="float: left; padding-left: 20px;">
+		${currentFolderName}
+	</div>
+	<div id="write-btn" style="float: right; padding-right: 20px; cursor:pointer;" onclick="moveInsertPage(${currentFolderSerial});">
+		글쓰기
 	</div>
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 	
@@ -53,9 +53,9 @@
 </form>
 <script>
 //글쓰기 버튼 클릭시
-function moveInsertPage(){
+function moveInsertPage(currentFolderSerial){
     var ajaxOption = {
-            url : "MiniHpBoardInsert.do",
+            url : "MiniHpBoardInsert.do/"+currentFolderSerial,
             async : true,
             type : "GET",
             dataType : "html",

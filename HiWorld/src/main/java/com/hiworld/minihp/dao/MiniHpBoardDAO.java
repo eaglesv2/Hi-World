@@ -19,8 +19,13 @@ public interface MiniHpBoardDAO {
 	
 	
 	// 게시판 관련--------------------------
-	List<MiniHpBoardVO> getAll();
-	MiniHpBoardVO get(int serial);
+	//맨 첫번째 폴더 가져오기
+	int getFirstFolderSerial(int userSerial);
+	List<MiniHpBoardVO> getAll(int folderSerial);
+	String getFolderName(int folderSerial);
+	//게시물 insert
 	int insert(MiniHpBoardVO vo);
+	
+	MiniHpBoardVO get(int serial);
 	
 }

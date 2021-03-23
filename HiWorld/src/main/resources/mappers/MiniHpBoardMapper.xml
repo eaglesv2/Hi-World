@@ -30,18 +30,31 @@
 	
 	
 	<!-- 게시판 관련 -->
+	<select id="getFirstFolderSerial" resultType="int">
+		SELECT serial FROM MiniHP_Board_Folder
+		WHERE UserSerial=#{userSerial}
+		LIMIT 1
+	</select>
 	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
 		SELECT * FROM MiniHP_Board_View
+		WHERE folderSerial=#{folderSerial}
+		ORDER BY uDate DESC
 	</select>
+	<select id="getFolderName" resultType="string">
+		SELECT folderName FROM MiniHP_Board_Folder
+		WHERE serial = #{folderSerial}
+	</select>
+	
+	<!-- insert -->
+	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpBoardVO">
+		INSERT INTO MiniHP_Board(UserSerial,folderSerial,title,content,file)
+		VALUES(#{userSerial},#{folderSerial},#{title},#{content},#{file})
+	</insert>
+	
 	<!-- title, userName, uDate, hit, content -->
 	<select id="get" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
 		SELECT UserName, title, content, hit, uDate FROM MiniHP_Board_View
 		WHERE boardSerial = #{serial}
 	</select>
-	<!-- UserSerial일단 2로 설정 -->
-	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		INSERT INTO MiniHP_Board(UserSerial,title,content)
-		VALUES(2,#{title},#{content})
-	</insert>
 	
 </mapper>

@@ -2,29 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <body>
-	Border
+	Board
 	<hr>
 	<ul>
 		<c:forEach var="i" items="${folderList}">
 			<li><font size="2pt"> 
-				<span id="folder-${i.serial}">
-					<a href="#" onclick="">
-						${i.folderName}
-					</a>
-					<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateForm();">
-					<img src="resources/images/folder_deleted.png" width="10px" height="10px" onclick="deletedFolder('${i.serial}');">
-				</span>
+				<span class="folderNames" onclick="goToFolder('${i.serial}');" style="cursor:pointer;">${i.folderName}</span>
+				<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateForm('${i.serial}','${i.folderName}');">
+				<img src="resources/images/folder_deleted.png" width="10px" height="10px" onclick="deletedFolder('${i.serial}');">
 			</font></li>
-			<div id="updateFolder" style="display: none;">
-				<input type="text" id="updateFolderName" style="width: 100px;" value="${i.folderName}" /><br />
-				<font size="1pt"> 
-					<input type="radio" name="updateScope" value="2" checked="checked">전체공개<br /> 
-					<input type="radio" name="updateScope" value="1">일촌공개<br /> 
-					<input type="radio" name="updateScope" value="0">비공개<br />
-				</font>
-				<input type="button" value="수정" onclick="updateFolder('${i.serial}');" />
-				<input type="button" value="취소" onclick="cancelFolder();" />
-			</div>
+			<div id="board-side-${i.serial}"></div>
 		</c:forEach>
 	</ul>
 	<img src="resources/images/folder_add.png" width="10px" height="10px" align="left" onclick="addFolder();">
@@ -40,6 +27,24 @@
 	</div>
 </body>
 <script>
+	//폴더 클릭시 해당 폴더로 이동
+	function goToFolder(folderSerial) {
+		var ajaxMain = {
+	            url : 'miniHpBoard.do?folderSerial='+folderSerial,
+	            async : true,
+	            type : "GET",
+	            dataType : "html",
+	            cache : false
+	    };
+	    
+	    $.ajax(ajaxMain).done(function(data){
+	        // Contents 영역 삭제
+	        $('#bodyContents').children().remove();
+	        // Contents 영역 교체
+	        $('#bodyContents').html(data);
+	    });
+	}
+
 	//사이드 불러오기
 	function getBoardSide() {
 		var ajaxSide = {
@@ -70,25 +75,30 @@
 	
 	//폴더 추가
 	function insertFolder() {
-		var scope = $(":input:radio[name=scope]:checked").val();
-		
-		var data = {
-			folderName : $('#folderName').val(),
-			scope : scope
+		var folderName = $('#folderName').val();
+		if(folderName==="")
+			alert('폴더명을 입력하세요');
+		else{
+			var scope = $(":input:radio[name=scope]:checked").val();
+			
+			var data = {
+				folderName : folderName,
+				scope : scope
+			}
+			console.log(JSON.stringify(data));
+			$.ajax({
+				type: 'POST',
+				url: 'MiniHpBoardSide.do',
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8',
+				data: JSON.stringify(data)
+			}).done(function() {
+				//사이드 불러오기
+				getBoardSide();
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			});
 		}
-		console.log(JSON.stringify(data));
-		$.ajax({
-			type: 'POST',
-			url: 'MiniHpBoardSide.do',
-			datatype: 'json',
-			contentType:'application/json; charset=utf-8',
-			data: JSON.stringify(data)
-		}).done(function() {
-			//사이드 불러오기
-			getBoardSide();
-		}).fail(function(error) {
-			alert(JSON.stringify(error));
-		});
 	}
 	//폴더 삭제
 	function deletedFolder(serial) {
@@ -109,24 +119,34 @@
 	//폴더 수정하기
 	function updateFolder(serial) {
 		
-		var folderName = $('#updateFolderName').val();
-		var scope = $(":input:radio[name=updateScope]:checked").val();
-		$.ajax({
-			type: 'PUT',
-			url: 'MiniHpBoardSide.do/'+serial+'/'+folderName+'/'+scope,
-			datatype: 'json',
-			contentType:'application/json; charset=utf-8'
-		}).done(function() {
-			//alert('폴더가 수정되었습니다.');
-			//사이드 불러오기
-			getBoardSide();
-		}).fail(function(error) {
-			alert(JSON.stringify(error));
-		}); 
+		var folderName = $('#folderName-'+serial).val();
+		if(folderName==="")
+			alert('폴더명을 입력하세요');
+		else{
+			var scope = $(":input:radio[name=scope-"+serial+"]:checked").val();
+			$.ajax({
+				type: 'PUT',
+				url: 'MiniHpBoardSide.do/'+serial+'/'+folderName+'/'+scope,
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8'
+			}).done(function() {
+				//alert('폴더가 수정되었습니다.');
+				//사이드 불러오기
+				getBoardSide();
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			}); 
+		}
 	}
 	
 	//폴더명 수정화면 펼치기
-	function updateForm() {
-		$('#updateFolder').toggle();
+	function updateForm(serial,beforeFolderName) {
+		$('#board-side-'+serial)
+			.append('<input type="text" id="folderName-'+serial+'" style="width: 100px;" value="'+beforeFolderName+'" /><br />')
+			.append('<input type="radio" name="scope-'+serial+'" value="2" checked="checked">전체공개<br />')
+			.append('<input type="radio" name="scope-'+serial+'" value="1">일촌공개<br /> ')
+			.append('<input type="radio" name="scope-'+serial+'" value="0">비공개<br />')
+			.append('<input type="button" value="수정" onclick="updateFolder('+serial+');" />')
+			.append('<input type="button" value="취소" onclick="cancelFolder();" />');
 	}
 </script>

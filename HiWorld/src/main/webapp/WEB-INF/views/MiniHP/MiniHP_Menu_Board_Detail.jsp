@@ -32,14 +32,24 @@ table.type08 td {
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
+#main{
+	height: 420px;
+	width: 450px;
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+}
+#main::-webkit-scrollbar{
+	display: none;
+}
 </style>
 <body>
+<div id="main">
 	<table class="type08">
 	  <thead>
 	  <tr>
 	    <th scope="cols">${board.title}</th>
 	    <th scope="cols">
-	    	<input type="button" value="목록" onclick="moveBoard('miniHpBoard.do?menu=menu4')">
+	    	<input type="button" value="목록" onclick="moveBoard()">
 	    	<input type="button" value="이동">
 	    	<input type="button" value="삭제">
 	    </th>
@@ -56,6 +66,10 @@ table.type08 td {
 	  <tr>
 	    <td scope="row" colspan="2">${board.content}</td>
 	  </tr>
+	  <tr>
+	    <td scope="row" colspan="2"><img alt="나와라" src='resources/upload/df54dfd7-6534-4932-8682-0645a8ca110e_판다.jpg' width="400"></td>
+	  </tr>
 	  </tbody>
 	</table>
+</div>
 </body>

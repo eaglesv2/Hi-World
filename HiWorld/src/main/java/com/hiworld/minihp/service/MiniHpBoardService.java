@@ -13,7 +13,11 @@ public interface MiniHpBoardService {
 	int updateFolder(MiniHPBoardFolderVO vo);
 	
 	//게시판 관련---------------
-	List<MiniHpBoardVO> getAll();
-	MiniHpBoardVO get(int serial);
+	int getFirstFolderSerial(int userSerial);
+	List<MiniHpBoardVO> getAll(Integer folderSerial);
+	String getFolderName(int folderSerial);
+	
 	int insert(MiniHpBoardVO vo);
+	
+	MiniHpBoardVO get(int serial);
 }

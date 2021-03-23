@@ -39,7 +39,7 @@
 }
 </style>
 <body>
-	<form id="insertForm" action="MiniHpBoardInsert.do" method="post">
+	<form id="insertForm" name="insertForm" enctype="multipart/form-data">
 		<table id="menuBoardInsert">
 			<thead height="5">
 				<tr>
@@ -59,13 +59,13 @@
 				</tr>
 				<tr>
 					<!-- 파일 업로드 -->
-					<td colspan="2">
-					</td>
+					<th scope="row">파일</th>
+					<td><input type="file" name="file1" id="file"></td>
 				</tr>
 				<tr style="text-align: right">
 					<td colspan="2">
-						<input type="button" value="ajax메소드" onclick="insertBoard();">
-						<input type="submit" value="form태그submit">
+						<input type="hidden" value="${folderSerial}" name="folderSerial">
+						<input type="button" value="저장" onclick="insertBoard();">
 						<input type="reset" value="취소">
 					</td>
 				</tr>
@@ -75,22 +75,36 @@
 </body>
 <script>
 function insertBoard(){
-	var data = {
-		title : $('#title').val(),
-		content : $('#content').val()
-	}
-	console.log(JSON.stringify(data));
-	$.ajax({
-		type: 'POST',
-		url: 'MiniHpBoardInsert.do',
-		datatype: 'json',
-		contentType:'application/json; charset=utf-8',
-		data: JSON.stringify(data)
-	}).done(function() {
-		alert('글이 등록되었습니다.');
-		moveBoard('miniHpBoard.do?menu=menu4');
-	}).fail(function(error) {
-		alert(JSON.stringify(error));
-	});
+	
+	 var form = $("form")[0];       
+     var formData = new FormData(form);
+
+     $.ajax({
+         cache : false,
+         url : "MiniHpBoardInsert.do", // 요기에
+         processData: false,
+         contentType: false,
+         type : 'POST', 
+         data : formData, 
+         success : function(data) {
+       			var ajaxMain = {
+       		            url : 'miniHpBoard.do?folderSerial='+data,
+       		            async : true,
+       		            type : "GET",
+       		            dataType : "html",
+       		            cache : false
+       		    };
+       		    
+       		    $.ajax(ajaxMain).done(function(data){
+       		        // Contents 영역 삭제
+       		        $('#bodyContents').children().remove();
+       		        // Contents 영역 교체
+       		        $('#bodyContents').html(data);
+       		    });
+         }, 
+         error : function(xhr, status) {
+             alert(xhr + " : " + status);
+         }
+     });
 }
 </script>
