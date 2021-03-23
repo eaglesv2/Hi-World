@@ -39,12 +39,12 @@ public class MiniHpIntroController {
 	
 	@GetMapping("/miniHp_updateIntroInfo.do")
 	public String miniHpUpdateIntroInfo(MiniHpIntroVO introVO) {
-		System.out.println("미니홈피 인트로 수정 컨트롤러");
+		/*System.out.println("미니홈피 인트로 수정 컨트롤러");*/
 		/*System.out.println(introVO.getUserID());
 		System.out.println(introVO.getHpInfo());*/
 		service.updateIntroInfo(introVO);
 		
-		System.out.println("미니홈피 인트로 수정 서비스 갔다옴");
+		/*System.out.println("미니홈피 인트로 수정 서비스 갔다옴");*/
 		return "MiniHP/MiniHP_Left";
 	}
 	
@@ -65,13 +65,13 @@ public class MiniHpIntroController {
 	
 	@GetMapping("/miniHp_updateIntroTitle.do")
 	public String miniHpUpdateIntroTitle(MiniHpIntroVO introVO) {
-		System.out.println("미니홈피 타이틀 수정 컨트롤러");
+		/*System.out.println("미니홈피 타이틀 수정 컨트롤러");
 		System.out.println(introVO.getUserID());
-		System.out.println(introVO.getHpTitle());
+		System.out.println(introVO.getHpTitle());*/
 		
 		service.updateIntroTitle(introVO);
 		
-		System.out.println("미니홈피 타이틀 수정 서비스 갔다옴");
+		/*System.out.println("미니홈피 타이틀 수정 서비스 갔다옴");*/
 		
 		return "MiniHP/MiniHP_TopTitle";
 	}
