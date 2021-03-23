@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
 .MainContainer{
-    border: 2px solid black;
+    border: 2px solid #dae1e6;
     width: 1080px;
     margin:0 auto;
     height: 950px;
     position: relative;
     border-radius: 10px;
+    
 
 }
 
@@ -30,9 +31,9 @@
 }
 
 .leftCon #bodyContext{
-    margin: 50px 50px 50px 50px;
-    outline: solid black;
-    height: 600px;
+    margin: 20px 20px 20px 20px;
+    outline: solid #dae1e6;
+    height: 650px;
 }
 
 .rightCon{
@@ -40,11 +41,11 @@
     float: right;
     width: 25%;
     height: 800px;
-    
+  
 }
 .rightCon #jang {
-    
     height: 10px;
+    
 }
 
 .rightCon #jang #jang-top{
@@ -59,12 +60,14 @@
     
 }
 .rightCon #minimi{
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
     float:top;
     height: 200px;
     width: 100%;
-    text-align: center;
     margin-bottom: 10px;
+    background: #f7f9fa;
+    
+    
 }
 .rightCon #minimi label{
     display: inline-block;
@@ -81,15 +84,20 @@
 }
 .rightCon #minimi #UserID{
     width: 150px;
-    margin-bottom: 10px;
+    height: 18px;
+    background-color: #fbfbfb;
+    border:1px solid #d4d4d4
+    
 }
 .rightCon #minimi #UserPW{
     width: 150px;
-    margin-bottom: 5px;
+    height:18px;
+    background-color: #fbfbfb;
+    border:1px solid #d4d4d4;
 }
 
 .rightCon #minimi #icon{
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
     height: 50%;
     
 }
@@ -99,13 +107,19 @@
     float: left;
 }
 .rightCon  #minihome{
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
     height: 50px;
     text-align: center;
     display: table;
     width: 100%;
     margin-bottom: 10px;
+    background:#f7f9fa;
+    
 }
+#minihome hover{
+	color:green;	
+}
+
 .rightCon #minihome a{
     display: table-cell;
     vertical-align: middle;
@@ -113,13 +127,13 @@
 }
 #Nav{
     height: 100%;  
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
     border-right: 0px;
     margin: auto 0px;
 }
 
 #Nav #Navmenu{
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
 }
 
 #Nav li {
@@ -135,16 +149,44 @@
 
 #add {
     margin-top: 10px;
-    border: 1px solid black;
+    border: 1px solid #dae1e6;
     height: 515px;
 }
 
 
-#login{
-	margin-top: 10px;
-	margin-bottom: 10px;
+
+#loginCheck{
+	width: 80px;
+	height:48px;
+	border:1px solid #d4d4d4;
 }
 
-#login #loginCheck{
-	width: 80px;
+#loginform{
+ 	border:1px solid black;
+ 	width:100%;
 }
+
+#formtable{
+	margin-top:20px;
+	margin-left:15px;
+}
+
+#signup{
+	float: left;
+	border:0px solid #f7f9fa;
+	margin-left:15px;
+	width:76px;
+}
+#find-id{
+	float:left;
+	border:0px solid #f7f9fa;
+	width:160px;
+}
+
+#naver_id_login{
+	margin-top: 40px;
+	margin-bottom: 5xp;
+}
+
+
+

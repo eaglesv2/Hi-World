@@ -236,7 +236,8 @@ public class ClientController {
 
 	
 	
-//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
+
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("카카오로그인");

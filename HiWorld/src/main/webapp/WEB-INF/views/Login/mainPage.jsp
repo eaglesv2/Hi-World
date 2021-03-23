@@ -7,14 +7,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/mainPage.css">
+    <link rel="stylesheet" href="resources/css/mainPage.css?after">
     <link rel="stylesheet" href="resources/css/reset.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="resources/js/mainPage.js"></script>
     <title>Document</title>
     <script type="text/javascript">
                 
-        $(document).ready(function(){    
+        $(document).ready(function(){
+        	
               $("#header").load("header");
     
     
@@ -107,7 +109,6 @@
  
              };
              
-		
              function MiniHP() {
             	var popupWidth = 880
             	var popupHeight = 580
@@ -117,8 +118,14 @@
 			}
     
 	
-                
       </script>
+      <style>
+	      	.kakaobutton > img{
+			width: 150px;
+			height: 33px;
+			vertical-align: middle;
+	}
+      </style>
 </head>
 <body>
 
@@ -178,21 +185,44 @@
 				<c:otherwise>
 					
 						<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
-						<div id="login">로그인</div>
+					
 						<form action="checkClient.do" method="post">
-							<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br> 
-							<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
-							<input type="submit" value="로그인" id="loginCheck"> 
+							
+								<table id="formtable">
+									<tr>
+										<td>
+											<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br>
+										</td>
+										 
+										<td rowspan="2" style="vertical-align:middle;">
+											<input type="submit" value="로그인" id="loginCheck">	
+										</td>
+									</tr>
+									<tr>
+										 <td>
+											 <input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
+										 </td>
+									
+									</tr>							
+								</table>
 							<input type="button" onclick="signUp()" value="회원가입" id="signup">
 						</form>
-						
-						<hr />
+						<div>
+							<input type="button" value="아이디 비빌먼호 찾기" id="find-id" />
+						</div>
+				
 						<!-- 네이버 로그인 창으로 이동 -->
 						<div id="naver_id_login" style="text-align: center">
+			
 							<!-- 네아 확인 url주소가 넘어옴 -->
 							<a href="${url}"> <img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 						</div>
+						
+						<div id="kakao_id_login" style="text-align: center">
+							<a id="kakao-login-btn" class="kakaobutton" ></a>
+						</div>
 						<br>
+						
 						</c:otherwise>
 					</c:choose>
             </div>
@@ -201,10 +231,33 @@
                 </div>
 
                 <div id="add">
-                    광고입니다
+                  	  광고입니다
                 </div>
         </div>
     </div>
 </body>
+<script>
+	Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');
+	Kakao.isInitialized();
+	
+	
+	Kakao.Auth.createLoginButton({ 
+		container: '#kakao-login-btn', 
+		success: function(authObj) { 
+			Kakao.API.request({
+	    	    url: '/v2/user/me',
+	    	    success: function(data) {
+	    	    	var UserID = data.id
+	    	    	var UserName = data.properties.nickname
+	    	    	location.href="kakaoLogin.do?UserID="+UserID+"&&UserName="+UserName
+	    	    	
+	    	      }
+	    	});		
+			}, 
+		fail: function(err) { 
+			alert(JSON.stringify(err)); 
+			} 
+		});
 
+</script>
 </html>

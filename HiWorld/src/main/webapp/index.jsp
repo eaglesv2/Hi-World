@@ -8,9 +8,9 @@
 </head>
 <body>
 	
-	<a href="login.do">로그인</a>
-		
 	<a href="sangpoom.do">상품결제로 이동</a>
-
+	<a href="login.do">메인페이지가기</a>
+	
+	
 </body>
 </html>

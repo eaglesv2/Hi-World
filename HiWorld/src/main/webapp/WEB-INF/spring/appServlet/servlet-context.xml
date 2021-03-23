@@ -29,7 +29,18 @@
 	<context:component-scan base-package="com.hiworld.client.controller,com.hiworld.client.service,com.hiworld.minihp.controller,com.hiworld.minihp.service,com.hiworld.article.service" />
 
 	<!-- Ajax 주석문 허가 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven >
+		<!-- @ResponseBody형태로 값을 보낼때 한글처리 -->
+		<mvc:message-converters>
+			<beans:bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<beans:property name="supportedMediaTypes">
+					<beans:list>
+						<beans:value>text/html;charset=UTF-8</beans:value>
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 	<!-- 스프링에서 처리할 수 없는 요청은 tomcat에 위임 -->
 	<mvc:default-servlet-handler />
 
