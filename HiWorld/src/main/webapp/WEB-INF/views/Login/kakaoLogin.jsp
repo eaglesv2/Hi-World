@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,12 +22,10 @@
 <a href="#" onclick="mykakao()">mykakao</a>
 <a id="kakao-login-btn" class="button"></a>
 <script>
-    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');//여기서 아까 발급받은 키 중 javascript키를 사용해준다.
+    Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');
     Kakao.isInitialized();
     
- 
-    // 카카오 로그인 버튼을 생성합니다. + 인가 + 토큰바로 생성함
+
     Kakao.Auth.createLoginButton({ 
     	container: '#kakao-login-btn', 
     	success: function(authObj) { 

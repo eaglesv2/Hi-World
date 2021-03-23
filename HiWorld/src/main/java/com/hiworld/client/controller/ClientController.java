@@ -1,19 +1,15 @@
 package com.hiworld.client.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.hiworld.article.service.ArticleService;
+import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
@@ -40,6 +38,10 @@ public class ClientController {
 	/* ClientService를 부르기 위해 정의 */
 	@Autowired
 	private ClientService clientService;
+	
+	/* ArticleService를 부르기 위해 정의 */
+	@Autowired
+	private ArticleService articleService;
 	
 	/* BO자동으로 등록 */
 	@Autowired
@@ -139,9 +141,6 @@ public class ClientController {
 	@GetMapping("BamTolCharge.do")
 	public String BamTolPayMent(HttpSession session, Model model) {
 		System.out.println("결제창으로 이동");
-		String UserID = (String)session.getAttribute("UserID");
-		ClientVO vo = clientService.getOneClient(UserID);
-		model.addAttribute("vo",vo);
 		return "PayMent/BamTolCharge";
 	}
 	
@@ -151,13 +150,17 @@ public class ClientController {
 	@ResponseBody
 	public String userCash(ClientVO clientVO, HttpSession session) {
 		System.out.println("밤톨충전");
-		String UserID = (String)session.getAttribute("UserID");
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
 		int UserCash = clientVO.getUserCash()+clientVO.getCount();
 		System.out.println(clientVO.getCount());
 		System.out.println(UserCash);
 		clientVO.setUserCash(UserCash);
 		clientVO.setUserID(UserID);
-		clientService.userCash(clientVO);
+		int check = clientService.userCash(clientVO);
+		if(check!=0) {
+			sessionVO.setUserCash(UserCash);			
+		}
 		return "success";
 	}
 	
@@ -233,9 +236,8 @@ public class ClientController {
 
 	
 	
-//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("카카오로그인");
@@ -261,6 +263,62 @@ public class ClientController {
 	
 	
 	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/sangpoom.do")
+	public String sangpoom(Model model) {
+		/* 상품  최신순 불러오기 */
+		System.out.println("상품보기");
+		ArrayList<ArticleVO> ArticleList = articleService.getAllArticle();
+		model.addAttribute("ArticleList",ArticleList);
+		
+		return "sangpoom";
+	}
+	
+	@GetMapping("/basket.do")
+	@ResponseBody
+	public int basket(ArticleVO articleVO) {
+		System.out.println("장바구니 담기");
+		String ArticleName = articleVO.getArticleName();
+		String UserSerial = articleVO.getUserSerial();
+		/* 상품정보 가져오기 */
+		
+		ArticleVO vo = articleService.getOneArticle(ArticleName);
+		vo.setUserSerial(UserSerial);
+		
+		/* 내 아이디에 상품 있는지 체크 */
+		int check = articleService.check(vo);
+		
+		/* 장바구니에 등록 */
+		int basket = articleService.basket(vo);
+		
+		return 1;
+	}
+	
+	@GetMapping("/ArticleInsert.do")
+	@ResponseBody
+	public int ArticleInsert(ArticleVO articleVO) {
+		System.out.println("상품 넣기");
+		
+		
+		
+		/* 결제 하기 */
+		
+		
+		/* 상품 넣기 */
+		/* 내 아이디에 상품 넣기 */
+		int basket = articleService.basket(articleVO);
+		
+		if(basket==1) {
+			return 1;			
+		}else {
+			return 0;
+		}
+		
+	}
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/*메인페이지 AJAX*/
 	@GetMapping("/noticePage.do")

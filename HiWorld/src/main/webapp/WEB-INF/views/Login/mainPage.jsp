@@ -109,8 +109,15 @@
  
              };
              
-
-                
+             function MiniHP() {
+            	var popupWidth = 880
+            	var popupHeight = 580
+            	var popupX = (window.screen.width/2)-(popupWidth/2)
+            	var popupY = (window.screen.height/2)-(popupHeight/2)
+            	window.open("${pageContext.request.contextPath}/miniHP.jsp","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+			}
+    
+	
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -220,7 +227,7 @@
 					</c:choose>
             </div>
                 <div id="minihome">
-                    <a href="MiniHP_Home.do">미니홈피 들어가기</a>
+                    <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
                 </div>
 
                 <div id="add">
