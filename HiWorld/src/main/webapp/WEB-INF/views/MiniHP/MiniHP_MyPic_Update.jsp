@@ -63,18 +63,32 @@ $(function(){
 	});
 });
 
-/* function upload(){
-	var str = document.myForm.fileUpload.value;
-	if(str==""){
-		swal("파일을 선택해주세요.", "");
-		return;
-	}
-	document.myForm.submit();
-	} */
+function upload() {
+	event.preventDefault();
+	
+	//Get Form
+	var form = $("#uploadForm")[0];
+	
+	//Create FormData object
+	var data = new FormData(form);
+	
+	$.ajax({
+		type : 'POST',
+		url : 'miniHp_updateIntroPicture.do',
+		enctype : 'multipart/form-data',
+		data : data,
+		processData : false,
+		contentType : false,
+		
+		success: function(result) {
+			window.close();	
+		}
+	})
+}
 </script>
 
 </head>
-<form action="miniHp_updateIntroPicture.do" method="post" name="myForm" enctype="multipart/form-data">
+<form action="miniHp_updateIntroPicture.do" method="post" id="uploadForm" enctype="multipart/form-data">
 	<!--input box-->
 	<div align="center">
 		<img alt="" src="" style="width: 30%;"><br />
@@ -85,7 +99,7 @@ $(function(){
 		<button type="button" title="파일찾기">
 			<span style="font-size: 8pt;">파일찾기</span>
 		</button>
-		<input type="file" name="fileUpload" class="input_file" title="파일찾기">
+		<input type="file" name="uploadFile" class="input_file" title="파일찾기">
 	</div>
 	<div class="upload-btn_wrap">
 		<button type="button" title="업로드" onclick="upload();">

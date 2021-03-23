@@ -4,11 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.service.MiniHpIntroService;
@@ -78,9 +82,34 @@ public class MiniHpIntroController {
 		return "MiniHP/MiniHP_MyPic_Update";
 	}
 	
-	@RequestMapping(value = "miniHp_updateIntroPicture.do", method = RequestMethod.POST)
-	public String miniHpUpdateIntroPicture() {
+	@ResponseBody
+	@PostMapping("/miniHp_getIntroPicture.do")
+	public ResponseEntity<byte[]> miniHpGetIntroPicture(HttpServletRequest request) {
+		System.out.println("미니홈피 프로필 사진 가져오기 컨트롤러");
+		String UserID = request.getParameter("UserID");
 		
-		return ""; 
+		return service.getIntroPicture(UserID);
 	}
+	
+	@RequestMapping(value = "miniHp_updateIntroPicture.do", method = RequestMethod.POST)
+	public String miniHpUpdateIntroPicture(MultipartHttpServletRequest request, HttpSession session, MiniHpIntroVO introVO) {
+		System.out.println("미니홈피 프로필 사진 수정 컨트롤러");
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		MultipartFile file = request.getFile("uploadFile");
+		
+		introVO.setUserID(UserID);
+		introVO.setHpPicture_imgFile(file);
+		
+		/*System.out.println(file);*/
+		
+		System.out.println(introVO.getUserID());
+		System.out.println(introVO.getHpPicture_imgFile());
+		System.out.println(introVO.getHpPicture_imgFile().getOriginalFilename());
+		service.updateIntroPicture(introVO);
+		
+		return "MiniHP/MiniHP_Left"; 
+	}
+	
+	
 }

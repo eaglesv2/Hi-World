@@ -1,6 +1,12 @@
 package com.hiworld.minihp.service;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.hiworld.client.vo.sessionVO;
@@ -61,4 +67,33 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 		System.out.println("미니홈피 타이틀 수정 서비스");
 		introDAO.updateTitle(introVO);
 	}
+	
+	/*프로필 사진 가져오기*/
+	@Override
+	public ResponseEntity<byte[]> getIntroPicture(String UserID) {
+		System.out.println("미니홈피 프로필 사진 가져오기 서비스");
+		byte[] hpPicture = introDAO.getPicture(UserID);
+		final HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_PNG);
+		
+		return new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK);
+	}
+	
+	/*프로필 사진 수정*/
+	@Override
+	public void updateIntroPicture(MiniHpIntroVO introVO) {
+		System.out.println("미니홈피 프로필 사진 수정 서비스");
+		try {
+			if(!introVO.getHpPicture_imgFile().getOriginalFilename().equals("")) {
+				introVO.setHpPicture(introVO.getHpPicture_imgFile().getBytes());
+				System.out.println(introVO.getHpPicture());
+			}
+		} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
+		introDAO.updatePicture(introVO);
+	}
+
+	
 }

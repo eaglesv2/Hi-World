@@ -18,4 +18,10 @@ public interface MiniHpIntroDAO {
 	
 	/*미니홈피 타이틀 수정*/
 	void updateTitle(MiniHpIntroVO introVO);
+	
+	/*미니홈피 프로필 사진 가져오기*/
+	byte[] getPicture(String UserID);
+	
+	/*미니홈피 프로필 사진 수정*/
+	void updatePicture(MiniHpIntroVO introVO);
 }
