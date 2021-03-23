@@ -121,7 +121,7 @@
       </script>
       <style>
 	      	.kakaobutton > img{
-			width: 150px;
+			width: 200px;
 			height: 33px;
 			vertical-align: middle;
 	}
@@ -215,7 +215,7 @@
 						<div id="naver_id_login" style="text-align: center">
 			
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}"> <img width="200px" height="33px" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 						</div>
 						
 						<div id="kakao_id_login" style="text-align: center">
@@ -231,7 +231,7 @@
                 </div>
 
                 <div id="add">
-                  	  광고입니다
+                  	  <img src="resources/images/mainadd.jpg" alt="" />
                 </div>
         </div>
     </div>

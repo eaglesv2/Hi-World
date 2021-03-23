@@ -134,25 +134,32 @@
 
 #Nav #Navmenu{
     border: 1px solid #dae1e6;
+    background:#f7f9fa;
 }
 
 #Nav li {
     display: inline-block;
-    font-size: 30px;
-    margin-left: 90px;
-    height: 40px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    font-size: 20px;
+    font-weight:800;
     cursor: pointer;
+    margin-left:115px;
+    padding-top:10px;
+    padding-bottom:10px;
+    color:black;
     
-}
+	}
 
 #add {
     margin-top: 10px;
     border: 1px solid #dae1e6;
     height: 515px;
+    
 }
 
+#add img{
+	width: 100%;
+	height: 100%;
+}
 
 
 #loginCheck{
