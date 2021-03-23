@@ -5,9 +5,13 @@ public class sessionVO {
 	private String UserName;
 	private String UserID;
 	private String UserBirth;
+	private String UserTel;
+	private String UserGender;
+	private String UserAddress;
 	private int UserCash;
 	private int count;
 	private int isFollow;
+	
 	
 	
 	public int getUserSerial() {
@@ -33,6 +37,24 @@ public class sessionVO {
 	}
 	public void setUserBirth(String userBirth) {
 		UserBirth = userBirth;
+	}
+	public String getUserTel() {
+		return UserTel;
+	}
+	public void setUserTel(String userTel) {
+		UserTel = userTel;
+	}
+	public String getUserGender() {
+		return UserGender;
+	}
+	public String getUserAddress() {
+		return UserAddress;
+	}
+	public void setUserAddress(String userAddress) {
+		UserAddress = userAddress;
+	}
+	public void setUserGender(String userGender) {
+		UserGender = userGender;
 	}
 	public int getUserCash() {
 		return UserCash;

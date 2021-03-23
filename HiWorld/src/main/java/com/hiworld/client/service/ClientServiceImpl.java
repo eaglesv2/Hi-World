@@ -153,6 +153,14 @@ public class ClientServiceImpl implements ClientService {
 		return dao.userCash(clientVO);
 	}
 	
-	
+	/* 내정보보기 PW 중복체크*/
+	@Override
+	public String pwCheck(String UserID) {
+		System.out.println("PW중복체크");
+		String pw =  dao.pwCheck(UserID);
+		System.out.println(pw);
+		return pw;
+		
+	}
 	
 }

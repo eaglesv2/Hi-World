@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiworld.article.dao.ArticleDAO">
+
+	<!-- 최신 물품 조회 -->
+	<select id="getAllArticle" resultType="articleVO">
+		SELECT * FROM Shop_Article ORDER BY ArticleSerial DESC; 
+	</select>
+
+	<!-- 물품 정보 가져오기 -->
+	<select id="getOneArticle" resultType="articleVO">
+		SELECT * FROM Shop_Article WHERE ArticleName = #{ArticleName}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO User_Article
+		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName})
+	</insert>
+
+	<insert id="basket">
+		INSERT INTO Shop_Basket
+		VALUES(#{UserSerial},#{ArticleSerial})
+	</insert>
+	
+	<select id="basketCheck" resultType="int">
+		SELECT COUNT(UserSerial) FROM Shop_Basket WHERE UserSerial = #{UserSerial} AND ArticleSerial = #{ArticleSerial}
+	</select>
+
+	<select id="check" resultType="articleVO">
+		SELECT * FROM User_Article
+		WHERE UserSerial = #{UserSerial}
+	</select>
+
+	<select id="getUserArticle" resultType="articleVO">
+		SELECT * FROM Shop_Article WHERE ArticleSerial IN (SELECT ArticleSerial FROM Shop_Basket WHERE UserSerial = #{UserSerial}) 
+	</select>
+	
+
+
+
+</mapper>

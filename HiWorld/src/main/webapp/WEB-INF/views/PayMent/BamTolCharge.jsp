@@ -16,11 +16,11 @@
 	IMP.init('imp29852102');
 
 	// 로그인한사람 정보
-	var id = "${vo.userID}"
-	var name = "${vo.userName}"
-	var tel = "${vo.userTel}"
-	var addr = "${vo.userAddress}"
-	var userCash = ${vo.userCash}
+	var id = "${sessionVO.userID}"
+	var name = "${sessionVO.userName}"
+	var tel = "${sessionVO.userTel}"
+	var addr = "${sessionVO.userAddress}"
+	var userCash = ${sessionVO.userCash}
 
 	// 결제 시스템
 	function requestPay() {

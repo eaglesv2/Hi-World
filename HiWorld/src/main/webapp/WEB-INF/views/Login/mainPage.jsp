@@ -7,14 +7,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/mainPage.css">
+    <link rel="stylesheet" href="resources/css/mainPage.css?after">
     <link rel="stylesheet" href="resources/css/reset.css">
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="resources/js/mainPage.js"></script>
     <title>Document</title>
     <script type="text/javascript">
                 
-        $(document).ready(function(){    
+        $(document).ready(function(){
+        	
               $("#header").load("header");
     
     
@@ -107,11 +109,87 @@
  
              };
              
-
-    
+             function myinfo(){
+                 var ajaxOption5={
+                		 type: "GET",
+                         url : "logincheck.do",
+                         dataType : "html", 
+                         async:true,
+                         cache:false
+                		 
+                 }
+            	  $.ajax(ajaxOption5).done(function(data){
+            		  console.log("dddd")
+            		  //Contents 영역삭제
+            		  $('#bodyContext').children().remove();
+            		  console.log("1111") 
+            		  //Contents 영역 교체
+            		  $('#bodyContext').html(data);
+            	  })
+             }
+             function MiniHP() {
+            	var popupWidth = 880
+            	var popupHeight = 580
+            	var popupX = (window.screen.width/2)-(popupWidth/2);
+            	var popupY = (window.screen.height/2)-(popupHeight/2);
+            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='miniHP'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+			}
+    	
+             
+            function bamTol(){
+            	console.log("ddd")
+            	var popupWidth =300
+            	var popupHeight =500
+            	var popupX = (window.screen.width/2)-(popupWidth/2);
+            	var popupY = (window.screen.height/2)-(popupHeight/2);
+            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='bamTol'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            }
 	
-                
+            function kaja2(){
+            	var UserPW = $('#password').val();
+    		   	console.log(UserPW);
+                  $.ajax({
+                	url: "pwCheck.do",
+                	type: "POST",
+                	data: {"UserPW":UserPW},
+                	success: function(data) {
+                		console.log(data)
+    					if(data==1){
+    		                 var ajaxOption5={
+    		                		 type: "GET",
+    		                         url : "getOneClient.do",
+    		                         dataType : "html", 
+    		                         async:true,
+    		                         cache:false
+    		                		 
+    		                 }
+    		            	  $.ajax(ajaxOption5).done(function(data){
+    		            		  console.log("dddd")
+    		            		  //Contents 영역삭제
+    		            		  $('#bodyContext').children().remove();
+    		            		  console.log("1111") 
+    		            		  //Contents 영역 교체
+    		            		  $('#bodyContext').html(data);
+    		            	  })
+    					}else{
+    						alert('비밀번호를 잘못 입력하셨습니다 다시입력해 주세요.')
+    					}
+    				},
+                  error: function(){
+                	  alert("에러입니다.")
+                 	 }
+                 })
+           
+    		
+    	}
       </script>
+      <style>
+	      	.kakaobutton > img{
+			width: 200px;
+			height: 33px;
+			vertical-align: middle;
+	}
+      </style>
 </head>
 <body>
 
@@ -157,8 +235,8 @@
 						        </div>
 						        <div id="jang">
 						            <div id="jang-top">
-						                <a href="getOneClient.do?UserID=${sessionVO.userID}">내정보보기</a>
-						                <a href="BamTolCharge.do">밤톨충전</a>
+						                <div onclick="myinfo()">내정보보기</div>
+						                <div onclick="bamTol()">밤톨충전</div>
 						            </div>
 						            <div id="jang-bottom">
 						                <a href="">장바구니</a>
@@ -171,33 +249,79 @@
 				<c:otherwise>
 					
 						<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
-						<div id="login">로그인</div>
+					
 						<form action="checkClient.do" method="post">
-							<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br> 
-							<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
-							<input type="submit" value="로그인" id="loginCheck"> 
+							
+								<table id="formtable">
+									<tr>
+										<td>
+											<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br>
+										</td>
+										 
+										<td rowspan="2" style="vertical-align:middle;">
+											<input type="submit" value="로그인" id="loginCheck">	
+										</td>
+									</tr>
+									<tr>
+										 <td>
+											 <input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
+										 </td>
+									
+									</tr>							
+								</table>
 							<input type="button" onclick="signUp()" value="회원가입" id="signup">
 						</form>
-						
-						<hr />
+						<div>
+							<input type="button" value="아이디 비빌먼호 찾기" id="find-id" />
+						</div>
+				
 						<!-- 네이버 로그인 창으로 이동 -->
 						<div id="naver_id_login" style="text-align: center">
+			
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="150" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}"> <img width="200px" height="33px" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+						</div>
+						
+						<div id="kakao_id_login" style="text-align: center">
+							<a id="kakao-login-btn" class="kakaobutton" ></a>
 						</div>
 						<br>
+						
 						</c:otherwise>
 					</c:choose>
             </div>
                 <div id="minihome">
-                    <a href="MiniHP_Home.do">미니홈피 들어가기</a>
+                    <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
                 </div>
 
                 <div id="add">
-                    광고입니다
+                  	  <img src="resources/images/mainadd.jpg" alt="" />
                 </div>
         </div>
     </div>
 </body>
+<script>
+	Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');
+	Kakao.isInitialized();
+	
+	
+	Kakao.Auth.createLoginButton({ 
+		container: '#kakao-login-btn', 
+		success: function(authObj) { 
+			Kakao.API.request({
+	    	    url: '/v2/user/me',
+	    	    success: function(data) {
+	    	    	var UserID = data.id
+	    	    	var UserName = data.properties.nickname
+	    	    	location.href="kakaoLogin.do?UserID="+UserID+"&&UserName="+UserName
+	    	    	
+	    	      }
+	    	});		
+			}, 
+		fail: function(err) { 
+			alert(JSON.stringify(err)); 
+			} 
+		});
 
+</script>
 </html>

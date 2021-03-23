@@ -176,6 +176,7 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+
 			<!-- json 하는법 -->
 		 <dependency>
 		      <groupId>com.fasterxml.jackson.core</groupId>
@@ -196,7 +197,21 @@
 			<artifactId>jackson-mapper-asl</artifactId> 
 			<version>1.9.13</version> 
 		</dependency>
-
+		
+		<!-- con.jar 사용 -->
+      	<dependency>
+         	<groupId>com.servlets</groupId>
+         	<artifactId>cos</artifactId>
+         	<version>05Nov2002</version>
+     	 </dependency>
+		
+		<!-- 파일 업로드 관련 -->
+		<dependency>
+    		<groupId>commons-fileupload</groupId>
+    		<artifactId>commons-fileupload</artifactId>
+   			<version>1.4</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

@@ -13,4 +13,28 @@
 		SET hpInfo = #{hpInfo}
 		WHERE UserID = #{UserID}
 	</update>
+	
+	<select id="getTitle" parameterType="String" resultType="String">
+		SELECT hpTitle
+		FROM MiniHP_Intro
+		WHERE UserID = #{UserID}
+	</select>
+	
+	<update id="updateTitle" parameterType="com.hiworld.minihp.vo.MiniHpIntroVO">
+		UPDATE MiniHP_Intro
+		SET hpTitle = #{hpTitle}
+		WHERE UserID = #{UserID}
+	</update>
+	
+	<select id="getPicture" parameterType="String" resultType="byte[]">
+		SELECT hpPicture
+		FROM MiniHP_Intro
+		WHERE UserID = #{UserID}
+	</select>
+	
+	<update id="updatePicture" parameterType="com.hiworld.minihp.vo.MiniHpIntroVO">
+		UPDATE MiniHP_Intro
+		SET hpPicture = #{hpPicture}
+		WHERE UserID = #{UserID}
+	</update>
 </mapper>

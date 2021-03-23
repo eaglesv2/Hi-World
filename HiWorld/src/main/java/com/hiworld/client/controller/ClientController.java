@@ -1,19 +1,15 @@
 package com.hiworld.client.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Locale;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.hiworld.article.service.ArticleService;
+import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
@@ -40,6 +38,10 @@ public class ClientController {
 	/* ClientService를 부르기 위해 정의 */
 	@Autowired
 	private ClientService clientService;
+	
+	/* ArticleService를 부르기 위해 정의 */
+	@Autowired
+	private ArticleService articleService;
 	
 	/* BO자동으로 등록 */
 	@Autowired
@@ -93,6 +95,8 @@ public class ClientController {
 				return Integer.toString(result);
 			}
 	
+			
+			
 	/* 로그인 */
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
@@ -108,16 +112,44 @@ public class ClientController {
 		}
 	}
 	
+	/*메인페이지 AJAX*/
+	@GetMapping("/logincheck.do")
+	public String myinfo() {
+		System.out.println("succc");
+		return "Login/logincheck";
+		
+	}
+		
+	
+	//내정보보기 전 비밀번호 체크
+	@PostMapping("pwCheck.do")
+	@ResponseBody
+	public int pwCheck(ClientVO clientVO, HttpSession session) {
+		System.out.println("pw중복체크");
+		sessionVO VO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID= VO.getUserID();
+		String pw = clientService.pwCheck(UserID);
+		String pw2 = clientVO.getUserPW();
+		if(pw.equals(pw2)) {
+			System.out.println("?");
+			return 1;
+		}else {
+			return 0;
+		}		
+	}
+	
 	/* 내 정보 보기 */
 	@GetMapping("getOneClient.do")
-	public String getOneClient(HttpServletRequest request, Model model) {
+	public String getOneClient(HttpSession session, Model model) {
 		System.out.println("내정보보기");
-		String UserID = request.getParameter("UserID");
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
 		ClientVO vo = clientService.getOneClient(UserID);
 		model.addAttribute("clientVO",vo);
 		
 		return "Login/userOneView";
 	}
+	
 	
 	
 	/* 로그아웃 */
@@ -139,9 +171,6 @@ public class ClientController {
 	@GetMapping("BamTolCharge.do")
 	public String BamTolPayMent(HttpSession session, Model model) {
 		System.out.println("결제창으로 이동");
-		String UserID = (String)session.getAttribute("UserID");
-		ClientVO vo = clientService.getOneClient(UserID);
-		model.addAttribute("vo",vo);
 		return "PayMent/BamTolCharge";
 	}
 	
@@ -151,13 +180,17 @@ public class ClientController {
 	@ResponseBody
 	public String userCash(ClientVO clientVO, HttpSession session) {
 		System.out.println("밤톨충전");
-		String UserID = (String)session.getAttribute("UserID");
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
 		int UserCash = clientVO.getUserCash()+clientVO.getCount();
 		System.out.println(clientVO.getCount());
 		System.out.println(UserCash);
 		clientVO.setUserCash(UserCash);
 		clientVO.setUserID(UserID);
-		clientService.userCash(clientVO);
+		int check = clientService.userCash(clientVO);
+		if(check!=0) {
+			sessionVO.setUserCash(UserCash);			
+		}
 		return "success";
 	}
 	
@@ -233,12 +266,8 @@ public class ClientController {
 
 	
 	
+
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	@GetMapping("/login2.do")
-	public String login2() {
-		return "Login/kakaoLogin";
-	}
-	
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("카카오로그인");
@@ -264,6 +293,96 @@ public class ClientController {
 	
 	
 	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/sangpoom.do")
+	public String sangpoom(Model model) {
+		/* 상품  최신순 불러오기 */
+		System.out.println("상품보기");
+		ArrayList<ArticleVO> ArticleList = articleService.getAllArticle();
+		model.addAttribute("ArticleList",ArticleList);
+		
+		return "sangpoom";
+	}
+	
+	@GetMapping("/basket.do")
+	@ResponseBody
+	public int basket(ArticleVO articleVO) {
+		System.out.println("장바구니 담기");
+		String ArticleName = articleVO.getArticleName();
+		int UserSerial = articleVO.getUserSerial();
+		/* 상품정보 가져오기 */
+		
+		ArticleVO vo = articleService.getOneArticle(ArticleName);
+		vo.setUserSerial(UserSerial);
+		
+		/*
+		 	반환 int 값 1은 성공
+		 	0은 이미 구매한 상품
+		 	-1은 실패
+		 	-2는 장바구니에 이미있음
+		 	
+		  */
+		
+		/* 내 아이디에 상품 있는지 체크 */
+		int check = articleService.check(vo);
+		
+		if(check!=1) {
+			/* 장바구니 있는지 체크 */
+			int basketCheck = articleService.basketCheck(vo);
+			
+			if(basketCheck!=1) {
+				/* 장바구니에 등록 */
+				articleService.basket(vo);	
+				check=1;
+			}else {
+				check=-2;
+			}
+			
+		}else {
+			check=0;
+		}
+		
+		return check;
+	}
+	
+	@GetMapping("/ArticleInsert.do")
+	@ResponseBody
+	public int ArticleInsert(ArticleVO articleVO) {
+		System.out.println("상품 넣기");
+		
+		
+		
+		/* 결제 하기 */
+		
+		
+		/* 상품 넣기 */
+		/* 내 아이디에 상품 넣기 */
+		int basket = articleService.basket(articleVO);
+		
+		if(basket==1) {
+			return 1;			
+		}else {
+			return 0;
+		}
+		
+	}
+	
+	
+	@GetMapping("/basketJoin.do")
+	public String basketJoin(Model model, HttpSession session) {
+		System.out.println("장바구니이동");
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = vo.getUserSerial();
+		/* 장바구니 목록 가져오기 */
+		ArrayList<ArticleVO> ArticleList = articleService.getUserArticle(UserSerial);
+		model.addAttribute("ArticleList", ArticleList);
+		return "basket";
+	}
+	
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/*메인페이지 AJAX*/
 	@GetMapping("/noticePage.do")

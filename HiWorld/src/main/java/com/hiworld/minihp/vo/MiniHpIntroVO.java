@@ -1,10 +1,13 @@
 package com.hiworld.minihp.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MiniHpIntroVO {
 	
 	private String UserID;
 	private String hpTitle;
-	private String hpPicture;
+	private MultipartFile hpPicture_imgFile;
+	private byte[] hpPicture;
 	private String hpInfo;
 	private int hpToday;
 	
@@ -20,10 +23,16 @@ public class MiniHpIntroVO {
 	public void setHpTitle(String hpTitle) {
 		this.hpTitle = hpTitle;
 	}
-	public String getHpPicture() {
+	public MultipartFile getHpPicture_imgFile() {
+		return hpPicture_imgFile;
+	}
+	public void setHpPicture_imgFile(MultipartFile hpPicture_imgFile) {
+		this.hpPicture_imgFile = hpPicture_imgFile;
+	}
+	public byte[] getHpPicture() {
 		return hpPicture;
 	}
-	public void setHpPicture(String hpPicture) {
+	public void setHpPicture(byte[] hpPicture) {
 		this.hpPicture = hpPicture;
 	}
 	public String getHpInfo() {

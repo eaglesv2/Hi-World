@@ -26,7 +26,7 @@
 	</beans:bean>
 
 	<!-- 이 패키지 아래에 있는것들 전부 다 빈객체 자동생성 -->
-	<context:component-scan base-package="com.hiworld.client.controller,com.hiworld.client.service,com.hiworld.minihp.controller,com.hiworld.minihp.service" />
+	<context:component-scan base-package="com.hiworld.client.controller,com.hiworld.client.service,com.hiworld.minihp.controller,com.hiworld.minihp.service,com.hiworld.article.service" />
 
 	<!-- Ajax 주석문 허가 -->
 	<mvc:annotation-driven >
@@ -49,9 +49,11 @@
 	<!-- NaverLoginBO Class에 대한 Bean설정 추가 -->
 	<beans:bean id="naverLoginBO" class="com.hiworld.client.controller.NaverLoginBO" />
 
+
 	<!-- 파일 업로드 처리, 최대 사이즈 300MB -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize"  value="314572800"/>
 	</beans:bean>
+
 
 </beans:beans>
