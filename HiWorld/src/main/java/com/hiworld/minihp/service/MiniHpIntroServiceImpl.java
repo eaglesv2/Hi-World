@@ -1,7 +1,10 @@
 package com.hiworld.minihp.service;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -73,9 +76,11 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	public ResponseEntity<byte[]> getIntroPicture(String UserID) {
 		System.out.println("미니홈피 프로필 사진 가져오기 서비스");
 		byte[] hpPicture = introDAO.getPicture(UserID);
+		
 		final HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
 		
+		System.out.println(new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK));
 		return new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK);
 	}
 	
