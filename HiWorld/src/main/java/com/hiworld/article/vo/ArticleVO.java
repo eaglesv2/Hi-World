@@ -7,7 +7,7 @@ public class ArticleVO {
 	private String ArticleKinds;
 	private String ArticleName;
 	private int ArticlePrice;
-	private String UserSerial;
+	private int UserSerial;
 	
 	
 	public int getArticleSerial() {
@@ -40,10 +40,10 @@ public class ArticleVO {
 	public void setArticlePrice(int articlePrice) {
 		ArticlePrice = articlePrice;
 	}
-	public String getUserSerial() {
+	public int getUserSerial() {
 		return UserSerial;
 	}
-	public void setUserSerial(String userSerial) {
+	public void setUserSerial(int userSerial) {
 		UserSerial = userSerial;
 	}
 	

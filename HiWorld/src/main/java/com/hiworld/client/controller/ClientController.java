@@ -310,19 +310,40 @@ public class ClientController {
 	public int basket(ArticleVO articleVO) {
 		System.out.println("장바구니 담기");
 		String ArticleName = articleVO.getArticleName();
-		String UserSerial = articleVO.getUserSerial();
+		int UserSerial = articleVO.getUserSerial();
 		/* 상품정보 가져오기 */
 		
 		ArticleVO vo = articleService.getOneArticle(ArticleName);
 		vo.setUserSerial(UserSerial);
 		
+		/*
+		 	반환 int 값 1은 성공
+		 	0은 이미 구매한 상품
+		 	-1은 실패
+		 	-2는 장바구니에 이미있음
+		 	
+		  */
+		
 		/* 내 아이디에 상품 있는지 체크 */
 		int check = articleService.check(vo);
 		
-		/* 장바구니에 등록 */
-		int basket = articleService.basket(vo);
+		if(check!=1) {
+			/* 장바구니 있는지 체크 */
+			int basketCheck = articleService.basketCheck(vo);
+			
+			if(basketCheck!=1) {
+				/* 장바구니에 등록 */
+				articleService.basket(vo);	
+				check=1;
+			}else {
+				check=-2;
+			}
+			
+		}else {
+			check=0;
+		}
 		
-		return 1;
+		return check;
 	}
 	
 	@GetMapping("/ArticleInsert.do")
@@ -346,6 +367,19 @@ public class ClientController {
 		}
 		
 	}
+	
+	
+	@GetMapping("/basketJoin.do")
+	public String basketJoin(Model model, HttpSession session) {
+		System.out.println("장바구니이동");
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = vo.getUserSerial();
+		/* 장바구니 목록 가져오기 */
+		ArrayList<ArticleVO> ArticleList = articleService.getUserArticle(UserSerial);
+		model.addAttribute("ArticleList", ArticleList);
+		return "basket";
+	}
+	
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
