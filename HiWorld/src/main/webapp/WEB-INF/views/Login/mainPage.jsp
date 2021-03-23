@@ -109,15 +109,79 @@
  
              };
              
+             function myinfo(){
+                 var ajaxOption5={
+                		 type: "GET",
+                         url : "logincheck.do",
+                         dataType : "html", 
+                         async:true,
+                         cache:false
+                		 
+                 }
+            	  $.ajax(ajaxOption5).done(function(data){
+            		  console.log("dddd")
+            		  //Contents 영역삭제
+            		  $('#bodyContext').children().remove();
+            		  console.log("1111") 
+            		  //Contents 영역 교체
+            		  $('#bodyContext').html(data);
+            	  })
+             }
              function MiniHP() {
             	var popupWidth = 880
             	var popupHeight = 580
-            	var popupX = (window.screen.width/2)-(popupWidth/2)
-            	var popupY = (window.screen.height/2)-(popupHeight/2)
-            	window.open("${pageContext.request.contextPath}/miniHP.jsp","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	var popupX = (window.screen.width/2)-(popupWidth/2);
+            	var popupY = (window.screen.height/2)-(popupHeight/2);
+            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='miniHP'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
 			}
-    
+    	
+             
+            function bamTol(){
+            	console.log("ddd")
+            	var popupWidth =300
+            	var popupHeight =500
+            	var popupX = (window.screen.width/2)-(popupWidth/2);
+            	var popupY = (window.screen.height/2)-(popupHeight/2);
+            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='bamTol'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            }
 	
+            function kaja2(){
+            	var UserPW = $('#password').val();
+    		   	console.log(UserPW);
+                  $.ajax({
+                	url: "pwCheck.do",
+                	type: "POST",
+                	data: {"UserPW":UserPW},
+                	success: function(data) {
+                		console.log(data)
+    					if(data==1){
+    		                 var ajaxOption5={
+    		                		 type: "GET",
+    		                         url : "getOneClient.do",
+    		                         dataType : "html", 
+    		                         async:true,
+    		                         cache:false
+    		                		 
+    		                 }
+    		            	  $.ajax(ajaxOption5).done(function(data){
+    		            		  console.log("dddd")
+    		            		  //Contents 영역삭제
+    		            		  $('#bodyContext').children().remove();
+    		            		  console.log("1111") 
+    		            		  //Contents 영역 교체
+    		            		  $('#bodyContext').html(data);
+    		            	  })
+    					}else{
+    						alert('비밀번호를 잘못 입력하셨습니다 다시입력해 주세요.')
+    					}
+    				},
+                  error: function(){
+                	  alert("에러입니다.")
+                 	 }
+                 })
+           
+    		
+    	}
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -171,8 +235,8 @@
 						        </div>
 						        <div id="jang">
 						            <div id="jang-top">
-						                <a href="getOneClient.do?UserID=${sessionVO.userID}">내정보보기</a>
-						                <a href="BamTolCharge.do">밤톨충전</a>
+						                <div onclick="myinfo()">내정보보기</div>
+						                <div onclick="bamTol()">밤톨충전</div>
 						            </div>
 						            <div id="jang-bottom">
 						                <a href="">장바구니</a>

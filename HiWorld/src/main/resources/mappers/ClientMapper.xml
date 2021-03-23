@@ -72,6 +72,9 @@
 		WHERE UserID = #{UserID}
 	</update>
 	
+	<select id="pwCheck" resultType="String">
+		SELECT UserPW FROM HW_USERLIST WHERE UserID= #{UserID}
+	</select>
 	
 </mapper>
 

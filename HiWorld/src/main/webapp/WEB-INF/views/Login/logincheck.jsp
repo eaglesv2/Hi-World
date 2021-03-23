@@ -6,15 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
-<script>
-	var check = <%= request.getParameter("check") %>
-	if(check=="miniHP"){
-	   location.href="MiniHP_Home.do";
-	}else if(check=="bamTol"){
-	   location.href="BamTolCharge.do";
-	   
-	}
-</script>
+	
+		비밀번호 입력 <input type="password" name="UserPW" id="password" />
+		<input type="button" value="확인" onclick="kaja2()"/>
+	
+	
 </body>
+<script>
+	
+</script>
 </html>
