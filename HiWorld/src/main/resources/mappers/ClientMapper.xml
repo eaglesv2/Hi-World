@@ -51,12 +51,12 @@
 	
 	<!-- 네이버 회원 확인 -->
 	<select id="NaverCheckClient" resultType="sessionVO">
-		SELECT UserSerial, UserID, UserName, UserCash, UserBirth FROM HW_USERLIST WHERE UserID = #{UserID}
+		SELECT UserSerial, UserID, UserName, UserCash, UserBirth, UserTel, UserAddress, UserGender FROM HW_USERLIST WHERE UserID = #{UserID}
 	</select>
 	
 	<!-- 회원 로그인 확인 -->
 	<select id="checkClient" resultType="sessionVO">
-		SELECT UserSerial, UserID, UserName, UserCash, UserBirth FROM HW_USERLIST WHERE UserID = #{UserID} AND UserPW = #{UserPW}
+		SELECT UserSerial, UserID, UserName, UserCash, UserBirth, UserTel, UserAddress, UserGender FROM HW_USERLIST WHERE UserID = #{UserID} AND UserPW = #{UserPW}
 	</select>
 	
 	<!-- 회원 한명 조회 -->

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,22 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+</head>
+<body>
 
+	<input type="radio" name="check" value="10000" />밤톨 10개 구매 10000원
+	<br />
+	<input type="radio" name="check" value="28000" />밤톨 30개 구매 28000원
+	<br />
+	<input type="radio" name="check" value="45000" />밤톨 50개 구매 45000원
+	<br />
+	<input type="radio" name="check" value="90000" />밤톨 100개 구매 90000원
+	<br />
+
+	<input type="button" onclick="ChargePay()" value="결제하기" />
+
+
+</body>
 
 <script>
 	//생략가능
@@ -16,14 +32,14 @@
 	IMP.init('imp29852102');
 
 	// 로그인한사람 정보
-	var id = "${vo.userID}"
-	var name = "${vo.userName}"
-	var tel = "${vo.userTel}"
-	var addr = "${vo.userAddress}"
-	var userCash = ${vo.userCash}
+	var id = "${sessionVO.userID}"
+	var name = "${sessionVO.userName}"
+	var tel = "${sessionVO.userTel}"
+	var addr = "${sessionVO.userAddress}"
+	var userCash = ${sessionVO.userCash}
 
 	// 결제 시스템
-	function requestPay() {
+	function ChargePay() {
 
 		// 체크박스 체크여부
 		var check = $('input[name=check]:checked').val()
@@ -105,24 +121,8 @@
 		}
 
 	}
-
 </script>
 
 
-</head>
-<body>
 
-	<input type="radio" name="check" value="10000" />밤톨 10개 구매 10000원
-	<br />
-	<input type="radio" name="check" value="28000" />밤톨 30개 구매 28000원
-	<br />
-	<input type="radio" name="check" value="45000" />밤톨 50개 구매 45000원
-	<br />
-	<input type="radio" name="check" value="90000" />밤톨 100개 구매 90000원
-	<br />
-
-	<button onclick="requestPay()">결제하기</button>
-
-
-</body>
 </html>
