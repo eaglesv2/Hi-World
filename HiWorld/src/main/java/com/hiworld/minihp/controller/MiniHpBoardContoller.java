@@ -1,5 +1,10 @@
 package com.hiworld.minihp.controller;
 
+import java.io.File;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hiworld.minihp.service.MiniHpBoardService;
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
@@ -22,34 +29,37 @@ public class MiniHpBoardContoller {
 	
 	@Autowired
 	private MiniHpBoardService service;
-	//게시판 메인 부분
-	@GetMapping("/miniHpBoard.do")
-	public String miniHpBoard(String menu, Model model) {
-		System.out.println("게시판 main");
-		
-		
-		
-		model.addAttribute("list",service.getAll());
-		return "MiniHP/MiniHP_Menu_Board";
+	
+	//세션에서 현재 유저 정보 가져오기 메소드
+	private int getSessionUser(HttpSession session) {
+//		//세션에서 현재 유저 가져오기
+//		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
+//		int userSerial = sessionUser.getUserSerial();
+		//임시로 2로 지정
+		int userSerial = 2;
+		return userSerial;
 	}
+	// 파일명 중복방지 처리
+    private String getUuidFileName(String originalFileName) {
+    	 return UUID.randomUUID().toString() + "_" + originalFileName;
+    }
+	
 	//게시판 사이드 부분
 	@GetMapping("/MiniHpBoardSide.do")
 	public String miniHpBoardSide(Model model, HttpSession session) {
 		System.out.println("게시판 side");
-		//세션 관련 임시 보류, 일단 2로 통일
-		//int userSerial = (Integer)session.getAttribute("UserSerial");
-		int userSerial = 2;
+		int userSerial = getSessionUser(session);
+		
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
 		return "MiniHP/MiniHP_Menu_Board_Side";
 	}
 	//폴더 추가
 	@PostMapping("/MiniHpBoardSide.do")
 	@ResponseBody
-	public void addFolder(@RequestBody MiniHPBoardFolderVO vo) {
+	public void addFolder(@RequestBody MiniHPBoardFolderVO vo, HttpSession session) {
 		System.out.println("addFolder");
 		
-		//세션에서 현재 유저 가져오기(일단 2로 고정)
-		int userSerial = 2;
+		int userSerial = getSessionUser(session);
 		vo.setUserSerial(userSerial);
 		
 		System.out.println(vo);
@@ -83,21 +93,70 @@ public class MiniHpBoardContoller {
 		else System.out.println("폴더 수정 실패!");
 	}
 	
+	
+	
+	
+	//게시판 메인 부분
+	@GetMapping("/miniHpBoard.do")
+	public String miniHpBoard(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial) {
+		System.out.println("게시판 main");
+		
+		int userSerial = getSessionUser(session);
+		if(folderSerial==null)
+			folderSerial = service.getFirstFolderSerial(userSerial);
+		
+		model.addAttribute("list",service.getAll(folderSerial));
+		
+		model.addAttribute("currentFolderName", service.getFolderName(folderSerial));
+		model.addAttribute("currentFolderSerial", folderSerial);
+		return "MiniHP/MiniHP_Menu_Board";
+	}
 	//게시글 작성 화면
-	@GetMapping("/MiniHpBoardInsert.do")
-	public String miniHpBoardInsertPage(Model model) {
+	@GetMapping("/MiniHpBoardInsert.do/{folderSerial}")
+	public String miniHpBoardInsertPage(Model model,@PathVariable int folderSerial) {
 		System.out.println("게시판 insert 화면");
+		model.addAttribute("folderSerial",folderSerial);
 		return "MiniHP/MiniHP_Menu_Board_Insert";
 	}
 	//게시글 저장 처리
 	@PostMapping("/MiniHpBoardInsert.do")
 	@ResponseBody
-	public void miniHpBoardInsert(@RequestBody MiniHpBoardVO vo) {
-		System.out.println("게시판 insert");
+	public int miniHpBoardInsert(MultipartFile file1, MiniHpBoardVO vo, HttpServletRequest request,HttpSession session) {
+		//파일 저장 로직
+		//파일명 중복방지 처리
+		if(!file1.isEmpty()) {
+			String fileName = getUuidFileName(file1.getOriginalFilename());
+		
+			//업로드된 파일을 서버에 저장
+			ServletContext ctx = request.getServletContext();//파일 경로 얻기 위한 객체
+			String webPath = "/resources/upload";//웹상의 위치
+			String realPath = ctx.getRealPath(webPath);//실제 위치
+			
+			//우선 해당 경로까지의 폴더가 있는지 체크, 없으면 만들어줌
+			File savePath = new File(realPath);
+			if(!savePath.exists())
+				savePath.mkdirs();//s가 붙으면 mkdir -p 같은 효과
+			//경로와 파일명 사이에 구분자가 필요,File.separator가 os마다 맞는 구분자를 넣어줌
+			realPath += File.separator + fileName;
+			//파일위치, 파일명 출력
+			System.out.println("realPath: " + realPath);
+			File saveFile = new File(realPath);
+	
+			//업로드된 파일을 서버 저장소에 저장하는 방법
+			try {
+				file1.transferTo(saveFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			vo.setFile(fileName);
+		}
+		vo.setUserSerial(getSessionUser(session));
 		System.out.println(vo);
 		int result = service.insert(vo);
-		if(result>0) System.out.println("게시글 등록 성공!");
-		else System.out.println("게시글 등록 실패!");
+		if(result>0) System.out.println("게시물 insert 성공!");
+		else System.out.println("게시물 insert 실패!");
+		
+		return vo.getFolderSerial();//수정한 폴더 반환
 	}
 	//자세한 페이지 이동
 	@GetMapping("/MiniHpBoardDetail.do")

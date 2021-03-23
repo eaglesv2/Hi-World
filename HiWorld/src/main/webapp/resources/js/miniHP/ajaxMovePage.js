@@ -54,13 +54,13 @@ function getBoardSide() {
     });
 }
 //게시판 이동
-function moveBoard(url){
+function moveBoard(){
 	//사이드 불러오기
 	getBoardSide();
 	
     // 메인 불러오기
     var ajaxMain = {
-            url : url,
+            url : 'miniHpBoard.do',
             async : true,
             type : "GET",
             dataType : "html",
@@ -73,8 +73,6 @@ function moveBoard(url){
         // Contents 영역 교체
         $('#bodyContents').html(data);
     });
-    
-	
 }
 
 

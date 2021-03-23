@@ -47,12 +47,21 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	
 	// 게시판 관련-------------
 	@Override
-	public List<MiniHpBoardVO> getAll() {
-		List<MiniHpBoardVO> list = dao.getAll();
+	public int getFirstFolderSerial(int userSerial) {
+		return dao.getFirstFolderSerial(userSerial);
+	}
+	@Override
+	@Transactional
+	public List<MiniHpBoardVO> getAll(Integer folderSerial) {
+		List<MiniHpBoardVO> list = dao.getAll(folderSerial);
 		if(list==null || list.size()==0)
 			return null;
 		else
 			return list;
+	}
+	@Override
+	public String getFolderName(int folderSerial) {
+		return dao.getFolderName(folderSerial);
 	}
 	
 	@Override
