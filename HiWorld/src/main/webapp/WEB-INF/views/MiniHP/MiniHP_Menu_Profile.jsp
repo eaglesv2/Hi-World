@@ -54,7 +54,7 @@ function checkProfile() {
 		type : 'GET',
 		url : 'miniHp_check_profile.do',
 		/* userId session 받기 */
-		data : { UserID : '${sessionVO.UserID}' },
+		data : { UserID : '${sessionVO.userID}' },
 		
 		success : function(result) {
 			if(result == 1) { //프로필 존재 시
@@ -80,7 +80,7 @@ function displayProfile() {
 		type : 'GET',
 		url : 'miniHp_get_profile.do',
 		/* userId session 받기 */
-		data : { UserID : '${sessionVO.UserID}' },
+		data : { UserID : '${sessionVO.userID}' },
 		
 		success : function(result) {
 			console.log('ajax success');
@@ -105,7 +105,7 @@ function insert_ok() {
 		type : 'GET',
 		url : 'miniHp_insert_profile.do',
 		/* user serial userId session 받기 */
-		data : { UserSerial : '${sessionVO.UserSerial}', UserID : '${sessionVO.UserID}', ProfileContent : content },
+		data : { UserSerial : '${sessionVO.userSerial}', UserID : '${sessionVO.userID}', ProfileContent : content },
 		
 		success : function(result) {
 			if(result == success) {
@@ -135,7 +135,7 @@ function change_ok() {
 		type : 'GET',
 		url : 'miniHp_update_profile.do',
 		/* user serial userId session 받기 */
-		data : { UserSerial : '${sessionVO.UserSerial}', UserID : '${sessionVO.UserID}', ProfileContent : content },
+		data : { UserSerial : '${sessionVO.userSerial}', UserID : '${sessionVO.userID}', ProfileContent : content },
 		
 		success : function(result) {
 			if(result == 'success') {

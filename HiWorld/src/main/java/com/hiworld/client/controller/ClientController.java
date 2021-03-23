@@ -95,6 +95,8 @@ public class ClientController {
 				return Integer.toString(result);
 			}
 	
+			
+			
 	/* 로그인 */
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
@@ -110,16 +112,44 @@ public class ClientController {
 		}
 	}
 	
+	/*메인페이지 AJAX*/
+	@GetMapping("/logincheck.do")
+	public String myinfo() {
+		System.out.println("succc");
+		return "Login/logincheck";
+		
+	}
+		
+	
+	//내정보보기 전 비밀번호 체크
+	@PostMapping("pwCheck.do")
+	@ResponseBody
+	public int pwCheck(ClientVO clientVO, HttpSession session) {
+		System.out.println("pw중복체크");
+		sessionVO VO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID= VO.getUserID();
+		String pw = clientService.pwCheck(UserID);
+		String pw2 = clientVO.getUserPW();
+		if(pw.equals(pw2)) {
+			System.out.println("?");
+			return 1;
+		}else {
+			return 0;
+		}		
+	}
+	
 	/* 내 정보 보기 */
 	@GetMapping("getOneClient.do")
-	public String getOneClient(HttpServletRequest request, Model model) {
+	public String getOneClient(HttpSession session, Model model) {
 		System.out.println("내정보보기");
-		String UserID = request.getParameter("UserID");
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
 		ClientVO vo = clientService.getOneClient(UserID);
 		model.addAttribute("clientVO",vo);
 		
 		return "Login/userOneView";
 	}
+	
 	
 	
 	/* 로그아웃 */
@@ -236,7 +266,8 @@ public class ClientController {
 
 	
 	
-//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@	
+
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("카카오로그인");

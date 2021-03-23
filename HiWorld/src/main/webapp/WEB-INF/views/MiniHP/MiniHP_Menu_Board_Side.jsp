@@ -11,10 +11,20 @@
 					<a href="#" onclick="">
 						${i.folderName}
 					</a>
-					<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="editting('${i.serial}','${i.folderName}');">
+					<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateForm();">
 					<img src="resources/images/folder_deleted.png" width="10px" height="10px" onclick="deletedFolder('${i.serial}');">
 				</span>
 			</font></li>
+			<div id="updateFolder" style="display: none;">
+				<input type="text" id="updateFolderName" style="width: 100px;" value="${i.folderName}" /><br />
+				<font size="1pt"> 
+					<input type="radio" name="updateScope" value="2" checked="checked">전체공개<br /> 
+					<input type="radio" name="updateScope" value="1">일촌공개<br /> 
+					<input type="radio" name="updateScope" value="0">비공개<br />
+				</font>
+				<input type="button" value="수정" onclick="updateFolder('${i.serial}');" />
+				<input type="button" value="취소" onclick="cancelFolder();" />
+			</div>
 		</c:forEach>
 	</ul>
 	<img src="resources/images/folder_add.png" width="10px" height="10px" align="left" onclick="addFolder();">
@@ -74,7 +84,6 @@
 			contentType:'application/json; charset=utf-8',
 			data: JSON.stringify(data)
 		}).done(function() {
-			alert('폴더가 등록되었습니다.');
 			//사이드 불러오기
 			getBoardSide();
 		}).fail(function(error) {
@@ -88,8 +97,8 @@
 			url: 'MiniHpBoardSide.do/'+serial,
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
-		}).done(function() {
-			alert('폴더가 삭제되었습니다.');
+		}).done(function(data) {
+			alert(data);
 			//사이드 불러오기
 			getBoardSide();
 		}).fail(function(error) {
@@ -99,25 +108,25 @@
 	
 	//폴더 수정하기
 	function updateFolder(serial) {
-		var afterFolderName = $("#"+serial).val();
+		
+		var folderName = $('#updateFolderName').val();
+		var scope = $(":input:radio[name=updateScope]:checked").val();
 		$.ajax({
 			type: 'PUT',
-			url: 'MiniHpBoardSide.do/'+serial+"/"+afterFolderName,
+			url: 'MiniHpBoardSide.do/'+serial+'/'+folderName+'/'+scope,
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			alert('폴더가 수정되었습니다.');
+			//alert('폴더가 수정되었습니다.');
 			//사이드 불러오기
 			getBoardSide();
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
-		});
+		}); 
 	}
 	
 	//폴더명 수정화면 펼치기
-	function editting(serial, beforeFolderName, event) {
-		var jsFolderName = $("#folder-"+serial);
-		jsFolderName.html("<input id='"+serial+"' type='text' value='"+ beforeFolderName +"' style='border:none; width: 70px'>");
-		jsFolderName.append($("<br><a onclick='updateFolder("+ serial +")'>수정 </a>")).append($("<a onclick='getBoardSide()'> 취소</a>"));
+	function updateForm() {
+		$('#updateFolder').toggle();
 	}
 </script>
