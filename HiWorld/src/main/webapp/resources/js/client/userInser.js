@@ -5,15 +5,19 @@
 		var name = false;
 		var birth = false;
 		$('#signUp').click(function() {
+			//아이디가 잘못 된 입력인지 확인
 			if (id != true) {
 				return false;
 				
+			//패스워드가 잘못 된 입력인지 확인	
 			} else if (pw != true) {
 				return false;
-			}
-			else if (name != true){
+				
+			//이름이 잘못 된 입력인지 확인
+			}else if (name != true){
 				return false;
 			}
+			
 			// 패스워드 확인
 			else if ($('#userPW').val() != $('#pwCheck').val()) {
 				console.log($('#userPW').val())
