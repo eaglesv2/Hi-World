@@ -13,7 +13,11 @@ public interface ArticleDAO {
 	
 	ArticleVO getOneArticle(String ArticleName);
 	
-	int check(ArticleVO vo);
+	ArticleVO check(ArticleVO vo);
 	
 	int basket(ArticleVO vo);
+	
+	int basketCheck(ArticleVO vo);
+	
+	ArrayList<ArticleVO> getUserArticle(int UserSerial);
 }

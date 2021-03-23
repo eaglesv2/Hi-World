@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	장바구니목록 보기
+	<a href="basketJoin.do">장바구니</a>
 	<h1>물품 최신순으로 나열</h1>
 	<table>
 		<c:forEach var="kinds" items="${ArticleList}">
@@ -26,25 +26,29 @@
 	</table>
 
 
-
+	
 
 
 </body>
 <script>
-	function basket(kinds) {
+	function basket(ArticleName) {
 			var UserSerial = '${sessionVO.userSerial}';
 			$.ajax({
 				typr: "GET",
 				url: "basket.do",
 				data: {
 					"UserSerial" : UserSerial,
-					"ArticleName" : kinds
+					"ArticleName" : ArticleName
 				},
 				success : function (data) {
 					if(data==1){
 						alert("성공")
-					}else{
+					}else if(data==0){
+						alert("이미 구매한 상품")
+					}else if(data==-1){
 						alert("실패")
+					}else if(data==-2){
+						alert("이미 장바구니 들어감")
 					}
 				}
 			})

@@ -17,12 +17,24 @@
 		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName})
 	</insert>
 
-	<insert id="basket"></insert>
+	<insert id="basket">
+		INSERT INTO Shop_Basket
+		VALUES(#{UserSerial},#{ArticleSerial})
+	</insert>
+	
+	<select id="basketCheck" resultType="int">
+		SELECT COUNT(UserSerial) FROM Shop_Basket WHERE UserSerial = #{UserSerial} AND ArticleSerial = #{ArticleSerial}
+	</select>
 
+	<select id="check" resultType="articleVO">
+		SELECT * FROM User_Article
+		WHERE UserSerial = #{UserSerial}
+	</select>
 
-
-
-
+	<select id="getUserArticle" resultType="articleVO">
+		SELECT * FROM Shop_Article WHERE ArticleSerial IN (SELECT ArticleSerial FROM Shop_Basket WHERE UserSerial = #{UserSerial}) 
+	</select>
+	
 
 
 

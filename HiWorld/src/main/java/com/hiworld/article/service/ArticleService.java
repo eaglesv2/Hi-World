@@ -16,4 +16,8 @@ public interface ArticleService {
 	int insert(ArticleVO vo);
 	
 	int basket(ArticleVO vo);
+	
+	int basketCheck(ArticleVO vo);
+	
+	ArrayList<ArticleVO> getUserArticle(int UserSerial);
 }
