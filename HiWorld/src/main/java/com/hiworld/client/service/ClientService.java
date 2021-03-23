@@ -45,5 +45,6 @@ public interface ClientService {
 	/* 밤톨 충전 */
 	int userCash(ClientVO clientVO);
 	
-	
+	/*내정보보기 비밀번호 중복체크*/
+	String pwCheck(String clientVO);
 }

@@ -49,4 +49,7 @@ public interface ClientDAO {
 	
 	/* 아이디 중복 체크*/
 	int idCheck(String userId);
+	
+	/*내정보보기 PW중복체크*/
+	String pwCheck(String UserID);
 }
