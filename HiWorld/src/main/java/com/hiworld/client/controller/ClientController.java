@@ -269,6 +269,7 @@ public class ClientController {
 	
 
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 카카오 로그인 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 카카오 로그인 확인 */
 	@GetMapping("/kakaoLogin.do")
 	public String kakaoLogin(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("카카오로그인");
@@ -296,6 +297,7 @@ public class ClientController {
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 상품 보기 */
 	@GetMapping("/sangpoom.do")
 	public String sangpoom(Model model) {
 		/* 상품  최신순 불러오기 */
@@ -306,6 +308,7 @@ public class ClientController {
 		return "sangpoom";
 	}
 	
+	/* 장바구니 담기 */
 	@GetMapping("/basket.do")
 	@ResponseBody
 	public int basket(ArticleVO articleVO) {
@@ -318,17 +321,17 @@ public class ClientController {
 		vo.setUserSerial(UserSerial);
 		
 		/*
-		 	반환 int 값 1은 성공
+		 	값 1은 성공
 		 	0은 이미 구매한 상품
 		 	-1은 실패
 		 	-2는 장바구니에 이미있음
-		 	
 		  */
 		
 		/* 내 아이디에 상품 있는지 체크 */
 		int check = articleService.check(vo);
 		
 		if(check!=1) {
+			/* 구매한 상품 없음 */
 			/* 장바구니 있는지 체크 */
 			int basketCheck = articleService.basketCheck(vo);
 			
@@ -346,30 +349,8 @@ public class ClientController {
 		
 		return check;
 	}
-	
-	@GetMapping("/ArticleInsert.do")
-	@ResponseBody
-	public int ArticleInsert(ArticleVO articleVO) {
-		System.out.println("상품 넣기");
 		
-		
-		
-		/* 결제 하기 */
-		
-		
-		/* 상품 넣기 */
-		/* 내 아이디에 상품 넣기 */
-		int basket = articleService.basket(articleVO);
-		
-		if(basket==1) {
-			return 1;			
-		}else {
-			return 0;
-		}
-		
-	}
-	
-	
+	/* 장바구니 목록 보기 */
 	@GetMapping("/basketJoin.do")
 	public String basketJoin(Model model, HttpSession session) {
 		System.out.println("장바구니이동");
@@ -381,6 +362,54 @@ public class ClientController {
 		return "basket";
 	}
 	
+	/* 장바구니에서 구매하기 */
+	@GetMapping("/bay.do")
+	@ResponseBody
+	public int bay(HttpSession session, ArticleVO articleVO) {
+		System.out.println("물품 구입");
+		String value = articleVO.getArticleName();
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int idx = value.indexOf(",");
+		
+		int userSerial = sessionVO.getUserSerial();
+		String articleName = value.substring(0,idx);
+		int articlePrice = Integer.valueOf(value.substring(idx+1));
+		int clientPrice = sessionVO.getUserCash();
+		
+		
+		ArticleVO vo = articleService.getOneArticle(articleName);
+		vo.setUserSerial(userSerial);
+		
+		/*
+		 1 성공
+		 0 금액부족
+		 -1 이미구매한상품
+		 */
+		
+		if(clientPrice<articlePrice) {
+			return 0;
+		}else {
+			/* 이미 구매한 상품인지 확인 */
+			int check = articleService.check(vo);
+			if(check!=1) {
+				/* 구매한상품 없음 상품 넣기 */
+				articleService.insert(vo);
+				
+				/* 구매한 상품 금액 변경 및 세션 */
+				int cal = clientPrice-articlePrice;
+				vo.setArticlePrice(cal);
+				articleService.cash(vo);
+				sessionVO.setUserSerial(cal);
+				
+				/* 구매한 상품 장바구니 삭제 */
+				articleService.delBasket(vo);
+				return 1;
+			}else {
+				return -1;
+			}
+		}
+		
+	}
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

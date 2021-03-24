@@ -39,7 +39,7 @@ public class ArticleServiceImpl implements ArticleService {
 	public int check(ArticleVO vo) {
 		System.out.println("상품 있는지 확인");
 		ArticleVO vo2 = articleDAO.check(vo);
-		if (vo2.getArticleSerial() > 0) {
+		if (vo2 == null) {
 			return 0;
 		} else {
 			return 1;
@@ -70,5 +70,19 @@ public class ArticleServiceImpl implements ArticleService {
 	public ArrayList<ArticleVO> getUserArticle(int UserSerial) {
 		System.out.println("장바구니 목록 가져오기");
 		return articleDAO.getUserArticle(UserSerial);
+	}
+	
+	/* 결제금액 차감 */
+	@Override
+	public int cash(ArticleVO vo) {
+		System.out.println("결제금액 차감");
+		return articleDAO.cash(vo);
+	}
+	
+	/* 장바구니에 있는 목록 삭제 */
+	@Override
+	public int delBasket(ArticleVO vo) {
+		System.out.println("장바구니 목록삭제");
+		return articleDAO.delBasket(vo);
 	}
 }
