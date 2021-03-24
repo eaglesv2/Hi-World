@@ -29,7 +29,7 @@ public class MiniHpIntroController {
 	@ResponseBody
 	@GetMapping(value = "/miniHp_getIntroInfo.do", produces ="application/text;charset=utf8")
 	public String miniHpGetIntroInfo(HttpServletRequest request) {
-		System.out.println("미니홈피 인트로 가져오기 컨트롤러");
+		/*System.out.println("미니홈피 인트로 가져오기 컨트롤러");*/
 		String UserID = request.getParameter("UserID");
 		/*System.out.println(UserID);*/
 
@@ -51,7 +51,7 @@ public class MiniHpIntroController {
 	@ResponseBody
 	@GetMapping(value = "/miniHp_getIntroTitle.do", produces ="application/text;charset=utf8")
 	public String miniHpGetIntroTitle(HttpServletRequest request) {
-		System.out.println("미니홈피 타이틀 가져오기 컨트롤러");
+		/*System.out.println("미니홈피 타이틀 가져오기 컨트롤러");*/
 		HttpSession session = request.getSession();
 		sessionVO = (sessionVO) session.getAttribute("sessionVO");
 		/*String UserID = sessionVO.getUserID();
@@ -87,6 +87,7 @@ public class MiniHpIntroController {
 	public ResponseEntity<byte[]> miniHpGetIntroPicture(HttpServletRequest request) {
 		System.out.println("미니홈피 프로필 사진 가져오기 컨트롤러");
 		String UserID = request.getParameter("UserID");
+		System.out.println(UserID);
 		
 		return service.getIntroPicture(UserID);
 	}

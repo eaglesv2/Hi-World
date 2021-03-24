@@ -1,10 +1,8 @@
 package com.hiworld.minihp.service;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +23,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	/*소개글 가져오기*/
 	@Override
 	public String getIntroInfo(String UserID) {
-		System.out.println("미니홈피 인트로 가져오기 서비스");
+		/*System.out.println("미니홈피 인트로 가져오기 서비스");*/
 		String info = "";
 		
 		if(introDAO.getInfo(UserID) == null) {
@@ -34,7 +32,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 			info = introDAO.getInfo(UserID);
 		}
 		
-		System.out.println(info);
+		/*System.out.println(info);*/
 		
 		return info;
 	}
@@ -49,7 +47,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	/*제목 가져오기*/
 	@Override
 	public String getIntroTitle(sessionVO sessionVO) {
-		System.out.println("미니홈피 타이틀 가져오기 서비스");
+		/*System.out.println("미니홈피 타이틀 가져오기 서비스");*/
 		String title = "";
 		String UserID = sessionVO.getUserID();
 		
@@ -59,7 +57,7 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 			title = introDAO.getTitle(UserID);
 		}
 		
-		System.out.println(title);
+		/*System.out.println(title);*/
 		
 		return title;
 	}
@@ -75,9 +73,11 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	@Override
 	public ResponseEntity<byte[]> getIntroPicture(String UserID) {
 		System.out.println("미니홈피 프로필 사진 가져오기 서비스");
-		byte[] hpPicture = introDAO.getPicture(UserID);
+		Map<String, Object> map = introDAO.getPicture(UserID);
+		byte[] hpPicture = (byte[])map.get("hpPicture");
+		System.out.println(hpPicture);
 		
-		final HttpHeaders headers = new HttpHeaders();
+		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
 		
 		System.out.println(new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK));
