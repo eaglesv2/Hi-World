@@ -130,6 +130,7 @@ public class ClientServiceImpl implements ClientService {
 	public sessionVO checkClient(ClientVO clientVO) {
 		System.out.println("회원 로그인 확인");
 		sessionVO vo = dao.checkClient(clientVO);
+		System.out.println(vo);
 		if(vo==null) {
 			return null;
 		}else {

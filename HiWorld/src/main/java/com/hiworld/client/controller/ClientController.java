@@ -101,13 +101,14 @@ public class ClientController {
 	@PostMapping("checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
 		System.out.println("로그인");
-		sessionVO vo = clientService.checkClient(clientVO);			
+		sessionVO vo = clientService.checkClient(clientVO);	
+		String message = "";
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("sessionVO", vo);
 			return "redirect:/login.do";
 		}else {
-
+			System.out.println("여기로 왔니?");
 			return "Login/mainPage";	
 		}
 	}
