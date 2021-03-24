@@ -20,4 +20,8 @@ public interface ArticleDAO {
 	int basketCheck(ArticleVO vo);
 	
 	ArrayList<ArticleVO> getUserArticle(int UserSerial);
+	
+	int cash(ArticleVO vo);
+	
+	int delBasket(ArticleVO vo);
 }

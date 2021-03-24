@@ -12,30 +12,45 @@
 		SELECT * FROM Shop_Article WHERE ArticleName = #{ArticleName}
 	</select>
 
+	<!-- 물품 등록 -->
 	<insert id="insert">
 		INSERT INTO User_Article
-		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName})
+		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName},#{ArticleImg})
 	</insert>
 
+	<!-- 장바구니 -->
 	<insert id="basket">
 		INSERT INTO Shop_Basket
 		VALUES(#{UserSerial},#{ArticleSerial})
 	</insert>
 	
+	<!-- 장바구니 체크 -->
 	<select id="basketCheck" resultType="int">
 		SELECT COUNT(UserSerial) FROM Shop_Basket WHERE UserSerial = #{UserSerial} AND ArticleSerial = #{ArticleSerial}
 	</select>
 
+	<!-- 물품 구매했는지 체크 -->
 	<select id="check" resultType="articleVO">
 		SELECT * FROM User_Article
-		WHERE UserSerial = #{UserSerial}
+		WHERE UserSerial = #{UserSerial} AND ArticleSerial = #{ArticleSerial}
 	</select>
 
+	<!-- 장바구니 불러오기 -->
 	<select id="getUserArticle" resultType="articleVO">
 		SELECT * FROM Shop_Article WHERE ArticleSerial IN (SELECT ArticleSerial FROM Shop_Basket WHERE UserSerial = #{UserSerial}) 
 	</select>
 	
+	<!-- 밤톨 업데이트 -->
+	<update id="cash">
+		UPDATE HW_USERLIST 
+		SET UserCash = #{ArticlePrice}
+		WHERE UserSerial = #{UserSerial}
+	</update>
 
-
+	<!-- 구매시 장바구니 목록삭제 -->
+	<delete id="delBasket">
+		DELETE FROM Shop_Basket
+		WHERE UserSerial = #{UserSerial} AND ArticleSerial = #{ArticleSerial}
+	</delete>
 
 </mapper>
