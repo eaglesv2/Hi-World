@@ -306,7 +306,7 @@
 					</c:choose>
             </div>
                 <div id="minihome">
-                    <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
+                    <a href="#" onclick="MiniHP()">미니홈피 들어가기.</a>
                 </div>
 
                 <div id="add">
