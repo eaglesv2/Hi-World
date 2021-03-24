@@ -26,7 +26,7 @@
 		WHERE UserID = #{UserID}
 	</update>
 	
-	<select id="getPicture" parameterType="String" resultType="byte[]">
+	<select id="getPicture" parameterType="String" resultType="java.util.Map">
 		SELECT hpPicture
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}

@@ -1,5 +1,7 @@
 package com.hiworld.minihp.dao;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.hiworld.minihp.vo.MiniHpIntroVO;
@@ -20,7 +22,7 @@ public interface MiniHpIntroDAO {
 	void updateTitle(MiniHpIntroVO introVO);
 	
 	/*미니홈피 프로필 사진 가져오기*/
-	byte[] getPicture(String UserID);
+	Map<String, Object> getPicture(String UserID);
 	
 	/*미니홈피 프로필 사진 수정*/
 	void updatePicture(MiniHpIntroVO introVO);

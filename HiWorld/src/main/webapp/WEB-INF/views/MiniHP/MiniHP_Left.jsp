@@ -51,17 +51,32 @@ function change_i_ok(){
 function displayProfile(){
 	console.log('display profile');
 	
-	$.ajax({
+	var xhr= new XMLHttpRequest();
+	var data = {'UserID' : '${sessionVO.userID}'};
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState === xhr.DONE) {
+			if(xhr.status === 200) {
+				$("#profileImage").attr("src", xhr.responseText);
+			}	
+		}
+	};
+	xhr.open('POST','miniHp_getIntroPicture.do');
+	xhr.setRequestHeader('Content-Type', 'application/json');
+	xhr.send(JSON.stringify(data));
+	
+	/* $.ajax({
 		type : 'POST',
 		url : 'miniHp_getIntroPicture.do',
 		data : { UserID : '${sessionVO.userID}'},
-		
+	
 		success : function(result) {
 			console.log('image ajax success');
+			console.log(result);
 			$("#profileImage").attr("src",result);
 		}
-	})
-}
+	}) */
+} //file은 ajax로 안불러와짐;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 function displayInfo(){
 	console.log('display info');
 	
@@ -126,7 +141,7 @@ height:100px;
 					<tr bgcolor="#FFFFFF">
 						<td>
 						<c:if test="${sessionVO.userGender eq 'M'}">
-							<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/admin/basic_man.jpg" width="128" height="128" border="0" alt=""/>
+							<img id="profileImage" <%-- src="miniHp_getIntroPicture.do?UserID=${sessionVO.userID}" --%>src="${pageContext.request.contextPath}/resources/images/admin/basic_man.jpg" width="128" height="128" border="0" alt=""/>
 						</c:if>
 						<c:if test="${sessionVO.userGender eq 'F'}">
 							<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/admin/basic_girl.jpg" width="128" height="128" border="0" alt=""/>
