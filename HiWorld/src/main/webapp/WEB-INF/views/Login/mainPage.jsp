@@ -12,15 +12,25 @@
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="resources/js/mainPage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <title>Document</title>
     <script type="text/javascript">
                 
-        $(document).ready(function(){
-        	
-              $("#header").load("header");
-    
-    
-          });
+
+	 $(document).ready(function(){
+		 	var main = $('.bxslider').bxSlider({
+				       mode: 'fade',
+				       auto:true,
+				       controls:true,
+				       speed:500,
+					   
+
+				   })
+			});
+
       
         function signUp(){
         	location.href="userInsertForm.do";
@@ -172,7 +182,7 @@
     		            		  $('#bodyContext').html(data);
     		            	  })
     					}else{
-    						alert('비밀번호를 잘못 입력하셨습니다 다시입력해 주세요.')
+    						Swal.fire('비밀번호를 다시 입력해주세요.')
     					}
     				},
                   error: function(){
@@ -194,9 +204,14 @@
 <body>
 
     <div class="MainContainer">
-            <div id="header">
-                
-            </div>
+          
+	    <ul class="bxslider">
+	        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
+	        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
+	        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
+	        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+	    </ul>
+
         <div class="leftCon">
             <div id="Nav">
                 <div id="Navmenu">
@@ -295,9 +310,13 @@
                 </div>
 
                 <div id="add">
-                  	  <img src="resources/images/mainadd.jpg" alt="" />
+                  	  <img src="resources/images/mainadd.png" alt="" />
                 </div>
         </div>
+    </div>
+    
+    <div id="footer">
+    	
     </div>
 </body>
 <script>
