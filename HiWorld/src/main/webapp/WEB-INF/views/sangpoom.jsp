@@ -28,9 +28,6 @@
 	</table>
 
 
-
-
-
 </body>
 <script>
 	function basket(ArticleName) {

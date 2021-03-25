@@ -49,17 +49,32 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
+//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+	/* 회원 전체 목록 보이기 */
+	@GetMapping("/adminClient.do")
+	public String adminClient() {
+		return "";
+	}
+	
+	/* 상품 등록 */
+	@GetMapping("/adminArticle.do")
+	public String adminArticle() {
+		return "";
+	}
+	
+	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자체 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/* 회원가입페이지로 이동 */
-	@GetMapping("userInsertForm.do")
+	@GetMapping("/userInsertForm.do")
 	public String userInsertForm() {
 		return "Login/userInsert"; 
 	}
 	
 	/* 회원가입 */
-	@PostMapping("insertClient.do")
+	@PostMapping("/insertClient.do")
 	public String insertClient(ClientVO clientVO) {
 		System.out.println("회원가입");
 		/* tel을 다 가져와서 하나로 묶어서 setter하기 */
@@ -84,21 +99,22 @@ public class ClientController {
 		
 		return checkJoin;
 	}
+	
 	//id 중복 확인 을 할경우
-			@PostMapping("idCheck.do")
-			@ResponseBody
-			public String idCheck(HttpServletRequest request) {
-				System.out.println("아이디중복확인");
-				String userid = request.getParameter("userID");
-				System.out.println(userid);
-				int result = clientService.idCheck(userid);
-				return Integer.toString(result);
-			}
+	@PostMapping("/idCheck.do")
+	@ResponseBody
+	public String idCheck(HttpServletRequest request) {
+		System.out.println("아이디중복확인");
+		String userid = request.getParameter("userID");
+		System.out.println(userid);
+		int result = clientService.idCheck(userid);
+		return Integer.toString(result);
+	}
 	
 			
 			
 	/* 로그인 */
-	@PostMapping("checkClient.do")
+	@PostMapping("/checkClient.do")
 	public String checkClient(ClientVO clientVO, HttpSession session) {
 		System.out.println("로그인");
 		sessionVO vo = clientService.checkClient(clientVO);	
@@ -123,7 +139,7 @@ public class ClientController {
 		
 	
 	//내정보보기 전 비밀번호 체크
-	@PostMapping("pwCheck.do")
+	@PostMapping("/pwCheck.do")
 	@ResponseBody
 	public int pwCheck(ClientVO clientVO, HttpSession session) {
 		System.out.println("pw중복체크");
@@ -132,7 +148,6 @@ public class ClientController {
 		String pw = clientService.pwCheck(UserID);
 		String pw2 = clientVO.getUserPW();
 		if(pw.equals(pw2)) {
-			System.out.println("?");
 			return 1;
 		}else {
 			return 0;
@@ -140,7 +155,7 @@ public class ClientController {
 	}
 	
 	/* 내 정보 보기 */
-	@GetMapping("getOneClient.do")
+	@GetMapping("/getOneClient.do")
 	public String getOneClient(HttpSession session, Model model) {
 		System.out.println("내정보보기");
 		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
@@ -169,7 +184,7 @@ public class ClientController {
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
-	@GetMapping("BamTolCharge.do")
+	@GetMapping("/BamTolCharge.do")
 	public String BamTolPayMent(HttpSession session, Model model) {
 		System.out.println("결제창으로 이동");
 		return "PayMent/BamTolCharge";
@@ -177,7 +192,7 @@ public class ClientController {
 	
 	
 	/* 밤톨 충전 */
-	@GetMapping("userCash.do")
+	@GetMapping("/userCash.do")
 	@ResponseBody
 	public String userCash(ClientVO clientVO, HttpSession session) {
 		System.out.println("밤톨충전");
@@ -297,13 +312,33 @@ public class ClientController {
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	/* 상품 보기 */
+	/* 상품 보기 (최신순) */
 	@GetMapping("/sangpoom.do")
-	public String sangpoom(Model model) {
-		/* 상품  최신순 불러오기 */
+	public String sangpoom(Model model, HttpServletRequest request) {
 		System.out.println("상품보기");
+		
+		/* 호출한 ajax의 데이터가 뭔지 확인 */
+//		String list = request.getParameter("list");
+		
+		
+//		switch (list) {
+		/* 상품 최신순 */
+//		case "new":
+//			
+//			break;
+//		
+//		case "character": break;
+//		case "background": break;
+//		case "music": break;
+//		case "mouse": break;
+//		default:
+//			break;
+//		}
+		
+		
 		ArrayList<ArticleVO> ArticleList = articleService.getAllArticle();
-		model.addAttribute("ArticleList",ArticleList);
+		model.addAttribute("ArticleList",ArticleList);			
+		
 		
 		return "sangpoom";
 	}
@@ -362,7 +397,7 @@ public class ClientController {
 		return "basket";
 	}
 	
-	/* 장바구니에서 구매하기 */
+	/* 한개 구매하기 */
 	@GetMapping("/bay.do")
 	@ResponseBody
 	public int bay(HttpSession session, ArticleVO articleVO) {
@@ -411,7 +446,51 @@ public class ClientController {
 		
 	}
 	
+	/* 장바구니 목록 삭제 */
+	@GetMapping("/delArticle.do")
+	@ResponseBody
+	public int delArticle(HttpSession session, ArticleVO articleVO) {
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = sessionVO.getUserSerial();
+		articleVO.setUserSerial(UserSerial);
+		
+		articleService.delBasket(articleVO);
+		return 1;
+	}
 	
+	
+	/* 장바구니에서 결제 */
+	@GetMapping("/totalBay.do")
+	@ResponseBody
+	public int totalBay(HttpSession session, int total) {
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = sessionVO.getUserSerial();
+		int price = sessionVO.getUserCash();
+		
+		
+		/*
+		 1 성공
+		 0 금액부족 
+		 */
+		
+		if(price>=total) {
+			/* 결제 가능 */
+			articleService.totalBay(UserSerial);
+			
+			/* 금액 차감 */
+			ArticleVO vo = new ArticleVO();
+			vo.setArticlePrice(price-total);
+			vo.setUserSerial(UserSerial);
+			articleService.cash(vo);
+			sessionVO.setUserCash(price-total);
+			
+			/* 장바구니 삭제 */
+			articleService.delAllBasket(UserSerial);
+			return 1;
+		}else {
+			return 0;
+		}
+	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/*메인페이지 AJAX*/
