@@ -3,16 +3,16 @@ package com.hiworld.minihp.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hiworld.minihp.dao.MiniHP_ProfileDAO;
-import com.hiworld.minihp.vo.MiniHP_ProfileVO;
+import com.hiworld.minihp.dao.MiniHpProfileDAO;
+import com.hiworld.minihp.vo.MiniHpProfileVO;
 
 @Service("MiniHpProfileService")
 public class MiniHpProfileServiceImpl implements MiniHpProfileService {
 	
 	@Autowired
-	private MiniHP_ProfileDAO profileDAO;
+	private MiniHpProfileDAO profileDAO;
 	
-	private MiniHP_ProfileVO profileVO;
+	private MiniHpProfileVO profileVO;
 	
 	@Override
 	public String checkProfile(String userId) {
@@ -39,7 +39,7 @@ public class MiniHpProfileServiceImpl implements MiniHpProfileService {
 	}
 	
 	@Override
-	public int insertProfile(MiniHP_ProfileVO profileVO) {
+	public int insertProfile(MiniHpProfileVO profileVO) {
 		System.out.println("프로필 작성 서비스");
 		int checkNumber = profileDAO.insertProfile(profileVO);
 		System.out.println(profileVO.getProfileContent());
@@ -47,7 +47,7 @@ public class MiniHpProfileServiceImpl implements MiniHpProfileService {
 	}
 	
 	@Override
-	public int updateProfile(MiniHP_ProfileVO profileVO) {
+	public int updateProfile(MiniHpProfileVO profileVO) {
 		System.out.println("프로필 수정 서비스");
 		int checkNumber = profileDAO.updateProfile(profileVO);
 		System.out.println(profileVO.getUserID());

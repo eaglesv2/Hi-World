@@ -72,15 +72,15 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	/*프로필 사진 가져오기*/
 	@Override
 	public ResponseEntity<byte[]> getIntroPicture(String UserID) {
-		System.out.println("미니홈피 프로필 사진 가져오기 서비스");
+		/*System.out.println("미니홈피 프로필 사진 가져오기 서비스");*/
 		Map<String, Object> map = introDAO.getPicture(UserID);
 		byte[] hpPicture = (byte[])map.get("hpPicture");
-		System.out.println(hpPicture);
+		/*System.out.println(hpPicture);*/
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_PNG);
 		
-		System.out.println(new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK));
+		/*System.out.println(new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK));*/
 		return new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK);
 	}
 	

@@ -26,4 +26,20 @@ public interface MiniHpIntroDAO {
 	
 	/*미니홈피 프로필 사진 수정*/
 	void updatePicture(MiniHpIntroVO introVO);
+	
+	/*미니홈피 세팅 정보 가져오기*/
+	MiniHpIntroVO getData(String UserID);
+	
+	/*미니홈피 오늘 방문자 수 가져오기*/
+	int getToday(String UserID);
+	
+	/*미니홈피 오늘 방문자수 카운트*/
+	void updateToday(String UserID);
+	
+	/*미니홈피 전체 방문자 수 가져오기*/
+	int getTotal(String UserID);
+	
+	/*미니홈피 누적 방문자수 카운트*/
+	void updateTotal(String UserID);
+	
 }

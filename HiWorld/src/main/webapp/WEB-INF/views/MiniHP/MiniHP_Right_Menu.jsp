@@ -48,7 +48,27 @@ $(function(){
 	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
 });
 
+/* ajax */
+function movePage(url){
+	// ajax option
+	var ajaxOption = {
+	url : url,
+	async : true,
+	type : "GET",
+	dataType : "html",
+	cache : false
+};
+        
+	$.ajax(ajaxOption).done(function(data){
+	// Contents 영역 삭제
+	$('#bodyContents').children().remove();
+	 // Contents 영역 교체
+	$('#bodyContents').html(data);
+	});
+}
+ 
 </script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=2"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -63,46 +83,46 @@ $(function(){
 	
 	<c:if test="${miniHpUserMenuVO.menu2==1}">
 		<c:if test="${menu=='menu2'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpProfile.do?menu=menu2';">프로필</div>
+			<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
 		</c:if>
 		<c:if test="${menu!='menu2'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpProfile.do?menu=menu2';">프로필</div>
+			<div align="center" class="unselected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
 		</c:if>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu3==1}">
 		<c:if test="${menu=='menu3'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpPicture.do?menu=menu3';">사진첩</div>
+			<div align="center" class="selected-Menu" onclick="movePicture('miniHpPicture.do?menu=menu3')">사진첩</div>
 		</c:if>
 		<c:if test="${menu!='menu3'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpPicture.do?menu=menu3';">사진첩</div>
+			<div align="center" class="unselected-Menu" onclick="movePicture('miniHpPicture.do?menu=menu3')">사진첩</div>
 		</c:if>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu4==1}">
 		<c:if test="${menu=='menu4'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpBoard.do?menu=menu4';">게시판</div>
+			<div align="center" class="selected-Menu" onclick="moveBoard()">게시판</div>
 		</c:if>
 		<c:if test="${menu!='menu4'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpBoard.do?menu=menu4';">게시판</div>
+			<div align="center" class="unselected-Menu" onclick="moveBoard()">게시판</div>
 		</c:if>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu5==1}">
 		<c:if test="${menu=='menu5'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpVideo.do?menu=menu5';">동영상</div>
+			<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
 		</c:if>
 		<c:if test="${menu!='menu5'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpVideo.do?menu=menu5';">동영상</div>
+			<div align="center" class="unselected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
 		</c:if>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu6==1}">
 		<c:if test="${menu=='menu6'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpGuest.do?menu=menu6';">방명록</div>
+			<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6');">방명록</div>
 		</c:if>
 		<c:if test="${menu!='menu6'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpGuest.do?menu=menu6';">방명록</div>
+			<div align="center" class="unselected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
 		</c:if>
 	</c:if>
 	

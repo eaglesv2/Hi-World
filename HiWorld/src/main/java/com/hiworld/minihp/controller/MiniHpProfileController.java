@@ -1,6 +1,7 @@
 package com.hiworld.minihp.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.service.MiniHpProfileService;
-import com.hiworld.minihp.vo.MiniHP_ProfileVO;
+import com.hiworld.minihp.vo.MiniHpProfileVO;
+import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 @Controller
 public class MiniHpProfileController {
@@ -19,10 +23,16 @@ public class MiniHpProfileController {
 	@Autowired
 	private MiniHpProfileService service;
 	
+	@Autowired
+	private MiniHpIntroDAO introDAO;
+	
+	MiniHpIntroVO introVO;
+	
 
 	@RequestMapping("/MiniHP_Home.do")
-	public String miniHp_Home() {
-		
+	public String miniHp_Home(HttpSession session, Model model) {
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		model.addAttribute("menu", "menu1");
 		return "MiniHP/MiniHP_Home";
 	}
 	
@@ -32,7 +42,12 @@ public class MiniHpProfileController {
 	}
 	
 	@RequestMapping("/MiniHP_Left.do")
-	public String miniHp_Left() {
+	public String miniHp_Left(HttpSession session, Model model) {
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		System.out.println(UserID);
+		introVO = introDAO.getData(UserID);
+		model.addAttribute("introVO", introVO);
 		return "MiniHP/MiniHP_Left";
 	}
 	
@@ -107,7 +122,7 @@ public class MiniHpProfileController {
 	
 	@ResponseBody
 	@GetMapping("/miniHp_insert_profile.do")
-	public String miniHpInsertProfile(MiniHP_ProfileVO profileVO) {
+	public String miniHpInsertProfile(MiniHpProfileVO profileVO) {
 		System.out.println("프로필 작성 컨트롤러");
 		int result = service.insertProfile(profileVO);
 		
@@ -127,7 +142,7 @@ public class MiniHpProfileController {
 	
 	@ResponseBody
 	@GetMapping("/miniHp_update_profile.do")
-	public String miniHpUpdateProfile(MiniHP_ProfileVO profileVO) {
+	public String miniHpUpdateProfile(MiniHpProfileVO profileVO) {
 		System.out.println("프로필 수정 컨트롤러");
 		int result = service.updateProfile(profileVO);
 		System.out.println(result);

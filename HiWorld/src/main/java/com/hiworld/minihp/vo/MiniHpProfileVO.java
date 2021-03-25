@@ -1,6 +1,6 @@
 package com.hiworld.minihp.vo;
 
-public class MiniHP_ProfileVO {
+public class MiniHpProfileVO {
 	
 	private int UserSerial;
 	private String UserID;
