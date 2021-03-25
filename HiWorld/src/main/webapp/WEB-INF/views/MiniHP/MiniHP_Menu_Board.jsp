@@ -38,7 +38,12 @@
 				</tr>
 				<c:forEach items="${list}" var="l">
 				<tr>
-					<td style="width: 30%; height: 5px;word-break:break-all;" onclick="moveDetailPage(${l.boardSerial});">${l.title}</td>
+					<td style="width: 30%; height: 5px;word-break:break-all; cursor:pointer;" onclick="moveDetailPage(${l.boardSerial});">
+						${l.title}
+						<c:if test="${l.file!=null}">
+							<img alt="file" src="resources/images/disk-file.png" width="10px">
+						</c:if>
+					</td>
 					<td style="width: 30%; height: 5px;word-break:break-all;">${l.userName}</td>
 					<td style="width: 30%; height: 5px;word-break:break-all;">${l.uDate}</td>
 					<td style="width: 10%; height: 5px;word-break:break-all;">${l.hit}</td>
@@ -69,7 +74,6 @@ function moveInsertPage(currentFolderSerial){
 }
 //게시물 제목 클릭시 상세 페이지로 넘어감
 function moveDetailPage(boardSerial){
-	console.log(boardSerial);
     var ajaxOption = {
             url : "MiniHpBoardDetail.do?serial="+boardSerial,
             async : true,

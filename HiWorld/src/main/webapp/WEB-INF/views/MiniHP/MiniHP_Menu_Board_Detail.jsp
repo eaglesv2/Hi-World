@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
 table.type08 {
   border-collapse: collapse;
@@ -49,9 +50,10 @@ table.type08 td {
 	  <tr>
 	    <th scope="cols">${board.title}</th>
 	    <th scope="cols">
-	    	<input type="button" value="목록" onclick="moveBoard()">
-	    	<input type="button" value="이동">
-	    	<input type="button" value="삭제">
+	    	<input type="button" value="목록" onclick="goToFolder('${board.folderSerial}')">
+	    	<input type="button" value="이동" onclick="showPopup('${board.boardSerial}')">
+	    	<input type="button" value="삭제" onclick="deleteBoard('${board.boardSerial}','${board.file}','${board.folderSerial}')">
+	    	<input type="button" value="수정" onclick="updateBoard('${board.boardSerial}')">
 	    </th>
 	  </tr>
 	  </thead>
@@ -60,16 +62,70 @@ table.type08 td {
 	    <td scope="row">작성자: ${board.userName}</td>
 	    <td>${board.uDate} 조회수: ${board.hit}</td>
 	  </tr>
+	  <c:if test="${board.file!=null}">
 	  <tr>
-	    <td scope="row" colspan="2">첨부파일</td>
+	    <td scope="row">첨부파일</td>
+	    <td>
+	    	<a onclick="downloadFile('${board.file}');" style="cursor:pointer;">${board.file}</a>
+	    	<%-- <a href="download.do?fileName=${board.file}">${board.file}</a> --%>
+	    </td>
 	  </tr>
+	  </c:if>
 	  <tr>
 	    <td scope="row" colspan="2">${board.content}</td>
-	  </tr>
-	  <tr>
-	    <td scope="row" colspan="2"><img alt="나와라" src='resources/upload/df54dfd7-6534-4932-8682-0645a8ca110e_판다.jpg' width="400"></td>
 	  </tr>
 	  </tbody>
 	</table>
 </div>
 </body>
+<script>
+function downloadFile(file) {
+	location.href="download.do?fileName="+file;
+}
+function showPopup(serial) {
+	window.open("updateBoardFolder.do?serial="+serial, "게시글 폴더 이동", "width=400, height=300, left=100, top=50");
+}
+function goToFolder(folderSerial) {
+	var ajaxMain = {
+            url : 'miniHpBoard.do?folderSerial='+folderSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        // Contents 영역 삭제
+        $('#bodyContents').children().remove();
+        // Contents 영역 교체
+        $('#bodyContents').html(data);
+    });
+}
+function deleteBoard(boardSerial,file,folderSerial) {
+	$.ajax({
+		type: 'DELETE',
+		url: 'miniHpBoard.do?boardSerial='+boardSerial+"&fileName="+file,
+		datatype: 'html'
+	}).done(function(data) {
+		goToFolder(folderSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
+function updateBoard(boardSerial) {
+	var ajaxMain = {
+            url : 'MiniHpBoardUpdate.do?serial='+boardSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        // Contents 영역 삭제
+        $('#bodyContents').children().remove();
+        // Contents 영역 교체
+        $('#bodyContents').html(data);
+    });
+}
+</script>

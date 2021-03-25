@@ -53,8 +53,25 @@
 	
 	<!-- title, userName, uDate, hit, content -->
 	<select id="get" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		SELECT UserName, title, content, hit, uDate FROM MiniHP_Board_View
+		SELECT * FROM MiniHP_Board_View
 		WHERE boardSerial = #{serial}
 	</select>
+	<update id="updateBoardFolder" parameterType="int">
+		UPDATE MiniHP_Board
+		SET folderSerial=#{folderSerial}
+		WHERE boardSerial=#{boardSerial}
+	</update>
 	
+	<!-- delete -->
+	<delete id="delete">
+		DELETE FROM MiniHP_Board
+		WHERE boardSerial=#{serial}
+	</delete>
+	
+	<!-- update -->
+	<update id="update" parameterType="com.hiworld.minihp.vo.MiniHpBoardVO">
+		UPDATE MiniHP_Board
+		SET title=#{title}, content=#{content}, file=#{file}, uDate=CURRENT_TIMESTAMP
+		WHERE boardSerial=#{boardSerial};
+	</update>
 </mapper>
