@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+
+
+#chargeContainer{
+	border: 1px solid black;
+	height: 580px;
+	
+	
+}
+
+#leftCon{
+	float:left;
+	width: 30%;
+	height:100%;
+	border:1px solid;
+}
+
+#rightCon{
+	border : 1px solid ;
+	float:left;
+	width:69.4%;
+	height:100%;
+	
+}
+
+#logo img{
+	border: 1px solid;
+	width:50%;
+	height:100%;
+}
+
+#bamtolinfo label {
+	display: block;
+	border:1px solid;
+	margin-top: 100px;
+	padding: 10px 10px 10px 10px;
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#bamtolprice{
+	margin-top:10px;
+}
+#priceinfo{
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:30px;
+}
+
+#price1 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+#price2 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+#price3 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+#price4 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+
+#paymentinfo{
+	float:left;
+	margin-top:10px;
+	width: 580px;
+}
+
+#priceCount{
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:30px;
+
+}
+
+#agreeinput{
+	width: 430px;
+	height: 100px;
+	float: left;
+	margin-left:10px;
+}
+#selectinfo{
+	border:1px solid;
+	width:435px;
+	float:left;
+	margin-left:10px;
+	height:24px;
+}
+
+#checkbox{
+	margin-top:5px;
+	float:right;
+}
+
+#paybutton{
+	float:right;
+	margin-top:10px;
+	margin-right:30px;
+}

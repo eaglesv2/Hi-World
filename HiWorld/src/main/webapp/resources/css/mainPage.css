@@ -4,7 +4,6 @@
     border: 2px solid #dae1e6;
     width: 1080px;
     margin:0 auto;
-    height: 950px;
     position: relative;
     border-radius: 10px;
     
@@ -172,6 +171,7 @@ a{
 	width: 80px;
 	height:48px;
 	border:1px solid #d4d4d4;
+
 }
 
 #loginform{
@@ -182,6 +182,7 @@ a{
 #formtable{
 	margin-top:20px;
 	margin-left:15px;
+	border-collapse: collapse;
 }
 
 #signup{
@@ -204,7 +205,16 @@ a{
 
 .bxslider li img{
 	width: 1080px;
-	/* dsd */
+}
+
+#nickname{
+	margin-top:30px;
+	margin-left : 130px;
+}
+
+#haveCash{
+	margin-top:10px;
+	margin-left : 130px;
 }
 
 

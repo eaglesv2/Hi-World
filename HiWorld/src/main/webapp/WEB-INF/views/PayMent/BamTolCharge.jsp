@@ -7,8 +7,8 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
-
-
+<link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="resources/css/BamTolCharge.css">
 <script>
 	//생략가능
 	var IMP = window.IMP;
@@ -111,18 +111,57 @@
 
 </head>
 <body>
-
-	<input type="radio" name="check" value="10000" />밤톨 10개 구매 10000원
-	<br />
-	<input type="radio" name="check" value="28000" />밤톨 30개 구매 28000원
-	<br />
-	<input type="radio" name="check" value="45000" />밤톨 50개 구매 45000원
-	<br />
-	<input type="radio" name="check" value="90000" />밤톨 100개 구매 90000원
-	<br />
-
-	<button onclick="requestPay()">결제하기</button>
-
+	<div id="chargeContainer">
+		<div id="leftCon">
+			<div id="logo">
+				<div>
+					<img src="resources/images/미니미.jpg" alt="이미지가 들어갑니다." />
+				</div>
+			</div>
+			
+			<div >
+				
+			</div>
+		</div>
+		<div id="rightCon">
+				<div id="bamtolinfo">
+					<label>밤톨을 구매하기 위한 창입니다.</label>
+				</div>
+				<div id="bamtolprice">
+					<div id="priceinfo">
+					
+					</div>
+					<div id="price1">
+						
+					</div>
+					<div id="price2">
+					
+					</div>
+					<div id="price3">
+					
+					</div>
+					<div id="price4">
+					
+					</div>
+				</div>
+				<div id="paymentinfo">
+					<div id="priceCount">
+					
+					</div>
+					
+					<div id="agreetext">
+						<input type="text" id="agreeinput" />
+						<div id="selectinfo">
+							<input type="checkbox" id="checkbox" />
+						</div>
+					</div>
+				</div>
+				<div id="paybutton">
+					<button onclick="requestPay()">결제하기</button>
+				</div>
+				
+		</div>
+	</div>
 
 </body>
 </html>
