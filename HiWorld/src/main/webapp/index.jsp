@@ -8,8 +8,10 @@
 </head>
 <body>
 	
-	<a href="sangpoom.do">상품결제로 이동</a>
+	
 	<a href="login.do">메인페이지가기</a>
+	<a href="adminClient.do">어드민 회원관리</a>
+	<a href="adminArticle.do">어드민 상품등록</a>
 	
 	
 </body>

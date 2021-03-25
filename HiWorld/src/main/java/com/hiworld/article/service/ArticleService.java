@@ -24,4 +24,8 @@ public interface ArticleService {
 	int cash(ArticleVO vo);
 	
 	int delBasket(ArticleVO vo);
+	
+	int totalBay(int UserSerial);
+	
+	int delAllBasket(int UserSerial);
 }

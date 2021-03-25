@@ -85,4 +85,18 @@ public class ArticleServiceImpl implements ArticleService {
 		System.out.println("장바구니 목록삭제");
 		return articleDAO.delBasket(vo);
 	}
+	
+	/* 결제 한번에 하기 */
+	@Override
+	public int totalBay(int UserSerial) {
+		System.out.println("결제 한번에");
+		return articleDAO.totalBay(UserSerial);
+	}
+	
+	/* 장바구니 목록 한번에 삭제 */
+	@Override
+	public int delAllBasket(int UserSerial) {
+		System.out.println("장바구니 목록전체삭제");
+		return articleDAO.delAllBasket(UserSerial);
+	}
 }
