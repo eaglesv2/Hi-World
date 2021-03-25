@@ -13,22 +13,23 @@ body{
 #header{
 	padding-top: 62px;
 	padding-bottom: 20px;
-	text-align: center;
-}
+} 
 
 #wrapper{
-	position: relative;
 	height:100;
 }
 
 #content{
-	position: absolute;
+	position: relative;
+	top: 10px;
+	right: 100px;
+	left: 100px;
 	left: 50%;
 	transform: translate(-50%);
-	width: 460px;
+	width: 500px;
 }
 
-/* 입력폼  */
+/*  입력폼 */ 
 
 input:focus{
 	outline: none;	
@@ -42,7 +43,7 @@ h3{
 
 .box{
 	display: block;
-	width: 100%;
+	width: 500px;
 	height: 51px;
 	border: solid 1px #dadada;
 	padding: 10px 14px 10px 14px;
@@ -84,20 +85,25 @@ input{
 .error{
 	margin-top: 9px;
 	font-size: 12px;
-	display: none;
+	
 }
-
+#userTel1{
+	width:100px;
+}
 .btn_area{
 	margin: 30px 0 91px;
 }
-
+.box int_tel{
+	width: 30px;
+	
+}
 #signUp{
 	width:100%;
 	padding: 21px 0 17px;
 	border: 0;
 	cursor: pointer;
 	color: #fff;
-	background-color: #08a600;
+	background-color: #08f0f0;
 	font-size: 20px;
 	font-weight: 400;
 	font-family: Dotum, '돋움',Helvetica,sans-serif;
