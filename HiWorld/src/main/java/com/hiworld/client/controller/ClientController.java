@@ -63,7 +63,7 @@ public class ClientController {
 	public String insertClient(ClientVO clientVO) {
 		System.out.println("회원가입");
 		/* tel을 다 가져와서 하나로 묶어서 setter하기 */
-		String tel = clientVO.getUserTel1()+"-"+clientVO.getUserTel2()+"-"+clientVO.getUserTel3();
+		String tel = clientVO.getUserTel1()+"-"+clientVO.getUserTel2();
 		clientVO.setUserTel(tel);
 		
 		/* address는 선택사항이므로 아무것도 입력안할시 없음 값 추가 */
