@@ -1,6 +1,6 @@
 package com.hiworld.minihp.service;
 
-import com.hiworld.minihp.vo.MiniHP_ProfileVO;
+import com.hiworld.minihp.vo.MiniHpProfileVO;
 
 public interface MiniHpProfileService {
 	
@@ -11,8 +11,8 @@ public interface MiniHpProfileService {
 	String getProfile(String id);
 	
 	/*미니홈피 프로필 작성*/ 
-	int insertProfile(MiniHP_ProfileVO profileVO);
+	int insertProfile(MiniHpProfileVO profileVO);
 
 	/*미니홈피 프로필 수정*/
-	int updateProfile(MiniHP_ProfileVO profileVO);
+	int updateProfile(MiniHpProfileVO profileVO);
 }

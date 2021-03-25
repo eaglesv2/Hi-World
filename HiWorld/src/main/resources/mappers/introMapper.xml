@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpIntroDAO">
 	
+	<select id="getData" resultType="com.hiworld.minihp.vo.MiniHpIntroVO">
+		SELECT *
+		FROM MiniHP_Intro
+		WHERE UserID = #{UserID}
+	</select>
+	
 	<select id="getInfo" parameterType="String" resultType="String">
 		SELECT hpInfo
 		FROM MiniHP_Intro
@@ -37,4 +43,29 @@
 		SET hpPicture = #{hpPicture}
 		WHERE UserID = #{UserID}
 	</update>
+	
+	<select id="getToday" parameterType="String" resultType="int">
+		SELECT hpToday
+		FROM MiniHP_Intro
+		WHERE UserID = #{UserID}
+	</select>
+	
+	<update id="updateToday" parameterType="String">
+		UPDATE MiniHP_Intro
+		SET hpToday = hpToday + 1
+		WHERE UserID = #{UserID}
+	</update>
+	
+	<select id="getTotal" parameterType="String" resultType="int">
+		SELECT hpTotal
+		FROM MiniHP_Intro
+		WHERE UserID = #{UserID}
+	</select>
+	
+	<update id="updateTotal" parameterType="String">
+		UPDATE MiniHP_Intro
+		SET hpTotal = hpTotal + 1
+		WHERE UserID = #{UserID}
+	</update>
+	
 </mapper>

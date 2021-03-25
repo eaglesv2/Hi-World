@@ -10,6 +10,7 @@ public class MiniHpIntroVO {
 	private byte[] hpPicture;
 	private String hpInfo;
 	private int hpToday;
+	private int hpTotal;
 	
 	public String getUserID() {
 		return UserID;
@@ -46,5 +47,11 @@ public class MiniHpIntroVO {
 	}
 	public void setHpToday(int hpToday) {
 		this.hpToday = hpToday;
+	}
+	public int getHpTotal() {
+		return hpTotal;
+	}
+	public void setHpTotal(int hpTotal) {
+		this.hpTotal = hpTotal;
 	}
 }

@@ -15,7 +15,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#profile_info_ok").hide();
-	displayProfile();
 	displayInfo();
 });
 
@@ -48,21 +47,23 @@ function change_i_ok(){
 	})
 }
 
-function displayProfile(){
+/* function displayProfile(){
 	console.log('display profile');
 	
 	var xhr= new XMLHttpRequest();
-	var data = {'UserID' : '${sessionVO.userID}'};
+	var UserID = '${sessionVO.userID}';
+	console.log(UserID);
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState === xhr.DONE) {
 			if(xhr.status === 200) {
-				$("#profileImage").attr("src", xhr.responseText);
+				console.log(xhr.response, typeof xhr.response);
+				document.getElementById("profileImage").src = xhr.responsetText;
 			}	
 		}
 	};
-	xhr.open('POST','miniHp_getIntroPicture.do');
-	xhr.setRequestHeader('Content-Type', 'application/json');
-	xhr.send(JSON.stringify(data));
+	xhr.open('GET','miniHp_getIntroPicture.do?UserID='+UserID);
+	xhr.responseType = 'text';
+	xhr.send(null); */
 	
 	/* $.ajax({
 		type : 'POST',
@@ -74,8 +75,8 @@ function displayProfile(){
 			console.log(result);
 			$("#profileImage").attr("src",result);
 		}
-	}) */
-} //file은 ajax로 안불러와짐;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	}) 
+}*/ //file은 ajax로 안불러와짐;;;;;;;;;;;;;;;;;;
 
 function displayInfo(){
 	console.log('display info');
@@ -140,13 +141,17 @@ height:100px;
 				<table bgcolor="#FFFFFF" width="130" cellpadding="1" cellspacing="1">
 					<tr bgcolor="#FFFFFF">
 						<td>
-						<c:if test="${sessionVO.userGender eq 'M'}">
-							<img id="profileImage" <%-- src="miniHp_getIntroPicture.do?UserID=${sessionVO.userID}" --%>src="${pageContext.request.contextPath}/resources/images/admin/basic_man.jpg" width="128" height="128" border="0" alt=""/>
+						<c:if test="${empty introVO.hpPicture}">
+							<c:if test="${sessionVO.userGender eq 'M'}">
+								<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/admin/basic_man.jpg" width="128" height="128" border="0" alt=""/>
+							</c:if>
+							<c:if test="${sessionVO.userGender eq 'F'}">
+								<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/admin/basic_girl.jpg" width="128" height="128" border="0" alt=""/>
+							</c:if>
 						</c:if>
-						<c:if test="${sessionVO.userGender eq 'F'}">
-							<img id="profileImage" src="${pageContext.request.contextPath}/resources/images/admin/basic_girl.jpg" width="128" height="128" border="0" alt=""/>
+						<c:if test ="${!empty introVO.hpPicture}">
+							<img id="profileImage" src="miniHp_getIntroPicture.do?UserID=${sessionVO.userID}" width="128" height="128" border="0" alt=""/>
 						</c:if>
-							
 						</td>
 					</tr>
 					<tr bgcolor="#FFFFFF">
@@ -175,10 +180,10 @@ height:100px;
 				
 				<!-- 성별에 따름 성별표시 마크 --> 
 				<c:if test="${sessionVO.userGender eq 'M'}">
-				<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
+					<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
 				</c:if>
 				<c:if test="${sessionVO.userGender eq 'F'}">
-				<img src="${pageContext.request.contextPath}/resources/images/admin/female.jpg">
+					<img src="${pageContext.request.contextPath}/resources/images/admin/female.jpg">
 				</c:if>
 				<!-- 유저 생일 표시 -->
 				<font style="font-size: 7pt;">${sessionVO.userBirth}</font>

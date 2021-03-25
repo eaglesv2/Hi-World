@@ -83,11 +83,11 @@ public class MiniHpIntroController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/miniHp_getIntroPicture.do")
+	@GetMapping("/miniHp_getIntroPicture.do")
 	public ResponseEntity<byte[]> miniHpGetIntroPicture(HttpServletRequest request) {
-		System.out.println("미니홈피 프로필 사진 가져오기 컨트롤러");
+		/*System.out.println("미니홈피 프로필 사진 가져오기 컨트롤러");*/
 		String UserID = request.getParameter("UserID");
-		System.out.println(UserID);
+		/*System.out.println(UserID);*/
 		
 		return service.getIntroPicture(UserID);
 	}

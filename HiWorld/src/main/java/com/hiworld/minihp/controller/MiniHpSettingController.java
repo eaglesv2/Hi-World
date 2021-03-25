@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
@@ -84,17 +85,20 @@ public class MiniHpSettingController {
 	}
 	
 	@RequestMapping("miniHp_rightMenu.do")
-	public String rightMenu(HttpServletRequest request, String menu) {
-
+	public String rightMenu(HttpServletRequest request) {
+		System.out.println("메뉴불러오기");
 		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("UserID");
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		String userId = vo.getUserID();
+		String menu = request.getParameter("menu");
 		MiniHpUserMenuVO miniHpUserMenuVO = service.getMenuAvailable(userId);
-
+		
+		System.out.println(menu);
+		
 		request.setAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
 		request.setAttribute("menu", menu);
 
 		return "MiniHP/MiniHP_Right_Menu";
 	}
-	
 	
 }

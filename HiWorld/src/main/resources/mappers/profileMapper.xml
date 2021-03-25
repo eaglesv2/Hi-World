@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hiworld.minihp.dao.MiniHP_ProfileDAO">
+<mapper namespace="com.hiworld.minihp.dao.MiniHpProfileDAO">
 	
-	<select id="checkProfile" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHP_ProfileVO">
+	<select id="checkProfile" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpProfileVO">
 		SELECT UserID, ProfileContent 
 		FROM MiniHP_Profile 
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<select id="getProfile" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHP_ProfileVO">
+	<select id="getProfile" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpProfileVO">
 		SELECT ProfileContent 
 		FROM MiniHP_Profile 
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updateProfile" parameterType="com.hiworld.minihp.vo.MiniHP_ProfileVO">
+	<update id="updateProfile" parameterType="com.hiworld.minihp.vo.MiniHpProfileVO">
 		UPDATE MiniHP_Profile  
 		SET ProfileContent = #{ProfileContent} 
 		WHERE UserID = #{UserID}
 	</update>
 	
-	<insert id="insertProfile" parameterType="com.hiworld.minihp.vo.MiniHP_ProfileVO">
+	<insert id="insertProfile" parameterType="com.hiworld.minihp.vo.MiniHpProfileVO">
 		INSERT INTO MiniHP_Profile (UserSerial, UserId, ProfileContent) 
 		VALUES (#{UserSerial}, #{UserID}, #{ProfileContent})
 	</insert>
