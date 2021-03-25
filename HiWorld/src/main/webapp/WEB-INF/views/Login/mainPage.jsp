@@ -148,8 +148,8 @@
              
             function bamTol(){
             	console.log("ddd")
-            	var popupWidth =300
-            	var popupHeight =500
+            	var popupWidth =880
+            	var popupHeight =580
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
             	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='bamTol'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
@@ -187,31 +187,51 @@
     				},
                   error: function(){
                 	  alert("에러입니다.")
-                 	 }
-                 })
+                 		 }
+                	})
            
     		
-    	}
+    			}
+            
+            function shoppingcart(){
+            	console.log("1234") 
+                var ajaxOption={
+               		 type: "GET",
+                        url : "basketJoin.do",
+                        dataType : "html", 
+                        async:true,
+                        cache:false
+               		 
+                }
+           	  $.ajax(ajaxOption).done(function(data){
+           		  //Contents 영역삭제
+           		  $('#bodyContext').children().remove();
+           		  console.log("1111") 
+           		  //Contents 영역 교체
+           		  $('#bodyContext').html(data);
+           	  })
+            }
       </script>
       <style>
 	      	.kakaobutton > img{
 			width: 200px;
 			height: 33px;
 			vertical-align: middle;
-	}
+		}
+		.bx-wrapper{
+			margin-bottom:30px;
+		}
       </style>
 </head>
 <body>
 
     <div class="MainContainer">
-          
-	    <ul class="bxslider">
-	        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
-	        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
-	        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
-	        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
-	    </ul>
-
+		    <ul class="bxslider">
+		        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
+		        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
+		        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
+		        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+		    </ul>
         <div class="leftCon">
             <div id="Nav">
                 <div id="Navmenu">
@@ -240,12 +260,18 @@
 
 		    <c:choose>
 				
-					<c:when test="${sessionVO.userName != null}">
+					<c:when test="${sessionVO.userName != null}&&${sessionVO.userName != 'ADMIN'}">
 							<div id="minimi">
 						        <div id="icon">
 						            <img src="bb.jpg" alt="">
 						            <div>
-						                ${sessionVO.userName}
+						               <div id="nickname">
+						              		 ${sessionVO.userName} 님
+						              	</div>
+						              	<div id="haveCash">
+						              		보유 밤톨: ${sessionVO.userCash}개
+						              	</div>
+						          	     
 						            </div>
 						        </div>
 						        <div id="jang">
@@ -254,12 +280,17 @@
 						                <div onclick="bamTol()">밤톨충전</div>
 						            </div>
 						            <div id="jang-bottom">
-						                <a href="">장바구니</a>
+						                <div onclick="shoppingcart()">장바구니</div>
 						                <a href="logout.do">로그아웃</a>
-						        </div>
+						        	</div>
 						        </div>
 						    </div>
 					</c:when>
+					<!-- 어드민이 들어왔을 경우 -->
+					<c:when test="${sessionVO.userName == 'ADMIN'}">
+                  		<div id="minimi"> 어드민입니다. </div>
+                  		
+                  	</c:when>
 					
 				<c:otherwise>
 					
@@ -274,7 +305,7 @@
 										</td>
 										 
 										<td rowspan="2" style="vertical-align:middle;">
-											<input type="submit" value="로그인" id="loginCheck">	
+											<input type="submit" value="로그인" id="loginCheck" tabindex="-1">	
 										</td>
 									</tr>
 									<tr>
@@ -306,7 +337,7 @@
 					</c:choose>
             </div>
                 <div id="minihome">
-                    <a href="#" onclick="MiniHP()">미니홈피 들어가기.</a>
+                    <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
                 </div>
 
                 <div id="add">
