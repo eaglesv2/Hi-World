@@ -2,6 +2,7 @@ package com.hiworld.minihp.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,13 +66,23 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	}
 	
 	@Override
-	public MiniHpBoardVO get(int serial) {
-		return dao.get(serial);
-	}
-	
-	@Override
 	public int insert(MiniHpBoardVO vo) {
 		return dao.insert(vo);
 	}
-	
+	@Override
+	public MiniHpBoardVO get(int serial) {
+		return dao.get(serial);
+	}
+	@Override
+	public int updateBoardFolder(int boardSerial,int folderSerial) {
+		return dao.updateBoardFolder(boardSerial, folderSerial);
+	}
+	@Override
+	public int delete(int serial) {
+		return dao.delete(serial);
+	}
+	@Override
+	public int update(MiniHpBoardVO vo) {
+		return dao.update(vo);
+	}
 }

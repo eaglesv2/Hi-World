@@ -2,6 +2,8 @@ package com.hiworld.minihp.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
@@ -25,7 +27,12 @@ public interface MiniHpBoardDAO {
 	String getFolderName(int folderSerial);
 	//게시물 insert
 	int insert(MiniHpBoardVO vo);
-	
+	//select one
 	MiniHpBoardVO get(int serial);
-	
+	//게시글 폴더 이동
+	int updateBoardFolder(@Param("boardSerial") int boardSerial,@Param("folderSerial")  int folderSerial);
+	//delete
+	int delete(int serial);
+	//update
+	int update(MiniHpBoardVO vo);
 }

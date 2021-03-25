@@ -20,4 +20,10 @@ public interface MiniHpBoardService {
 	int insert(MiniHpBoardVO vo);
 	
 	MiniHpBoardVO get(int serial);
+	//게시글 폴더 이동
+	int updateBoardFolder(int boardSerial, int folderSerial);
+	//delete
+	int delete(int serial);
+	//update
+	int update(MiniHpBoardVO vo);
 }
