@@ -4,15 +4,6 @@
 <!-- 매핑될 DAO 인터페이스 풀네임 -->
 <mapper namespace="com.hiworld.client.dao.ClientDAO">
 	
-	<!-- 회원 전체 조회 -->
-	<!-- resultType값은 config에서 설정한 별명 또한 반환값의 타입을 정해주는 것임 -->
-	<select id="getAllClient" resultType="clientVO">
-		<!-- 이 안에 sql문을 작성하면 됨 -->
-		<!-- ctrl + shift + x로 대문자 변환가능 -->
-		SELECT * FROM CLIENT
-		
-	</select>
-		
 	<!-- 회원 정보 수정 -->
 	<update id="updateClient">
 		UPDATE CLIENT SET
@@ -77,6 +68,24 @@
 		SELECT UserPW FROM HW_USERLIST WHERE UserID= #{UserID}
 	</select>
 	
+	<!-- 회원 전체 조회 -->
+	<select id="getAllClient" resultType="clientVO">
+		SELECT * FROM HW_USERLIST WHERE UserID != 'ADMIN' AND Ban != 1
+	</select>
 	
+	<!-- 밴한 회원 전체 조회 -->
+	<select id="getAllBanClient" resultType="clientVO">
+		SELECT * FROM HW_USERLIST WHERE UserID != 'ADMIN' AND Ban = 1
+	</select>
+	
+	<!-- 밴 -->
+	<update id="banClient">
+		UPDATE HW_USERLIST SET Ban = 1 WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	<!-- 밴 풀기 -->
+	<update id="unBanClient">
+		UPDATE HW_USERLIST SET Ban = 0 WHERE UserSerial = #{UserSerial}
+	</update>
 </mapper>
 

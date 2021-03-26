@@ -31,8 +31,7 @@ span {
 </style>
 
 </head>
-<script type="text/javascript" src="/cyworld/resources/js/ajaxUtil2.js"></script>
-<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){

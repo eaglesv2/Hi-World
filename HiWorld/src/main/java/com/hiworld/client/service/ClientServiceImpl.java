@@ -18,17 +18,8 @@ public class ClientServiceImpl implements ClientService {
 	@Autowired
 	private ClientDAO dao;
 	
-	/* 회원 전체 조회 */
-	@Override
-	/* sql문 실패시 자동으로 롤백 됨 */
-	@Transactional
-	public ArrayList<ClientVO> getAllClient() {
-		/* 모든 회원 정보가 담긴 ArrayList가 넘어감 */
-		return dao.getAllClient();
-	}
 	
-	
-	
+
 	/* 회원 정보 수정*/
 	@Override
 	public String updateClient(ClientVO clientVO) {
@@ -164,4 +155,30 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 	
+	/* 회원 전체 조회 */
+	@Override
+	/* sql문 실패시 자동으로 롤백 됨 */
+	@Transactional
+	public ArrayList<ClientVO> getAllClient() {
+		/* 모든 회원 정보가 담긴 ArrayList가 넘어감 */
+		return dao.getAllClient();
+	}
+	
+	/* 밴한 회원 전체 조회 */
+	@Override
+	public ArrayList<ClientVO> getAllBanClient() {
+		return dao.getAllBanClient();
+	}
+	
+	/* 밴 */
+	@Override
+	public int banClient(int UserSerial) {
+		return dao.banClient(UserSerial);
+	}
+	
+	/* 밴 풀기 */
+	@Override
+	public int unBanClient(int UserSerial) {
+		return dao.unBanClient(UserSerial);
+	}
 }

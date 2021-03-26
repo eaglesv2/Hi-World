@@ -51,14 +51,46 @@ public class ClientController {
 
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/* 회원 전체 목록 보이기 */
-	@GetMapping("/adminClient.do")
-	public String adminClient() {
-		return "adminClient";
+	/* 회원 목록 보이기 */
+	@GetMapping("/Manage_Client.do")
+	public String adminClient(HttpServletRequest request, Model model) {
+		String check = request.getParameter("check");
+		System.out.println(check);
+		if(check.equals("all")) {
+			/* 회원 전체 */
+			ArrayList<ClientVO> alist = clientService.getAllClient();
+			model.addAttribute("alist",alist);
+			return "adminClient";
+		}else {
+			/* 벤한 회원만 보기 */
+			ArrayList<ClientVO> alist = clientService.getAllBanClient();
+			model.addAttribute("alist",alist);
+			return "adminBanClient";
+		}
+		
+	}
+	
+	/* 회원 밴 관련 */
+	@GetMapping("/userBan.do")
+	@ResponseBody
+	public String userBan(HttpServletRequest request) {
+		int UserSerial = Integer.parseInt(request.getParameter("UserSerial"));
+		System.out.println(UserSerial);
+		String check = request.getParameter("BanCheck");
+		System.out.println(check);
+		if(check.equals("ban")) {
+			/* 밴 걸기 */
+			clientService.banClient(UserSerial);
+		}else {
+			/* 밴 풀기 */
+			clientService.unBanClient(UserSerial);
+		}
+		
+		return "";
 	}
 	
 	/* 상품 등록 */
-	@GetMapping("/adminArticle.do")
+	@GetMapping("/Manage_Article.do")
 	public String adminArticle() {
 		return "adminArticle";
 	}
@@ -118,7 +150,6 @@ public class ClientController {
 	public String checkClient(ClientVO clientVO, HttpSession session) {
 		System.out.println("로그인");
 		sessionVO vo = clientService.checkClient(clientVO);	
-		String message = "";
 		if(vo!=null) {
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("sessionVO", vo);

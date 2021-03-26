@@ -211,6 +211,7 @@
            		  $('#bodyContext').html(data);
            	  })
             }
+            
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -224,7 +225,7 @@
       </style>
 </head>
 <body>
-
+	
     <div class="MainContainer">
 		    <ul class="bxslider">
 		        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
