@@ -260,7 +260,8 @@
 
 		    <c:choose>
 				
-					<c:when test="${sessionVO.userName != null}&&${sessionVO.userName != 'ADMIN'}">
+					<c:when test="${sessionVO.userName != null}">
+					<c:if test="${sessionVO.userName != 'ADMIN'}">
 							<div id="minimi">
 						        <div id="icon">
 						            <img src="bb.jpg" alt="">
@@ -285,9 +286,11 @@
 						        	</div>
 						        </div>
 						    </div>
+					</c:if>
 					</c:when>
-					<!-- 어드민이 들어왔을 경우 -->
+					
 					<c:when test="${sessionVO.userName == 'ADMIN'}">
+					<!-- 어드민이 들어왔을 경우 -->
                   		<div id="minimi"> 어드민입니다. </div>
                   		
                   	</c:when>
