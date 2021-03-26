@@ -38,7 +38,8 @@
 	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
 		SELECT * FROM MiniHP_Board_View
 		WHERE folderSerial=#{folderSerial}
-		ORDER BY uDate DESC
+		ORDER BY cDate DESC
+		<!-- LIMIT #{offset}, #{size} -->
 	</select>
 	<select id="getFolderName" resultType="string">
 		SELECT folderName FROM MiniHP_Board_Folder

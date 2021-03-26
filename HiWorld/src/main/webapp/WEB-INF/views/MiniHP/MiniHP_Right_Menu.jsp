@@ -39,7 +39,6 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-
 $(function(){
 	$('.unselected-Menu').css('background-color', '#${miniHpUserMenuVO.menuBGColor }');
 	$('.unselected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
@@ -47,7 +46,6 @@ $(function(){
 	$('.selected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
 	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
 });
-
 /* ajax */
 function movePage(url){
 	// ajax option

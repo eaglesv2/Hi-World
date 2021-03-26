@@ -116,6 +116,18 @@ public class MiniHpBoardContoller {
 			e.printStackTrace();
 		}
 	}
+	//파일 삭제 로직
+	private void deleteFile(String fileName,HttpServletRequest request) {
+		String savePath = request.getRealPath("/resources/upload/");
+	    
+		File file = new File(savePath+fileName);
+		if(file.exists()){
+			file.delete();
+			System.out.println("파일 삭제됨");
+		}else{
+			System.out.println("파일 없음");
+		}
+	}
 	
 	
 	
@@ -245,17 +257,8 @@ public class MiniHpBoardContoller {
 	public void deleteBoard(int boardSerial, String fileName,HttpServletRequest request) {
 		System.out.println("deleteBoard");
 		int result = service.delete(boardSerial);
-		if(result>0 && !fileName.equals("")) {
-			String savePath = request.getRealPath("/resources/upload/");
-		    
-			File file = new File(savePath+fileName);
-			if(file.exists()){
-				file.delete();
-				System.out.println("파일 삭제됨");
-			}else{
-				System.out.println("파일 없음");
-			}
-		}
+		if(result>0 && !fileName.equals(""))
+			deleteFile(fileName, request);
 	}
 	//게시글 수정 화면
 	@GetMapping("/MiniHpBoardUpdate.do")
@@ -269,25 +272,38 @@ public class MiniHpBoardContoller {
 	@PostMapping("/MiniHpBoardUpdate.do")
 	public String MiniHpBoardUpdate(MultipartFile file1, MiniHpBoardVO vo, HttpServletRequest request, Model model) {
 		System.out.println("게시판 update");
-		/*
-		 파일 없음 -> 파일 없음: 						update(db file은 null)
-		 file1==null,vo.getFile()==null
-		 파일 없음 -> 파일 있음: 						파일 저장 / vo.setFile(fileName); / update
-		 file1!=null,vo.getFile()==null
-		 파일 있음 -> 파일 있음: 						vo.setFile(fileName); / update
-		 file1!=null,vo.getFile()!=null,file1==vo.getFile()
-		 파일 있음 -> 파일 바꿈: 						파일 저장 / vo.setFile(fileName); / update / 파일 삭제
-		 file1!=null,vo.getFile()!=null,file1!=vo.getFile()
-		 파일 있음 -> 파일 없음: 						update / 파일 삭제
-		 file1==null,vo.getFile()!=null
-		 */
-//		if(!file1.isEmpty()) {
-//			//파일명 중복방지 처리
-//			String fileName = getUuidFileName(file1.getOriginalFilename());
-//			
-//			saveFile(file1, fileName, request);
-//			vo.setFile(fileName);
-//		}
+		System.out.println(vo);
+		
+		if(file1==null) {//첨부파일 기존 파일 그대로
+			service.update(vo);
+		} else {
+			if(file1.isEmpty()) {//첨부파일이 없을경우: 원래 없음 or 기존 첨부파일 삭제됨
+				String fileName = vo.getFile();
+				vo.setFile(null);//db에는 null로
+				int result1 = service.update(vo);
+				if(result1>0)
+					deleteFile(fileName, request);//파일 삭제
+			} else {//첨부파일 있을경우
+				if("".equals(vo.getFile())) {//기존에 없음 -> 새로 추가
+					String fileName = getUuidFileName(file1.getOriginalFilename());
+					saveFile(file1, fileName, request);
+					vo.setFile(fileName);
+					service.update(vo);
+				} else {//기존 파일 바뀜
+					String oriFileName = vo.getFile();
+					//1. 새로운 파일 저장
+					String fileName = getUuidFileName(file1.getOriginalFilename());
+					saveFile(file1, fileName, request);
+					//2. db에 있는 파일명 수정
+					vo.setFile(fileName);
+					//3. update
+					int result2 = service.update(vo);
+					//4. 기존 파일 삭제
+					if(result2>0)
+						deleteFile(oriFileName, request);
+				}
+			}
+		}
 		
 		model.addAttribute("board",service.get(vo.getBoardSerial()));
 		return "MiniHP/MiniHP_Menu_Board_Detail";
