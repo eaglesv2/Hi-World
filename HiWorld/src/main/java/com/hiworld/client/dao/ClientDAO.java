@@ -8,8 +8,7 @@ import com.hiworld.client.vo.sessionVO;
 /* myBatis에서 메소드를 가져와서 사용하기 위해서 */
 public interface ClientDAO {
 	
-	/* 회원 전체 보기 */
-	ArrayList<ClientVO> getAllClient();
+	
 	
 	
 	
@@ -52,4 +51,16 @@ public interface ClientDAO {
 	
 	/*내정보보기 PW중복체크*/
 	String pwCheck(String UserID);
+	
+	/* 회원 전체 보기 */
+	ArrayList<ClientVO> getAllClient();
+	
+	/* 밴한 회원 전체 보기 */
+	ArrayList<ClientVO> getAllBanClient();
+	
+	/* 밴 */
+	int banClient(int UserSerial);
+	
+	/* 밴 풀기 */
+	int unBanClient(int UserSerial);
 }

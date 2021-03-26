@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h1>상품등록하기</h1>
+	아이템 선택하기 <input type="file" />
 </body>
 </html>
