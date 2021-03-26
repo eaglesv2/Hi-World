@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="getMenuAvailable" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpUserMenuVO">
-		SELECT menu3, menu4, menu5, menu6, menuBGColor, menuFontColor, menuBorderColor
+		SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menuBGColor, menuFontColor, menuBorderColor
 		FROM MiniHP_UserMenu
 		WHERE UserID = #{UserID}
 	</select>

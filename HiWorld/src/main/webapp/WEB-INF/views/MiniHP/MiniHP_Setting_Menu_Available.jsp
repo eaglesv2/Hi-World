@@ -51,38 +51,35 @@ input::placeholder {
 
 	$(function(){	
 		var menu3 = $("#menu3-${miniHpUserMenuVO.menu3}");
-		menu3.checked = true;
+		menu3.prop("checked",true);
+		console.log("#menu3-${miniHpUserMenuVO.menu3}");
 		
 		var menu4 = $("#menu4-${miniHpUserMenuVO.menu4}");
-		menu4.checked = true;
+		menu4.prop("checked",true);
 		
 		var menu5 = $("#menu5-${miniHpUserMenuVO.menu5}");
-		menu5.checked = true;
+		menu5.prop("checked",true);
 		
 		var menu6=$("#menu6-${miniHpUserMenuVO.menu6}");
-		menu6.checked = true;
-	/* 	
-		$('.menu').css('background-color', '#' + '${miniHpUserMenuVO.menuBGColor}');
-		$('.menu').css('color', '#' + '${miniHpUserMenuVO.menuBGFontColor}');
-		$('.menu').css('border-color', '#' + '${miniHpUserMenuVO.menuBorderColor}'); */
-		/* 
-		$('.menu').css('color', '#' + $("#menuBackground").val());
-		$('.menu').css('color', '#' + $("#menuFontColor").val());
-		$('.menu').css('border-color', '#'+$("#menuBorder").val());
-		 */
+		menu6.prop("checked",true);
+
+		$(".menu").css('background-color', '#' + $("#menuBackground").val());
+		$(".menu").css('color', '#' + $("#menuFontColor").val());
+		$(".menu").css('border-color', '#'+$("#menuBorder").val());
+		
 	});
 	
 	$(document).ready(function(){
 		 $("#send").click(function(){
-			var menu3 = $(':radio[name="menu3"]:checked').val();
-			var menu4 = $(':radio[name="menu4"]:checked').val();
-			var menu5 = $(':radio[name="menu5"]:checked').val();
-			var menu6 = $(':radio[name="menu6"]:checked').val();
+			var menu3 = $(":radio[name='menu3']:checked").val();
+			var menu4 = $(":radio[name='menu4']:checked").val();
+			var menu5 = $(":radio[name='menu5']:checked").val();
+			var menu6 = $(":radio[name='menu6']:checked").val();
 			var menuBGColor= $("#menuBackground").val();
 			var menuFontColor = $("#menuFontColor").val();
 			var menuBorderColor = $("#menuBorder").val();
 			
-			var allData = { "UserID" : '${sessionVO.UserID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
+			var allData = { "UserID" : '${sessionVO.userID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
 							"menuBGColor" : menuBGColor, "menuFontColor" : menuFontColor, "menuBorderColor" : menuBorderColor }
 			$.ajax({
 				type : "POST",
@@ -134,11 +131,6 @@ input::placeholder {
 		 });
 	});
 	
-	function bb(){	
-		$('#menuBackground').style.backgroundColor="black";
-	}
-	
-	
 </script>
 </head>
 <body>
@@ -179,7 +171,7 @@ input::placeholder {
 				바탕 색상
 			</div>
 			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuBackground" value="${miniHpUserMenuVOO.menuBGColor}" placeholder="바탕 색상" 
+				<input class="form-control jscolor" id="menuBackground" value="${miniHpUserMenuVO.menuBGColor}" placeholder="바탕 색상" 
 					style="width: 30%; cursor: pointer">
 			</div>
 			<div align="left" style="padding-left: 228px;">

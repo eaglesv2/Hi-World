@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MiniHpIntroVO {
 	
 	private String UserID;
+	private String userName;
 	private String hpTitle;
 	private MultipartFile hpPicture_imgFile;
 	private byte[] hpPicture;
@@ -17,6 +18,12 @@ public class MiniHpIntroVO {
 	}
 	public void setUserID(String userID) {
 		UserID = userID;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public String getHpTitle() {
 		return hpTitle;

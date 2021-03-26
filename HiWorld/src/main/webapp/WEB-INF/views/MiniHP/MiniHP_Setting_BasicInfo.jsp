@@ -5,10 +5,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-	
-	String pathUserId=(String)request.getAttribute("pathUserId");
-%>
-<%
 %>
 <!DOCTYPE html>
 <html>
@@ -47,13 +43,11 @@ input::placeholder {
   font-size: 8pt;
 }
 </style>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-
 </script>
 </head>
 <body>
-<form name="myForm">
 	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0" valine="top">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
@@ -64,29 +58,32 @@ input::placeholder {
 				아이디
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="text" value="${cyUserDTO.userId}" disabled="disabled"> 
+				<input type="text" value="${sessionVO.userID}" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				패스워드
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="password" id="userPw" value="${cyUserDTO.userPw}" disabled="disabled"> 
+				<input type="password" id="userPw" value="************" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				이름
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="text" value="${cyUserDTO.userName}" disabled="disabled"> 
+				<input type="text" value="${sessionVO.userName}" disabled="disabled"> 
 			</div>
 			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
 				생년월일
 			</div>
 			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
-				<input type="text" value="${cyUserDTO.userBirth }" disabled="disabled"> 
+				<input type="text" value="${sessionVO.userBirth}" disabled="disabled"> 
 			</div>
-			<!-- <div align="center" style="border: 0px solid black;height: 28px;padding-top: 2px;width: 430px;margin-top: 30px;">
-				<input type="button" id="changePw" value="수정" onclick="changePw()">&nbsp;<input type="reset" value="초기화">
-			</div> -->
+			<div style="float: left;border: 0px solid black;padding-top: 8px;font-size: 10pt;">
+				전화번호
+			</div>
+			<div style="border: 0px solid black;height: 28px;padding-top: 2px;padding-left: 70px;">
+				<input type="text" value="${sessionVO.userTel}" disabled="disabled"> 
+			</div>
 		</div>
 	</div>
 
@@ -100,7 +97,5 @@ input::placeholder {
 	</table>
 	
 	<div style="height: 200px;"></div>
-	
-</form>
 </body>
 </html>

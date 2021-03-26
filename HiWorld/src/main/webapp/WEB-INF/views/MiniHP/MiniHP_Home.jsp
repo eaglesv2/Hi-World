@@ -52,12 +52,6 @@ $(document).ready(function() {
 	})
 });
 
-/* $(function(){
-	url = 'miniHp_rightMenu.do';
-	$.post(url,{menu:'${menu}'},function(result){
-		$("#rightMenu").html(result);
-	})
-}); */
 </script>
 
 </head>
@@ -104,15 +98,7 @@ $(document).ready(function() {
 						<!-- Setting menu beginning -->
 							<span id="rightMenu">
 							</span>
-							<!-- 
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
-							<div align="center" class="selected-Menu" onclick="movePicture('miniHpPicture.do?menu=menu3')">사진첩</div>
-							<div align="center" class="selected-Menu" onclick="moveBoard()">게시판</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
-							<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
-							<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
-							 -->
+						
 						<!-- Setting menu ending -->	
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
@@ -127,27 +113,4 @@ $(document).ready(function() {
 		</tr>
 	</table>
 </body>
-<!-- ajax -->
-<script>
- 	
- /*    function movePage(url){
-        // ajax option
-        var ajaxOption = {
-                url : url,
-                async : true,
-                type : "GET",
-                dataType : "html",
-                cache : false
-        };
-        
-        $.ajax(ajaxOption).done(function(data){
-            // Contents 영역 삭제
-            $('#bodyContents').children().remove();
-            // Contents 영역 교체
-            $('#bodyContents').html(data);
-        });
-    } */
- 
-</script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=2"></script>
 </html>

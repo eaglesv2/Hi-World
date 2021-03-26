@@ -3,8 +3,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-	
-	String aa="_ok";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -41,11 +39,11 @@
 <script type="text/javascript">
 
 $(function(){
-	$('.unselected-Menu').css('background-color', '#${miniHpUserMenuVO.menuBGColor }');
-	$('.unselected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
-	$('.unselected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
-	$('.selected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor }');
-	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor }');
+	$('.unselected-Menu').css('background-color', '#${miniHpUserMenuVO.menuBGColor}');
+	$('.unselected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor}');
+	$('.unselected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor}');
+	$('.selected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor}');
+	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor}');
 });
 
 /* ajax */
@@ -68,7 +66,7 @@ function movePage(url){
 }
  
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=2"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=7"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -83,10 +81,10 @@ function movePage(url){
 	
 	<c:if test="${miniHpUserMenuVO.menu2==1}">
 		<c:if test="${menu=='menu2'}">
-			<div align="center" class="selected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
+			<div align="center" class="selected-Menu" onclick="moveProfile()">프로필</div>
 		</c:if>
 		<c:if test="${menu!='menu2'}">
-			<div align="center" class="unselected-Menu" onclick="movePage('miniHpProfile.do?menu=menu2')">프로필</div>
+			<div align="center" class="unselected-Menu" onclick="moveProfile()">프로필</div>
 		</c:if>
 	</c:if>
 	
@@ -119,7 +117,7 @@ function movePage(url){
 	
 	<c:if test="${miniHpUserMenuVO.menu6==1}">
 		<c:if test="${menu=='menu6'}">
-			<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6');">방명록</div>
+			<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
 		</c:if>
 		<c:if test="${menu!='menu6'}">
 			<div align="center" class="unselected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
@@ -128,10 +126,10 @@ function movePage(url){
 	
 	<c:if test="${miniHpUserMenuVO.menu7==1}">
 		<c:if test="${menu=='menu7'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
+			<div align="center" class="selected-Menu" onclick="moveSetting()">관&nbsp;리</div>
 		</c:if>
 		<c:if test="${menu!='menu7'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='miniHpSetting.do?menu=menu7';">관&nbsp;리</div>
+			<div align="center" class="unselected-Menu" onclick="moveSetting()">관&nbsp;리</div>
 		</c:if>
 	</c:if>
 </body>
