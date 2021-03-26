@@ -77,6 +77,8 @@
 				</tr>
 				<tr style="text-align: right">
 					<td colspan="2">
+						<input type="hidden" value="${board.boardSerial}" name="boardSerial">
+						<input type="hidden" value="${board.file}" name="file">
 						<input type="button" value="수정" onclick="updateBoard();">
 					</td>
 				</tr>
@@ -85,33 +87,21 @@
 	</form>
 </body>
 <script>
-function insertBoard(){
+function updateBoard(){
 	
 	 var form = $("form")[0];       
      var formData = new FormData(form);
 
      $.ajax({
          cache : false,
-         url : "MiniHpBoardInsert.do", // 요기에
+         url : "MiniHpBoardUpdate.do", // 요기에
          processData: false,
          contentType: false,
          type : 'POST', 
          data : formData, 
          success : function(data) {
-       			var ajaxMain = {
-       		            url : 'miniHpBoard.do?folderSerial='+data,
-       		            async : true,
-       		            type : "GET",
-       		            dataType : "html",
-       		            cache : false
-       		    };
-       		    
-       		    $.ajax(ajaxMain).done(function(data){
-       		        // Contents 영역 삭제
-       		        $('#bodyContents').children().remove();
-       		        // Contents 영역 교체
-       		        $('#bodyContents').html(data);
-       		    });
+        	 $('#bodyContents').children().remove();
+	        $('#bodyContents').html(data);
          }, 
          error : function(xhr, status) {
              alert(xhr + " : " + status);
