@@ -54,13 +54,13 @@ public class ClientController {
 	/* 회원 전체 목록 보이기 */
 	@GetMapping("/adminClient.do")
 	public String adminClient() {
-		return "";
+		return "adminClient";
 	}
 	
 	/* 상품 등록 */
 	@GetMapping("/adminArticle.do")
 	public String adminArticle() {
-		return "";
+		return "adminArticle";
 	}
 	
 	
