@@ -9,8 +9,7 @@ import com.hiworld.client.vo.sessionVO;
 /* controller -> service -> serviceimpl -> dao -> mybatis */
 public interface ClientService {
 
-	/* 회원 전체 보기 */
-	ArrayList<ClientVO> getAllClient();
+	
 	
 	/* 회원 정보 수정 */
 	String updateClient(ClientVO clientVO);
@@ -47,4 +46,16 @@ public interface ClientService {
 	
 	/*내정보보기 비밀번호 중복체크*/
 	String pwCheck(String clientVO);
+	
+	/* 회원 전체 보기 */
+	ArrayList<ClientVO> getAllClient();
+	
+	/* 밴한 회원 전체 보기 */
+	ArrayList<ClientVO> getAllBanClient();
+	
+	/* 밴 */
+	int banClient(int UserSerial);
+	
+	/* 밴 풀기 */
+	int unBanClient(int UserSerial);
 }
