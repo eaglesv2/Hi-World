@@ -5,7 +5,7 @@
 #chargeContainer{
 	border: 1px solid black;
 	height: 580px;
-	
+	margin-left:10px;
 	
 }
 
@@ -23,11 +23,22 @@
 	height:100%;
 	
 }
+#logo{
+	margin-top: 105px;
+}
 
 #logo img{
 	border: 1px solid;
 	width:50%;
 	height:100%;
+}
+
+.chargeEX{
+	border:1px solid;
+	width: 80%;
+	height:5%;
+	margin-left:20px;
+	margin-right:20px;
 }
 
 #bamtolinfo label {
@@ -50,28 +61,7 @@
 	margin-left:30px;
 }
 
-#price1 {
-	border:1px solid;
-	width: 100px;
-	height: 130px;
-	float:left;
-	margin-left:10px;
-}
-#price2 {
-	border:1px solid;
-	width: 100px;
-	height: 130px;
-	float:left;
-	margin-left:10px;
-}
-#price3 {
-	border:1px solid;
-	width: 100px;
-	height: 130px;
-	float:left;
-	margin-left:10px;
-}
-#price4 {
+.price1 {
 	border:1px solid;
 	width: 100px;
 	height: 130px;
@@ -79,13 +69,55 @@
 	margin-left:10px;
 }
 
+.price2 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+.price3 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+.price4 {
+	border:1px solid;
+	width: 100px;
+	height: 130px;
+	float:left;
+	margin-left:10px;
+}
+
+#price1_1{
+	border:1px solid;
+	width:100px;
+	height:30%;
+}
+#price2_1{
+	border:1px solid;
+	width:100%;
+	height:30%;
+}
+#price3_1{
+	border:1px solid;
+	width:100%;
+	height:30%;
+}
+#price4_1{
+	border:1px solid;
+	width:100%;
+	height:30%;
+}
 #paymentinfo{
 	float:left;
 	margin-top:10px;
 	width: 580px;
 }
 
-#priceCount{
+#priceagree{
 	border:1px solid;
 	width: 100px;
 	height: 130px;
