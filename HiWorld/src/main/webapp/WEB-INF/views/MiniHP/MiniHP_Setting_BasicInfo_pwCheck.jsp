@@ -49,37 +49,19 @@ input::placeholder {
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
-<%-- 
-	$(document).ready(function(){
-		 $("#send").click(function(){
-			var params = "userPw="+$("#userPw").val();
-			
-			$.ajax({
-				type:"POST",
-				url:"<%=cp%>/cy/setting/setBasicInformation_pw_ok.action",
-				data:params,
-				success:function(args){
-					$("#browser").html(args);
-				},
-				error:function(e){
-					alert(e.responseText);
-				}			 
-			 });		 		 
-		 });
-	});
-	 --%>
+
 	function sendPw(){
 		
 		$.ajax({
 			type : 'POST',
 			url : 'miniHp_setBasicInformation_pw_ok.do',
 			/* userId session값 */
-			data : { UserID : 'tester', UserPW : $("#userPw").val() },
+			data : { UserID : '${sessionVO.userID}', UserPW : $("#userPw").val() },
 			
 			success : function(result) {
-				$("#browser").html(result); 
+				$("#bodyContents").html(result); 
 			}
-		})
+		});
 	}
 
 	
@@ -93,7 +75,7 @@ input::placeholder {
 	
 	<div align="center" style="width: 420px; height:200px; font: 굴림;font-size: 10pt;border: 0px solid black;background-color: #F6F6F6;padding-top: 140px;">
 		<div style="margin-bottom: 5px;">
-			기본정보 수정
+			기본정보 조회
 		</div>
 		<div>
 			<div style="float: left;margin-left:100px;border: 0px solid black;width: 40%;">
@@ -105,7 +87,7 @@ input::placeholder {
 		</div>
 		<div>
 			<div style="float: left;margin-left:100px;border: 0px solid black;font-size: 9pt;margin-left:135px;margin-top: 10px;">
-				${msg }
+				${msg}
 			</div>
 		</div>
 	</div>

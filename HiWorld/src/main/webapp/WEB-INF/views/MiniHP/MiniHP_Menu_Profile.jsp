@@ -4,9 +4,6 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-
-%>
-<%
 %>
 <!DOCTYPE html>
 <html>
@@ -46,6 +43,10 @@ body {
 var content = "";
 $(document).ready(function(){
 	console.log('page load');
+	$("#insert").hide();
+	$("#insert_ok").hide();
+	$("#change").hide();
+	$("#change_ok").hide();
 	checkProfile();
 });
 function checkProfile() {
@@ -134,7 +135,6 @@ function change_ok() {
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_update_profile.do',
-		/* user serial userId session 받기 */
 		data : { UserSerial : '${sessionVO.userSerial}', UserID : '${sessionVO.userID}', ProfileContent : content },
 		
 		success : function(result) {
@@ -168,7 +168,7 @@ function change_ok() {
 					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				
 					<font>
-						<span id="noContent" align="center">작성된 프로필이 없습니다</span>
+						<span id="noContent" align="center"></span>
 					</font>
 				
 					<img src="/root/resources/images/bar.jpg" width="420" height="6" border="0" alt="">

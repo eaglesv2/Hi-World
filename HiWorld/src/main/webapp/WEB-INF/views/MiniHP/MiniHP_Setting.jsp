@@ -25,32 +25,50 @@ body
  scrollbar-arrow-color: #9C92FF}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=2"></script>
 <script type="text/javascript">
-
-	$(function(){
-		var url = "miniHp_menuList.do";
-			$.post(url,{},function(args){
-				$("#menuData").html(args); 
-			});  
+	
+	$(document).ready(function() {
+		console.log('1');
+		$.ajax({
+			type : 'post',
+			url : 'miniHp_menuList.do',
 			
-		url = "miniHp_rightMenu.do";
-			$.post(url,{menu:"${menu}"},function(args){
-				$("#rightMenu").html(args); 
-			});  
-			
-			if("${currentFlag}"=="2"){
-				url="miniHp_menuAvailable.do";
-				$.post(url,{},function(args){
-					$("#browser").html(args); 
-				});
-			} else {
-				url="miniHp_setBasicInformation_pw.do";
-				$.post(url,{},function(args){
-					$("#browser").html(args); 
-				});
+			success : function(result) {
+				$("#menuData").html(result);
 			}
+		});
+		
+		$.ajax({
+			type : 'post',
+			url : 'miniHp_rightMenu.do',
+			data : { menu : '${menu}'},
+			
+			success : function(result) {
+				$("#rightMenu").html(result);
+			}
+		});
+		
+		if("${currentFlag}" == "2") {
+			$.ajax({
+				type : 'post',
+				url : 'miniHp_menuAvailable.do',
+				
+				success : function(result) {
+					$("#browser").html(result); 
+				}
+			})
+		} else {
+			$.ajax({
+				type : 'post',
+				url : 'miniHp_setBasicInformation_pw.do',
+				
+				success : function(result) {
+					$("#browser").html(result); 
+				}
+			})
+		}
 	});
-
 
 </script>
 </head>

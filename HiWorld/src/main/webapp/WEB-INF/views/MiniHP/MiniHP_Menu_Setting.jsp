@@ -23,17 +23,33 @@
 		}
 	}
 	
-	function setMenuAvailable(){
-		location.href="miniHp_setting.do?flag=2&menu=menu7";
+	function setBasicInformation(){
 		
-		var url="miniHp_menuAvailable.do";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
+		$.ajax({
+			type : 'post',
+			url : 'miniHp_setBasicInformation_pw.do',
+			
+			success : function(result) {
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result)
+			}
 		});
 	}
 	
-	function setUsingBackGound(){
+	function setMenuAvailable(){
+
+		$.ajax({
+			type : 'post',
+			url : 'miniHp_menuAvailable.do',
+			
+			success : function(result) {
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		});
+	}
+	
+	<%-- function setUsingBackGound(){
 		var url="<%=cp%>/cy/setting/usingBackGround.action";
 		  
 		$.post(url,{},function(args){
@@ -71,13 +87,7 @@
 			$("#browser").html(args); 
 		});
 	}
-	function setBasicInformation(){
-		var url="miniHp_setBasicInformation_pw.do";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
-	}
+	 --%>
 
 
 	
@@ -94,7 +104,7 @@
 		<div style="border: 0px solid black;width: 100%;">
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/setting_menu_3lines.png" height="13px" width="13px">
 			<font  style="font-size:10pt;font-weight: bold;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="javascript:openOrCloseMenu('1')">
+				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="openOrCloseMenu('1')">
 					미니홈피관리
 				</span>
 			</font>
@@ -102,13 +112,13 @@
 		<div id="menu1" style="border: 0px solid black;width: 100%;padding-left: 4px;">
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
 			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setBasicInformation();">
+				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setBasicInformation();">
 					기본정보
 				</span>
 			</font><br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
 			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setMenuAvailable()">
+				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setMenuAvailable()">
 					메뉴
 				</span>
 			</font><br/>
@@ -163,6 +173,7 @@
 				</span>
 			</font>
 		</div>
+		<%-- 
 		<div id="menu4" style="border: 0px solid black;width: 100%;padding-left: 4px;display: none;">
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
 			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
@@ -207,6 +218,7 @@
 				</span>
 			</font><br/>
 		</div>
+		 --%>
 	</div>
 
 </body>
