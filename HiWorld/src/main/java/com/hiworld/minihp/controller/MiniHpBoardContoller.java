@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hiworld.minihp.service.MiniHpBoardService;
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
+import com.hiworld.minihp.vo.MiniHpBoardPagingVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 @Controller
@@ -187,14 +188,21 @@ public class MiniHpBoardContoller {
 	//-----------------------------------------게시글--------------------------------------------------------
 	//게시판 메인 부분
 	@GetMapping("/miniHpBoard.do")
-	public String miniHpBoard(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial) {
+	public String miniHpBoard(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("게시판 main");
 		
 		int userSerial = getSessionUser(session);
 		if(folderSerial==null)
 			folderSerial = service.getFirstFolderSerial(userSerial);
 		
-		model.addAttribute("list",service.getAll(folderSerial));
+		//전체 리스트 개수
+		int listCnt = service.countInsideFolder(folderSerial);
+		MiniHpBoardPagingVO pagingVO = new MiniHpBoardPagingVO(listCnt, curPage);
+		
+		
+		model.addAttribute("list",service.getAll(folderSerial, curPage));
+		model.addAttribute("listCnt",listCnt);
+		model.addAttribute("pagination",pagingVO);
 		
 		model.addAttribute("currentFolderName", service.getFolderName(folderSerial));
 		model.addAttribute("currentFolderSerial", folderSerial);
@@ -232,6 +240,9 @@ public class MiniHpBoardContoller {
 		System.out.println("게시판 detail 화면");
 		
 		model.addAttribute("board",service.get(serial));
+		
+		//댓글 추가
+		model.addAttribute("replyList", service.getAllReply(serial));
 		return "MiniHP/MiniHP_Menu_Board_Detail";
 	}
 	//폴더 이동 popup

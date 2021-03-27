@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
+import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 public interface MiniHpBoardDAO {
@@ -23,7 +24,7 @@ public interface MiniHpBoardDAO {
 	// 게시판 관련--------------------------
 	//맨 첫번째 폴더 가져오기
 	int getFirstFolderSerial(int userSerial);
-	List<MiniHpBoardVO> getAll(int folderSerial);
+	List<MiniHpBoardVO> getAll(@Param("folderSerial") int folderSerial,@Param("offset")  int offset,@Param("size")  int size);
 	String getFolderName(int folderSerial);
 	//게시물 insert
 	int insert(MiniHpBoardVO vo);
@@ -35,4 +36,7 @@ public interface MiniHpBoardDAO {
 	int delete(int serial);
 	//update
 	int update(MiniHpBoardVO vo);
+	
+	//댓글
+	List<MiniHpBoardReplyVO> getAllReply(int boardSerial);
 }
