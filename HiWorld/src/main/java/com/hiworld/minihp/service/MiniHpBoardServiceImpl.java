@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hiworld.minihp.dao.MiniHpBoardDAO;
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
+import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 @Service
 public class MiniHpBoardServiceImpl implements MiniHpBoardService {
@@ -53,8 +54,12 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	}
 	@Override
 	@Transactional
-	public List<MiniHpBoardVO> getAll(Integer folderSerial) {
-		List<MiniHpBoardVO> list = dao.getAll(folderSerial);
+	public List<MiniHpBoardVO> getAll(Integer folderSerial, int page) {
+		//페이징
+		int size = 5;//한페이지에 5개씩
+		int offset = 0+(page-1)*size;
+		
+		List<MiniHpBoardVO> list = dao.getAll(folderSerial, offset, size);
 		if(list==null || list.size()==0)
 			return null;
 		else
@@ -63,6 +68,10 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Override
 	public String getFolderName(int folderSerial) {
 		return dao.getFolderName(folderSerial);
+	}
+	@Override
+	public int countInsideFolder(int serial) {
+		return dao.countInsideFolder(serial);
 	}
 	
 	@Override
@@ -84,5 +93,10 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Override
 	public int update(MiniHpBoardVO vo) {
 		return dao.update(vo);
+	}
+	
+	@Override
+	public List<MiniHpBoardReplyVO> getAllReply(int boardSerial) {
+		return dao.getAllReply(boardSerial);
 	}
 }

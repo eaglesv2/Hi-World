@@ -39,7 +39,7 @@
 		SELECT * FROM MiniHP_Board_View
 		WHERE folderSerial=#{folderSerial}
 		ORDER BY cDate DESC
-		<!-- LIMIT #{offset}, #{size} -->
+		LIMIT #{offset}, #{size}
 	</select>
 	<select id="getFolderName" resultType="string">
 		SELECT folderName FROM MiniHP_Board_Folder
@@ -75,4 +75,10 @@
 		SET title=#{title}, content=#{content}, file=#{file}, uDate=CURRENT_TIMESTAMP
 		WHERE boardSerial=#{boardSerial};
 	</update>
+	
+	<!-- 댓글 -->
+	<select id="getAllReply" resultType="com.hiworld.minihp.vo.MiniHpBoardReplyVO">
+		SELECT * FROM MiniHP_Board_Reply_View
+		WHERE boardSerial=#{boardSerial}
+	</select>
 </mapper>

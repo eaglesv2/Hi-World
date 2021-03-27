@@ -17,7 +17,7 @@
 	<div id="nowFolder" style="float: left; padding-left: 20px;">
 		${currentFolderName}
 	</div>
-	<div id="write-btn" style="float: right; padding-right: 20px; cursor:pointer;" onclick="moveInsertPage(${currentFolderSerial});">
+	<div id="write-btn" style="float: right; padding-right: 20px; cursor:pointer;" onclick="moveInsertPage();">
 		글쓰기
 	</div>
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
@@ -38,7 +38,7 @@
 				</tr>
 				<c:forEach items="${list}" var="l">
 				<tr>
-					<td style="width: 30%; height: 5px;word-break:break-all; cursor:pointer;" onclick="moveDetailPage(${l.boardSerial});">
+					<td style="width: 30%; height: 5px;word-break:break-all; cursor:pointer;" onclick="moveDetailPage('${l.boardSerial}');">
 						${l.title}
 						<c:if test="${l.file!=null}">
 							<img alt="file" src="resources/images/disk-file.png" width="10px">
@@ -53,12 +53,42 @@
 		</c:otherwise>
 	</c:choose>
 	</div>
+	<input id="currentFolderSerial" type="hidden" value="${currentFolderSerial}">
+     <div>
+        <c:if test="${pagination.curRange ne 1 }">
+            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+        </c:if>
+        <c:if test="${pagination.curPage ne 1}">
+            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+        </c:if>
+        <c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
+            <c:choose>
+                <c:when test="${pageNum eq  pagination.curPage}">
+                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                </c:when>
+                <c:otherwise>
+                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+        </c:if>
+        <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+        </c:if>
+    </div>
+    
+    <%-- <div>
+        총 게시글 수 : ${pagination.listCnt } /    총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPage } / 현재 블럭 : ${pagination.curRange } / 총 블럭 수 : ${pagination.rangeCnt }
+    </div> --%>
 	
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 </form>
 <script>
 //글쓰기 버튼 클릭시
-function moveInsertPage(currentFolderSerial){
+function moveInsertPage(){
+	var currentFolderSerial = $('#currentFolderSerial').val();
     var ajaxOption = {
             url : "MiniHpBoardInsert.do/"+currentFolderSerial,
             async : true,
@@ -86,5 +116,23 @@ function moveDetailPage(boardSerial){
         $('#bodyContents').children().remove();
         $('#bodyContents').html(data);
     });
+}
+//페이징
+function fn_paging(curPage) {
+	var folderSerial = $('#currentFolderSerial').val();
+	var ajaxMain = {
+	        url : 'miniHpBoard.do?folderSerial='+folderSerial+"&curPage="+curPage,
+	        async : true,
+	        type : "GET",
+	        dataType : "html",
+	        cache : false
+	};
+	
+	$.ajax(ajaxMain).done(function(data){
+	    // Contents 영역 삭제
+	    $('#bodyContents').children().remove();
+	    // Contents 영역 교체
+	    $('#bodyContents').html(data);
+	});
 }
 </script>

@@ -3,6 +3,7 @@ package com.hiworld.minihp.service;
 import java.util.List;
 
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
+import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 public interface MiniHpBoardService {
@@ -14,8 +15,10 @@ public interface MiniHpBoardService {
 	
 	//게시판 관련---------------
 	int getFirstFolderSerial(int userSerial);
-	List<MiniHpBoardVO> getAll(Integer folderSerial);
+	List<MiniHpBoardVO> getAll(Integer folderSerial, int page);
 	String getFolderName(int folderSerial);
+	//페이징처리
+	int countInsideFolder(int serial);
 	
 	int insert(MiniHpBoardVO vo);
 	
@@ -26,4 +29,7 @@ public interface MiniHpBoardService {
 	int delete(int serial);
 	//update
 	int update(MiniHpBoardVO vo);
+	
+	//댓글
+	List<MiniHpBoardReplyVO> getAllReply(int boardSerial);
 }

@@ -75,6 +75,23 @@ table.type08 td {
 	    <td scope="row" colspan="2">${board.content}</td>
 	  </tr>
 	  </tbody>
+	  <c:if test="${replyList!=null}"><!-- 댓글 개수 구하면 그걸로 비교하기 -->
+	  	<tbody>
+	  		<tr>
+		    	<td scope="row" colspan="2">
+		    		<img alt="" src="resources/images/reply-pen.png" width="10px">
+		    		댓글 ()
+		    	</td>
+		    </tr>
+	  		<tr>
+		    	<td scope="row" colspan="2">
+				    <c:forEach items="${replyList}" var="r">
+				    	${r.userName}: ${r.replyContent} (${r.cDate})<br>
+				    </c:forEach>
+		    	</td>
+		    </tr>
+	  	</tbody>
+	  </c:if>	  
 	</table>
 </div>
 </body>
