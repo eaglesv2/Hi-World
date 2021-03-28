@@ -12,13 +12,14 @@ public class MiniHpBoardVO {
 	private String content;
 	private String file;
 	private int hit;
+	private int replyCnt;
 	private Date cDate;
 	private Date uDate;
 	
 	public MiniHpBoardVO() {}
 
 	public MiniHpBoardVO(int boardSerial, int userSerial, String userName, int folderSerial, String folderName,
-			String title, String content, String file, int hit, Date cDate, Date uDate) {
+			String title, String content, String file, int hit, int replyCnt, Date cDate, Date uDate) {
 		this.boardSerial = boardSerial;
 		this.userSerial = userSerial;
 		this.userName = userName;
@@ -28,6 +29,7 @@ public class MiniHpBoardVO {
 		this.content = content;
 		this.file = file;
 		this.hit = hit;
+		this.replyCnt = replyCnt;
 		this.cDate = cDate;
 		this.uDate = uDate;
 	}
@@ -104,6 +106,14 @@ public class MiniHpBoardVO {
 		this.hit = hit;
 	}
 
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
+
 	public Date getcDate() {
 		return cDate;
 	}
@@ -124,7 +134,8 @@ public class MiniHpBoardVO {
 	public String toString() {
 		return "MiniHpBoardVO [boardSerial=" + boardSerial + ", userSerial=" + userSerial + ", userName=" + userName
 				+ ", folderSerial=" + folderSerial + ", folderName=" + folderName + ", title=" + title + ", content="
-				+ content + ", file=" + file + ", hit=" + hit + ", cDate=" + cDate + ", uDate=" + uDate + "]";
+				+ content + ", file=" + file + ", hit=" + hit + ", replyCnt=" + replyCnt + ", cDate=" + cDate
+				+ ", uDate=" + uDate + "]";
 	}
 	
 }

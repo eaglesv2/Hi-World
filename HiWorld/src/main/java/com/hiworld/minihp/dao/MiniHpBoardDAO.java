@@ -38,5 +38,15 @@ public interface MiniHpBoardDAO {
 	int update(MiniHpBoardVO vo);
 	
 	//댓글
+	//selectAll
 	List<MiniHpBoardReplyVO> getAllReply(int boardSerial);
+	//insert
+	int insertReply(MiniHpBoardReplyVO vo);
+	//delete
+	int deleteReply(int serial);
+	//update 
+	int updateReply(@Param("serial") int serial, @Param("content") String content);
+	
+	//조회수
+	int updateHit(int boardSerial);
 }
