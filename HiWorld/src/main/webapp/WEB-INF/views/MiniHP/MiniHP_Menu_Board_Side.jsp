@@ -6,12 +6,25 @@
 	<hr>
 	<ul>
 		<c:forEach var="i" items="${folderList}">
-			<li><font size="2pt"> 
-				<span class="folderNames" onclick="goToFolder('${i.serial}');" style="cursor:pointer;">${i.folderName}</span>
-				<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateForm('${i.serial}','${i.folderName}');">
-				<img src="resources/images/folder_deleted.png" width="10px" height="10px" onclick="deletedFolder('${i.serial}');">
-			</font></li>
-			<div id="board-side-${i.serial}"></div>
+			
+			<li>
+			<font size="2pt"> 
+				<span id="folder-${i.serial}">
+					<span class="folderNames" onclick="goToFolder('${i.serial}');" style="cursor:pointer;">${i.folderName}</span>
+					<img src="resources/images/folder_edit.png" width="10px" height="10px" style="cursor:pointer;" onclick="updateForm('${i.serial}');">
+					<img src="resources/images/folder_deleted.png" width="10px" height="10px" style="cursor:pointer;" onclick="deletedFolder('${i.serial}');">
+				</span>
+				<span id="folderForm-${i.serial}"  style="display: none;">
+					<input type="text" id="folderName-${i.serial}" style="width: 100px;" value="${i.folderName}" /><br />
+					<input type="radio" name="scope-${i.serial}" value="2" checked="checked">전체공개<br />
+					<input type="radio" name="scope-${i.serial}" value="1">일촌공개<br /> 
+					<input type="radio" name="scope-${i.serial}" value="0">비공개<br />
+					<input type="button" value="수정" onclick="updateFolder(${i.serial});" />
+					<input type="button" value="취소" onclick="cancelFolder();" />
+				</span>
+			</font>
+			</li>
+			
 		</c:forEach>
 	</ul>
 	<img src="resources/images/folder_add.png" width="10px" height="10px" align="left" onclick="addFolder();">
@@ -102,18 +115,21 @@
 	}
 	//폴더 삭제
 	function deletedFolder(serial) {
-		$.ajax({
-			type: 'DELETE',
-			url: 'MiniHpBoardSide.do/'+serial,
-			datatype: 'json',
-			contentType:'application/json; charset=utf-8'
-		}).done(function(data) {
-			alert(data);
-			//사이드 불러오기
-			getBoardSide();
-		}).fail(function(error) {
-			alert(JSON.stringify(error));
-		});
+		if(confirm("정말 삭제하시겠습니까?")){
+			$.ajax({
+				type: 'DELETE',
+				url: 'MiniHpBoardSide.do/'+serial,
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8'
+			}).done(function(data) {
+				//실패할수도 있어서 alert 있어야됨
+				alert(data);
+				//사이드 불러오기
+				getBoardSide();
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			});
+		}
 	}
 	
 	//폴더 수정하기
@@ -141,12 +157,7 @@
 	
 	//폴더명 수정화면 펼치기
 	function updateForm(serial,beforeFolderName) {
-		$('#board-side-'+serial)
-			.append('<input type="text" id="folderName-'+serial+'" style="width: 100px;" value="'+beforeFolderName+'" /><br />')
-			.append('<input type="radio" name="scope-'+serial+'" value="2" checked="checked">전체공개<br />')
-			.append('<input type="radio" name="scope-'+serial+'" value="1">일촌공개<br /> ')
-			.append('<input type="radio" name="scope-'+serial+'" value="0">비공개<br />')
-			.append('<input type="button" value="수정" onclick="updateFolder('+serial+');" />')
-			.append('<input type="button" value="취소" onclick="cancelFolder();" />');
+		$('#folder-'+serial).toggle();
+		$('#folderForm-'+serial).toggle();
 	}
 </script>

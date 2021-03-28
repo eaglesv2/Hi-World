@@ -79,7 +79,9 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 		return dao.insert(vo);
 	}
 	@Override
+	@Transactional
 	public MiniHpBoardVO get(int serial) {
+		dao.updateHit(serial);//게시글 볼때마다 조회수 1 증가
 		return dao.get(serial);
 	}
 	@Override
@@ -98,5 +100,17 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Override
 	public List<MiniHpBoardReplyVO> getAllReply(int boardSerial) {
 		return dao.getAllReply(boardSerial);
+	}
+	@Override
+	public int insertReply(MiniHpBoardReplyVO vo) {
+		return dao.insertReply(vo);
+	}
+	@Override
+	public int deleteReply(int serial) {
+		return dao.deleteReply(serial);
+	}
+	@Override
+	public int updateReply(int serial, String content) {
+		return dao.updateReply(serial, content);
 	}
 }

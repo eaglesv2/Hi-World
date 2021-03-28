@@ -81,4 +81,24 @@
 		SELECT * FROM MiniHP_Board_Reply_View
 		WHERE boardSerial=#{boardSerial}
 	</select>
+	<insert id="insertReply" parameterType="com.hiworld.minihp.vo.MiniHpBoardReplyVO">
+		INSERT INTO MiniHP_Board_Reply(UserSerial,boardSerial,replyContent)
+		VALUES(#{userSerial},#{boardSerial},#{replyContent})
+	</insert>
+	<delete id="deleteReply">
+		DELETE FROM MiniHP_Board_Reply
+		WHERE replySerial=#{serial}
+	</delete>
+	<update id="updateReply">
+		UPDATE MiniHP_Board_Reply
+		SET replyContent=#{content}
+		WHERE replySerial=#{serial}
+	</update>
+	
+	<!-- 조회수 -->
+	<update id="updateHit">
+		UPDATE MiniHP_Board_View
+		SET hit = hit+1
+		WHERE boardSerial=#{boardSerial}
+	</update>
 </mapper>

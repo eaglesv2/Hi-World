@@ -31,5 +31,13 @@ public interface MiniHpBoardService {
 	int update(MiniHpBoardVO vo);
 	
 	//댓글
+	//selectAll
 	List<MiniHpBoardReplyVO> getAllReply(int boardSerial);
+	//insert
+	int insertReply(MiniHpBoardReplyVO vo);
+	//delete
+	int deleteReply(int serial);
+	//update 
+	int updateReply(int serial, String content);
+	
 }

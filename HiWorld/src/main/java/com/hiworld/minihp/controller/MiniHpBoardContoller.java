@@ -29,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hiworld.minihp.service.MiniHpBoardService;
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
 import com.hiworld.minihp.vo.MiniHpBoardPagingVO;
+import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 @Controller
@@ -44,7 +45,7 @@ public class MiniHpBoardContoller {
 //		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
 //		int userSerial = sessionUser.getUserSerial();
 		//임시로 2로 지정
-		int userSerial = 2;
+		int userSerial = 7;
 		return userSerial;
 	}
 	// 파일명 중복방지 처리
@@ -318,5 +319,41 @@ public class MiniHpBoardContoller {
 		
 		model.addAttribute("board",service.get(vo.getBoardSerial()));
 		return "MiniHP/MiniHP_Menu_Board_Detail";
+	}
+	
+	//댓글
+	//insert
+	@PostMapping("/MiniHpBoardReply.do")
+	@ResponseBody
+	public void insertReply(@RequestBody MiniHpBoardReplyVO vo, HttpSession session) {
+		System.out.println("insert reply");
+		
+		int userSerial = getSessionUser(session);
+		vo.setUserSerial(userSerial);
+		
+		System.out.println(vo);
+		int result = service.insertReply(vo);
+		if(result>0) System.out.println("댓글 등록 성공!");
+		else System.out.println("댓글 등록 실패!");
+	}
+	//delete
+	@DeleteMapping("/MiniHpBoardReply.do/{serial}")
+	@ResponseBody
+	public String deleteReply(@PathVariable int serial) {
+		System.out.println("deleteReply");
+		
+		int result = service.deleteReply(serial);
+		if(result>0) return ("댓글 삭제 성공!");
+		else return ("댓글 삭제 실패");
+	}
+	//update
+	@PutMapping("/MiniHpBoardReply.do/{serial}/{content}")
+	@ResponseBody
+	public void updateReply(@PathVariable int serial,@PathVariable String content) {
+		System.out.println("updateReply");
+		
+		int result = service.updateReply(serial, content);
+		if(result>0) System.out.println("댓글 수정 성공!");
+		else System.out.println("댓글 수정 실패!");
 	}
 }

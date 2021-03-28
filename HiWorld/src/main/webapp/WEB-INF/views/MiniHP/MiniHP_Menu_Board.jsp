@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 	#main{
 		height: 350px;
@@ -40,6 +41,16 @@
 				<tr>
 					<td style="width: 30%; height: 5px;word-break:break-all; cursor:pointer;" onclick="moveDetailPage('${l.boardSerial}');">
 						${l.title}
+						<!-- 댓글 개수 출력 -->
+						[${l.replyCnt}]
+						<!-- 게시글 등록되고 3일동안 new 아이콘 표시 -->
+						<c:set var="now" value="<%=new java.util.Date()%>" /><!-- 현재시간 -->
+						<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" /><!-- 현재시간을 숫자로 -->
+						<fmt:parseNumber value="${l.cDate.time / (1000*60*60*24)}" integerOnly="true" var="chgDttm" /><!-- 게시글 작성날짜를 숫자로 -->
+						<c:if test="${today - chgDttm le 3}"><!-- 3일동안은 new 표시 -->
+							<i><img src="resources/images/new.png" width="12px" alt="new" /></i>
+						</c:if>
+						<!-- 파일 있을시 파일 아이콘 표시 -->
 						<c:if test="${l.file!=null}">
 							<img alt="file" src="resources/images/disk-file.png" width="10px">
 						</c:if>
