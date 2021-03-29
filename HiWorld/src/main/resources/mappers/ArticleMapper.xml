@@ -15,7 +15,7 @@
 	<!-- 물품 등록 -->
 	<insert id="insert">
 		INSERT INTO User_Article
-		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName},#{ArticleImg})
+		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName},#{ArticleImg},${ArticleContent})
 	</insert>
 
 	<!-- 장바구니 -->
@@ -66,4 +66,10 @@
 		DELETE FROM Shop_Basket
 		WHERE UserSerial = #{UserSerial}
 	</delete>
+	
+	<!-- 관리자 물품 등록 -->
+	<insert id="insertArticle">
+		INSERT INTO Shop_Article(ArticleImg, ArticleKinds, ArticleName, ArticlePrice, ArticleContent)
+		VALUES (#{ArticleImg},#{ArticleKinds},#{ArticleName},#{ArticlePrice},#{ArticleContent})
+	</insert>
 </mapper>

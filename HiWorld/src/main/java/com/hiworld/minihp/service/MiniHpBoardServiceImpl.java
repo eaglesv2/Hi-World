@@ -56,7 +56,7 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Transactional
 	public List<MiniHpBoardVO> getAll(Integer folderSerial, int page) {
 		//페이징
-		int size = 5;//한페이지에 5개씩
+		int size = 10;//한페이지에 10개씩
 		int offset = 0+(page-1)*size;
 		
 		List<MiniHpBoardVO> list = dao.getAll(folderSerial, offset, size);

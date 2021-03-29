@@ -49,6 +49,7 @@ $(document).ready(function(){
 	$("#change_ok").hide();
 	checkProfile();
 });
+
 function checkProfile() {
 	console.log('checkProfile');
 	$.ajax({

@@ -22,11 +22,12 @@ public interface ClientDAO {
 	/* 회원 정보 삭제 */
 	int deleteClient(ClientVO clientVO);
 	
-	/* 로그인*/
-	int userLogin(ClientVO clientVO);
 	
 	
 //	############################### 기능 구현 완료
+	/* 로그인*/
+	int userLogin(ClientVO clientVO);
+	
 	/* 회원 정보 입력 성공시 성공한 갯수 나옴 1 */
 	int insertClient(ClientVO clientVO);
 	
@@ -63,4 +64,8 @@ public interface ClientDAO {
 	
 	/* 밴 풀기 */
 	int unBanClient(int UserSerial);
+	
+	/* 로그인시 밴 확인 */
+	String checkBan(ClientVO clientVO);
 }
+	 

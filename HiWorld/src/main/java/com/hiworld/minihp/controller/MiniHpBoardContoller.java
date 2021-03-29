@@ -316,9 +316,10 @@ public class MiniHpBoardContoller {
 				}
 			}
 		}
-		
-		model.addAttribute("board",service.get(vo.getBoardSerial()));
-		return "MiniHP/MiniHP_Menu_Board_Detail";
+		//해당 자세한 페이지로 이동
+		return "redirect:MiniHpBoardDetail.do?serial="+vo.getBoardSerial();
+//		model.addAttribute("board",service.get(vo.getBoardSerial()));
+//		return "MiniHP/MiniHP_Menu_Board_Detail";
 	}
 	
 	//댓글

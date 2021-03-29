@@ -1,9 +1,11 @@
 package com.hiworld.client.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.article.service.ArticleService;
@@ -91,13 +94,60 @@ public class ClientController {
 		return "";
 	}
 	
-	/* 상품 등록 */
+	/* 상품 페이지 불러오기 */
 	@GetMapping("/Manage_Article.do")
 	public String adminArticle() {
 		return "adminArticle";
 	}
 	
 	
+	/* 파일 업로드 하기 */
+	@PostMapping("/ArticleUpload.do") 
+	@ResponseBody
+	public int ArticleUpload(MultipartFile[] uploadFile, HttpServletRequest request) {
+		
+		
+		/* 현재 내 프로젝트 경로(개인마다달라서 자름) + 이미지 경로 */
+		String url = request.getSession().getServletContext().getRealPath("");
+		url = url+"resources\\images\\article";
+		System.out.println(url);
+				
+		for(MultipartFile file : uploadFile) {
+			/* 기존 파일 정보 */
+			System.out.println(file.getOriginalFilename());
+			System.out.println(file.getSize());
+			
+			/* 업로드될 파일 명 */
+			String uploadFileName = file.getOriginalFilename();
+			File saveFile = new File(url, uploadFileName);
+			try {
+				/* 파일 업로드 */
+				file.transferTo(saveFile);
+			} catch (Exception e) {
+				System.out.println("에러");
+			}
+		}
+		
+		return 1;
+	}
+	
+	/* 디비에 목록 등록 */
+	@GetMapping("/ArticleEnroll.do")
+	@ResponseBody
+	public int ArticleEnroll(ArticleVO articleVO) {
+		
+		int price = articleVO.getArticlePrice();
+		System.out.println(price);
+		
+		/* 이미지 파일경로 저장 */
+		String articleImg = articleVO.getArticleImg();
+		articleImg = "resources/images/article/"+articleImg;
+		articleVO.setArticleImg(articleImg);
+		
+		articleService.insertArticle(articleVO);
+		
+		return 1;
+	}
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자체 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
@@ -152,7 +202,9 @@ public class ClientController {
 	public String checkClient(ClientVO clientVO, HttpSession session, HttpServletResponse res )throws Exception {
 		System.out.println("로그인");
 		sessionVO vo = clientService.checkClient(clientVO);	
+		
 		if(vo!=null) {
+
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("sessionVO", vo);
 			return "redirect:/login.do";
@@ -161,6 +213,7 @@ public class ClientController {
 			PrintWriter writer = res.getWriter();
 			writer.println("<script>alert('아이디 또는 패스워드를 확인하세요.')</script>");
 			writer.flush();
+
 			return "Login/mainPage";	
 			
 		}
@@ -431,6 +484,7 @@ public class ClientController {
 		/* 장바구니 목록 가져오기 */
 		ArrayList<ArticleVO> ArticleList = articleService.getUserArticle(UserSerial);
 		model.addAttribute("ArticleList", ArticleList);
+		System.out.println(ArticleList);
 		return "basket";
 	}
 	

@@ -11,50 +11,45 @@
 }
 
 #menuUpdateBoard thead th {
-  padding: 10px;
   font-weight: bold;
   border-top: 1px solid #ccc;
   border-right: 1px solid #ccc;
-  background: #dcdcd1;
+  background: #E6E6E6;
 }
 #menuUpdateBoard tbody th {
-  width: 150px;
-  padding: 10px;
   font-weight: bold;
-  vertical-align: top;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   background: #ececec;
 }
 #menuUpdateBoard td {
   width: 350px;
-  padding: 10px;
   vertical-align: top;
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
 #content{
 	resize: none;
-	width: 430px;
-	height: 150px;
+	width: 450px;
+	height: 240px;
 }
 </style>
 <body>
 	<form id="updateForm" name="updateForm" enctype="multipart/form-data">
 		<table id="menuUpdateBoard">
-			<thead height="5">
+			<thead>
 				<tr>
 					<th scope="cols" colspan="2">게시물 수정</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr height="5">
-					<th scope="row">제목</th>
+				<tr height="20">
+					<th width="20%" scope="row">제목</th>
 					<td><input type="text" name="title" id="title" value="${board.title}"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-					내용<br>
+					<font size="1">내용</font><br>
 						<textarea name="content" id="content">${board.content}</textarea>
 					</td>
 				</tr>
@@ -66,7 +61,8 @@
 						<c:choose>
 							<c:when test="${board.file!=null}">
 								${board.file}
-								<input type="button" value="삭제" onclick="deleteFile();">
+								<img src="resources/images/x-delete.png" width="10px" height="10px" style="cursor:pointer;" onclick="deleteFile();">
+								<!-- <input type="button" value="삭제" onclick="deleteFile();"> -->
 							</c:when>
 							<c:otherwise>
 								<input type="file" name="file1" id="file">

@@ -181,4 +181,10 @@ public class ClientServiceImpl implements ClientService {
 	public int unBanClient(int UserSerial) {
 		return dao.unBanClient(UserSerial);
 	}
+	
+	/* 로그인시 밴 체크 */
+	@Override
+	public String checkBan(ClientVO clientVO) {
+		return dao.checkBan(clientVO);
+	}
 }

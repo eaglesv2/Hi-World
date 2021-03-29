@@ -28,4 +28,6 @@ public interface ArticleDAO {
 	int totalBay(int UserSerial);
 	
 	int delAllBasket(int UserSerial);
+	
+	int insertArticle(ArticleVO vo);
 }
