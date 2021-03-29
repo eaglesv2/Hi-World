@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MiniHpNeighborDAO">
+	
+	<select id="checkNeighbor" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+		SELECT *
+		FROM MiniHP_Neighbor
+		WHERE (neighborID1 = #{senderID} AND neighborID2 = #{receiverID})
+		   OR (neighborID1 = #{receiverID} AND neighborID2 = #{senderID})
+	</select>
+	
+	<insert id="insertNeighbor" parameterType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+		INSERT INTO MiniHP_Neighbor
+		VALUES neighborID1 = #{neighborID1}, neighborName1 = #{neighborName1}, neighborValue1 = #{neighborValue1},
+			   neighborID2 = #{neighborID2}, neighborName2 = #{neighborName2}, neighborValue2 = #{neighborValue2}
+	</insert>
+</mapper>

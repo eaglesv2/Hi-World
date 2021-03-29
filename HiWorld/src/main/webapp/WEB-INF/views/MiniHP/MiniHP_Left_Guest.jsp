@@ -74,8 +74,7 @@ height:100px;
 						</td>
 					</tr>
 					<tr bgcolor="#FFFFFF">
-						<td>
-							<%-- <img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="window.open('miniHp_uploadIntroPicture.do','','width=400,height=200,location=no,status=no,scrollbars=no');"> --%>
+						<td>						
 						</td>
 					</tr>
 				</table>
@@ -91,7 +90,7 @@ height:100px;
 					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
 				</font>
-				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>${sessionVO.userName}</b>
+				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>${ownerVO.userName}</b>
 				
 				<!-- 성별에 따름 성별표시 마크 --> 
 				<c:if test="${ownerVO.userGender eq 'M'}">
@@ -101,9 +100,9 @@ height:100px;
 					<img src="${pageContext.request.contextPath}/resources/images/admin/female.jpg">
 				</c:if>
 				<!-- 유저 생일 표시 -->
-				<font style="font-size: 7pt;">${sessionVO.userBirth}</font>
+				<font style="font-size: 7pt;">${ownerVO.userBirth}</font>
 					<br/>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" <%-- onclick="window.open('my_member_list.action','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" --%>/>
+					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerId=${OwnerVO.userID}&OwnerName=${OwnerVO.userName}','${OwnerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</font>
 				<select id="mySelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser();">
 					<option value="">★이웃 바람타기</option>
@@ -114,7 +113,7 @@ height:100px;
 					</c:forEach>
 					</c:if> --%>
 				</select>
-				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="random();"/>
+				<img src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="window.open('MiniHP_Home.do','${sessionVO.userID}','width=1090,height=600,location=no,status=no,scrollbars=no')"/>
 			</td>
 		</tr>
 	</table>	
