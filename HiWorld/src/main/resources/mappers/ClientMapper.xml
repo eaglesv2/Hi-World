@@ -3,6 +3,7 @@
 
 <!-- 매핑될 DAO 인터페이스 풀네임 -->
 <mapper namespace="com.hiworld.client.dao.ClientDAO">
+
 	
 	<!-- 회원 정보 수정 -->
 	<update id="updateClient">
@@ -87,5 +88,10 @@
 	<update id="unBanClient">
 		UPDATE HW_USERLIST SET Ban = 0 WHERE UserSerial = #{UserSerial}
 	</update>
+	
+	<!-- 로그인시 밴 확인 -->
+	<select id="checkBan" resultType="String">
+		SELECT Ban FROM HW_USERLIST WHERE UserSerial = #{UserSerial}
+	</select>
 </mapper>
 

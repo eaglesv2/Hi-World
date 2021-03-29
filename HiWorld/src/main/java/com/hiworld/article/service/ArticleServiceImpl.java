@@ -16,7 +16,7 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public ArrayList<ArticleVO> getAllArticle() {
-		/* 상품목록 가져오기 */
+	/* 상품목록 가져오기 */
 		System.out.println("상품가져오기");
 		return articleDAO.getAllArticle();
 	}
@@ -98,5 +98,11 @@ public class ArticleServiceImpl implements ArticleService {
 	public int delAllBasket(int UserSerial) {
 		System.out.println("장바구니 목록전체삭제");
 		return articleDAO.delAllBasket(UserSerial);
+	}
+	
+	/* 상품 등록 */
+	@Override
+	public int insertArticle(ArticleVO vo) {
+		return articleDAO.insertArticle(vo);
 	}
 }
