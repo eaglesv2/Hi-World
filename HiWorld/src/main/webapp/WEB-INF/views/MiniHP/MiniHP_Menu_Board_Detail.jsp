@@ -1,37 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 table.type08 {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
-  border-left: 1px solid #ccc;
   margin: 20px 10px;
+  width: 410px;
 }
 
 table.type08 thead th {
-  padding: 10px;
-  font-weight: bold;
-  border-top: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  background: #dcdcd1;
+  border-bottom: 1px dotted #ccc;
+  font-weight: normal;
 }
 table.type08 tbody th {
-  width: 150px;
-  padding: 10px;
-  font-weight: bold;
   vertical-align: top;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #ccc;
   background: #ececec;
 }
 table.type08 td {
-  width: 350px;
-  padding: 10px;
   vertical-align: top;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px dotted #ccc;
 }
 #main{
 	height: 420px;
@@ -44,76 +35,97 @@ table.type08 td {
 }
 </style>
 <body>
+<input type="hidden" id="boardSerial" value="${board.boardSerial}">
 <div id="main">
-	<table class="type08">
-		<thead>
-			<tr>
-		  		<th scope="cols">${board.title}</th>
-				<th scope="cols">
-					<input type="button" value="목록" onclick="goToFolder('${board.folderSerial}')">
-					<input type="button" value="이동" onclick="showPopup('${board.boardSerial}')">
-					<input type="button" value="삭제" onclick="deleteBoard('${board.boardSerial}','${board.file}','${board.folderSerial}')">
-					<input type="button" value="수정" onclick="updateBoard('${board.boardSerial}')">
-					<input type="hidden" id="boardSerial" value="${board.boardSerial}">
-	  			</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td scope="row">작성자: ${board.userName}</td>
-				<td>${board.uDate} 조회수: ${board.hit}</td>
-			</tr>
-			<c:if test="${board.file!=null}">
-			<tr>
-	  			<td scope="row">첨부파일</td>
-	  			<td>
-	  				<a onclick="downloadFile('${board.file}');" style="cursor:pointer;">${board.file}</a>
-					<%-- <a href="download.do?fileName=${board.file}">${board.file}</a> --%>
-				</td>
-			</tr>
-			</c:if>
-			<tr>
-	 			<td scope="row" colspan="2">${board.content}</td>
-			</tr>
-		</tbody>
+<table class="type08">
+	<thead>
 		<tr>
-		 	<td scope="row" colspan="2">
-		 		<img alt="" src="resources/images/reply-pen.png" width="10px">
-		 		댓글 [${board.replyCnt}]
-		 		<input type="button" value="댓글작성" style="float: right" onclick="showReplyForm();">
+	  		<th>
+	  			<font style="font-weight: bold;">${board.title}</font>
+	  			<span style="float: right;">
+	  				<span onclick="goToFolder('${board.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">목록</span>
+	  				<span onclick="showPopup('${board.boardSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">이동</span>
+	  				<span onclick="deleteBoard('${board.boardSerial}','${board.file}','${board.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">삭제</span>
+	  				<span onclick="updateBoard('${board.boardSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">수정</span>
+	  			</span>
+	  		</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td scope="row">
+				${board.userName}
+				<span style="font-size: 5px; float: right; padding-top: 5px;">
+				(<fmt:formatDate value="${board.uDate}" pattern="yyyy-MM-dd"/>)
+				조회수: ${board.hit}
+				</span>
 			</td>
 		</tr>
-		<tbody id="replyForm" style="display: none;">
-			<tr>
- 				<td scope="row" colspan="2">
- 					<textarea id="replyContent" style="resize: none; width: 390px; height: 100px;"></textarea><br>
-					<input type="button" value="취소" style="float: right" onclick="showReplyForm();">
-					<input type="button" value="입력" style="float: right" onclick="insertReply('${board.boardSerial}');">
-				</td>
-			</tr>
-		</tbody>
-		<c:if test="${board.replyCnt!=0}">
+		<c:if test="${board.file!=null}">
 		<tr>
- 			<td scope="row" colspan="2">
-				<c:forEach items="${replyList}" var="r">
-					<span id="reply-${r.replySerial}">
-						${r.userName}: ${r.replyContent} (${r.cDate})
-						<c:if test="${sessionVO.userSerial==r.userSerial}">
-							<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateReplyForm('${r.replySerial}');" style="cursor:pointer;">
-							<img src="resources/images/folder_deleted.png" width="10px" height="10px" onclick="deleteReply('${r.replySerial}');" style="cursor:pointer;">
-						</c:if>
-					</span>
-					<span id="replyForm-${r.replySerial}" style="display: none;">
-						<input type="text" id="updateReplyContent-${r.replySerial}" value="${r.replyContent}">
-						<input type="button" value="수정" onclick="updateReply('${r.replySerial}')">
-						<input type="button" value="취소" onclick="updateReplyForm('${r.replySerial}');">
-					</span>
-					<br>
-				</c:forEach>
+  			<td style="border-bottom: none;">
+  				<span style="font-size: 5px; float: right; padding-top: 5px;">
+  				<font style="color: gray;">첨부파일 : </font>
+  				<a onclick="downloadFile('${board.file}');" style="cursor:pointer;">${board.file}</a>
+				</span>
 			</td>
 		</tr>
 		</c:if>
-	</table>
+		<tr>
+ 			<td style="height: 200px;">
+ 				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
+ 					${board.content}
+ 				</span>
+			</td>
+		</tr>
+	</tbody>
+	<tr>
+	 	<td scope="row">
+	 		<img alt="" src="resources/images/reply-pen.png" width="10px">
+	 		<font style="font-size: 10pt;">댓글 [${board.replyCnt}]</font>
+	 		<span onclick="showReplyForm();" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt; float: right">댓글작성</span>
+		</td>
+	</tr>
+	<tbody id="replyForm" style="display: none;">
+		<tr>
+			<td scope="row">
+				<textarea id="replyContent" style="resize: none; width: 390px; height: 100px;"></textarea><br>
+				<input type="button" value="취소" style="float: right" onclick="showReplyForm();">
+				<input type="button" value="입력" style="float: right" onclick="insertReply('${board.boardSerial}');">
+			</td>
+		</tr>
+	</tbody>
+	<c:if test="${board.replyCnt!=0}">
+	<tr style="background: #EBE9E9;">
+			<td scope="row">
+			<c:forEach items="${replyList}" var="r">
+				<span id="reply-${r.replySerial}">
+					${r.userName}: ${r.replyContent}
+					<span style="font-size: 5px; padding-top: 5px; color: gray;">
+					(<fmt:formatDate value="${r.cDate}" pattern="yyyy-MM-dd"/>)
+					</span>
+					<c:if test="${sessionVO.userSerial==r.userSerial}">
+						<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateReplyForm('${r.replySerial}');" style="cursor:pointer;">
+						<img src="resources/images/x-delete.png" width="10px" height="10px" onclick="deleteReply('${r.replySerial}');" style="cursor:pointer;">
+					</c:if>
+				</span>
+				<span id="replyForm-${r.replySerial}" style="display: none;">
+					<input type="text" id="updateReplyContent-${r.replySerial}" value="${r.replyContent}">
+					<%-- <input type="button" value="수정" onclick="updateReply('${r.replySerial}')">
+					<input type="button" value="취소" onclick="updateReplyForm('${r.replySerial}');"> --%>
+					<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateReply('${r.replySerial}');">
+						수정
+					</span>
+					<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateReplyForm('${r.replySerial}');">
+						취소
+					</span>
+				</span>
+				<br>
+			</c:forEach>
+		</td>
+	</tr>
+	</c:if>
+</table>
 </div>
 </body>
 <script>
