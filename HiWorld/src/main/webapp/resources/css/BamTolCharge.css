@@ -1,152 +1,236 @@
 @charset "UTF-8";
 
-
-
-#chargeContainer{
-	border: 1px solid black;
+#chargeContainer {
+	
 	height: 580px;
-	margin-left:10px;
-	
+	margin-left: 10px;
 }
 
-#leftCon{
-	float:left;
+#leftCon {
+	float: left;
 	width: 30%;
-	height:100%;
-	border:1px solid;
+	height: 100%;
+	border: none;
+	border-right:1px solid #b5b5b5;
+	border-top:1px solid #b5b5b5;
 }
 
-#rightCon{
-	border : 1px solid ;
-	float:left;
-	width:69.4%;
-	height:100%;
-	
+#rightCon {
+	border: 1px solid #b5b5b5;
+	border-bottom:none;
+	float: left;
+	width: 69.4%;
+	height: 100%;
+	background: #f4f2f2;
 }
-#logo{
+
+#logo {
 	margin-top: 105px;
+	text-align: center;
 }
 
-#logo img{
-	border: 1px solid;
-	width:50%;
-	height:100%;
+#logo img {
+	border: 1px solid #b5b5b5;
+	width: 50%;
+	height: 100%;
 }
 
-.chargeEX{
-	border:1px solid;
+.chargeEX {
+	border-top: 1px solid #b5b5b5;
+	border-bottom: 1px solid #b5b5b5;
 	width: 80%;
-	height:5%;
-	margin-left:20px;
-	margin-right:20px;
+	height: 10%;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.chargeEX input {
+	margin-top: 18px;
+	border: none;
 }
 
 #bamtolinfo label {
 	display: block;
-	border:1px solid;
+	border: 1px solid #b5b5b5;
 	margin-top: 100px;
 	padding: 10px 10px 10px 10px;
 	margin-left: 30px;
 	margin-right: 30px;
 }
 
-#bamtolprice{
-	margin-top:10px;
+#bamtolprice {
+	margin-top: 10px;
 }
-#priceinfo{
-	border:1px solid;
+
+#priceinfo {
+	border:none;
+	border-top: 1px solid #b5b5b5;
 	width: 100px;
 	height: 130px;
-	float:left;
-	margin-left:30px;
+	float: left;
+	margin-left: 30px;
+}
+
+#priceinfo label {
+	display: block;
+	margin-top: 10px;
 }
 
 .price1 {
-	border:1px solid;
+	border: 1px solid #b5b5b5;
 	width: 100px;
 	height: 130px;
-	float:left;
-	margin-left:10px;
+	float: left;
+	margin-left: 10px;
+	background: #edebeb;
+	text-align: center;
 }
 
 .price2 {
-	border:1px solid;
+	border: 1px solid #b5b5b5;
 	width: 100px;
 	height: 130px;
-	float:left;
-	margin-left:10px;
-}
-.price3 {
-	border:1px solid;
-	width: 100px;
-	height: 130px;
-	float:left;
-	margin-left:10px;
-}
-.price4 {
-	border:1px solid;
-	width: 100px;
-	height: 130px;
-	float:left;
-	margin-left:10px;
+	float: left;
+	margin-left: 10px;
+	background: #edebeb;
+	text-align: center;
+	
+	
 }
 
-#price1_1{
-	border:1px solid;
-	width:100px;
-	height:30%;
+.price3 {
+	border: 1px solid #b5b5b5;
+	width: 100px;
+	height: 130px;
+	float: left;
+	margin-left: 10px;
+	background: #edebeb;
+	text-align: center;
+	
 }
-#price2_1{
-	border:1px solid;
-	width:100%;
-	height:30%;
+
+.price4 {
+	border: 1px solid #b5b5b5;
+	width: 100px;
+	height: 130px;
+	float: left;
+	margin-left: 10px;
+	background: #edebeb;
+	text-align: center;
+	
 }
-#price3_1{
-	border:1px solid;
-	width:100%;
-	height:30%;
+
+#price1_1 {
+	border: none;
+	border-bottom:1px solid #b5b5b5;
+	width: 100px;
+	height: 30%;
+	background: white;
+	margin-top: 5px;
+	
 }
-#price4_1{
-	border:1px solid;
-	width:100%;
-	height:30%;
+
+#price2_1 {
+	border: none;
+	border-bottom:1px solid #b5b5b5;
+	width: 100%;
+	height: 30%;
+	background: white;
+	margin-top: 5px;
 }
-#paymentinfo{
-	float:left;
-	margin-top:10px;
+
+#price3_1 {
+	border: none;
+	border-bottom:1px solid #b5b5b5;
+	width: 100%;
+	height: 30%;
+	background: white;
+	margin-top: 5px;
+}
+
+#price4_1 {
+	border: none;
+	border-bottom:1px solid #b5b5b5;
+	width: 100%;
+	height: 30%;
+	background: white;
+	margin-top: 5px;
+}
+#price1_2{
+	margin-top: 5px;
+}
+
+#price2_2{
+	margin-top: 5px;
+}
+
+#price3_2{
+	margin-top: 5px;
+}
+
+#price4_2{
+	margin-top: 5px;
+}
+
+
+#paymentinfo {
+	float: left;
+	margin-top: 10px;
 	width: 580px;
 }
 
-#priceagree{
-	border:1px solid;
+#priceagree {
+	border-top:1px solid #b5b5b5;
 	width: 100px;
 	height: 130px;
-	float:left;
-	margin-left:30px;
-
+	float: left;
+	margin-left: 30px;
+	padding-bottom:10px;
 }
 
-#agreeinput{
+#priceagree label {
+	display: block;
+	margin-top:10px;
+}
+
+#agreeinput {
 	width: 430px;
 	height: 100px;
 	float: left;
-	margin-left:10px;
-}
-#selectinfo{
-	border:1px solid;
-	width:435px;
-	float:left;
-	margin-left:10px;
-	height:24px;
+	margin-left: 10px;
+	border:none;
+	border:1px solid #b5b5b5;
+	border-bottom:none;
+	background: white;
+
 }
 
-#checkbox{
-	margin-top:5px;
-	float:right;
+#selectinfo {
+	border: 1px solid #b5b5b5;
+	width: 434px;
+	float: left;
+	margin-left: 10px;
+	height: 24px;
+	background: white;
+	
+}
+#checkinput{
+	width:90%;
+	font-size:10px;
+	border: none;
+    margin-top: 5px;
+    margin-left: 15px;
 }
 
-#paybutton{
-	float:right;
-	margin-top:10px;
-	margin-right:30px;
+#checkbox {
+	margin-top: 5px;
+	float: right;
+}
+
+#paybutton {
+	float: right;
+	margin-top: 10px;
+	margin-right: 30px;
 }

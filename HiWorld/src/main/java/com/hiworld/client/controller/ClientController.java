@@ -2,10 +2,12 @@ package com.hiworld.client.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -197,25 +199,23 @@ public class ClientController {
 			
 	/* 로그인 */
 	@PostMapping("/checkClient.do")
-	public String checkClient(ClientVO clientVO, HttpSession session) {
+	public String checkClient(ClientVO clientVO, HttpSession session, HttpServletResponse res )throws Exception {
 		System.out.println("로그인");
 		sessionVO vo = clientService.checkClient(clientVO);	
 		
 		if(vo!=null) {
-			/* 밴 먹었는지 확인 */
-			String test = clientService.checkBan(clientVO);
-			if(test!=null) {
-				/* 1은 밴 먹음 */
-				return "Login/mainPage";
-			}else {
-				/* 이름하고 아이디를 세션 화 */
-				session.setAttribute("sessionVO", vo);
-				return "redirect:/login.do";
-			}
-			
-		}else {			
-			System.out.println("여기로 왔니?");
+
+			/* 이름하고 아이디를 세션 화 */
+			session.setAttribute("sessionVO", vo);
+			return "redirect:/login.do";
+		}else {
+			res.setContentType("text/html;charset=UTF-8");
+			PrintWriter writer = res.getWriter();
+			writer.println("<script>alert('아이디 또는 패스워드를 확인하세요.')</script>");
+			writer.flush();
+
 			return "Login/mainPage";	
+			
 		}
 	}
 	
