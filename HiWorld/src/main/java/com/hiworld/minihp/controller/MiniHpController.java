@@ -1,5 +1,7 @@
 package com.hiworld.minihp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,13 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.service.MiniHpNeighborListService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpNeighborListVO;
+import com.hiworld.minihp.vo.MiniHpNeighborVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
 @Controller
@@ -23,11 +29,19 @@ public class MiniHpController {
 	MiniHpSettingService settingService;
 	
 	@Autowired
+	MiniHpNeighborListService neighborListService;
+	
+	@Autowired
 	MiniHpIntroDAO introDAO;
 	
 	MiniHpIntroVO introVO;
 	
 	MiniHpUserMenuVO menuVO;
+	
+	MiniHpNeighborListVO neighborListVO;
+	
+	
+	//@@@@@@@@@@@@@@@@ 홈페이지 VIEW @@@@@@@@@@@@@@@@@@
 	
 	@RequestMapping("/MiniHP_Home.do")
 	public String miniHp_Home(HttpSession session, Model model) {
@@ -114,7 +128,7 @@ public class MiniHpController {
 	}
 	
 	@RequestMapping("/miniHp_rightMenu.do")
-	public String rightMenu(HttpServletRequest request) {
+	public String rightMenu(HttpServletRequest request, Model model) {
 		System.out.println("메뉴불러오기");
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
@@ -124,10 +138,48 @@ public class MiniHpController {
 		
 		System.out.println(menu);
 		
-		request.setAttribute("miniHpUserMenuVO", menuVO);
-		request.setAttribute("menu", menu);
+		model.addAttribute("miniHpUserMenuVO", menuVO);
+		model.addAttribute("menu", menu);
 
 		return "MiniHP/MiniHP_Right_Menu";
 	}
 	
+	
+	// @@@@@@@@@@@@@@@@ 이웃 신청 @@@@@@@@@@@@@@@@
+	
+	@GetMapping("/miniHp_neighborRegisterList.do")
+	public String neighborRegisterList(HttpSession session, Model model) {
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserID);
+		
+		model.addAttribute("registorList", list);
+		
+		return "MiniHP/MiniHP_NeighborRegisterList";
+	}
+	
+	@GetMapping("/miniHp_neighborRegisterCheck.do")
+	public String neighborRegisterCheck(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		String senderID = request.getParameter("senderID");
+		String receiverID = vo.getUserID();
+		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
+		String minimiPath = vo.getOriginalFileName();*/
+		neighborListVO = neighborListService.getRegisterCheck(senderID, receiverID);
+		
+		model.addAttribute("neighborListVO", neighborListVO);
+		
+		return "MiniHP/MiniHO_NeighborRegisterCheck";
+	}
+	
+	@ResponseBody
+	@PostMapping("/miniHp_neighborRegisterCheck_ok.do")
+	public String neighborRegisterCheck_ok(HttpServletRequest request, MiniHpNeighborVO neighborVO) {
+		int type = Integer.parseInt(request.getParameter("type"));
+		
+		neighborListService.registerCheck_ok(type, neighborVO);
+		
+		return "";
+	}
 }
