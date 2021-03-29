@@ -204,10 +204,16 @@ public class ClientController {
 		sessionVO vo = clientService.checkClient(clientVO);	
 		
 		if(vo!=null) {
-
-			/* 이름하고 아이디를 세션 화 */
-			session.setAttribute("sessionVO", vo);
-			return "redirect:/login.do";
+			/* 밴 먹었는지 확인 */
+			String test = clientService.checkBan(clientVO);
+			if(test!=null) {
+				/* 1은 밴 먹음 */
+				return "Login/mainPage";
+			}else {
+				/* 이름하고 아이디를 세션 화 */
+				session.setAttribute("sessionVO", vo);
+				return "redirect:/login.do";
+			}
 		}else {
 			res.setContentType("text/html;charset=UTF-8");
 			PrintWriter writer = res.getWriter();
