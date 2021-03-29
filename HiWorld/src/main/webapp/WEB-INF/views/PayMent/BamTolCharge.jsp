@@ -106,22 +106,43 @@
 
 	}
 	
+	function focus(){
+		$('.price1').css({'border':'1px solid red'});
+		console.log('dddd')
+	}
+	
+	function blur(){
+// 		$('.price1').css({'border':'1px solid #b5b5b5'});
+	}
 	function price1(){
-		$('#chargeEX').val('충전 예정금액 : 10000원')
-		
+		$('#chargeEX').val('충전 예정금액 : 10000원');
+		$('.price1').css({'border':'1px solid red'});
+		$('.price2').css({'border':'1px solid #b5b5b5'});
+		$('.price3').css({'border':'1px solid #b5b5b5'});
+		$('.price4').css({'border':'1px solid #b5b5b5'});		
 	}
 	function price2(){
 		$('#chargeEX').val('충전 예정금액 : 28000원')
+		$('.price1').css({'border':'1px solid #b5b5b5'});
+		$('.price2').css({'border':'1px solid red'});
+		$('.price3').css({'border':'1px solid #b5b5b5'});
+		$('.price4').css({'border':'1px solid #b5b5b5'});	
 	
 	}
 	function price3(){
 		$('#chargeEX').val('충전 예정금액 : 45000원');
-		
+		$('.price1').css({'border':'1px solid #b5b5b5'});
+		$('.price2').css({'border':'1px solid #b5b5b5'});
+		$('.price3').css({'border':'1px solid red'});
+		$('.price4').css({'border':'1px solid #b5b5b5'});	
 
 	}
 	function price4(){
 		$('#chargeEX').val('충전 예정금액 : 90000원')
-
+		$('.price1').css({'border':'1px solid #b5b5b5'});
+		$('.price2').css({'border':'1px solid #b5b5b5'});
+		$('.price3').css({'border':'1px solid #b5b5b5'});
+		$('.price4').css({'border':'1px solid red'});	
 	}
 </script>
 
@@ -137,7 +158,7 @@
 			</div>
 			
 			<div class="chargeEX" >
-				<input type="text" id="chargeEX" />
+				<input type="text" id="chargeEX" readonly disabled/>
 			</div>
 		</div>
 		<div id="rightCon">
@@ -148,12 +169,12 @@
 					<div id="priceinfo">
 						<label> 결제 금액</label>
 					</div>
-					<div class="price1" onclick="price1()" value="10000">
-						<div id="price1_1" style="width: 100% ;height: 30%;border:1px solid">
+					<div class="price1" onclick="price1()" onfocus="focus()" onblur="blur()">
+						<div id="price1_1">
 							밤톨 10개
 						</div>
 						<div id="price1_2">
-							10000원
+							10,000원
 						</div>
 					</div>
 					<div class="price2" onclick="price2()">
@@ -161,7 +182,7 @@
 							밤톨 30개
 						</div>
 						<div id="price2_2">
-							28000원
+							28,000원
 						</div>
 					</div>
 					<div class="price3" onclick="price3()">
@@ -169,7 +190,7 @@
 							밤톨 50개
 						</div>
 						<div id="price3_2">
-							45000원
+							45,000원
 						</div>
 					</div>
 					<div class="price4" onclick="price4()">
@@ -177,18 +198,24 @@
 							밤톨 100개
 						</div>
 						<div id="price4_2">
-							90000원
+							90,000원
 						</div>
 					</div>
 				</div>
 				<div id="paymentinfo">
 					<div id="priceagree">
-						약관 동의
+						<label>
+							약관 동의
+						</label>
+						
 					</div>
 					
-					<div id="agreetext">
-						<input type="text" id="agreeinput" value="안녕하세요 회원 약관입니다. 문진이형은 20만원을 가져오시오" readonly/>
+					<div >
+						<div id="agreetext">
+							<input type="text" id="agreeinput" value="안녕하세요 회원 약관입니다. 문진이형은 20만원을 가져오시오" readonly disabled="disabled"/>
+						</div>
 						<div id="selectinfo">
+							<input type="text" id="checkinput" value="상품 가격을 확인하였으며 , 계약 관련 고지사항 및 BT정책 및 결제 진행에 동의합니다."/>
 							<input type="checkbox" id="checkbox" />
 						</div>
 					</div>
