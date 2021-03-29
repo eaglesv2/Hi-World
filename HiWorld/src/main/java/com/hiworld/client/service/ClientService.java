@@ -58,4 +58,9 @@ public interface ClientService {
 	
 	/* 밴 풀기 */
 	int unBanClient(int UserSerial);
+	
+	/* 로그인시 밴 확인 */
+	String checkBan(ClientVO clientVO);
+	
+	
 }
