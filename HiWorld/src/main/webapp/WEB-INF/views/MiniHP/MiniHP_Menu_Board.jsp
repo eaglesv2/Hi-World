@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 	#main{
-		height: 350px;
+		height: 330px;
 		width: 450px;
 		overflow-y: scroll;
 		-ms-overflow-style: none;
@@ -14,12 +14,11 @@
 	}
 </style>
 <form name="poto">
-	
-	<div id="nowFolder" style="float: left; padding-left: 20px;">
+	<div id="nowFolder" style="float: left; padding-left: 20px; font-size: 15px; font-weight: bold;color: #1294AB;">
 		${currentFolderName}
 	</div>
-	<div id="write-btn" style="float: right; padding-right: 20px; cursor:pointer;" onclick="moveInsertPage();">
-		글쓰기
+	<div id="write-btn" style="float: right; padding-right: 20px;">
+		<button type="button" onclick="moveInsertPage();"><img alt="" src="resources/images/reply-pen.png" width="10px">글쓰기</button>
 	</div>
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 	
@@ -30,19 +29,21 @@
 			<h3>등록된 글이 없습니다</h3>
 		</c:when>
 		<c:otherwise>
-			<table>
+			<table style="table-layout: fixed;">
 				<tr>
-					<th style="width: 30%;">제목</th>
-					<th style="width: 30%">작성자</th>
+					<th style="width: 40%;">제목</th>
+					<th style="width: 20%">작성자</th>
 					<th style="width: 30%">작성일</th>
 					<th style="width: 10%">조회</th>
 				</tr>
 				<c:forEach items="${list}" var="l">
 				<tr>
-					<td style="width: 30%; height: 5px;word-break:break-all; cursor:pointer;" onclick="moveDetailPage('${l.boardSerial}');">
+					<td style="width: 30%; height: 5px;word-break:break-all;" >
+						<span onclick="moveDetailPage('${l.boardSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" >
 						${l.title}
 						<!-- 댓글 개수 출력 -->
 						[${l.replyCnt}]
+						</span>
 						<!-- 게시글 등록되고 3일동안 new 아이콘 표시 -->
 						<c:set var="now" value="<%=new java.util.Date()%>" /><!-- 현재시간 -->
 						<fmt:parseNumber value="${now.time / (1000*60*60*24)}" integerOnly="true" var="today" /><!-- 현재시간을 숫자로 -->
@@ -55,9 +56,11 @@
 							<img alt="file" src="resources/images/disk-file.png" width="10px">
 						</c:if>
 					</td>
-					<td style="width: 30%; height: 5px;word-break:break-all;">${l.userName}</td>
-					<td style="width: 30%; height: 5px;word-break:break-all;">${l.uDate}</td>
-					<td style="width: 10%; height: 5px;word-break:break-all;">${l.hit}</td>
+					<td style="height: 5px;word-break:break-all; text-align: center;">${l.userName}</td>
+					<td style="height: 5px;word-break:break-all; text-align: center;">
+						<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd"/>
+					</td>
+					<td style="height: 5px;word-break:break-all; text-align: center;">${l.hit}</td>
 				</tr>
 				</c:forEach>
 			</table>
@@ -111,6 +114,7 @@ function moveInsertPage(){
     $.ajax(ajaxOption).done(function(data){
         $('#bodyContents').children().remove();
         $('#bodyContents').html(data);
+        console.log('aaaaaaaaaa');
     });
 }
 //게시물 제목 클릭시 상세 페이지로 넘어감

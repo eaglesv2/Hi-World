@@ -12,9 +12,10 @@
 <center><h3>이동할 폴더를 선택해주세요</h3></center>
 <hr>
 <c:forEach items="${folderList}" var="l">
-	<a onclick="updateBoardFolder('${serial}','${l.serial}')" style="cursor:pointer;">
+	<span onclick="updateBoardFolder('${serial}','${l.serial}')" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+		<img alt="" src="${pageContext.request.contextPath}/resources/images/folder_icon.png" height="13px" width="13px">
 		${l.folderName}
-	</a><br><br>
+	</span><br>
 </c:forEach>
 </body>
 <script>
