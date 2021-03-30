@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +12,14 @@
     <link rel="stylesheet" href="resources/css/shoppingPage.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-      function shop_character(){
+      function shop_character(list){
               //ajax option
                console.log("1234") 
               var ajaxOption={
              		 type: "GET",
                       url : "shop_character.do",
-                      dataType : "html", 
+                      dataType : "html",
+                      data: {"list":list},
                       async:true,
                       cache:false
              		 
@@ -33,13 +35,14 @@
                    console.log("에러를 찾자");
                });
              };
-    function shop_background(){
+    function shop_background(list){
 		        //ajax option
 		        console.log("1234") 
 		       var ajaxOption2={
 		      		 type: "GET",
 		               url : "shop_background.do",
 		               dataType : "html", 
+		               data: {"list":list},
 		               async:true,
 		               cache:false
 		      		 
@@ -56,12 +59,13 @@
 		        });
 		      };
 
-     function shop_music(){
+     function shop_music(list){
 		         //ajax option
 		         console.log("1234") 
 		        var ajaxOption3={
 		       		 type: "GET",
 		                url : "shop_music.do",
+		                data: {"list":list},
 		                dataType : "html", 
 		                async:true,
 		                cache:false
@@ -80,13 +84,14 @@
 		       };
 
 
-    function shop_mouse(){
+    function shop_mouse(list){
 		        //ajax option
 		        console.log("1234") 
 			       var ajaxOption4={
 			      		 type: "GET",
 			               url : "shop_mouse.do",
 			               dataType : "html", 
+			               data: {"list":list},
 			               async:true,
 			               cache:false
 		      		 
@@ -106,10 +111,10 @@
 </head>
 <body>
 	<div class="Navi">
-		<div onclick="shop_character()">캐릭터</div>
-		<div onclick="shop_background()">배경화면</div>
-		<div onclick="shop_music()">음악</div>
-		<div onclick="shop_mouse()">마우스모양</div>
+		<div onclick="shop_character('캐릭터')">캐릭터</div>
+		<div onclick="shop_background('배경')">배경화면</div>
+		<div onclick="shop_music('음악')">음악</div>
+		<div onclick="shop_mouse('마우스')">마우스모양</div>
 	</div>
 		<div class="sangpum">
 		<table>
@@ -121,17 +126,37 @@
 						<td>구매하기</td>
 						<td>장바구니로가기</td>
 				</tr>
-				<c:forEach var="kinds" items="${ArticleList}">
-					<tr>
-						<td><img src="${kinds.articleImg}" /></td>
-						<td>${kinds.articleKinds}</td>
-						<td>${kinds.articleName}</td>
-						<td>${kinds.articlePrice}BT</td>
-						<td><a href="#"
-							onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
-						<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
-					</tr>
-			
+
+		<c:forEach var="kinds" items="${ArticleList}">
+			<tr>
+				<c:set var="check" value="${kinds.articleImg}" />
+				<c:if test="${fn:contains(check,'.png')}">
+					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
+					<td>${kinds.articleKinds}</td>
+					<td>${kinds.articleName}</td>
+					<td>${kinds.articlePrice}</td>
+					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
+					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
+				</c:if>
+				<c:if test="${fn:contains(check,'.jsp')}">
+					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
+					<td>${kinds.articleKinds}</td>
+					<td>${kinds.articleName}</td>
+					<td>${kinds.articlePrice}</td>
+					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
+					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
+				</c:if>
+				<c:if test="${fn:contains(check, '.mp3')}">
+					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
+					<td>${kinds.articleKinds}</td>
+					<td>${kinds.articleName}</td>
+					<td>${kinds.articlePrice}</td>
+					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
+					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
+					<td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td>
+				</c:if>
+			</tr>
+
 				</c:forEach>
 			
 		</table>
@@ -147,6 +172,21 @@
 
 </body>
 <script>
+
+	function PLAY(mp3) {
+		var audio = new Audio(mp3);
+		/* 노래 시작 */
+		audio.play();
+	
+		/* Timeout을 이용해서 10초후 노래 정지*/
+		setTimeout(function() {
+			audio.pause();
+		}, 10000)
+		
+	}
+
+
+
 	function basket(ArticleName) {
 			var UserSerial = '${sessionVO.userSerial}';
 			$.ajax({

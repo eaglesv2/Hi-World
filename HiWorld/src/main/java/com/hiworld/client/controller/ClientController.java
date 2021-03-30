@@ -487,22 +487,22 @@ public class ClientController {
 		case "캐릭터":
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleCharacter";
+			return "Login/shop_character";
 		/* 배경화면 별 */
 		case "배경": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleBackground";
+			return "Login/shop_background";
 		/* 음악 별 */
 		case "음악": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleMusic";
+			return "Login/shop_Music";
 		/* 마우스 별 */	
 		case "마우스": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleMouse";
+			return "Login/shop_Mouse";
 		/* 에러 */	
 		default:
 			return "error";
