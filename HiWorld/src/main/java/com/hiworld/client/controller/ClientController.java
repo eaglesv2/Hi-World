@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -53,7 +52,29 @@ public class ClientController {
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
-
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 이웃 찾기 */
+	@GetMapping("/boardPage.do")
+	public String boardAjax(Model model) {
+		
+		/* 
+		 	MiniHp_Intro 정보 싹 가져옴
+		 	조건은 session에 등록된 자기의 정보 빼고 가져오기
+		 	
+		 	
+		 	
+		 	그값을 모델화 시키고 view
+		 */
+		
+		
+		
+		/* */
+		return "Login/boardPage";
+	}
+	
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/* 회원 목록 보이기 */
@@ -453,7 +474,7 @@ public class ClientController {
 		/* 호출한 ajax의 데이터가 뭔지 확인 */
 		String list = request.getParameter("list");
 		articleVO.setArticleList(list);
-		ArrayList<ArticleVO> ArticleList ;
+		ArrayList<ArticleVO> ArticleList;
 		
 		switch (list) {
 		
@@ -642,24 +663,26 @@ public class ClientController {
 	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/*메인페이지 AJAX*/
+	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
 	public String noticeAjax() {
+		/* 디비에서 목록 불러오기 */
+		
+		
+		
 		return "Login/noticePage";
 		
 	}
 	
+	/* 쇼핑페이지 */
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
 		System.out.println("오나 ?");
 		return "Login/shoppingPage";
 	}
 	
-	@GetMapping("/boardPage.do")
-	public String boardAjax() {
-		return "Login/boardPage";
-	}
 	
+	/* 문의 사항 */
 	@GetMapping("/questionPage.do")
 	public String questionAjax() {
 		return "Login/questionPage";
