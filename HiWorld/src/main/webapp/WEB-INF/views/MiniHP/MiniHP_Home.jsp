@@ -51,8 +51,6 @@ $(document).ready(function() {
 	})
 });
 
-
-
 </script>
 
 </head>
@@ -65,7 +63,7 @@ $(document).ready(function() {
 						<td colspan="2" align="center">
 							<br>
 							<!-- 투데이 + 전체 방문자 수 -->
-							<font><span style="font-size:8pt;">today <font color="red">1</font> | total 1</span></font>
+							<font><span style="font-size:8pt;">today <font color="red">${introVO.hpToday}</font> | total ${introVO.hpTotal}</span></font>
 						</td>
 						<td height="40">
 							<!-- 미니 홈피 제목 -->
@@ -80,7 +78,7 @@ $(document).ready(function() {
 
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="sideContents">
-								<iframe frameborder="0" width="160" height="440" src="MiniHP_Left.do"></iframe> 
+								<iframe name="left" frameborder="0" width="160" height="440" src="MiniHP_Left.do"></iframe> 
 							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 

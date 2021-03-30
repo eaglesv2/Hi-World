@@ -1,5 +1,7 @@
 package com.hiworld.minihp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,9 +16,11 @@ import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpDAO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.service.MiniHpNeighborListService;
+import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
 import com.hiworld.minihp.vo.MiniHpNeighborListVO;
+import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
@@ -25,6 +29,9 @@ public class MiniHpGuestController {
 	
 	@Autowired
 	MiniHpSettingService settingService;
+	
+	@Autowired
+	MiniHpNeighborService neighborService;
 	
 	@Autowired
 	MiniHpNeighborListService neighborListService;
@@ -41,38 +48,54 @@ public class MiniHpGuestController {
 	
 	MiniHpOwnerVO ownerVO;
 	
-	@RequestMapping("/miniHp_rightGuestMenu.do")
+	/*게스트 미니홈피 메인*/
+	@GetMapping("/miniHp_guestHome.do")
+	public String homeGuest(HttpServletRequest request) {
+		String OwnerID = request.getParameter("OwnerID");
+		introVO = introDAO.getData(OwnerID);
+		
+		request.setAttribute("OwnerID", OwnerID);
+		request.setAttribute("ownerintroVO", introVO);
+		
+		return "MiniHP/MiniHP_Home_Guest";
+	}
+	
+	@GetMapping("/miniHp_rightGuestMenu.do")
 	public String rightGuestMenu(HttpServletRequest request) {
 		System.out.println("게스트 메뉴 불러오기");
 		String OwnerID = request.getParameter("OwnerID");
+		System.out.println(OwnerID);
 		menuVO = settingService.getMenuAvailable(OwnerID);
 		/*introVO = introDAO.getData(OwnerID);*/
 		
+		request.setAttribute("OwnerID", OwnerID);
 		request.setAttribute("ownermenuVO", menuVO);
 		/*request.setAttribute("ownerintroVO", introVO);*/
 		
 		return "MiniHP/MiniHP_Right_Guest_Menu";
 	}
 	
-	@RequestMapping("/miniHp_leftGuest.do")
+	@GetMapping("/miniHp_leftGuest.do")
 	public String leftGuest(HttpServletRequest request) {
 		String OwnerID = request.getParameter("OwnerID");
 		introVO = introDAO.getData(OwnerID);
 		ownerVO = dao.getData(OwnerID);
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(OwnerID); //이웃 목록 불러오기
 		
 		request.setAttribute("ownerintroVO", introVO);
 		request.setAttribute("ownerVO", ownerVO);
+		request.setAttribute("neighborList", neighborList);
 		
 		return "MiniHP/MiniHP_Left_Guest";
 	}
 	
-	@RequestMapping("/miniHp_rightGuest.do")
+	@GetMapping("/miniHp_rightGuest.do")
 	public String rightGuest(HttpServletRequest request) {
 		
 		return "MiniHP/MiniHP_Right_Guest";
 	}
 	
-	@RequestMapping("/miniHp_topGuest.do")
+	@GetMapping("/miniHp_topGuest.do")
 	public String topGuest(HttpServletRequest request) {
 		String OwnerID = request.getParameter("OwnerID");
 		introVO = introDAO.getData(OwnerID);

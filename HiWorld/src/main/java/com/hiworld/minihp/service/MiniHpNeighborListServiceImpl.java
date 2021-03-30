@@ -16,9 +16,6 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 	@Autowired
 	private MiniHpNeighborListDAO neighborListDAO;
 	
-	@Autowired
-	private MiniHpNeighborDAO neighborDAO;
-	
 	MiniHpNeighborListVO neighborListVO;
 	
 	MiniHpNeighborVO neighborVO;
@@ -35,11 +32,11 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 		
 		List<MiniHpNeighborListVO> list = neighborListDAO.getRegisterList(UserID);
 		
-		System.out.println(list);
-		
 		if(list.size() == 0) {
 			list = null;
 		}
+		
+		System.out.println(list);
 		
 		return list;
 	}
@@ -52,30 +49,4 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 		
 		return neighborListVO;
 	}
-	
-	/*이웃 신청 결과 처리*/
-	@Override
-	public void registerCheck_ok(int type, MiniHpNeighborVO nVO) {
-
-		String senderID = nVO.getNeighborID1();
-		String receiverID = nVO.getNeighborID2();
-		switch(type) {
-		case 0: //이웃 신청 거절
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
-			break;
-			
-		case 1: //이웃 신청 수락
-			neighborVO = neighborDAO.checkNeighbor(senderID, receiverID);
-			if(neighborVO == null) {
-				neighborDAO.insertNeighbor(nVO);
-			}
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
-			break;
-		
-		case 2: //이웃 신청 보류
-			
-			break;
-		}
-	}
-
 }
