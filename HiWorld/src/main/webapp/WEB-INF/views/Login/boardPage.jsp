@@ -17,12 +17,11 @@
     
 	<div id="container">
 	
-	<table>
+	<table border="1">
 		<c:forEach var="kinds" items="${MiniVO}">
 			<tr>
-				<td><a href="#">${kinds.HpTitle}</a></td>
-				<td>${kinds.UserName}</td>
-				<td>${kinds.UserID}</td>
+				<td>${kinds.hpTitle}</td>
+				<td>${kinds.userName}<a href=# onclick="MiniHp_Open('${kinds.userID}')" style="color: blue;">(${kinds.userID})</a></td>
 			</tr>		
 		</c:forEach>
 	</table>
@@ -31,4 +30,15 @@
 	</div>    
     
 </body>
+
+<script>
+	function MiniHp_Open(UserID){
+		var popupWidth = 880;
+	    var popupHeight = 580;
+	   var popupX = (window.screen.width/2)-(popupWidth/2);
+	    var popupY = (window.screen.height/2)-(popupHeight/2);
+	   window.open("miniHp_guestHome.do?OwnerID="+UserID,UserID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+	}
+</script>
+
 </html>
