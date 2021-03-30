@@ -111,23 +111,36 @@
 		<div onclick="shop_music()">음악</div>
 		<div onclick="shop_mouse()">마우스모양</div>
 	</div>
-	<div class="sangpum">
-			<a href="basketJoin.do">장바구니</a>
-			<h1>물품 최신순으로 나열</h1>
-			<table>
+		<div class="sangpum">
+		<table>
+				<tr id="tablehead">
+						<td>상품</td>
+						<td>종류</td>
+						<td>상품명</td>
+						<td>가격</td>
+						<td>구매하기</td>
+						<td>장바구니로가기</td>
+				</tr>
 				<c:forEach var="kinds" items="${ArticleList}">
 					<tr>
 						<td><img src="${kinds.articleImg}" /></td>
 						<td>${kinds.articleKinds}</td>
 						<td>${kinds.articleName}</td>
-						<td>${kinds.articlePrice}</td>
+						<td>${kinds.articlePrice}BT</td>
 						<td><a href="#"
 							onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
 						<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
 					</tr>
+			
 				</c:forEach>
-			</table>
-		</div>
+			
+		</table>
+	</div>
+	
+	<div>
+		<a href="basketJoin.do">장바구니</a>
+		<h1>물품 최신순으로 나열</h1>
+	</div>
 
 
 

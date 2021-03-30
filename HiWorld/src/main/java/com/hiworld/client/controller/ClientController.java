@@ -424,7 +424,7 @@ public class ClientController {
 		case "쇼핑":
 			ArticleList = articleService.getAllArticle();
 			model.addAttribute("ArticleList",ArticleList);			
-			return "articleMain";		
+			return "Login/shoppingPage";		
 		/* 케릭터 별 */
 		case "캐릭터":
 			ArticleList = articleService.getSelectArticle(articleVO);
@@ -615,7 +615,7 @@ public class ClientController {
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
 		System.out.println("오나 ?");
-		return "Login/shoppingPage";
+		return "articleMain";
 	}
 	
 	@GetMapping("/boardPage.do")
