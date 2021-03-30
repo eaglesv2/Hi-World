@@ -277,7 +277,44 @@ public class ClientController {
 		return "redirect:/login.do";
 	}
 	
-	
+	/* 회원정보 수정*/
+	@PostMapping("UserUpdate.do")
+	public String userUpdate(HttpServletRequest request, HttpSession session,Model model) {
+		System.out.println("수정 항목임 여기 왓니?");
+		//int updatech = Integer.parseInt(request.getParameter("updatech"));
+		/* 받아온 값을 vo에 넣기 위해서 작업*/
+		String userName= request.getParameter("userName");
+		sessionVO vo1 = (sessionVO)session.getAttribute("sessionVO");
+		int userserial = vo1.getUserSerial();
+		String userId = vo1.getUserID();
+		ClientVO vo = clientService.getOneClient(userId);
+		vo.setUserName(userName);
+		vo.setUserSerial(userserial);
+		int ok = clientService.updateName(vo);
+		/*============================================================*/
+		sessionVO sessionvo = (sessionVO)session.getAttribute("sessionVO");
+		/* user이름을 조회 하고 리턴하기 위해서*/
+		String UserId = sessionvo.getUserID();
+		String oneclient = clientService.selectName(UserId);
+		ClientVO clientvo = clientService.getOneClient(oneclient);
+		model.addAttribute("clientVO", clientvo);
+		
+		
+				/*if(updatech == 1) {
+			 1이 들어 오면 name를 수정 하라
+				
+				
+		}else if(updatech == 2) {
+			 2이 들어 오면 pw를 수정 하라
+		}else if(updatech == 3) {
+			 3이 들어 오면 birth를 수정 하라
+		}else if(updatech == 4) {
+			 4이 들어 오면 tel를 수정 하라
+		}else if(updatech == 5) {
+			 5이 들어 오면 address를 수정 하라
+		}*/
+		return "Login/userOneView";
+	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
 	@GetMapping("/BamTolCharge.do")

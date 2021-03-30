@@ -21,6 +21,83 @@
 		<!-- ALTER 를 이용해서 table구조 바꾸기도 가능 -->
 	</delete>
 	
+	
+	<!-- 회원 정보 수정 -->
+	
+	<!--  이름 수정 -->
+	<update id="updateName" parameterType="clientVO">
+		UPDATE HW_USERLIST SET
+		UserName = #{UserName}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	<!-- 이름 조회  -->
+	<select id="selectName" resultType="String">
+	SELECT UserName FROM HW_USERLIST
+	where UserID = #{UserID}
+	</select>
+	
+	
+	<!--  비밀번호 수정 -->
+	<update id="updatepw" parameterType="clientVO">
+		UPDATE HW_USERLIST SET
+		UserPW = #{UserPW}
+		WHERE UserPW = #{UserPW}
+	</update>
+	<!-- 비밀번호 조회  -->
+	<select id="selectpw" resultType="clientVO">
+	SELECT UserPW FROM HW_USERLIST
+	WHERE UserPW = #{UserPW}
+	</select>
+	
+	<!--  생일 수정 -->
+	<update id="updateBirth" parameterType="clientVO">
+		UPDATE HW_USERLIST SET
+		UserBirth = #{UserBirth}
+		WHERE UserBirth = #{UserBirth}
+	</update>
+	<!-- 생일수정 조회  -->
+	<select id="selectBirth" resultType="clientVO">
+	SELECT UserBirth FORM HW_USERLIST
+	WHERE UserBirth = #{UserBirth}
+	</select>
+	
+		<!--  연락처 수정 -->
+		<update id="updateTel" parameterType="clientVO">
+		UPDATE HW_USERLIST SET
+		UserTel = #{UserTel}
+		WHERE UserTel = #{UserTel}
+	</update>
+	<!-- 연락처 조회  -->
+	<select id="selectTel" resultType="clientVO">
+	SELECT UserTel FORM HW_USERLIST
+	WHERE UserTel = #{UserTel}
+	</select>
+	
+	
+		<!-- 주소 수정  --> 
+	<update id="updateAddress" parameterType="clientVO">
+		UPDATE HW_USERLIST SET
+		UserAddress = #{UserAddress}
+		WHERE UserAddress = #{UserAddress}
+	</update>
+	<!-- 주소 조회  -->
+	<select id="selectAddress" resultType="clientVO">
+	SELECT UserAddress FORM HW_USERLIST
+	WHERE UserAddress = #{UserAddress}
+	</select>
+	
+	
+		
+	<!-- 회원 정보 삭제 -->
+	<delete id="deleteClient">
+		DELETE FROM CLIENT
+		WHERE ID = #{id}
+		<!-- ON DELETE CASCADE 연결된 칼럼까지 다 삭제 -->
+		<!-- ALTER 를 이용해서 table구조 바꾸기도 가능 -->
+	</delete>
+	
+	
+	
 	<!-- ################################### 구현 완료  -->
 	<!-- 회원 회원 가입 -->
 	<!-- parameterType 값은 자동으로 설정됨? 아마 아닐경우 직접 써주기 -->
