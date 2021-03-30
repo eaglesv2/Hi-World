@@ -27,8 +27,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.article.service.ArticleService;
 import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.client.service.ClientService;
+import com.hiworld.client.service.NeighborService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 @Controller
 public class ClientController {
@@ -47,6 +49,9 @@ public class ClientController {
 	@Autowired
 	private ArticleService articleService;
 	
+	@Autowired
+	private NeighborService neighborService;
+	
 	/* BO자동으로 등록 */
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -58,20 +63,15 @@ public class ClientController {
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 이웃 찾기 */
 	@GetMapping("/boardPage.do")
-	public String boardAjax(Model model) {
+	public String boardAjax(Model model, HttpSession session) {
 		
-		/* 
-		 	MiniHp_Intro 정보 싹 가져옴
-		 	조건은 session에 등록된 자기의 정보 빼고 가져오기
-		 	
-		 	
-		 	
-		 	그값을 모델화 시키고 view
-		 */
+		/* 내 아이디 가져오기 */
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
 		
+		model.addAttribute("MiniVO",MiniVO);
 		
-		
-		/* */
 		return "Login/boardPage";
 	}
 	
