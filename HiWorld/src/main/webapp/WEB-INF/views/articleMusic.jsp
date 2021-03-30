@@ -10,9 +10,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-
 	<a href="basketJoin.do">장바구니</a>
-	<h1>물품 최신순으로 나열</h1>
+	<h1>물품 노래순으로 나열</h1>
 	<table>
 		<c:forEach var="kinds" items="${ArticleList}">
 			<tr>
@@ -107,5 +106,4 @@
 		})
 	}
 </script>
-
 </html>

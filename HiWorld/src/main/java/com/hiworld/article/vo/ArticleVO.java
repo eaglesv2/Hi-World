@@ -9,6 +9,7 @@ public class ArticleVO {
 	private int ArticlePrice;
 	private int UserSerial;
 	private String ArticleContent;
+	private String ArticleList;
 	
 	public int getArticleSerial() {
 		return ArticleSerial;
@@ -51,6 +52,12 @@ public class ArticleVO {
 	}
 	public void setArticleContent(String articleContent) {
 		ArticleContent = articleContent;
+	}
+	public String getArticleList() {
+		return ArticleList;
+	}
+	public void setArticleList(String articleList) {
+		ArticleList = articleList;
 	}
 	
 	
