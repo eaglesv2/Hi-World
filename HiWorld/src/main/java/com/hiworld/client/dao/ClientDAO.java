@@ -26,7 +26,7 @@ public interface ClientDAO {
 	/*이름 수정 */
 	int updateName(ClientVO clientVO);
 	/* 이름 조회*/
-	String selectName(String clientVO);
+	ClientVO selectName(String clientVO);
 	
 	/* 패스워드 수정*/
 	int updatepw(ClientVO clientVO);

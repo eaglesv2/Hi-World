@@ -48,11 +48,9 @@ public class ClientServiceImpl implements ClientService {
 	}
 	/* 이름 조회*/
 	@Override
-	public String selectName(String clientVO) {
+	public ClientVO selectName(String clientVO) {
 		// TODO Auto-generated method stub
-		System.out.println("시팔 여기 안왔냐? 정말?");
-		String vo = dao.selectName(clientVO);
-		System.out.println(vo);
+		ClientVO vo = dao.selectName(clientVO);
 		return vo;
 	}
 	

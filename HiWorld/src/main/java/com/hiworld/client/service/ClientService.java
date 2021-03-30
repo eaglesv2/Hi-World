@@ -21,7 +21,7 @@ public interface ClientService {
 	/* 이름 수정*/
 	int updateName(ClientVO clientVO);
 	/* 이름 조회*/
-	String selectName(String id);
+	ClientVO selectName(String id);
 	
 	/* 비밀번호 수정*/
 	String updatepw(ClientVO clientVO);
