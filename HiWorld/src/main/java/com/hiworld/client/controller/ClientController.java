@@ -614,6 +614,7 @@ public class ClientController {
 	
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
+		System.out.println("오나 ?");
 		return "Login/shoppingPage";
 	}
 	
