@@ -17,10 +17,15 @@
     
 	<div id="container">
 	
-		<c:forEach var="kinds" items="${ArticleList}">
-		
+	<table>
+		<c:forEach var="kinds" items="${MiniVO}">
+			<tr>
+				<td><a href="#">${kinds.HpTitle}</a></td>
+				<td>${kinds.UserName}</td>
+				<td>${kinds.UserID}</td>
+			</tr>		
 		</c:forEach>
-
+	</table>
 		
 		
 	</div>    

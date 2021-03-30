@@ -68,4 +68,9 @@
 		WHERE UserID = #{UserID}
 	</update>
 	
+	<select id="getAllNeighbor" resultType="com.hiworld.minihp.vo.MiniHpIntroVO">
+		SELECT * 
+		FROM MiniHP_Intro
+		WHERE UserID != #{UserID}
+	</select>
 </mapper>
