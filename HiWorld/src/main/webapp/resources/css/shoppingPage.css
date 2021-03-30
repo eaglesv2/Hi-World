@@ -26,7 +26,7 @@ tr#tablehead{
 	border-bottom:1px soild;
 }
 
-.sangpum tr,td{
+.sangpum tr,th{
 	vertical-align: middle;
 }
 .sangpum #tablehead tr{
@@ -40,3 +40,4 @@ tr#tablehead{
     width: 100px;
     height: 100px;
 }
+
