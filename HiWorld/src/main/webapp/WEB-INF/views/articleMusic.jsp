@@ -15,12 +15,12 @@
 	<table>
 		<c:forEach var="kinds" items="${ArticleList}">
 			<tr>
-				<td><img src="${kinds.articleImg}" /></td>
+				<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
 				<td>${kinds.articleKinds}</td>
 				<td>${kinds.articleName}</td>
 				<td>${kinds.articlePrice}</td>
-				<td><a href="#"
-					onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
+				<td><input type="button" value="10초 미리듣기" onclick="PLAY('${kinds.articleImg}')"/></td>
+				<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
 				<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
 			</tr>
 		</c:forEach>
@@ -29,6 +29,18 @@
 
 </body>
 <script>
+	function PLAY(mp3) {
+		var audio = new Audio(mp3);
+		/* 노래 시작 */
+		audio.play();
+
+		/* Timeout을 이용해서 10초후 노래 정지*/
+		setTimeout(function() {
+			audio.pause();
+		}, 10000)
+		
+	}
+
 	function basket(ArticleName) {
 			var UserSerial = '${sessionVO.userSerial}';
 			$.ajax({

@@ -144,17 +144,16 @@
             	var popupHeight = 580
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
-            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='miniHP'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	window.open("MiniHP_Home.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
 			}
     	
              
             function bamTol(){
-            	console.log("ddd")
             	var popupWidth =880
             	var popupHeight =580
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
-            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='bamTol'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
             }
 	
             function kaja2(){
