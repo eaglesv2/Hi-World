@@ -475,14 +475,14 @@ public class ClientController {
 		String list = request.getParameter("list");
 		articleVO.setArticleList(list);
 		ArrayList<ArticleVO> ArticleList;
-		
+		System.out.println(list);
 		switch (list) {
 		
 		/* 상품 최신순 */
 		case "쇼핑":
 			ArticleList = articleService.getAllArticle();
 			model.addAttribute("ArticleList",ArticleList);			
-			return "Login/shoppingPage";		
+			return "Login/shoppingPage";	
 		/* 케릭터 별 */
 		case "캐릭터":
 			ArticleList = articleService.getSelectArticle(articleVO);

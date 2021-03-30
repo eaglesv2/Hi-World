@@ -15,13 +15,12 @@
 	<table>
 		<c:forEach var="kinds" items="${ArticleList}">
 			<tr>
-				<td><img src="${kinds.articleImg}" /></td>
-				<td>${kinds.articleKinds}</td>
-				<td>${kinds.articleName}</td>
-				<td>${kinds.articlePrice}</td>
-				<td><a href="#"
-					onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
-				<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
+				<td><img src="${kinds.articleImg}" /></th>
+				<td>${kinds.articleKinds}</th>
+				<td>${kinds.articleName}</th>
+				<td>${kinds.articlePrice}</th>
+				<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+				<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 			</tr>
 		</c:forEach>
 	</table>

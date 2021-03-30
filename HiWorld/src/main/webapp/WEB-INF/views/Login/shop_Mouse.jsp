@@ -10,19 +10,29 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-	<a href="basketJoin.do">장바구니</a>
-	<h1>물품 마우스순으로 나열</h1>
+
 	<table>
+		<tr id="tablehead">
+				<td>상품</td>
+				<td>종류</td>
+				<td>상품명</td>
+				<td>가격</td>
+				<td>구매하기</td>
+				<td>장바구니로가기</td>
+		</tr>
 		<c:forEach var="kinds" items="${ArticleList}">
 			<tr>
-				<td><img src="${kinds.articleImg}" /></td>
-				<td>${kinds.articleKinds}</td>
-				<td>${kinds.articleName}</td>
-				<td>${kinds.articlePrice}</td>
+				<th><img src="${kinds.articleImg}" /></th>
+				<th>${kinds.articleKinds}</th>
+				<th>${kinds.articleName}</th>
+				<th>${kinds.articlePrice}</th>
+				<th><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+				<th><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 			</tr>
 		</c:forEach>
 	</table>
-
+	<a href="basketJoin.do">장바구니</a>
+	<h1>물품 노래순으로 나열</h1>
 
 </body>
 <script>
