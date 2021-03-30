@@ -41,7 +41,7 @@
 					</c:if>
 				</font><br>
 				<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateFolder(${i.serial});">
-					■추가
+					■수정
 				</span>&nbsp;
 				<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="cancelFolder();">
 					■취소
@@ -95,22 +95,6 @@
 	    });
 	}
 
-	//사이드 불러오기
-	function getBoardSide() {
-		var ajaxSide = {
-	            url : "MiniHpBoardSide.do",
-	            async : true,
-	            type : "GET",
-	            dataType : "html",
-	            cache : false
-	    };
-	    $.ajax(ajaxSide).done(function(data){
-	        // Contents 영역 삭제
-	        $('#sideContents').children().remove();
-	        // Contents 영역 교체
-	        $('#sideContents').html(data);
-	    });
-	}
 	//"+" 버튼 클릭시 폴더 제목 작성란, 공개 범위 설정창 열림
 	function addFolder() {
 		if($('#addFolder').css("display")==="none")

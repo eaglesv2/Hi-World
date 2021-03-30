@@ -62,16 +62,19 @@
             };
         	
              
-             function shopping(){
+             function shopping(list){
                  console.log("1234") 
                  var ajaxOption2={
                 		 type: "GET",
-                         url : "shoppingPage.do",
+                         url : "sangpoom.do",
+                         data: {"list":list},
                          dataType : "html", 
                          async:true,
                          cache:false
                 		 
                  }
+                 
+                 
             	  $.ajax(ajaxOption2).done(function(data){
             		  //Contents 영역삭제
             		  $('#bodyContext').children().remove();
@@ -144,17 +147,16 @@
             	var popupHeight = 580
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
-            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='miniHP'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	window.open("MiniHP_Home.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
 			}
     	
              
             function bamTol(){
-            	console.log("ddd")
             	var popupWidth =880
             	var popupHeight =580
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
-            	window.open("${pageContext.request.contextPath}/miniHP.jsp?check='bamTol'","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
             }
 	
             function kaja2(){
@@ -213,7 +215,82 @@
            		  $('#bodyContext').html(data);
            	  })
             }
-            
+        	function basket(ArticleName) {
+    			var UserSerial = '${sessionVO.userSerial}';
+    			$.ajax({
+    				type: "GET",
+    				url: "basket.do",
+    				data: {
+    					"UserSerial" : UserSerial,
+    					"ArticleName" : ArticleName
+    				},
+    				success : function (data) {
+    					if(data==1){
+    						alert("성공")
+    					}else if(data==0){
+    						alert("이미 구매한 상품")
+    					}else if(data==-1){
+    						alert("실패")
+    					}else if(data==-2){
+    						alert("이미 장바구니 들어감")
+    					}
+    				}
+    			})
+    	}
+    	
+    	function bay(ArticleName) {
+    		var UserSerial = '${sessionVO.userSerial}';
+    		
+    		/* alert 창 */
+    		const swalWithBootstrapButtons = Swal.mixin({
+     			customClass: {
+        		cancelButton: 'btn btn-danger',
+        		confirmButton: 'btn btn-success'
+      			},
+      			buttonsStyling: false
+    		})
+
+    		swalWithBootstrapButtons.fire({
+    	  		title: '정말 구매하실껀가요??',
+    			text: "구매 하신 후 환불은 어렵습니다.",
+    			icon: 'warning',
+    			showCancelButton: true,
+    			confirmButtonText: '구매 하지 않겠습니다.',
+    			cancelButtonText: '구매 하겠습니다.',
+    			reverseButtons: true
+    		}).then((result) => {
+    			
+    			if (result.isConfirmed) {
+    				swalWithBootstrapButtons.fire(
+    	 				      '취소 하였습니다.'
+    	 				    )
+     		} else if (result.dismiss === Swal.DismissReason.cancel) {
+     			$.ajax({
+    					type: "GET",
+    					url: "bay.do",
+    					data:{
+    						"UserSerial" : UserSerial,
+    						"ArticleName" : ArticleName
+    					},
+    					success: function (data) {
+    						if(data==1){
+    							swalWithBootstrapButtons.fire(
+    							     '결제 성공 하였습니다.'
+    			    			)
+    						}else if(data==0){
+    							swalWithBootstrapButtons.fire(
+    							     '밤톨이 부족합니다'
+    			    				)
+    						}else if(data==-1){
+    							swalWithBootstrapButtons.fire(
+    						    	 '이미 구매한 상품입니다.'
+    			    			)
+    						}
+    					}
+    				})
+    		}
+    		})
+    	}
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -241,7 +318,7 @@
                         <li id="kong" onclick="notice()">
                          	   공지사항
                         </li>
-                        <li id="shopping" onclick="shopping()">
+                        <li id="shopping" onclick="shopping('쇼핑')">
                  		           쇼핑
                         </li>
                         <li id="board" onclick="board()">

@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,8 +27,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.article.service.ArticleService;
 import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.client.service.ClientService;
+import com.hiworld.client.service.NeighborService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 @Controller
 public class ClientController {
@@ -48,12 +49,32 @@ public class ClientController {
 	@Autowired
 	private ArticleService articleService;
 	
+	@Autowired
+	private NeighborService neighborService;
+	
 	/* BO자동으로 등록 */
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
-
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 이웃 찾기 */
+	@GetMapping("/boardPage.do")
+	public String boardAjax(Model model, HttpSession session) {
+		
+		/* 내 아이디 가져오기 */
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
+		
+		model.addAttribute("MiniVO",MiniVO);
+		
+		return "Login/boardPage";
+	}
+	
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/* 회원 목록 보이기 */
@@ -277,7 +298,44 @@ public class ClientController {
 		return "redirect:/login.do";
 	}
 	
-	
+	/* 회원정보 수정*/
+	@PostMapping("UserUpdate.do")
+	public String userUpdate(HttpServletRequest request, HttpSession session,Model model) {
+		System.out.println("수정 항목임 여기 왓니?");
+		//int updatech = Integer.parseInt(request.getParameter("updatech"));
+		/* 받아온 값을 vo에 넣기 위해서 작업*/
+		String userName= request.getParameter("userName");
+		sessionVO vo1 = (sessionVO)session.getAttribute("sessionVO");
+		int userserial = vo1.getUserSerial();
+		String userId = vo1.getUserID();
+		ClientVO vo = clientService.getOneClient(userId);
+		vo.setUserName(userName);
+		vo.setUserSerial(userserial);
+		int ok = clientService.updateName(vo);
+		/*============================================================*/
+		sessionVO sessionvo = (sessionVO)session.getAttribute("sessionVO");
+		/* user이름을 조회 하고 리턴하기 위해서*/
+		String UserId = sessionvo.getUserID();
+		String oneclient = clientService.selectName(UserId);
+		ClientVO clientvo = clientService.getOneClient(oneclient);
+		model.addAttribute("clientVO", clientvo);
+		
+		
+				/*if(updatech == 1) {
+			 1이 들어 오면 name를 수정 하라
+				
+				
+		}else if(updatech == 2) {
+			 2이 들어 오면 pw를 수정 하라
+		}else if(updatech == 3) {
+			 3이 들어 오면 birth를 수정 하라
+		}else if(updatech == 4) {
+			 4이 들어 오면 tel를 수정 하라
+		}else if(updatech == 5) {
+			 5이 들어 오면 address를 수정 하라
+		}*/
+		return "Login/userOneView";
+	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
 	@GetMapping("/BamTolCharge.do")
@@ -410,33 +468,48 @@ public class ClientController {
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 상품 보기 (최신순) */
 	@GetMapping("/sangpoom.do")
-	public String sangpoom(Model model, HttpServletRequest request) {
+	public String sangpoom(Model model, HttpServletRequest request, ArticleVO articleVO) {
 		System.out.println("상품보기");
 		
 		/* 호출한 ajax의 데이터가 뭔지 확인 */
-//		String list = request.getParameter("list");
+		String list = request.getParameter("list");
+		articleVO.setArticleList(list);
+		ArrayList<ArticleVO> ArticleList;
 		
+		switch (list) {
 		
-//		switch (list) {
 		/* 상품 최신순 */
-//		case "new":
-//			
-//			break;
-//		
-//		case "character": break;
-//		case "background": break;
-//		case "music": break;
-//		case "mouse": break;
-//		default:
-//			break;
-//		}
+		case "쇼핑":
+			ArticleList = articleService.getAllArticle();
+			model.addAttribute("ArticleList",ArticleList);			
+			return "Login/shoppingPage";		
+		/* 케릭터 별 */
+		case "캐릭터":
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "Login/shop_character";
+		/* 배경화면 별 */
+		case "배경": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "Login/shop_background";
+		/* 음악 별 */
+		case "음악": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "Login/shop_Music";
+		/* 마우스 별 */	
+		case "마우스": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "Login/shop_Mouse";
+		/* 에러 */	
+		default:
+			return "error";
+		}
 		
 		
-		ArrayList<ArticleVO> ArticleList = articleService.getAllArticle();
-		model.addAttribute("ArticleList",ArticleList);			
 		
-		
-		return "sangpoom";
 	}
 	
 	/* 장바구니 담기 */
@@ -590,23 +663,26 @@ public class ClientController {
 	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/*메인페이지 AJAX*/
+	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
 	public String noticeAjax() {
+		/* 디비에서 목록 불러오기 */
+		
+		
+		
 		return "Login/noticePage";
 		
 	}
 	
+	/* 쇼핑페이지 */
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
-		return "Login/shoppingPage";
+		System.out.println("오나 ?");
+		return "articleMain";
 	}
 	
-	@GetMapping("/boardPage.do")
-	public String boardAjax() {
-		return "Login/boardPage";
-	}
 	
+	/* 문의 사항 */
 	@GetMapping("/questionPage.do")
 	public String questionAjax() {
 		return "Login/questionPage";

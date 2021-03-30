@@ -22,7 +22,35 @@ public interface ClientDAO {
 	/* 회원 정보 삭제 */
 	int deleteClient(ClientVO clientVO);
 	
+	/* 회원 정보 수정 */
+	/*이름 수정 */
+	int updateName(ClientVO clientVO);
+	/* 이름 조회*/
+	String selectName(String clientVO);
 	
+	/* 패스워드 수정*/
+	int updatepw(ClientVO clientVO);
+	/* 이름 조회*/
+	ClientVO selectpw(ClientVO clientVO);
+	
+	
+	/* 생일 수정*/
+	int updateBirth(ClientVO clientVO);
+	/* 이름 조회*/
+	ClientVO selectBirth(ClientVO clientVO);
+	
+	/* 연락처 수정*/
+	int updateTel(ClientVO clientVO);
+	/* 이름 조회*/
+	ClientVO selectTel(ClientVO clientVO);
+	
+	
+	/* 주소 수정*/
+	int updateAddress(ClientVO clientVO);
+	/* 이름 조회*/
+	ClientVO selectAddress(ClientVO clientVO);
+	
+	/* ------------------회원정보 조회 끝------------------*/
 	
 //	############################### 기능 구현 완료
 	/* 로그인*/

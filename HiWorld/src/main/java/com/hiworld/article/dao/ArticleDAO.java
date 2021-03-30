@@ -9,6 +9,8 @@ public interface ArticleDAO {
 	
 	ArrayList<ArticleVO> getAllArticle();
 	
+	ArrayList<ArticleVO> getSelectArticle(ArticleVO articleVO);
+	
 	int insert(ArticleVO vo);
 	
 	ArticleVO getOneArticle(String ArticleName);
