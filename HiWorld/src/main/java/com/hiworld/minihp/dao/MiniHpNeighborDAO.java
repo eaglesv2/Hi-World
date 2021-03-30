@@ -1,6 +1,8 @@
 package com.hiworld.minihp.dao;
 
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.hiworld.minihp.vo.MiniHpNeighborVO;
@@ -13,4 +15,7 @@ public interface MiniHpNeighborDAO {
 	
 	/*이웃 수락시 이웃 정보 입력*/
 	void insertNeighbor(MiniHpNeighborVO neighborVO);
+	
+	/*이웃 목록 불러오기*/
+	List<MiniHpNeighborVO> getNeighborList(String userID);
 }

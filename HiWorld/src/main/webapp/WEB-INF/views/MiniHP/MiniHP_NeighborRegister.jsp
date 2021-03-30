@@ -33,7 +33,7 @@ function registerSend(){
 	});
 }
 </script>
- <body background="${resoucePath}/imgages/admin/member_call.jpg">
+ <body background="${pageContext.request.contextPath}/resources//imgages/admin/member_call.png">
 	<form action="" name="neighborRegisterForm" method="post">
 		<span style="position: absolute; top:35px; left:80px;"><font color="Blue">${senderName}</font></span>
 			<img alt="상대방의 미니미" src="${resoucePath}/img/${minimiPath}" style="position: absolute; top:65px; left:30px;" width="98px" height="98">
@@ -50,10 +50,10 @@ function registerSend(){
 			<textarea rows="3" cols="32" style="width: 240px; height: 40px;" name="userMessege"></textarea>
 		</span>
 		<span style="position: absolute; top:329px; left:95px; font-size:8pt;" >
-			<img alt="" src="${resoucePath}/imgages/admin/sendBtn.jpg" onclick="registerSend();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/imgages/admin/sendBtn.jpg" onclick="registerSend();"/>
 		</span>
 		<span style="position: absolute; top:330px; left:158px; font-size:8pt;" >
-			<img alt="" src="${resoucePath}/imgages/admin/cancelBtn.jpg" onclick="window.close();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/imgages/admin/cancelBtn.jpg" onclick="window.close();"/>
 		</span>
 		<input type="hidden" name="senderID" value="${sessionVO.userID}">
 		<input type="hidden" name="senderName" value="${senderName}">
