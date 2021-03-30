@@ -108,20 +108,6 @@ public class MiniHpController {
 		return "MiniHP/MiniHP_Menu_Profile";
 	}
 	
-	//사진첩 탭
-	@GetMapping("/miniHpPicture.do")
-	public String miniHpPicture(String menu, Model model) {
-		System.out.println("사진첩1");
-		model.addAttribute("menu",menu);
-		return "MiniHP/MiniHP_Menu_Picture";
-	}
-	
-	@GetMapping("/MiniHpPicutreSide.do")
-	public String miniHpPictureSide(Model model) {
-		System.out.println("사진첩2");
-		return "MiniHP/MiniHP_Menu_Picture_Side";
-	}
-	
 	//동영상 탭
 	@GetMapping("/miniHpVideo.do")
 	public String miniHpVideo(String menu, Model model) {
