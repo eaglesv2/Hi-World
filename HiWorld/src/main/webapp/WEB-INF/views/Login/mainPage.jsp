@@ -26,7 +26,7 @@
 				       auto:true,
 				       controls:true,
 				       speed:500,
-					   
+	   
 
 				   })
 				   
@@ -84,24 +84,29 @@
             	  })
              };
 
-             function board(){
-            	 console.log("1234") 
-                 var ajaxOption3={
-                		 type: "GET",
-                         url : "boardPage.do",
-                         dataType : "html", 
-                         async:true,
-                         cache:false
-                		 
-                 }
-            	  $.ajax(ajaxOption3).done(function(data){
-            		  //Contents 영역삭제
-            		  $('#bodyContext').children().remove();
-            		  console.log("1111") 
-            		  //Contents 영역 교체
-            		  $('#bodyContext').html(data);
-            	  })
- 
+             function board(Name){
+            	 if(Name!="" && Name!=null){
+            		 console.log("1234") 
+                     var ajaxOption3={
+                    		 type: "GET",
+                             url : "boardPage.do",
+                             dataType : "html", 
+                             async:true,
+                             cache:false
+                    		 
+                     }
+                	  $.ajax(ajaxOption3).done(function(data){
+                		  //Contents 영역삭제
+                		  $('#bodyContext').children().remove();
+                		  console.log("1111") 
+                		  //Contents 영역 교체
+                		  $('#bodyContext').html(data);
+                	  })
+            	 }else {
+					alert("로그인하세요");
+				}
+            	 
+
              };
              
              function question(){
@@ -321,8 +326,8 @@
                         <li id="shopping" onclick="shopping('쇼핑')">
                  		           쇼핑
                         </li>
-                        <li id="board" onclick="board()">
-                           	 게시판
+                        <li id="board" onclick="board('${sessionVO.userName}')">
+                           	 이웃찾기
                         </li>
                         <li id="question" onclick="question()">
                            	 문의
