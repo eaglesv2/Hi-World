@@ -1,9 +1,24 @@
+//사진첩 사이드 불러오기
+function getPictureSide() {
+	var ajaxSide = {
+	        url : "MiniHpPicutreSide.do",
+	        async : true,
+	        type : "GET",
+	        dataType : "html",
+	        cache : false
+	};
+	$.ajax(ajaxSide).done(function(data){
+	    $('#sideContents').children().remove();
+	    $('#sideContents').html(data);
+	});
+}
 //사진첩 이동
-function movePicture(url){
-	
+function movePicture(){
+	//사이드 불러오기
+	getPictureSide();
     // 메인 불러오기
     var ajaxMain = {
-            url : url,
+            url : 'miniHpPicture.do',
             async : true,
             type : "GET",
             dataType : "html",
@@ -11,26 +26,8 @@ function movePicture(url){
     };
     
     $.ajax(ajaxMain).done(function(data){
-        // Contents 영역 삭제
         $('#bodyContents').children().remove();
-        // Contents 영역 교체
         $('#bodyContents').html(data);
-    });
-    
-    //사이드(폴더) 불러오기
-	var ajaxSide = {
-            url : "MiniHpPicutreSide.do",
-            async : true,
-            type : "GET",
-            dataType : "html",
-            cache : false
-    };
-    
-    $.ajax(ajaxSide).done(function(data){
-        // Contents 영역 삭제
-        $('#sideContents').children().remove();
-        // Contents 영역 교체
-        $('#sideContents').html(data);
     });
 }
 
