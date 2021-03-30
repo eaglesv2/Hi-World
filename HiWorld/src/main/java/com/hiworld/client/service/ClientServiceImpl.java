@@ -38,7 +38,134 @@ public class ClientServiceImpl implements ClientService {
 		return checkJoin;
 		
 	}
+	/* 회원 정보 수정 시작====================================*/
+	/*이름 수정 */
+	@Override
+	public int updateName(ClientVO clientVO) {
+		int checkNumber = dao.updateName(clientVO);
+		return checkNumber;
+		
+	}
+	/* 이름 조회*/
+	@Override
+	public String selectName(String clientVO) {
+		// TODO Auto-generated method stub
+		System.out.println("시팔 여기 안왔냐? 정말?");
+		String vo = dao.selectName(clientVO);
+		System.out.println(vo);
+		return vo;
+	}
 	
+	
+	
+	
+	/*비밀번호 수정 */
+	@Override
+	public String updatepw(ClientVO clientVO) {
+		int checkNumber = dao.updatepw(clientVO);
+		String checkJoin = "";
+		
+		/* 회원수정 잘 되었는지 체크 */
+		if(checkNumber==0) {
+			checkJoin = "fail";
+		}else if(checkNumber==-1) {
+			checkJoin = "error";
+		}else {
+			checkJoin = "success";
+			
+		}
+		
+		return checkJoin;
+		
+	}
+	/* 비밀번호 조회*/
+	@Override
+	public ClientVO selectpw(ClientVO clientVO) {
+		// TODO Auto-generated method stub
+		ClientVO vo = dao.selectpw(clientVO);
+		return vo;
+	}
+	
+	/*생일 수정 */
+	@Override
+	public String updateBirth(ClientVO clientVO) {
+		int checkNumber = dao.updateBirth(clientVO);
+		String checkJoin = "";
+		
+		/* 회원수정 잘 되었는지 체크 */
+		if(checkNumber==0) {
+			checkJoin = "fail";
+		}else if(checkNumber==-1) {
+			checkJoin = "error";
+		}else {
+			checkJoin = "success";
+		}
+		
+		return checkJoin;
+		
+	}
+	/* 생일 조회*/
+	@Override
+	public ClientVO selectBirth(ClientVO clientVO) {
+		// TODO Auto-generated method stub
+		ClientVO vo = dao.selectBirth(clientVO);
+		return vo;
+	}
+	
+	/*연락처 수정 */
+	@Override
+	public String updateTel(ClientVO clientVO) {
+		int checkNumber = dao.updateTel(clientVO);
+		String checkJoin = "";
+		
+		/* 회원수정 잘 되었는지 체크 */
+		if(checkNumber==0) {
+			checkJoin = "fail";
+		}else if(checkNumber==-1) {
+			checkJoin = "error";
+		}else {
+			checkJoin = "success";
+		}
+		
+		return checkJoin;
+		
+	}
+	/* 연락처 조회*/
+	@Override
+	public ClientVO selectTel(ClientVO clientVO) {
+		// TODO Auto-generated method stub
+		ClientVO vo = dao.selectTel(clientVO);
+		return vo;
+	}
+	
+	
+	/*주소 수정 */
+	@Override
+	public String updateAddress(ClientVO clientVO) {
+		int checkNumber = dao.updateAddress(clientVO);
+		String checkJoin = "";
+		
+		/* 회원수정 잘 되었는지 체크 */
+		if(checkNumber==0) {
+			checkJoin = "fail";
+		}else if(checkNumber==-1) {
+			checkJoin = "error";
+		}else {
+			checkJoin = "success";
+		}
+		
+		return checkJoin;
+		
+	}
+	/* 주소 조회*/
+	@Override
+	public ClientVO selectAddress(ClientVO clientVO) {
+		// TODO Auto-generated method stub
+		ClientVO vo = dao.selectAddress(clientVO);
+		return vo;
+	}
+	
+	/* 회원가입 수정 끝-------------------------------------------------*/
 	/* 회원 정보 삭제 */
 	@Override
 	public String deleteClinet(ClientVO clientVO) {

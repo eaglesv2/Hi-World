@@ -17,7 +17,30 @@ public interface ClientService {
 	/* 회원 정보 삭제 */
 	String deleteClinet(ClientVO clientVO);
 	
+	/* 회원 정보 수정시작-------------------- */
+	/* 이름 수정*/
+	int updateName(ClientVO clientVO);
+	/* 이름 조회*/
+	String selectName(String id);
 	
+	/* 비밀번호 수정*/
+	String updatepw(ClientVO clientVO);
+	/* 비밀번호 조회*/
+	ClientVO selectpw(ClientVO clientVO);
+	
+	/* 생일 수정*/
+	String updateBirth(ClientVO clientVO);
+	/* 생일 조회*/
+	ClientVO selectBirth(ClientVO clientVO);
+	/* 연락처 수정*/
+	String updateTel(ClientVO clientVO);
+	/* 연락처 조회*/
+	ClientVO selectTel(ClientVO clientVO);
+	/* 주소 수정*/
+	String updateAddress(ClientVO clientVO);
+	/* 주소 조회*/
+	ClientVO selectAddress(ClientVO clientVO);
+	/*-------------------회원수정 끝----------------- */
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 기능 구현 완료
