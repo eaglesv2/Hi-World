@@ -88,14 +88,6 @@
 	
 	
 		
-	<!-- 회원 정보 삭제 -->
-	<delete id="deleteClient">
-		DELETE FROM CLIENT
-		WHERE ID = #{id}
-		<!-- ON DELETE CASCADE 연결된 칼럼까지 다 삭제 -->
-		<!-- ALTER 를 이용해서 table구조 바꾸기도 가능 -->
-	</delete>
-	
 	
 	
 	<!-- ################################### 구현 완료  -->
