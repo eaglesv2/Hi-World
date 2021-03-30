@@ -16,16 +16,19 @@
 	
 	
 	
+	<!-- 회원 정보 수정 -->
+	
 	<!--  이름 수정 -->
 	<update id="updateName" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserName = #{UserName}
 		WHERE UserSerial = #{UserSerial}
 	</update>
+	
 	<!-- 이름 조회  -->
-	<select id="selectName" resultType="String">
-	SELECT UserName FROM HW_USERLIST
-	where UserID = #{UserID}
+	<select id="selectName" resultType="clientVO">
+	SELECT * FROM HW_USERLIST
+	where UserName = #{UserName}
 	</select>
 	
 	
@@ -33,12 +36,12 @@
 	<update id="updatepw" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserPW = #{UserPW}
-		WHERE UserPW = #{UserPW}
+		WHERE UserSerial = #{UserSerial}
 	</update>
 	<!-- 비밀번호 조회  -->
 	<select id="selectpw" resultType="clientVO">
-	SELECT UserPW FROM HW_USERLIST
-	WHERE UserPW = #{UserPW}
+	SELECT * FROM HW_USERLIST
+	where UserPW = #{UserPW}
 	</select>
 	
 	<!--  생일 수정 -->
