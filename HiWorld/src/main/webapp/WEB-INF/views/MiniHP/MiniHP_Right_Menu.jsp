@@ -64,7 +64,7 @@ function movePage(url){
 }
  
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=7"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=5"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -88,10 +88,10 @@ function movePage(url){
 	
 	<c:if test="${miniHpUserMenuVO.menu3==1}">
 		<c:if test="${menu=='menu3'}">
-			<div align="center" class="selected-Menu" onclick="movePicture('miniHpPicture.do?menu=menu3')">사진첩</div>
+			<div align="center" class="selected-Menu" onclick="movePicture()">사진첩</div>
 		</c:if>
 		<c:if test="${menu!='menu3'}">
-			<div align="center" class="unselected-Menu" onclick="movePicture('miniHpPicture.do?menu=menu3')">사진첩</div>
+			<div align="center" class="unselected-Menu" onclick="movePicture()">사진첩</div>
 		</c:if>
 	</c:if>
 	

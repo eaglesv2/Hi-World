@@ -92,10 +92,6 @@
             <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
         </c:if>
     </div>
-    
-    <%-- <div>
-        총 게시글 수 : ${pagination.listCnt } /    총 페이지 수 : ${pagination.pageCnt } / 현재 페이지 : ${pagination.curPage } / 현재 블럭 : ${pagination.curRange } / 총 블럭 수 : ${pagination.rangeCnt }
-    </div> --%>
 	
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 </form>

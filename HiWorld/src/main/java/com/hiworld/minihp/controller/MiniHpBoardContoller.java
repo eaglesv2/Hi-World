@@ -38,20 +38,7 @@ public class MiniHpBoardContoller {
 	@Autowired
 	private MiniHpBoardService service;
 	
-	//-----------------------------------------공통--------------------------------------------------------
-	//세션에서 현재 유저 정보 가져오기 메소드
-	private int getSessionUser(HttpSession session) {
-//		//세션에서 현재 유저 가져오기
-//		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
-//		int userSerial = sessionUser.getUserSerial();
-		//임시로 2로 지정
-		int userSerial = 7;
-		return userSerial;
-	}
-	// 파일명 중복방지 처리
-    private String getUuidFileName(String originalFileName) {
-    	 return UUID.randomUUID().toString() + "_" + originalFileName;
-    }
+	
     //파일 다운로드 처리
 	@GetMapping("/download.do")
 	@ResponseBody
@@ -94,42 +81,7 @@ public class MiniHpBoardContoller {
 			}
 		}
 	}
-	//파일 저장 로직
-	private void saveFile(MultipartFile file1,String fileName, HttpServletRequest request) {
-		//업로드된 파일을 서버에 저장
-		ServletContext ctx = request.getServletContext();//파일 경로 얻기 위한 객체
-		String webPath = "/resources/upload";//웹상의 위치
-		String realPath = ctx.getRealPath(webPath);//실제 위치
-		
-		//우선 해당 경로까지의 폴더가 있는지 체크, 없으면 만들어줌
-		File savePath = new File(realPath);
-		if(!savePath.exists())
-			savePath.mkdirs();//s가 붙으면 mkdir -p 같은 효과
-		//경로와 파일명 사이에 구분자가 필요,File.separator가 os마다 맞는 구분자를 넣어줌
-		realPath += File.separator + fileName;
-		//파일위치, 파일명 출력
-		System.out.println("realPath: " + realPath);
-		File saveFile = new File(realPath);
-
-		//업로드된 파일을 서버 저장소에 저장하는 방법
-		try {
-			file1.transferTo(saveFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	//파일 삭제 로직
-	private void deleteFile(String fileName,HttpServletRequest request) {
-		String savePath = request.getRealPath("/resources/upload/");
-	    
-		File file = new File(savePath+fileName);
-		if(file.exists()){
-			file.delete();
-			System.out.println("파일 삭제됨");
-		}else{
-			System.out.println("파일 없음");
-		}
-	}
+	
 	
 	
 	
@@ -139,7 +91,7 @@ public class MiniHpBoardContoller {
 	@GetMapping("/MiniHpBoardSide.do")
 	public String miniHpBoardSide(Model model, HttpSession session) {
 		System.out.println("게시판 side");
-		int userSerial = getSessionUser(session);
+		int userSerial = Utils.getSessionUser(session);
 		
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
 		return "MiniHP/MiniHP_Menu_Board_Side";
@@ -150,7 +102,7 @@ public class MiniHpBoardContoller {
 	public void addFolder(@RequestBody MiniHPBoardFolderVO vo, HttpSession session) {
 		System.out.println("addFolder");
 		
-		int userSerial = getSessionUser(session);
+		int userSerial = Utils.getSessionUser(session);
 		vo.setUserSerial(userSerial);
 		
 		System.out.println(vo);
@@ -192,7 +144,7 @@ public class MiniHpBoardContoller {
 	public String miniHpBoard(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("게시판 main");
 		
-		int userSerial = getSessionUser(session);
+		int userSerial = Utils.getSessionUser(session);
 		if(folderSerial==null)
 			folderSerial = service.getFirstFolderSerial(userSerial);
 		
@@ -222,12 +174,12 @@ public class MiniHpBoardContoller {
 	public int miniHpBoardInsert(MultipartFile file1, MiniHpBoardVO vo, HttpServletRequest request,HttpSession session) {
 		if(!file1.isEmpty()) {
 			//파일명 중복방지 처리
-			String fileName = getUuidFileName(file1.getOriginalFilename());
+			String fileName = Utils.getUuidFileName(file1.getOriginalFilename());
 			
-			saveFile(file1, fileName, request);
+			Utils.saveFile(file1, fileName, request);
 			vo.setFile(fileName);
 		}
-		vo.setUserSerial(getSessionUser(session));
+		vo.setUserSerial(Utils.getSessionUser(session));
 		System.out.println(vo);
 		int result = service.insert(vo);
 		if(result>0) System.out.println("게시물 insert 성공!");
@@ -252,7 +204,7 @@ public class MiniHpBoardContoller {
 		System.out.println("게시글 폴더 이동");
 		model.addAttribute("serial", serial);
 		
-		int userSerial = getSessionUser(session);
+		int userSerial = Utils.getSessionUser(session);
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
 		return "MiniHP/MiniHP_updateBoardFolder";
 	}
@@ -270,7 +222,7 @@ public class MiniHpBoardContoller {
 		System.out.println("deleteBoard");
 		int result = service.delete(boardSerial);
 		if(result>0 && !fileName.equals(""))
-			deleteFile(fileName, request);
+			Utils.deleteFile(fileName, request);
 	}
 	//게시글 수정 화면
 	@GetMapping("/MiniHpBoardUpdate.do")
@@ -294,25 +246,25 @@ public class MiniHpBoardContoller {
 				vo.setFile(null);//db에는 null로
 				int result1 = service.update(vo);
 				if(result1>0)
-					deleteFile(fileName, request);//파일 삭제
+					Utils.deleteFile(fileName, request);//파일 삭제
 			} else {//첨부파일 있을경우
 				if("".equals(vo.getFile())) {//기존에 없음 -> 새로 추가
-					String fileName = getUuidFileName(file1.getOriginalFilename());
-					saveFile(file1, fileName, request);
+					String fileName = Utils.getUuidFileName(file1.getOriginalFilename());
+					Utils.saveFile(file1, fileName, request);
 					vo.setFile(fileName);
 					service.update(vo);
 				} else {//기존 파일 바뀜
 					String oriFileName = vo.getFile();
 					//1. 새로운 파일 저장
-					String fileName = getUuidFileName(file1.getOriginalFilename());
-					saveFile(file1, fileName, request);
+					String fileName = Utils.getUuidFileName(file1.getOriginalFilename());
+					Utils.saveFile(file1, fileName, request);
 					//2. db에 있는 파일명 수정
 					vo.setFile(fileName);
 					//3. update
 					int result2 = service.update(vo);
 					//4. 기존 파일 삭제
 					if(result2>0)
-						deleteFile(oriFileName, request);
+						Utils.deleteFile(oriFileName, request);
 				}
 			}
 		}
@@ -329,7 +281,7 @@ public class MiniHpBoardContoller {
 	public void insertReply(@RequestBody MiniHpBoardReplyVO vo, HttpSession session) {
 		System.out.println("insert reply");
 		
-		int userSerial = getSessionUser(session);
+		int userSerial = Utils.getSessionUser(session);
 		vo.setUserSerial(userSerial);
 		
 		System.out.println(vo);
