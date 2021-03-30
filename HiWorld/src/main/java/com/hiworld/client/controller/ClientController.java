@@ -410,33 +410,48 @@ public class ClientController {
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 상품 보기 (최신순) */
 	@GetMapping("/sangpoom.do")
-	public String sangpoom(Model model, HttpServletRequest request) {
+	public String sangpoom(Model model, HttpServletRequest request, ArticleVO articleVO) {
 		System.out.println("상품보기");
 		
 		/* 호출한 ajax의 데이터가 뭔지 확인 */
-//		String list = request.getParameter("list");
+		String list = request.getParameter("list");
+		articleVO.setArticleList(list);
+		ArrayList<ArticleVO> ArticleList ;
 		
+		switch (list) {
 		
-//		switch (list) {
 		/* 상품 최신순 */
-//		case "new":
-//			
-//			break;
-//		
-//		case "character": break;
-//		case "background": break;
-//		case "music": break;
-//		case "mouse": break;
-//		default:
-//			break;
-//		}
+		case "쇼핑":
+			ArticleList = articleService.getAllArticle();
+			model.addAttribute("ArticleList",ArticleList);			
+			return "articleMain";		
+		/* 케릭터 별 */
+		case "캐릭터":
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "articleCharacter";
+		/* 배경화면 별 */
+		case "배경": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "articleBackground";
+		/* 음악 별 */
+		case "음악": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "articleMusic";
+		/* 마우스 별 */	
+		case "마우스": 
+			ArticleList = articleService.getSelectArticle(articleVO);
+			model.addAttribute("ArticleList",ArticleList);	
+			return "articleMouse";
+		/* 에러 */	
+		default:
+			return "error";
+		}
 		
 		
-		ArrayList<ArticleVO> ArticleList = articleService.getAllArticle();
-		model.addAttribute("ArticleList",ArticleList);			
 		
-		
-		return "sangpoom";
 	}
 	
 	/* 장바구니 담기 */

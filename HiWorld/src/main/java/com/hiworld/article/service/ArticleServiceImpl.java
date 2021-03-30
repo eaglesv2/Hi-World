@@ -16,9 +16,15 @@ public class ArticleServiceImpl implements ArticleService {
 
 	@Override
 	public ArrayList<ArticleVO> getAllArticle() {
-	/* 상품목록 가져오기 */
+		/* 상품목록 가져오기 */
 		System.out.println("상품가져오기");
 		return articleDAO.getAllArticle();
+	}
+
+	/* 상품 선택 가져오기 */
+	@Override
+	public ArrayList<ArticleVO> getSelectArticle(ArticleVO articleVO) {
+		return articleDAO.getSelectArticle(articleVO);
 	}
 
 	/* 상품 확인 */
@@ -71,35 +77,35 @@ public class ArticleServiceImpl implements ArticleService {
 		System.out.println("장바구니 목록 가져오기");
 		return articleDAO.getUserArticle(UserSerial);
 	}
-	
+
 	/* 결제금액 차감 */
 	@Override
 	public int cash(ArticleVO vo) {
 		System.out.println("결제금액 차감");
 		return articleDAO.cash(vo);
 	}
-	
+
 	/* 장바구니에 있는 목록 삭제 */
 	@Override
 	public int delBasket(ArticleVO vo) {
 		System.out.println("장바구니 목록삭제");
 		return articleDAO.delBasket(vo);
 	}
-	
+
 	/* 결제 한번에 하기 */
 	@Override
 	public int totalBay(int UserSerial) {
 		System.out.println("결제 한번에");
 		return articleDAO.totalBay(UserSerial);
 	}
-	
+
 	/* 장바구니 목록 한번에 삭제 */
 	@Override
 	public int delAllBasket(int UserSerial) {
 		System.out.println("장바구니 목록전체삭제");
 		return articleDAO.delAllBasket(UserSerial);
 	}
-	
+
 	/* 상품 등록 */
 	@Override
 	public int insertArticle(ArticleVO vo) {

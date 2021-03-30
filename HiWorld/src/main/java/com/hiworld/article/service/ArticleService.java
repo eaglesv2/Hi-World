@@ -9,6 +9,8 @@ public interface ArticleService {
 	/* 기본 정보 가져오기 */
 	ArrayList<ArticleVO> getAllArticle();
 	
+	ArrayList<ArticleVO> getSelectArticle(ArticleVO list);
+	
 	ArticleVO getOneArticle(String ArticleName);
 	
 	int check(ArticleVO vo);

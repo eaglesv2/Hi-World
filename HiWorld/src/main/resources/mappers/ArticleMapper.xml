@@ -6,6 +6,11 @@
 	<select id="getAllArticle" resultType="articleVO">
 		SELECT * FROM Shop_Article ORDER BY ArticleSerial DESC; 
 	</select>
+	
+	<!-- 선택별 물품 조회 -->
+	<select id="getSelectArticle" resultType="articleVO">
+		SELECT * FROM Shop_Article WHERE ArticleKinds = '${ArticleList}'
+	</select>
 
 	<!-- 물품 정보 가져오기 -->
 	<select id="getOneArticle" resultType="articleVO">

@@ -13,7 +13,11 @@
 	<a href="login.do">메인페이지가기</a>
 	<a href="#" onclick="Manage_Client()">어드민 회원관리</a>
 	<a href="#" onclick="Manage_Article()">어드민 상품등록</a>
-	<a href="#" onclick="Article()">쇼핑</a>
+	<a href="#" onclick="Article('쇼핑')">쇼핑</a>
+	<a href="#" onclick="Article('캐릭터')">캐릭터</a>
+	<a href="#" onclick="Article('배경')">배경</a>
+	<a href="#" onclick="Article('음악')">음악</a>
+	<a href="#" onclick="Article('마우스')">마우스</a>
 
 	<div id="test"></div>
 	
@@ -47,10 +51,11 @@
 	
 	
 	/* 쇼핑페이지 이동 */
-	function Article(){
+	function Article(list){
 		$.ajax({
 			url: "sangpoom.do",
 			type: "GET",
+			data: {"list":list},
 			dataType: "html",
 			success: function(data) {
 				$("#test").html(data);
