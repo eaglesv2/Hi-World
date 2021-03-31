@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
-table.type08 {
+table.boardTable {
   border-collapse: collapse;
   text-align: left;
   line-height: 1.5;
@@ -11,16 +11,16 @@ table.type08 {
   width: 410px;
 }
 
-table.type08 thead th {
+table.boardTable thead th {
   border-bottom: 1px dotted #ccc;
   font-weight: normal;
 }
-table.type08 tbody th {
+table.boardTable tbody th {
   vertical-align: top;
   border-bottom: 1px dotted #ccc;
   background: #ececec;
 }
-table.type08 td {
+table.boardTable td {
   vertical-align: top;
   border-bottom: 1px dotted #ccc;
 }
@@ -37,7 +37,7 @@ table.type08 td {
 <body>
 <input type="hidden" id="boardSerial" value="${board.boardSerial}">
 <div id="main">
-<table class="type08">
+<table class="boardTable">
 	<thead>
 		<tr>
 	  		<th>

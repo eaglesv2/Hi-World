@@ -54,12 +54,11 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	}
 	@Override
 	@Transactional
-	public List<MiniHpBoardVO> getAll(Integer folderSerial, int page) {
+	public List<MiniHpBoardVO> getAll(Integer folderSerial, int page, int pageSize) {
 		//페이징
-		int size = 10;//한페이지에 10개씩
-		int offset = 0+(page-1)*size;
+		int offset = 0+(page-1)*pageSize;
 		
-		List<MiniHpBoardVO> list = dao.getAll(folderSerial, offset, size);
+		List<MiniHpBoardVO> list = dao.getAll(folderSerial, offset, pageSize);
 		if(list==null || list.size()==0)
 			return null;
 		else
@@ -79,9 +78,7 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 		return dao.insert(vo);
 	}
 	@Override
-	@Transactional
 	public MiniHpBoardVO get(int serial) {
-		dao.updateHit(serial);//게시글 볼때마다 조회수 1 증가
 		return dao.get(serial);
 	}
 	@Override
@@ -95,6 +92,10 @@ public class MiniHpBoardServiceImpl implements MiniHpBoardService {
 	@Override
 	public int update(MiniHpBoardVO vo) {
 		return dao.update(vo);
+	}
+	@Override
+	public int updateHit(int boardSerial) {
+		return dao.updateHit(boardSerial);
 	}
 	
 	@Override

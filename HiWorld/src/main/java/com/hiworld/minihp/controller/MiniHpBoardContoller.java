@@ -153,7 +153,7 @@ public class MiniHpBoardContoller {
 		MiniHpBoardPagingVO pagingVO = new MiniHpBoardPagingVO(listCnt, curPage);
 		
 		
-		model.addAttribute("list",service.getAll(folderSerial, curPage));
+		model.addAttribute("list",service.getAll(folderSerial, curPage, pagingVO.getPageSize()));
 		model.addAttribute("listCnt",listCnt);
 		model.addAttribute("pagination",pagingVO);
 		
@@ -193,7 +193,7 @@ public class MiniHpBoardContoller {
 		System.out.println("게시판 detail 화면");
 		
 		model.addAttribute("board",service.get(serial));
-		
+		service.updateHit(serial);
 		//댓글 추가
 		model.addAttribute("replyList", service.getAllReply(serial));
 		return "MiniHP/MiniHP_Menu_Board_Detail";
