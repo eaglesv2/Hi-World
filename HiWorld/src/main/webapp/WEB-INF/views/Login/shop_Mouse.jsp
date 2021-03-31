@@ -31,8 +31,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<a href="basketJoin.do">장바구니</a>
-	<h1>물품 노래순으로 나열</h1>
+
 
 </body>
 <script>

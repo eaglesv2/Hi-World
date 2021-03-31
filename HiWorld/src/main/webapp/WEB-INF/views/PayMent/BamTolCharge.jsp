@@ -26,83 +26,83 @@
 	function requestPay() {
 	
 		// 체크박스 체크여부
-		var check = $('#chargeEX').val();
-		var bamTol
-		var sell
-		var count
-		console.log(check);
-		if (check == '충전 예정금액 : 10000원') {
-			bamTol = '밤톨10개'
-			sell = 10000;
-			count = 10
-		} else if (check == '충전 예정금액 : 28000원') {
-			bamTol = '밤톨30개'
-			sell = 29900;
-			count = 30
-		} else if (check == '충전 예정금액 : 45000원') {
-			bamTol = '밤톨50개'
-			sell = 48900;
-			count = 50
-		} else if (check == '충전 예정금액 : 90000원') {
-			bamTol = '밤톨100개'
-			sell = 90000;
-			count = 100
-		} else {
-			sell = 0;
+		if($('#checkbox').is(':checked')==true){
+			var bamTol
+			var sell
+			var count
+			console.log(check);
+			if (check == '충전 예정금액 : 10000원') {
+				bamTol = '밤톨10개'
+				sell = 10000;
+				count = 10
+			} else if (check == '충전 예정금액 : 28000원') {
+				bamTol = '밤톨30개'
+				sell = 29900;
+				count = 30
+			} else if (check == '충전 예정금액 : 45000원') {
+				bamTol = '밤톨50개'
+				sell = 48900;
+				count = 50
+			} else if (check == '충전 예정금액 : 90000원') {
+				bamTol = '밤톨100개'
+				sell = 90000;
+				count = 100
+			} else {
+				sell = 0;
+			}
+
+			if (sell != 0) {
+				// IMP.request_pay(param, callback) 호출
+				IMP.request_pay({ // param
+					pg : "html5_inicis",
+					pay_method : "card",
+					merchant_uid : "ORD20180131-0000011",
+					name : bamTol,
+					amount : sell,
+					buyer_name : name,
+					buyer_tel : tel,
+					buyer_addr : addr
+				}, function(rsp) { // callback
+					if (rsp.success) {
+						// 결제 성공 시 로직,
+						$.ajax({
+							type : "GET",
+							url : "userCash.do",
+							data : {
+								"count" : count,
+								"UserCash" : userCash
+							},
+							success : function(data) {
+								alert("결제 성공")
+								opener.document.location.reload();
+								self.close();
+							}
+						})
+
+					} else {
+						alert("결제 실패")
+						// 결제 실패 시 로직,
+						$.ajax({
+							type : "GET",
+							url : "userCash.do",
+							data : {
+								"count" : count,
+								"UserCash" : userCash
+							},
+							success : function(data) {
+								alert("결제 성공")
+								opener.document.location.reload();
+								self.close();
+							}
+						})
+
+					}
+				});
+			}
+		}else if ($('#checkbox').is(':checked')==false) {
+			alert('동의에 수락하세요')
 		}
-
-		if (sell != 0) {
-			// IMP.request_pay(param, callback) 호출
-			IMP.request_pay({ // param
-				pg : "html5_inicis",
-				pay_method : "card",
-				merchant_uid : "ORD20180131-0000011",
-				name : bamTol,
-				amount : sell,
-				buyer_name : name,
-				buyer_tel : tel,
-				buyer_addr : addr
-			}, function(rsp) { // callback
-				if (rsp.success) {
-					// 결제 성공 시 로직,
-					$.ajax({
-						type : "GET",
-						url : "userCash.do",
-						dataType : "int",
-						data : {
-							"count" : count,
-							"UserCash" : userCash
-						},
-						error : function(data) {
-							alert("실패")
-						},
-						success : function(data) {
-							alert("결제 성공")
-						}
-					})
-
-				} else {
-					alert("결제 실패")
-					// 결제 실패 시 로직,
-					$.ajax({
-						type : "GET",
-						url : "userCash.do",
-						dataType : "int",
-						data : {
-							"count" : count,
-							"UserCash" : userCash
-						},
-						error : function(data) {
-							alert("실패")
-						},
-						success : function(data) {
-							alert("결제 성공")
-						}
-					})
-
-				}
-			});
-		}
+		
 
 	}
 	
@@ -144,6 +144,9 @@
 		$('.price3').css({'border':'1px solid #b5b5b5'});
 		$('.price4').css({'border':'1px solid red'});	
 	}
+	
+
+
 </script>
 
 

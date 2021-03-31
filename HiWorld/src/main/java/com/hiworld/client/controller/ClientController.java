@@ -559,8 +559,7 @@ public class ClientController {
 		/* 장바구니 목록 가져오기 */
 		ArrayList<ArticleVO> ArticleList = articleService.getUserArticle(UserSerial);
 		model.addAttribute("ArticleList", ArticleList);
-		System.out.println(ArticleList);
-		return "basket";
+		return "/Login/basket";
 	}
 	
 	/* 한개 구매하기 */
