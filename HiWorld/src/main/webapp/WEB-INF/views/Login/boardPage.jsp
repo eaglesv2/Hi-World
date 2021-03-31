@@ -13,8 +13,8 @@
 </head>
 <body>
 	<h1>이웃 찾기</h1>
-	<br /> 검색
-	<input type="text" placeholder="이름을 검색하세요." id="search" />
+	<br /> 
+	<input type="text" placeholder="이름 or 아이디를 입력하세요" id="search" />
 	<br />
 
 	<div id="container">

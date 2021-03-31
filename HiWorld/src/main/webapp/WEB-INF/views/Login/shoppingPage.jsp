@@ -159,12 +159,9 @@
 				</c:if>
 			</tr>
 
-				</c:forEach>
+		</c:forEach>
 			
 		</table>
-		<a href="basketJoin.do">장바구니</a>
-		<h1>물품 최신순으로 나열</h1>
-		
 	</div>
 	
 
