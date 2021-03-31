@@ -15,7 +15,7 @@ public interface MiniHpBoardService {
 	
 	//게시판 관련---------------
 	int getFirstFolderSerial(int userSerial);
-	List<MiniHpBoardVO> getAll(Integer folderSerial, int page);
+	List<MiniHpBoardVO> getAll(Integer folderSerial, int page, int pageSize);
 	String getFolderName(int folderSerial);
 	//페이징처리
 	int countInsideFolder(int serial);
@@ -29,6 +29,9 @@ public interface MiniHpBoardService {
 	int delete(int serial);
 	//update
 	int update(MiniHpBoardVO vo);
+	
+	//조회수
+	int updateHit(int boardSerial);
 	
 	//댓글
 	//selectAll

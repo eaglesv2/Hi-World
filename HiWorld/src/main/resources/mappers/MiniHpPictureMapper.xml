@@ -30,75 +30,71 @@
 	
 	
 	<!-- 게시판 관련 -->
-	<!-- <select id="getFirstFolderSerial" resultType="int">
-		SELECT serial FROM MiniHP_Board_Folder
+	<select id="getFirstFolderSerial" resultType="int">
+		SELECT serial FROM MiniHP_Picture_Folder
 		WHERE UserSerial=#{userSerial}
 		LIMIT 1
 	</select>
-	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		SELECT * FROM MiniHP_Board_View
+	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpPictureVO">
+		SELECT * FROM MiniHP_Picture_View
 		WHERE folderSerial=#{folderSerial}
 		ORDER BY cDate DESC
 		LIMIT #{offset}, #{size}
 	</select>
 	<select id="getFolderName" resultType="string">
-		SELECT folderName FROM MiniHP_Board_Folder
+		SELECT folderName FROM MiniHP_Picture_Folder
 		WHERE serial = #{folderSerial}
 	</select>
 	
-	insert
-	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		INSERT INTO MiniHP_Board(UserSerial,folderSerial,title,content,file)
+	<!-- insert -->
+	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpPictureVO">
+		INSERT INTO MiniHP_Picture(UserSerial,folderSerial,title,content,file)
 		VALUES(#{userSerial},#{folderSerial},#{title},#{content},#{file})
 	</insert>
 	
-	title, userName, uDate, hit, content
-	<select id="get" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		SELECT * FROM MiniHP_Board_View
-		WHERE boardSerial = #{serial}
-	</select>
-	<update id="updateBoardFolder" parameterType="int">
-		UPDATE MiniHP_Board
+	<update id="updatePictureFolder" parameterType="int">
+		UPDATE MiniHP_Picture
 		SET folderSerial=#{folderSerial}
-		WHERE boardSerial=#{boardSerial}
+		WHERE pictureSerial=#{pictureSerial}
 	</update>
 	
-	delete
+	<!-- delete -->
 	<delete id="delete">
-		DELETE FROM MiniHP_Board
-		WHERE boardSerial=#{serial}
+		DELETE FROM MiniHP_Picture
+		WHERE pictureSerial=#{serial}
 	</delete>
 	
-	update
-	<update id="update" parameterType="com.hiworld.minihp.vo.MiniHpBoardVO">
-		UPDATE MiniHP_Board
+	<!-- update -->
+	<select id="get" resultType="com.hiworld.minihp.vo.MiniHpPictureVO">
+		SELECT * FROM MiniHP_Picture_View
+		WHERE pictureSerial = #{serial}
+	</select>
+	<update id="update" parameterType="com.hiworld.minihp.vo.MiniHpPictureVO">
+		UPDATE MiniHP_Picture
 		SET title=#{title}, content=#{content}, file=#{file}, uDate=CURRENT_TIMESTAMP
-		WHERE boardSerial=#{boardSerial};
+		WHERE pictureSerial=#{pictureSerial};
 	</update>
 	
-	댓글
-	<select id="getAllReply" resultType="com.hiworld.minihp.vo.MiniHpBoardReplyVO">
-		SELECT * FROM MiniHP_Board_Reply_View
-		WHERE boardSerial=#{boardSerial}
+	<!-- 댓글 -->
+	<select id="getReplyCnt" resultType="int">
+		SELECT COUNT(pictureSerial) FROM MiniHP_Picture_Reply
+		WHERE pictureSerial=#{pictureSerial}
 	</select>
-	<insert id="insertReply" parameterType="com.hiworld.minihp.vo.MiniHpBoardReplyVO">
-		INSERT INTO MiniHP_Board_Reply(UserSerial,boardSerial,replyContent)
-		VALUES(#{userSerial},#{boardSerial},#{replyContent})
+	<select id="getAllReply" resultType="com.hiworld.minihp.vo.MiniHpPictureReplyVO">
+		SELECT * FROM MiniHP_Picture_Reply_View
+		WHERE pictureSerial=#{pictureSerial}
+	</select>
+	<insert id="insertReply" parameterType="com.hiworld.minihp.vo.MiniHpPictureReplyVO">
+		INSERT INTO MiniHP_Picture_Reply(UserSerial,pictureSerial,replyContent)
+		VALUES(#{userSerial},#{pictureSerial},#{replyContent})
 	</insert>
 	<delete id="deleteReply">
-		DELETE FROM MiniHP_Board_Reply
+		DELETE FROM MiniHP_Picture_Reply
 		WHERE replySerial=#{serial}
 	</delete>
 	<update id="updateReply">
-		UPDATE MiniHP_Board_Reply
+		UPDATE MiniHP_Picture_Reply
 		SET replyContent=#{content}
 		WHERE replySerial=#{serial}
 	</update>
-	
-	조회수
-	<update id="updateHit">
-		UPDATE MiniHP_Board_View
-		SET hit = hit+1
-		WHERE boardSerial=#{boardSerial}
-	</update> -->
 </mapper>

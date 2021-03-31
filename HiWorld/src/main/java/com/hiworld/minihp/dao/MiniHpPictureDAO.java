@@ -2,7 +2,11 @@ package com.hiworld.minihp.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hiworld.minihp.vo.MiniHPPictureFolderVO;
+import com.hiworld.minihp.vo.MiniHpPictureReplyVO;
+import com.hiworld.minihp.vo.MiniHpPictureVO;
 
 public interface MiniHpPictureDAO {
 	//폴더 부분
@@ -18,31 +22,28 @@ public interface MiniHpPictureDAO {
 	
 	
 	// 게시판 관련--------------------------
-//	//맨 첫번째 폴더 가져오기
-//	int getFirstFolderSerial(int userSerial);
-//	List<MiniHpBoardVO> getAll(@Param("folderSerial") int folderSerial,@Param("offset")  int offset,@Param("size")  int size);
-//	String getFolderName(int folderSerial);
-//	//게시물 insert
-//	int insert(MiniHpBoardVO vo);
-//	//select one
-//	MiniHpBoardVO get(int serial);
-//	//게시글 폴더 이동
-//	int updateBoardFolder(@Param("boardSerial") int boardSerial,@Param("folderSerial")  int folderSerial);
-//	//delete
-//	int delete(int serial);
-//	//update
-//	int update(MiniHpBoardVO vo);
-//	
-//	//댓글
-//	//selectAll
-//	List<MiniHpBoardReplyVO> getAllReply(int boardSerial);
-//	//insert
-//	int insertReply(MiniHpBoardReplyVO vo);
-//	//delete
-//	int deleteReply(int serial);
-//	//update 
-//	int updateReply(@Param("serial") int serial, @Param("content") String content);
-//	
-//	//조회수
-//	int updateHit(int boardSerial);
+	//맨 첫번째 폴더 가져오기
+	int getFirstFolderSerial(int userSerial);
+	List<MiniHpPictureVO> getAll(@Param("folderSerial") int folderSerial,@Param("offset") int offset,@Param("size") int size);
+	String getFolderName(int folderSerial);
+	//게시물 insert
+	int insert(MiniHpPictureVO vo);
+	//게시글 폴더 이동
+	int updatePictureFolder(@Param("pictureSerial") int pictureSerial,@Param("folderSerial")  int folderSerial);
+	//delete
+	int delete(int serial);
+	//update
+	MiniHpPictureVO get(int serial);
+	int update(MiniHpPictureVO vo);
+	
+	//댓글
+	//selectAll
+	int getReplyCnt(int pictureSerial);
+	List<MiniHpPictureReplyVO> getAllReply(int boardSerial);
+	//insert
+	int insertReply(MiniHpPictureReplyVO vo);
+	//delete
+	int deleteReply(int serial);
+	//update 
+	int updateReply(@Param("serial") int serial, @Param("content") String content);
 }
