@@ -2,6 +2,7 @@ package com.hiworld.minihp.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.hiworld.minihp.vo.MiniHpNeighborListVO;
@@ -16,8 +17,8 @@ public interface MiniHpNeighborListDAO {
 	List<MiniHpNeighborListVO> getRegisterList(String UserID);
 	
 	/*이웃 신청 정보 불러오기*/
-	MiniHpNeighborListVO getData(String senderID, String receiverID);
+	MiniHpNeighborListVO getData(@Param("senderID")String senderID, @Param("receiverID")String receiverID);
 	
 	/*이웃 신청 수락 or 거절 시 신청 정보 삭제*/
-	void deleteNeighborList(String senderID, String receiverID);
+	void deleteNeighborList(@Param("senderID")String senderID, @Param("receiverID")String receiverID);
 }

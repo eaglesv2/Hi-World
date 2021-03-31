@@ -27,6 +27,17 @@ body {
 //넘어올때 로그인한 유저 vo와 미니홈피 주인 id + miniHp VO 다 가져오기
 $(document).ready(function() {
 	console.log('1');
+	/* $.ajax({
+		type : 'GET',
+		url: 'miniHp_todayCheck.do',
+		data : { OwnerID : '${OwnerID}', GuestID : '${sessionVO.userID}'},
+		
+		success : function() {
+			console.log('방문자체크 성공')
+		}
+	}); */
+	
+	console.log('2222');
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_rightGuestMenu.do',
@@ -35,7 +46,7 @@ $(document).ready(function() {
 		success : function(result) {
 			$("#rightMenu").html(result);
 		}
-	})
+	});
 });
 </script>
  </head>
@@ -60,13 +71,13 @@ $(document).ready(function() {
 					<tr>
 						<td width="10"> </td>
 
-						<td align="center" width="178" height="450" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
+						<td align="center" width="178" height="448" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
 							<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
-						<td align="center" width="480" height="450" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
+						<td align="center" width="476" height="448" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
 							<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
 							<!-- ---------------------------------------------------------------------------- -->

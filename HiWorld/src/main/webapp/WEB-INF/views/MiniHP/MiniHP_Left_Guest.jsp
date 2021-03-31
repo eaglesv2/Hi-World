@@ -125,7 +125,7 @@ height:100px;
 				<!-- 유저 생일 표시 -->
 				<font style="font-size: 7pt;">${ownerVO.userBirth}</font>
 					<br/>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerId=${OwnerVO.userID}&OwnerName=${OwnerVO.userName}','${OwnerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
+					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerId=${ownerVO.userID}&OwnerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</font>
 				
 				<select id="mySelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser();">

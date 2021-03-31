@@ -35,6 +35,8 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 
 		String senderID = nVO.getNeighborID1();
 		String receiverID = nVO.getNeighborID2();
+		System.out.println(senderID);
+		System.out.println(receiverID);
 		switch(type) {
 		case 0: //이웃 신청 거절
 			neighborListDAO.deleteNeighborList(senderID, receiverID);
@@ -76,8 +78,7 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 					neighborViewVO.setUserName(neighborVO.getNeighborName2());
 					neighborViewVO.setUserValue(neighborVO.getNeighborValue2());
 				} else {
-					/*neighborViewVO.setUserID(neighborVO.getNeighborID1());*/
-					neighborViewVO.setUserID("tester");
+					neighborViewVO.setUserID(neighborVO.getNeighborID1());
 					neighborViewVO.setUserName(neighborVO.getNeighborName1());
 					neighborViewVO.setUserValue(neighborVO.getNeighborValue1());
 				}

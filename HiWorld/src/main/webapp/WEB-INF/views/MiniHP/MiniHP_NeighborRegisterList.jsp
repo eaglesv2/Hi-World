@@ -14,15 +14,15 @@
 <script type="text/javascript">
 
 </script>
- <body background="root/resources/imgages/admin/member_list.png">
+ <body background="${pageContext.request.contextPath}/resources/images/admin/member_list.png">
 	<form action="" name="neighborRegisterList" method="post" style="position: absolute; top:50px; left: 15px; font-size: 8pt;">
 		<c:if test="${registerList ne null}">
 			<ul style="width: 282px; height:300px;">				
 				<c:forEach var="vo" items="${registerList}">
 					<li style="vertical-align: top;">
-						<a href="" onclick="window.open('miniHp_neighborRegistorCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
+						<a href="" onclick="window.open('miniHp_neighborRegisterCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
                             <font color="Blue">${vo.senderName}</font>
-                           		 님이 일촌 신청을 하셨습니다.
+                           		 님이 이웃 신청을 하셨습니다.
                         </a>						
 					</li>
 				</c:forEach>

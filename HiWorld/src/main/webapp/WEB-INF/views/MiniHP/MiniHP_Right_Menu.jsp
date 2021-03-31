@@ -9,26 +9,13 @@
 <head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-.unselected-Menu{
+.menu{
 	border: 1px solid;
 	border-left: 0px;
 	width: 60px;
 	height: 22px;
 	padding-top: 6px;
-	margin-bottom: 3px;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-	font-size: 9pt;
-	user-select:none;
-}
-.selected-Menu{
-	border: 1px solid;
-	border-left: 0px;
-	background-color: white;
-	width: 60px;
-	height: 22px;
-	padding-top: 6px;
-	margin-bottom: 3px;
+	margin-bottom: 1px;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	font-size: 9pt;
@@ -37,13 +24,6 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$('.unselected-Menu').css('background-color', '#${miniHpUserMenuVO.menuBGColor}');
-	$('.unselected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor}');
-	$('.unselected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor}');
-	$('.selected-Menu').css('color', '#${miniHpUserMenuVO.menuFontColor}');
-	$('.selected-Menu').css('border-color', '#${miniHpUserMenuVO.menuBorderColor}');
-});
 /* ajax */
 function movePage(url){
 	// ajax option
@@ -62,73 +42,48 @@ function movePage(url){
 	$('#bodyContents').html(data);
 	});
 }
- 
+$(document).ready(function(){
+	$(".menu").css('background-color', '#${miniHpUserMenuVO.menuBGColor}');
+	$(".menu").css('color', '#${miniHpUserMenuVO.menuFontColor}');
+	$(".menu").css('border-color', '#${miniHpUserMenuVO.menuBorderColor}');
+	$("#menu1").css('background-color', '#FFFFFF');
+})
+$('.menu').click(function(){
+	console.log('2312341234');
+	$(".menu").css('background-color', '#${miniHpUserMenuVO.menuBGColor}');
+	$(this).css('background-color', '#FFFFFF');
+});
 </script>
 <script src="resources/js/miniHP/ajaxMovePage.js?ver=5"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${miniHpUserMenuVO.menu1==1}">
-		<c:if test="${menu=='menu1'}">
-			<div align="center" class="selected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
-		</c:if>
-		<c:if test="${menu!='menu1'}">
-			<div align="center" class="unselected-Menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
-		</c:if>
+		<div align="center" id="menu1" class="menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu2==1}">
-		<c:if test="${menu=='menu2'}">
-			<div align="center" class="selected-Menu" onclick="moveProfile()">프로필</div>
-		</c:if>
-		<c:if test="${menu!='menu2'}">
-			<div align="center" class="unselected-Menu" onclick="moveProfile()">프로필</div>
-		</c:if>
+		<div align="center" id="menu2" class="menu" onclick="moveProfile()">프로필</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu3==1}">
-		<c:if test="${menu=='menu3'}">
-			<div align="center" class="selected-Menu" onclick="movePicture()">사진첩</div>
-		</c:if>
-		<c:if test="${menu!='menu3'}">
-			<div align="center" class="unselected-Menu" onclick="movePicture()">사진첩</div>
-		</c:if>
+		<div align="center" id="menu3" class="menu" onclick="movePicture()">사진첩</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu4==1}">
-		<c:if test="${menu=='menu4'}">
-			<div align="center" class="selected-Menu" onclick="moveBoard()">게시판</div>
-		</c:if>
-		<c:if test="${menu!='menu4'}">
-			<div align="center" class="unselected-Menu" onclick="moveBoard()">게시판</div>
-		</c:if>
+		<div align="center" id="menu4" class="menu" onclick="moveBoard()">게시판</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu5==1}">
-		<c:if test="${menu=='menu5'}">
-			<div align="center" class="selected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
-		</c:if>
-		<c:if test="${menu!='menu5'}">
-			<div align="center" class="unselected-Menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>
-		</c:if>
+		<div align="center" id="menu5" class="menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>	
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu6==1}">
-		<c:if test="${menu=='menu6'}">
-			<div align="center" class="selected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
-		</c:if>
-		<c:if test="${menu!='menu6'}">
-			<div align="center" class="unselected-Menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
-		</c:if>
+		<div align="center" id="menu6" class="menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu7==1}">
-		<c:if test="${menu=='menu7'}">
-			<div align="center" class="selected-Menu" onclick="moveSetting()">관&nbsp;리</div>
-		</c:if>
-		<c:if test="${menu!='menu7'}">
-			<div align="center" class="unselected-Menu" onclick="moveSetting()">관&nbsp;리</div>
-		</c:if>
+		<div align="center" id="menu7" class="menu" onclick="moveSetting()">관&nbsp;리</div>
 	</c:if>
 </body>
 </html>
