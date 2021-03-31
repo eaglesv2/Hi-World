@@ -138,7 +138,7 @@ function secret(num){
 
 	<!-- c:Foreach 게시판 ------------------------------------------------------------ -->
 <center><img src="/root/resources/images/bar.jpg" width="430" height="6" border="0" alt=""></center>
-	<c:if test="${length eq 0 }">
+	<%-- <c:if test="${length eq 0 }">
 		<br/><center>
 		작성된 글이 없습니다.<br/><br/>
 		일촌들에게 안부를 물어보시는 건 어떨까요?</center>
@@ -179,7 +179,7 @@ function secret(num){
 		<tr>
 			<td colspan="2" align="center" bgcolor="#fffbff">
 				<span id="span<%=i %>" align="left"></span><br/>
-				<input type="hidden" id="num<%=i %>" value="${list.get(i).num }">
+				<input type="hidden" id="num<%=i %>" value="${list.get(i).num}">
 				<textarea id="comment<%=i %>" rows="2" cols="47" style="resize:none; width: 80%;"></textarea>
 				<input type="button" name="comment_save" value="확인" onclick="comment('<%=i%>');">
 			</td>
@@ -190,10 +190,10 @@ function secret(num){
 	</c:forEach>
 	<!-- ---------- ------------------------------------------------------------ -->
 	<div align="center">
-	${pageIndexList }
+	${pageIndexList}
 	</div>
-	</c:if>	
-	<input type="hidden" name="currentPage" value="${currentPage }"/>
+	</c:if>	 --%>
+	<input type="hidden" name="currentPage" value="${currentPage}"/>
 </form>
 
  </body>

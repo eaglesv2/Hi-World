@@ -1,68 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 
-	<a href="basketJoin.do">장바구니</a>
-	<h1>물품 최신순으로 나열</h1>
 	<table>
+		<tr id="tablehead">
+				<td>상품</td>
+				<td>종류</td>
+				<td>상품명</td>
+				<td>가격</td>
+				<td>구매하기</td>
+				<td>장바구니로가기</td>
+		</tr>
 		<c:forEach var="kinds" items="${ArticleList}">
 			<tr>
-				<c:set var="check" value="${kinds.articleImg}" />
-				<c:if test="${fn:contains(check,'.png')}">
-					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
-					<td>${kinds.articleKinds}</td>
-					<td>${kinds.articleName}</td>
-					<td>${kinds.articlePrice}</td>
-					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
-					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
-				</c:if>
-				<c:if test="${fn:contains(check,'.jsp')}">
-					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
-					<td>${kinds.articleKinds}</td>
-					<td>${kinds.articleName}</td>
-					<td>${kinds.articlePrice}</td>
-					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
-					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
-				</c:if>
-				<c:if test="${fn:contains(check, '.mp3')}">
-					<td><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></td>
-					<td>${kinds.articleKinds}</td>
-					<td>${kinds.articleName}</td>
-					<td>${kinds.articlePrice}</td>
-					<td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td>
-					<td><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></td>
-					<td><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></td>
-				</c:if>
+				<th><img src="${kinds.articleImg}" /></th>
+				<th>${kinds.articleKinds}</th>
+				<th>${kinds.articleName}</th>
+				<th>${kinds.articlePrice}</th>
+				<th><a href="#"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+				<th><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 			</tr>
 		</c:forEach>
 	</table>
-
+	<a href="basketJoin.do">장바구니</a>
+	<h1>물품 노래순으로 나열</h1>
 
 </body>
 <script>
-function PLAY(mp3) {
-	var audio = new Audio(mp3);
-	/* 노래 시작 */
-	audio.play();
-
-	/* Timeout을 이용해서 10초후 노래 정지*/
-	setTimeout(function() {
-		audio.pause();
-	}, 10000)
-	
-}
-
 	function basket(ArticleName) {
 			var UserSerial = '${sessionVO.userSerial}';
 			$.ajax({
@@ -140,5 +113,4 @@ function PLAY(mp3) {
 		})
 	}
 </script>
-
 </html>

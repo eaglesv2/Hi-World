@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +11,6 @@
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style type="text/css">
 body {
 	scrollbar-face-color: #FFFFFF;
@@ -30,9 +28,9 @@ body {
 $(document).ready(function() {
 	console.log('1');
 	$.ajax({
-		type : 'post',
+		type : 'GET',
 		url : 'miniHp_rightGuestMenu.do',
-		data : { UserID : '${sessionVO.userID}', OwnerID : '${OwnerID}'},
+		data : { OwnerID : '${OwnerID}'},
 		
 		success : function(result) {
 			$("#rightMenu").html(result);
@@ -55,7 +53,7 @@ $(document).ready(function() {
 							<font><span style="font-size:8pt;">today <font color="red">${ownerintroVO.hpToday}</font> | total ${ownerintroVO.hpTotal}</span></font>
 						</td>
 						<td align="center" height="40">
-							<iframe frameborder="0" width="470" height="40" src="miniHp_topGuest.do"></iframe> 
+							<iframe frameborder="0" width="470" height="40" src="miniHp_topGuest.do?OwnerID=${OwnerID}"></iframe> 
 						</td>
 						<td></td>
 					</tr>
@@ -64,13 +62,13 @@ $(document).ready(function() {
 
 						<td align="center" width="178" height="450" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do"></iframe> 
+							<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
 						<td align="center" width="480" height="450" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do"></iframe> 
+							<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
 							<!-- ---------------------------------------------------------------------------- -->
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->

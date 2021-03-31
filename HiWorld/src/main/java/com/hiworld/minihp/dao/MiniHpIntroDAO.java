@@ -1,5 +1,6 @@
 package com.hiworld.minihp.dao;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -42,4 +43,6 @@ public interface MiniHpIntroDAO {
 	/*미니홈피 누적 방문자수 카운트*/
 	void updateTotal(String UserID);
 	
+	/*전체 정보 가져오기*/
+	ArrayList<MiniHpIntroVO> getAllNeighbor(String UserID);
 }

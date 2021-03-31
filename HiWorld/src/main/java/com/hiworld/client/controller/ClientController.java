@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,8 +28,10 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.article.service.ArticleService;
 import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.client.service.ClientService;
+import com.hiworld.client.service.NeighborService;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 @Controller
 public class ClientController {
@@ -48,12 +49,32 @@ public class ClientController {
 	@Autowired
 	private ArticleService articleService;
 	
+	@Autowired
+	private NeighborService neighborService;
+	
 	/* BO자동으로 등록 */
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
-
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+//  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 이웃 찾기 */
+	@GetMapping("/boardPage.do")
+	public String boardAjax(Model model, HttpSession session) {
+		
+		/* 내 아이디 가져오기 */
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = vo.getUserID();
+		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
+		
+		model.addAttribute("MiniVO",MiniVO);
+		
+		return "Login/boardPage";
+	}
+	
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/* 회원 목록 보이기 */
@@ -449,35 +470,35 @@ public class ClientController {
 		/* 호출한 ajax의 데이터가 뭔지 확인 */
 		String list = request.getParameter("list");
 		articleVO.setArticleList(list);
-		ArrayList<ArticleVO> ArticleList ;
-		
+		ArrayList<ArticleVO> ArticleList;
+		System.out.println(list);
 		switch (list) {
 		
 		/* 상품 최신순 */
 		case "쇼핑":
 			ArticleList = articleService.getAllArticle();
 			model.addAttribute("ArticleList",ArticleList);			
-			return "articleMain";		
+			return "Login/shoppingPage";	
 		/* 케릭터 별 */
 		case "캐릭터":
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleCharacter";
+			return "Login/shop_character";
 		/* 배경화면 별 */
 		case "배경": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleBackground";
+			return "Login/shop_background";
 		/* 음악 별 */
 		case "음악": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleMusic";
+			return "Login/shop_Music";
 		/* 마우스 별 */	
 		case "마우스": 
 			ArticleList = articleService.getSelectArticle(articleVO);
 			model.addAttribute("ArticleList",ArticleList);	
-			return "articleMouse";
+			return "Login/shop_Mouse";
 		/* 에러 */	
 		default:
 			return "error";
@@ -638,24 +659,26 @@ public class ClientController {
 	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 메인 페이지 불러오는 곳 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/*메인페이지 AJAX*/
+	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
 	public String noticeAjax() {
+		/* 디비에서 목록 불러오기 */
+		
+		
+		
 		return "Login/noticePage";
 		
 	}
 	
+	/* 쇼핑페이지 */
 	@GetMapping("/shoppingPage.do")
 	public String shoppingAjax() {
 		System.out.println("오나 ?");
-		return "Login/shoppingPage";
+		return "articleMain";
 	}
 	
-	@GetMapping("/boardPage.do")
-	public String boardAjax() {
-		return "Login/boardPage";
-	}
 	
+	/* 문의 사항 */
 	@GetMapping("/questionPage.do")
 	public String questionAjax() {
 		return "Login/questionPage";
