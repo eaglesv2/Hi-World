@@ -11,10 +11,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-var ajaxData = $("form[name=neighborRegisterCheck]").seiralize();
+
 function neighborRegister_ok(){
-	
+	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
+	console.log('ok')
 	$.ajax({
 		type : 'POST',
 		url : 'miniHp_neighborRegisterCheck_ok.do?type=1',
@@ -24,10 +26,9 @@ function neighborRegister_ok(){
 			window.close();
 		}
 	});
-	
 }
 function neighborRegister_next(){
-	
+	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
 	$.ajax({
 		type : 'POST',
 		url : 'miniHp_neighborRegisterCheck_ok.do?type=2',
@@ -39,7 +40,7 @@ function neighborRegister_next(){
 	});
 }
 function neighborRegister_no(){
-	
+	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
 	$.ajax({
 		type : 'POST',
 		url : 'miniHp_neighborRegisterCheck_ok.do?type=0',
@@ -51,10 +52,10 @@ function neighborRegister_no(){
 	});
 }
 </script>
- <body background="${pageContext.request.contextPath}/resources/imgages/admin/member_check.png">
-	<form action="" name="neighborRegistorCheck" method="post">
+ <body background="${pageContext.request.contextPath}/resources/images/admin/member_check.png">
+	<form action="" name="neighborRegisterCheck" method="post">
 		<span style="position: absolute; top:87px; left:85px; font-size: 9pt">
-			<a href="" onclick=""><font color="Blue">${neighborListVO.senderName}</font></a>
+			<font color="Blue">${neighborListVO.senderName}</font>
 		</span>
 		
 		<img alt="미니미" src="${resoucePath}/img/${minimiPath}" style="position: absolute; top:105px; left:30px;" width="98px" height="98">
@@ -75,17 +76,17 @@ function neighborRegister_no(){
 		</span>
 		
 		<span style="position: absolute; top:420px; left:115px; font-size:8pt;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/yesBtn.jpg" onclick="neighborRegistor_ok();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/yesBtn.jpg" onclick="neighborRegister_ok()"/>
 		</span>
 		
 		<span style="position: absolute; top:420px; left:155px; font-size:8pt;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/nextBtn.jpg" onclick="neighborRegistor_next();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/nextBtn.jpg" onclick="neighborRegister_next()"/>
 		</span>
 		
 		<span style="position: absolute; top:420px; left:205px; font-size:8pt;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/noBtn.jpg" onclick="neighborRegistor_no();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/noBtn.jpg" onclick="neighborRegister_no()"/>
 		</span>	
-		
+
 		<input type="hidden" name="neighborID1" value="${neighborListVO.senderID}">
 		<input type="hidden" name="neighborName1" value="${neighborListVO.senderName}">
 		<input type="hidden" name="neighborValue1" value="${neighborListVO.senderValue}">

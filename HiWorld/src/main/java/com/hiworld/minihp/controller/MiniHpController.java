@@ -60,7 +60,7 @@ public class MiniHpController {
 		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
 		
 		model.addAttribute("introVO", introVO);
-		model.addAttribute("menu", "menu1");
+
 		return "MiniHP/MiniHP_Home";
 	}
 	
@@ -102,33 +102,33 @@ public class MiniHpController {
 	
 	//프로필 탭
 	@GetMapping("/miniHpProfile.do")
-	public String miniHpProfile(String menu, Model model) {
+	public String miniHpProfile(Model model) {
 		System.out.println("프로필 화면");
-		model.addAttribute("menu",menu);
+
 		return "MiniHP/MiniHP_Menu_Profile";
 	}
 	
 	//동영상 탭
 	@GetMapping("/miniHpVideo.do")
-	public String miniHpVideo(String menu, Model model) {
+	public String miniHpVideo( Model model) {
 		System.out.println("비디오");
-		model.addAttribute("menu",menu);
+
 		return "MiniHP/MiniHP_Menu_Video";
 	}
 	
 	//방명록 탭
 	@GetMapping("/miniHpGuest.do")
-	public String miniHpGuest(String menu, Model model) {
+	public String miniHpGuest(Model model) {
 		System.out.println("방명록");
-		model.addAttribute("menu",menu);
+
 		return "MiniHP/MiniHP_Menu_Guest";
 	}
 	
 	//관리 탭
 	@GetMapping("/miniHpSetting.do")
-	public String miniHpSetting(String menu, Model model) {
+	public String miniHpSetting(Model model) {
 		System.out.println("관리");
-		model.addAttribute("menu",menu);
+
 		return "MiniHP/MiniHP_Setting_BasicInfo_pwCheck";
 	}
 	
@@ -149,13 +149,9 @@ public class MiniHpController {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String userId = vo.getUserID();
-		String menu = request.getParameter("menu");
 		menuVO = settingService.getMenuAvailable(userId);
 		
-		/*System.out.println(menu);*/
-		
 		model.addAttribute("miniHpUserMenuVO", menuVO);
-		model.addAttribute("menu", menu);
 
 		return "MiniHP/MiniHP_Right_Menu";
 	}
@@ -168,8 +164,8 @@ public class MiniHpController {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String UserID = vo.getUserID();
 		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserID);
-		
-		model.addAttribute("registorList", list);
+
+		model.addAttribute("registerList", list);
 		
 		return "MiniHP/MiniHP_NeighborRegisterList";
 	}
@@ -183,10 +179,12 @@ public class MiniHpController {
 		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
 		String minimiPath = vo.getOriginalFileName();*/
 		neighborListVO = neighborListService.getRegisterCheck(senderID, receiverID);
+		System.out.println(neighborListVO.getSenderValue());
+		System.out.println(neighborListVO.getReceiverValue());
 		
 		model.addAttribute("neighborListVO", neighborListVO);
 		
-		return "MiniHP/MiniHO_NeighborRegisterCheck";
+		return "MiniHP/MiniHP_NeighborRegisterCheck";
 	}
 	
 	@ResponseBody
@@ -194,6 +192,8 @@ public class MiniHpController {
 	public String neighborRegisterCheck_ok(HttpServletRequest request, MiniHpNeighborVO neighborVO) {
 		int type = Integer.parseInt(request.getParameter("type"));
 		
+		System.out.println(neighborVO.getNeighborValue1());
+		System.out.println(neighborVO.getNeighborValue2());
 		neighborService.registerCheck_ok(type, neighborVO);
 		
 		return "";

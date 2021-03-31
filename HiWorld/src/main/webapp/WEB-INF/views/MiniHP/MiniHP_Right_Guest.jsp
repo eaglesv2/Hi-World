@@ -34,7 +34,7 @@ span {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
+/* $(document).ready(function(){
     initSet();
 });
 
@@ -117,7 +117,7 @@ function secret(num){
 	document.myForm.action = "my_guestBook_secret.action?num="+num;
 	document.myForm.submit();
 }
-
+ */
 </script>
 
  <body>

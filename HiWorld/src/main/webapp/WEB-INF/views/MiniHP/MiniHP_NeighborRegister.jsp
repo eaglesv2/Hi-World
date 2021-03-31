@@ -12,11 +12,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 function registerSend(){
 	
 	var ajaxData = $("form[name=neighborRegisterForm]").serialize();
+	/* var userMessage = $("textarea[name=userMessage]").val(); */
 	
 	$.ajax({
 		type : 'POST',
@@ -24,6 +26,7 @@ function registerSend(){
 		data : ajaxData,
 		
 		success : function(result) {
+			console.log('이웃 신청 성공');
 			window.close();
 		},
 		
@@ -33,7 +36,7 @@ function registerSend(){
 	});
 }
 </script>
- <body background="${pageContext.request.contextPath}/resources//imgages/admin/member_call.png">
+ <body background="${pageContext.request.contextPath}/resources//images/admin/member_call.png">
 	<form action="" name="neighborRegisterForm" method="post">
 		<span style="position: absolute; top:35px; left:80px;"><font color="Blue">${senderName}</font></span>
 			<img alt="상대방의 미니미" src="${resoucePath}/img/${minimiPath}" style="position: absolute; top:65px; left:30px;" width="98px" height="98">
@@ -47,17 +50,17 @@ function registerSend(){
 			<font color="Blue">${senderName}</font>님을 <font color="Blue">${receiverName}</font>님의 <input type="text" style="width:50px; height:10px;" name="senderValue"/>으로
 		</span>
 		<span style="position: absolute; top:255px; left:30px; font-size:8pt;">
-			<textarea rows="3" cols="32" style="width: 240px; height: 40px;" name="userMessege"></textarea>
+			<textarea rows="3" cols="32" style="width: 240px; height: 40px;" name="userMessage"></textarea>
 		</span>
 		<span style="position: absolute; top:329px; left:95px; font-size:8pt;" >
-			<img alt="" src="${pageContext.request.contextPath}/resources/imgages/admin/sendBtn.jpg" onclick="registerSend();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/sendBtn.jpg" onclick="registerSend();"/>
 		</span>
 		<span style="position: absolute; top:330px; left:158px; font-size:8pt;" >
-			<img alt="" src="${pageContext.request.contextPath}/resources/imgages/admin/cancelBtn.jpg" onclick="window.close();"/>
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/cancelBtn.jpg" onclick="window.close();"/>
 		</span>
 		<input type="hidden" name="senderID" value="${sessionVO.userID}">
 		<input type="hidden" name="senderName" value="${senderName}">
-		<input type="hidden" name="receiverID" value="${ownerVO.userID}">
+		<input type="hidden" name="receiverID" value="${receiverId}">
 		<input type="hidden" name="receiverName" value="${receiverName}">
 	</form>
  </body>

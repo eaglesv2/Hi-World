@@ -35,7 +35,7 @@ body
 			url : 'miniHp_menuList.do',
 			
 			success : function(result) {
-				$("#menuData").html(result);
+				$("#sideContents").html(result);
 			}
 		});
 		
@@ -55,7 +55,7 @@ body
 				url : 'miniHp_menuAvailable.do',
 				
 				success : function(result) {
-					$("#browser").html(result); 
+					$("#bodyContents").html(result); 
 				}
 			})
 		} else {
@@ -64,7 +64,7 @@ body
 				url : 'miniHp_setBasicInformation_pw.do',
 				
 				success : function(result) {
-					$("#browser").html(result); 
+					$("#bodyContents").html(result); 
 				}
 			})
 		}
@@ -92,12 +92,12 @@ body
 						<td width="10"></td>
 						<td width="178" height="440" align="center" valign="top" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg" style="padding-top: 10px;">
 						<!-- Setting menu beginning -->
-							<span id="menuData"></span>
+							<span id="sideContents"></span>
 						<!-- Setting menu ending -->								
 						</td>
 						<td width="480" height="440" align="center" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 						<!-- Setting menu beginning -->
-							<span id="browser" ></span>
+							<span id="bodyContents" ></span>
 						
 						<!-- Setting menu ending -->							
 						</td>
