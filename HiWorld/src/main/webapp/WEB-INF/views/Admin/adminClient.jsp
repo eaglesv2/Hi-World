@@ -16,9 +16,8 @@
 	<input type="text" id="search" />
 	<table border="1">
 		<tr>
-			<td>유저번호</td>
-			<td>유저이름</td>
-			<td>유저아이디</td>
+			<td>유저고유번호</td>
+			<td>유저이름(아이디)</td>
 			<td>유저밴</td>
 		</tr>
 		<tbody id="tbody">
@@ -26,16 +25,14 @@
 				<!-- 벤안되었을때 -->
 				<tr id="${kinds.userSerial}">
 					<td>${kinds.userSerial}</td>
-					<td>${kinds.userName}</td>
-					<td>${kinds.userID}</td>
-					<td><input type="button" value="Ban"
-						onclick="UserBan(${kinds.userSerial})" /></td>
+					<td>${kinds.userName}(${kinds.userID})</td>
+					<td><input type="button" value="Ban" onclick="UserBan(${kinds.userSerial})" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 
-	<a href="#" onclick="Manage_Ban()">밴한회원 보기</a>
+	<a href="#" onclick="Manage_Ban()">밴한 회원 보기</a>
 
 </body>
 
@@ -47,7 +44,7 @@
 			data: {"check":"ban"},
 			dataType: "html",
 			success: function(data) {
-				$("#test").html(data);
+				$("#bodyContext").html(data);
 			}
 		})
 	}

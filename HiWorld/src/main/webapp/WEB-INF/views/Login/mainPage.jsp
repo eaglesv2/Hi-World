@@ -71,7 +71,6 @@
                          dataType : "html", 
                          async:true,
                          cache:false
-                		 
                  }
                  
                  
@@ -321,6 +320,43 @@
     		}
     		})
     	}
+    	
+    	/* 어드민 회원관리 */
+    	function Manage_Client(){
+    		$.ajax({
+    			url: "Manage_Client.do",
+    			type: "GET",
+    			data: {"check":"all"},
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}	
+    	
+    	/* 어드민 상품등록 */
+    	function Manage_Article() {
+    		$.ajax({
+    			url: "Manage_Article.do",
+    			type: "GET",
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}
+    	
+    	/* 어드민 공지사항 등록 */
+    	function Manage_Board() {
+    		$.ajax({
+    			url: "Manage_Board.do",
+    			type: "GET",
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -397,13 +433,17 @@
 						        </div>
 						    </div>
 					</c:if>
+					<c:if test="${sessionVO.userID == 'ADMIN'}">
+					<!-- 어드민이 들어왔을 경우 -->
+                  		<div id="minimi"> 어드민입니다. <br />
+                  		<a href="#" onclick="Manage_Client()">어드민 회원관리</a><br />
+						<a href="#" onclick="Manage_Article()">어드민 상품등록</a><br />
+						<a href="#" onclick="Manage_Board()">어드민 공지시항 등록</a><br />
+						<a href="logout.do">로그아웃</a>
+						</div>
+                  	</c:if>
 					</c:when>
 					
-					<c:when test="${sessionVO.userName == 'ADMIN'}">
-					<!-- 어드민이 들어왔을 경우 -->
-                  		<div id="minimi"> 어드민입니다. </div>
-                  		
-                  	</c:when>
 					
 				<c:otherwise>
 					
