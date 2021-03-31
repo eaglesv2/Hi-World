@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,6 @@ public class ClientController {
 	/* 네이버 */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
-	
 	
 	/* ClientService를 부르기 위해 정의 */
 	@Autowired
@@ -280,7 +280,7 @@ public class ClientController {
 		ClientVO vo = clientService.getOneClient(UserID);
 		model.addAttribute("clientVO",vo);
 		
-		return "Login/userOneView";
+		return "Login/userview";
 	}
 	
 	
@@ -298,43 +298,39 @@ public class ClientController {
 		return "redirect:/login.do";
 	}
 	
-	/* 회원정보 수정*/
+	/* 회원정보 수정 구현 완료*/
 	@PostMapping("UserUpdate.do")
-	public String userUpdate(HttpServletRequest request, HttpSession session,Model model) {
-		System.out.println("수정 항목임 여기 왓니?");
+	@ResponseBody
+	public String userUpdate(HttpServletRequest request, HttpSession session,Model model, ClientVO vvo) {
 		//int updatech = Integer.parseInt(request.getParameter("updatech"));
 		/* 받아온 값을 vo에 넣기 위해서 작업*/
-		String userName= request.getParameter("userName");
-		sessionVO vo1 = (sessionVO)session.getAttribute("sessionVO");
-		int userserial = vo1.getUserSerial();
-		String userId = vo1.getUserID();
-		ClientVO vo = clientService.getOneClient(userId);
-		vo.setUserName(userName);
-		vo.setUserSerial(userserial);
-		int ok = clientService.updateName(vo);
-		/*============================================================*/
-		sessionVO sessionvo = (sessionVO)session.getAttribute("sessionVO");
-		/* user이름을 조회 하고 리턴하기 위해서*/
-		String UserId = sessionvo.getUserID();
-		String oneclient = clientService.selectName(UserId);
-		ClientVO clientvo = clientService.getOneClient(oneclient);
-		model.addAttribute("clientVO", clientvo);
-		
-		
-				/*if(updatech == 1) {
-			 1이 들어 오면 name를 수정 하라
-				
-				
-		}else if(updatech == 2) {
-			 2이 들어 오면 pw를 수정 하라
-		}else if(updatech == 3) {
-			 3이 들어 오면 birth를 수정 하라
-		}else if(updatech == 4) {
-			 4이 들어 오면 tel를 수정 하라
-		}else if(updatech == 5) {
-			 5이 들어 오면 address를 수정 하라
-		}*/
-		return "Login/userOneView";
+		String upDatech = request.getParameter("upDatech");
+		switch (upDatech) {
+		case "1":
+			/* 섹션으로 로그인 된 유저 정보를 읽어와서 씨리얼 번호로 이름을 수정*/
+			sessionVO so = (sessionVO)session.getAttribute("sessionVO");
+			int uSerial = so.getUserSerial();
+			String uName = request.getParameter("userName");
+			vvo.setUserSerial(uSerial);
+			vvo.setUserName(uName);
+			int ok = clientService.updateName(vvo);
+			ClientVO clientvo = clientService.selectName(uName);
+			model.addAttribute("clientVO", clientvo);
+			break;
+		case "2":
+			
+			 break;
+		case "3":
+			 break;
+		case "4":
+			 break;
+		case "5":
+			 break;
+			
+		default:
+			return "Login/userview";
+		}
+		return "Login/userview";
 	}
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
