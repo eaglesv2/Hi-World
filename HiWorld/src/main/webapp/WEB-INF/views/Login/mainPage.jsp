@@ -47,7 +47,7 @@
                      dataType : "html", 
                      async:true,
                      cache:false
-            		 
+ 
              }
         	  $.ajax(ajaxOption).done(function(data){
         		  //Contents 영역삭제
@@ -507,10 +507,11 @@
 						</c:otherwise>
 					</c:choose>
             </div>
+            	<c:if test="${sessionVO.userName != null}">
                 <div id="minihome">
                     <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
                 </div>
-
+				</c:if>
                 <div id="add">
                   	  <img src="resources/images/mainadd.png" alt="" />
                 </div>

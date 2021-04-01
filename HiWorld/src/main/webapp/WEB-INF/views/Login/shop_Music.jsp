@@ -49,7 +49,9 @@
 	}
 
 	function basket(ArticleName) {
-			var UserSerial = '${sessionVO.userSerial}';
+		var UserSerial = '${sessionVO.userSerial}';
+		
+		if(UserSerial!=''&&UserSerial!=null){
 			$.ajax({
 				type: "GET",
 				url: "basket.do",
@@ -69,11 +71,15 @@
 					}
 				}
 			})
-	}
+		}else{
+			alert("로그인하세요");
+		}
+}
+
+function bay(ArticleName) {
+	var UserSerial = '${sessionVO.userSerial}';
 	
-	function bay(ArticleName) {
-		var UserSerial = '${sessionVO.userSerial}';
-		
+	if(UserSerial!=''&&UserSerial!=null){
 		/* alert 창 */
 		const swalWithBootstrapButtons = Swal.mixin({
  			customClass: {
@@ -123,6 +129,10 @@
 				})
 		}
 		})
+	}else{
+		alert("로그인하세요");
 	}
+	
+}
 </script>
 </html>

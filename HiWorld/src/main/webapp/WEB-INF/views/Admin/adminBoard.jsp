@@ -24,7 +24,8 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-<body>
+
+<body id="#bodyContext">
 	<div id="board_con" style="text-align: center;padding-top: 150px;">
 		<div id="boardheader">공지사항 등록하기</div>
 		<form name="BoardSubmit">
@@ -46,6 +47,17 @@
 				data : BoardSubmit,
 				success : function(data) {
 					alert("등록되었습니다.");
+					var ajaxOption3={
+                   		 type: "GET",
+                            url : "noticePage.do",
+                            dataType : "html", 
+                            async:true,
+                            cache:false
+                    	}
+               	 	$.ajax(ajaxOption3).done(function(data){
+               		  //Contents 영역 교체
+               		  	$('#bodyContext').html(data);
+               	 	 })
 				}
 			})
 			
