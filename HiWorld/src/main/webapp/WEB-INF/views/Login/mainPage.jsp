@@ -213,6 +213,7 @@
                 }
            	  $.ajax(ajaxOption).done(function(data){
            		  //Contents 영역삭제
+           		  console.log('adfdasf')
            		  $('#bodyContext').children().remove();
            		  console.log("1111") 
            		  //Contents 영역 교체
@@ -433,6 +434,7 @@
 						        </div>
 						    </div>
 					</c:if>
+
 					<c:if test="${sessionVO.userID == 'ADMIN'}">
 					<!-- 어드민이 들어왔을 경우 -->
                   		<div id="minimi"> 어드민입니다. <br />
@@ -444,6 +446,7 @@
                   	</c:if>
 					</c:when>
 					
+
 					
 				<c:otherwise>
 					
