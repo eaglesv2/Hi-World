@@ -7,6 +7,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style>
+	@charset "UTF-8";
+
+body{
+	width:100%;
+	height: 100%;
+	text-align: center;
+	overflow-y:scroll;
+}
+
+h1{
+	margin-bottom: 30px;
+    padding: 20px;}
+
+
+.sangpum table{
+    border:1px solid black;
+    width: 700%;
+    height: 80%;
+    text-align: center;
+    display: table;
+    border-spacing: 0 10px;
+    border-collapse: separate;
+    border-collapse: none;
+    margin-left:100px;
+
+}
+
+#tablehead{
+	text-align: center;
+}
+
+#tbody tr,th{
+	vertical-align: middle;
+	text-align: center;
+	margin-bottom:20px;
+}
+
+.total{
+	vertical-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+    font-weight: 800;
+    font-size: xx-large;
+	
+th img{
+	border:1px solid;
+}
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
@@ -14,50 +65,57 @@
 	<h1>장바구니 목록</h1>
 	<c:choose>
 		<c:when test="${ArticleList != '[]'}">
-			<table>
+			<table class="sangpum" style="width:70%;border-collapse: separate;margin-left:100px;border-spacing:0 20px;">
 				<tbody id="tbody">
+
 					<c:forEach var="kinds" items="${ArticleList}">
 						<tr class="${kinds.articleSerial}">
 							<c:set var="check" value="${kinds.articleImg}" />
 							<c:if test="${fn:contains(check,'.png')}">
-								<th style="width: 27%"><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
-								<th>${kinds.articleKinds}</th>
+								<th style="width: 27%;"><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:100px;height:100px; /></th>
+								<th style="width: 50px;">${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">삭제</th>
+								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 							</c:if>
 							<c:if test="${fn:contains(check,'.jsp')}">
-								<th><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
+								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px;/></th>
 								<th>${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">삭제</th>
+								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 							</c:if>
 							<c:if test="${fn:contains(check, '.mp3')}">
-								<th><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
+								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px; /></th>
 								<th>${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">삭제</th>
+								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 								<%-- <td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td> --%>
 							</c:if>
 							<c:set var="total" value="${total+kinds.articlePrice}" />
 						</tr>
 					</c:forEach>
-					<tr class="total">
-						<td>총금액 : <b id="totalPrice"></b>원 입니다.
-						</td>
-					</tr>
-					<tr class="total">
-						<td><a href="#" onclick="totalBay()">결제하기</a></td>
-					</tr>
+				
+
 				</tbody>
+				
 			</table>
 
+			<div class="total">
+				<div>
+					총금액 : <b id="totalPrice"></b>BT 입니다.
+				</div>
+			</div>
+			<div class="total">
+				<div>
+					<a href="#" onclick="totalBay()">결제하기</a>
+				</div>
+			</div>
 
 
 
-			
+
 		</c:when>
 
 

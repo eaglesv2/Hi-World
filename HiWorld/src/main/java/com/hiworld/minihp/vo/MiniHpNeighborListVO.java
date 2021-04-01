@@ -9,6 +9,7 @@ public class MiniHpNeighborListVO {
 	private String receiverName;
 	private String receiverValue;
 	private String userMessage;
+	private int type;
 	
 	public String getSenderID() {
 		return senderID;
@@ -51,5 +52,11 @@ public class MiniHpNeighborListVO {
 	}
 	public void setUserMessage(String userMessage) {
 		this.userMessage = userMessage;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
 	}
 }

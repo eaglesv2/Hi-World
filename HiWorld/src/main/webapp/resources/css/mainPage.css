@@ -216,5 +216,7 @@ a{
 	margin-top:10px;
 	margin-left : 130px;
 }
-
+#jang-top div{
+	cursor: pointer;
+}
 

@@ -2,9 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,39 +33,40 @@ body{
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-var str_i ="";
-/* 
-$(document).ready(function(){
-	sendRequest("/cy/setting/getMemberList.action",null,displayInfo,"GET");
-});
 
-function displayInfo(){
-	if(httpRequest.readyState==4){
-		if(httpRequest.status==200){
-			str_i = httpRequest.responseText;
-			var infoTxt = document.getElementById("infoTxt");
-			infoTxt.innerHTML = str_i;	
-		}
-	}
-}
-
-function deleteMember(userId){
-	var flag = confirm("일촌을 끊겠습니까?");
+function deleteNeighbor(neighborID){
+	var flag = confirm("이웃을 끊겠습니까?");
+	
 	if(flag) {
-		var params = "userId="+userId;
-		sendRequest("/cy/setting/deleteMemberList.action",params,displayInfo,"GET");
+		$.ajax({
+			type : 'GET',
+			url : 'miniHp_deleteNeighbor.do',
+			data : { NeighborID : neighborID },
+			
+			success : function() {
+				loacation.reload();
+			}
+		});
 	}
 }
 
-function updateMember(userId){
-    window.open('my_member_update.action?userId='+userId,'${userId }memberCall','width=312,height=380,location=no,status=no,scrollbars=no');
+function updateNeighbor(neighborID){
+      var url    ="miniHp_updateNeighbor.do";
+      var title  = "updateNeighbor";
+      var status = 'width=312,height=380,location=no,status=no,scrollbars=no';
+      
+      window.open("",title,status);
+      neighborSetting.target = title;                   
+      neighborSetting.action = url;                   
+      neighborSetting.method = "POST";
+      neighborSetting.submit();     
 }
- */
+
 </script>
 </head>
 <body>
-<form name="myForm">
-	<h3>일촌 관리</h3>
+<form name="neighborSetting">
+	<h3>이웃 관리</h3>
 	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
@@ -76,7 +74,14 @@ function updateMember(userId){
 	<div align ="left" valign="top" id="infoTxt" class="infoTxt">
 		<c:if test="${listLength != 0}">
 			<c:forEach var="neighborList" items="${neighborList}">
-				<font style="margin-left: 10px;">나(${memberValue[i] }) - <a href="#"><font color="blue">${neighborList.userName}</font></a>(${neighborList.userValue})</font>
+				<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
+				<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborID}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborID}');"/><br/>
+				<input type="hidden" name="userID" value="${neighborList.userID}">
+				<input type="hidden" name="userName" value="${neighborList.userName}">
+				<input type="hidden" name="userValue" value="${neighborList.userValue}">
+				<input type="hidden" name="neighborID" value="${neighborList.neighborID}">
+				<input type="hidden" name="neighborName" value="${neighborList.neighborName}">
+				<input type="hidden" name="neighborValue" value="${neighborList.neighborValue}">
 			</c:forEach>
 		</c:if>
 		<c:if test="${listLength == 0}">

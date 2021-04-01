@@ -213,6 +213,7 @@
                 }
            	  $.ajax(ajaxOption).done(function(data){
            		  //Contents 영역삭제
+           		  console.log('adfdasf')
            		  $('#bodyContext').children().remove();
            		  console.log("1111") 
            		  //Contents 영역 교체
@@ -424,7 +425,7 @@
 						        <div id="jang">
 						            <div id="jang-top">
 						                <div onclick="myinfo()">내정보보기</div>
-						                <div onclick="bamTol()">밤톨충전</div>
+						                <div id="bamtolbtn" onclick="bamTol()">밤톨충전</div>
 						            </div>
 						            <div id="jang-bottom">
 						                <div onclick="shoppingcart()">장바구니</div>
@@ -433,17 +434,34 @@
 						        </div>
 						    </div>
 					</c:if>
+
 					<c:if test="${sessionVO.userID == 'ADMIN'}">
 					<!-- 어드민이 들어왔을 경우 -->
-                  		<div id="minimi"> 어드민입니다. <br />
-                  		<a href="#" onclick="Manage_Client()">어드민 회원관리</a><br />
-						<a href="#" onclick="Manage_Article()">어드민 상품등록</a><br />
-						<a href="#" onclick="Manage_Board()">어드민 공지시항 등록</a><br />
-						<a href="logout.do">로그아웃</a>
-						</div>
+							<div id="minimi">
+								<div id="icon">
+									<img src="bb.jpg" alt="">
+									<div>
+										<div id="nickname">${sessionVO.userName} 님</div>
+										<div id="haveCash">보유 밤톨: ${sessionVO.userCash}개</div>
+
+									</div>
+								</div>
+								<div id="jang">
+									<div id="jang-top">
+										<div onclick="Manage_Client()">회원관리</div>
+										<div onclick="Manage_Article()">상품등록</div>
+									</div>
+									<div id="jang-bottom">
+										<div onclick="Manage_Board()">공지등록</div>
+										<a href="logout.do">로그아웃</a>
+									</div>
+								</div>
+							</div>
+
                   	</c:if>
 					</c:when>
 					
+
 					
 				<c:otherwise>
 					

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
@@ -22,6 +23,9 @@ public class MiniHpSettingController {
 	
 	@Autowired
 	MiniHpSettingService settingService;
+	
+	@Autowired
+	MiniHpNeighborService neighborService;
 	
 	@Autowired
 	MiniHpIntroDAO introDAO;
@@ -90,14 +94,20 @@ public class MiniHpSettingController {
 	}
 	
 	@RequestMapping("/miniHp_setNeighborList.do")
-	public String setNeighborList(HttpSession session) {
+	public String setNeighborList(HttpSession session, Model model) {
 		System.out.println("미니홈피 이웃 목록 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
 		String UserID = sessionVO.getUserID();
-		/*List<MiniHpSettingNeighborViewVO> neighborList = neighborService.getSettingNeighborList(UserID); //이웃 목록 불러오기
-		*/
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserID); //이웃 목록 불러오기
+		if(neighborList == null) {
+			model.addAttribute("listLength", 0);
+		} else {
+			model.addAttribute("listLength", neighborList.size());
+		}
 		
-		return "MiniHP/MiniHP_Setting_NieghborList";
+		model.addAttribute("neighborList", neighborList);
+		
+		return "MiniHP/MiniHP_Setting_NeighborList";
 	}
 }
 
