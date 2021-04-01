@@ -5,7 +5,7 @@
 <body>
 	
 	<div id="folder-header" style="width: 150px;height: 30px;" align="left">
-		<font  style="font-size:15pt; font-weight: bold; color: #1294AB; letter-spacing: 1px;">Picture</font>
+		<font  style="font-size:15pt; font-weight: bold; color: #1294AB; letter-spacing: 1px;">Video</font>
 	</div>
 	
 	<div style="border-top: 3px solid #EBEBEB; border-bottom: 3px solid #EBEBEB; width: 150px; height: 370px; word-break:break-all;overflow: auto;overflow-x: hidden;" align="left">
@@ -71,8 +71,6 @@
 			<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="cancelFolder();">
 				■취소
 			</span>
-			<!-- <input type="button" value="추가" onclick="insertFolder();" />
-			<input type="button" value="취소" onclick="cancelFolder();" /> -->
 		</div>
 	</div>
 </body>
@@ -80,7 +78,7 @@
 	//폴더 클릭시 해당 폴더로 이동
 	function goToFolder(folderSerial) {
 		var ajaxMain = {
-	            url : 'miniHpPicture.do?folderSerial='+folderSerial,
+	            url : 'miniHpVideo.do?folderSerial='+folderSerial,
 	            async : true,
 	            type : "GET",
 	            dataType : "html",
@@ -102,7 +100,7 @@
 	}
 	//폴더 추가 취소
 	function cancelFolder() {
-		getPictureSide();
+		getVideoSide();
 	}
 	
 	//폴더 추가
@@ -120,13 +118,13 @@
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
-				url: 'MiniHpPictureSide.do',
+				url: 'MiniHpVideoSide.do',
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8',
 				data: JSON.stringify(data)
 			}).done(function() {
 				//사이드 불러오기
-				getPictureSide();
+				getVideoSide();
 			}).fail(function(error) {
 				alert(JSON.stringify(error));
 			});
@@ -137,14 +135,14 @@
 		if(confirm("정말 삭제하시겠습니까?")){
 			$.ajax({
 				type: 'DELETE',
-				url: 'MiniHpPictureSide.do/'+serial,
+				url: 'MiniHpVideoSide.do/'+serial,
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8'
 			}).done(function(data) {
 				//실패할수도 있어서 alert 있어야됨
 				alert(data);
 				//사이드 불러오기
-				getPictureSide();
+				getVideoSide();
 			}).fail(function(error) {
 				alert(JSON.stringify(error));
 			});
@@ -161,13 +159,13 @@
 			var scope = $(":input:radio[name=scope-"+serial+"]:checked").val();
 			$.ajax({
 				type: 'PUT',
-				url: 'MiniHpPictureSide.do/'+serial+'/'+folderName+'/'+scope,
+				url: 'MiniHpVideoSide.do/'+serial+'/'+folderName+'/'+scope,
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8'
 			}).done(function() {
 				//alert('폴더가 수정되었습니다.');
 				//사이드 불러오기
-				getPictureSide();
+				getVideoSide();
 			}).fail(function(error) {
 				alert(JSON.stringify(error));
 			}); 

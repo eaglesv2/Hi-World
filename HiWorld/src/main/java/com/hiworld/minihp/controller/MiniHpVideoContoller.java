@@ -16,31 +16,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hiworld.minihp.service.MiniHpPictureService;
-import com.hiworld.minihp.vo.MiniHPPictureFolderVO;
-import com.hiworld.minihp.vo.MiniHpPicturePagingVO;
-import com.hiworld.minihp.vo.MiniHpPictureReplyVO;
-import com.hiworld.minihp.vo.MiniHpPictureVO;
+import com.hiworld.minihp.service.MiniHpVideoService;
+import com.hiworld.minihp.vo.MiniHPVideoFolderVO;
+import com.hiworld.minihp.vo.MiniHpVideoPagingVO;
+import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
+import com.hiworld.minihp.vo.MiniHpVideoVO;
 
 @Controller
-public class MiniHpPictureContoller {
+public class MiniHpVideoContoller {
 	
 	@Autowired
-	private MiniHpPictureService service;
+	private MiniHpVideoService service;
 	
 	//-----------------------------------------폴더--------------------------------------------------------
 	//게시판 사이드 부분
-	@GetMapping("/MiniHpPictureSide.do")
-	public String miniHpPictureSide(Model model, HttpSession session) {
-		System.out.println("MiniHpPictureSide.do");
+	@GetMapping("/MiniHpVideoSide.do")
+	public String miniHpVideoSide(Model model, HttpSession session) {
+		System.out.println("MiniHpVideoSide.do");
 		int userSerial = Utils.getSessionUser(session);
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
-		return "MiniHP/MiniHP_Menu_Picture_Side";
+		return "MiniHP/MiniHP_Menu_Video_Side";
 	}
 	//폴더 추가
-	@PostMapping("/MiniHpPictureSide.do")
+	@PostMapping("/MiniHpVideoSide.do")
 	@ResponseBody
-	public void addFolder(@RequestBody MiniHPPictureFolderVO vo, HttpSession session) {
+	public void addFolder(@RequestBody MiniHPVideoFolderVO vo, HttpSession session) {
 		System.out.println("addFolder");
 		
 		int userSerial = Utils.getSessionUser(session);
@@ -52,7 +52,7 @@ public class MiniHpPictureContoller {
 		else System.out.println("폴더 등록 실패!");
 	}
 	//폴더 삭제
-	@DeleteMapping("/MiniHpPictureSide.do/{serial}")
+	@DeleteMapping("/MiniHpVideoSide.do/{serial}")
 	@ResponseBody
 	public String deleteFolder(@PathVariable int serial) {
 		System.out.println("deleteFolder");
@@ -62,11 +62,11 @@ public class MiniHpPictureContoller {
 		else return ("폴더 삭제 실패, 빈 폴더만 삭제할 수 있습니다.");
 	}
 	//폴더 수정
-	@PutMapping("/MiniHpPictureSide.do/{serial}/{folderName}/{scope}")
+	@PutMapping("/MiniHpVideoSide.do/{serial}/{folderName}/{scope}")
 	@ResponseBody
 	public void updateFolder(@PathVariable int serial,@PathVariable String folderName,@PathVariable int scope) {
 		System.out.println("updateFolder");
-		MiniHPPictureFolderVO vo = new MiniHPPictureFolderVO();
+		MiniHPVideoFolderVO vo = new MiniHPVideoFolderVO();
 		vo.setSerial(serial);
 		vo.setFolderName(folderName);
 		vo.setScope(scope);
@@ -80,10 +80,10 @@ public class MiniHpPictureContoller {
 	
 	
 	//-----------------------------------------게시글--------------------------------------------------------
-	//게시판 메인 부분
-	@GetMapping("/miniHpPicture.do")
-	public String miniHpPicture(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
-		System.out.println("miniHpPicture.do");
+	//메인 부분
+	@GetMapping("/miniHpVideo.do")
+	public String miniHpVideo(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
+		System.out.println("miniHpVideo.do");
 		
 		int userSerial = Utils.getSessionUser(session);
 		if(folderSerial==null)
@@ -91,7 +91,7 @@ public class MiniHpPictureContoller {
 		
 		//페이징처리-----------------------------------------------------------------------------------------------------
 		int listCnt = service.countInsideFolder(folderSerial);//총 게시글 수
-		MiniHpPicturePagingVO pagingVO = new MiniHpPicturePagingVO(listCnt, curPage);//총 게시글수, 현재 페이지로 pagingVO 생성
+		MiniHpVideoPagingVO pagingVO = new MiniHpVideoPagingVO(listCnt, curPage);//총 게시글수, 현재 페이지로 pagingVO 생성
 		
 		model.addAttribute("list",service.getAll(folderSerial, curPage, pagingVO.getPageSize()));//현재 페이지만큼만 가져옴
 		model.addAttribute("listCnt",listCnt);
@@ -99,19 +99,19 @@ public class MiniHpPictureContoller {
 		//--------------------------------------------------------------------------------------------------------------
 		model.addAttribute("currentFolderName", service.getFolderName(folderSerial));
 		model.addAttribute("currentFolderSerial", folderSerial);
-		return "MiniHP/MiniHP_Menu_Picture";
+		return "MiniHP/MiniHP_Menu_Video";
 	}
 	//게시글 작성 화면
-	@GetMapping("/MiniHpPictureInsert.do/{folderSerial}")
-	public String miniHpPictureInsertPage(Model model,@PathVariable int folderSerial) {
-		System.out.println("Picture insert 화면");
+	@GetMapping("/MiniHpVideoInsert.do/{folderSerial}")
+	public String miniHpVideoInsertPage(Model model,@PathVariable int folderSerial) {
+		System.out.println("Video insert 화면");
 		model.addAttribute("folderSerial",folderSerial);
-		return "MiniHP/MiniHP_Menu_Picture_Insert";
+		return "MiniHP/MiniHP_Menu_Video_Insert";
 	}
 	//게시글 저장 처리
-	@PostMapping("/MiniHpPictureInsert.do")
+	@PostMapping("/MiniHpVideoInsert.do")
 	@ResponseBody
-	public int miniHpPictureInsert(MultipartFile file1, MiniHpPictureVO vo, HttpServletRequest request,HttpSession session) {
+	public int miniHpVideoInsert(MultipartFile file1, MiniHpVideoVO vo, HttpServletRequest request,HttpSession session) {
 		if(!file1.isEmpty()) {
 			//파일명 중복방지 처리
 			String fileName = Utils.getUuidFileName(file1.getOriginalFilename());
@@ -122,50 +122,50 @@ public class MiniHpPictureContoller {
 		vo.setUserSerial(Utils.getSessionUser(session));
 		System.out.println(vo);
 		int result = service.insert(vo);
-		if(result>0) System.out.println("사진 insert 성공!");
-		else System.out.println("사진 insert 실패!");
+		if(result>0) System.out.println("동영상 insert 성공!");
+		else System.out.println("동영상 insert 실패!");
 		
 		return vo.getFolderSerial();//수정한 폴더 반환
 	}
 	//폴더 이동 popup
-	@GetMapping("/updatePictureFolder.do")
-	public String updatePictureFolderPopup(int serial, Model model, HttpSession session) {
+	@GetMapping("/updateVideoFolder.do")
+	public String updateVideoFolderPopup(int serial, Model model, HttpSession session) {
 		System.out.println("폴더 이동");
 		model.addAttribute("serial", serial);
 		
 		int userSerial = Utils.getSessionUser(session);
 		model.addAttribute("folderList",service.getAllFolder(userSerial));
-		return "MiniHP/MiniHP_updatePictureFolder";
+		return "MiniHP/MiniHP_updateVideoFolder";
 	}
 	//폴더 이동
-	@PutMapping("/updatePictureFolder.do/{pictureSerial}/{folderSerial}")
+	@PutMapping("/updateVideoFolder.do/{videoSerial}/{folderSerial}")
 	@ResponseBody
-	public void updatePictureFolder(@PathVariable int pictureSerial,@PathVariable int folderSerial) {
-		service.updatePictureFolder(pictureSerial, folderSerial);
+	public void updateVideoFolder(@PathVariable int videoSerial,@PathVariable int folderSerial) {
+		service.updateVideoFolder(videoSerial, folderSerial);
 	}
 	
 	//사진 삭제
-	@DeleteMapping("/miniHpPicture.do")
+	@DeleteMapping("/miniHpVideo.do")
 	@ResponseBody
-	public void deletePicture(int pictureSerial, String fileName,HttpServletRequest request) {
-		System.out.println("deletePicture");
-		int result = service.delete(pictureSerial);
+	public void deleteVideo(int videoSerial, String fileName,HttpServletRequest request) {
+		System.out.println("deleteVideo");
+		int result = service.delete(videoSerial);
 		if(result>0 && !fileName.equals(""))
 			Utils.deleteFile(fileName, request);
 	}
 	//게시글 수정 화면
-	@GetMapping("/MiniHpPictureUpdate.do")
-	public String MiniHpPictureUpdatePage(int serial, Model model) {
-		System.out.println("MiniHpPictureUpdate.do");
+	@GetMapping("/MiniHpVideoUpdate.do")
+	public String MiniHpVideoUpdatePage(int serial, Model model) {
+		System.out.println("MiniHpVideoUpdate.do");
 		
-		model.addAttribute("picture",service.get(serial));
-		return "MiniHP/MiniHP_Menu_Picture_update";
+		model.addAttribute("video",service.get(serial));
+		return "MiniHP/MiniHP_Menu_Video_update";
 	}
 	//게시글 수정
-	@PostMapping("/MiniHpPictureUpdate.do")
+	@PostMapping("/MiniHpVideoUpdate.do")
 	@ResponseBody
-	public void MiniHpPictureUpdate(MultipartFile file1, MiniHpPictureVO vo, HttpServletRequest request, Model model) {
-		System.out.println("MiniHpPictureUpdate.do");
+	public void MiniHpVideoUpdate(MultipartFile file1, MiniHpVideoVO vo, HttpServletRequest request, Model model) {
+		System.out.println("MiniHpVideoUpdate.do");
 		System.out.println(vo);
 		
 		if(file1==null) {//첨부파일 기존 파일 그대로
@@ -202,21 +202,21 @@ public class MiniHpPictureContoller {
 	
 	//댓글
 	//selectAll
-	@GetMapping("/MiniHpPictureReply.do")
-	public String selectAllReply(int pictureSerial, Model model) {
-		System.out.println("MiniHpPictureReply.do");
+	@GetMapping("/MiniHpVideoReply.do")
+	public String selectAllReply(int videoSerial, Model model) {
+		System.out.println("MiniHpVideoReply.do");
 		
-		model.addAttribute("serial", pictureSerial);
+		model.addAttribute("serial", videoSerial);
 		//댓글 총 개수
-		model.addAttribute("replyCnt", service.getReplyCnt(pictureSerial));
+		model.addAttribute("replyCnt", service.getReplyCnt(videoSerial));
 		//댓글
-		model.addAttribute("replyList", service.getAllReply(pictureSerial));
+		model.addAttribute("replyList", service.getAllReply(videoSerial));
 		return "MiniHP/reply";//이 reply페이지는 사진첩,동영상,방명록 공유함
 	}
 	//insert
-	@PostMapping("/MiniHpPictureReply.do")
+	@PostMapping("/MiniHpVideoReply.do")
 	@ResponseBody
-	public void insertReply(@RequestBody MiniHpPictureReplyVO vo, HttpSession session) {
+	public void insertReply(@RequestBody MiniHpVideoReplyVO vo, HttpSession session) {
 		System.out.println("insert reply");
 		
 		int userSerial = Utils.getSessionUser(session);
@@ -228,7 +228,7 @@ public class MiniHpPictureContoller {
 		else System.out.println("댓글 등록 실패!");
 	}
 	//delete
-	@DeleteMapping("/MiniHpPictureReply.do/{serial}")
+	@DeleteMapping("/MiniHpVideoReply.do/{serial}")
 	@ResponseBody
 	public String deleteReply(@PathVariable int serial) {
 		System.out.println("deleteReply");
@@ -238,7 +238,7 @@ public class MiniHpPictureContoller {
 		else return ("댓글 삭제 실패");
 	}
 	//update
-	@PutMapping("/MiniHpPictureReply.do/{serial}/{content}")
+	@PutMapping("/MiniHpVideoReply.do/{serial}/{content}")
 	@ResponseBody
 	public void updateReply(@PathVariable int serial,@PathVariable String content) {
 		System.out.println("updateReply");

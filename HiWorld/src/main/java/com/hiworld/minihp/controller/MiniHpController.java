@@ -81,7 +81,7 @@ public class MiniHpController {
 	@ResponseBody
 	@GetMapping("/MiniHpDefaultSide.do")
 	public String miniHpDefaultSide() {
-		return "MiniHP/MiniHP_Left.do";
+		return "MiniHP_Left.do";
 	}
 	
 	@RequestMapping("/MiniHP_Right.do")
@@ -95,22 +95,6 @@ public class MiniHpController {
 		System.out.println("프로필 화면");
 
 		return "MiniHP/MiniHP_Menu_Profile";
-	}
-	
-	//동영상 탭
-	@GetMapping("/miniHpVideo.do")
-	public String miniHpVideo( Model model) {
-		System.out.println("비디오");
-
-		return "MiniHP/MiniHP_Menu_Video";
-	}
-	
-	//방명록 탭
-	@GetMapping("/miniHpGuest.do")
-	public String miniHpGuest(Model model) {
-		System.out.println("방명록");
-
-		return "MiniHP/MiniHP_Menu_Guest";
 	}
 	
 	//관리 탭

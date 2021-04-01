@@ -50,7 +50,7 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=5"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=7"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -71,11 +71,11 @@ $('.menu').click(function(){
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu5==1}">
-		<div align="center" id="menu5" class="menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>	
+		<div align="center" id="menu5" class="menu" onclick="moveVideo()">동영상</div>	
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu6==1}">
-		<div align="center" id="menu6" class="menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
+		<div align="center" id="menu6" class="menu" onclick="moveBook()">방명록</div>
 	</c:if>
 	
 	<c:if test="${miniHpUserMenuVO.menu7==1}">

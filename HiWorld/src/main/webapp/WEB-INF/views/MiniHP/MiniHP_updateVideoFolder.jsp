@@ -12,17 +12,17 @@
 <center><h3>이동할 폴더를 선택해주세요</h3></center>
 <hr>
 <c:forEach items="${folderList}" var="l">
-	<span onclick="updatePictureFolder('${serial}','${l.serial}')" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+	<span onclick="updateVideoFolder('${serial}','${l.serial}')" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
 		<img alt="" src="${pageContext.request.contextPath}/resources/images/folder_icon.png" height="13px" width="13px">
 		${l.folderName}
 	</span><br>
 </c:forEach>
 </body>
 <script>
-	function updatePictureFolder(pictureSerial, folderSerial) {
+	function updateVideoFolder(videoSerial, folderSerial) {
 		$.ajax({
 			type: 'PUT',
-			url: 'updatePictureFolder.do/'+pictureSerial+'/'+folderSerial,
+			url: 'updateVideoFolder.do/'+videoSerial+'/'+folderSerial,
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
