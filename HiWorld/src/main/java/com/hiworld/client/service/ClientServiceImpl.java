@@ -346,4 +346,22 @@ public class ClientServiceImpl implements ClientService {
 	public void lookUp(BoardVO boardVO) {
 		dao.lookUp(boardVO);
 	}
+	
+	/* 게시글 삭제 */
+	@Override
+	public void BoardDelete(BoardVO boardVO) {
+		dao.BoardDelete(boardVO);
+	}
+	
+	/* 댓글 등록 */
+	@Override
+	public void insertReply(BoardVO boardVO) {
+		dao.insertReply(boardVO);
+	}
+	
+	/* 댓글 삭제 */
+	@Override
+	public void ReplyDelete(BoardReplyVO boardReplyVO) {
+		dao.ReplyDelete(boardReplyVO);
+	}
 }

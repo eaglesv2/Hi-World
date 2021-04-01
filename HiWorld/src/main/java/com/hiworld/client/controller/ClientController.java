@@ -3,7 +3,10 @@ package com.hiworld.client.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -114,6 +117,57 @@ public class ClientController {
 		
 		return 1;
 	}
+	
+	/* 공지 사항 삭제 */
+	@GetMapping("/deleteBoard.do")
+	@ResponseBody
+	public String deleteBoard(BoardVO boardVO) {
+		System.out.println("공지 사항 삭제");
+		
+		clientService.BoardDelete(boardVO);
+		
+		return "";
+	}
+	
+	/* 댓글 등록 */
+	@GetMapping(value="/replyInsert.do", produces="application/text; charset=utf8")
+	@ResponseBody
+	public String replyInsert(BoardVO boardVO,HttpSession session) {
+		System.out.println("댓글 등록");
+		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int userSerial = sessionVO.getUserSerial();
+		String userName = sessionVO.getUserName();
+		String userID = sessionVO.getUserID();
+		boardVO.setUserSerial(userSerial);
+		boardVO.setUserName(userName);
+		boardVO.setUserID(userID);
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(cal.getTime());
+		
+		/* 정보 등록 */
+		clientService.insertReply(boardVO);
+		
+		/* 리턴값 등록 */
+		String data = "<tr>";
+		data += "<td>"+boardVO.getReplyContent()+"</td>";
+		data += "<td>"+userName+"("+userID+")"+"</td>";
+		data += "<td>"+date+"</td>";
+		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td><button onclick=\"deleteReply('${kinds.replySerial}')\">삭제</button></td> </c:if>";
+		data += "</tr>";
+
+		
+		return data;
+	}
+	
+	/* 댓글 삭제 */
+	@GetMapping("/deleteReply.do")
+	@ResponseBody
+	public String deleteReply(BoardReplyVO boardReplyVO) {
+		System.out.println("댓글 삭제");
+		clientService.ReplyDelete(boardReplyVO);
+		return "";
+	}
 
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 이웃 찾기 */
@@ -124,20 +178,12 @@ public class ClientController {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String UserID = vo.getUserID();
 		
-		if(UserID.equals("ADMIN")) {
-			res.setContentType("text/html;charset=UTF-8");
-			PrintWriter writer = res.getWriter();
-			writer.println("<script>alert('밴을 먹은 아이디입니다 문의게시판이나 고객센터를 통해 문의주세요')</script>");
-			writer.flush();
-			return null;
-		}else {			
-			ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
 			
-			model.addAttribute("MiniVO", MiniVO);
-			return "Login/boardPage";
-		}
+		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
+			
+		model.addAttribute("MiniVO", MiniVO);
+		return "Login/boardPage";
 		
-
 	}
 
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -316,7 +362,7 @@ public class ClientController {
 	/* 메인페이지 AJAX */
 	@GetMapping("/logincheck.do")
 	public String myinfo() {
-		System.out.println("succc");
+		System.out.println("로그인체크");
 		return "Login/logincheck";
 
 	}

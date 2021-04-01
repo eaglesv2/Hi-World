@@ -165,24 +165,43 @@
 	
 	<!-- 공지사항 가져오기 -->
 	<select id="getBoardList" resultType="boardVO">
-		SELECT * FROM HW_Board WHERE userSerial = 1
+		SELECT * FROM HW_Board WHERE userSerial = 1 ORDER BY boardSerial DESC
 	</select>
 	
 	<!-- 공지사항 세부정보 -->
 	<select id="getBoardOne" resultType="boardVO">
-		SELECT * FROM HW_Board WHERE userSerial = 1 AND boardSerial = ${boardSerial};
+		SELECT * FROM HW_Board WHERE userSerial = 1 AND boardSerial = #{boardSerial}
 	</select>
 
 	<!-- 공지사항 댓글 -->
 	<select id="getBoardReply" resultType="boardReplyVO">
-		SELECT * FROM HW_Borad_Reply WHERE boardSerial = ${boardSerial};
+		SELECT * FROM HW_Board_Reply WHERE boardSerial = #{boardSerial} ORDER BY replySerial DESC
 	</select>
 	
 	<!-- 공지사항 조회 1올리기 -->
 	<update id="lookUp">
 		UPDATE HW_Board
 		SET lookUp = lookUp+1
-		WHERE boardSerial = ${boardSerial}
+		WHERE boardSerial = #{boardSerial}
 	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="BoardDelete">
+		DELETE FROM HW_Board
+		WHERE boardSerial = #{boardSerial}
+	</delete>
+	
+	<!-- 댓글 등록  -->
+	<insert id="insertReply" parameterType="boardReplyVO">
+		INSERT INTO HW_Board_Reply(userSerial, userName, userID, boardSerial, replyContent)
+		VALUES (#{userSerial},#{userName},#{userID},#{boardSerial},#{replyContent})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="ReplyDelete">
+		DELETE FROM HW_Board_Reply
+		WHERE replySerial = #{replySerial}
+	</delete>
+	
 </mapper>
 

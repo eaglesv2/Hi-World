@@ -14,24 +14,33 @@
 <body>
 
 	<div id="Context">
-		게시판!!
 		<c:choose>
 			<c:when test="${list != '[]'}">
 				<table>
+					<tr>
+						<td>NO.</td>
+						<td>제목</td>
+						<td>작성자</td>
+						<td>작성일</td>
+						<td>조회수</td>
+					</tr>
 					<c:forEach var="kinds" items="${list}">
-						<tr>
+						<tr id="${kinds.boardSerial}">
 							<td>${kinds.boardSerial}</td>
 							<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a></td>
 							<td>관리자</td>
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
+							<c:if test="${sessionVO.userID eq 'ADMIN'}">
+								<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
+							</c:if>
 						</tr>
 
 					</c:forEach>
 				</table>
 			</c:when>
 
-			<c:otherwise>
+	<c:otherwise>
 		등록된 공지사항이 없습니다
 	</c:otherwise>
 
@@ -47,6 +56,17 @@
 			data : {"boardSerial" : boardSerial},
 			success : function(data) {
 				$('#Context').html(data);
+			}
+		})
+	}
+	
+	function deleteBoard(boardSerial) {
+		$.ajax({
+			url : "deleteBoard.do",
+			type : "GET",
+			data : {"boardSerial" : boardSerial},
+			success : function(data) {
+				$("#"+boardSerial).remove();
 			}
 		})
 	}
