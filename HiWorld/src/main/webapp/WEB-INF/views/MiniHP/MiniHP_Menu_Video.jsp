@@ -1,354 +1,295 @@
-<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-//cyworld/src/main/webapp/WEB-INF/views/mypage/my_r_video_page.jsp 에 있는 내용
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<style>
+	table.videoTable {
+	  border-collapse: collapse;
+	  text-align: left;
+	  line-height: 1.5;
+	  margin: 20px 10px;
+	  width: 410px;
+	}
 	
-	String pathUserId=(String)request.getAttribute("pathUserId");
-%>
-<%
-%>
-<!DOCTYPE html>
-<html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-a:link {text-decoration: none; color: black;}
-a:visited {text-decoration: none; color: black;}
-a:active {text-decoration: none; color: grey;}
-a:hover {text-decoration: underline; color: red;}
- 	
-body{
-	scrollbar-face-color: #FFFFFF;
-	 scrollbar-highlight-color: #DBDBDB;
-	 scrollbar-3dlight-color: #FFFFFF;
-	 scrollbar-shadow-color: #9C92FF;
-	 scrollbar-darkshadow-color: #FFFFFF;
-	 scrollbar-track-color: #FFFFFF;
-	 scrollbar-arrow-color: #9C92FF
-}
-/* .video{
-	width: 100%; 
-    height: 768px; 
-    overflow: hidden; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-  	}
-  
-video[poster]{ 
-    height:100%;
-    width:100%;
-    } */
+	table.videoTable thead th {
+	  border-bottom: 1px dotted #ccc;
+	  font-weight: normal;
+	}
+	table.videoTable tbody th {
+	  vertical-align: top;
+	  border-bottom: 1px dotted #ccc;
+	  background: #ececec;
+	}
+	table.videoTable td {
+	  vertical-align: top;
+	  border-bottom: 1px dotted #ccc;
+	}
+	#main{
+		height: 330px;
+		width: 450px;
+		overflow-y: scroll;
+		-ms-overflow-style: none;
+	}
+	#main::-webkit-scrollbar{
+		display: none;
+	}
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
-	function moving(folderNameToMove,userId,num){
-	
-		location.replace('moving_ok.action?userId='+userId+'&num='+num+'&folderName='+folderNameToMove);
-	}
-	
-	//댓글 아작스------------------------------------------------------------------------------------------------------------------------------------
-  $(document).ready(function(){
-		 $("#sendButton0").click(function(){
-			 var params = "replierId=" + $("#replierId0").val() + "&content=" + $("#content0").val() + "&userId=" + $("#userId0").val()
-			 + "&videoNum=" + $("#videoNum0").val()+ "&replierName=" + $("#replierName0").val() + "&index=" + $("#index0").val();
-			 
-			 $.ajax({
-				 type:"POST",
-				 url:"<%=cp%>/cy/video/insertReple.action",
-				 data:params,
-				 success:function(args){
-					 	$("#listData0").html(args);
-					 	$("#content0").val("");
-					 	$("#content0").focus();
-				 },
-				 beforeSend:showRequest(0),
-				 error:function(e){
-					 alert(e.responseText);
-				 }			 
-			 });		 		 
-		 });
-		 
-		 $("#sendButton1").click(function(){
-			 var params = "replierId=" + $("#replierId1").val() + "&content=" + $("#content1").val() + "&userId=" + $("#userId1").val()
-			 + "&videoNum=" + $("#videoNum1").val()+ "&replierName=" + $("#replierName1").val() + "&index=" + $("#index1").val();
-			 
-			 $.ajax({
-				 type:"POST",
-				 url:"<%=cp%>/cy/video/insertReple.action",
-				 data:params,
-				 success:function(args){
-					 	$("#listData1").html(args);
-					 	$("#content1").val("");
-					 	$("#content1").focus();
-				 },
-				 beforeSend:showRequest(1),
-				 error:function(e){
-					 alert(e.responseText);
-				 }			 
-			 });		 		 
-		 });
-		 
-		 $("#sendButton2").click(function(){
-			 var params = "replierId=" + $("#replierId2").val() + "&content=" + $("#content2").val() + "&userId=" + $("#userId2").val()
-			 + "&videoNum=" + $("#videoNum2").val()+ "&replierName=" + $("#replierName2").val() + "&index=" + $("#index2").val();
-			 
-			 $.ajax({
-				 type:"POST",
-				 url:"<%=cp%>/cy/video/insertReple.action",
-				 data:params,
-				 success:function(args){
-					 	$("#listData2").html(args);
-					 	$("#content2").val("");
-					 	$("#content2").focus();
-				 },
-				 beforeSend:showRequest(2),
-				 error:function(e){
-					 alert(e.responseText);
-				 }			 
-			 });		 		 
-		 });
-  });
-  function showRequest(index){
-	
-	  var content = $.trim($("#content"+index).val());
-  
-	  if(!content){
-		  swal("댓글을 입력하세요.", "", "<%=cp %>/resources/images/cy_logo.png");
-	  	  $("#content"+index).focus();
-	  	  return true;
-	  }
-	  
-	  if(content.length>200){
-		  swal("내용은 200자까지 입력할 수 있습니다.", "", "<%=cp %>/resources/images/cy_logo.png");
-		  $("#content"+index).focus();
-		  return true;
-	  }
-	  
-	  return false;
-  }
-  function listPage(page,value1,value2,value3){
-	  
-	  var url = "<%=cp%>/cy/video/listReple.action";
-	  
-	  
-		  $.post(url,{pageNum:page,userId:value1,videoNum:value2,index:value3},function(args){
-			  	$("#listData"+value3).html(args); 
-		  });
-		  
-			  $("#listData"+value3).show();
-			  
-		var btn1 = document.getElementById("btnReple1"+value3);
-		var btn2 = document.getElementById("btnReple2"+value3);
-				
-		btn1.style.display="none";
-		btn2.style.display="block";
-	  
-  }
-  
-	function closeReple(index) {
-		
-		$("#listData"+index).hide();
-		
-		var btn1 = document.getElementById("btnReple1"+index);
-		var btn2 = document.getElementById("btnReple2"+index);
-		btn2.style.display="none";
-		btn1.style.display="block";
-	}
-  
-	function deleteOneRepleData(value1,value2,value3,value4){
-		var url = "<%=cp%>/cy/video/deleteOneRepleData.action";
-		
-		$.post(url,{userId:value1,num:value2,videoNum:value3,index:value4},function(args){
-			$("#listData"+value4).html(args);
+<script>
+//글쓰기 버튼 클릭시
+function moveInsertPage(){
+	var currentFolderSerial = $('#currentFolderSerial').val();
+    var ajaxOption = {
+            url : "MiniHpVideoInsert.do/"+currentFolderSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxOption).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+function showPopup(serial) {
+	window.open("updateVideoFolder.do?serial="+serial, "동영상 폴더 이동", "width=400, height=300, left=100, top=50");
+}
+function goToFolder(folderSerial) {
+	var ajaxMain = {
+            url : 'miniHpVideo.do?folderSerial='+folderSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+function deleteVideo(videoSerial,file,folderSerial) {
+	if(confirm("정말 삭제하시겠습니까?")){
+		$.ajax({
+			type: 'DELETE',
+			url: 'miniHpVideo.do?videoSerial='+videoSerial+"&fileName="+file,
+			datatype: 'html'
+		}).done(function(data) {
+			goToFolder(folderSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
 		});
 	}
-	 
-	function gfg_Run() { 
-		document.addEventListener("contextmenu",
-			function(e) { 
-				if (e.target.nodeName === "video") { 
-					e.preventDefault(); 
-				} 
-			}, false); 
-     } 
-	 
-	window.onload=function(){	
-		document.addEventListener("contextmenu",
-			function(e) { 
-				if (e.target.nodeName === "video") { 
-					e.preventDefault(); 
-				} 
-			}, false); 
-		 
-		 for(var i=0;i<${list.size()};i++){
-			 $('#video'+i).attr('draggable', false);	 
-		 }
-	 }
+}
+function updateVideo(videoSerial) {
+	var ajaxMain = {
+            url : 'MiniHpVideoUpdate.do?serial='+videoSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+//댓글 작성 화면 펼치기
+function showReplyForm(serial) {
+	$('#replyInsertForm-'+serial).toggle();
+}
+//댓글
+function getReplyAll(videoSerial) {
+	var ajaxReply = {
+            url : 'MiniHpVideoReply.do?videoSerial='+videoSerial,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxReply).done(function(data){
+		$('#reply-'+videoSerial).html(data);
+    });
+}
+
+function insertReply(videoSerial) {
+	var replyContent = $('#replyContent-'+videoSerial).val();
+	if(replyContent==="")
+		alert('내용을 입력하세요');
+	else{
+		var data = {
+			replyContent : replyContent,
+			videoSerial : videoSerial
+		}
+		console.log(JSON.stringify(data));
+		$.ajax({
+			type: 'POST',
+			url: 'MiniHpVideoReply.do',
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8',
+			data: JSON.stringify(data)
+		}).done(function() {
+			var currentFolderSerial = $('#currentFolderSerial').val();
+			goToFolder(currentFolderSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+}
+function deleteReply(serial) {
+	if(confirm("정말 삭제하시겠습니까?")){
+		$.ajax({
+			type: 'DELETE',
+			url: 'MiniHpVideoReply.do/'+serial,
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8'
+		}).done(function(data) {
+			var currentFolderSerial = $('#currentFolderSerial').val();
+			goToFolder(currentFolderSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+}
+//update 칸 만들기
+function updateReplyForm(serial) {
+	$('#reply-'+serial).toggle();
+	$('#replyForm-'+serial).toggle();
+}
+function updateReply(serial) {
+	var content = $('#updateReplyContent-'+serial).val();
+	if(content==="")
+		alert('내용을 입력하세요');
+	else{
+		console.log(content);
+		$.ajax({
+			type: 'PUT',
+			url: 'MiniHpVideoReply.do/'+serial+'/'+content,
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8'
+		}).done(function() {
+			var currentFolderSerial = $('#currentFolderSerial').val();
+			goToFolder(currentFolderSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+}
+//페이징
+function fn_paging(curPage) {
+	var folderSerial = $('#currentFolderSerial').val();
+	var ajaxMain = {
+	        url : 'miniHpVideo.do?folderSerial='+folderSerial+"&curPage="+curPage,
+	        async : true,
+	        type : "GET",
+	        dataType : "html",
+	        cache : false
+	};
+	
+	$.ajax(ajaxMain).done(function(data){
+	    // Contents 영역 삭제
+	    $('#bodyContents').children().remove();
+	    // Contents 영역 교체
+	    $('#bodyContents').html(data);
+	});
+}
 </script>
-</head>
-<body>
 <form name="poto">
- 	<c:if test="${totalFolderData==0 }">
- 	<table border="0" width="420" cellpadding="0" cellspacing="0" align="center">
-		<tr>
-			<td align="right">
-				<br/>
-			</td>
-		</tr>
-	</table>
-
-	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0">
-		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
-	</table>
-
-	<!-- 비디오 ----------------------------------------------------------------------------------------------- -->
+	<div id="nowFolder" style="float: left; padding-left: 20px; font-size: 15px; font-weight: bold;color: #1294AB;">
+		${currentFolderName}
+	</div>
+	<div id="write-btn" style="float: right; padding-right: 20px;">
+		<button type="button" onclick="moveInsertPage();"><img alt="" src="resources/images/reply-pen.png" width="10px">동영상올리기</button>
+	</div>
+	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 	
 	
-	<table border="0" width="420" height="300" cellpadding="1" cellspacing="1" align="center">
-		<tr valign="middle">
-			<td align="center">
-				<font  style="font-size:10pt;font-weight: bold;">
-					앨범을 생성한 후 선택해주세요.
-				</font>
-			</td>
-		</tr>
-	</table>
- 	</c:if>
-
-	<c:if test="${totalFolderData!=0 }">
-	<table border="0" width="420" cellpadding="0" cellspacing="0" align="center">
-		<tr>
-			<td align="right">
-				<input type="button" value="비디오 올리기" style="height: 25px; width: 82px; font-size: 8pt;" onclick="javascript:location.href='write.action?folderName=${folderName }';"/>				
-			</td>
-		</tr>
-	</table>
-
-	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0">
-		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
-	</table>
-
-	<!-- 비디오 ----------------------------------------------------------------------------------------------- -->
-	
-	<c:if test="${totalData==0 }">
-	<table border="0" width="420" height="300" cellpadding="1" cellspacing="1" align="center">
-		<tr valign="middle">
-			<td align="center">
-				<font  style="font-size:10pt;font-weight: bold;">
-					등록된 비디오가 없습니다.
-				</font>
-			</td>
-		</tr>
-	</table>
-	</c:if>
-	
-	<c:forEach var="dto" items="${list }" varStatus="status">
-	<c:set var="index" value="${status.index }"/>
-	
-	<table border="0" bgcolor="#EBEBEB" width="420" cellpadding="1" cellspacing="1" align="center">
-		<tr>
-			<td>
-				<a name="n5"></a>
-				<font  style="font-size:9pt;padding-left: 3px;"><b>${dto.listNum }. ${dto.subject }</b></font>
-			</td>
-		</tr>
-	</table>
-	<table border="0" bgcolor="#F6F6F6" align="center" width="420" cellpadding="1" cellspacing="1">
-		<tr>
-			<td width="100">  
-				<font  style="font-size:9pt;padding-left: 3px;">${dto.userName }</font>
-			</td>
-			<td align="right">  
-				<font  style="font-size:9pt;padding-right: 3px;">스크랩 : ${dto.scrap }</font>
-			</td>
-		</tr>
-	</table>&nbsp;
-	
-	<table border="0" align="center" width="420" cellpadding="1" cellspacing="1" style="table-layout: fixed;word-break:break-all;">
-		<tr>
-			<td align="center">  
-				<!-- 비디오 바꾸기 -->
-					<video src="/img/<%=pathUserId %>/video/${folderName }/${dto.saveFileName }" width="400" controls>
-					</video>
-				<!-- --------- -->
-									
-			</td>
-		</tr>
-		<tr>
-			<td style="padding-left: 8px;padding-right: 4px;">  
-				<font>
-					${dto.content }
-				</font>
-			</td>
-		</tr>
-	</table><br/>
-	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0">
-		<tr height="2">
-			<td align="right" colspan="3" bgcolor="#EBEBEB"> 
-			</td>
-		</tr>
-		<tr bgcolor="#F6F6F6" height="30">
-			<td width="5"></td>
-			<td width="50">
-				<input type="button" id="btnReple1${index }" value="댓글 보기" style="height: 20px; width: 60px; font-size: 8pt;" onclick="javascript:listPage(1,'${dto.userId}',${dto.num },${index })"/>
-				<input type="button" id="btnReple2${index }" value="댓글 닫기" style="display: none;height: 20px; width: 60px; font-size: 8pt;" onclick="javascript:closeReple(${index })"/>
-			</td>
-			<td align="right" style="padding-right: 3px;">
-				<font>
-					<a onclick="javascript:location.href='update.action?userId=${dto.userId}&num=${dto.num }';">수정</a> | 
-					<a onclick="window.open('moving.action?userId=${dto.userId}&num=${dto.num }&folderName=${dto.folderName }','window_moving','width=300,height=300,left=300,top=300,location=no,status=no,scrollbars=no');" target="_blank">이동</a> | 
-					<a onclick="javascript:location.href='delete.action?userId=${dto.userId}&num=${dto.num }&saveFileName=${dto.saveFileName }&folderName=${dto.folderName }';">삭제</a>
-				</font>
-			</td>
-		</tr>
-	</table>
+	<div id="main">
+	<c:choose>
+		<c:when test="${list==null}">
+			<h3>등록된 동영상이 없습니다</h3>
+		</c:when>
+		<c:otherwise>
+			<table class="videoTable">
+				<c:forEach items="${list}" var="l">
+				<thead>
+					<tr style=" border-bottom: none;">
+				  		<th>
+				  			<font style="font-weight: bold;">${l.title}</font>
+				  			<span style="float: right;">
+				  				<span onclick="showPopup('${l.videoSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">이동</span>
+				  				<span onclick="deleteVideo('${l.videoSerial}','${l.file}','${l.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">삭제</span>
+				  				<span onclick="updateVideo('${l.videoSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">수정</span>
+				  			</span>
+				  		</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td scope="row">
+							${l.userName}
+							<span style="font-size: 5px; float: right; padding-top: 5px;">
+							(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd"/>)
+							</span>
+						</td>
+					</tr>
+					<c:if test="${l.file!=null}">
+					<tr>
+			  			<td style="border-bottom: none;">
+							<video src="resources/upload/${l.file}" style="max-width: 100%" controls>
+								해당 브라우저에서는 지원하지 않습니다.
+							</video>
+						</td>
+					</tr>
+					</c:if>
+					<tr>
+			 			<td>
+			 				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
+			 					${l.content}
+			 				</span>
+						</td>
+					</tr>
+				</tbody>
+				<tbody id="reply-${l.videoSerial}">
 				
-	<!-- 댓글-------------------------------------------------------------------------------------------------------  -->
-
-	<span id="listData${index }"></span>
-				
-	<table border="0" width="420" bgcolor="#EBEBEB" align="center" cellpadding="0" cellspacing="0">
-		<tr>
-			<td align="left" style="padding-left: 6px;padding-top: 4px;padding-bottom: 4px;"> 
-				<font>
-					댓글
-				</font>
-				<input type="hidden" id="userId${index }" value="${dto.userId }"/>
-				<input type="hidden" id="videoNum${index }" value="${dto.num }"/>
-				<input type="hidden" id="replierId${index }" value="${sessionScope.session.userId }"/>
-				<input type="hidden" id="replierName${index }" value="${sessionScope.session.userName }"/>
-				<input type="hidden" id="index${index }" value="${index }"/>
-				
-				<input type="text" id="content${index }" maxlength="200" style="width: 76%;"/>
-				<input type="button" id="sendButton${index }" style="height: 22px; width: 50px; font-size: 8pt;" value="확인"/>
-			</td>
-		</tr>
-	</table><br/>
-	</c:forEach>
+				</tbody>
+				<script>
+					getReplyAll('${l.videoSerial}');
+				</script>
+				<tr><td style="border-bottom: none;"><br><br></td></tr>
+				</c:forEach>
+			</table>
+		</c:otherwise>
+	</c:choose>
+	     <!-- 페이징 -->
+	     <div>
+	        <c:if test="${pagination.curRange ne 1 }">
+	            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+	        </c:if>
+	        <c:if test="${pagination.curPage ne 1}">
+	            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+	        </c:if>
+	        <c:forEach var="pageNum" begin="${pagination.startPage }" end="${pagination.endPage }">
+	            <c:choose>
+	                <c:when test="${pageNum eq  pagination.curPage}">
+	                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+	                </c:when>
+	                <c:otherwise>
+	                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+	                </c:otherwise>
+	            </c:choose>
+	        </c:forEach>
+	        <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+	            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+	        </c:if>
+	        <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+	            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+	        </c:if>
+	    </div>
+	</div>
+	<input id="currentFolderSerial" type="hidden" value="${currentFolderSerial}">
 	
-	<table border="0" width="420" cellpadding="1" cellspacing="1" align="center">
-		<tr>
-			<td align="center">
-				<a name="n5"></a>
-				<font><b>${pageIndexList }</b></font>
-			</td>
-		</tr>
-	</table>
-	</c:if>
-
-	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0">
-		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
-	</table>
-
-	<br/><br/><br/>
+	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 </form>
-</body>
-</html>

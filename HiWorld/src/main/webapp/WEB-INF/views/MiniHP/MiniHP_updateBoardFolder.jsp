@@ -27,6 +27,8 @@
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
 			alert('폴더 이동이 완료되었습니다');
+			//부모창 페이지 이동
+			opener.parent.goToFolder(folderSerial);
 			self.close();
 		}).fail(function(error) {
 			alert(JSON.stringify(error));

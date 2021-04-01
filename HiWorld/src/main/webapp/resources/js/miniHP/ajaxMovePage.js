@@ -1,7 +1,7 @@
 //사진첩 사이드 불러오기
 function getPictureSide() {
 	var ajaxSide = {
-	        url : "MiniHpPicutreSide.do",
+	        url : "MiniHpPictureSide.do",
 	        async : true,
 	        type : "GET",
 	        dataType : "html",
@@ -51,7 +51,7 @@ function getProfileSide() {
 
 function moveProfile() {
 	//사이드 불러오기
-	/*getProfileSide();*/
+	getProfileSide();
 	
 	// 메인 불러오기
     var ajaxMain = {
@@ -107,6 +107,72 @@ function moveBoard(){
         // Contents 영역 삭제
         $('#bodyContents').children().remove();
         // Contents 영역 교체
+        $('#bodyContents').html(data);
+    });
+}
+
+//동영상 사이드 불러오기
+function getVideoSide() {
+	var ajaxSide = {
+	        url : "MiniHpVideoSide.do",
+	        async : true,
+	        type : "GET",
+	        dataType : "html",
+	        cache : false
+	};
+	$.ajax(ajaxSide).done(function(data){
+	    $('#sideContents').children().remove();
+	    $('#sideContents').html(data);
+	});
+}
+//동영상 이동
+function moveVideo(){
+	//사이드 불러오기
+	getVideoSide();
+    // 메인 불러오기
+    var ajaxMain = {
+            url : 'miniHpVideo.do',
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+
+//방명록 이동
+function moveBook(){
+	//사이드 불러오기
+	getProfileSide();
+    // 메인 불러오기
+    var ajaxMain = {
+            url : 'miniHpBook.do',
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+//방명록 메인 부분만 가져오기
+function getBook(){
+    var ajaxMain = {
+            url : 'miniHpBook.do',
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
         $('#bodyContents').html(data);
     });
 }
