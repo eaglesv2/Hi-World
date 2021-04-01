@@ -56,29 +56,16 @@ public class ClientServiceImpl implements ClientService {
 	
 	
 	
-	
 	/*비밀번호 수정 */
 	@Override
-	public String updatepw(ClientVO clientVO) {
+	public int updatepw(ClientVO clientVO) {
 		int checkNumber = dao.updatepw(clientVO);
-		String checkJoin = "";
-		
-		/* 회원수정 잘 되었는지 체크 */
-		if(checkNumber==0) {
-			checkJoin = "fail";
-		}else if(checkNumber==-1) {
-			checkJoin = "error";
-		}else {
-			checkJoin = "success";
-			
-		}
-		
-		return checkJoin;
+		return checkNumber;
 		
 	}
 	/* 비밀번호 조회*/
 	@Override
-	public ClientVO selectpw(ClientVO clientVO) {
+	public ClientVO selectpw(String clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectpw(clientVO);
 		return vo;
@@ -130,7 +117,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 	/* 연락처 조회*/
 	@Override
-	public ClientVO selectTel(ClientVO clientVO) {
+	public ClientVO selectTel(int clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectTel(clientVO);
 		return vo;

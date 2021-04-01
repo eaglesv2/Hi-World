@@ -24,9 +24,9 @@ public interface ClientService {
 	ClientVO selectName(String id);
 	
 	/* 비밀번호 수정*/
-	String updatepw(ClientVO clientVO);
+	int updatepw(ClientVO clientVO);
 	/* 비밀번호 조회*/
-	ClientVO selectpw(ClientVO clientVO);
+	ClientVO selectpw(String clientVO);
 	
 	/* 생일 수정*/
 	String updateBirth(ClientVO clientVO);
@@ -35,7 +35,7 @@ public interface ClientService {
 	/* 연락처 수정*/
 	String updateTel(ClientVO clientVO);
 	/* 연락처 조회*/
-	ClientVO selectTel(ClientVO clientVO);
+	ClientVO selectTel(int clientVO);
 	/* 주소 수정*/
 	String updateAddress(ClientVO clientVO);
 	/* 주소 조회*/

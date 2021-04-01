@@ -280,7 +280,7 @@ public class ClientController {
 		ClientVO vo = clientService.getOneClient(UserID);
 		model.addAttribute("clientVO",vo);
 		
-		return "Login/userOneView";
+		return "Login/userview";
 	}
 	
 	
@@ -302,31 +302,37 @@ public class ClientController {
 	@PostMapping("UserUpdate.do")
 	@ResponseBody
 	public String userUpdate(HttpServletRequest request, HttpSession session,Model model, ClientVO vvo) {
-		//int updatech = Integer.parseInt(request.getParameter("updatech"));
 		/* 받아온 값을 vo에 넣기 위해서 작업*/
+		System.out.println("수정 구현");
 		String upDatech = request.getParameter("upDatech");
+		System.out.println(upDatech);
 		switch (upDatech) {
+		
 		case "1":
-			/* 섹션으로 로그인 된 유저 정보를 읽어와서 씨리얼 번호로 이름을 수정*/
-			sessionVO so = (sessionVO)session.getAttribute("sessionVO");
-			int uSerial = so.getUserSerial();
-			String uName = request.getParameter("userName");
-			vvo.setUserSerial(uSerial);
-			vvo.setUserName(uName);
-			int ok = clientService.updateName(vvo);
-			ClientVO clientvo = clientService.selectName(uName);
-			model.addAttribute("clientVO", clientvo);
-			break;
+			sessionVO so1 = (sessionVO)session.getAttribute("sessionVO");
+			int userial = so1.getUserSerial();
+			String Pw = request.getParameter("userDate");
+			vvo.setUserSerial(userial);
+			vvo.setUserPW(Pw);
+			clientService.updatepw(vvo);
+			Pw = vvo.getUserPW();
+			ClientVO clientvo1 = clientService.selectpw(Pw);
+			model.addAttribute("userView", clientvo1);
+			 break;
 		case "2":
-			
+			sessionVO so2 = (sessionVO)session.getAttribute("sessionVO");
+			int Userial = so2.getUserSerial();
+			String Tel = request.getParameter("userDate");
+			vvo.setUserSerial(Userial);
+			vvo.setUserTel(Tel);
+			clientService.updateTel(vvo);
+			Userial = vvo.getUserSerial();
+			ClientVO clientvo2 = clientService.selectTel(Userial);
+			model.addAttribute("userView", clientvo2);
 			 break;
 		case "3":
 			 break;
-		case "4":
-			 break;
-		case "5":
-			 break;
-			
+					
 		default:
 			return "Login/userview";
 		}
