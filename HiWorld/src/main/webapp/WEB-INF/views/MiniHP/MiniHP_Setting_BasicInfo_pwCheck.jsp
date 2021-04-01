@@ -1,18 +1,8 @@
-<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
-	
-	String pathUserId=(String)request.getAttribute("pathUserId");
-%>
-<%
-%>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -87,7 +77,7 @@ input::placeholder {
 		</div>
 		<div>
 			<div style="float: left;margin-left:100px;border: 0px solid black;font-size: 9pt;margin-left:135px;margin-top: 10px;">
-				${msg}
+				<%-- ${msg} --%>
 			</div>
 		</div>
 	</div>

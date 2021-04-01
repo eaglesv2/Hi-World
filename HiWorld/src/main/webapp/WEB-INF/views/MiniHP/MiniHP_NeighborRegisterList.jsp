@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html>
 <head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
@@ -11,19 +8,42 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+#list{
+	position: absolute; 
+	top:50px; 
+	left: 15px; 
+	font-size: 8pt;
+}
+#ul{
+	width: 282px; 
+	height:300px;
+}
+#li{
+	vertical-align: top;
+}
+</style>
 <script type="text/javascript">
-
 </script>
  <body background="${pageContext.request.contextPath}/resources/images/admin/member_list.png">
-	<form action="" name="neighborRegisterList" method="post" style="position: absolute; top:50px; left: 15px; font-size: 8pt;">
+	<form id="list" action="" name="neighborRegisterList" method="post">
 		<c:if test="${registerList ne null}">
-			<ul style="width: 282px; height:300px;">				
+			<ul id="ul">				
 				<c:forEach var="vo" items="${registerList}">
-					<li style="vertical-align: top;">
-						<a href="" onclick="window.open('miniHp_neighborRegisterCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
-                            <font color="Blue">${vo.senderName}</font>
-                           		 님이 이웃 신청을 하셨습니다.
-                        </a>						
+					<li id="li">
+                            <c:if test="${vo.type eq 0}">
+                            	<a href="" onclick="window.open('miniHp_neighborRegisterCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
+                           	 		<font color="Blue">${vo.senderName}</font>
+                           				 님이 이웃 신청을 하셨습니다.
+                           		</a>
+                           	</c:if>
+                           	<c:if test="${vo.type eq 1}">
+                           		<a href="" onclick="window.open('miniHp_neighborUpdateCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
+                           	 		<font color="Blue">${vo.senderName}</font>
+                           				 님이 이웃명 수정을 신청하셨습니다.
+                           		</a>
+                           	</c:if>
+                        						
 					</li>
 				</c:forEach>
 			</ul>

@@ -9,18 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
-import com.hiworld.minihp.service.MiniHpNeighborListService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
-import com.hiworld.minihp.vo.MiniHpNeighborListVO;
-import com.hiworld.minihp.vo.MiniHpNeighborVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
@@ -34,18 +30,11 @@ public class MiniHpController {
 	MiniHpNeighborService neighborService;
 	
 	@Autowired
-	MiniHpNeighborListService neighborListService;
-	
-	@Autowired
 	MiniHpIntroDAO introDAO;
 	
 	MiniHpIntroVO introVO;
 	
 	MiniHpUserMenuVO menuVO;
-	
-	MiniHpNeighborVO neighborVO;
-	
-	MiniHpNeighborListVO neighborListVO;
 	
 	MiniHpNeighborViewVO neighborViewVO;
 	
@@ -154,48 +143,5 @@ public class MiniHpController {
 		model.addAttribute("miniHpUserMenuVO", menuVO);
 
 		return "MiniHP/MiniHP_Right_Menu";
-	}
-	
-	
-	// @@@@@@@@@@@@@@@@ 이웃 신청 @@@@@@@@@@@@@@@@
-	
-	@GetMapping("/miniHp_neighborRegisterList.do")
-	public String neighborRegisterList(HttpSession session, Model model) {
-		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
-		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserID);
-
-		model.addAttribute("registerList", list);
-		
-		return "MiniHP/MiniHP_NeighborRegisterList";
-	}
-	
-	@GetMapping("/miniHp_neighborRegisterCheck.do")
-	public String neighborRegisterCheck(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String senderID = request.getParameter("senderID");
-		String receiverID = vo.getUserID();
-		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
-		String minimiPath = vo.getOriginalFileName();*/
-		neighborListVO = neighborListService.getRegisterCheck(senderID, receiverID);
-		System.out.println(neighborListVO.getSenderValue());
-		System.out.println(neighborListVO.getReceiverValue());
-		
-		model.addAttribute("neighborListVO", neighborListVO);
-		
-		return "MiniHP/MiniHP_NeighborRegisterCheck";
-	}
-	
-	@ResponseBody
-	@PostMapping("/miniHp_neighborRegisterCheck_ok.do")
-	public String neighborRegisterCheck_ok(HttpServletRequest request, MiniHpNeighborVO neighborVO) {
-		int type = Integer.parseInt(request.getParameter("type"));
-		
-		System.out.println(neighborVO.getNeighborValue1());
-		System.out.println(neighborVO.getNeighborValue2());
-		neighborService.registerCheck_ok(type, neighborVO);
-		
-		return "";
 	}
 }
