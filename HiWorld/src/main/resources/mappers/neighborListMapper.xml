@@ -4,7 +4,7 @@
 	
 	<insert id="insertNeighborList" parameterType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		INSERT INTO MiniHP_NeighborList
-		VALUES (#{senderID}, #{senderName}, #{senderValue}, #{receiverID}, #{receiverName}, #{receiverValue}, #{userMessage})
+		VALUES (#{senderID}, #{senderName}, #{senderValue}, #{receiverID}, #{receiverName}, #{receiverValue}, #{userMessage}, #{type})
 	</insert>
 	
 	<select id="getRegisterList" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">

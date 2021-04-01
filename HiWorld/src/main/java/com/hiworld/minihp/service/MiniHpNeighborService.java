@@ -11,5 +11,11 @@ public interface MiniHpNeighborService {
 	void registerCheck_ok(int type, MiniHpNeighborVO neighborVO);
 	
 	/*이웃 목록 불러오기*/
-	List<MiniHpNeighborViewVO> getNeighborList(String UserID);
+	List<MiniHpNeighborViewVO> getNeighborList(String userID);
+	
+	/*이웃 끊기*/
+	void deleteNeighbor(String userID, String neighborID);
+	
+	/*이웃 수정 신청 결과*/
+	void updateCheck_ok(int type, MiniHpNeighborVO neighborVO);
 }

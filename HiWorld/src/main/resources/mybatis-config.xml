@@ -9,7 +9,8 @@
 		<typeAlias type="com.hiworld.client.vo.ClientVO" alias="clientVO"/>
 		<typeAlias type="com.hiworld.client.vo.sessionVO" alias="sessionVO"/>
 		<typeAlias type="com.hiworld.article.vo.ArticleVO" alias="articleVO"/>
+		<typeAlias type="com.hiworld.client.vo.BoardVO" alias="boardVO"/>
+		<typeAlias type="com.hiworld.client.vo.BoardReplyVO" alias="boardReplyVO"/>
 	</typeAliases>
-	
-	
+
 </configuration>

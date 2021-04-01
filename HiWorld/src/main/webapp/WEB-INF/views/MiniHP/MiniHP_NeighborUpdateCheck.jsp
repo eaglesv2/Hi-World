@@ -61,13 +61,12 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-function neighborRegister_ok(){
-	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
+function neighborUpdate_ok(){
+	var ajaxData = $("form[name=neighborUpdateCheck]").serialize();
 	console.log('ok')
 	$.ajax({
 		type : 'POST',
-		url : 'miniHp_neighborRegisterCheck_ok.do?type=1',
+		url : 'miniHp_neighborUpdateCheck_ok.do?type=1',
 		data : ajaxData,
 		
 		success : function(result) {
@@ -75,11 +74,11 @@ function neighborRegister_ok(){
 		}
 	});
 }
-function neighborRegister_next(){
-	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
+function neighborUpdate_next(){
+	var ajaxData = $("form[name=neighborUpdateCheck]").serialize();
 	$.ajax({
 		type : 'POST',
-		url : 'miniHp_neighborRegisterCheck_ok.do?type=2',
+		url : 'miniHp_neighborRegisterUpdate_ok.do?type=2',
 		data : ajaxData,
 		
 		success : function(result) {
@@ -87,11 +86,11 @@ function neighborRegister_next(){
 		}
 	});
 }
-function neighborRegister_no(){
-	var ajaxData = $("form[name=neighborRegisterCheck]").serialize();
+function neighborUpdate_no(){
+	var ajaxData = $("form[name=neighborUpdateCheck]").serialize();
 	$.ajax({
 		type : 'POST',
-		url : 'miniHp_neighborRegisterCheck_ok.do?type=0',
+		url : 'miniHp_neighborRegisterUpdate_ok.do?type=0',
 		data : ajaxData,
 		
 		success : function(result) {
@@ -101,7 +100,7 @@ function neighborRegister_no(){
 }
 </script>
  <body background="${pageContext.request.contextPath}/resources/images/admin/member_check.png">
-	<form action="" name="neighborRegisterCheck" method="post">
+	<form action="" name="neighborUpdateCheck" method="post">
 		<span id="sender_name">
 			${neighborListVO.senderName}
 		</span>
@@ -114,25 +113,25 @@ function neighborRegister_no(){
 		</span>
 		
 		<span id="msg2">
-			<font color="black"><b>이웃맺기</b></font>를 희망합니다.
+			<font color="black"><b>이웃명 수정하기</b></font>를 희망합니다.
 		</span>
 		
-		<textarea id="msg_area" rows="5" cols="46" readonly="readonly">${neighborListVO.userMessage}</textarea>
+		<textarea id="msg_area"rows="5" cols="46" readonly="readonly">${neighborListVO.userMessage}</textarea>
 		
 		<span id="msg3">
 			<font color="blue">${neighborListVO.senderName}</font>(${neighborListVO.senderValue}) - <font color="blue">${neighborListVO.receiverName}</font>(${neighborListVO.receiverValue})
 		</span>
 		
 		<span id="yesBtn">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/yesBtn.jpg" onclick="neighborRegister_ok()"/>
+			<img alt="예" src="${pageContext.request.contextPath}/resources/images/admin/yesBtn.jpg" onclick="neighborUpdate_ok()"/>
 		</span>
 		
 		<span id="nextBtn">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/nextBtn.jpg" onclick="neighborRegister_next()"/>
+			<img alt="나중에" src="${pageContext.request.contextPath}/resources/images/admin/nextBtn.jpg" onclick="neighborUpdate_next()"/>
 		</span>
 		
 		<span id="noBtn">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/noBtn.jpg" onclick="neighborRegister_no()"/>
+			<img alt="아니오" src="${pageContext.request.contextPath}/resources/images/admin/noBtn.jpg" onclick="neighborUpdate_no()"/>
 		</span>	
 
 		<input type="hidden" name="neighborID1" value="${neighborListVO.senderID}">

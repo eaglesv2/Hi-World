@@ -9,18 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpDAO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.service.MiniHpIntroService;
-import com.hiworld.minihp.service.MiniHpNeighborListService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
-import com.hiworld.minihp.vo.MiniHpNeighborListVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
@@ -37,9 +34,6 @@ public class MiniHpGuestController {
 	
 	@Autowired
 	MiniHpNeighborService neighborService;
-	
-	@Autowired
-	MiniHpNeighborListService neighborListService;
 	
 	@Autowired
 	MiniHpDAO dao;
@@ -138,34 +132,5 @@ public class MiniHpGuestController {
 		/*System.out.println(ownerVO.getUserName());*/
 		
 		return introService.getGuestTitle(ownerVO);
-	}
-	
-	/*이웃 신청 버튼 누를시!!!*/
-	@GetMapping("/miniHp_neighborRegister.do")
-	public String neighborRegister(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String senderName = vo.getUserName(); //보내는이 이름
-		String receiverId = request.getParameter("OwnerId"); //받는이 아이디
-		System.out.println(receiverId);
-		String receiverName = request.getParameter("OwnerName"); //받는이 이름
-		
-       /* CyUsingItemDTO usingItem = cyUsingItemDAO.useMinimi(userId);
-        String minimiPath = usingItem.getOriginalFileName();*/
-       /* request.setAttribute("minimiPath", minimiPath); */
-		model.addAttribute("senderName", senderName);
-		model.addAttribute("receiverId", receiverId);
-		model.addAttribute("receiverName", receiverName);
-		return "MiniHP/MiniHP_NeighborRegister";
-	}
-	
-	/*이웃 신청 했을 때!!!*/
-	@ResponseBody
-	@PostMapping("/miniHp_NeighborRegister_ok.do")
-	public String neighborRegister_ok(HttpServletRequest request, MiniHpNeighborListVO neighborListVO) {
-		System.out.println(neighborListVO.getUserMessage());
-		neighborListService.insertNeighborList(neighborListVO); //신청 정보를 테이블에 저장
-		
-		return "";
 	}
 }
