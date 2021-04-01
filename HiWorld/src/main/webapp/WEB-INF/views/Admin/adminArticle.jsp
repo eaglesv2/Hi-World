@@ -3,32 +3,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link href="resources/css/adminArticle.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 </head>
 <body>
-
-	<h1>파일 업로드 관리자용</h1>
-
-	<div class="uploadDiv">
-		<input type="file" name="uploadFile" multiple id="uploadFile" />
+<div id="article_con">
+	<div id="article_box">
+		
+		<h1>파일 업로드 관리자용</h1>
+	
+		<div class="uploadDiv">
+			사진  <input type="file" name="uploadFile" multiple id="uploadFile" />
+		</div>
+			상품 종류 : <select name="ArticleKinds">
+					<option value="">종류를 선택하세요</option>
+					<option value="캐릭터">캐릭터</option>
+					<option value="배경화면">배경화면</option>
+					<option value="배경음악">배경음악</option>
+					<option value="마우스">마우스모양</option>
+			   </select> <br /> 
+			상품 이름 : <input type="text" name="ArticleName" id="ArticleFile" />	<br /> 
+			상품 가격 : <input type="number" name="ArticlePrice" /> <br />
+		<textarea rows="10" cols="30" name="ArticleContent"	placeholder="상품 설명을 간단히 작성하세요"></textarea>
+	
+	
+		<button id="uploadBtn">업로드</button>
 	</div>
-	상품 이름 <input type="text" name="ArticleName" id="ArticleFile" />	<br /> 
-	상품 종류 <select name="ArticleKinds">
-				<option value="">종류를 선택하세요</option>
-				<option value="캐릭터">캐릭터</option>
-				<option value="배경화면">배경화면</option>
-				<option value="배경음악">배경음악</option>
-				<option value="마우스">마우스모양</option>
-		   </select> <br /> 
-	상품 가격 <input type="number" name="ArticlePrice" /> <br />
-	<textarea rows="10" cols="30" name="ArticleContent"	placeholder="상품 설명을 간단히 작성하세요"></textarea>
-
-
-	<button id="uploadBtn">업로드</button>
-
+</div>
 </body>
 
 <script>

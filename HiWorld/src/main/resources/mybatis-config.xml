@@ -4,6 +4,7 @@
 
 <!-- 별명을 간단하게 만들어서 myBatis mapper에서 그 값을 간단히 사용할 수 있게 끔 함 -->
 <configuration>
+
 	<typeAliases>
 		<!-- 저 type명을 별명으로 간단히 사용하겠다. -->
 		<typeAlias type="com.hiworld.client.vo.ClientVO" alias="clientVO"/>
@@ -14,3 +15,4 @@
 	</typeAliases>
 
 </configuration>
+
