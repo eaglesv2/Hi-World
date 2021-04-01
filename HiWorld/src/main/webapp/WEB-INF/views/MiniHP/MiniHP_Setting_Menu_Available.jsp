@@ -1,14 +1,6 @@
-<%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
-	String pathUserId=(String)request.getAttribute("pathUserId");
-%>
-<%
-%>
+
 <!DOCTYPE html>
 <html>
 <head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
@@ -39,14 +31,96 @@ body{
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
 	font-size: 9pt;
-	user-select:none;
+	user-select: none;
+	align: center;
 }
 input::placeholder {
   font-style: italic;
   font-size: 8pt;
 }
+#background {
+	width: 420px; 
+	height:210px; 
+	padding-top: 6px;
+	font: 굴림;
+	font-size: 10pt;
+	border: 0px solid black;
+	background-color: #F6F6F6;
+	align: left;
+}
+#menuside{
+	border: 0px solid black;
+	width: 200px;
+	height:150px;
+	float: left;
+	margin-top: 8px;
+}
+#menu_top{
+	float: left;
+	border: 0px solid black;
+	padding-top: 5px;
+}
+.menus{
+	float: left;
+	border: 0px solid black;
+	padding-top: 8px;
+}
+#radio_top{
+	border: 0px solid black;
+	height: 28px;
+	padding-top: 10px;
+	padding-left: 70px;
+}
+.radio{
+	border: 0px solid black;
+	height: 28px;
+	padding-top: 13px;
+	padding-left: 70px;
+}
+#colorside{
+	border: 0px solid black;
+	height: 165px;
+	padding-top: 5px;
+}
+.color{
+	align: left;
+	padding-left: 228px;
+}
+.color_choice{
+	padding-top: 5px;
+	padding-bottom: 10px;
+	padding-right: 42px; 
+	border: 0px solid black;
+}
+#default_color{
+	float: right; 
+	border: 0px solid black;
+	height: 28px;
+	padding-top: 5px;
+	padding-left: 75px;
+	padding-right: 27px;
+	font-size:8pt;
+	color: #1294AB;
+	font-weight: bold;
+}
+#menuBackground{
+	width: 30%;
+	cursor: pointer
+}
+#menuFontColor{
+	width: 30%;
+	cursor: pointer
+}
+#menuBorder{
+	width: 30%;
+	cursor: pointer
+}
+#send{
+	margin-right: 25px;
+}
 </style>
 <script src="https://www.lgkids.co.kr/es_all/plugins/jscolor-2.0.5/jscolor.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 
 	$(function(){	
@@ -130,72 +204,66 @@ input::placeholder {
 			$('.menu').css('border-color', '#000000');
 		 });
 	});
-	
 </script>
 </head>
 <body>
-<form name="myForm">
+<form name="menuSetting">
 	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0" valine="top">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
 	
-	<div align="left" style="width: 420px; height:210px; padding-top: 6px;font: 굴림;font-size: 10pt;border: 0px solid black;background-color: #F6F6F6;">
-		<div style="border: 0px solid black;width: 200px;height:150px;float: left;margin-top: 8px;">
-			<div style="float: left;border: 0px solid black;padding-top: 5px;">
-				<div align="center" class="menu">사진첩</div>
+	<div id="background">
+		<div id="menuside">
+			<div id="menu_top">
+				<div class="menu">사진첩</div>
 			</div>
-			<div style="border: 0px solid black;height: 28px;padding-top: 10px;padding-left: 70px;">
+			<div id="radio_top">
 				<input type="radio" name="menu3" id="menu3-1" value="1"> 공개 <input type="radio" name="menu3" id="menu3-0" value="0"> 비공개
 			</div>
-			<div style="float: left;border: 0px solid black;padding-top: 8px;">
-				<div align="center" class="menu">게시판</div>
+			<div class="menus">
+				<div class="menu">게시판</div>
 			</div>
-			<div style="border: 0px solid black;height: 28px;padding-top: 13px;padding-left: 70px;">
+			<div class="radio">
 				<input type="radio" name="menu4" id="menu4-1" value="1"> 공개 <input type="radio" name="menu4" id="menu4-0" value="0"> 비공개
 			</div>
-			<div style="float: left;border: 0px solid black;padding-top: 8px;">
-				<div align="center" class="menu">비디오</div>
+			<div class="menus">
+				<div class="menu">비디오</div>
 			</div>
-			<div style="border: 0px solid black;height: 28px;padding-top: 13px;padding-left: 70px;">
+			<div class="radio">
 				<input type="radio" name="menu5" id="menu5-1" value="1"> 공개 <input type="radio" name="menu5" id="menu5-0" value="0"> 비공개
 			</div>
-			<div style="float: left;border: 0px solid black;padding-top: 8px;">
-				<div align="center" class="menu">방명록</div>
+			<div class="menus">
+				<div class="menu">방명록</div>
 			</div>
-			<div style="border: 0px solid black;height: 28px;padding-top: 13px;padding-left: 70px;">
+			<div class="radio">
 				<input type="radio" name="menu6" id="menu6-1" value="1"> 공개 <input type="radio" name="menu6" id="menu6-0" value="0"> 비공개
 			</div>
 		</div>
-		<div align="center" style="border: 0px solid black;height: 165px;padding-top: 5px;">
-			<div align="left" style="padding-left: 228px;">
+		<div id="colorside" align="center">
+			<div class="color">
 				바탕 색상
 			</div>
-			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuBackground" value="${miniHpUserMenuVO.menuBGColor}" placeholder="바탕 색상" 
-					style="width: 30%; cursor: pointer">
+			<div class="color_choice">
+				<input class="form-control jscolor" id="menuBackground" value="${miniHpUserMenuVO.menuBGColor}" placeholder="바탕 색상">
 			</div>
-			<div align="left" style="padding-left: 228px;">
+			<div class="color">
 				글씨 색상
 			</div>
-			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuFontColor" value="${miniHpUserMenuVO.menuFontColor}" placeholder="글씨 색상"
-					style="width: 30%; cursor: pointer">
+			<div class="color_choice">
+				<input class="form-control jscolor" id="menuFontColor" value="${miniHpUserMenuVO.menuFontColor}" placeholder="글씨 색상">
 			</div>
-			<div align="left" style="padding-left: 228px;">
+			<div class="color">
 				테두리 색상
 			</div>
-			<div style="padding-top: 5px;padding-bottom: 10px;padding-right: 42px; border: 0px solid black;">
-				<input class="form-control jscolor" id="menuBorder" value="${miniHpUserMenuVO.menuBorderColor}" placeholder="테두리 색상"
-					style="width: 30%; cursor: pointer">
+			<div class="color_choice">
+				<input class="form-control jscolor" id="menuBorder" value="${miniHpUserMenuVO.menuBorderColor}" placeholder="테두리 색상">
 			</div>
 		</div>
-		<div align="right" style="border: 0px solid black;height: 28px;padding-top: 5px;padding-left: 75px;padding-right: 27px;">
-			<font  style="font-size:8pt;color: #1294AB;font-weight: bold;">
-				<span id="basicMenuColor" onmouseover="this.style.color='#FF5E00';" onmouseout="this.style.color='#1294AB';"
-					style="padding-right: 61px; cursor: pointer">
-						■ 기본 색상
-				</span>
-			</font>
+		<div id="default_color">
+			<span id="basicMenuColor" onmouseover="this.style.color='#FF5E00';" onmouseout="this.style.color='#1294AB';"
+				style="padding-right: 30px; cursor: pointer">
+					■ 기본 색상
+			</span>
 			<input type="button" id="send" value="저장">
 		</div>
 	</div>

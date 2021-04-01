@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,7 +20,6 @@ body {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-//넘어올때 로그인한 유저 vo와 미니홈피 주인 id + miniHp VO 다 가져오기
 $(document).ready(function() {
 	console.log('1');
 	/* $.ajax({
@@ -50,10 +45,8 @@ $(document).ready(function() {
 });
 </script>
  </head>
-
-<form name="main">
-
 <body topmargin="0" leftmargin="0">
+<form name="guestHome">
 	<table border="0" align="left" valign="top" width="850" height="550" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>
@@ -101,7 +94,6 @@ $(document).ready(function() {
 		</tr>
 	</table>
 	<!-- ------------------------ -->
- </body>
-
- </form>
+</form>
+</body>
 </html>

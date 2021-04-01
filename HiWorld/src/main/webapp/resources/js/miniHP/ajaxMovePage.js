@@ -51,7 +51,7 @@ function getProfileSide() {
 
 function moveProfile() {
 	//사이드 불러오기
-	/*getProfileSide();*/
+	getProfileSide();
 	
 	// 메인 불러오기
     var ajaxMain = {
