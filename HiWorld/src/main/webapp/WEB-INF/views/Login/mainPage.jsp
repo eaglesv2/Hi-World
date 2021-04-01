@@ -214,6 +214,7 @@
                 }
            	  $.ajax(ajaxOption).done(function(data){
            		  //Contents 영역삭제
+           		  console.log('adfdasf')
            		  $('#bodyContext').children().remove();
            		  console.log("1111") 
            		  //Contents 영역 교체
@@ -397,13 +398,37 @@
 						        </div>
 						    </div>
 					</c:if>
+					<c:if test="${sessionVO.userName == 'ADMIN'}">
+					<!-- 어드민이 들어왔을 경우 -->
+                  	
+                  			<div id="minimi">
+						        <div id="icon">
+						            <img src="bb.jpg" alt="">
+						            <div>
+						               <div id="nickname">
+						              		 ${sessionVO.userName} 님
+						              	</div>
+						              	<div id="haveCash">
+						              		보유 밤톨: ${sessionVO.userCash}개
+						              	</div>
+						          	     
+						            </div>
+						        </div>
+						        <div id="jang">
+						            <div id="jang-top">
+						                <div onclick="myinfo()">내정보보기</div>
+						                <div onclick="bamTol()">밤톨충전</div>
+						            </div>
+						            <div id="jang-bottom">
+						                <div onclick="shoppingcart()">장바구니</div>
+						                <a href="logout.do">로그아웃</a>
+						        	</div>
+						        </div>
+						    </div>
+                  	</c:if>
 					</c:when>
 					
-					<c:when test="${sessionVO.userName == 'ADMIN'}">
-					<!-- 어드민이 들어왔을 경우 -->
-                  		<div id="minimi"> 어드민입니다. </div>
-                  		
-                  	</c:when>
+
 					
 				<c:otherwise>
 					

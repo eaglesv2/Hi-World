@@ -39,11 +39,11 @@
 			
 				<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
 				<h2>로그인</h2>
-				<form action="checkClient.do" method="post">
-					<input type="text" name="UserID" id="UserID" placeholder="아이디" > <br> 
-					<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호"> <br>
-					<input type="submit" value="로그인"> <br>
-				</form>
+					<form action="checkClient.do" method="post">
+							<input type="text" name="UserID" id="UserID" placeholder="아이디" > <br> 
+							<input type="password" id="UserPW" name="UserPW" placeholder="비밀번호"> <br>
+							<input type="submit" value="로그인"> <br>
+					</form>
 				<a href="userInsertForm.do">회원가입</a>
 				<br>
 				
