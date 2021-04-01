@@ -11,8 +11,8 @@
 	
 	<insert id="insertNeighbor" parameterType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		INSERT INTO MiniHP_Neighbor
-		VALUES neighborID1 = #{neighborID1}, neighborName1 = #{neighborName1}, neighborValue1 = #{neighborValue1},
-			   neighborID2 = #{neighborID2}, neighborName2 = #{neighborName2}, neighborValue2 = #{neighborValue2}
+		VALUES (#{neighborID1}, #{neighborName1}, #{neighborValue1},
+			    #{neighborID2}, #{neighborName2}, #{neighborValue2})
 	</insert>
 	
 	<select id="getNeighborList" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">

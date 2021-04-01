@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.hiworld.minihp.dao.MiniHpPictureDAO;
 import com.hiworld.minihp.vo.MiniHPPictureFolderVO;
+import com.hiworld.minihp.vo.MiniHpPictureReplyVO;
+import com.hiworld.minihp.vo.MiniHpPictureVO;
 @Service
 public class MiniHpPictureServiceImpl implements MiniHpPictureService {
 	
@@ -45,69 +47,70 @@ public class MiniHpPictureServiceImpl implements MiniHpPictureService {
 	
 	
 	// 게시판 관련-------------
-//	@Override
-//	public int getFirstFolderSerial(int userSerial) {
-//		return dao.getFirstFolderSerial(userSerial);
-//	}
-//	@Override
-//	@Transactional
-//	public List<MiniHpBoardVO> getAll(Integer folderSerial, int page) {
-//		//페이징
-//		int size = 10;//한페이지에 10개씩
-//		int offset = 0+(page-1)*size;
-//		
-//		List<MiniHpBoardVO> list = dao.getAll(folderSerial, offset, size);
-//		if(list==null || list.size()==0)
-//			return null;
-//		else
-//			return list;
-//	}
-//	@Override
-//	public String getFolderName(int folderSerial) {
-//		return dao.getFolderName(folderSerial);
-//	}
-//	@Override
-//	public int countInsideFolder(int serial) {
-//		return dao.countInsideFolder(serial);
-//	}
-//	
-//	@Override
-//	public int insert(MiniHpBoardVO vo) {
-//		return dao.insert(vo);
-//	}
-//	@Override
-//	@Transactional
-//	public MiniHpBoardVO get(int serial) {
-//		dao.updateHit(serial);//게시글 볼때마다 조회수 1 증가
-//		return dao.get(serial);
-//	}
-//	@Override
-//	public int updateBoardFolder(int boardSerial,int folderSerial) {
-//		return dao.updateBoardFolder(boardSerial, folderSerial);
-//	}
-//	@Override
-//	public int delete(int serial) {
-//		return dao.delete(serial);
-//	}
-//	@Override
-//	public int update(MiniHpBoardVO vo) {
-//		return dao.update(vo);
-//	}
-//	
-//	@Override
-//	public List<MiniHpBoardReplyVO> getAllReply(int boardSerial) {
-//		return dao.getAllReply(boardSerial);
-//	}
-//	@Override
-//	public int insertReply(MiniHpBoardReplyVO vo) {
-//		return dao.insertReply(vo);
-//	}
-//	@Override
-//	public int deleteReply(int serial) {
-//		return dao.deleteReply(serial);
-//	}
-//	@Override
-//	public int updateReply(int serial, String content) {
-//		return dao.updateReply(serial, content);
-//	}
+	@Override
+	public int getFirstFolderSerial(int userSerial) {
+		return dao.getFirstFolderSerial(userSerial);
+	}
+	@Override
+	@Transactional
+	public List<MiniHpPictureVO> getAll(Integer folderSerial, int page, int pageSize) {
+		//페이징
+		int offset = 0+(page-1)*pageSize;//1페이지일 경우 1~5, 2페이지일 경우 2~10... 이런식으로 게시글 가져옴
+		
+		List<MiniHpPictureVO> list = dao.getAll(folderSerial, offset, pageSize);
+		if(list==null || list.size()==0)
+			return null;
+		else
+			return list;
+	}
+	@Override
+	public String getFolderName(int folderSerial) {
+		return dao.getFolderName(folderSerial);
+	}
+	@Override
+	public int countInsideFolder(int serial) {
+		return dao.countInsideFolder(serial);
+	}
+	
+	@Override
+	public int insert(MiniHpPictureVO vo) {
+		return dao.insert(vo);
+	}
+	@Override
+	public int updatePictureFolder(int pictureSerial,int folderSerial) {
+		return dao.updatePictureFolder(pictureSerial, folderSerial);
+	}
+	@Override
+	public int delete(int serial) {
+		return dao.delete(serial);
+	}
+	@Override
+	public MiniHpPictureVO get(int serial) {
+		return dao.get(serial);
+	}
+	@Override
+	public int update(MiniHpPictureVO vo) {
+		return dao.update(vo);
+	}
+	
+	@Override
+	public int getReplyCnt(int pictureSerial) {
+		return dao.getReplyCnt(pictureSerial);
+	}
+	@Override
+	public List<MiniHpPictureReplyVO> getAllReply(int pictureSerial) {
+		return dao.getAllReply(pictureSerial);
+	}
+	@Override
+	public int insertReply(MiniHpPictureReplyVO vo) {
+		return dao.insertReply(vo);
+	}
+	@Override
+	public int deleteReply(int serial) {
+		return dao.deleteReply(serial);
+	}
+	@Override
+	public int updateReply(int serial, String content) {
+		return dao.updateReply(serial, content);
+	}
 }

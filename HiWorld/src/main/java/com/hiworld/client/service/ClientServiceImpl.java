@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hiworld.client.dao.ClientDAO;
+import com.hiworld.client.vo.BoardReplyVO;
+import com.hiworld.client.vo.BoardVO;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
 
@@ -289,6 +291,14 @@ public class ClientServiceImpl implements ClientService {
 		return dao.getAllClient();
 	}
 	
+	/* 로그인시 밴 체크 */
+	@Override
+	public int checkBan(ClientVO clientVO) {
+		return dao.checkBan(clientVO);
+	}
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADMIN @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 밴한 회원 전체 조회 */
 	@Override
 	public ArrayList<ClientVO> getAllBanClient() {
@@ -307,9 +317,33 @@ public class ClientServiceImpl implements ClientService {
 		return dao.unBanClient(UserSerial);
 	}
 	
-	/* 로그인시 밴 체크 */
+	/* 게시판 등록 */
 	@Override
-	public String checkBan(ClientVO clientVO) {
-		return dao.checkBan(clientVO);
+	public int BoardSubmit(BoardVO boardVO) {
+		return dao.BoardSubmit(boardVO);
+	}
+	
+	/* 게시판 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getBoardList() {
+		return dao.getBoardList();
+	}
+	
+	/* 게시판 세부정보 */
+	@Override
+	public BoardVO getBoardOne(BoardVO boardVO) {
+		return dao.getBoardOne(boardVO);
+	}
+	
+	/* 게시판 댓글 */
+	@Override
+	public ArrayList<BoardReplyVO> getBoardReply(BoardVO boardVO) {
+		return dao.getBoardReply(boardVO);
+	}
+	
+	/* 조회 1 올리기 */
+	@Override
+	public void lookUp(BoardVO boardVO) {
+		dao.lookUp(boardVO);
 	}
 }

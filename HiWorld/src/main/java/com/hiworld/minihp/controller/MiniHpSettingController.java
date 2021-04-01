@@ -1,5 +1,7 @@
 package com.hiworld.minihp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,13 +14,14 @@ import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
 @Controller
 public class MiniHpSettingController {
 	
 	@Autowired
-	MiniHpSettingService service;
+	MiniHpSettingService settingService;
 	
 	@Autowired
 	MiniHpIntroDAO introDAO;
@@ -26,6 +29,8 @@ public class MiniHpSettingController {
 	MiniHpUserMenuVO menuVO;
 	
 	MiniHpIntroVO introVO;
+	
+	sessionVO sessionVO;
 	
 	/*@RequestMapping("/miniHp_setting")
 	public String miniHpSetting(HttpServletRequest request, String menu, String flag) {
@@ -53,9 +58,9 @@ public class MiniHpSettingController {
 		System.out.println("미니홈피 기본정보 비밀번호 확인");
 		String id = request.getParameter("UserID");
 		String pw = request.getParameter("UserPW");
-		System.out.println(id);
-		System.out.println(pw);
-		int result = service.pwCheck(id,pw);
+		/*System.out.println(id);
+		System.out.println(pw);*/
+		int result = settingService.pwCheck(id,pw);
 		System.out.println(result);
 		if(result == 0) {
 			return "MiniHP/MiniHP_Setting_BasicInfo_pwCheck";
@@ -68,8 +73,8 @@ public class MiniHpSettingController {
 	public String settingMenuAvailable(Model model, HttpSession session) {
 		System.out.println("미니홈피 메뉴 설정");
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		MiniHpUserMenuVO miniHpUserMenuVO = service.getMenuAvailable(vo.getUserID());
-		System.out.println(miniHpUserMenuVO);
+		MiniHpUserMenuVO miniHpUserMenuVO = settingService.getMenuAvailable(vo.getUserID());
+		/*System.out.println(miniHpUserMenuVO);*/
 		model.addAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
 
 		return "MiniHP/MiniHP_Setting_Menu_Available";
@@ -79,10 +84,20 @@ public class MiniHpSettingController {
 	public String settingMenuAvailable_ok(Model model, HttpSession session, MiniHpUserMenuVO userMenuVO) {
 		System.out.println("미니홈피 메뉴 설정 확인 컨트롤러");
 		
-		service.updateMenuAvailable(userMenuVO);
+		settingService.updateMenuAvailable(userMenuVO);
 
 		return settingMenuAvailable(model, session);
 	}
-
+	
+	@RequestMapping("/miniHp_setNeighborList.do")
+	public String setNeighborList(HttpSession session) {
+		System.out.println("미니홈피 이웃 목록 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
+		/*List<MiniHpSettingNeighborViewVO> neighborList = neighborService.getSettingNeighborList(UserID); //이웃 목록 불러오기
+		*/
+		
+		return "MiniHP/MiniHP_Setting_NieghborList";
+	}
 }
 

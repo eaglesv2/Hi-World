@@ -7,14 +7,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpDAO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.service.MiniHpIntroService;
 import com.hiworld.minihp.service.MiniHpNeighborListService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
@@ -23,12 +24,16 @@ import com.hiworld.minihp.vo.MiniHpNeighborListVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
+import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 @Controller
 public class MiniHpGuestController {
 	
 	@Autowired
 	MiniHpSettingService settingService;
+	
+	@Autowired
+	MiniHpIntroService introService;
 	
 	@Autowired
 	MiniHpNeighborService neighborService;
@@ -48,43 +53,62 @@ public class MiniHpGuestController {
 	
 	MiniHpOwnerVO ownerVO;
 	
+	MiniHpVisitorVO visitorVO;
+	
 	/*게스트 미니홈피 메인*/
 	@GetMapping("/miniHp_guestHome.do")
-	public String homeGuest(HttpServletRequest request) {
+	public String homeGuest(HttpServletRequest request, Model model) {
+		/*System.out.println("미니홈피 게스트 컨트롤러");*/
+		HttpSession session = request.getSession();
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
 		String OwnerID = request.getParameter("OwnerID");
+		String GuestID = vo.getUserID();
+		System.out.println(OwnerID);
+		
+		visitorVO = new MiniHpVisitorVO();
+		visitorVO.setOwnerID(OwnerID);
+		visitorVO.setGuestID(GuestID);
+		
+		introService.todayCheck(visitorVO);
 		introVO = introDAO.getData(OwnerID);
 		
-		request.setAttribute("OwnerID", OwnerID);
-		request.setAttribute("ownerintroVO", introVO);
+		model.addAttribute("OwnerID", OwnerID);
+		model.addAttribute("ownerintroVO", introVO);
 		
 		return "MiniHP/MiniHP_Home_Guest";
 	}
-	
+	/*게스트 미니홈피 메뉴설정*/
 	@GetMapping("/miniHp_rightGuestMenu.do")
-	public String rightGuestMenu(HttpServletRequest request) {
+	public String rightGuestMenu(HttpServletRequest request, Model model) {
 		System.out.println("게스트 메뉴 불러오기");
 		String OwnerID = request.getParameter("OwnerID");
 		System.out.println(OwnerID);
 		menuVO = settingService.getMenuAvailable(OwnerID);
 		/*introVO = introDAO.getData(OwnerID);*/
 		
-		request.setAttribute("OwnerID", OwnerID);
-		request.setAttribute("ownermenuVO", menuVO);
+		model.addAttribute("OwnerID", OwnerID);
+		model.addAttribute("ownermenuVO", menuVO);
 		/*request.setAttribute("ownerintroVO", introVO);*/
 		
 		return "MiniHP/MiniHP_Right_Guest_Menu";
 	}
 	
 	@GetMapping("/miniHp_leftGuest.do")
-	public String leftGuest(HttpServletRequest request) {
+	public String leftGuest(HttpServletRequest request, Model model) {
 		String OwnerID = request.getParameter("OwnerID");
 		introVO = introDAO.getData(OwnerID);
 		ownerVO = dao.getData(OwnerID);
 		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(OwnerID); //이웃 목록 불러오기
 		
-		request.setAttribute("ownerintroVO", introVO);
-		request.setAttribute("ownerVO", ownerVO);
-		request.setAttribute("neighborList", neighborList);
+		if(neighborList == null) {
+			model.addAttribute("listLength", 0);
+		} else {
+			model.addAttribute("listLength", neighborList.size());
+		}
+		
+		model.addAttribute("ownerintroVO", introVO);
+		model.addAttribute("ownerVO", ownerVO);
+		model.addAttribute("neighborList", neighborList);
 		
 		return "MiniHP/MiniHP_Left_Guest";
 	}
@@ -94,40 +118,52 @@ public class MiniHpGuestController {
 		
 		return "MiniHP/MiniHP_Right_Guest";
 	}
-	
+	/*게스트 미니홈피 제목 설정*/
 	@GetMapping("/miniHp_topGuest.do")
-	public String topGuest(HttpServletRequest request) {
+	public String topGuest(HttpServletRequest request, Model model) {
 		String OwnerID = request.getParameter("OwnerID");
-		introVO = introDAO.getData(OwnerID);
+		/*introVO = introDAO.getData(OwnerID);*/
 		
-		request.setAttribute("ownerintroVO", introVO);
+		model.addAttribute("OwnerID", OwnerID);
+		/*model.addAttribute("ownerintroVO", introVO);*/
 		
 		return "MiniHP/MiniHP_TopGuest";
 	}
 	
-	//이웃 신청 버튼 누를시!!!
+	@ResponseBody
+	@GetMapping("/miniHp_getGuestIntroTitle.do")
+	public String getGuestTitle(HttpServletRequest request) {
+		String OwnerID = request.getParameter("OwnerID");
+		ownerVO = dao.getData(OwnerID);
+		/*System.out.println(ownerVO.getUserName());*/
+		
+		return introService.getGuestTitle(ownerVO);
+	}
+	
+	/*이웃 신청 버튼 누를시!!!*/
 	@GetMapping("/miniHp_neighborRegister.do")
-	public String neighborRegister(HttpServletRequest request) {
+	public String neighborRegister(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String senderName = vo.getUserName(); //보내는이 이름
-		String receiverId = request.getParameter("OwnerId"); //받는이 아이다
+		String receiverId = request.getParameter("OwnerId"); //받는이 아이디
+		System.out.println(receiverId);
 		String receiverName = request.getParameter("OwnerName"); //받는이 이름
 		
        /* CyUsingItemDTO usingItem = cyUsingItemDAO.useMinimi(userId);
         String minimiPath = usingItem.getOriginalFileName();*/
        /* request.setAttribute("minimiPath", minimiPath); */
-		request.setAttribute("senderName", senderName);
-		request.setAttribute("receiverId", receiverId);
-		request.setAttribute("receiverName", receiverName);
+		model.addAttribute("senderName", senderName);
+		model.addAttribute("receiverId", receiverId);
+		model.addAttribute("receiverName", receiverName);
 		return "MiniHP/MiniHP_NeighborRegister";
 	}
 	
-	//이웃 신청 했을 때!!!
+	/*이웃 신청 했을 때!!!*/
 	@ResponseBody
 	@PostMapping("/miniHp_NeighborRegister_ok.do")
 	public String neighborRegister_ok(HttpServletRequest request, MiniHpNeighborListVO neighborListVO) {
-		
+		System.out.println(neighborListVO.getUserMessage());
 		neighborListService.insertNeighborList(neighborListVO); //신청 정보를 테이블에 저장
 		
 		return "";

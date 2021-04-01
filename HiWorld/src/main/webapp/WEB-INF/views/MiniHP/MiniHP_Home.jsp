@@ -21,20 +21,6 @@ body
  scrollbar-track-color: #FFFFFF;
  scrollbar-arrow-color: #9C92FF
  }
- 	
-.selected-Menu{
-	border: 1px solid;
-	border-left: 0px;
-	background-color: white;
-	width: 60px;
-	height: 22px;
-	padding-top: 6px;
-	margin-bottom: 3px;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-	font-size: 9pt;
-	user-select:none;
-}
 </style>
 
 <script type="text/javascript">
@@ -43,7 +29,6 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'post',
 		url : 'miniHp_rightMenu.do',
-		data : { menu : '${menu}'},
 		
 		success : function(result) {
 			$("#rightMenu").html(result);
@@ -74,7 +59,7 @@ $(document).ready(function() {
 					<tr>
 						<td width="10"> </td>
 
-						<td align="center" width="178" height="450" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
+						<td align="center" width="178" height="448" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="sideContents">
@@ -83,17 +68,17 @@ $(document).ready(function() {
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
-						<td align="center" width="480" height="450" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
+						<td align="center" width="476" height="448" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 										
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="bodyContents">
-								<iframe frameborder="0" width="470" height="430" src="MiniHP_Right.do"></iframe> 
+								<iframe frameborder="0" width="465" height="430" src="MiniHP_Right.do"></iframe> 
 							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 							
 						</td>
 						<!-- 오른쪽 메뉴 부분 이걸 for문 돌려서 메뉴 선택한거 다보여주게 하기 ---------------------------------------------- -->
-						<td valign="top" style="padding-top: 20px;">
+						<td valign="top" style="padding-top: 20px; bor">
 						<!-- Setting menu beginning -->
 							<span id="rightMenu">
 							</span>

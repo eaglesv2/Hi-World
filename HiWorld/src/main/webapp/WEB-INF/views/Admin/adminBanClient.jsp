@@ -16,23 +16,23 @@
 	<input type="text" id="search" />
 	<table border="1">
 		<tr>
-			<td>유저번호</td>
-			<td>유저이름</td>
-			<td>유저아이디</td>
+			<td>유저고유번호</td>
+			<td>유저이름(유저아이디)</td>
 			<td>밴풀기</td>
 		</tr>
 		<tbody id="tbody">
 			<c:forEach var="kinds" items="${alist}">
 				<tr id="${kinds.userSerial}">
 					<td>${kinds.userSerial}</td>
-					<td>${kinds.userName}</td>
-					<td>${kinds.userID}</td>
-					<td><input type="button" value="unBan"
-						onclick="UserUnBan(${kinds.userSerial})" /></td>
+					<td>${kinds.userName}(${kinds.userID})</td>
+					<td><input type="button" value="unBan" onclick="UserUnBan(${kinds.userSerial})" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<a href="#" onclick="Manage_Client()">회원 목록 보기</a>
+	
 </body>
 
 <script>
@@ -61,6 +61,18 @@
 			}
 		})
 	}
+	
+	function Manage_Client(){
+		$.ajax({
+			url: "Manage_Client.do",
+			type: "GET",
+			data: {"check":"all"},
+			dataType: "html",
+			success: function(data) {
+				$("#bodyContext").html(data);
+			}
+		})
+	}	
 </script>
 
 </html>

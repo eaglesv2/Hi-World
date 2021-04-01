@@ -36,7 +36,7 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 			list = null;
 		}
 		
-		System.out.println(list);
+		/*System.out.println(list);*/
 		
 		return list;
 	}

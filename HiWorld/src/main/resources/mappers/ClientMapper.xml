@@ -135,8 +135,14 @@
 	<select id="getAllClient" resultType="clientVO">
 		SELECT * FROM HW_USERLIST WHERE UserID != 'ADMIN' AND Ban != 1
 	</select>
+		
+	<!-- 로그인시 밴 확인 -->
+	<select id="checkBan" resultType="int">
+		SELECT Ban FROM HW_USERLIST WHERE UserSerial = #{UserSerial}
+	</select>
 	
-	<!-- 밴한 회원 전체 조회 -->
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ADMIN   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+		<!-- 밴한 회원 전체 조회 -->
 	<select id="getAllBanClient" resultType="clientVO">
 		SELECT * FROM HW_USERLIST WHERE UserID != 'ADMIN' AND Ban = 1
 	</select>
@@ -151,9 +157,32 @@
 		UPDATE HW_USERLIST SET Ban = 0 WHERE UserSerial = #{UserSerial}
 	</update>
 	
-	<!-- 로그인시 밴 확인 -->
-	<select id="checkBan" resultType="String">
-		SELECT Ban FROM HW_USERLIST WHERE UserSerial = #{UserSerial}
+	<!-- 공지사항 업로드 -->
+	<insert id="BoardSubmit">
+		INSERT INTO HW_Board (userSerial, title, content, lookUp)
+		VALUES (#{userSerial},#{title},#{content}, 0)
+	</insert>
+	
+	<!-- 공지사항 가져오기 -->
+	<select id="getBoardList" resultType="boardVO">
+		SELECT * FROM HW_Board WHERE userSerial = 1
 	</select>
+	
+	<!-- 공지사항 세부정보 -->
+	<select id="getBoardOne" resultType="boardVO">
+		SELECT * FROM HW_Board WHERE userSerial = 1 AND boardSerial = ${boardSerial};
+	</select>
+
+	<!-- 공지사항 댓글 -->
+	<select id="getBoardReply" resultType="boardReplyVO">
+		SELECT * FROM HW_Borad_Reply WHERE boardSerial = ${boardSerial};
+	</select>
+	
+	<!-- 공지사항 조회 1올리기 -->
+	<update id="lookUp">
+		UPDATE HW_Board
+		SET lookUp = lookUp+1
+		WHERE boardSerial = ${boardSerial}
+	</update>
 </mapper>
 

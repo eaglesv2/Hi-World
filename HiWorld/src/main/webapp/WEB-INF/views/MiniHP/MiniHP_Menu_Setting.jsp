@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
+<head>
+<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -26,7 +26,7 @@
 	function setBasicInformation(){
 		
 		$.ajax({
-			type : 'post',
+			type : 'POST',
 			url : 'miniHp_setBasicInformation_pw.do',
 			
 			success : function(result) {
@@ -39,8 +39,26 @@
 	function setMenuAvailable(){
 
 		$.ajax({
-			type : 'post',
+			type : 'POST',
 			url : 'miniHp_menuAvailable.do',
+			
+			success : function(result) {
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		});
+	}
+	
+	function setNeighborList(){
+		/* var url="/cy/setting/my_setting_r_memberList.action";
+	
+		$.post(url,{},function(args){
+			$("#browser").html(args); 
+		}); */
+		
+		$.ajax({
+			type : 'POST',
+			url : 'miniHp_setNeighborList.do',
 			
 			success : function(result) {
 				$("#bodyContents").children().remove();
@@ -80,13 +98,7 @@
 		});
 	}
 	
-	function setMemberList(){
-		var url="<%=cp%>/cy/setting/my_setting_r_memberList.action";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
-	}
+	
 	 --%>
 
 
@@ -124,8 +136,8 @@
 			</font><br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
 			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setMemberList();">
-					일촌관리
+				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setNeighborList()">
+					이웃관리
 				</span>
 			</font><br/><br/>
 		</div>
@@ -134,7 +146,7 @@
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_3lines.png" height="13px" width="13px">
 			<font  style="font-size:10pt;font-weight: bold;">
 				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="javascript:openOrCloseMenu('2')">
-				아이템 설정관리
+					아이템 설정관리
 				</span>
 			</font>
 		</div>

@@ -80,7 +80,7 @@
 	//폴더 클릭시 해당 폴더로 이동
 	function goToFolder(folderSerial) {
 		var ajaxMain = {
-	            url : 'miniHpBoard.do?folderSerial='+folderSerial,
+	            url : 'miniHpPicture.do?folderSerial='+folderSerial,
 	            async : true,
 	            type : "GET",
 	            dataType : "html",
@@ -88,9 +88,7 @@
 	    };
 	    
 	    $.ajax(ajaxMain).done(function(data){
-	        // Contents 영역 삭제
 	        $('#bodyContents').children().remove();
-	        // Contents 영역 교체
 	        $('#bodyContents').html(data);
 	    });
 	}
