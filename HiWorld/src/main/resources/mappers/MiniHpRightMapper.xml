@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiworld.minihp.dao.MiniHpRightDAO">
+	<select id="getBoardList" resultType="com.hiworld.minihp.vo.MiniHpBoardVO">
+		SELECT boardSerial, title, cDate 
+		FROM MiniHP_Board 
+		WHERE UserSerial=#{userSerial} 
+		ORDER BY cDate DESC 
+		LIMIT 5
+	</select>
+	<select id="getPictureList" resultType="com.hiworld.minihp.vo.MiniHpPictureVO">
+		SELECT pictureSerial, title, cDate 
+		FROM MiniHP_Picture 
+		WHERE UserSerial=#{userSerial} 
+		ORDER BY cDate DESC 
+		LIMIT 5
+	</select>
+	<select id="getVideoList" resultType="com.hiworld.minihp.vo.MiniHpVideoVO">
+		SELECT videoSerial, title, cDate 
+		FROM MiniHP_Video 
+		WHERE UserSerial=#{userSerial} 
+		ORDER BY cDate DESC 
+		LIMIT 5
+	</select>
+</mapper>

@@ -144,7 +144,7 @@
 	<div class="books">
 		<div class="booksTop">
 			<span class="booksTop-left">
-				<span>${l.userName}</span>
+				<span>${l.writeUserName}</span>
 				<span class="date">(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd HH:mm"/>)</span>
 			</span>
 			<span class="booksTop-right">

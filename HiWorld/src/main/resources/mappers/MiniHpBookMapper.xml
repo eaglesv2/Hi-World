@@ -16,8 +16,8 @@
 	
 	<!-- insert -->
 	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpBookVO">
-		INSERT INTO MiniHP_Book(UserSerial,content)
-		VALUES(#{userSerial},#{content})
+		INSERT INTO MiniHP_Book(UserSerial,writeUserSerial,content)
+		VALUES(#{userSerial},#{writeUserSerial},#{content})
 	</insert>
 	
 	<!-- delete -->

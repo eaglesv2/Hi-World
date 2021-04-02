@@ -66,13 +66,17 @@ $(document).ready(function() {
 
 						<td align="center" width="178" height="448" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
+							<span id="sideContents">
+								<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
 						<td align="center" width="476" height="448" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
+							<span id="bodyContents">
+								<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
