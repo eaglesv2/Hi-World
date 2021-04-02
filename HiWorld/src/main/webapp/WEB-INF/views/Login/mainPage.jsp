@@ -108,7 +108,8 @@
 
              };
              
-             function question(){
+             function question(Name){
+            	 if(Name!="" && Name!=null){
              	 console.log("1234") 
                  var ajaxOption4={
                 		 type: "GET",
@@ -125,7 +126,9 @@
             		  //Contents 영역 교체
             		  $('#bodyContext').html(data);
             	  })
- 
+            	 }else{
+            		 alert("로그인하세요");
+            	 }
              };
              
              function myinfo(){
@@ -391,7 +394,7 @@
                         <li id="board" onclick="board('${sessionVO.userName}')">
                            	 이웃찾기
                         </li>
-                        <li id="question" onclick="question()">
+                        <li id="question" onclick="question('${sessionVO.userName}')">
                            	 문의
                         </li>
                 </div>

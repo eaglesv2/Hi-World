@@ -39,11 +39,13 @@
 </style>	
 </head>
 <body>
+<div id="Context">
 	<div id="serchclient">
 		<h1>banList</h1>
 		회원 검색하기
 		<input type="text" id="search" />
 	</div>
+	
 	<table border="1" id="bantable">
 		<tr>
 			<td style="text-align: center;">유저번호</td>
@@ -51,31 +53,87 @@
 			<td>밴풀기</td>
 		</tr>
 		<tbody id="tbody">
-			<c:forEach var="kinds" items="${alist}">
+			<c:forEach var="kinds" items="${list}">
 				<tr id="${kinds.userSerial}">
 					<td style="width:150px;text-align: center;">${kinds.userSerial}</td>
 					<td>${kinds.userName}(${kinds.userID})</td>
-					<td><input type="button" id=" " value="unBan" onclick="UserUnBan(${kinds.userSerial})" /></td>
+					<td><input type="button" value="unBan" onclick="UserUnBan(${kinds.userSerial})" /></td>
 				</tr>
 			</c:forEach>
 		</tbody>
+		
+		<tfoot id="tfoot">
+				<c:forEach var="kinds" items="${alist}">
+					<!-- 벤안되었을때 -->
+					<tr id="${kinds.userSerial}">
+						<td style="width:150px;text-align: center;">${kinds.userSerial}</td>
+						<td>${kinds.userName}(${kinds.userID})</td>
+						<td><input type="button" value="Ban" onclick="UserBan(${kinds.userSerial})" /></td>
+					</tr>
+				</c:forEach>
+		</tfoot>
+
+		
 	</table>
 	<div id="clientlist">
 		<a href="#" onclick="Manage_Client()">회원 목록 보기</a>
 	</div>
+	
+	
+	
+	
+	
+	<div>
+        <c:if test="${pagination.curRange ne 1 }">
+            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+        </c:if>
+        <c:if test="${pagination.curPage ne 1}">
+            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+        </c:if>
+        <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
+            <c:choose>
+                <c:when test="${pageNum eq  pagination.curPage}">
+                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                </c:when>
+                <c:otherwise>
+                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+        </c:if>
+        <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+        </c:if>
+	</div>
+	
+</div>	
 </body>
 
 <script>
+	$(document).ready(function() {
+		$("#tfoot").hide();
+		$("#tfoot>tr").hide();
+	})
+
 	$("#search").keyup(function() {
 		var key = $(this).val();
-	
-		/* 일단 검색시 목록 전체안보이게 */
-		$("#tbody>tr").hide();
-	
-		var writer = $("#tbody>tr>td:nth-child(2):contains('"+key+"')");
-	
-		$(writer).parent().show();
-	
+		console.log(key);
+		
+		if(key==''){
+			$("#tbody>tr").show();
+			$("#tfoot").hide();
+			$("#tfoot>tr").hide();
+		}else{
+			/* 일단 검색시 목록 전체안보이게 */
+			$("#tbody>tr").hide();
+		
+			var writer = $("#tfoot>tr>td:nth-child(2):contains('"+key+"')");
+			$("#tfoot").show();
+			$(writer).parent().show();
+		}
+		
 	})
 	
 	function UserUnBan(userSerial) {
@@ -103,6 +161,21 @@
 			}
 		})
 	}	
+	
+	function fn_paging(curPage) {
+	    var ajaxMain = {
+	            url : 'Manage_Client.do?check=ban&curPage='+curPage,
+	            async : true,
+	            type : "GET",
+	            dataType : "html",
+	            cache : false
+	    };
+	$.ajax(ajaxMain).done(function(data){
+	        $('#Context').children().remove();
+	    	// Contents 영역 교체
+	        $('#Context').html(data);
+		});
+	}
 </script>
 
 </html>

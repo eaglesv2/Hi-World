@@ -14,17 +14,43 @@ public class ArticleServiceImpl implements ArticleService {
 	@Autowired
 	private ArticleDAO articleDAO;
 
+	/*상품개수*/
 	@Override
-	public ArrayList<ArticleVO> getAllArticle() {
+	public int countAllArticlePage() {
+		return articleDAO.countAllArticlePage();
+	}
+	
+	@Override
+	public ArrayList<ArticleVO> getAllArticle(int page, int pageSize) {
 		/* 상품목록 가져오기 */
 		System.out.println("상품가져오기");
-		return articleDAO.getAllArticle();
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ArticleVO> list = articleDAO.getAllArticle(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
 	}
 
+	/* 상품 선택 갯수 */
+	@Override
+	public int countArticlePage(String list) {
+		return articleDAO.countArticlePage(list);
+	}
+	
 	/* 상품 선택 가져오기 */
 	@Override
-	public ArrayList<ArticleVO> getSelectArticle(ArticleVO articleVO) {
-		return articleDAO.getSelectArticle(articleVO);
+	public ArrayList<ArticleVO> getSelectArticle(String list, int page, int pageSize) {
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ArticleVO> alist = articleDAO.getSelectArticle(list, offset, pageSize);
+		if(alist==null || alist.size()==0) {
+			return null;
+		}else {
+			return alist;
+		}
 	}
 
 	/* 상품 확인 */
