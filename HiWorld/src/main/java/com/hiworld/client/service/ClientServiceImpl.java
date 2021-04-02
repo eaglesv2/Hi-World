@@ -282,13 +282,32 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 	
+	/* 회원 전체 카운트 */
+	@Override
+	public int countBoardPage() {
+		return dao.countBoardPage();
+	}
+	
 	/* 회원 전체 조회 */
+	@Override
+	public ArrayList<ClientVO> getAllClientData() {
+		return dao.getAllClientData();
+	}
+	
 	@Override
 	/* sql문 실패시 자동으로 롤백 됨 */
 	@Transactional
-	public ArrayList<ClientVO> getAllClient() {
-		/* 모든 회원 정보가 담긴 ArrayList가 넘어감 */
-		return dao.getAllClient();
+	public ArrayList<ClientVO> getAllClient(int page, int pageSize) {
+		
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ClientVO> list = dao.getAllClient(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+		
 	}
 	
 	/* 로그인시 밴 체크 */
@@ -299,10 +318,29 @@ public class ClientServiceImpl implements ClientService {
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADMIN @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 밴한 회원 카운트 */
+	@Override
+	public int countBoardBanPage() {
+		return dao.countBoardBanPage();
+	}
+	
 	/* 밴한 회원 전체 조회 */
 	@Override
-	public ArrayList<ClientVO> getAllBanClient() {
-		return dao.getAllBanClient();
+	public ArrayList<ClientVO> getAllBanClientData() {
+		return dao.getAllBanClientData();
+	}
+	@Override
+	public ArrayList<ClientVO> getAllBanClient(int page, int pageSize) {
+		
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ClientVO> list = dao.getAllBanClient(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+		
 	}
 	
 	/* 밴 */
@@ -323,10 +361,23 @@ public class ClientServiceImpl implements ClientService {
 		return dao.BoardSubmit(boardVO);
 	}
 	
+	/* 게시판 갯수 가져오기 */
+	@Override
+	public int countNoticePage() {
+		return dao.countNoticePage();
+	}
+	
 	/* 게시판 목록 가져오기 */
 	@Override
-	public ArrayList<BoardVO> getBoardList() {
-		return dao.getBoardList();
+	public ArrayList<BoardVO> getBoardList(int page, int pageSize) {
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<BoardVO> list = dao.getBoardList(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
 	}
 	
 	/* 게시판 세부정보 */

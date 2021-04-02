@@ -60,6 +60,21 @@
 		});
 	}
 	
+	function setStoryRoomMinimi(){
+		console.log('3333');
+		
+		$.ajax({
+			type : 'POST',
+			url : 'miniHp_storyRoomMinimi.do',
+			
+			success: function(result) {
+				console.log('3333333');
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		})
+	}
+	
 	<%-- function setUsingBackGound(){
 		var url="<%=cp%>/cy/setting/usingBackGround.action";
 		  
@@ -68,12 +83,7 @@
 		});
 	}
 	
-	function setUsingStoryMinimi(){
-		var url="<%=cp%>/cy/setting/usingStoryMinimi.action";		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
-	}
+	
 
 	function setUsingSong(){
 		var url="<%=cp%>/cy/setting/changeUsingSong.action";
@@ -185,7 +195,7 @@
 			</span>
 			<br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setUsingStoryMinimi()">
+			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setStoryRoomMinimi()">
 				스토리룸,미니미 설정
 			</span>
 			<br/>

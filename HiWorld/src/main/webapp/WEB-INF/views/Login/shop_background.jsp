@@ -10,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-
+<div id="Context">
 	<table>
 		<tr id="tablehead">
 				<td>상품</td>
@@ -33,9 +33,48 @@
 		</c:forEach>
 	</table>
 
-
+	<div>  
+        <c:if test="${pagination.curRange ne 1 }">
+            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+        </c:if>
+        <c:if test="${pagination.curPage ne 1}">
+            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+        </c:if>
+        <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
+            <c:choose>
+                <c:when test="${pageNum eq  pagination.curPage}">
+                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                </c:when>
+                <c:otherwise>
+                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+        </c:if>
+        <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+        </c:if>
+	</div>
+</div>
 </body>
 <script>
+function fn_paging(curPage) {
+    var ajaxMain = {
+            url : 'sangpoom.do?list=배경&curPage='+curPage,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+	$.ajax(ajaxMain).done(function(data){
+        $('#Context').children().remove();
+    	// Contents 영역 교체
+        $('#Context').html(data);
+    });
+}
+
 function basket(ArticleName) {
 	var UserSerial = '${sessionVO.userSerial}';
 	

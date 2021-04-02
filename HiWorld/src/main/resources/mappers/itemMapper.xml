@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hiworld.minihp.dao.MiniHpItemDAO">
+	
+	<select id="getItemList" resultType="com.hiworld.minihp.vo.MiniHpSelectedItemVO">
+		SELECT *
+		FROM UserSelect_Article
+		WHERE userSerial = #{userSerial}
+	</select>
+	<select id="getMinimiList" resultType="com.hiworld.minihp.vo.MiniHpUserItemVO">
+		SELECT *
+		FROM User_Article
+		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
+	</select>
+	
+	<select id="getStoryRoomList" resultType="com.hiworld.minihp.vo.MiniHpUserItemVO">
+		SELECT *
+		FROM User_Article
+		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
+	</select>
+</mapper>

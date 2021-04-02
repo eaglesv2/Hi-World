@@ -31,11 +31,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.hiworld.article.service.ArticleService;
 import com.hiworld.article.vo.ArticleVO;
+import com.hiworld.article.vo.MainShoppingPagingVO;
 import com.hiworld.client.service.ClientService;
 import com.hiworld.client.service.NeighborService;
 import com.hiworld.client.vo.BoardReplyVO;
 import com.hiworld.client.vo.BoardVO;
 import com.hiworld.client.vo.ClientVO;
+import com.hiworld.client.vo.MainBoardPagingVO;
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
 
@@ -66,16 +68,23 @@ public class ClientController {
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
-	public String noticeAjax(Model model, HttpSession session, BoardVO boardVO) {
+	public String noticeAjax(Model model, HttpSession session,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("공지사항");
-		/* 디비에서 목록 불러오기 */
-		ArrayList<BoardVO> list = clientService.getBoardList();
 		
-		model.addAttribute("list",list);
-		return "Login/noticePage";
-
-	}
+		
+		
+		/* 페이징 처리 */
+		int listCnt = clientService.countNoticePage();
+		MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
+		
+		model.addAttribute("list",clientService.getBoardList(curPage,pagingVO.getPageSize()));
+		model.addAttribute("listCnt",listCnt);
+		model.addAttribute("pagination",pagingVO);
 	
+		return "Login/noticePage";
+	
+		}
+		
 	/* 공지 사항 세부 정보 */
 	@GetMapping("/boardView.do")
 	public String boardView(BoardVO boardVO, Model model) {
@@ -103,7 +112,7 @@ public class ClientController {
 		return "Admin/adminBoard";
 	}
 	
-	/* 공지 사항 등록 */
+	/* 공지, 문의 사항 등록 */
 	@GetMapping("/BoardSubmit.do")
 	@ResponseBody
 	public int BoardSubmit(BoardVO boardVO,HttpSession session) {
@@ -128,6 +137,26 @@ public class ClientController {
 		
 		return "";
 	}
+	
+	/* 문의 사항 보기 */
+	@GetMapping("/questionPage.do")
+	public String questionAjax() {
+		return "Login/questionPage";
+	}
+	
+	/* 문의 사항 등록 페이지 이동 */
+	@GetMapping("/questionBoard.do")
+	public String questionBoard() {
+		System.out.println("문의사항 등록페이지 이동");        
+		return "Login/questionBoard";
+	}
+	
+	/* 문의 사항 세부 정보 */
+	@GetMapping("/questionDetailPage.do")
+	public String questionDetailPage() {
+		return "";
+	}
+	
 	
 	/* 댓글 등록 */
 	@GetMapping(value="/replyInsert.do", produces="application/text; charset=utf8")
@@ -190,18 +219,29 @@ public class ClientController {
 
 	/* 회원 목록 보이기 */
 	@GetMapping("/Manage_Client.do")
-	public String adminClient(HttpServletRequest request, Model model) {
+	public String adminClient(HttpServletRequest request, Model model,@RequestParam(defaultValue="1") int curPage) {
 		String check = request.getParameter("check");
 		System.out.println(check);
 		if (check.equals("all")) {
 			/* 회원 전체 */
-			ArrayList<ClientVO> alist = clientService.getAllClient();
-			model.addAttribute("alist", alist);
+			int listCnt = clientService.countBoardPage();
+			MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
+			model.addAttribute("alist",clientService.getAllClientData());
+			model.addAttribute("list",clientService.getAllClient(curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
 			return "Admin/adminClient";
 		} else {
+			int listCnt = clientService.countBoardBanPage();
+			MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
+			
+			model.addAttribute("alist",clientService.getAllBanClientData());
+			model.addAttribute("list",clientService.getAllBanClient(curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
 			/* 벤한 회원만 보기 */
-			ArrayList<ClientVO> alist = clientService.getAllBanClient();
-			model.addAttribute("alist", alist);
+
 			return "Admin/adminBanClient";
 		}
 
@@ -596,40 +636,77 @@ public class ClientController {
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 상품 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 상품 보기 (최신순) */
 	@GetMapping("/sangpoom.do")
-	public String sangpoom(Model model, HttpServletRequest request, ArticleVO articleVO) {
+	public String sangpoom(Model model, HttpServletRequest request,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("상품보기");
 
 		/* 호출한 ajax의 데이터가 뭔지 확인 */
 		String list = request.getParameter("list");
-		articleVO.setArticleList(list);
-		ArrayList<ArticleVO> ArticleList;
 		System.out.println(list);
+		int listCnt;
+		MainShoppingPagingVO pagingVO;
+		
 		switch (list) {
 
 		/* 상품 최신순 */
 		case "쇼핑":
-			ArticleList = articleService.getAllArticle();
-			model.addAttribute("ArticleList", ArticleList);
+			
+			/* 페이징 처리 */
+			listCnt = articleService.countAllArticlePage();
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			
+			model.addAttribute("ArticleList",articleService.getAllArticle(curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
+
 			return "Login/shoppingPage";
 		/* 케릭터 별 */
 		case "캐릭터":
-			ArticleList = articleService.getSelectArticle(articleVO);
-			model.addAttribute("ArticleList", ArticleList);
+			
+			/* 페이징 처리 */
+			listCnt = articleService.countArticlePage(list);
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			System.out.println("여기?");
+			model.addAttribute("ArticleList",articleService.getSelectArticle(list,curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
 			return "Login/shop_character";
 		/* 배경화면 별 */
 		case "배경":
-			ArticleList = articleService.getSelectArticle(articleVO);
-			model.addAttribute("ArticleList", ArticleList);
+			
+			/* 페이징 처리 */
+			listCnt = articleService.countArticlePage(list);
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			
+			model.addAttribute("ArticleList",articleService.getSelectArticle(list,curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
 			return "Login/shop_background";
 		/* 음악 별 */
 		case "음악":
-			ArticleList = articleService.getSelectArticle(articleVO);
-			model.addAttribute("ArticleList", ArticleList);
+			
+			/* 페이징 처리 */
+			listCnt = articleService.countArticlePage(list);
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			
+			model.addAttribute("ArticleList",articleService.getSelectArticle(list,curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
 			return "Login/shop_Music";
 		/* 마우스 별 */
 		case "마우스":
-			ArticleList = articleService.getSelectArticle(articleVO);
-			model.addAttribute("ArticleList", ArticleList);
+			
+			/* 페이징 처리 */
+			listCnt = articleService.countArticlePage(list);
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			
+			model.addAttribute("ArticleList",articleService.getSelectArticle(list,curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
 			return "Login/shop_Mouse";
 		/* 에러 */
 		default:
@@ -784,12 +861,6 @@ public class ClientController {
 	public String shoppingAjax() {
 		System.out.println("오나 ?");
 		return "articleMain";
-	}
-
-	/* 문의 사항 */
-	@GetMapping("/questionPage.do")
-	public String questionAjax() {
-		return "Login/questionPage";
 	}
 
 	/* 쇼핑 ajax */

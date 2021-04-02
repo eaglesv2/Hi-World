@@ -108,7 +108,8 @@
 
              };
              
-             function question(){
+             function question(Name){
+            	 if(Name!="" && Name!=null){
              	 console.log("1234") 
                  var ajaxOption4={
                 		 type: "GET",
@@ -125,7 +126,9 @@
             		  //Contents 영역 교체
             		  $('#bodyContext').html(data);
             	  })
- 
+            	 }else{
+            		 alert("로그인하세요");
+            	 }
              };
              
              function myinfo(){
@@ -402,6 +405,7 @@
          </div>
         <div class="leftCon">
             <div id="Nav">
+
                 <div id="bx_div">
                 	<ul class="bxslider">
 				        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
@@ -409,6 +413,7 @@
 				        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
 				        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
 		    		</ul>
+
                 </div>
                 <div id="bodyContext">
 
