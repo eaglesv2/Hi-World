@@ -73,20 +73,18 @@ body
 			<td colspan="2"><font class="updateBoard"><b>Update Board...</b></font></td>
 		</tr>
 		<tr bgcolor="#FFFFFF" style="font-size:9pt;">
-			<td width="240">
-				<!-- 게시물 및 댓글 목록 -->
-				<%-- <c:if test="${size ne 0}">
-				<c:forEach var="i" begin="0" end="${list.size()-1 }" step="1">
-				<img alt="" src="${pageContext.request.contextPath}/resources/images/${list.get(i).getType()}Title.png" width="30px" height="12px">${list.get(i).getSubject()}<br/>
-				</c:forEach>
-				<c:forEach var="i" begin="0" end="${5-list.size()}" step="1">
-				<br/>
-				</c:forEach>
-				</c:if> --%>
-				<%-- <c:if test="${size eq 0}">
-				<span style="text-align: center;"><br/>등록된 게시물이 없습니다<br/>소식이 뜸한 친구에게 마음의 한마디를<br/>남겨주세요.<br/><br/><br/></span>
-				</c:if> --%>
-				<span style="text-align: center;"><br/>등록된 게시물이 없습니다<br/>소식이 뜸한 친구에게 마음의 한마디를<br/>남겨주세요.<br/><br/><br/></span>
+			<td width="240" height="70">
+				<c:if test="${latestPosts==null}">
+					<span style="text-align: center;"><br/>등록된 게시물이 없습니다<br/>소식이 뜸한 친구에게 마음의 한마디를<br/>남겨주세요.<br/><br/><br/></span>
+				</c:if>
+				<c:if test="${latestPosts!=null}">
+					<c:forEach items="${latestPosts}" var="p">
+						<c:if test="${p.boardSerial!=0}"><img alt="not found" src="resources/images/title-board.png" width="25"></c:if>
+						<c:if test="${p.pictureSerial!=0}"><img alt="not found" src="resources/images/title-picture.png" width="25"></c:if>
+						<c:if test="${p.videoSerial!=0}"><img alt="not found" src="resources/images/title-video.png" width="25"></c:if>
+						<span>${p.title}<br/></span>
+					</c:forEach>
+				</c:if>
 			</td>
 			<td valign="center">  
 				

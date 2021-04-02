@@ -46,9 +46,14 @@ public class MiniHpBookContoller {
 	@PostMapping("/miniHpBook.do")
 	@ResponseBody
 	public void miniHpVideoInsert(@RequestBody MiniHpBookVO vo,HttpSession session) {
-		//유저명은 현재 로그인된 유저
-		int userSerial = Utils.getSessionUser(session);
+		//작성자는 현재 로그인된 유저
+		int writeUserSerial = Utils.getSessionUser(session);
+		vo.setWriteUserSerial(writeUserSerial);
+		
+		//홈피 주인시리얼도 가져와야됨
+		int userSerial = (int)session.getAttribute("ownerSerial");
 		vo.setUserSerial(userSerial);
+		
 		System.out.println(vo);
 		int result = service.insert(vo);
 		if(result>0) System.out.println("방명록 insert 성공!");

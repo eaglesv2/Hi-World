@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.service.MiniHpRightService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpLatestPostsVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
 @Controller
 public class MiniHpController {
+	@Autowired
+	MiniHpRightService rightService;
 	
 	@Autowired
 	MiniHpSettingService settingService;
@@ -47,6 +51,9 @@ public class MiniHpController {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String UserID = vo.getUserID();
 		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
+		
+		//ownerSerial 세션에 추가
+		session.setAttribute("ownerSerial", vo.getUserSerial());
 		
 		model.addAttribute("introVO", introVO);
 
@@ -85,7 +92,11 @@ public class MiniHpController {
 	}
 	
 	@RequestMapping("/MiniHP_Right.do")
-	public String miniHp_Right() {
+	public String miniHp_Right(Model model, HttpSession session) {
+		//최근 게시물 표시
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("latestPosts", rightService.getLatestPosts(userSerial));
+		
 		return "MiniHP/MiniHP_Right";
 	}
 	

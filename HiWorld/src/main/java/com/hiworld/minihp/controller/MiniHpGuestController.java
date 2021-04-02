@@ -56,6 +56,11 @@ public class MiniHpGuestController {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
 		String OwnerID = request.getParameter("OwnerID");
+		
+		//ownerSerial 세션에 추가
+		ownerVO = dao.getData(OwnerID);
+		session.setAttribute("ownerSerial", ownerVO.getUserSerial());
+		
 		String GuestID = vo.getUserID();
 		System.out.println(OwnerID);
 		

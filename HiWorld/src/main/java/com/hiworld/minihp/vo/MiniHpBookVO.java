@@ -6,6 +6,8 @@ public class MiniHpBookVO {
 	private int bookSerial;
 	private int userSerial;
 	private String userName;
+	private int writeUserSerial;
+	private String writeUserName;
 	private String miniMe;
 	private String content;
 	private int replyCnt;
@@ -28,6 +30,18 @@ public class MiniHpBookVO {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public int getWriteUserSerial() {
+		return writeUserSerial;
+	}
+	public void setWriteUserSerial(int writeUserSerial) {
+		this.writeUserSerial = writeUserSerial;
+	}
+	public String getWriteUserName() {
+		return writeUserName;
+	}
+	public void setWriteUserName(String writeUserName) {
+		this.writeUserName = writeUserName;
 	}
 	public String getMiniMe() {
 		return miniMe;
@@ -62,9 +76,8 @@ public class MiniHpBookVO {
 	@Override
 	public String toString() {
 		return "MiniHpBookVO [bookSerial=" + bookSerial + ", userSerial=" + userSerial + ", userName=" + userName
-				+ ", miniMe=" + miniMe + ", content=" + content + ", replyCnt=" + replyCnt + ", cDate=" + cDate
-				+ ", uDate=" + uDate + "]";
+				+ ", writeUserSerial=" + writeUserSerial + ", writeUserName=" + writeUserName + ", miniMe=" + miniMe
+				+ ", content=" + content + ", replyCnt=" + replyCnt + ", cDate=" + cDate + ", uDate=" + uDate + "]";
 	}
-	
 	
 }
