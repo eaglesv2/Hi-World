@@ -23,10 +23,10 @@
 	 $(document).ready(function(){
 		 	var main = $('.bxslider').bxSlider({
 				       mode: 'fade',
-				       auto:true,
-				       controls:true,
+				       auto:false,
 				       speed:500,
-	   
+				       controls: false,
+				       pager: false
 
 				   })
 				   
@@ -366,36 +366,50 @@
 			vertical-align: middle;
 		}
 		.bx-wrapper{
-			margin-bottom:30px;
+			margin-right:15px;
+			border:none;
+			margin-bottom:15px;
 		}
       </style>
 </head>
 <body>
 	
     <div class="MainContainer">
-		    <ul class="bxslider">
-		        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
-		        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
-		        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
-		        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
-		    </ul>
+	   
+		    <div id="mainlogo">
+		    	<img src="resources/images/로고1.png" alt="로고사진" />
+		    		<div id="mainserch">
+			    		 <input type="text"  />
+			    		<img src="resources/images/돋보기.png" alt="" />
+		    		</div>
+		    </div>
+
+		<div id="Navmenu"> 
+			    <div id="Navli">
+				      <li id="kong" onclick="notice()">
+		                  	공지사항
+		              </li>
+		              <li id="shopping" onclick="shopping('쇼핑')">
+		              		    쇼핑
+		              </li>
+		              <li id="board" onclick="board('${sessionVO.userName}')">
+		                               	이웃찾기
+		              </li>
+		               <li id="question" onclick="question()">
+		                          	  문의
+		              </li>
+	           </div>   
+         </div>
         <div class="leftCon">
             <div id="Nav">
-                <div id="Navmenu">
-                        <li id="kong" onclick="notice()">
-                         	   공지사항
-                        </li>
-                        <li id="shopping" onclick="shopping('쇼핑')">
-                 		           쇼핑
-                        </li>
-                        <li id="board" onclick="board('${sessionVO.userName}')">
-                           	 이웃찾기
-                        </li>
-                        <li id="question" onclick="question()">
-                           	 문의
-                        </li>
+                <div id="bx_div">
+                	<ul class="bxslider">
+				        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
+				        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+		    		</ul>
                 </div>
-
                 <div id="bodyContext">
 
                 </div>
