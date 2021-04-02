@@ -1,42 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	board_con h1,input,textarea{
-		margin-bottom:10px;
-	}
-	
-	#boardheader{
-		margin-bottom:10px;
-		font-size:x-large;
-	}
-	textarea{
-	    width: 279px;
-    	height: 163px;
-	}
-	
-	
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-
 <body>
+<div id="body">
+
 	<div id="board_con" style="text-align: center;padding-top: 150px;">
-		<div id="boardheader">공지사항 등록하기</div>
+		<div id="boardheader">문의사항 등록하기</div>
 		<form name="BoardSubmit">
-			공지사항 제목 <input type="text" name="title"/>	<br /> 
-			<textarea rows="10" cols="30" name="content" placeholder="공지사항 내용을 입력하세요."></textarea> <br />
+			문의사항 제목 <input type="text" name="title"/>	<br /> 
+			<textarea rows="10" cols="30" name="content" placeholder="문의사항 내용을 입력하세요."></textarea> <br />
 		</form>
 		<button onclick="submit()">등록하기</button>
 	</div>
+	
+</div>
 </body>
 
-	<script>
+<script>
 		function submit() {
 			
 			var BoardSubmit = $("form[name=BoardSubmit]").serialize();
@@ -49,7 +36,7 @@
 					alert("등록되었습니다.");
 					var ajaxOption3={
                    		 type: "GET",
-                            url : "noticePage.do",
+                            url : "questionPage.do",
                             dataType : "html", 
                             async:true,
                             cache:false
@@ -62,6 +49,7 @@
 			})
 			
 		}
-	</script>
+</script>
+
 
 </html>

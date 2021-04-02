@@ -2,6 +2,8 @@ package com.hiworld.client.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hiworld.client.vo.BoardReplyVO;
 import com.hiworld.client.vo.BoardVO;
 import com.hiworld.client.vo.ClientVO;
@@ -83,16 +85,24 @@ public interface ClientDAO {
 	/*내정보보기 PW중복체크*/
 	String pwCheck(String UserID);
 	
+	/* 회원 전체 카운트 */
+	int countBoardPage();
+	
 	/* 회원 전체 보기 */
-	ArrayList<ClientVO> getAllClient();
+	ArrayList<ClientVO> getAllClientData();
+	ArrayList<ClientVO> getAllClient(@Param("offset")int offset, @Param("size")int size);
 	
 	/* 로그인시 밴 확인 */
 	int checkBan(ClientVO clientVO);
 	
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   ADMIN @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 밴한 회원 카운트 */
+	int countBoardBanPage();
+	
 	/* 밴한 회원 전체 보기 */
-	ArrayList<ClientVO> getAllBanClient();
+	ArrayList<ClientVO> getAllBanClientData();
+	ArrayList<ClientVO> getAllBanClient(@Param("offset")int offset, @Param("size")int size);
 	
 	/* 밴 */
 	int banClient(int UserSerial);
@@ -103,8 +113,11 @@ public interface ClientDAO {
 	/* 게시판 등록 */
 	int BoardSubmit(BoardVO boardVO);
 	
+	/* 게시판 갯수 가져오기 */
+	int countNoticePage();
+	
 	/* 게시판 가져오기 */
-	ArrayList<BoardVO> getBoardList();
+	ArrayList<BoardVO> getBoardList(@Param("offset")int offset, @Param("size")int size);
 	
 	/* 게시판 세부정보 */
 	BoardVO getBoardOne(BoardVO boardVO);

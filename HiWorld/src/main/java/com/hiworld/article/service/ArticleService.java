@@ -7,9 +7,13 @@ import com.hiworld.article.vo.ArticleVO;
 public interface ArticleService {
 	
 	/* 기본 정보 가져오기 */
-	ArrayList<ArticleVO> getAllArticle();
+	int countAllArticlePage();
 	
-	ArrayList<ArticleVO> getSelectArticle(ArticleVO list);
+	ArrayList<ArticleVO> getAllArticle(int page, int pageSize);
+	
+	int countArticlePage(String list);
+	
+	ArrayList<ArticleVO> getSelectArticle(String list, int page, int pageSize);
 	
 	ArticleVO getOneArticle(String ArticleName);
 	
@@ -32,4 +36,6 @@ public interface ArticleService {
 	int delAllBasket(int UserSerial);
 	
 	int insertArticle(ArticleVO vo);
+	
+	
 }
