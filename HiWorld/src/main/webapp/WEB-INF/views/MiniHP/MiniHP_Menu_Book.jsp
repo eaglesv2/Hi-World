@@ -79,14 +79,14 @@
 		overflow: hidden;
 	}
 	.booksReply{
-		height: auto;
+		/* height: auto; */
 		/* border-top: 1px solid red;
 		border-bottom: 1px solid red; */
 	}
 	.replys{
-		width: 100%;
-		height: auto;
-		background-color: #F2F2F2;
+		/* width: 100%;
+		background-color: #F2F2F2; */
+		/* height: 10px; */
 	}
 	.btns{
 		font-size:10pt;
@@ -117,10 +117,15 @@
 		float: right;
 		margin-right: 10px;
 		margin-top: 5px;
-		height: 30px;
+		height: 35px;
 		background-color: white;
 		border: 1px solid gray;
 		border-radius: 5px;
+	}
+	.replySrc{
+		width: 100%;
+		background-color: #F2F2F2;
+		text-align: left;
 	}
 </style>
 <div id="main">
@@ -163,12 +168,14 @@
 	</div>
 	<div class="booksReply">
 		<div class="insertReplyArea"><!-- 댓글 작성란, 주인만 보이게 -->
-			<textarea class="insertReplyForm"></textarea>
-			<input class="bookBigBtns" type="button" value="확인" onclick="">
+			<textarea class="insertReplyForm" id="replyContent-${l.bookSerial}"></textarea>
+			<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
 		</div>
 		<!-- 댓글 있을경우 가져옴 -->
 		<c:if test="${l.replyCnt!=0}">
-			<iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="0" height="auto"></iframe>
+			<%-- <iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="1" marginheight="0" marginwidth="0" width="100%" height="50%"></iframe> --%>
+			<script> $("#replySrc-"+'${l.bookSerial}').load("MiniHpBookReply.do?bookSerial=${l.bookSerial}");</script> 
+			<div id="replySrc-${l.bookSerial}" class="replySrc"></div> 
 		</c:if>
 	</div>
 	</c:forEach>
@@ -285,5 +292,67 @@ function fn_paging(curPage) {
 	    $('#bodyContents').children().remove();
 	    $('#bodyContents').html(data);
 	});
+}
+//댓글
+function insertReply(bookSerial) {
+	var replyContent = $('#replyContent-'+bookSerial).val();
+	if(replyContent==="")
+		alert('내용을 입력하세요');
+	else{
+		var data = {
+			replyContent : replyContent,
+			bookSerial : bookSerial
+		}
+		console.log(JSON.stringify(data));
+		$.ajax({
+			type: 'POST',
+			url: 'MiniHpBookReply.do',
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8',
+			data: JSON.stringify(data)
+		}).done(function() {
+			$("#replySrc-"+bookSerial).load("MiniHpBookReply.do?bookSerial="+bookSerial);
+			$('#replyContent-'+bookSerial).val("");
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+}
+function deleteReply(bookSerial,serial) {
+	if(confirm("정말 삭제하시겠습니까?")){
+		$.ajax({
+			type: 'DELETE',
+			url: 'MiniHpBookReply.do/'+serial,
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8'
+		}).done(function(data) {
+			$("#replySrc-"+bookSerial).load("MiniHpBookReply.do?bookSerial="+bookSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
+}
+//update 칸 만들기
+function updateReplyForm(serial) {
+	$('#reply-'+serial).toggle();
+	$('#replyForm-'+serial).toggle();
+}
+function updateReply(bookSerial,serial) {
+	var content = $('#updateReplyContent-'+serial).val();
+	if(content==="")
+		alert('내용을 입력하세요');
+	else{
+		console.log(content);
+		$.ajax({
+			type: 'PUT',
+			url: 'MiniHpBookReply.do/'+serial+'/'+content,
+			datatype: 'json',
+			contentType:'application/json; charset=utf-8'
+		}).done(function() {
+			$("#replySrc-"+bookSerial).load("MiniHpBookReply.do?bookSerial="+bookSerial);
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}
 }
 </script>

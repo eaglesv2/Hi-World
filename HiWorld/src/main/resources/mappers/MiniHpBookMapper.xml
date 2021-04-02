@@ -42,17 +42,17 @@
 		SELECT * FROM MiniHP_Book_Reply_View
 		WHERE bookSerial=#{bookSerial}
 	</select>
-	<!-- <insert id="insertReply" parameterType="com.hiworld.minihp.vo.MiniHpVideoReplyVO">
-		INSERT INTO MiniHP_Video_Reply(UserSerial,videoSerial,replyContent)
-		VALUES(#{userSerial},#{videoSerial},#{replyContent})
+	<insert id="insertReply" parameterType="com.hiworld.minihp.vo.MiniHpBookReplyVO">
+		INSERT INTO MiniHP_Book_Reply(UserSerial,bookSerial,replyContent)
+		VALUES(#{userSerial},#{bookSerial},#{replyContent})
 	</insert>
 	<delete id="deleteReply">
-		DELETE FROM MiniHP_Video_Reply
+		DELETE FROM MiniHP_Book_Reply
 		WHERE replySerial=#{serial}
 	</delete>
 	<update id="updateReply">
-		UPDATE MiniHP_Video_Reply
+		UPDATE MiniHP_Book_Reply
 		SET replyContent=#{content}
 		WHERE replySerial=#{serial}
-	</update> -->
+	</update>
 </mapper>

@@ -21,11 +21,11 @@ public interface MiniHpBookService {
 	//selectAll
 //	int getReplyCnt(int videoSerial);
 	List<MiniHpBookReplyVO> getAllReply(int bookSerial);
-//	//insert
-//	int insertReply(MiniHpVideoReplyVO vo);
-//	//delete
-//	int deleteReply(int serial);
-//	//update 
-//	int updateReply(int serial, String content);
+	//insert
+	int insertReply(MiniHpBookReplyVO vo);
+	//delete
+	int deleteReply(int serial);
+	//update 
+	int updateReply(int serial, String content);
 	
 }

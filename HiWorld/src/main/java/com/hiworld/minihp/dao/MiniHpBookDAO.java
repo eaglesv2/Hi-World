@@ -24,10 +24,10 @@ public interface MiniHpBookDAO {
 	//selectAll
 	//int getReplyCnt(int videoSerial);
 	List<MiniHpBookReplyVO> getAllReply(int bookSerial);
-//	//insert
-//	int insertReply(MiniHpVideoReplyVO vo);
-//	//delete
-//	int deleteReply(int serial);
-//	//update 
-//	int updateReply(@Param("serial") int serial, @Param("content") String content);
+	//insert
+	int insertReply(MiniHpBookReplyVO vo);
+	//delete
+	int deleteReply(int serial);
+	//update 
+	int updateReply(@Param("serial") int serial, @Param("content") String content);
 }

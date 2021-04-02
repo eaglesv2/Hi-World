@@ -100,7 +100,7 @@ function showReplyForm(serial) {
 	$('#replyInsertForm-'+serial).toggle();
 }
 //댓글
-function getReplyAll(videoSerial) {
+/* function getReplyAll(videoSerial) {
 	var ajaxReply = {
             url : 'MiniHpVideoReply.do?videoSerial='+videoSerial,
             async : true,
@@ -112,7 +112,7 @@ function getReplyAll(videoSerial) {
     $.ajax(ajaxReply).done(function(data){
 		$('#reply-'+videoSerial).html(data);
     });
-}
+} */
 
 function insertReply(videoSerial) {
 	var replyContent = $('#replyContent-'+videoSerial).val();
@@ -131,14 +131,15 @@ function insertReply(videoSerial) {
 			contentType:'application/json; charset=utf-8',
 			data: JSON.stringify(data)
 		}).done(function() {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			//var currentFolderSerial = $('#currentFolderSerial').val();
+			//goToFolder(currentFolderSerial);
+			$("#replyTbody-"+videoSerial).load("MiniHpVideoReply.do?videoSerial="+videoSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
 	}
 }
-function deleteReply(serial) {
+function deleteReply(videoSerial,serial) {
 	if(confirm("정말 삭제하시겠습니까?")){
 		$.ajax({
 			type: 'DELETE',
@@ -146,8 +147,9 @@ function deleteReply(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function(data) {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			//var currentFolderSerial = $('#currentFolderSerial').val();
+			//goToFolder(currentFolderSerial);
+			$("#replyTbody-"+videoSerial).load("MiniHpVideoReply.do?videoSerial="+videoSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -158,7 +160,7 @@ function updateReplyForm(serial) {
 	$('#reply-'+serial).toggle();
 	$('#replyForm-'+serial).toggle();
 }
-function updateReply(serial) {
+function updateReply(videoSerial,serial) {
 	var content = $('#updateReplyContent-'+serial).val();
 	if(content==="")
 		alert('내용을 입력하세요');
@@ -170,8 +172,9 @@ function updateReply(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			//var currentFolderSerial = $('#currentFolderSerial').val();
+			//goToFolder(currentFolderSerial);
+			$("#replyTbody-"+videoSerial).load("MiniHpVideoReply.do?videoSerial="+videoSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -214,7 +217,7 @@ function fn_paging(curPage) {
 		<c:otherwise>
 			<table class="videoTable">
 				<c:forEach items="${list}" var="l">
-				<thead>
+				<tbody>
 					<tr style=" border-bottom: none;">
 				  		<th>
 				  			<font style="font-weight: bold;">${l.title}</font>
@@ -225,7 +228,7 @@ function fn_paging(curPage) {
 				  			</span>
 				  		</th>
 					</tr>
-				</thead>
+				</tbody>
 				<tbody>
 					<tr>
 						<td scope="row">
@@ -252,12 +255,13 @@ function fn_paging(curPage) {
 						</td>
 					</tr>
 				</tbody>
-				<tbody id="reply-${l.videoSerial}">
+				<script>
+					//getReplyAll('${l.videoSerial}');
+					$("#replyTbody-"+'${l.videoSerial}').load("MiniHpVideoReply.do?videoSerial=${l.videoSerial}");
+				</script>
+				<tbody id="replyTbody-${l.videoSerial}">
 				
 				</tbody>
-				<script>
-					getReplyAll('${l.videoSerial}');
-				</script>
 				<tr><td style="border-bottom: none;"><br><br></td></tr>
 				</c:forEach>
 			</table>
