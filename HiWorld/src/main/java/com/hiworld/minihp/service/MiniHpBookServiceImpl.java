@@ -56,16 +56,16 @@ public class MiniHpBookServiceImpl implements MiniHpBookService {
 	public List<MiniHpBookReplyVO> getAllReply(int bookSerial) {
 		return dao.getAllReply(bookSerial);
 	}
-//	@Override
-//	public int insertReply(MiniHpVideoReplyVO vo) {
-//		return dao.insertReply(vo);
-//	}
-//	@Override
-//	public int deleteReply(int serial) {
-//		return dao.deleteReply(serial);
-//	}
-//	@Override
-//	public int updateReply(int serial, String content) {
-//		return dao.updateReply(serial, content);
-//	}
+	@Override
+	public int insertReply(MiniHpBookReplyVO vo) {
+		return dao.insertReply(vo);
+	}
+	@Override
+	public int deleteReply(int serial) {
+		return dao.deleteReply(serial);
+	}
+	@Override
+	public int updateReply(int serial, String content) {
+		return dao.updateReply(serial, content);
+	}
 }

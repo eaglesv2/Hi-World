@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.minihp.service.MiniHpBookService;
 import com.hiworld.minihp.vo.MiniHpBookPagingVO;
+import com.hiworld.minihp.vo.MiniHpBookReplyVO;
 import com.hiworld.minihp.vo.MiniHpBookVO;
 
 @Controller
@@ -80,45 +81,45 @@ public class MiniHpBookContoller {
 	public String selectAllReply(int bookSerial, Model model) {
 		System.out.println("MiniHpBookReply.do");
 		
-//		model.addAttribute("serial", bookSerial);
+		model.addAttribute("serial", bookSerial);
 //		//댓글 총 개수
 //		model.addAttribute("replyCnt", service.getReplyCnt(videoSerial));
 		//댓글
 		model.addAttribute("replyList", service.getAllReply(bookSerial));
 		return "MiniHP/MiniHP_Menu_Book_Reply";
 	}
-//	//insert
-//	@PostMapping("/MiniHpVideoReply.do")
-//	@ResponseBody
-//	public void insertReply(@RequestBody MiniHpVideoReplyVO vo, HttpSession session) {
-//		System.out.println("insert reply");
-//		
-//		int userSerial = Utils.getSessionUser(session);
-//		vo.setUserSerial(userSerial);
-//		
-//		System.out.println(vo);
-//		int result = service.insertReply(vo);
-//		if(result>0) System.out.println("댓글 등록 성공!");
-//		else System.out.println("댓글 등록 실패!");
-//	}
-//	//delete
-//	@DeleteMapping("/MiniHpVideoReply.do/{serial}")
-//	@ResponseBody
-//	public String deleteReply(@PathVariable int serial) {
-//		System.out.println("deleteReply");
-//		
-//		int result = service.deleteReply(serial);
-//		if(result>0) return ("댓글 삭제 성공!");
-//		else return ("댓글 삭제 실패");
-//	}
-//	//update
-//	@PutMapping("/MiniHpVideoReply.do/{serial}/{content}")
-//	@ResponseBody
-//	public void updateReply(@PathVariable int serial,@PathVariable String content) {
-//		System.out.println("updateReply");
-//		
-//		int result = service.updateReply(serial, content);
-//		if(result>0) System.out.println("댓글 수정 성공!");
-//		else System.out.println("댓글 수정 실패!");
-//	}
+	//insert
+	@PostMapping("/MiniHpBookReply.do")
+	@ResponseBody
+	public void insertReply(@RequestBody MiniHpBookReplyVO vo, HttpSession session) {
+		System.out.println("insert reply");
+		
+		int userSerial = Utils.getSessionUser(session);
+		vo.setUserSerial(userSerial);
+		
+		System.out.println(vo);
+		int result = service.insertReply(vo);
+		if(result>0) System.out.println("댓글 등록 성공!");
+		else System.out.println("댓글 등록 실패!");
+	}
+	//delete
+	@DeleteMapping("/MiniHpBookReply.do/{serial}")
+	@ResponseBody
+	public String deleteReply(@PathVariable int serial) {
+		System.out.println("deleteReply");
+		
+		int result = service.deleteReply(serial);
+		if(result>0) return ("댓글 삭제 성공!");
+		else return ("댓글 삭제 실패");
+	}
+	//update
+	@PutMapping("/MiniHpBookReply.do/{serial}/{content}")
+	@ResponseBody
+	public void updateReply(@PathVariable int serial,@PathVariable String content) {
+		System.out.println("updateReply");
+		
+		int result = service.updateReply(serial, content);
+		if(result>0) System.out.println("댓글 수정 성공!");
+		else System.out.println("댓글 수정 실패!");
+	}
 }

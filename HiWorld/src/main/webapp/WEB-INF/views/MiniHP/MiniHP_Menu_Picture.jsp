@@ -98,13 +98,9 @@ function updatePicture(pictureSerial) {
 //댓글 작성 화면 펼치기
 function showReplyForm(serial) {
 	$('#replyInsertForm-'+serial).toggle();
-	/* if($('#replyInsertForm-'+serial).css("display")==="none")
-		$('#replyInsertForm-'+serial).css("display","");
-	else
-		$('#replyInsertForm-'+serial).css("display","none"); */
 }
 //댓글
-function getReplyAll(pictureSerial) {
+/* function getReplyAll(pictureSerial) {
 	var ajaxReply = {
             url : 'MiniHpPictureReply.do?pictureSerial='+pictureSerial,
             async : true,
@@ -116,7 +112,7 @@ function getReplyAll(pictureSerial) {
     $.ajax(ajaxReply).done(function(data){
 		$('#reply-'+pictureSerial).html(data);
     });
-}
+} */
 
 function insertReply(pictureSerial) {
 	var replyContent = $('#replyContent-'+pictureSerial).val();
@@ -135,14 +131,13 @@ function insertReply(pictureSerial) {
 			contentType:'application/json; charset=utf-8',
 			data: JSON.stringify(data)
 		}).done(function() {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			$("#replyTbody-"+pictureSerial).load("MiniHpPictureReply.do?pictureSerial="+pictureSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
 	}
 }
-function deleteReply(serial) {
+function deleteReply(pictureSerial,serial) {
 	if(confirm("정말 삭제하시겠습니까?")){
 		$.ajax({
 			type: 'DELETE',
@@ -150,8 +145,7 @@ function deleteReply(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function(data) {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			$("#replyTbody-"+pictureSerial).load("MiniHpPictureReply.do?pictureSerial="+pictureSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -162,7 +156,7 @@ function updateReplyForm(serial) {
 	$('#reply-'+serial).toggle();
 	$('#replyForm-'+serial).toggle();
 }
-function updateReply(serial) {
+function updateReply(pictureSerial,serial) {
 	var content = $('#updateReplyContent-'+serial).val();
 	if(content==="")
 		alert('내용을 입력하세요');
@@ -174,8 +168,7 @@ function updateReply(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			var currentFolderSerial = $('#currentFolderSerial').val();
-			goToFolder(currentFolderSerial);
+			$("#replyTbody-"+pictureSerial).load("MiniHpPictureReply.do?pictureSerial="+pictureSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -254,12 +247,11 @@ function fn_paging(curPage) {
 						</td>
 					</tr>
 				</tbody>
-				<%-- <span id="reply-${l.pictureSerial}" onload="getReplyAll('${l.pictureSerial}');"> --%>
-				<tbody id="reply-${l.pictureSerial}">
+				<tbody id="replyTbody-${l.pictureSerial}">
 				
 				</tbody>
 				<script>
-					getReplyAll('${l.pictureSerial}');
+					$("#replyTbody-"+'${l.pictureSerial}').load("MiniHpPictureReply.do?pictureSerial=${l.pictureSerial}");
 				</script>
 				<tr><td style="border-bottom: none;"><br><br></td></tr>
 				</c:forEach>

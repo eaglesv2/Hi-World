@@ -29,12 +29,12 @@
 								</span>
 								<c:if test="${sessionVO.userSerial==r.userSerial}">
 									<img src="resources/images/folder_edit.png" width="10px" class="" height="10px" onclick="updateReplyForm('${r.replySerial}');" style="cursor:pointer;">
-									<img src="resources/images/x-delete.png" width="10px" height="10px" onclick="deleteReply('${r.replySerial}');" style="cursor:pointer;">
+									<img src="resources/images/x-delete.png" width="10px" height="10px" onclick="deleteReply('${serial}','${r.replySerial}');" style="cursor:pointer;">
 								</c:if>
 							</span>
 							<span id="replyForm-${r.replySerial}" style="display: none;">
 								<input type="text" id="updateReplyContent-${r.replySerial}" value="${r.replyContent}">
-								<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateReply('${r.replySerial}');">
+								<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateReply('${serial}','${r.replySerial}');">
 									수정
 								</span>
 								<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="updateReplyForm('${r.replySerial}');">
