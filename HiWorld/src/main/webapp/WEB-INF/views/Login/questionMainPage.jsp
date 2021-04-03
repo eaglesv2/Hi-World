@@ -20,7 +20,7 @@
 			문의사항 혹은 이름을 검색하세요 <input type="text" id="search" />
 		</div>
 
-		<a href="#" onclick="questionWrite()">문의사항 작성</a>
+		
 		<c:choose>
 			<c:when test="${list != '[]'}">
 				<table>
@@ -32,7 +32,7 @@
 						<td>조회수</td>
 					</tr>
 					<tbody id="tbody">
-						<c:set var="number" value="1"/>
+						<c:set var="number" value="${number}"/>
 						<c:forEach var="kinds" items="${list}">
 							<tr id="${kinds.boardSerial}">
 								<td>${number}</td>
@@ -46,11 +46,11 @@
 								</c:choose>
 								<td>${kinds.cDate}</td>
 								<td>${kinds.lookUp}</td>
-								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-								</c:if>
 								<c:if test="${kinds.adminReply > 0}">
 									<td>관리자 답변완료</td>
+								</c:if>
+								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
 								</c:if>
 								
 							</tr>
@@ -59,7 +59,7 @@
 					</tbody>
 
 					<tfoot id="tfoot">
-						<c:set var="number" value="1"/>
+						<c:set var="number" value="${number}"/>
 						<c:forEach var="kinds" items="${list}">
 							<tr id="${kinds.boardSerial}">
 								<td>${number}</td>
@@ -73,11 +73,11 @@
 								</c:choose>
 								<td>${kinds.cDate}</td>
 								<td>${kinds.lookUp}</td>
-								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-								</c:if>
 								<c:if test="${kinds.adminReply > 0}">
 									<td>관리자 답변완료</td>
+								</c:if>
+								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
 								</c:if>
 							</tr>
 						<c:set var="number" value="${number+1}"/>
@@ -97,7 +97,7 @@
 							<td>조회수</td>
 						</tr>
 						<tbody id="tbody">
-							<c:set var="number" value="1"/>
+							<c:set var="number" value="${number}"/>
 							<c:forEach var="kinds" items="${list}">
 								<tr id="${kinds.boardSerial}">
 									<td>${number}</td>
@@ -111,11 +111,11 @@
 									</c:choose>
 									<td>${kinds.cDate}</td>
 									<td>${kinds.lookUp}</td>
-									<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-										<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-									</c:if>
 									<c:if test="${kinds.adminReply > 0}">
 										<td>관리자 답변완료</td>
+									</c:if>
+									<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+										<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
 									</c:if>
 								</tr>
 							<c:set var="number" value="${number+1}"/>
@@ -181,7 +181,7 @@
 	</div>
 
 
-
+	<a href="#" onclick="questionWrite()">문의사항 작성</a>
 
 
 </body>

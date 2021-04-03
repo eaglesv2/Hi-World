@@ -24,7 +24,7 @@
 						<td>작성일</td>
 						<td>조회수</td>
 					</tr>
-					<c:set var="number" value="1"/>
+					<c:set var="number" value="${number}"/>
 					<c:forEach var="kinds" items="${list}">
 						<tr id="${kinds.boardSerial}">
 							<td>${number}</td>

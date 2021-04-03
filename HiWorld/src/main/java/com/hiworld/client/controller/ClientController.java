@@ -81,6 +81,8 @@ public class ClientController {
 		model.addAttribute("listCnt",listCnt);
 		model.addAttribute("pagination",pagingVO);
 	
+		model.addAttribute("number",curPage*15-14);
+		
 		return "Login/noticePage";
 	
 		}
@@ -152,7 +154,7 @@ public class ClientController {
 		model.addAttribute("pagination",pagingVO);
 		model.addAttribute("alist",clientService.getAllQuestionList());
 		
-
+		model.addAttribute("number",curPage*15-14);
 		
 		return "Login/questionMainPage";
 	}
