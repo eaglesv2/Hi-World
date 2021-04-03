@@ -51,7 +51,7 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=7"></script>
+<script src="resources/js/miniHP/ajaxMoveGuestPage.js?ver=3"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -64,19 +64,19 @@ $('.menu').click(function(){
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu3==1}">
-		<div align="center" id="menu3" class="menu" onclick="movePicture()">사진첩</div>
+		<div align="center" id="menu3" class="menu" onclick="movePicture('${ownerSerial}')">사진첩</div>
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu4==1}">
-		<div align="center" id="menu4" class="menu" onclick="moveBoard()">게시판</div>
+		<div align="center" id="menu4" class="menu" onclick="moveBoard('${ownerSerial}')">게시판</div>
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu5==1}">
-		<div align="center" id="menu5" class="menu" onclick="movePage('miniHpVideo.do?menu=menu5')">동영상</div>	
+		<div align="center" id="menu5" class="menu" onclick="moveVideo('${ownerSerial}')">동영상</div>	
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu6==1}">
-		<div align="center" id="menu6" class="menu" onclick="movePage('miniHpGuest.do?menu=menu6')">방명록</div>
+		<div align="center" id="menu6" class="menu" onclick="moveBook('${ownerSerial}')">방명록</div>
 	</c:if>
 </body>
 </html>

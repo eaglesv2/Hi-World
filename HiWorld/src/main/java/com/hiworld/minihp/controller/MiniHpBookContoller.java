@@ -42,17 +42,17 @@ public class MiniHpBookContoller {
 		return "MiniHP/MiniHP_Menu_Book";
 	}
 	
-	//게시글 저장 처리
+	//글 저장 처리
 	@PostMapping("/miniHpBook.do")
 	@ResponseBody
 	public void miniHpVideoInsert(@RequestBody MiniHpBookVO vo,HttpSession session) {
-		//작성자는 현재 로그인된 유저
-		int writeUserSerial = Utils.getSessionUser(session);
-		vo.setWriteUserSerial(writeUserSerial);
-		
-		//홈피 주인시리얼도 가져와야됨
-		int userSerial = (int)session.getAttribute("ownerSerial");
+		//주인 미니홈페이지에서
+		//누구에게? -> 자기 자신
+		int userSerial = Utils.getSessionUser(session);
 		vo.setUserSerial(userSerial);
+		
+		//누가 -> 자기 자신
+		vo.setWriteUserSerial(userSerial);
 		
 		System.out.println(vo);
 		int result = service.insert(vo);

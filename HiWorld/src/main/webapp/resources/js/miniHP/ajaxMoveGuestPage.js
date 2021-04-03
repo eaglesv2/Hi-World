@@ -1,7 +1,7 @@
 //사진첩 사이드 불러오기
-function getPictureSide() {
+function getPictureSide(ownerSerial) {
 	var ajaxSide = {
-	        url : "MiniHpPictureSide.do",
+	        url : "MiniHpPictureGuestSide.do?ownerSerial="+ownerSerial,
 	        async : true,
 	        type : "GET",
 	        dataType : "html",
@@ -13,12 +13,12 @@ function getPictureSide() {
 	});
 }
 //사진첩 이동
-function movePicture(){
+function movePicture(ownerSerial){
 	//사이드 불러오기
-	getPictureSide();
+	getPictureSide(ownerSerial);
     // 메인 불러오기
     var ajaxMain = {
-            url : 'miniHpPicture.do',
+            url : 'miniHpGuestPicture.do?ownerSerial='+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -71,10 +71,10 @@ function moveProfile() {
 }
 
 //게시판 사이드 불러오기
-function getBoardSide() {
+function getBoardSide(ownerSerial) {
 	
 	var ajaxSide = {
-            url : "MiniHpBoardSide.do",
+            url : "MiniHpBoardGuestSide.do?ownerSerial="+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -90,13 +90,13 @@ function getBoardSide() {
 }
 
 //게시판 이동
-function moveBoard(){
+function moveBoard(ownerSerial){
 	//사이드 불러오기
-	getBoardSide();
+	getBoardSide(ownerSerial);
 	
     // 메인 불러오기
     var ajaxMain = {
-            url : 'miniHpBoard.do',
+            url : 'miniHpBoardGuest.do?ownerSerial='+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -112,9 +112,9 @@ function moveBoard(){
 }
 
 //동영상 사이드 불러오기
-function getVideoSide() {
+function getVideoSide(ownerSerial) {
 	var ajaxSide = {
-	        url : "MiniHpVideoSide.do",
+	        url : "MiniHpVideoGuestSide.do?ownerSerial="+ownerSerial,
 	        async : true,
 	        type : "GET",
 	        dataType : "html",
@@ -126,12 +126,12 @@ function getVideoSide() {
 	});
 }
 //동영상 이동
-function moveVideo(){
+function moveVideo(ownerSerial){
 	//사이드 불러오기
-	getVideoSide();
+	getVideoSide(ownerSerial);
     // 메인 불러오기
     var ajaxMain = {
-            url : 'miniHpVideo.do',
+            url : 'miniHpVideoGuest.do?ownerSerial='+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -145,16 +145,16 @@ function moveVideo(){
 }
 
 //방명록 이동
-function moveBook(){
-	//사이드 불러오기
-	getProfileSide();
+function moveBook(ownerSerial){
+	//사이드 불러오기(게스트는 아직 구현 X)
+	/*getProfileSide();*/
     // 메인 불러오기
-	getBook();
+	getBook(ownerSerial);
 }
 //방명록 메인 부분만 가져오기
-function getBook(){
+function getBook(ownerSerial){
     var ajaxMain = {
-            url : 'miniHpBook.do',
+            url : 'miniHpBookGuest.do?ownerSerial='+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -162,44 +162,6 @@ function getBook(){
     };
     $.ajax(ajaxMain).done(function(data){
         $('#bodyContents').children().remove();
-        $('#bodyContents').html(data);
-    });
-}
-
-//관리탭 불러오기
-function getSettingSide() {
-	var ajaxSide = {
-			url : "MiniHpSettingSide.do",
-			async : true,
-            type : "GET",
-            dataType : "html",
-            cache : false
-	};
-	
-	 $.ajax(ajaxSide).done(function(data){
-	        // Contents 영역 삭제
-	        $('#sideContents').children().remove();
-	        // Contents 영역 교체
-	        $('#sideContents').html(data);
-	    });
-}
-
-function moveSetting() {
-	getSettingSide();
-	
-	// 메인 불러오기
-    var ajaxMain = {
-            url : "miniHpSetting.do?menu=menu7",
-            async : true,
-            type : "GET",
-            dataType : "html",
-            cache : false
-    };
-    
-    $.ajax(ajaxMain).done(function(data){
-        // Contents 영역 삭제
-        $('#bodyContents').children().remove();
-        // Contents 영역 교체
         $('#bodyContents').html(data);
     });
 }

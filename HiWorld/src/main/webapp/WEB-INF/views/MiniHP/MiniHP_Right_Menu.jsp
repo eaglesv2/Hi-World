@@ -50,7 +50,7 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=7"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=1"></script>
 <title>Insert title here</title>
 </head>
 <body>

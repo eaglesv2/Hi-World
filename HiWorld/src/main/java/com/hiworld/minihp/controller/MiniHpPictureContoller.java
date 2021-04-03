@@ -29,7 +29,7 @@ public class MiniHpPictureContoller {
 	private MiniHpPictureService service;
 	
 	//-----------------------------------------폴더--------------------------------------------------------
-	//게시판 사이드 부분
+	//사이드 부분
 	@GetMapping("/MiniHpPictureSide.do")
 	public String miniHpPictureSide(Model model, HttpSession session) {
 		System.out.println("MiniHpPictureSide.do");
@@ -80,7 +80,7 @@ public class MiniHpPictureContoller {
 	
 	
 	//-----------------------------------------게시글--------------------------------------------------------
-	//게시판 메인 부분
+	//메인 부분
 	@GetMapping("/miniHpPicture.do")
 	public String miniHpPicture(Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("miniHpPicture.do");
