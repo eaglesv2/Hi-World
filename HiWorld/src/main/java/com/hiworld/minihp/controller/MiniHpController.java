@@ -52,8 +52,6 @@ public class MiniHpController {
 		String UserID = vo.getUserID();
 		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
 		
-		//ownerSerial 세션에 추가
-		session.setAttribute("ownerSerial", vo.getUserSerial());
 		
 		model.addAttribute("introVO", introVO);
 

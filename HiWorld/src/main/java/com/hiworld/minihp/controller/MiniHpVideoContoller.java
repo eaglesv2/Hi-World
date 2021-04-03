@@ -29,7 +29,7 @@ public class MiniHpVideoContoller {
 	private MiniHpVideoService service;
 	
 	//-----------------------------------------폴더--------------------------------------------------------
-	//게시판 사이드 부분
+	//사이드 부분
 	@GetMapping("/MiniHpVideoSide.do")
 	public String miniHpVideoSide(Model model, HttpSession session) {
 		System.out.println("MiniHpVideoSide.do");

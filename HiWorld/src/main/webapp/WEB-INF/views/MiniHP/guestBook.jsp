@@ -128,6 +128,7 @@
 		text-align: left;
 	}
 </style>
+<input type="hidden" id="ownerSerial" value="${ownerSerial}">
 <div id="main">
 	<div id="writeFrame">
 		<div id="writeForm">
@@ -147,12 +148,12 @@
 				<span>${l.writeUserName}</span>
 				<span class="date">(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd HH:mm"/>)</span>
 			</span>
+			<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
 			<span class="booksTop-right">
-				<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
-					<span class="btns" onclick="updateBookForm('${l.bookSerial}');">수정</span><!-- 글쓴이만 가능하게 -->
-				</c:if>
+				<span class="btns" onclick="updateBookForm('${l.bookSerial}');">수정</span><!-- 글쓴이만 가능하게 -->
 				<span class="btns" onclick="deleteBook('${l.bookSerial}')">삭제</span><!-- 글쓴이+홈피주인 -->
 			</span>
+			</c:if>
 		</div>
 		<div class="booksMiddle">
 			<span class="bookMiniMeFrame">
@@ -169,10 +170,13 @@
 		</div>
 	</div>
 	<div class="booksReply">
-		<div class="insertReplyArea"><!-- 댓글 작성란, 주인만 보이게 -->
-			<textarea class="insertReplyForm" id="replyContent-${l.bookSerial}"></textarea>
-			<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
-		</div>
+		<!-- 댓글 작성란, 주인 혹은 작성자만 작성 가능 -->
+		<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
+			<div class="insertReplyArea">
+				<textarea class="insertReplyForm" id="replyContent-${l.bookSerial}"></textarea>
+				<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
+			</div>
+		</c:if>
 		<!-- 댓글 있을경우 가져옴 -->
 		<c:if test="${l.replyCnt!=0}">
 			<%-- <iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="1" marginheight="0" marginwidth="0" width="100%" height="50%"></iframe> --%>
@@ -209,6 +213,8 @@
     </div>
 </div>
 <script>
+//주인 시리얼 고정
+var ownerSerial = $('#ownerSerial').val();
 $(function() {
 	//insert
 	$('#bookInsertBtn').click(function() {insertBook();});
@@ -226,18 +232,13 @@ function insertBook() {
 	if(content==="")
 		alert('내용을 입력하세요');
 	else{
-		var data = {
-			content : content
-		}
-		console.log(JSON.stringify(data));
 		$.ajax({
 			type: 'POST',
-			url: 'miniHpBook.do',
+			url: 'miniHpBookGuest.do/'+ownerSerial+'/'+content,
 			datatype: 'json',
-			contentType:'application/json; charset=utf-8',
-			data: JSON.stringify(data)
+			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			getBook();
+			getBook(ownerSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -251,7 +252,7 @@ function deleteBook(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function(data) {
-			getBook();
+			getBook(ownerSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
@@ -274,7 +275,7 @@ function updateBook(serial) {
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			getBook();
+			getBook(ownerSerial);
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
 		});
