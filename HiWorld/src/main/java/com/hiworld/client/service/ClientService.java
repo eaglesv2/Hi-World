@@ -117,9 +117,24 @@ public interface ClientService {
 	/* 게시판 삭제 */
 	void BoardDelete(BoardVO boardVO);
 	
+	/* 관리자 댓글 등록 */
+	void adminReplyInsert(BoardVO boardVO);
+	
 	/* 댓글 등록 */
 	void insertReply(BoardVO boardVO);
 	
 	/* 댓글 삭제 */
 	void ReplyDelete(BoardReplyVO boardReplyVO);
+	
+	/* 공지사항 갯수 가져오기 */
+	int countQuestionPage();
+	
+	/* 공지사항 목록 가져오기 */
+	ArrayList<BoardVO> getQuestionList(int page, int pageSize);
+
+	/* 공지사항 전부 목록 가져오기 */
+	ArrayList<BoardVO> getAllQuestionList();
+	
+	/* 관리자가 댓글 달았는지 확인 */
+	int adminReplyCheck(BoardVO boardVO);
 }

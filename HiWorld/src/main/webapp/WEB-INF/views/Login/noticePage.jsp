@@ -24,18 +24,19 @@
 						<td>작성일</td>
 						<td>조회수</td>
 					</tr>
+					<c:set var="number" value="1"/>
 					<c:forEach var="kinds" items="${list}">
 						<tr id="${kinds.boardSerial}">
-							<td>${kinds.boardSerial}</td>
+							<td>${number}</td>
 							<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a></td>
-							<td>관리자</td>
+							<td>${kinds.userName}</td>
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
-							<c:if test="${sessionVO.userID eq 'ADMIN'}">
+							<c:if test="${sessionVO.userSerial eq kinds.userSerial}">
 								<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
 							</c:if>
 						</tr>
-
+					<c:set var="number" value="${number+1}"/>
 					</c:forEach>
 				</table>
 			</c:when>

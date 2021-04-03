@@ -398,7 +398,7 @@
 		              <li id="board" onclick="board('${sessionVO.userName}')">
 		                               	이웃찾기
 		              </li>
-		               <li id="question" onclick="question()">
+		               <li id="question" onclick="question('${sessionVO.userName}')">
 		                          	  문의
 		              </li>
 	           </div>   

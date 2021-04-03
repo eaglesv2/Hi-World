@@ -119,8 +119,10 @@ public class ClientController {
 		System.out.println("공지 사항 등록");
 		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
 		int userSerial = vo.getUserSerial();
+		String userName = vo.getUserName();
 		
 		boardVO.setUserSerial(userSerial);
+		boardVO.setUserName(userName);
 		
 		clientService.BoardSubmit(boardVO);
 		
@@ -140,8 +142,19 @@ public class ClientController {
 	
 	/* 문의 사항 보기 */
 	@GetMapping("/questionPage.do")
-	public String questionAjax() {
-		return "Login/questionPage";
+	public String questionAjax(Model model, HttpSession session,@RequestParam(defaultValue="1") int curPage) {
+		
+		int listCnt = clientService.countQuestionPage();
+		MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
+		
+		model.addAttribute("list",clientService.getQuestionList(curPage,pagingVO.getPageSize()));
+		model.addAttribute("listCnt",listCnt);
+		model.addAttribute("pagination",pagingVO);
+		model.addAttribute("alist",clientService.getAllQuestionList());
+		
+
+		
+		return "Login/questionMainPage";
 	}
 	
 	/* 문의 사항 등록 페이지 이동 */
@@ -153,8 +166,24 @@ public class ClientController {
 	
 	/* 문의 사항 세부 정보 */
 	@GetMapping("/questionDetailPage.do")
-	public String questionDetailPage() {
-		return "";
+	public String questionDetailPage(BoardVO boardVO, Model model) {
+		
+		System.out.println(boardVO.getBoardSerial());
+		
+		/* 세부정보 하나만 가져오기 */
+		boardVO = clientService.getBoardOne(boardVO);
+		
+		/* 조회수 1 올리기 */
+		clientService.lookUp(boardVO);
+		
+		/* 댓글정보 가져오기 */
+		ArrayList<BoardReplyVO> list = clientService.getBoardReply(boardVO);
+		
+		
+		model.addAttribute("boardVO",boardVO);
+		model.addAttribute("list",list);
+		
+		return "Login/questionDetailPage";
 	}
 	
 	
@@ -165,6 +194,8 @@ public class ClientController {
 		System.out.println("댓글 등록");
 		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
 		int userSerial = sessionVO.getUserSerial();
+		
+		
 		String userName = sessionVO.getUserName();
 		String userID = sessionVO.getUserID();
 		boardVO.setUserSerial(userSerial);
@@ -174,6 +205,10 @@ public class ClientController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sdf.format(cal.getTime());
 		
+		/* 어드민 댓글 등록 */
+		if(userSerial == 1) {
+			clientService.adminReplyInsert(boardVO);
+		}
 		/* 정보 등록 */
 		clientService.insertReply(boardVO);
 		

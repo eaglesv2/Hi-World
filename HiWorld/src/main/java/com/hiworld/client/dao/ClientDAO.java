@@ -131,10 +131,25 @@ public interface ClientDAO {
 	/* 게시글 삭제 */
 	void BoardDelete(BoardVO boardVO);
 	
+	/* 관리자 댓글 등록 */
+	void adminReplyInsert(BoardVO boardVO);
+	
 	/* 댓글 등록 */
 	void insertReply(BoardVO boardVO);
 	
 	/* 댓글 삭제 */
 	void ReplyDelete(BoardReplyVO boardReplyVO);
+	
+	/* 문의사항 갯수 */
+	int countQuestionPage();
+	
+	/* 문의사항 가져오기 */
+	ArrayList<BoardVO> getQuestionList(@Param("offset")int offset, @Param("size")int size);
+	
+	/* 문의사항 전부 가져오기 */
+	ArrayList<BoardVO> getAllQuestionList();
+	
+	/* 관리자 댓글 확인 */
+	int adminReplyCheck(BoardVO boardVO);
 }
 	 

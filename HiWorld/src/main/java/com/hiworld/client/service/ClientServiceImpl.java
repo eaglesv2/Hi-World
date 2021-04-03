@@ -404,6 +404,12 @@ public class ClientServiceImpl implements ClientService {
 		dao.BoardDelete(boardVO);
 	}
 	
+	/* 관리자 댓글 등록 */
+	@Override
+	public void adminReplyInsert(BoardVO boardVO) {
+		dao.adminReplyInsert(boardVO);
+	}
+	
 	/* 댓글 등록 */
 	@Override
 	public void insertReply(BoardVO boardVO) {
@@ -415,4 +421,36 @@ public class ClientServiceImpl implements ClientService {
 	public void ReplyDelete(BoardReplyVO boardReplyVO) {
 		dao.ReplyDelete(boardReplyVO);
 	}
+	
+	/* 공지사항 갯수 가져오기 */
+	@Override
+	public int countQuestionPage() {
+		return dao.countQuestionPage();
+	}
+	
+	/* 공지사항 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getQuestionList(int page, int pageSize) {
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<BoardVO> list = dao.getQuestionList(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+	}
+	
+	/* 공지사항 전부 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getAllQuestionList() {
+		return dao.getAllQuestionList();
+	}
+	
+	/* 관리자가 댓글 달았는지 확인 */
+	@Override
+	public int adminReplyCheck(BoardVO boardVO) {
+		return dao.adminReplyCheck(boardVO);
+	}
+	
 }
