@@ -4,7 +4,9 @@ import java.sql.Date;
 
 public class BoardVO {
 	private int boardSerial;
+	private int replySerial;
 	private int userSerial;
+	private int adminReply;
 	private String userName;
 	private String userID;
 	private String title;
@@ -15,6 +17,18 @@ public class BoardVO {
 	
 	
 	
+	public int getAdminReply() {
+		return adminReply;
+	}
+	public void setAdminReply(int adminReply) {
+		this.adminReply = adminReply;
+	}
+	public int getReplySerial() {
+		return replySerial;
+	}
+	public void setReplySerial(int replySerial) {
+		this.replySerial = replySerial;
+	}
 	public String getReplyContent() {
 		return replyContent;
 	}

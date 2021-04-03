@@ -207,8 +207,8 @@
 	
 	<!-- 게시판 업로드 -->
 	<insert id="BoardSubmit">
-		INSERT INTO HW_Board (userSerial, title, content, lookUp)
-		VALUES (#{userSerial},#{title},#{content}, 0)
+		INSERT INTO HW_Board (userSerial, title, content, lookUp, userName)
+		VALUES (#{userSerial},#{title},#{content}, 0, #{userName})
 	</insert>
 	
 	<!-- 게시판 갯수 가져오기 -->
@@ -230,7 +230,7 @@
 	<select id="getBoardOne" resultType="boardVO">
 		SELECT * 
 		FROM HW_Board 
-		WHERE userSerial = 1 AND boardSerial = #{boardSerial}
+		WHERE boardSerial = #{boardSerial}
 	</select>
 
 	<!-- 게시판 댓글 -->
@@ -255,6 +255,13 @@
 		WHERE boardSerial = #{boardSerial}
 	</delete>
 	
+	<!-- 관리자 댓글 -->
+	<update id="adminReplyInsert">
+		UPDATE HW_Board
+		SET adminReply = 1
+		WHERE boardSerial = #{boardSerial}
+	</update>
+	
 	<!-- 댓글 등록  -->
 	<insert id="insertReply" parameterType="boardReplyVO">
 		INSERT INTO HW_Board_Reply(userSerial, userName, userID, boardSerial, replyContent)
@@ -267,6 +274,38 @@
 		FROM HW_Board_Reply
 		WHERE replySerial = #{replySerial}
 	</delete>
+	
+	<!-- 문의사항 갯수 -->
+	<select id="countQuestionPage" resultType="int">
+		SELECT COUNT(boardSerial) 
+		FROM HW_Board 
+		WHERE userSerial != 1;
+	</select>
+	
+	
+	<!-- 문의사항 가져오기 -->
+	<select id="getQuestionList" resultType="boardVO">
+		SELECT * FROM HW_Board 
+		WHERE userSerial != 1 
+		ORDER BY boardSerial DESC
+		LIMIT #{offset}, #{size}
+	</select>
+	
+	<!-- 문의사항 전부 가져오기 -->
+	<!-- 게시판 가져오기 -->
+	<select id="getAllQuestionList" resultType="boardVO">
+		SELECT * FROM HW_Board 
+		WHERE userSerial != 1 
+		ORDER BY boardSerial DESC
+	</select>
+	
+	
+	<!-- 관리자 댓글 확인 -->
+	<select id="adminReplyCheck" resultType="int">
+		SELECT COUNT(*) 
+		FROM HW_Board
+		WHERE userSerial = 1 AND replySerial = #{replySerial}
+	</select>
 	
 </mapper>
 

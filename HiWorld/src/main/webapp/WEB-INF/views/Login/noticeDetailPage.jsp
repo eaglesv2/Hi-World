@@ -12,7 +12,7 @@
 
 	<table>
 		<tr>
-			<td>${boardVO.title} ${boardVO.cDate} 관리자</td>
+			<td>${boardVO.title} ${boardVO.cDate} ${boardVO.userName}</td>
 		</tr>
 		<tr> 
 			<td><textarea rows="20" cols="80" readonly>${boardVO.content}</textarea></td>
