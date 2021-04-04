@@ -6,6 +6,8 @@ public class MiniHpSelectedItemVO {
 	private String backgroundSrc;
 	private String musicSrc;
 	private String mouseSrc;
+	private String minimiX;
+	private String minimiY;
 	
 	public int getUserSerial() {
 		return userSerial;
@@ -36,5 +38,17 @@ public class MiniHpSelectedItemVO {
 	}
 	public void setMouseSrc(String mouseSrc) {
 		this.mouseSrc = mouseSrc;
+	}
+	public String getMinimiX() {
+		return minimiX;
+	}
+	public void setMinimiX(String minimiX) {
+		this.minimiX = minimiX;
+	}
+	public String getMinimiY() {
+		return minimiY;
+	}
+	public void setMinimiY(String minimiY) {
+		this.minimiY = minimiY;
 	}
 }

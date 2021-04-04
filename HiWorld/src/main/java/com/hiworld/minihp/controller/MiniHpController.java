@@ -14,18 +14,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
-import com.hiworld.minihp.service.MiniHpRightService;
+import com.hiworld.minihp.service.MiniHpItemService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
+import com.hiworld.minihp.service.MiniHpRightService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
-import com.hiworld.minihp.vo.MiniHpLatestPostsVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
+import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
 @Controller
 public class MiniHpController {
+	
 	@Autowired
 	MiniHpRightService rightService;
+	
+	@Autowired
+	MiniHpItemService itemService;
 	
 	@Autowired
 	MiniHpSettingService settingService;
@@ -93,7 +98,10 @@ public class MiniHpController {
 	public String miniHp_Right(Model model, HttpSession session) {
 		//최근 게시물 표시
 		int userSerial = Utils.getSessionUser(session);
+		MiniHpSelectedItemVO itemList = itemService.getItemList(userSerial);
+		
 		model.addAttribute("latestPosts", rightService.getLatestPosts(userSerial));
+		model.addAttribute("itemList", itemList);
 		
 		return "MiniHP/MiniHP_Right";
 	}

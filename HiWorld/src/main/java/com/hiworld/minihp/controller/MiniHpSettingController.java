@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
@@ -125,6 +127,26 @@ public class MiniHpSettingController {
 		model.addAttribute("storySize", storySize);
 		
 		return "MiniHP/MiniHP_Setting_StoryRoom_Minimi";
+	}
+	
+	@ResponseBody
+	@PostMapping("/miniHp_saveStoryRoomMinimi.do")
+	public String saveStoryRoomMinimi(HttpServletRequest request, HttpSession session) {
+		System.out.println("미니홈피 스토리룸 미니미 저장 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = sessionVO.getUserSerial();
+		String storyRoom = request.getParameter("storyRoom");
+		String minimi = request.getParameter("minimi");
+		String[] minimiXY = request.getParameter("xy").split(",");
+		String minimiX = minimiXY[0];
+		String minimiY = minimiXY[1];
+		/*System.out.println(storyRoom);
+		System.out.println(minimi);
+		System.out.println(minimiX + ", " + minimiY);*/
+		itemService.updateStoryRoom(UserSerial, storyRoom);
+		itemService.updateMinimi(UserSerial, minimi, minimiX, minimiY);
+		
+		return "";
 	}
 }
 

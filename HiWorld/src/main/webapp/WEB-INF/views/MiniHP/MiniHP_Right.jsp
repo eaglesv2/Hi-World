@@ -87,7 +87,6 @@ body
 				</c:if>
 			</td>
 			<td valign="center">  
-				
 				<table bgcolor="#FFFFFF" width="200" align="center" cellpadding="2" cellspacing="0">
 					<%-- <c:if test="${length ne 0 }">
 						<%int a = 0; %>
@@ -113,14 +112,17 @@ body
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
 			<td align="center"  colspan="2">  
-				<font><b>나의 미니미와 스토리룸을 소개합니다.</b></font>	
+				<font><b>나의 미니미와 스토리룸을 소개합니다</b></font>	
 			</td>
 		</tr>
 		<tr bgcolor="#FFFFFF">
-			<td align="center" colspan="2">  
-				<img <%-- src="${resourcePath}/img${useStoryRoom}" --%> src= "${pageContext.request.contextPath}/resources/images/r_myhome.gif" width="389" height="192" border="0" alt="">
-				<img src="${resourcePath}/img${useMinimi.getOriginalFileName()}" alt="" style="position: absolute; top :${useMinimi.getImgY()}; left : ${useMinimi.getImgX()};"/>
-			</td>
+			<td align="center" colspan="2">
+			<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center;"></div>
+			<div style="background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX}"></div>
+	
+				<%-- <img src="${pageContext.request.contextPath}/${itemList.backgroundSrc}" alt="스토리룸" width="400px" height="200px" border="0">
+				<img src="${pageContext.request.contextPath}/${itemList.characterSrc}" alt="미니미" width="70px" height="60px" style="position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX};"/>
+			 --%></td>
 		</tr>
 	</table><br/>
 		<font color="#8be0ff" size="3pt"><b>이웃평</b></font><hr noshade size="1px" color="#e6e6e6"/>

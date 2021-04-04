@@ -7,6 +7,7 @@
 		FROM UserSelect_Article
 		WHERE userSerial = #{userSerial}
 	</select>
+	
 	<select id="getMinimiList" resultType="com.hiworld.minihp.vo.MiniHpUserItemVO">
 		SELECT *
 		FROM User_Article
@@ -18,4 +19,16 @@
 		FROM User_Article
 		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
 	</select>
+	
+	<update id="updateStoryRoom">
+		UPDATE UserSelect_Article
+		SET backgroundSrc = #{storyRoom}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	<update id="updateMinimi">
+		UPDATE UserSelect_Article
+		SET characterSrc = #{minimi}, minimiX = #{minimiX}, minimiY = #{minimiY}
+		WHERE UserSerial = #{UserSerial}
+	</update>
 </mapper>
