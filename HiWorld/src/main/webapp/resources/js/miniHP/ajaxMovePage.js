@@ -1,3 +1,22 @@
+//홈 이동
+function moveHome() {
+	//사이드 불러오기
+	getProfileSide();
+	// 메인 불러오기
+    var ajaxMain = {
+            url : 'MiniHP_Right.do',
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+
 //사진첩 사이드 불러오기
 function getPictureSide() {
 	var ajaxSide = {

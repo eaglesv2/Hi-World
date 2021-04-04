@@ -50,14 +50,13 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMovePage.js?ver=1"></script>
+<script src="resources/js/miniHP/ajaxMovePage.js?ver=2"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${miniHpUserMenuVO.menu1==1}">
-		<div align="center" id="menu1" class="menu" onclick="javaScript:location.href='MiniHP_Home.do?menu=menu1';">홈</div>
+		<div align="center" id="menu1" class="menu" onclick="moveHome();">홈</div>
 	</c:if>
-	
 	<c:if test="${miniHpUserMenuVO.menu2==1}">
 		<div align="center" id="menu2" class="menu" onclick="moveProfile()">프로필</div>
 	</c:if>

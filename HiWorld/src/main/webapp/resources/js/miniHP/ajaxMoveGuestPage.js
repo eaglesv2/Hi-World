@@ -1,3 +1,22 @@
+//홈 이동
+function moveHome(OwnerID) {
+	//사이드 불러오기
+	getProfileSide(OwnerID);
+	// 메인 불러오기
+    var ajaxMain = {
+            url : 'miniHp_rightGuest.do?OwnerID='+OwnerID,
+            async : true,
+            type : "GET",
+            dataType : "html",
+            cache : false
+    };
+    
+    $.ajax(ajaxMain).done(function(data){
+        $('#bodyContents').children().remove();
+        $('#bodyContents').html(data);
+    });
+}
+
 //사진첩 사이드 불러오기
 function getPictureSide(ownerSerial) {
 	var ajaxSide = {
@@ -32,9 +51,9 @@ function movePicture(ownerSerial){
 }
 
 //프로필 사이드 불러오기
-function getProfileSide() {
+function getProfileSide(OwnerID) {
 	var ajaxSide = {
-            url : "MiniHpDefaultSide.do",
+            url : "MiniHpGuestDefaultSide.do?OwnerID="+OwnerID,
             async : true,
             type : "GET",
             dataType : "html",
@@ -49,7 +68,7 @@ function getProfileSide() {
 	 });
 }
 
-function moveProfile() {
+/*function moveProfile() {
 	//사이드 불러오기
 	getProfileSide();
 	
@@ -68,7 +87,7 @@ function moveProfile() {
         // Contents 영역 교체
         $("#bodyContents").html(result);
     });
-}
+}*/
 
 //게시판 사이드 불러오기
 function getBoardSide(ownerSerial) {
@@ -145,9 +164,9 @@ function moveVideo(ownerSerial){
 }
 
 //방명록 이동
-function moveBook(ownerSerial){
-	//사이드 불러오기(게스트는 아직 구현 X)
-	/*getProfileSide();*/
+function moveBook(OwnerID,ownerSerial){
+	//사이드 불러오기
+	getProfileSide(OwnerID);
     // 메인 불러오기
 	getBook(ownerSerial);
 }

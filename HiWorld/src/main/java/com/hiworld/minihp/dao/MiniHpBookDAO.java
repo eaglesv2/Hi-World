@@ -11,6 +11,8 @@ public interface MiniHpBookDAO {
 	// 게시판 관련--------------------------
 	//selectAll
 	List<MiniHpBookVO> getAll(@Param("userSerial") int userSerial, @Param("offset") int offset,@Param("size") int size);
+	//현재 로그인된 유저 미니미 가져오기
+	String getMiniMe(int userSerial);
 	//페이징처리
 	int countAll(int userSerial);
 	//게시물 insert

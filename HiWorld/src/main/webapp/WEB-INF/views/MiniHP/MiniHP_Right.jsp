@@ -1,43 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-
 <style type="text/css">
-
-ul{
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0px 0px 0px 30px;
-	font-size : 9pt;
-
-}
-
-body
-	{scrollbar-face-color: #FFFFFF;
-	 scrollbar-highlight-color: #DBDBDB;
-	 scrollbar-3dlight-color: #FFFFFF;
-	 scrollbar-shadow-color: #9C92FF;
-	 scrollbar-darkshadow-color: #FFFFFF;
-	 scrollbar-track-color: #FFFFFF;
-	 scrollbar-arrow-color: #9C92FF}
-	 
- a{ 
- color: black; text-decoration: none;
+ .neiWordBtn{
+ 	background-color: white;
+	border: 1px solid gray;
+	border-radius: 5px;
  }
- 
 </style>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
  
- $(document).ready(function(){
+ /* $(document).ready(function(){
 	    initSet();
 	});
  
@@ -64,13 +39,16 @@ body
  
  function moveToUser(userId){
 	 window.open("user_main.action?userId="+userId,userId,"width=1090,height=600,location=no,status=no,scrollbars=no");
- }
+ } */
+
  </script>
 
- <body leftmargin="5" topmargin="0">
+ <body>
+ <div style="width: 465px; height: 430px; overflow-x: hidden;">
+ <div>
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
-			<td colspan="2"><font class="updateBoard"><b>Update Board...</b></font></td>
+			<td colspan="2"><font class="updateBoard" style="color: #1294AB; font-weight: 900;">Updated News</font></td>
 		</tr>
 		<tr bgcolor="#FFFFFF" style="font-size:9pt;">
 			<td width="240" height="70">
@@ -89,25 +67,53 @@ body
 			<td valign="center">  
 				
 				<table bgcolor="#FFFFFF" width="200" align="center" cellpadding="2" cellspacing="0">
-					<%-- <c:if test="${length ne 0 }">
-						<%int a = 0; %>
-						<tr bgcolor="#FFFFFF" align="left">
-						<c:forEach var="i" begin="0" end="${length-1}" step="1">
-						<%a++; %>																			
-								<td><font style="font-size:9pt;"><a href="${array[i][1]}">${array[i][0]}</a></font> <font color="#2d384a"style="font-size:8pt;">${array[i][2] }/${array[i][3] }</font><c:if test="${array[i][2] ne '0' }">
-								<img alt="" src="${pageContext.request.contextPath}/resources/images/new.png"></c:if></td>
-						<%if(a==2){ %>
-						<tr/>
-						<%} %>
-						</c:forEach>
-					</c:if> --%>
+					<tr>
+						<td>
+							<c:if test="${miniHpUserMenuVO.menu3==1}">
+								<span onclick="movePicture();" style="cursor: pointer;">사진첩</span>
+								${today.pictureCntToday}/${today.pictureCnt}
+								<c:if test="${today.pictureCntToday>0}">
+									<img alt="new" src="resources/images/title-new.png">
+								</c:if>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${miniHpUserMenuVO.menu4==1}">
+								<span onclick="moveBoard();" style="cursor: pointer;">게시판</span>
+								${today.boardCntToday}/${today.boardCnt}
+								<c:if test="${today.boardCntToday>0}">
+									<img alt="new" src="resources/images/title-new.png">
+								</c:if>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<c:if test="${miniHpUserMenuVO.menu5==1}">
+								<span onclick="moveVideo();" style="cursor: pointer;">비디오</span>
+								${today.videoCntToday}/${today.videoCnt}
+								<c:if test="${today.videoCntToday>0}">
+									<img alt="new" src="resources/images/title-new.png">
+								</c:if>
+							</c:if>
+						</td>
+						<td>
+							<c:if test="${miniHpUserMenuVO.menu6==1}">
+								<span onclick="moveBook();" style="cursor: pointer;">방명록</span>
+								${today.bookCntToday}/${today.bookCnt}
+								<c:if test="${today.bookCntToday>0}">
+									<img alt="new" src="resources/images/title-new.png">
+								</c:if>
+							</c:if>
+						</td>
+					</tr>
 				</table>
 
 			</td>
 		</tr>
 	</table>
 
-	<br/>
+	
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="440" height="6" border="0" alt="라인">
 
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
@@ -123,7 +129,80 @@ body
 			</td>
 		</tr>
 	</table><br/>
-		<font color="#8be0ff" size="3pt"><b>이웃평</b></font><hr noshade size="1px" color="#e6e6e6"/>
-		<span id="memberBoard"></span>
- </body>
-</html>
+		
+		
+		<div style="background-color: #F2F2F2;">
+			<div style="color: #1294AB; font-weight: bold; float: left; margin-left: 5px;">이웃평</div>
+			<!-- 일촌 관계만 보이게 하기 -->
+			<div style="float: none;">
+				<input id="neiWordContent" type="text" style="width: 330px;" >
+				<input class="neiWordBtn" type="button" value="등록" style="cursor: pointer;" onclick="insertNeiWord();">
+			</div>
+		</div>
+		<div id="neiWord" style="width: 100%;background-color: #F2F2F2; text-align: left;">
+		
+		</div>
+</div>
+</div>
+</body>
+<script>
+	//이웃평 불러오기
+	$('#neiWord').load("MiniHP_NeiWord.do");
+	//이웃평 insert
+	function insertNeiWord() {
+		var content = $('#neiWordContent').val();
+		if(content==="")
+			alert('내용을 입력하세요');
+		else{
+			$.ajax({
+				type: 'POST',
+				url: 'MiniHP_NeiWord.do/'+content,
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8'
+			}).done(function() {
+				$('#neiWord').load("MiniHP_NeiWord.do");
+				$('#neiWordContent').val("");
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			});
+		}
+	}
+	//delete
+	function deleteNeiWord(serial) {
+		if(confirm("정말 삭제하시겠습니까?")){
+			$.ajax({
+				type: 'DELETE',
+				url: 'MiniHP_NeiWord.do/'+serial,
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8'
+			}).done(function(data) {
+				$('#neiWord').load("MiniHP_NeiWord.do");
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			});
+		}
+	}
+	//update 칸 만들기
+	function updateNeiWordForm(serial) {
+		$('#reply-'+serial).toggle();
+		$('#replyForm-'+serial).toggle();
+	}
+	function updateNeiWord(serial) {
+		var content = $('#updateReplyContent-'+serial).val();
+		if(content==="")
+			alert('내용을 입력하세요');
+		else{
+			console.log(content);
+			$.ajax({
+				type: 'PUT',
+				url: 'MiniHP_NeiWord.do/'+serial+'/'+content,
+				datatype: 'json',
+				contentType:'application/json; charset=utf-8'
+			}).done(function() {
+				$('#neiWord').load("MiniHP_NeiWord.do");
+			}).fail(function(error) {
+				alert(JSON.stringify(error));
+			});
+		}
+	}
+</script>

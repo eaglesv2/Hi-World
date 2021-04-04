@@ -11,7 +11,7 @@
 </script>
 
 <style type="text/css">
-body
+/* body
 {
  scrollbar-face-color: #000000;
  scrollbar-highlight-color: #DBDBDB;
@@ -20,7 +20,7 @@ body
  scrollbar-darkshadow-color: #FFFFFF;
  scrollbar-track-color: #FFFFFF;
  scrollbar-arrow-color: #9C92FF
- }
+ } */
 </style>
 
 <script type="text/javascript">
@@ -34,8 +34,15 @@ $(document).ready(function() {
 			$("#rightMenu").html(result);
 		}
 	})
+	//right 불러오기
+	$.ajax({
+		type : 'get',
+		url : 'MiniHP_Right.do',
+		success : function(result) {
+			$("#bodyContents").html(result);
+		}
+	})
 });
-
 </script>
 
 </head>
@@ -72,7 +79,7 @@ $(document).ready(function() {
 										
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="bodyContents">
-								<iframe frameborder="0" width="465" height="430" src="MiniHP_Right.do"></iframe> 
+								<!-- <iframe frameborder="0" width="100%" height="100%" src="MiniHP_Right.do"></iframe> -->
 							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 							
