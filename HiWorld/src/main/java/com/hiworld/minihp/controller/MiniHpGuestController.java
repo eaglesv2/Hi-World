@@ -23,12 +23,14 @@ import com.hiworld.minihp.service.MiniHpBookService;
 import com.hiworld.minihp.service.MiniHpIntroService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpPictureService;
+import com.hiworld.minihp.service.MiniHpRightService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.service.MiniHpVideoService;
 import com.hiworld.minihp.vo.MiniHpBoardPagingVO;
 import com.hiworld.minihp.vo.MiniHpBookPagingVO;
 import com.hiworld.minihp.vo.MiniHpBookVO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpNeiWordVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpPicturePagingVO;
@@ -38,7 +40,8 @@ import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 @Controller
 public class MiniHpGuestController {
-	
+	@Autowired
+	MiniHpRightService rightService;
 	@Autowired
 	private MiniHpPictureService pictureService;
 	@Autowired
@@ -134,12 +137,50 @@ public class MiniHpGuestController {
 		
 		return "MiniHP/MiniHP_Left_Guest";
 	}
+	@ResponseBody
+	@GetMapping("/MiniHpGuestDefaultSide.do")
+	public String miniHpGuestDefaultSide(String OwnerID) {
+		return "miniHp_leftGuest.do?OwnerID="+OwnerID;
+	}
 	
 	@GetMapping("/miniHp_rightGuest.do")
-	public String rightGuest(HttpServletRequest request) {
+	public String rightGuest(String OwnerID,Model model) {
+		//주인 시리얼 전달
+		ownerVO = dao.getData(OwnerID);
+		int ownerSerial = ownerVO.getUserSerial();
+		model.addAttribute("ownerSerial", ownerSerial);
+		
+		model.addAttribute("latestPosts", rightService.getLatestPosts(ownerSerial));
+		
+		model.addAttribute("today",rightService.countToday(ownerSerial));
+		menuVO = settingService.getMenuAvailable(OwnerID);
+		model.addAttribute("ownermenuVO", menuVO);
 		
 		return "MiniHP/MiniHP_Right_Guest";
 	}
+	//이웃평
+	@GetMapping("/MiniHP_NeiWordGuest.do")
+	public String selectAllNeiWord(int ownerSerial, Model model) {
+		System.out.println("MiniHP_NeiWordGuest.do");
+		model.addAttribute("list", rightService.getAll(ownerSerial));
+		return "MiniHP/guestNeiWord";
+	}
+	//insert
+	@PostMapping("/MiniHP_NeiWordGuest.do/{content}/{ownerSerial}")
+	@ResponseBody
+	public void insertNeiWord(@PathVariable String content,@PathVariable int ownerSerial,HttpSession session) {
+		System.out.println("MiniHP_NeiWord.do");
+		MiniHpNeiWordVO vo = new MiniHpNeiWordVO();
+		vo.setContent(content);
+		int userSerial = Utils.getSessionUser(session);
+		vo.setUserSerial(ownerSerial);
+		vo.setWriteUserSerial(userSerial);
+		
+		int result = rightService.insert(vo);
+		if(result>0) System.out.println("insert 성공!");
+		else System.out.println("insert 실패!");
+	}
+	
 	/*게스트 미니홈피 제목 설정*/
 	@GetMapping("/miniHp_topGuest.do")
 	public String topGuest(HttpServletRequest request, Model model) {
@@ -262,6 +303,10 @@ public class MiniHpGuestController {
 	@GetMapping("/miniHpBookGuest.do")
 	public String miniHpBook(int ownerSerial, Model model, HttpSession session,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("방명록");
+		
+		int userSerial = Utils.getSessionUser(session);
+		//현재 로그인된 유저 미니미
+		model.addAttribute("writerMiniMe", bookService.getMiniMe(userSerial));
 		
 		model.addAttribute("ownerSerial",ownerSerial);
 		//페이징처리-----------------------------------------------------------------------------------------------------

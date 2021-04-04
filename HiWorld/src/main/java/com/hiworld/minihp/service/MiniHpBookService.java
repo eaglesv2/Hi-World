@@ -8,6 +8,8 @@ import com.hiworld.minihp.vo.MiniHpBookVO;
 public interface MiniHpBookService {
 	//게시판 관련---------------
 	List<MiniHpBookVO> getAll(int userSerial, int page, int pageSize);
+	//현재 로그인된 유저 미니미 가져오기
+	String getMiniMe(int userSerial);
 	//페이징처리
 	int countAll(int userSerial);
 	

@@ -42,6 +42,14 @@ $(document).ready(function() {
 			$("#rightMenu").html(result);
 		}
 	});
+	//right 불러오기
+	$.ajax({
+		type : 'get',
+		url : 'miniHp_rightGuest.do?OwnerID=${OwnerID}',
+		success : function(result) {
+			$("#bodyContents").html(result);
+		}
+	})
 });
 </script>
  </head>
@@ -75,7 +83,7 @@ $(document).ready(function() {
 						<td align="center" width="476" height="448" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="bodyContents">
-								<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
+								<%-- <iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> --%> 
 							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 						</td>

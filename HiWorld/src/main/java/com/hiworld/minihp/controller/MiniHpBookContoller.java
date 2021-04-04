@@ -31,6 +31,9 @@ public class MiniHpBookContoller {
 		System.out.println("방명록");
 		
 		int userSerial = Utils.getSessionUser(session);
+		//현재 로그인된 유저 미니미
+		model.addAttribute("writerMiniMe", service.getMiniMe(userSerial));
+		
 		//페이징처리-----------------------------------------------------------------------------------------------------
 		int listCnt = service.countAll(userSerial);//총 게시글 수
 		MiniHpBookPagingVO pagingVO = new MiniHpBookPagingVO(listCnt, curPage);//총 게시글수, 현재 페이지로 pagingVO 생성
@@ -69,7 +72,7 @@ public class MiniHpBookContoller {
 		if(result>0) System.out.println("방명록 delete 성공!");
 		else System.out.println("방명록 delete 실패!");
 	}
-	//게시글 수정
+	//수정
 	@PutMapping("/miniHpBook.do/{serial}/{content}")
 	@ResponseBody
 	public void MiniHpBookUpdate(@PathVariable int serial,@PathVariable String content) {
