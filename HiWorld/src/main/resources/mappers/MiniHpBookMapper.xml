@@ -2,12 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpBookDAO">
 	
-	<!-- 게시판 관련 -->
 	<select id="getAll" resultType="com.hiworld.minihp.vo.MiniHpBookVO">
 		SELECT * FROM MiniHP_Book_View
 		WHERE UserSerial = #{userSerial}
 		ORDER BY cDate DESC
 		LIMIT #{offset}, #{size}
+	</select>
+	<select id="getMiniMe" resultType="String">
+		SELECT characterSrc FROM UserSelect_Article
+		WHERE UserSerial=#{userSerial}
 	</select>
 	<select id="countAll" resultType="int">
 		SELECT COUNT(bookSerial) FROM MiniHP_Book_View

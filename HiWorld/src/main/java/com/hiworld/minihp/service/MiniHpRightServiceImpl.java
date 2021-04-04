@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hiworld.minihp.dao.MiniHpRightDAO;
+import com.hiworld.minihp.vo.CntTodayVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 import com.hiworld.minihp.vo.MiniHpLatestPostsVO;
+import com.hiworld.minihp.vo.MiniHpNeiWordVO;
 import com.hiworld.minihp.vo.MiniHpPictureVO;
 import com.hiworld.minihp.vo.MiniHpVideoVO;
 @Service
@@ -55,4 +57,25 @@ public class MiniHpRightServiceImpl implements MiniHpRightService {
 			return latestPosts;
 	}
 
+	@Override
+	public CntTodayVO countToday(int userSerial) {
+		return dao.countToday(userSerial);
+	}
+	
+	@Override
+	public List<MiniHpNeiWordVO> getAll(int userSerial) {
+		return dao.getAll(userSerial);
+	}
+	@Override
+	public int insert(MiniHpNeiWordVO vo) {
+		return dao.insert(vo);
+	}
+	@Override
+	public int delete(int serial) {
+		return dao.delete(serial);
+	}
+	@Override
+	public int update(int serial, String content) {
+		return dao.update(serial, content);
+	}
 }

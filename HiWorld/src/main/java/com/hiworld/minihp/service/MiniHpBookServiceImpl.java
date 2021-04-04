@@ -29,6 +29,10 @@ public class MiniHpBookServiceImpl implements MiniHpBookService {
 			return list;
 	}
 	@Override
+	public String getMiniMe(int userSerial) {
+		return dao.getMiniMe(userSerial);
+	}
+	@Override
 	public int countAll(int userSerial) {
 		return dao.countAll(userSerial);
 	}

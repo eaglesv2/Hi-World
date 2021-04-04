@@ -132,8 +132,7 @@
 	<div id="writeFrame">
 		<div id="writeForm">
 			<div class="bookMiniMeFrame">
-				<!-- 작성자 미니미 사진은 컨트롤러에서 sessionVO 사용해서 select해서 가져와야됨 -->
-				<img class="bookMiniMe" alt="미니미" src="resources/images/article/남성1.png">
+				<img class="bookMiniMe" alt="미니미" src="${writerMiniMe}">
 			</div>
 			<textarea class="ta" id="bookWriteContent"></textarea>
 		</div>
