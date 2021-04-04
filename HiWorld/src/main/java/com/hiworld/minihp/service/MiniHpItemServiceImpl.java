@@ -42,6 +42,17 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		return storyroomList;
 	}
 
+	@Override
+	public void updateStoryRoom(int userSerial, String storyRoom) {
+		itemDAO.updateStoryRoom(userSerial, storyRoom);
+	}
+
+	@Override
+	public void updateMinimi(int userSerial, String minimi, String minimiX, String minimiY) {
+		itemDAO.updateMinimi(userSerial, minimi, minimiX, minimiY);
+		
+	}
+
 	
 	
 	
