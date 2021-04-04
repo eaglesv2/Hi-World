@@ -87,8 +87,8 @@
 	<!-- 회원 회원 가입 -->
 	<!-- parameterType 값은 자동으로 설정됨? 아마 아닐경우 직접 써주기 -->
 	<insert id="insertClient" parameterType="clientVO">
-		INSERT INTO HW_USERLIST (UserName,UserID,UserPW,UserGender,UserBirth ,UserTel,UserAddress)
-		VALUES(#{UserName},#{UserID},#{UserPW},#{UserGender},#{UserBirth},#{UserTel},#{UserAddress})
+		INSERT INTO HW_USERLIST (UserName, UserID, UserPW, UserGender, UserBirth, UserTel, UserAddress)
+		VALUES(#{UserName}, #{UserID}, #{UserPW}, #{UserGender}, #{UserBirth}, #{UserTel}, #{UserAddress})
 	</insert>
 	
 	<!-- 회원가입시 미니홈피 기본값 등록 -->
