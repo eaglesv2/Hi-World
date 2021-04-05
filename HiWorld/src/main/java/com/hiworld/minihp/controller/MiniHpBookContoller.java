@@ -49,6 +49,7 @@ public class MiniHpBookContoller {
 	@PostMapping("/miniHpBook.do")
 	@ResponseBody
 	public void miniHpVideoInsert(@RequestBody MiniHpBookVO vo,HttpSession session) {
+		vo.setIsSecret(0);
 		//주인 미니홈페이지에서
 		//누구에게? -> 자기 자신
 		int userSerial = Utils.getSessionUser(session);
@@ -81,6 +82,16 @@ public class MiniHpBookContoller {
 		int result = service.update(serial, content);
 		if(result>0) System.out.println("방명록 수정 성공!");
 		else System.out.println("방명록 수정 실패!");
+	}
+	
+	//비밀로 하기
+	@PostMapping("/miniHpBookSecret.do/{serial}/{isSecret}")
+	@ResponseBody
+	public void changeSecret(@PathVariable int serial,@PathVariable int isSecret) {
+		System.out.println("비밀로 하기");
+		int result = service.changeSecret(serial,isSecret);
+		if(result>0) System.out.println("성공!");
+		else System.out.println("실패!");
 	}
 	
 	//댓글

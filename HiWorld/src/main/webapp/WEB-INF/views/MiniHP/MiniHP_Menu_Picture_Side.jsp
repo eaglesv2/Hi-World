@@ -26,17 +26,17 @@
 				<font size="1pt"> 
 					<c:if test="${i.scope==2}">
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="2" checked="checked"><span>전체공개</span></label>
-						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1"><span>일촌공개</span></label>
+						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1"><span>이웃공개</span></label>
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="0"><span>비공개</span></label>
 					</c:if>
 					<c:if test="${i.scope==1}">
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="2"><span>전체공개</span></label>
-						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1" checked="checked"><span>일촌공개</span></label>
+						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1" checked="checked"><span>이웃공개</span></label>
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="0"><span>비공개</span></label>
 					</c:if>
 					<c:if test="${i.scope==0}">
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="2"><span>전체공개</span></label>
-						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1"><span>일촌공개</span></label>
+						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="1"><span>이웃공개</span></label>
 						<label class="updateFolder-radio"><input type="radio" name="scope-${i.serial}" value="0" checked="checked"><span>비공개</span></label>
 					</c:if>
 				</font><br>
@@ -62,7 +62,7 @@
 			</font><br>
 			<font size="1pt"> 
 				<label class="addFolder-radio"><input type="radio" name="scope" value="2" checked="checked"><span>전체공개</span></label>
-				<label class="addFolder-radio"><input type="radio" name="scope" value="1"><span>일촌공개</span></label>
+				<label class="addFolder-radio"><input type="radio" name="scope" value="1"><span>이웃공개</span></label>
 				<label class="addFolder-radio"><input type="radio" name="scope" value="0"><span>비공개</span></label>
 			</font><br>
 			<span style="font-size:9pt;font-weight: bold;color: #1294AB; cursor: pointer;" onclick="insertFolder();">

@@ -73,7 +73,7 @@ table.boardTable td {
 		</c:if>
 		<tr>
  			<td style="height: 200px;">
- 				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
+ 				<span class="secondFont" style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
  					${board.content}
  				</span>
 			</td>
@@ -96,7 +96,7 @@ table.boardTable td {
 		</tr>
 	</tbody>
 	<c:if test="${board.replyCnt!=0}">
-	<tr style="background: #EBE9E9;">
+	<tr class="secondFont" style="background: #EBE9E9;">
 			<td scope="row">
 			<c:forEach items="${replyList}" var="r">
 				<span id="reply-${r.replySerial}">
