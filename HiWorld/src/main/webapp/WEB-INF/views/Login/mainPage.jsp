@@ -18,10 +18,10 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <title>Hi-World</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
-<link rel="icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
+
 <script type="text/javascript">
                 
 
@@ -469,7 +469,7 @@
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/파비콘.png" alt="로고사진" />
+		    	<img src="resources/images/Logo.png" alt="로고사진" />
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
