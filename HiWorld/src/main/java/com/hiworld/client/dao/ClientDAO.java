@@ -2,6 +2,8 @@ package com.hiworld.client.dao;
 
 import java.util.ArrayList;
 
+import javax.print.DocFlavor.STRING;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.hiworld.client.vo.BoardReplyVO;
@@ -26,23 +28,13 @@ public interface ClientDAO {
 	/* 회원 정보 삭제 */
 	int deleteClient(ClientVO clientVO);
 	
-	/* 회원 정보 수정 */
-	/*이름 수정 */
-	int updateName(ClientVO clientVO);
-	/* 이름 조회*/
-	ClientVO selectName(String clientVO);
+/* ==============회원 정보 수정=============== */
 	
 	/* 패스워드 수정*/
 	int updatepw(ClientVO clientVO);
 	/* 패스워드 조회*/
 	ClientVO selectpw(String clientVO);
-	
-	
-	/* 생일 수정*/
-	int updateBirth(ClientVO clientVO);
-	/* 이름 조회*/
-	ClientVO selectBirth(ClientVO clientVO);
-	
+
 	/* 연락처 수정*/
 	int updateTel(ClientVO clientVO);
 	/* 이름 조회*/
@@ -52,9 +44,16 @@ public interface ClientDAO {
 	/* 주소 수정*/
 	int updateAddress(ClientVO clientVO);
 	/* 이름 조회*/
-	ClientVO selectAddress(ClientVO clientVO);
+	ClientVO selectAddress(int clientVO);
 	
 	/* ------------------회원정보 조회 끝------------------*/
+	/* 아이디 비번 찾기*/
+	ClientVO selectFindId(String name, String tel);
+	
+	ClientVO selectFindPw(String id, String tel);
+	
+	
+	
 	
 //	############################### 기능 구현 완료
 	/* 로그인*/
