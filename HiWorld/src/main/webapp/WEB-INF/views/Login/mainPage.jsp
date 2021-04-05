@@ -401,6 +401,13 @@
 		               <li id="question" onclick="question('${sessionVO.userName}')">
 		                          	  문의
 		              </li>
+		              
+		              <li id="shoppingcart" onclick="shoppingcart()">
+		              		장바구니
+		              </li>
+		              <li id="bamtolcharge" onclick="bamTol()">
+		              		밤톨충전
+		              </li>
 	           </div>   
          </div>
         <div class="leftCon">
@@ -444,12 +451,8 @@
 						        <div id="jang">
 						            <div id="jang-top">
 						                <div onclick="myinfo()">내정보보기</div>
-						                <div id="bamtolbtn" onclick="bamTol()">밤톨충전</div>
-						            </div>
-						            <div id="jang-bottom">
-						                <div onclick="shoppingcart()">장바구니</div>
 						                <a href="logout.do">로그아웃</a>
-						        	</div>
+						            </div>
 						        </div>
 						    </div>
 					</c:if>
