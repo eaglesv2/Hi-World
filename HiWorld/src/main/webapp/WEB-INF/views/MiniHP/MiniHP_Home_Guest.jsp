@@ -6,7 +6,9 @@
 <head>
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hi-World</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
 <style type="text/css">
 body {
 	scrollbar-face-color: #FFFFFF;

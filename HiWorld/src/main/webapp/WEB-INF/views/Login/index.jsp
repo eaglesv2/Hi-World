@@ -6,9 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>로그인 페이지이며 메인이 생기면 뷰로 이동해야함</title>
-	<script src="resources/jQuery/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>로그인 페이지이며 메인이 생기면 뷰로 이동해야함</title>
+<script src="resources/jQuery/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 	<h1>로그인 페이지</h1>
