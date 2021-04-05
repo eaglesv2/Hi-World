@@ -474,7 +474,7 @@
 		    <div id="mainlogo">
 		    	<img src="resources/images/로고1.png" alt="로고사진" />
 		    		<div id="mainserch">
-			    		 <input type="searchInput"  />
+			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
 		    		</div>
 		    </div>
