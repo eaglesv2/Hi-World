@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hiworld.client.dao.ClientDAO;
+import com.hiworld.client.vo.BoardReplyVO;
+import com.hiworld.client.vo.BoardVO;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.sessionVO;
 
@@ -269,19 +271,65 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 	
+	/* 회원 전체 카운트 */
+	@Override
+	public int countBoardPage() {
+		return dao.countBoardPage();
+	}
+	
 	/* 회원 전체 조회 */
+	@Override
+	public ArrayList<ClientVO> getAllClientData() {
+		return dao.getAllClientData();
+	}
+	
 	@Override
 	/* sql문 실패시 자동으로 롤백 됨 */
 	@Transactional
-	public ArrayList<ClientVO> getAllClient() {
-		/* 모든 회원 정보가 담긴 ArrayList가 넘어감 */
-		return dao.getAllClient();
+	public ArrayList<ClientVO> getAllClient(int page, int pageSize) {
+		
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ClientVO> list = dao.getAllClient(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+		
+	}
+	
+	/* 로그인시 밴 체크 */
+	@Override
+	public int checkBan(ClientVO clientVO) {
+		return dao.checkBan(clientVO);
+	}
+	
+	
+//	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ ADMIN @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* 밴한 회원 카운트 */
+	@Override
+	public int countBoardBanPage() {
+		return dao.countBoardBanPage();
 	}
 	
 	/* 밴한 회원 전체 조회 */
 	@Override
-	public ArrayList<ClientVO> getAllBanClient() {
-		return dao.getAllBanClient();
+	public ArrayList<ClientVO> getAllBanClientData() {
+		return dao.getAllBanClientData();
+	}
+	@Override
+	public ArrayList<ClientVO> getAllBanClient(int page, int pageSize) {
+		
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<ClientVO> list = dao.getAllBanClient(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+		
 	}
 	
 	/* 밴 */
@@ -296,9 +344,102 @@ public class ClientServiceImpl implements ClientService {
 		return dao.unBanClient(UserSerial);
 	}
 	
-	/* 로그인시 밴 체크 */
+	/* 게시판 등록 */
 	@Override
-	public String checkBan(ClientVO clientVO) {
-		return dao.checkBan(clientVO);
+	public int BoardSubmit(BoardVO boardVO) {
+		return dao.BoardSubmit(boardVO);
 	}
+	
+	/* 게시판 갯수 가져오기 */
+	@Override
+	public int countNoticePage() {
+		return dao.countNoticePage();
+	}
+	
+	/* 게시판 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getBoardList(int page, int pageSize) {
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<BoardVO> list = dao.getBoardList(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+	}
+	
+	/* 게시판 세부정보 */
+	@Override
+	public BoardVO getBoardOne(BoardVO boardVO) {
+		return dao.getBoardOne(boardVO);
+	}
+	
+	/* 게시판 댓글 */
+	@Override
+	public ArrayList<BoardReplyVO> getBoardReply(BoardVO boardVO) {
+		return dao.getBoardReply(boardVO);
+	}
+	
+	/* 조회 1 올리기 */
+	@Override
+	public void lookUp(BoardVO boardVO) {
+		dao.lookUp(boardVO);
+	}
+	
+	/* 게시글 삭제 */
+	@Override
+	public void BoardDelete(BoardVO boardVO) {
+		dao.BoardDelete(boardVO);
+	}
+	
+	/* 관리자 댓글 등록 */
+	@Override
+	public void adminReplyInsert(BoardVO boardVO) {
+		dao.adminReplyInsert(boardVO);
+	}
+	
+	/* 댓글 등록 */
+	@Override
+	public void insertReply(BoardVO boardVO) {
+		dao.insertReply(boardVO);
+	}
+	
+	/* 댓글 삭제 */
+	@Override
+	public void ReplyDelete(BoardReplyVO boardReplyVO) {
+		dao.ReplyDelete(boardReplyVO);
+	}
+	
+	/* 공지사항 갯수 가져오기 */
+	@Override
+	public int countQuestionPage() {
+		return dao.countQuestionPage();
+	}
+	
+	/* 공지사항 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getQuestionList(int page, int pageSize) {
+		/* 페이징 */
+		int offset = 0+(page-1)*pageSize; //1페이지일경우 1~5 2페이지일경우 6~10 이런식으로 가져옴
+		ArrayList<BoardVO> list = dao.getQuestionList(offset, pageSize);
+		if(list==null || list.size()==0) {
+			return null;
+		}else {
+			return list;
+		}
+	}
+	
+	/* 공지사항 전부 목록 가져오기 */
+	@Override
+	public ArrayList<BoardVO> getAllQuestionList() {
+		return dao.getAllQuestionList();
+	}
+	
+	/* 관리자가 댓글 달았는지 확인 */
+	@Override
+	public int adminReplyCheck(BoardVO boardVO) {
+		return dao.adminReplyCheck(boardVO);
+	}
+	
 }

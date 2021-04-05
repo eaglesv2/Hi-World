@@ -80,7 +80,7 @@
 	//폴더 클릭시 해당 폴더로 이동
 	function goToFolder(folderSerial) {
 		var ajaxMain = {
-	            url : 'miniHpBoard.do?folderSerial='+folderSerial,
+	            url : 'miniHpPicture.do?folderSerial='+folderSerial,
 	            async : true,
 	            type : "GET",
 	            dataType : "html",
@@ -88,9 +88,7 @@
 	    };
 	    
 	    $.ajax(ajaxMain).done(function(data){
-	        // Contents 영역 삭제
 	        $('#bodyContents').children().remove();
-	        // Contents 영역 교체
 	        $('#bodyContents').html(data);
 	    });
 	}
@@ -122,7 +120,7 @@
 			console.log(JSON.stringify(data));
 			$.ajax({
 				type: 'POST',
-				url: 'MiniHpPicutreSide.do',
+				url: 'MiniHpPictureSide.do',
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8',
 				data: JSON.stringify(data)
@@ -139,7 +137,7 @@
 		if(confirm("정말 삭제하시겠습니까?")){
 			$.ajax({
 				type: 'DELETE',
-				url: 'MiniHpPicutreSide.do/'+serial,
+				url: 'MiniHpPictureSide.do/'+serial,
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8'
 			}).done(function(data) {
@@ -163,7 +161,7 @@
 			var scope = $(":input:radio[name=scope-"+serial+"]:checked").val();
 			$.ajax({
 				type: 'PUT',
-				url: 'MiniHpPicutreSide.do/'+serial+'/'+folderName+'/'+scope,
+				url: 'MiniHpPictureSide.do/'+serial+'/'+folderName+'/'+scope,
 				datatype: 'json',
 				contentType:'application/json; charset=utf-8'
 			}).done(function() {

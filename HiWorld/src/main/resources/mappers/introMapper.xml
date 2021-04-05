@@ -44,6 +44,17 @@
 		WHERE UserID = #{UserID}
 	</update>
 	
+	<select id="checkVisitor" resultType="com.hiworld.minihp.vo.MiniHpVisitorVO">
+		SELECT *
+		FROM MiniHP_Visitor
+		WHERE OwnerID = #{OwnerID} AND GuestID = #{GuestID}
+	</select>
+	
+	<insert id="insertVisitor">
+		INSERT INTO MiniHP_Visitor
+		VALUES (#{OwnerID}, #{GuestID})
+	</insert>
+	
 	<select id="getToday" parameterType="String" resultType="int">
 		SELECT hpToday
 		FROM MiniHP_Intro

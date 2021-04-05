@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpOwnerVO;
+import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 @Service
 public class MiniHpIntroServiceImpl implements MiniHpIntroService {
@@ -46,18 +48,35 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	
 	/*제목 가져오기*/
 	@Override
-	public String getIntroTitle(sessionVO sessionVO) {
+	public String getIntroTitle(sessionVO vo) {
 		/*System.out.println("미니홈피 타이틀 가져오기 서비스");*/
 		String title = "";
-		String UserID = sessionVO.getUserID();
+		String UserID = vo.getUserID();
+		
 		
 		if(introDAO.getTitle(UserID) == null) {
-			title = sessionVO.getUserName() + "님의 미니홈피";
+			title = vo.getUserName() + "님의 미니홈피";
 		} else {
 			title = introDAO.getTitle(UserID);
 		}
 		
 		/*System.out.println(title);*/
+		
+		return title;
+	}
+	
+	/*게스트 제목 가져오기*/
+	@Override
+	public String getGuestTitle(MiniHpOwnerVO ownerVO) {
+		String title = "";
+		String OwnerID = ownerVO.getUserID();
+		
+		
+		if(introDAO.getTitle(OwnerID) == null) {
+			title = ownerVO.getUserName() + "님의 미니홈피";
+		} else {
+			title = introDAO.getTitle(OwnerID);
+		}
 		
 		return title;
 	}
@@ -99,6 +118,19 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 		}
 		introDAO.updatePicture(introVO);
 	}
+	
+	/*방문자 체크*/
+	@Override
+	public void todayCheck(MiniHpVisitorVO visitorVO) {
+		/*System.out.println("방문자 체크 서비스");*/
+		MiniHpVisitorVO vo = new MiniHpVisitorVO();	
+		vo = introDAO.checkVisitor(visitorVO);
 
+		if(vo == null) {
+			introDAO.insertVisitor(visitorVO);
+			introDAO.updateToday(visitorVO.getOwnerID());
+			introDAO.updateTotal(visitorVO.getOwnerID());
+		}
+	}
 	
 }

@@ -2,14 +2,19 @@ package com.hiworld.article.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.hiworld.article.vo.ArticleVO;
 
 public interface ArticleDAO {
 
+	int countAllArticlePage();
 	
-	ArrayList<ArticleVO> getAllArticle();
+	ArrayList<ArticleVO> getAllArticle(@Param("offset")int offset, @Param("size")int size);
 	
-	ArrayList<ArticleVO> getSelectArticle(ArticleVO articleVO);
+	int countArticlePage(String list);
+	
+	ArrayList<ArticleVO> getSelectArticle(@Param("list")String list, @Param("offset")int offset, @Param("size")int size);
 	
 	int insert(ArticleVO vo);
 	

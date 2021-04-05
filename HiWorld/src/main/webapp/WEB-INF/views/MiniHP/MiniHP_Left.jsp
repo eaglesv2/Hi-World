@@ -9,7 +9,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -111,10 +110,11 @@ function moveToUser() {
 	console.log('홈피 이동');
 	
 	var OwnerID = $("#neighborSelect option:selected").val();
+	console.log(OwnerID);
 	
-	if(OwnerID == "") {
+	/* if(OwnerID == "") {
 		return;
-	} 
+	}  */
 	/* $("#neighborSelect option:eq(0)").attr("selected", "selected"); */
 	
 	/* $.ajax({
@@ -126,12 +126,12 @@ function moveToUser() {
 			console.log('홈피 이동');
 		}
 	}) */
-	var popupWidth =880
-    var popupHeight =580
+	var popupWidth = 880;
+    var popupHeight = 580;
 	var popupX = (window.screen.width/2)-(popupWidth/2);
     var popupY = (window.screen.height/2)-(popupHeight/2);
 	window.open("miniHp_guestHome.do?OwnerID="+OwnerID,OwnerID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
-	parent.window.close();
+	/* parent.window.close(); */
 }
 
 </script>
@@ -153,7 +153,7 @@ height:100px;
 	<table border="0" width="130" bgcolor="#FFFFFF">
 		<tr >
 			<td bgcolor="#FFFFFF" align="center">
-				<font><div id="profile_status"></div></font>
+				<div id="profile_status"></div>
 			</td>
 		</tr>
 		<tr >
@@ -217,10 +217,10 @@ height:100px;
 				
 				<select id="neighborSelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser()">
 					<option value="">★이웃 바람타기</option>
-					<!-- 일촌 목록 -->
+					<!-- 이웃 목록 -->
 					<c:if test="${listLength != 0}">
 					<c:forEach var="neighborList" items="${neighborList}">
-						<option value="${neighborList.userID}">${neighborList.userName} (${neighborList.userValue})</option>
+						<option value="${neighborList.neighborID}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
 					</c:forEach>
 					</c:if>
 					<c:if test="${listLength == 0}">

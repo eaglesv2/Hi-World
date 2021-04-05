@@ -111,6 +111,4 @@ public class MiniHpIntroController {
 		
 		return "MiniHP/MiniHP_Left"; 
 	}
-	
-	
 }

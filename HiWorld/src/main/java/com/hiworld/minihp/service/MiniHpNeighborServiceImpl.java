@@ -35,6 +35,8 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 
 		String senderID = nVO.getNeighborID1();
 		String receiverID = nVO.getNeighborID2();
+		System.out.println(senderID);
+		System.out.println(receiverID);
 		switch(type) {
 		case 0: //이웃 신청 거절
 			neighborListDAO.deleteNeighborList(senderID, receiverID);
@@ -44,6 +46,36 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 			neighborVO = neighborDAO.checkNeighbor(senderID, receiverID);
 			if(neighborVO == null) {
 				neighborDAO.insertNeighbor(nVO);
+			}
+			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			break;
+		
+		case 2: //이웃 신청 보류
+			
+			break;
+		}
+	}
+	
+	/*이웃명 수정 신청 결과 처리*/
+	@Override
+	public void updateCheck_ok(int type, MiniHpNeighborVO nVO) {
+		// TODO Auto-generated method stub
+		String senderID = nVO.getNeighborID1();
+		String receiverID = nVO.getNeighborID2();
+		String senderValue = nVO.getNeighborValue1();
+		String receiverValue = nVO.getNeighborValue2();
+		
+		switch(type) {
+		case 0: //이웃 신청 거절
+			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			break;
+			
+		case 1: //이웃 신청 수락
+			neighborVO = neighborDAO.checkNeighbor(senderID, receiverID);
+			if(neighborVO.getNeighborID1().equals(senderID)) {
+				neighborDAO.updateNeighbor(senderValue, receiverValue);
+			} else {
+				neighborDAO.updateNeighbor(receiverValue, senderValue);
 			}
 			neighborListDAO.deleteNeighborList(senderID, receiverID);
 			break;
@@ -72,14 +104,19 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 				System.out.println(neighborVO.getNeighborID2());
 				System.out.println(neighborViewVO);*/
 				if(neighborVO.getNeighborID1().equals(UserID)) {
+					neighborViewVO.setUserID(neighborVO.getNeighborID1());
+					neighborViewVO.setUserName(neighborVO.getNeighborName1());
+					neighborViewVO.setUserValue(neighborVO.getNeighborValue1());
+					neighborViewVO.setNeighborID(neighborVO.getNeighborID2());
+					neighborViewVO.setNeighborName(neighborVO.getNeighborName2());
+					neighborViewVO.setNeighborValue(neighborVO.getNeighborValue2());
+				} else {
 					neighborViewVO.setUserID(neighborVO.getNeighborID2());
 					neighborViewVO.setUserName(neighborVO.getNeighborName2());
 					neighborViewVO.setUserValue(neighborVO.getNeighborValue2());
-				} else {
-					/*neighborViewVO.setUserID(neighborVO.getNeighborID1());*/
-					neighborViewVO.setUserID("tester");
-					neighborViewVO.setUserName(neighborVO.getNeighborName1());
-					neighborViewVO.setUserValue(neighborVO.getNeighborValue1());
+					neighborViewVO.setNeighborID(neighborVO.getNeighborID1());
+					neighborViewVO.setNeighborName(neighborVO.getNeighborName1());
+					neighborViewVO.setNeighborValue(neighborVO.getNeighborValue1());
 				}
 				/*System.out.println(neighborViewVO.getUserID());*/
 				neighborViewList.add(neighborViewVO);
@@ -87,5 +124,15 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 			return neighborViewList;
 		}
 	}
+	
+	/*이웃 끊기*/
+	@Override
+	public void deleteNeighbor(String userID, String neighborID) {
+		
+		neighborDAO.deleteNeighbor(userID, neighborID);
+		
+	}
+
+
 
 }

@@ -32,6 +32,7 @@ public class MiniHpProfileController {
 		String result = service.checkProfile(id);
 		System.out.println("프로필 확인 서비스 갔다옴");
 		System.out.println(result);
+		
 		return result;
 	}
 	
@@ -41,6 +42,7 @@ public class MiniHpProfileController {
 		System.out.println("프로필 가져오기 컨트롤러");
 		String id = request.getParameter("UserID");
 		String result = service.getProfile(id);
+		
 		return result;
 	}
 	

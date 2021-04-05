@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -24,9 +20,19 @@ body {
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-//넘어올때 로그인한 유저 vo와 미니홈피 주인 id + miniHp VO 다 가져오기
 $(document).ready(function() {
 	console.log('1');
+	/* $.ajax({
+		type : 'GET',
+		url: 'miniHp_todayCheck.do',
+		data : { OwnerID : '${OwnerID}', GuestID : '${sessionVO.userID}'},
+		
+		success : function() {
+			console.log('방문자체크 성공')
+		}
+	}); */
+	
+	console.log('2222');
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_rightGuestMenu.do',
@@ -35,14 +41,20 @@ $(document).ready(function() {
 		success : function(result) {
 			$("#rightMenu").html(result);
 		}
+	});
+	//right 불러오기
+	$.ajax({
+		type : 'get',
+		url : 'miniHp_rightGuest.do?OwnerID=${OwnerID}',
+		success : function(result) {
+			$("#bodyContents").html(result);
+		}
 	})
 });
 </script>
  </head>
-
-<form name="main">
-
 <body topmargin="0" leftmargin="0">
+<form name="guestHome">
 	<table border="0" align="left" valign="top" width="850" height="550" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>
@@ -60,15 +72,19 @@ $(document).ready(function() {
 					<tr>
 						<td width="10"> </td>
 
-						<td align="center" width="178" height="450" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
+						<td align="center" width="178" height="448" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
+							<span id="sideContents">
+								<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 
 						</td>
-						<td align="center" width="480" height="450" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
+						<td align="center" width="476" height="448" background="${pageContext.request.contextPath}/resources/images/bg_center_rect.jpg">
 							<!-- 오른쪽 내용 부분 ----------------------------------------------------------- -->
-							<iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> 
+							<span id="bodyContents">
+								<%-- <iframe frameborder="0" width="470" height="430" src="miniHp_rightGuest.do?OwnerID=${OwnerID}"></iframe> --%> 
+							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 						</td>
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
@@ -90,7 +106,6 @@ $(document).ready(function() {
 		</tr>
 	</table>
 	<!-- ------------------------ -->
- </body>
-
- </form>
+</form>
+</body>
 </html>

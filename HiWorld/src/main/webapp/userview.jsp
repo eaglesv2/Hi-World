@@ -144,7 +144,7 @@ h3 {
 }
 
 div {
-	
+
 }
 
 #text {
@@ -162,11 +162,11 @@ div {
 .few {
 	color: red;
 }
+
 .userId1{
 float: left;
 width: 100px;
 }
-
 
 .userId2 {
 	margin-left: 150px;
@@ -197,6 +197,7 @@ width: 100px;
 	margin-left: 48px;
 	margin-top: 31px;
 	margin-bottom: 30px;
+
 }
 
 #gender1_few {
@@ -390,6 +391,8 @@ margin-top: 20px;
 						</div>
 					</div>
 				</div>
+				</div>
+				
 			</div>
 			<div class="birth_address">
 				<div class="birth_address_label">생년월일/주소

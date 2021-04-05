@@ -6,6 +6,7 @@
     margin:0 auto;
     position: relative;
     border-radius: 10px;
+    height: 1200px;
     
 
 }
@@ -22,30 +23,66 @@ a{
 	
 }
 
+#mainlogo{
+	width: 100%;
+	float:left;
+}
+
+#mainlogo img{
+	width: 142px;
+    height: 180px;
+    display: block;
+    float: left;
+}
+
+
+#mainserch{
+	float:left;
+	margin-top: 55px;
+	height: 50px;
+	width: 584px;;
+	border:1px solid;
+	    
+}
+#mainserch input{
+	float:left;
+	height: 24px;
+	width: 522px;
+	font-size:18px;
+	letter-spacing:-1px;
+	margin:12px 0 10px 10px;
+	border:none;
+}
+
+#mainserch img{
+	width: 30px;
+    height: 30px;
+    display: block;
+    float: left;
+    margin-top: 10px;
+    margin-left:6px;
+}
 .leftCon{
     margin-top:10px;
     float: left;
     width: 75%;
     height: 800px;
 }
-.leftCon #Nav #Navmenu{
-    
-    
-    
-    float: top;
-}
+
+
 
 .leftCon #bodyContext{
-    margin: 40px 20px 20px 20px;
+    margin: 20px 20px 20px 0px;
     outline: solid #dae1e6;
-    height: 650px;
+    height: 578px;
 }
 
 .rightCon{
-    margin-top:10px;
+    margin-top:30px;
     float: right;
     width: 25%;
     height: 800px;
+   
   
 }
 .rightCon #jang {
@@ -69,8 +106,9 @@ a{
     float:top;
     height: 200px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background: #f7f9fa;
+
     
     
 }
@@ -117,7 +155,7 @@ a{
     text-align: center;
     display: table;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background:#f7f9fa;
     
 }
@@ -133,6 +171,7 @@ a{
 #Nav{
     height: 100%;  
     border: 1px solid #dae1e6;
+    border-top:none;
     border-right: 0px;
     margin: auto 0px;
 }
@@ -146,18 +185,36 @@ a{
     display: inline-block;
     font-size: 20px;
     font-weight:800;
-    cursor: pointer;
-    margin-left:115px;
-    padding-top:10px;
-    padding-bottom:10px;
     color:black;
+    height: 202px;
     
 	}
-
+	
+#Navmenu{
+	display: block;
+    font-size: 20px;
+    font-weight:800;
+    color:black;
+    height: 20px;
+    float: top;
+}
+#Navli{
+	display:inline-block;
+	cursor: pointer;
+	list-style:none;
+}
+#Navli li{
+	float:left;
+	margin-right:80px;
+}
+#bx_div{
+	height: 202px;
+	margin-top:20px;
+}
 #add {
     margin-top: 10px;
     border: 1px solid #dae1e6;
-    height: 515px;
+    height: 521px;
     
 }
 
@@ -204,8 +261,10 @@ a{
 
 
 .bxslider li img{
-	width: 1080px;
+	width: 100%;
+	height: 100%;
 }
+
 
 #nickname{
 	margin-top:30px;
@@ -216,5 +275,7 @@ a{
 	margin-top:10px;
 	margin-left : 130px;
 }
-
+#jang-top div{
+	cursor: pointer;
+}
 

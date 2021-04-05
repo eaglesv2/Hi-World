@@ -9,14 +9,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hiworld.client.vo.sessionVO;
+
 public class Utils {
 	//세션에서 현재 유저 정보 가져오기 메소드
 	public static int getSessionUser(HttpSession session) {
-//		//세션에서 현재 유저 가져오기
-//		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
-//		int userSerial = sessionUser.getUserSerial();
-		//임시로 2로 지정
-		int userSerial = 7;
+		//세션에서 현재 유저 가져오기
+		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
+		int userSerial = sessionUser.getUserSerial();
+//		//임시로 7로 지정
+//		int userSerial = 7;
 		return userSerial;
 	}
 	

@@ -1,24 +1,39 @@
 package com.hiworld.minihp.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.service.MiniHpItemService;
+import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
+import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
+import com.hiworld.minihp.vo.MiniHpUserItemVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 
 @Controller
 public class MiniHpSettingController {
 	
 	@Autowired
-	MiniHpSettingService service;
+	MiniHpSettingService settingService;
+	
+	@Autowired
+	MiniHpNeighborService neighborService;
+	
+	@Autowired
+	MiniHpItemService itemService;
 	
 	@Autowired
 	MiniHpIntroDAO introDAO;
@@ -27,21 +42,10 @@ public class MiniHpSettingController {
 	
 	MiniHpIntroVO introVO;
 	
-	/*@RequestMapping("/miniHp_setting")
-	public String miniHpSetting(HttpServletRequest request, String menu, String flag) {
-		유저별 공개메뉴에 따른 리스트
-		menu="menu7";
-		String currentFlag="1";
-		if(flag!=null) {
-			currentFlag=flag;
-		}
-
-		request.setAttribute("menu", menu);
-		request.setAttribute("currentFlag", currentFlag);
-		
-		return "MiniHP/MiniHP_Setting";
-	}*/
+	sessionVO sessionVO;
 	
+	
+	/*회원 정보 조회*/
 	@RequestMapping("/miniHp_setBasicInformation_pw.do")
 	public String setBasicInformation_pw(HttpServletRequest request) {
 		System.out.println("미니홈피 기본정보 탭");
@@ -53,9 +57,9 @@ public class MiniHpSettingController {
 		System.out.println("미니홈피 기본정보 비밀번호 확인");
 		String id = request.getParameter("UserID");
 		String pw = request.getParameter("UserPW");
-		System.out.println(id);
-		System.out.println(pw);
-		int result = service.pwCheck(id,pw);
+		/*System.out.println(id);
+		System.out.println(pw);*/
+		int result = settingService.pwCheck(id,pw);
 		System.out.println(result);
 		if(result == 0) {
 			return "MiniHP/MiniHP_Setting_BasicInfo_pwCheck";
@@ -64,25 +68,85 @@ public class MiniHpSettingController {
 		}
 	}
 	
+	/*메뉴 설정 탭*/
 	@RequestMapping("/miniHp_menuAvailable.do")
-	public String settingMenuAvailable(Model model, HttpSession session) {
+	public String setMenuAvailable(Model model, HttpSession session) {
 		System.out.println("미니홈피 메뉴 설정");
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		MiniHpUserMenuVO miniHpUserMenuVO = service.getMenuAvailable(vo.getUserID());
-		System.out.println(miniHpUserMenuVO);
+		MiniHpUserMenuVO miniHpUserMenuVO = settingService.getMenuAvailable(vo.getUserID());
+		/*System.out.println(miniHpUserMenuVO);*/
 		model.addAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
 
 		return "MiniHP/MiniHP_Setting_Menu_Available";
 	}
 	
+	/*메뉴 설정 저장*/
 	@RequestMapping("/miniHp_menuAvailable_ok.do")
-	public String settingMenuAvailable_ok(Model model, HttpSession session, MiniHpUserMenuVO userMenuVO) {
+	public String setMenuAvailable_ok(Model model, HttpSession session, MiniHpUserMenuVO userMenuVO) {
 		System.out.println("미니홈피 메뉴 설정 확인 컨트롤러");
 		
-		service.updateMenuAvailable(userMenuVO);
+		settingService.updateMenuAvailable(userMenuVO);
 
-		return settingMenuAvailable(model, session);
+		return setMenuAvailable(model, session);
 	}
-
+	
+	/*일촌 관리 탭*/
+	@RequestMapping("/miniHp_setNeighborList.do")
+	public String setNeighborList(HttpSession session, Model model) {
+		System.out.println("미니홈피 이웃 목록 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		String UserID = sessionVO.getUserID();
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserID); //이웃 목록 불러오기
+		if(neighborList == null) {
+			model.addAttribute("listLength", 0);
+		} else {
+			model.addAttribute("listLength", neighborList.size());
+		}
+		
+		model.addAttribute("neighborList", neighborList);
+		
+		return "MiniHP/MiniHP_Setting_NeighborList";
+	}
+	
+	@RequestMapping("/miniHp_storyRoomMinimi.do")
+	public String setStoryRoomMinimi(HttpSession session, Model model) {
+		System.out.println("미니홈피 스토리룸 미니미 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = sessionVO.getUserSerial();
+		MiniHpSelectedItemVO itemList = itemService.getItemList(UserSerial);
+		List<MiniHpUserItemVO> minimiList = itemService.getMinimiList(UserSerial);
+		List<MiniHpUserItemVO> storyList = itemService.getStoryRoomList(UserSerial);
+		
+		int minimiSize = minimiList.size();
+		int storySize = storyList.size();
+		
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("minimiList", minimiList);
+		model.addAttribute("minimiSize", minimiSize);
+		model.addAttribute("storyList", storyList);
+		model.addAttribute("storySize", storySize);
+		
+		return "MiniHP/MiniHP_Setting_StoryRoom_Minimi";
+	}
+	
+	@ResponseBody
+	@PostMapping("/miniHp_saveStoryRoomMinimi.do")
+	public String saveStoryRoomMinimi(HttpServletRequest request, HttpSession session) {
+		System.out.println("미니홈피 스토리룸 미니미 저장 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int UserSerial = sessionVO.getUserSerial();
+		String storyRoom = request.getParameter("storyRoom");
+		String minimi = request.getParameter("minimi");
+		String[] minimiXY = request.getParameter("xy").split(",");
+		String minimiX = minimiXY[0];
+		String minimiY = minimiXY[1];
+		/*System.out.println(storyRoom);
+		System.out.println(minimi);
+		System.out.println(minimiX + ", " + minimiY);*/
+		itemService.updateStoryRoom(UserSerial, storyRoom);
+		itemService.updateMinimi(UserSerial, minimi, minimiX, minimiY);
+		
+		return "";
+	}
 }
 

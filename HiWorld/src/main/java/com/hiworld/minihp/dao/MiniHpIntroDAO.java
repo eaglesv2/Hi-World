@@ -3,9 +3,11 @@ package com.hiworld.minihp.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 @Repository
 public interface MiniHpIntroDAO {
@@ -30,6 +32,12 @@ public interface MiniHpIntroDAO {
 	
 	/*미니홈피 세팅 정보 가져오기*/
 	MiniHpIntroVO getData(String UserID);
+	
+	/*미니홈피 일일 중복 방문자 체크*/
+	MiniHpVisitorVO checkVisitor(MiniHpVisitorVO visitorVO);
+	
+	/*미니홈피 일일 방문자 기록*/
+	void insertVisitor(MiniHpVisitorVO visitorVO);
 	
 	/*미니홈피 오늘 방문자 수 가져오기*/
 	int getToday(String UserID);

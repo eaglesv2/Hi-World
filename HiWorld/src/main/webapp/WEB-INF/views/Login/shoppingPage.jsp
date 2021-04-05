@@ -110,13 +110,15 @@
     </script>
 </head>
 <body>
+
+<div id="Context">
 	<div class="Navi">
 		<div onclick="shop_character('캐릭터')">캐릭터</div>
 		<div onclick="shop_background('배경')">배경화면</div>
 		<div onclick="shop_music('음악')">음악</div>
 		<div onclick="shop_mouse('마우스')">마우스모양</div>
 	</div>
-		
+
 	<div class="sangpum">
 
 		
@@ -159,21 +161,56 @@
 				</c:if>
 			</tr>
 
-				</c:forEach>
+		</c:forEach>
 			
 		</table>
-		<a href="basketJoin.do">장바구니</a>
-		<h1>물품 최신순으로 나열</h1>
-		
-	</div>
 	
-
-
+	
+	<div>
+        <c:if test="${pagination.curRange ne 1 }">
+            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+        </c:if>
+        <c:if test="${pagination.curPage ne 1}">
+            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+        </c:if>
+        <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
+            <c:choose>
+                <c:when test="${pageNum eq  pagination.curPage}">
+                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                </c:when>
+                <c:otherwise>
+                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+        </c:if>
+        <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
+            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+        </c:if>
+	</div>
+</div>
+</div>
 
 
 </body>
 <script>
 
+	function fn_paging(curPage) {
+	    var ajaxMain = {
+	            url : 'sangpoom.do?list=쇼핑&curPage='+curPage,
+	            async : true,
+	            type : "GET",
+	            dataType : "html",
+	            cache : false
+	    };
+	$.ajax(ajaxMain).done(function(data){
+	        $('#Context').children().remove();
+	    	// Contents 영역 교체
+	        $('#Context').html(data);
+    });
+	}
 	function PLAY(mp3) {
 		var audio = new Audio(mp3);
 		/* 노래 시작 */
@@ -190,79 +227,91 @@
 
 	function basket(ArticleName) {
 			var UserSerial = '${sessionVO.userSerial}';
-			$.ajax({
-				type: "GET",
-				url: "basket.do",
-				data: {
-					"UserSerial" : UserSerial,
-					"ArticleName" : ArticleName
-				},
-				success : function (data) {
-					if(data==1){
-						alert("성공")
-					}else if(data==0){
-						alert("이미 구매한 상품")
-					}else if(data==-1){
-						alert("실패")
-					}else if(data==-2){
-						alert("이미 장바구니 들어감")
+			
+			if(UserSerial!=''&&UserSerial!=null){
+				$.ajax({
+					type: "GET",
+					url: "basket.do",
+					data: {
+						"UserSerial" : UserSerial,
+						"ArticleName" : ArticleName
+					},
+					success : function (data) {
+						if(data==1){
+							alert("성공")
+						}else if(data==0){
+							alert("이미 구매한 상품")
+						}else if(data==-1){
+							alert("실패")
+						}else if(data==-2){
+							alert("이미 장바구니 들어감")
+						}
 					}
-				}
-			})
+				})
+			}else{
+				alert("로그인하세요!!");
+			}
+			
 	}
 	
 	function bay(ArticleName) {
 		var UserSerial = '${sessionVO.userSerial}';
 		
-		/* alert 창 */
-		const swalWithBootstrapButtons = Swal.mixin({
- 			customClass: {
-    		cancelButton: 'btn btn-danger',
-    		confirmButton: 'btn btn-success'
-  			},
-  			buttonsStyling: false
-		})
+		if(UserSerial!=''&&UserSerial!=null){
+			/* alert 창 */
+			const swalWithBootstrapButtons = Swal.mixin({
+	 			customClass: {
+	    		cancelButton: 'btn btn-danger',
+	    		confirmButton: 'btn btn-success'
+	  			},
+	  			buttonsStyling: false
+			})
 
-		swalWithBootstrapButtons.fire({
-	  		title: '정말 구매하실껀가요??',
-			text: "구매 하신 후 환불은 어렵습니다.",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: '구매 하지 않겠습니다.',
-			cancelButtonText: '구매 하겠습니다.',
-			reverseButtons: true
-		}).then((result) => {
-			
-			if (result.isConfirmed) {
-				swalWithBootstrapButtons.fire(
-	 				      '취소 하였습니다.'
-	 				    )
- 		} else if (result.dismiss === Swal.DismissReason.cancel) {
- 			$.ajax({
-					type: "GET",
-					url: "bay.do",
-					data:{
-						"UserSerial" : UserSerial,
-						"ArticleName" : ArticleName
-					},
-					success: function (data) {
-						if(data==1){
-							swalWithBootstrapButtons.fire(
-							     '결제 성공 하였습니다.'
-			    			)
-						}else if(data==0){
-							swalWithBootstrapButtons.fire(
-							     '밤톨이 부족합니다'
-			    				)
-						}else if(data==-1){
-							swalWithBootstrapButtons.fire(
-						    	 '이미 구매한 상품입니다.'
-			    			)
+			swalWithBootstrapButtons.fire({
+		  		title: '정말 구매하실껀가요??',
+				text: "구매 하신 후 환불은 어렵습니다.",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: '구매 하지 않겠습니다.',
+				cancelButtonText: '구매 하겠습니다.',
+				reverseButtons: true
+			}).then((result) => {
+				
+				if (result.isConfirmed) {
+					swalWithBootstrapButtons.fire(
+		 				      '취소 하였습니다.'
+		 				    )
+	 		} else if (result.dismiss === Swal.DismissReason.cancel) {
+	 			$.ajax({
+						type: "GET",
+						url: "bay.do",
+						data:{
+							"UserSerial" : UserSerial,
+							"ArticleName" : ArticleName
+						},
+						success: function (data) {
+							if(data==1){
+								swalWithBootstrapButtons.fire(
+								     '결제 성공 하였습니다.'
+				    			)
+							}else if(data==0){
+								swalWithBootstrapButtons.fire(
+								     '밤톨이 부족합니다'
+				    				)
+							}else if(data==-1){
+								swalWithBootstrapButtons.fire(
+							    	 '이미 구매한 상품입니다.'
+				    			)
+							}
 						}
-					}
-				})
+					})
+			}
+			})
+		}else{
+			alert("로그인하세요!!");
 		}
-		})
+		
+		
 	}
 </script>
 </html>

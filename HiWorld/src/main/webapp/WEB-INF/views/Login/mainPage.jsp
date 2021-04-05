@@ -23,10 +23,10 @@
 	 $(document).ready(function(){
 		 	var main = $('.bxslider').bxSlider({
 				       mode: 'fade',
-				       auto:true,
-				       controls:true,
+				       auto:false,
 				       speed:500,
-	   
+				       controls: false,
+				       pager: false
 
 				   })
 				   
@@ -47,7 +47,7 @@
                      dataType : "html", 
                      async:true,
                      cache:false
-            		 
+ 
              }
         	  $.ajax(ajaxOption).done(function(data){
         		  //Contents 영역삭제
@@ -71,7 +71,6 @@
                          dataType : "html", 
                          async:true,
                          cache:false
-                		 
                  }
                  
                  
@@ -109,7 +108,8 @@
 
              };
              
-             function question(){
+             function question(Name){
+            	 if(Name!="" && Name!=null){
              	 console.log("1234") 
                  var ajaxOption4={
                 		 type: "GET",
@@ -126,7 +126,9 @@
             		  //Contents 영역 교체
             		  $('#bodyContext').html(data);
             	  })
- 
+            	 }else{
+            		 alert("로그인하세요");
+            	 }
              };
              
              function myinfo(){
@@ -214,12 +216,38 @@
                 }
            	  $.ajax(ajaxOption).done(function(data){
            		  //Contents 영역삭제
+           		  console.log('adfdasf')
            		  $('#bodyContext').children().remove();
            		  console.log("1111") 
            		  //Contents 영역 교체
            		  $('#bodyContext').html(data);
            	  })
             }
+            
+            /*  여기부터 userview */
+   function updateName() {
+	   alert("버튼 눌렀어요");
+		var ajaxData = $('input[name=username]').val();
+		alert("여기가 오류난거야?")
+		var upDatech = 1;
+		console.log("여기 왔니?")
+		alert(ajaxData)
+		$.ajax({
+			url : "UserUpdate.do",
+			type:"POST",
+			data : {"userName" : ajaxData, "upDatech":upDatech},
+			success: function(data) {
+				
+				if($('#name_hiden2').css('display') == 'none'){
+					$('#name_hiden2').show();
+					}
+				},
+			   			error : function () {
+							alert("error")
+			}
+		});
+		}
+
         	function basket(ArticleName) {
     			var UserSerial = '${sessionVO.userSerial}';
     			$.ajax({
@@ -297,6 +325,7 @@
     		})
     	}
     	
+
     	/*  여기부터 userview */
     	   function updateName() {
     		   alert("버튼 눌렀어요");
@@ -321,6 +350,44 @@
     			});
     			}
     	
+
+    	/* 어드민 회원관리 */
+    	function Manage_Client(){
+    		$.ajax({
+    			url: "Manage_Client.do",
+    			type: "GET",
+    			data: {"check":"all"},
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}	
+    	
+    	/* 어드민 상품등록 */
+    	function Manage_Article() {
+    		$.ajax({
+    			url: "Manage_Article.do",
+    			type: "GET",
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}
+    	
+    	/* 어드민 공지사항 등록 */
+    	function Manage_Board() {
+    		$.ajax({
+    			url: "Manage_Board.do",
+    			type: "GET",
+    			dataType: "html",
+    			success: function(data) {
+    				$("#bodyContext").html(data);
+    			}
+    		})
+    	}
+
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -329,36 +396,52 @@
 			vertical-align: middle;
 		}
 		.bx-wrapper{
-			margin-bottom:30px;
+			margin-right:15px;
+			border:none;
+			margin-bottom:15px;
 		}
       </style>
 </head>
 <body>
 	
     <div class="MainContainer">
-		    <ul class="bxslider">
-		        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
-		        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
-		        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
-		        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
-		    </ul>
+	   
+		    <div id="mainlogo">
+		    	<img src="resources/images/로고1.png" alt="로고사진" />
+		    		<div id="mainserch">
+			    		 <input type="text"  />
+			    		<img src="resources/images/돋보기.png" alt="" />
+		    		</div>
+		    </div>
+
+		<div id="Navmenu"> 
+			    <div id="Navli">
+				      <li id="kong" onclick="notice()">
+		                  	공지사항
+		              </li>
+		              <li id="shopping" onclick="shopping('쇼핑')">
+		              		    쇼핑
+		              </li>
+		              <li id="board" onclick="board('${sessionVO.userName}')">
+		                               	이웃찾기
+		              </li>
+		               <li id="question" onclick="question('${sessionVO.userName}')">
+		                          	  문의
+		              </li>
+	           </div>   
+         </div>
         <div class="leftCon">
             <div id="Nav">
-                <div id="Navmenu">
-                        <li id="kong" onclick="notice()">
-                         	   공지사항
-                        </li>
-                        <li id="shopping" onclick="shopping('쇼핑')">
-                 		           쇼핑
-                        </li>
-                        <li id="board" onclick="board('${sessionVO.userName}')">
-                           	 이웃찾기
-                        </li>
-                        <li id="question" onclick="question()">
-                           	 문의
-                        </li>
-                </div>
 
+                <div id="bx_div">
+                	<ul class="bxslider">
+				        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
+				        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+		    		</ul>
+
+                </div>
                 <div id="bodyContext">
 
                 </div>
@@ -388,7 +471,7 @@
 						        <div id="jang">
 						            <div id="jang-top">
 						                <div onclick="myinfo()">내정보보기</div>
-						                <div onclick="bamTol()">밤톨충전</div>
+						                <div id="bamtolbtn" onclick="bamTol()">밤톨충전</div>
 						            </div>
 						            <div id="jang-bottom">
 						                <div onclick="shoppingcart()">장바구니</div>
@@ -397,13 +480,34 @@
 						        </div>
 						    </div>
 					</c:if>
+
+					<c:if test="${sessionVO.userID == 'ADMIN'}">
+					<!-- 어드민이 들어왔을 경우 -->
+							<div id="minimi">
+								<div id="icon">
+									<img src="bb.jpg" alt="">
+									<div>
+										<div id="nickname">${sessionVO.userName} 님</div>
+										<div id="haveCash">보유 밤톨: ${sessionVO.userCash}개</div>
+
+									</div>
+								</div>
+								<div id="jang">
+									<div id="jang-top">
+										<div onclick="Manage_Client()">회원관리</div>
+										<div onclick="Manage_Article()">상품등록</div>
+									</div>
+									<div id="jang-bottom">
+										<div onclick="Manage_Board()">공지등록</div>
+										<a href="logout.do">로그아웃</a>
+									</div>
+								</div>
+							</div>
+
+                  	</c:if>
 					</c:when>
 					
-					<c:when test="${sessionVO.userName == 'ADMIN'}">
-					<!-- 어드민이 들어왔을 경우 -->
-                  		<div id="minimi"> 어드민입니다. </div>
-                  		
-                  	</c:when>
+
 					
 				<c:otherwise>
 					
@@ -449,10 +553,11 @@
 						</c:otherwise>
 					</c:choose>
             </div>
+            	<c:if test="${sessionVO.userName != null}">
                 <div id="minihome">
                     <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
                 </div>
-
+				</c:if>
                 <div id="add">
                   	  <img src="resources/images/mainadd.png" alt="" />
                 </div>

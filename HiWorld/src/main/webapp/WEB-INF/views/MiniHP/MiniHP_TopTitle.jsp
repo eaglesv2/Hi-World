@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
-%>
-<%
-%>
 <!DOCTYPE html>
-<html><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<html><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 var str;
@@ -62,11 +55,11 @@ function displayTitle(){
 </script>
 <body style="overflow:hidden;">
 	<div id="titleName" style="padding-top:12px;">
-		<span style="font-weight:bold; font-size: 15px; color: #4B9687; cursor: pointer;" id="inText" onclick="change();"><!-- 난 가끔 눔물을 흘린ㄷr. . ★ --></span>
+		<span style="font-weight:bold; font-size: 15px; color: #4B9687; cursor: pointer;" id="inText" onclick="change()"></span>
 	</div>
 	<div id="titleName_alter">
 		<input type="text" id="title_Txt" />
-		<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" onclick="change_ok();"/>
+		<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" onclick="change_ok()"/>
 	</div>
 </body>
 </html>
