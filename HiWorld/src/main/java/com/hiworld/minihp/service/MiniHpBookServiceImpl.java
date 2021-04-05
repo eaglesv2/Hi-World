@@ -52,6 +52,11 @@ public class MiniHpBookServiceImpl implements MiniHpBookService {
 		return dao.update(serial, content);
 	}
 	
+	@Override
+	public int changeSecret(int serial,int isSecret) {
+		return dao.changeSecret(serial,isSecret);
+	}
+	
 //	@Override
 //	public int getReplyCnt(int videoSerial) {
 //		return dao.getReplyCnt(videoSerial);

@@ -141,12 +141,18 @@
 	
 	<c:forEach items="${list}" var="l">
 	<div class="books">
-		<div class="booksTop">
+		<div class="booksTop" style='<c:if test="${l.isSecret==1}">background-color: #FAFABE;</c:if>'>
 			<span class="booksTop-left">
 				<span>${l.writeUserName}</span>
 				<span class="date">(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd HH:mm"/>)</span>
 			</span>
 			<span class="booksTop-right">
+				<c:if test="${l.isSecret==0}">
+					<span class="btns" onclick="changeSecret('${l.bookSerial}',1)">비밀로 하기</span>
+				</c:if>
+				<c:if test="${l.isSecret==1}">
+					<span class="btns" onclick="changeSecret('${l.bookSerial}',0)">공개로 하기</span>
+				</c:if>
 				<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
 					<span class="btns" onclick="updateBookForm('${l.bookSerial}');">수정</span><!-- 글쓴이만 가능하게 -->
 				</c:if>
@@ -158,7 +164,13 @@
 				<img class="bookMiniMe" alt="미니미" src="${l.miniMe}">
 			</span>
 			<span id="booksContent-${l.bookSerial}" class="booksContent">
-				${l.content}
+				<c:if test="${l.isSecret==1}">
+					<img alt="lock" src="resources/images/book-lock.png" width="10">
+					<font style="color: #FFC31F; font-weight: bold;">비밀이야</font>
+					<span style="color: #FFC31F; font-size: 10px;">(이 글은 홈주인과 작성자만 볼 수 있어요)</span>
+					<br>
+				</c:if>
+				<span class="secondFont">${l.content}</span>
 			</span>
 			<span id="booksContentUpdate-${l.bookSerial}" style="display: none;">
 				<textarea class="taUpdate" id="updateContent-${l.bookSerial}">${l.content}</textarea><br>
@@ -219,6 +231,18 @@ $(function() {
 		this.style.color='black';
 	});
 });
+function changeSecret(bookSerial,isSecret) {
+	$.ajax({
+		type: 'POST',
+		url: 'miniHpBookSecret.do/'+bookSerial+'/'+isSecret,
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8'
+	}).done(function(data) {
+		getBook();
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
 
 function insertBook() {
 	var content = $('#bookWriteContent').val();

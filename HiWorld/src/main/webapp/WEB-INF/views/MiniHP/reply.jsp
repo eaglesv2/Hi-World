@@ -20,7 +20,7 @@
 				</tr>
 				<c:if test="${replyCnt!=0}">
 				<tr style="background: #EBE9E9;">
-						<td scope="row">
+						<td scope="row" class="secondFont">
 						<c:forEach items="${replyList}" var="r">
 							<span id="reply-${r.replySerial}">
 								${r.userName}: ${r.replyContent}
