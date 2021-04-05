@@ -333,6 +333,32 @@
     		})
     	}
     	
+
+    	/*  여기부터 userview */
+    	   function updateName() {
+    		   alert("버튼 눌렀어요");
+    			var ajaxData = $('input[name=username]').val();
+    			alert("여기가 오류난거야?")
+    			var upDatech = 1;
+    			console.log("여기 왔니?")
+    			alert(ajaxData)
+    			$.ajax({
+    				url : "UserUpdate.do",
+    				type:"POST",
+    				data : {"userName" : ajaxData, "upDatech":upDatech},
+    				success: function(data) {
+    					
+    					if($('#name_hiden2').css('display') == 'none'){
+    						$('#name_hiden2').show();
+    						}
+    					},
+    				   			error : function () {
+    								alert("error")
+    				}
+    			});
+    			}
+    	
+
     	/* 어드민 회원관리 */
     	function Manage_Client(){
     		$.ajax({
@@ -425,7 +451,6 @@
 			})
 		})
     	
-    	
 
       </script>
 <style>
@@ -443,74 +468,89 @@
 </style>
 </head>
 <body>
+	
+    <div class="MainContainer">
+	   
+		    <div id="mainlogo">
+		    	<img src="resources/images/로고1.png" alt="로고사진" />
+		    		<div id="mainserch">
+			    		 <input type="searchInput"  />
+			    		<img src="resources/images/돋보기.png" alt="" />
+		    		</div>
+		    </div>
 
-	<div class="MainContainer">
+		<div id="Navmenu"> 
+			    <div id="Navli">
+				      <li id="kong" onclick="notice()">
+		                  	공지사항
+		              </li>
+		              <li id="shopping" onclick="shopping('쇼핑')">
+		              		    쇼핑
+		              </li>
+		              <li id="board" onclick="board('${sessionVO.userName}')">
+		                               	이웃찾기
+		              </li>
+		               <li id="question" onclick="question('${sessionVO.userName}')">
+		                          	  문의
+		              </li>
+		              
+		              <li id="shoppingcart" onclick="shoppingcart()">
+		              		장바구니
+		              </li>
+		              <li id="bamtolcharge" onclick="bamTol()">
+		              		밤톨충전
+		              </li>
+	           </div>   
+         </div>
+        <div class="leftCon">
+            <div id="Nav">
 
-		<div id="mainlogo">
-			<img src="resources/images/로고1.png" alt="로고사진" />
-			<div id="mainserch">
-				<input id="searchInput" placeholder="이름 혹은 아이디를 입력하세요"> <img
-					src="resources/images/돋보기.png" alt="" />
-			</div>
-		</div>
+                <div id="bx_div">
+                	<ul class="bxslider">
+				        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
+				        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+		    		</ul>
 
-		<div id="Navmenu">
-			<div id="Navli">
-				<li id="kong" onclick="notice()">공지사항</li>
-				<li id="shopping" onclick="shopping('쇼핑')">쇼핑</li>
-				<li id="board" onclick="board('${sessionVO.userName}')">이웃찾기</li>
-				<li id="question" onclick="question('${sessionVO.userName}')">
-					문의</li>
-			</div>
-		</div>
-		<div class="leftCon">
-			<div id="Nav">
+                </div>
+                <div id="bodyContext">
 
-				<div id="bx_div">
-					<ul class="bxslider">
-						<li><img src="resources/images/AttractionsBanner.jpg"
-							alt="사진"></li>
-						<li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
-						<li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
-						<li><img src="resources/images/FoodBanner.jpg" alt=""></li>
-					</ul>
+                </div>
+            </div>
+        </div>
 
-				</div>
-				<div id="bodyContext"></div>
-			</div>
-		</div>
+        <div class="rightCon">
+          <div id="minimi">
 
-		<div class="rightCon">
-			<div id="minimi">
-
-				<c:choose>
-
+		    <c:choose>
 					<c:when test="${sessionVO.userName != null}">
 						<c:if test="${sessionVO.userName != 'ADMIN'}">
 							<div id="minimi">
-								<div id="icon">
-									<img src="bb.jpg" alt="">
-									<div>
-										<div id="nickname">${sessionVO.userName}님</div>
-										<div id="haveCash">보유 밤톨: ${sessionVO.userCash}개</div>
 
-									</div>
-								</div>
-								<div id="jang">
-									<div id="jang-top">
-										<div onclick="myinfo()">내정보보기</div>
-										<div id="bamtolbtn" onclick="bamTol()">밤톨충전</div>
-									</div>
-									<div id="jang-bottom">
-										<div onclick="shoppingcart()">장바구니</div>
-										<a href="logout.do">로그아웃</a>
-									</div>
-								</div>
-							</div>
-						</c:if>
+						        <div id="icon">
+						            <img src="bb.jpg" alt="">
+						            <div>
+						               <div id="nickname">
+						              		 ${sessionVO.userName} 님
+						              	</div>
+						              	<div id="haveCash">
+						              		보유 밤톨: ${sessionVO.userCash}개
+						              	</div>
+						          	     
+						            </div>
+						        </div>
+						        <div id="jang">
+						            <div id="jang-top">
+						                <div onclick="myinfo()">내정보보기</div>
+						                <a href="logout.do">로그아웃</a>
+						            </div>
+						        </div>
+						    </div>
+					</c:if>
 
-						<c:if test="${sessionVO.userID == 'ADMIN'}">
-							<!-- 어드민이 들어왔을 경우 -->
+					<c:if test="${sessionVO.userID == 'ADMIN'}">
+					<!-- 어드민이 들어왔을 경우 -->
 							<div id="minimi">
 								<div id="icon">
 									<img src="bb.jpg" alt="">

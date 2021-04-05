@@ -91,16 +91,20 @@ a{
 }
 
 .rightCon #jang #jang-top{
-   display: flex;
-   justify-content: space-around;
-   margin-top: 20px;
+   margin-top: 40px;
    margin-bottom: 20px;
 }
-.rightCon #jang #jang-bottom{
-    display: flex;
-    justify-content: space-around;
-    
+
+#jang-top div{
+	float:left;
+	margin-left:40px;
 }
+#jang-top a{
+	float:left;
+	margin-left:45px;
+}
+
+
 .rightCon #minimi{
     border: 1px solid #dae1e6;
     float:top;
