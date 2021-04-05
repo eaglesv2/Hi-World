@@ -48,9 +48,13 @@ public class MiniHpController {
 	
 	MiniHpIntroVO introVO;
 	
+	MiniHpSelectedItemVO itemVO;
+	
 	MiniHpUserMenuVO menuVO;
 	
 	MiniHpNeighborViewVO neighborViewVO;
+	
+	
 	
 	
 	//@@@@@@@@@@@@@@@@ 홈페이지 VIEW @@@@@@@@@@@@@@@@@@
@@ -59,11 +63,13 @@ public class MiniHpController {
 	@RequestMapping("/MiniHP_Home.do")
 	public String miniHp_Home(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		int UserSerial = vo.getUserSerial();
 		String UserID = vo.getUserID();
 		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
-		
+		itemVO = itemService.getItemList(UserSerial);
 		
 		model.addAttribute("introVO", introVO);
+		model.addAttribute("itemList", itemVO);
 
 		return "MiniHP/MiniHP_Home";
 	}

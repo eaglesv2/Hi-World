@@ -9,20 +9,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
-
 <style type="text/css">
-/* body
-{
- scrollbar-face-color: #000000;
- scrollbar-highlight-color: #DBDBDB;
- scrollbar-3dlight-color: #FFFFFF;
- scrollbar-shadow-color: #9C92FF;
- scrollbar-darkshadow-color: #FFFFFF;
- scrollbar-track-color: #FFFFFF;
- scrollbar-arrow-color: #9C92FF
- } */
+body {
+	scrollbar-face-color: #000000;
+	scrollbar-highlight-color: #DBDBDB;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-shadow-color: #9C92FF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #9C92FF;
+	cursor: url('${pageContext.request.contextPath}/${itemList.mouseSrc}), auto;
+}
 </style>
-
 <script type="text/javascript">
 $(document).ready(function() {
 	console.log('1');
@@ -43,6 +41,7 @@ $(document).ready(function() {
 		}
 	})
 });
+
 </script>
 
 </head>
