@@ -10,21 +10,18 @@
 <link rel="stylesheet" href="resources/css/mainPage.css?after">
 <link rel="stylesheet" href="resources/css/reset.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/mainPage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script
-	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<title>Document</title>
+<title>Hi-World</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
 <script type="text/javascript">
                 
 
@@ -472,7 +469,7 @@
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/로고1.png" alt="로고사진" />
+		    	<img src="resources/images/파비콘.png" alt="로고사진" />
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
