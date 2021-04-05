@@ -325,6 +325,32 @@
     		})
     	}
     	
+
+    	/*  여기부터 userview */
+    	   function updateName() {
+    		   alert("버튼 눌렀어요");
+    			var ajaxData = $('input[name=username]').val();
+    			alert("여기가 오류난거야?")
+    			var upDatech = 1;
+    			console.log("여기 왔니?")
+    			alert(ajaxData)
+    			$.ajax({
+    				url : "UserUpdate.do",
+    				type:"POST",
+    				data : {"userName" : ajaxData, "upDatech":upDatech},
+    				success: function(data) {
+    					
+    					if($('#name_hiden2').css('display') == 'none'){
+    						$('#name_hiden2').show();
+    						}
+    					},
+    				   			error : function () {
+    								alert("error")
+    				}
+    			});
+    			}
+    	
+
     	/* 어드민 회원관리 */
     	function Manage_Client(){
     		$.ajax({
@@ -361,6 +387,7 @@
     			}
     		})
     	}
+
       </script>
       <style>
 	      	.kakaobutton > img{

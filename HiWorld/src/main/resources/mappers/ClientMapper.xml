@@ -16,6 +16,8 @@
 	
 	
 	
+	<!-- 회원 정보 수정 -->
+	
 	<!--  이름 수정 -->
 	<update id="updateName" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
@@ -42,6 +44,7 @@
 	where UserPW = #{UserPW}
 	</select>
 	
+	
 	<!--  생일 수정 -->
 	<update id="updateBirth" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
@@ -58,13 +61,13 @@
 		<update id="updateTel" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserTel = #{UserTel}
-		WHERE UserTel = #{UserTel}
-	</update>
-	<!-- 연락처 조회  -->
-	<select id="selectTel" resultType="clientVO">
-	SELECT UserTel FORM HW_USERLIST
-	WHERE UserTel = #{UserTel}
-	</select>
+		WHERE UserSerial = #{UserSerial}
+		</update>
+			<!-- 연락처 조회  -->
+		<select id="selectTel" resultType="clientVO">
+		SELECT * FROM HW_USERLIST
+		where UserSerial = #{UserSerial}
+		</select>
 	
 	
 		<!-- 주소 수정  --> 

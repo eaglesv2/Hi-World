@@ -34,8 +34,8 @@ public interface ClientDAO {
 	
 	/* 패스워드 수정*/
 	int updatepw(ClientVO clientVO);
-	/* 이름 조회*/
-	ClientVO selectpw(ClientVO clientVO);
+	/* 패스워드 조회*/
+	ClientVO selectpw(String clientVO);
 	
 	
 	/* 생일 수정*/
@@ -46,7 +46,7 @@ public interface ClientDAO {
 	/* 연락처 수정*/
 	int updateTel(ClientVO clientVO);
 	/* 이름 조회*/
-	ClientVO selectTel(ClientVO clientVO);
+	ClientVO selectTel(int clientVO);
 	
 	
 	/* 주소 수정*/
