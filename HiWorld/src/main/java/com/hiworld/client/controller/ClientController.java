@@ -519,14 +519,60 @@ public class ClientController {
 			model.addAttribute("userView", clientvo2);
 			 break;
 		case "3":
+			sessionVO so3 = (sessionVO)session.getAttribute("sessionVO");
+			int Usersial = so3.getUserSerial();
+			String Address = request.getParameter("userDate");
+			vvo.setUserSerial(Usersial);
+			vvo.setUserAddress(Address);
+			clientService.updateAddress(vvo);
+			Usersial = vvo.getUserSerial();
+			ClientVO clientvo3 = clientService.selectAddress(Usersial);
+			model.addAttribute("userView",clientvo3);
 			 break;
-
+					
 		default:
 			return "Login/userview";
 		}
 		return "Login/userview";
 	}
+	
+	
+	/* 아이디 비밀번호 찾기 폼으로가자*/
+	@RequestMapping("pw_Id_find.do")
+	public String pw_Id_find() throws Exception{
+		return "/Login/id_pw_find";
+	}
+	
+	/* 아이디 비밀번호 찾자 */
+	@RequestMapping("find_id_pw.do")
+	@ResponseBody
+	public String find_id_pw(HttpServletRequest request,ClientVO clientvo, Model md)throws Exception{
+		System.out.println("아이디 비밀번호를 찾을거야");
+		String find = request.getParameter("");
+		String check = null;
+		switch (find) {
+		case "1":
 
+			String name = clientvo.getUserName();
+			String tel = clientvo.getUserTel();
+			ClientVO vo = clientService.selectFindId(name, tel);
+			
+			return "find_id";
+		case "2":
+			String Id = clientvo.getUserID();
+			String tel1 = clientvo.getUserTel();
+			ClientVO vo1 = clientService.selectFindPw(Id, tel1);
+			return "find_pw";
+			
+			
+		default:
+			return "";
+			
+		}
+	}
+	
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
 	@GetMapping("/BamTolCharge.do")
