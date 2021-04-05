@@ -16,7 +16,7 @@ public class NeighborServiceImpl implements NeighborService{
 	
 	/* 자기 제외 정보 전부 가져오기 */
 	@Override
-	public ArrayList<MiniHpIntroVO> getAllNeighbor(String UserID) {
-		return dao.getAllNeighbor(UserID);
+	public ArrayList<MiniHpIntroVO> getAllNeighbor() {
+		return dao.getAllNeighbor();
 	}
 }

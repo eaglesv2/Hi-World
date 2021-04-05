@@ -82,6 +82,6 @@
 	<select id="getAllNeighbor" resultType="com.hiworld.minihp.vo.MiniHpIntroVO">
 		SELECT mi.hpTitle, hu.UserID, hu.UserName 
 		FROM MiniHP_Intro mi, HW_USERLIST hu
-		WHERE mi.UserSerial = hu.UserSerial AND mi.UserID != #{UserID};
+		WHERE mi.UserSerial = hu.UserSerial;
 	</select>
 </mapper>
