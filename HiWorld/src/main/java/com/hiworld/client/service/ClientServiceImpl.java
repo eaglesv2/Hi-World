@@ -41,98 +41,32 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 	/* 회원 정보 수정 시작====================================*/
-	/*이름 수정 */
-	@Override
-	public int updateName(ClientVO clientVO) {
-		int checkNumber = dao.updateName(clientVO);
-		return checkNumber;
-		
-	}
-	/* 이름 조회*/
-	@Override
-	public ClientVO selectName(String clientVO) {
-		// TODO Auto-generated method stub
-		ClientVO vo = dao.selectName(clientVO);
-		return vo;
-	}
-	
-	
-	
 	
 	/*비밀번호 수정 */
 	@Override
-	public String updatepw(ClientVO clientVO) {
+	public int updatepw(ClientVO clientVO) {
 		int checkNumber = dao.updatepw(clientVO);
-		String checkJoin = "";
-		
-		/* 회원수정 잘 되었는지 체크 */
-		if(checkNumber==0) {
-			checkJoin = "fail";
-		}else if(checkNumber==-1) {
-			checkJoin = "error";
-		}else {
-			checkJoin = "success";
-			
-		}
-		
-		return checkJoin;
+		return checkNumber;
 		
 	}
 	/* 비밀번호 조회*/
 	@Override
-	public ClientVO selectpw(ClientVO clientVO) {
+	public ClientVO selectpw(String clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectpw(clientVO);
 		return vo;
 	}
 	
-	/*생일 수정 */
-	@Override
-	public String updateBirth(ClientVO clientVO) {
-		int checkNumber = dao.updateBirth(clientVO);
-		String checkJoin = "";
-		
-		/* 회원수정 잘 되었는지 체크 */
-		if(checkNumber==0) {
-			checkJoin = "fail";
-		}else if(checkNumber==-1) {
-			checkJoin = "error";
-		}else {
-			checkJoin = "success";
-		}
-		
-		return checkJoin;
-		
-	}
-	/* 생일 조회*/
-	@Override
-	public ClientVO selectBirth(ClientVO clientVO) {
-		// TODO Auto-generated method stub
-		ClientVO vo = dao.selectBirth(clientVO);
-		return vo;
-	}
-	
 	/*연락처 수정 */
 	@Override
-	public String updateTel(ClientVO clientVO) {
+	public int updateTel(ClientVO clientVO) {
 		int checkNumber = dao.updateTel(clientVO);
-		String checkJoin = "";
-		
-		/* 회원수정 잘 되었는지 체크 */
-		if(checkNumber==0) {
-			checkJoin = "fail";
-		}else if(checkNumber==-1) {
-			checkJoin = "error";
-		}else {
-			checkJoin = "success";
-		}
-		
-		return checkJoin;
+		return checkNumber;
 		
 	}
 	/* 연락처 조회*/
 	@Override
-	public ClientVO selectTel(ClientVO clientVO) {
+	public ClientVO selectTel(int clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectTel(clientVO);
 		return vo;
@@ -141,25 +75,14 @@ public class ClientServiceImpl implements ClientService {
 	
 	/*주소 수정 */
 	@Override
-	public String updateAddress(ClientVO clientVO) {
+	public int updateAddress(ClientVO clientVO) {
 		int checkNumber = dao.updateAddress(clientVO);
-		String checkJoin = "";
-		
-		/* 회원수정 잘 되었는지 체크 */
-		if(checkNumber==0) {
-			checkJoin = "fail";
-		}else if(checkNumber==-1) {
-			checkJoin = "error";
-		}else {
-			checkJoin = "success";
-		}
-		
-		return checkJoin;
+		return checkNumber;
 		
 	}
 	/* 주소 조회*/
 	@Override
-	public ClientVO selectAddress(ClientVO clientVO) {
+	public ClientVO selectAddress(int clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectAddress(clientVO);
 		return vo;

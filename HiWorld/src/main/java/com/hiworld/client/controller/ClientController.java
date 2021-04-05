@@ -410,41 +410,64 @@ public class ClientController {
 		return "redirect:/login.do";
 	}
 
-	/* 회원정보 수정 구현 완료 */
+	/* 회원정보 수정 구현 완료*/
 	@PostMapping("UserUpdate.do")
 	@ResponseBody
-	public String userUpdate(HttpServletRequest request, HttpSession session, Model model, ClientVO vvo) {
-		// int updatech = Integer.parseInt(request.getParameter("updatech"));
-		/* 받아온 값을 vo에 넣기 위해서 작업 */
+	public String userUpdate(HttpServletRequest request, HttpSession session,Model model, ClientVO vvo) {
+		/* 받아온 값을 vo에 넣기 위해서 작업*/
+		System.out.println("수정 구현");
 		String upDatech = request.getParameter("upDatech");
+		System.out.println(upDatech);
 		switch (upDatech) {
+		
 		case "1":
-			/* 섹션으로 로그인 된 유저 정보를 읽어와서 씨리얼 번호로 이름을 수정 */
-			sessionVO so = (sessionVO) session.getAttribute("sessionVO");
-			int uSerial = so.getUserSerial();
-			String uName = request.getParameter("userName");
-			vvo.setUserSerial(uSerial);
-			vvo.setUserName(uName);
-			int ok = clientService.updateName(vvo);
-			ClientVO clientvo = clientService.selectName(uName);
-			model.addAttribute("clientVO", clientvo);
-			break;
+			sessionVO so1 = (sessionVO)session.getAttribute("sessionVO");
+			int userial = so1.getUserSerial();
+			String Pw = request.getParameter("userDate");
+			vvo.setUserSerial(userial);
+			vvo.setUserPW(Pw);
+			clientService.updatepw(vvo);
+			Pw = vvo.getUserPW();
+			ClientVO clientvo1 = clientService.selectpw(Pw);
+			model.addAttribute("userView", clientvo1);
+			 break;
 		case "2":
-
-			break;
+			sessionVO so2 = (sessionVO)session.getAttribute("sessionVO");
+			int Userial = so2.getUserSerial();
+			String Tel = request.getParameter("userDate");
+			vvo.setUserSerial(Userial);
+			vvo.setUserTel(Tel);
+			clientService.updateTel(vvo);
+			Userial = vvo.getUserSerial();
+			ClientVO clientvo2 = clientService.selectTel(Userial);
+			model.addAttribute("userView", clientvo2);
+			 break;
 		case "3":
-			break;
-		case "4":
-			break;
-		case "5":
-			break;
-
+			sessionVO so3 = (sessionVO)session.getAttribute("sessionVO");
+			int Usersial = so3.getUserSerial();
+			String Address = request.getParameter("userDate");
+			vvo.setUserSerial(Usersial);
+			vvo.setUserAddress(Address);
+			clientService.updateAddress(vvo);
+			Usersial = vvo.getUserSerial();
+			ClientVO clientvo3 = clientService.selectAddress(Usersial);
+			model.addAttribute("userView",clientvo3);
+			 break;
+					
 		default:
 			return "Login/userview";
 		}
 		return "Login/userview";
 	}
-
+	
+	
+	/* ID/비밀번호찾기 */
+	@RequestMapping("ID_PW_Find.do")
+	public String find_ID_PW_form() throws Exception{
+		return "Login/id_pw_find";
+	}
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
 	@GetMapping("/BamTolCharge.do")

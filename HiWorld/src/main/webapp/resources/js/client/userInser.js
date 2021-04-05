@@ -233,7 +233,7 @@
 		
 		//주소 정규식과 기능 구현
 		$('input[name=userAddress]').blur(function() {
-			var add = /^[가-힣]*|[a-zA-Z]*$/;
+			var add = /^[가-힣]*|[a-zA-Z]*|[1-9]*$/;
 			var add1 = $('input[name=userAddress]').val();
 			if(!add.test(add1)){
 				address = false;

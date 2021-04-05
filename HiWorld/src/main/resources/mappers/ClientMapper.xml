@@ -16,19 +16,7 @@
 	
 	
 	
-	<!--  이름 수정 -->
-	<update id="updateName" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserName = #{UserName}
-		WHERE UserSerial = #{UserSerial}
-	</update>
-	
-	<!-- 이름 조회  -->
-	<select id="selectName" resultType="clientVO">
-	SELECT * FROM HW_USERLIST
-	where UserName = #{UserName}
-	</select>
-	
+	<!-- 회원 정보 수정 -->
 	
 	<!--  비밀번호 수정 -->
 	<update id="updatepw" parameterType="clientVO">
@@ -41,42 +29,30 @@
 	SELECT * FROM HW_USERLIST
 	where UserPW = #{UserPW}
 	</select>
-	
-	<!--  생일 수정 -->
-	<update id="updateBirth" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserBirth = #{UserBirth}
-		WHERE UserBirth = #{UserBirth}
-	</update>
-	<!-- 생일수정 조회  -->
-	<select id="selectBirth" resultType="clientVO">
-	SELECT UserBirth FORM HW_USERLIST
-	WHERE UserBirth = #{UserBirth}
-	</select>
-	
+
 		<!--  연락처 수정 -->
 		<update id="updateTel" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserTel = #{UserTel}
-		WHERE UserTel = #{UserTel}
-	</update>
-	<!-- 연락처 조회  -->
-	<select id="selectTel" resultType="clientVO">
-	SELECT UserTel FORM HW_USERLIST
-	WHERE UserTel = #{UserTel}
-	</select>
+		WHERE UserSerial = #{UserSerial}
+		</update>
+			<!-- 연락처 조회  -->
+		<select id="selectTel" resultType="clientVO">
+		SELECT * FROM HW_USERLIST
+		where UserSerial = #{UserSerial}
+		</select>
 	
 	
 		<!-- 주소 수정  --> 
 	<update id="updateAddress" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserAddress = #{UserAddress}
-		WHERE UserAddress = #{UserAddress}
+		WHERE UserSerial = #{UserSerial}
 	</update>
 	<!-- 주소 조회  -->
 	<select id="selectAddress" resultType="clientVO">
-	SELECT UserAddress FORM HW_USERLIST
-	WHERE UserAddress = #{UserAddress}
+	SELECT * FROM HW_USERLIST 
+	WHERE UserSerial = #{UserSerial}	
 	</select>
 	
 	
@@ -87,7 +63,7 @@
 	<!-- 회원 회원 가입 -->
 	<!-- parameterType 값은 자동으로 설정됨? 아마 아닐경우 직접 써주기 -->
 	<insert id="insertClient" parameterType="clientVO">
-		INSERT INTO HW_USERLIST (UserName,UserID,UserPW,UserGender,UserBirth ,UserTel,UserAddress)
+		INSERT INTO HW_USERLIST (UserName,UserID,UserPW,UserGender,UserBirth,UserTel,UserAddress)
 		VALUES(#{UserName},#{UserID},#{UserPW},#{UserGender},#{UserBirth},#{UserTel},#{UserAddress})
 	</insert>
 	
