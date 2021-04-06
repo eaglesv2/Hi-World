@@ -4,24 +4,24 @@
 	
 	<insert id="insertNeighborList" parameterType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		INSERT INTO MiniHP_NeighborList
-		VALUES (#{senderID}, #{senderName}, #{senderValue}, #{receiverID}, #{receiverName}, #{receiverValue}, #{userMessage}, #{type})
+		VALUES (#{senderSerial}, #{senderName}, #{senderValue}, #{receiverSerial}, #{receiverName}, #{receiverValue}, #{userMessage}, #{type})
 	</insert>
 	
-	<select id="getRegisterList" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
+	<select id="getRegisterList" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		SELECT *
 		FROM MiniHP_NeighborList
-		WHERE receiverID = #{UserID}
+		WHERE receiverSerial = #{userSerial}
 	</select>
 	
-	<select id="getData" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
+	<select id="getData" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		SELECT *
 		FROM MiniHP_NeighborList
-		WHERE senderID = #{senderID} AND receiverID = #{receiverID}
+		WHERE senderSerial = #{senderSerial} AND receiverSerial = #{receiverSerial}
 	</select>
 	
 	<delete id="deleteNeighborList">
 		DELETE
 		FROM MiniHP_NeighborList
-		WHERE senderID = #{senderID} AND receiverID = #{receiverID}
+		WHERE senderSerial = #{senderSerial} AND receiverSerial = #{receiverSerial}
 	</delete>
 </mapper>

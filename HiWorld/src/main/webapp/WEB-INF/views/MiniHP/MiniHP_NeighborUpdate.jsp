@@ -97,9 +97,9 @@ function updateSend(){
 			<img alt="취소" src="${pageContext.request.contextPath}/resources/images/admin/cancelBtn.jpg" onclick="window.close()"/>
 		</span>
 		
-		<input type="hidden" name="senderID" value="${userID}">
+		<input type="hidden" name="senderSerial" value="${userSerial}">
 		<input type="hidden" name="senderName" value="${userName}">
-		<input type="hidden" name="receiverID" value="${neighborID}">
+		<input type="hidden" name="receiverSerial" value="${neighborSerial}">
 		<input type="hidden" name="receiverName" value="${neighborName}">
 		<input type="hidden" name="type" value="1">
 	</form>

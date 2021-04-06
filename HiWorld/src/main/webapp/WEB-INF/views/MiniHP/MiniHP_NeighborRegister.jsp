@@ -107,9 +107,9 @@ function registerSend(){
 		<span id="cancelBtn">
 			<img alt="취소" src="${pageContext.request.contextPath}/resources/images/admin/cancelBtn.jpg" onclick="window.close();"/>
 		</span>
-		<input type="hidden" name="senderID" value="${sessionVO.userID}">
+		<input type="hidden" name="senderSerial" value="${sessionVO.userSerial}">
 		<input type="hidden" name="senderName" value="${senderName}">
-		<input type="hidden" name="receiverID" value="${receiverId}">
+		<input type="hidden" name="receiverSerial" value="${receiverSerial}">
 		<input type="hidden" name="receiverName" value="${receiverName}">
 		<input type="hidden" name="type" value="0">
 	</form>

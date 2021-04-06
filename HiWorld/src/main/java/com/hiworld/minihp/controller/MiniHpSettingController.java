@@ -75,7 +75,7 @@ public class MiniHpSettingController {
 	public String setMenuAvailable(Model model, HttpSession session) {
 		System.out.println("미니홈피 메뉴 설정");
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		MiniHpUserMenuVO miniHpUserMenuVO = settingService.getMenuAvailable(vo.getUserID());
+		MiniHpUserMenuVO miniHpUserMenuVO = settingService.getMenuAvailable(vo.getUserSerial());
 		/*System.out.println(miniHpUserMenuVO);*/
 		model.addAttribute("miniHpUserMenuVO", miniHpUserMenuVO);
 
@@ -97,8 +97,8 @@ public class MiniHpSettingController {
 	public String setNeighborList(HttpSession session, Model model) {
 		System.out.println("미니홈피 이웃 목록 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		String UserID = sessionVO.getUserID();
-		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserID); //이웃 목록 불러오기
+		int UserSerial = sessionVO.getUserSerial();
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserSerial); //이웃 목록 불러오기
 		if(neighborList == null) {
 			model.addAttribute("listLength", 0);
 		} else {

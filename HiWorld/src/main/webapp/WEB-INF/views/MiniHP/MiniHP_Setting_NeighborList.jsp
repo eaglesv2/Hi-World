@@ -41,7 +41,7 @@ function deleteNeighbor(neighborID){
 		$.ajax({
 			type : 'GET',
 			url : 'miniHp_deleteNeighbor.do',
-			data : { NeighborID : neighborID },
+			data : { NeighborSerial : neighborSerial },
 			
 			success : function() {
 				loacation.reload();
@@ -75,11 +75,11 @@ function updateNeighbor(neighborID){
 		<c:if test="${listLength != 0}">
 			<c:forEach var="neighborList" items="${neighborList}">
 				<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
-				<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborID}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborID}');"/><br/>
-				<input type="hidden" name="userID" value="${neighborList.userID}">
+				<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborSerial}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborSerial}');"/><br/>
+				<input type="hidden" name="userSerial" value="${neighborList.userSerial}">
 				<input type="hidden" name="userName" value="${neighborList.userName}">
 				<input type="hidden" name="userValue" value="${neighborList.userValue}">
-				<input type="hidden" name="neighborID" value="${neighborList.neighborID}">
+				<input type="hidden" name="neighborSerial" value="${neighborList.neighborSerial}">
 				<input type="hidden" name="neighborName" value="${neighborList.neighborName}">
 				<input type="hidden" name="neighborValue" value="${neighborList.neighborValue}">
 			</c:forEach>

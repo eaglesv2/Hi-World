@@ -109,8 +109,8 @@ function sendRandom(){
 function moveToUser() {
 	console.log('홈피 이동');
 	
-	var OwnerID = $("#neighborSelect option:selected").val();
-	console.log(OwnerID);
+	var OwnerSerial = $("#neighborSelect option:selected").val();
+	console.log(OwnerSerial);
 	
 	/* if(OwnerID == "") {
 		return;
@@ -130,7 +130,7 @@ function moveToUser() {
     var popupHeight = 580;
 	var popupX = (window.screen.width/2)-(popupWidth/2);
     var popupY = (window.screen.height/2)-(popupHeight/2);
-	window.open("miniHp_guestHome.do?OwnerID="+OwnerID,OwnerID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+	window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
 	/* parent.window.close(); */
 }
 
@@ -212,7 +212,8 @@ height:100px;
 				<!-- 유저 생일 표시 -->
 				<font style="font-size: 7pt;">${sessionVO.userBirth}</font>
 					<br/>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
+				<!-- 일촌 신청 확인 버튼 -->
+				<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
 				</font>
 				
 				<select id="neighborSelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser()">
@@ -220,7 +221,7 @@ height:100px;
 					<!-- 이웃 목록 -->
 					<c:if test="${listLength != 0}">
 					<c:forEach var="neighborList" items="${neighborList}">
-						<option value="${neighborList.neighborID}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
+						<option value="${neighborList.neighborSerial}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
 					</c:forEach>
 					</c:if>
 					<c:if test="${listLength == 0}">

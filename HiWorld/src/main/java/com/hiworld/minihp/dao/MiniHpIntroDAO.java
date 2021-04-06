@@ -31,7 +31,7 @@ public interface MiniHpIntroDAO {
 	void updatePicture(MiniHpIntroVO introVO);
 	
 	/*미니홈피 세팅 정보 가져오기*/
-	MiniHpIntroVO getData(String UserID);
+	MiniHpIntroVO getData(int userSerial);
 	
 	/*미니홈피 일일 중복 방문자 체크*/
 	MiniHpVisitorVO checkVisitor(MiniHpVisitorVO visitorVO);
@@ -43,13 +43,13 @@ public interface MiniHpIntroDAO {
 	int getToday(String UserID);
 	
 	/*미니홈피 오늘 방문자수 카운트*/
-	void updateToday(String UserID);
+	void updateToday(int userSerial);
 	
 	/*미니홈피 전체 방문자 수 가져오기*/
 	int getTotal(String UserID);
 	
 	/*미니홈피 누적 방문자수 카운트*/
-	void updateTotal(String UserID);
+	void updateTotal(int userSerial);
 	
 	/*전체 정보 가져오기*/
 	ArrayList<MiniHpIntroVO> getAllNeighbor();

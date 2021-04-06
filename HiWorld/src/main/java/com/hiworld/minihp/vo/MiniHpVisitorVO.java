@@ -1,19 +1,21 @@
 package com.hiworld.minihp.vo;
 
 public class MiniHpVisitorVO {
-	private String OwnerID;
-	private String GuestID;
+	private int OwnerSerial;
+	private int GuestSerial;
 	
-	public String getOwnerID() {
-		return OwnerID;
+	public int getOwnerSerial() {
+		return OwnerSerial;
 	}
-	public void setOwnerID(String ownerID) {
-		OwnerID = ownerID;
+	public void setOwnerSerial(int ownerSerial) {
+		OwnerSerial = ownerSerial;
 	}
-	public String getGuestID() {
-		return GuestID;
+	public int getGuestSerial() {
+		return GuestSerial;
 	}
-	public void setGuestID(String guestID) {
-		GuestID = guestID;
+	public void setGuestSerial(int guestSerial) {
+		GuestSerial = guestSerial;
 	}
+	
+
 }

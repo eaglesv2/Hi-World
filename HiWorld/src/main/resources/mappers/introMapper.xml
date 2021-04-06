@@ -5,40 +5,40 @@
 	<select id="getData" resultType="com.hiworld.minihp.vo.MiniHpIntroVO">
 		SELECT *
 		FROM MiniHP_Intro
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</select>
 	
-	<select id="getInfo" parameterType="String" resultType="String">
+	<select id="getInfo" resultType="String">
 		SELECT hpInfo
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updateInfo" parameterType="com.hiworld.minihp.vo.MiniHpIntroVO">
+	<update id="updateInfo">
 		UPDATE MiniHP_Intro
 		SET hpInfo = #{hpInfo}
 		WHERE UserID = #{UserID}
 	</update>
 	
-	<select id="getTitle" parameterType="String" resultType="String">
+	<select id="getTitle" resultType="String">
 		SELECT hpTitle
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updateTitle" parameterType="com.hiworld.minihp.vo.MiniHpIntroVO">
+	<update id="updateTitle">
 		UPDATE MiniHP_Intro
 		SET hpTitle = #{hpTitle}
 		WHERE UserID = #{UserID}
 	</update>
 	
-	<select id="getPicture" parameterType="String" resultType="java.util.Map">
+	<select id="getPicture" resultType="java.util.Map">
 		SELECT hpPicture
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updatePicture" parameterType="com.hiworld.minihp.vo.MiniHpIntroVO">
+	<update id="updatePicture">
 		UPDATE MiniHP_Intro
 		SET hpPicture = #{hpPicture}
 		WHERE UserID = #{UserID}
@@ -47,40 +47,40 @@
 	<select id="checkVisitor" resultType="com.hiworld.minihp.vo.MiniHpVisitorVO">
 		SELECT *
 		FROM MiniHP_Visitor
-		WHERE OwnerID = #{OwnerID} AND GuestID = #{GuestID}
+		WHERE OwnerSerial = #{OwnerSerial} AND GuestSerial = #{GuestSerial}
 	</select>
 	
 	<insert id="insertVisitor">
 		INSERT INTO MiniHP_Visitor
-		VALUES (#{OwnerID}, #{GuestID})
+		VALUES (#{OwnerSerial}, #{GuestSerial})
 	</insert>
 	
-	<select id="getToday" parameterType="String" resultType="int">
+	<select id="getToday" resultType="int">
 		SELECT hpToday
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updateToday" parameterType="String">
+	<update id="updateToday">
 		UPDATE MiniHP_Intro
 		SET hpToday = hpToday + 1
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</update>
 	
-	<select id="getTotal" parameterType="String" resultType="int">
+	<select id="getTotal" resultType="int">
 		SELECT hpTotal
 		FROM MiniHP_Intro
 		WHERE UserID = #{UserID}
 	</select>
 	
-	<update id="updateTotal" parameterType="String">
+	<update id="updateTotal">
 		UPDATE MiniHP_Intro
 		SET hpTotal = hpTotal + 1
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</update>
 	
 	<select id="getAllNeighbor" resultType="com.hiworld.minihp.vo.MiniHpIntroVO">
-		SELECT mi.hpTitle, hu.UserID, hu.UserName 
+		SELECT mi.hpTitle, hu.UserSerial, hu.UserID, hu.UserName 
 		FROM MiniHP_Intro mi, HW_USERLIST hu
 		WHERE mi.UserSerial = hu.UserSerial;
 	</select>
