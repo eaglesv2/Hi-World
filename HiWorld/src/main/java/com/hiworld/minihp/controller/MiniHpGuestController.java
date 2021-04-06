@@ -272,8 +272,8 @@ public class MiniHpGuestController {
 	}
 	@PostMapping("/scrapePicture.do/{pictureSerial}/{folderSerial}")
 	@ResponseBody
-	public void scrapePicture(@PathVariable int pictureSerial,@PathVariable int folderSerial) {
-		pictureService.scrapePicture(pictureSerial, folderSerial);
+	public void scrapePicture(@PathVariable int pictureSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		pictureService.scrapePicture(pictureSerial, folderSerial,request);
 	}
 	
 	// 게시판 -------------------------------------
@@ -341,6 +341,22 @@ public class MiniHpGuestController {
 		model.addAttribute("isNeighbor", isNeighbor);
 		return "MiniHP/guestBoard_Detail";
 	}
+	//스크랩
+	@GetMapping("/scrapeBoard.do")
+	public String scrapeBoardPage(int boardSerial, Model model, HttpSession session) {
+		//자신의 모든 폴더 불러오기
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("folderList",boardService.getAllFolder(userSerial));
+		
+		//스크랩할 데이터
+		model.addAttribute("boardSerial", boardSerial);
+		return "MiniHP/scrapeBoard";
+	}
+	@PostMapping("/scrapeBoard.do/{boardSerial}/{folderSerial}")
+	@ResponseBody
+	public void scrapeBoard(@PathVariable int boardSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		boardService.scrapeBoard(boardSerial, folderSerial,request);
+	}
 	
 	// 동영상 -------------------------------------
 	@GetMapping("/MiniHpVideoGuestSide.do")
@@ -388,6 +404,22 @@ public class MiniHpGuestController {
 		model.addAttribute("currentFolderName", videoService.getFolderName(folderSerial));
 		model.addAttribute("currentFolderSerial", folderSerial);
 		return "MiniHP/guestVideo";
+	}
+	//스크랩
+	@GetMapping("/scrapeVideo.do")
+	public String scrapeVideoPage(int videoSerial, Model model, HttpSession session) {
+		//자신의 모든 폴더 불러오기
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("folderList",videoService.getAllFolder(userSerial));
+		
+		//스크랩할 데이터
+		model.addAttribute("videoSerial", videoSerial);
+		return "MiniHP/scrapeVideo";
+	}
+	@PostMapping("/scrapeVideo.do/{videoSerial}/{folderSerial}")
+	@ResponseBody
+	public void scrapeVideo(@PathVariable int videoSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		videoService.scrapeVideo(videoSerial, folderSerial,request);
 	}
 	
 	// 방명록 -------------------------------------

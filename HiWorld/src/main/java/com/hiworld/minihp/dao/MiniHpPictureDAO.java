@@ -11,6 +11,7 @@ import com.hiworld.minihp.vo.MiniHpPictureVO;
 public interface MiniHpPictureDAO {
 	int getFolderScope(int folderSerial);
 	
+	
 	//폴더 부분
 	//select all
 	List<MiniHPPictureFolderVO> getAllFolder(int userSerial);

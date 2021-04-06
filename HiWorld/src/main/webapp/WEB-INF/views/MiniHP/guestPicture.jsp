@@ -121,6 +121,25 @@ function fn_paging(curPage) {
 function scrapePicture(pictureSerial) {
 	window.open("scrapePicture.do?pictureSerial="+pictureSerial, "스크랩하기", "width=400, height=300, left=100, top=50");
 }
+function insertScrapeReply(pictureSerial) {
+	var replyContent = '퍼가요~섩';
+	var data = {
+		replyContent : replyContent,
+		pictureSerial : pictureSerial
+	}
+	console.log(JSON.stringify(data));
+	$.ajax({
+		type: 'POST',
+		url: 'MiniHpPictureReply.do',
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8',
+		data: JSON.stringify(data)
+	}).done(function() {
+		$("#replyTbody-"+pictureSerial).load("MiniHpPictureReply.do?pictureSerial="+pictureSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
 </script>
 <input type="hidden" id="ownerSerial" value="${ownerSerial}">
 <form name="poto">

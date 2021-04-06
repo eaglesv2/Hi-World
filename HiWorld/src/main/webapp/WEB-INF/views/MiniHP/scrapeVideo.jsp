@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 <body>
-<input id="pictureSerial" type="hidden" value="${pictureSerial}">
+<input id="videoSerial" type="hidden" value="${videoSerial}">
 <center><h3>스크랩할 폴더를 선택해주세요</h3></center>
 <hr>
 <c:forEach items="${folderList}" var="l">
@@ -21,15 +21,15 @@
 </body>
 <script>
 	function scrape(folderSerial) {
-		var pictureSerial = $('#pictureSerial').val();
+		var videoSerial = $('#videoSerial').val();
 		$.ajax({
 			type: 'POST',
-			url: 'scrapePicture.do/'+pictureSerial+'/'+folderSerial,
+			url: 'scrapeVideo.do/'+videoSerial+'/'+folderSerial,
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {
-			//부모창 댓글달기 구현해야됨
-			opener.parent.insertScrapeReply(pictureSerial);
+			//부모창 댓글달기
+			opener.parent.insertScrapeReply(videoSerial);
 			self.close();
 		}).fail(function(error) {
 			alert(JSON.stringify(error));
