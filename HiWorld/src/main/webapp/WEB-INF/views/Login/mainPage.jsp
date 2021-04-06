@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="resources/css/mainPage.css?after">
+<link rel="stylesheet" href="resources/css/mainPage.css">
 <link rel="stylesheet" href="resources/css/reset.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -384,6 +384,7 @@
     		})
     	}
     	
+
     	/* 홈페이지 즐겨찾기 */
     	function bookmark_add() {
     	     bookmark_url  = "도메인입력";
@@ -396,41 +397,6 @@
     	      return false;
     	     }
     	 }
-    	
-      </script>
-      <style>
-	      	.kakaobutton > img{
-			width: 200px;
-			height: 33px;
-			vertical-align: middle;
-		}
-		.bx-wrapper{
-			margin-right:15px;
-			border:none;
-			margin-bottom:15px;
-		}
-/* 		@font-face {
-		    font-family: 'PFStardust';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		} */
-		@font-face {
-	    font-family: 'SDSamliphopangche_Outline';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-		}
-		body{
-			 font-family: 'SDSamliphopangche_Outline';
-			 font-weight: 400;
-		}
-		input{
-			font-family:'SDSamliphopangche_Outline';
-		}
-		
-      </style>
-	<script>
     	$(document).ready(function() {
 			$.ajax({
 				type: 'get',
@@ -485,9 +451,43 @@
 					});
 				}
 			})
-		})
+		})	
     	
       </script>
+      <style>
+	      	.kakaobutton > img{
+			width: 200px;
+			height: 33px;
+			vertical-align: middle;
+		}
+		.bx-wrapper{
+			margin-right:15px;
+			border:none;
+			margin-bottom:15px;
+		}
+/* 		@font-face {
+		    font-family: 'PFStardust';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		} */
+		@font-face {
+	    font-family: 'SDSamliphopangche_Outline';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		body{
+			 font-family: 'SDSamliphopangche_Outline';
+			 font-weight: 400;
+		}
+		input{
+			font-family:'SDSamliphopangche_Outline';
+		}
+		
+      </style>
+
+
 
 </head>
 <body>
@@ -495,7 +495,7 @@
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/Logo.png" alt="로고사진" />
+		    	<img src="resources/images/로고5.png" alt="로고사진" />
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
@@ -506,7 +506,7 @@
 					</div>
 			    		
 		    </div>
-
+		<hr />
 		<div id="Navmenu"> 
 			    <div id="Navli">
 				      <li id="kong" onclick="notice()">
@@ -530,15 +530,13 @@
 		              </li>
 	           </div>   
          </div>
+         <hr />
         <div class="leftCon">
             <div id="Nav">
 
                 <div id="bx_div">
                 	<ul class="bxslider">
-				        <li><img src="resources/images/AttractionsBanner.jpg" alt="사진"></li>
-				        <li><img src="resources/images/CommerceBanner.jpg" alt=""></li>
-				        <li><img src="resources/images/CommunityBanner.jpg" alt=""></li>
-				        <li><img src="resources/images/FoodBanner.jpg" alt=""></li>
+				        <li><img src="resources/images/mainbanner.png" alt="사진"></li>
 		    		</ul>
 
                 </div>
@@ -648,14 +646,21 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<c:if test="${sessionVO.userName != null}">
-				<div id="minihome">
-					<a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
-				</div>
-			</c:if>
-			<div id="add">
-				<img src="resources/images/mainadd.png" alt="" />
-			</div>
+			<c:choose>
+				<c:when test="${sessionVO.userName != null}">
+					<div id="minihome">
+						<a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
+					</div>
+					<div id="add">
+						<img src="resources/images/mainadd.png" alt="" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div id="add1">
+						<img src="resources/images/mainadd.png" alt="" />
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 
