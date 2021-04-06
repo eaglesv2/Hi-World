@@ -7,6 +7,9 @@ import com.hiworld.minihp.vo.MiniHpPictureReplyVO;
 import com.hiworld.minihp.vo.MiniHpPictureVO;
 
 public interface MiniHpPictureService {
+	int getFolderScope(int folderSerial);
+	int scrapePicture(int pictureSerial,int folderSerial);
+	
 	//폴더 관련-------
 	List<MiniHPPictureFolderVO> getAllFolder(int userSerial);
 	int addFolder(MiniHPPictureFolderVO vo);

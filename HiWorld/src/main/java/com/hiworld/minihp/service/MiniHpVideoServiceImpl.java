@@ -15,6 +15,11 @@ public class MiniHpVideoServiceImpl implements MiniHpVideoService {
 	
 	@Autowired
 	private MiniHpVideoDAO dao;
+
+	@Override
+	public int getFolderScope(int folderSerial) {
+		return dao.getFolderScope(folderSerial);
+	}
 	
 	//폴더 관련------------
 	//폴더 selectAll

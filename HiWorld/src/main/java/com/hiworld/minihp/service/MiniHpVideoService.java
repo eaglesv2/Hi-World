@@ -7,6 +7,8 @@ import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
 import com.hiworld.minihp.vo.MiniHpVideoVO;
 
 public interface MiniHpVideoService {
+	int getFolderScope(int folderSerial);
+	
 	//폴더 관련-------
 	List<MiniHPVideoFolderVO> getAllFolder(int userSerial);
 	int addFolder(MiniHPVideoFolderVO vo);

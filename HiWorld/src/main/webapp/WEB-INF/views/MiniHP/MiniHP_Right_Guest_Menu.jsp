@@ -51,12 +51,12 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMoveGuestPage.js?ver=4"></script>
+<script src="resources/js/miniHP/ajaxMoveGuestPage.js?ver=5"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${ownermenuVO.menu1==1}">
-		<div align="center" id="menu1" class="menu" onclick="moveHome('${OwnerID}');">홈</div>
+		<div align="center" id="menu1" class="menu" onclick="moveHome('${ownerSerial}');">홈</div>
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu2==1}">
@@ -76,7 +76,7 @@ $('.menu').click(function(){
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu6==1}">
-		<div align="center" id="menu6" class="menu" onclick="moveBook('${OwnerID}','${ownerSerial}')">방명록</div>
+		<div align="center" id="menu6" class="menu" onclick="moveBook('${ownerSerial}')">방명록</div>
 	</c:if>
 </body>
 </html>

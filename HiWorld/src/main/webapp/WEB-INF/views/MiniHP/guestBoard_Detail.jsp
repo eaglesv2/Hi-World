@@ -45,6 +45,11 @@ table.boardTable td {
 	  			<font style="font-weight: bold;">${board.title}</font>
 	  			<span style="float: right;">
 	  				<span onclick="goToFolder('${board.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">목록</span>
+  					<c:if test="${isNeighbor==1}">
+			  			<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+			  				스크랩
+		  				</span>				  			
+		  			</c:if>
   				</span>
 	  		</th>
 		</tr>
