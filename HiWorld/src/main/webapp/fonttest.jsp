@@ -6,16 +6,45 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<style>
-	@font-face { font-family: 'yangjin'; src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff'); font-weight: normal; font-style: normal; }
 
-	body{font-family:'yangjin'}
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
 	
-	
-</style>
+	$().ready(function() {
+		$.ajax({
+			type: "GET",
+			url: "covid19.do",
+			dataType: "json",
+			async:true,
+            cache:false,
+            success: function(data) {            	
+            	// 코로나 완치 수
+				console.log(data[0])
+				
+				// 코로나 확진자 수 전체
+				console.log(data[1])
+				
+				// 오늘 코로나 확진자 수
+				console.log(data[2])
+				
+				// 오늘 날짜
+				console.log(data[3])
+				
+			}
+		})
+	})
+
+</script>
 
 <body>
-	<a href="#">적용이 되었을까요???</a>
-	 <a href="https://kor.pngtree.com/free-backgrounds'">Pngtree.com</a>
+
+
+
+
+
+
+
+
 </body>
 </html>

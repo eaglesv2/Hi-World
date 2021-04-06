@@ -239,7 +239,7 @@ public class ClientController {
 	//스프링 컨트롤러 부분
 	@RequestMapping(value = "/boardPage.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String json(Locale locale, Model model) {    
+	public String boardPage(Locale locale, Model model) {    
 		
 		/* 모든 정보 가져오기 */
 		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor();
