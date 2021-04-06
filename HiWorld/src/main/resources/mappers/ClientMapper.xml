@@ -59,14 +59,13 @@
 	<!-- 아이디찾기  -->
 	<select id="selectFindId" resultType="clientVO">
 	SELECT UserID FROM HW_USERLIST 
-	WHERE UserName = #{UserName}
-	AND UserTel = #{UserTel}
+	WHERE UserName = #{name} AND UserTel = #{tel}
 	</select>
+	
 	<!-- 비밀번호 찾기  -->
 	<select id="selectFindPw" resultType="clientVO">
 	SELECT UserPW FROM HW_USERLIST 
-	WHERE UserID = #{UserID}
-	AND UserPW = #{UserTel}
+	WHERE UserID = #{UserID} AND UserPW = #{UserTel}
 	</select>
 	
 	
