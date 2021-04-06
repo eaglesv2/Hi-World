@@ -8,7 +8,7 @@
 <title>Hi-World</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
 <link rel="icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
-<link rel="stylesheet" href="resources/css/UserInsert.css">
+<link rel="stylesheet" href="resources/css/UserInsert.css?after">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
