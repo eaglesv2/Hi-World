@@ -7,6 +7,8 @@ import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 public interface MiniHpBoardService {
+	int getFolderScope(int folderSerial);
+	
 	//폴더 관련-------
 	List<MiniHPBoardFolderVO> getAllFolder(int userSerial);
 	int addFolder(MiniHPBoardFolderVO vo);

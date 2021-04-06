@@ -16,6 +16,16 @@ public class MiniHpPictureServiceImpl implements MiniHpPictureService {
 	@Autowired
 	private MiniHpPictureDAO dao;
 	
+	@Override
+	public int getFolderScope(int folderSerial) {
+		return dao.getFolderScope(folderSerial);
+	}
+	@Override
+	public int scrapePicture(int pictureSerial, int folderSerial) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
 	//폴더 관련------------
 	//폴더 selectAll
 	@Override

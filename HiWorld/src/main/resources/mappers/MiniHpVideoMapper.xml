@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpVideoDAO">
+	<select id="getFolderScope" resultType="int">
+		SELECT scope FROM MiniHP_Video_Folder
+		WHERE serial=#{folderSerial}
+	</select>
 	
 	<!-- 폴더 관련 -->
 	<!-- 기본 폴더를 제외한 모든 폴더 찾기 -->
