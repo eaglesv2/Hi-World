@@ -4,7 +4,7 @@
 <html>
 <head>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link href="resources/css/adminArticle.css" rel="stylesheet">
+<link href="resources/css/adminArticle.css?after" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -13,7 +13,7 @@
 <div id="article_con">
 	<div id="article_box">
 		
-		<h1>파일 업로드 관리자용</h1>
+		<h1>상품 업로드 관리자용</h1>
 	
 		<div class="uploadDiv">
 			사진  <input type="file" name="uploadFile" multiple id="uploadFile" />
