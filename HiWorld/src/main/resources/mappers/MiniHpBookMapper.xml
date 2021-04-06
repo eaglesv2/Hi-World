@@ -19,8 +19,8 @@
 	
 	<!-- insert -->
 	<insert id="insert" parameterType="com.hiworld.minihp.vo.MiniHpBookVO">
-		INSERT INTO MiniHP_Book(UserSerial,writeUserSerial,content)
-		VALUES(#{userSerial},#{writeUserSerial},#{content})
+		INSERT INTO MiniHP_Book(UserSerial,writeUserSerial,content,isSecret)
+		VALUES(#{userSerial},#{writeUserSerial},#{content},#{isSecret})
 	</insert>
 	
 	<!-- delete -->
@@ -33,6 +33,12 @@
 	<update id="update">
 		UPDATE MiniHP_Book
 		SET content=#{content}, uDate=CURRENT_TIMESTAMP
+		WHERE bookSerial=#{serial}
+	</update>
+	
+	<update id="changeSecret">
+		UPDATE MiniHP_Book
+		SET isSecret=#{isSecret}
 		WHERE bookSerial=#{serial}
 	</update>
 	

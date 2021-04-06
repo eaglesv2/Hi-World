@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpDAO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
+import com.hiworld.minihp.dao.MiniHpNeighborDAO;
 import com.hiworld.minihp.service.MiniHpBoardService;
 import com.hiworld.minihp.service.MiniHpBookService;
 import com.hiworld.minihp.service.MiniHpIntroService;
@@ -50,6 +51,8 @@ public class MiniHpGuestController {
 	private MiniHpVideoService videoService;
 	@Autowired
 	private MiniHpBookService bookService;
+	@Autowired
+	MiniHpNeighborDAO neighborDAO;
 	
 	@Autowired
 	MiniHpSettingService settingService;
@@ -144,7 +147,7 @@ public class MiniHpGuestController {
 	}
 	
 	@GetMapping("/miniHp_rightGuest.do")
-	public String rightGuest(String OwnerID,Model model) {
+	public String rightGuest(String OwnerID,Model model,HttpSession session) {
 		//주인 시리얼 전달
 		ownerVO = dao.getData(OwnerID);
 		int ownerSerial = ownerVO.getUserSerial();
@@ -155,6 +158,13 @@ public class MiniHpGuestController {
 		model.addAttribute("today",rightService.countToday(ownerSerial));
 		menuVO = settingService.getMenuAvailable(OwnerID);
 		model.addAttribute("ownermenuVO", menuVO);
+		
+		//일촌 관계 전달
+		int isNeighbor = 0;
+		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+		if(neighborDAO.checkNeighbor(vo.getUserID(), OwnerID)!=null)
+			isNeighbor = 1;
+		model.addAttribute("isNeighbor", isNeighbor);
 		
 		return "MiniHP/MiniHP_Right_Guest";
 	}
@@ -319,11 +329,12 @@ public class MiniHpGuestController {
 		//--------------------------------------------------------------------------------------------------------------
 		return "MiniHP/guestBook";
 	}
-	@PostMapping("/miniHpBookGuest.do/{ownerSerial}/{content}")
+	@PostMapping("/miniHpBookGuest.do/{ownerSerial}/{content}/{isSecret}")
 	@ResponseBody
-	public void miniHpVideoInsert(@PathVariable int ownerSerial,@PathVariable String content,HttpSession session) {
+	public void miniHpVideoInsert(@PathVariable int ownerSerial,@PathVariable String content,@PathVariable int isSecret,HttpSession session) {
 		MiniHpBookVO vo = new MiniHpBookVO();
 		vo.setContent(content);
+		vo.setIsSecret(isSecret);
 		
 		//게스트 미니홈페이지에서
 		//누구에게? -> 게스트 주인

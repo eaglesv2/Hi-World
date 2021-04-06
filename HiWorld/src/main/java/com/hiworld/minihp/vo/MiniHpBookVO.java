@@ -11,6 +11,7 @@ public class MiniHpBookVO {
 	private String miniMe;
 	private String content;
 	private int replyCnt;
+	private int isSecret;
 	private Date cDate;
 	private Date uDate;
 	public int getBookSerial() {
@@ -61,6 +62,12 @@ public class MiniHpBookVO {
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
 	}
+	public int getIsSecret() {
+		return isSecret;
+	}
+	public void setIsSecret(int isSecret) {
+		this.isSecret = isSecret;
+	}
 	public Date getcDate() {
 		return cDate;
 	}
@@ -77,7 +84,8 @@ public class MiniHpBookVO {
 	public String toString() {
 		return "MiniHpBookVO [bookSerial=" + bookSerial + ", userSerial=" + userSerial + ", userName=" + userName
 				+ ", writeUserSerial=" + writeUserSerial + ", writeUserName=" + writeUserName + ", miniMe=" + miniMe
-				+ ", content=" + content + ", replyCnt=" + replyCnt + ", cDate=" + cDate + ", uDate=" + uDate + "]";
+				+ ", content=" + content + ", replyCnt=" + replyCnt + ", isSecret=" + isSecret + ", cDate=" + cDate
+				+ ", uDate=" + uDate + "]";
 	}
 	
 }

@@ -6,7 +6,7 @@ import com.hiworld.minihp.vo.MiniHpBookReplyVO;
 import com.hiworld.minihp.vo.MiniHpBookVO;
 
 public interface MiniHpBookService {
-	//게시판 관련---------------
+	
 	List<MiniHpBookVO> getAll(int userSerial, int page, int pageSize);
 	//현재 로그인된 유저 미니미 가져오기
 	String getMiniMe(int userSerial);
@@ -18,6 +18,9 @@ public interface MiniHpBookService {
 	int delete(int serial);
 	//update
 	int update(int serial, String content);
+	
+	//비밀로 하기
+	int changeSecret(int serial,int isSecret);
 	
 	//댓글
 	//selectAll

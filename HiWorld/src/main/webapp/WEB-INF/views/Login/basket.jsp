@@ -14,13 +14,14 @@
 body{
 	width:100%;
 	height: 100%;
-	text-align: center;
 	overflow-y:scroll;
 }
 
 h1{
 	margin-bottom: 30px;
-    padding: 20px;}
+    padding: 20px;
+    text-align: center;
+}
 
 
 .sangpum table{
@@ -52,6 +53,7 @@ h1{
 	margin-bottom: 20px;
     font-weight: 800;
     font-size: xx-large;
+    text-align: center;
 	
 th img{
 	border:1px solid;

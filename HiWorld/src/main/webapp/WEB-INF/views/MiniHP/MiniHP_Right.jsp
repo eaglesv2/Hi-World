@@ -138,7 +138,7 @@
 			<div style="color: #1294AB; font-weight: bold; float: left; margin-left: 5px;">이웃평</div>
 			<!-- 일촌 관계만 보이게 하기 -->
 			<div style="float: none;">
-				<input id="neiWordContent" type="text" style="width: 330px;" >
+				<input id="neiWordContent" type="text" style="width: 330px;" onkeypress="if(event.keyCode==13){insertNeiWord();}">
 				<input class="neiWordBtn" type="button" value="등록" style="cursor: pointer;" onclick="insertNeiWord();">
 			</div>
 		</div>

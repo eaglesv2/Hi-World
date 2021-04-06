@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Locale;
 
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.google.gson.Gson;
 import com.hiworld.article.service.ArticleService;
 import com.hiworld.article.vo.ArticleVO;
 import com.hiworld.article.vo.MainShoppingPagingVO;
@@ -236,20 +236,19 @@ public class ClientController {
 	}
 
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 이웃 찾기 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	/* 이웃 찾기 */
-	@GetMapping("/boardPage.do")
-	public String boardAjax(Model model, HttpSession session, ServletResponse res) throws Exception {
-
-		/* 내 아이디 가져오기 */
-		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
+	//스프링 컨트롤러 부분
+	@RequestMapping(value = "/boardPage.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
+	@ResponseBody
+	public String json(Locale locale, Model model) {    
 		
-			
-		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor(UserID);
-			
-		model.addAttribute("MiniVO", MiniVO);
-		return "Login/boardPage";
+		/* 모든 정보 가져오기 */
+		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor();
 		
+		
+	    /* 자바오브젝트 -> json, json -> 자바오브젝트 */
+	    Gson gson = new Gson();
+	    
+	    return gson.toJson(MiniVO);
 	}
 
 //  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 관리자 관련 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -467,7 +466,7 @@ public class ClientController {
 		sessionVO sessionVO = (sessionVO) session.getAttribute("sessionVO");
 		String UserID = sessionVO.getUserID();
 		ClientVO vo = clientService.getOneClient(UserID);
-		model.addAttribute("clientVO", vo);
+		model.addAttribute("clientVO",vo);
 
 		return "Login/userview";
 	}
@@ -486,42 +485,94 @@ public class ClientController {
 		 */
 		return "redirect:/login.do";
 	}
-
-	/* 회원정보 수정 구현 완료 */
+	
+	/* 회원정보 수정 구현 완료*/
 	@PostMapping("UserUpdate.do")
 	@ResponseBody
-	public String userUpdate(HttpServletRequest request, HttpSession session, Model model, ClientVO vvo) {
-		// int updatech = Integer.parseInt(request.getParameter("updatech"));
-		/* 받아온 값을 vo에 넣기 위해서 작업 */
+	public String userUpdate(HttpServletRequest request, HttpSession session,Model model, ClientVO vvo) {
+		/* 받아온 값을 vo에 넣기 위해서 작업*/
+		System.out.println("수정 구현");
 		String upDatech = request.getParameter("upDatech");
+		System.out.println(upDatech);
 		switch (upDatech) {
+		
 		case "1":
-			/* 섹션으로 로그인 된 유저 정보를 읽어와서 씨리얼 번호로 이름을 수정 */
-			sessionVO so = (sessionVO) session.getAttribute("sessionVO");
-			int uSerial = so.getUserSerial();
-			String uName = request.getParameter("userName");
-			vvo.setUserSerial(uSerial);
-			vvo.setUserName(uName);
-			int ok = clientService.updateName(vvo);
-			ClientVO clientvo = clientService.selectName(uName);
-			model.addAttribute("clientVO", clientvo);
-			break;
+			sessionVO so1 = (sessionVO)session.getAttribute("sessionVO");
+			int userial = so1.getUserSerial();
+			String Pw = request.getParameter("userDate");
+			vvo.setUserSerial(userial);
+			vvo.setUserPW(Pw);
+			clientService.updatepw(vvo);
+			Pw = vvo.getUserPW();
+			ClientVO clientvo1 = clientService.selectpw(Pw);
+			model.addAttribute("userView", clientvo1);
+			 break;
 		case "2":
-
-			break;
+			sessionVO so2 = (sessionVO)session.getAttribute("sessionVO");
+			int Userial = so2.getUserSerial();
+			String Tel = request.getParameter("userDate");
+			vvo.setUserSerial(Userial);
+			vvo.setUserTel(Tel);
+			clientService.updateTel(vvo);
+			Userial = vvo.getUserSerial();
+			ClientVO clientvo2 = clientService.selectTel(Userial);
+			model.addAttribute("userView", clientvo2);
+			 break;
 		case "3":
-			break;
-		case "4":
-			break;
-		case "5":
-			break;
-
+			sessionVO so3 = (sessionVO)session.getAttribute("sessionVO");
+			int Usersial = so3.getUserSerial();
+			String Address = request.getParameter("userDate");
+			vvo.setUserSerial(Usersial);
+			vvo.setUserAddress(Address);
+			clientService.updateAddress(vvo);
+			Usersial = vvo.getUserSerial();
+			ClientVO clientvo3 = clientService.selectAddress(Usersial);
+			model.addAttribute("userView",clientvo3);
+			 break;
+					
 		default:
 			return "Login/userview";
 		}
 		return "Login/userview";
 	}
+	
+	
+	/* 아이디 비밀번호 찾기 폼으로가자*/
+	@RequestMapping("pw_Id_find.do")
+	public String pw_Id_find() throws Exception{
+		return "/Login/id_pw_find";
+	}
+	
+	/* 아이디 비밀번호 찾자 */
+	@RequestMapping("find_id_pw.do")
+	@ResponseBody
+	public String find_id_pw(HttpServletRequest request,ClientVO clientvo, Model md)throws Exception{
+		System.out.println("아이디 비밀번호를 찾을거야");
+		String find = request.getParameter("");
+		String check = null;
+		switch (find) {
+		case "1":
 
+			String name = clientvo.getUserName();
+			String tel = clientvo.getUserTel();
+			ClientVO vo = clientService.selectFindId(name, tel);
+			
+			return "find_id";
+		case "2":
+			String Id = clientvo.getUserID();
+			String tel1 = clientvo.getUserTel();
+			ClientVO vo1 = clientService.selectFindPw(Id, tel1);
+			return "find_pw";
+			
+			
+		default:
+			return "";
+			
+		}
+	}
+	
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 결제 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 결제 창으로 이동 */
 	@GetMapping("/BamTolCharge.do")

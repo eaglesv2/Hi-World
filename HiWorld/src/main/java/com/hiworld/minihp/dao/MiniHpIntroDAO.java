@@ -52,5 +52,5 @@ public interface MiniHpIntroDAO {
 	void updateTotal(String UserID);
 	
 	/*전체 정보 가져오기*/
-	ArrayList<MiniHpIntroVO> getAllNeighbor(String UserID);
+	ArrayList<MiniHpIntroVO> getAllNeighbor();
 }

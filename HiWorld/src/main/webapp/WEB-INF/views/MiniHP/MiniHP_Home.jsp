@@ -5,21 +5,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hi-World</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
 <style type="text/css">
-body {
-	scrollbar-face-color: #000000;
-	scrollbar-highlight-color: #DBDBDB;
-	scrollbar-3dlight-color: #FFFFFF;
-	scrollbar-shadow-color: #9C92FF;
-	scrollbar-darkshadow-color: #FFFFFF;
-	scrollbar-track-color: #FFFFFF;
-	scrollbar-arrow-color: #9C92FF;
-	cursor: url('${pageContext.request.contextPath}/${itemList.mouseSrc}), auto;
+@font-face {
+font-family: 'BMHANNAPro';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+font-weight: normal;
+font-style: normal;
 }
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+font-family:'SDSamliphopangche_Outline';
+font-weight: 0;
+background-image: url("resources/images/basic.jpg");
+margin-left: 35px;
+}
+button{
+font-family:'SDSamliphopangche_Outline';
+}
+input{
+font-family:'BMHANNAPro';
+}
+textarea{
+font-family:'BMHANNAPro';
+}
+.secondFont{
+font-family:'BMHANNAPro';
+}
+/* body
+{
+ scrollbar-face-color: #000000;
+ scrollbar-highlight-color: #DBDBDB;
+ scrollbar-3dlight-color: #FFFFFF;
+ scrollbar-shadow-color: #9C92FF;
+ scrollbar-darkshadow-color: #FFFFFF;
+ scrollbar-track-color: #FFFFFF;
+ scrollbar-arrow-color: #9C92FF
+ } */
 </style>
 <script type="text/javascript">
 $(document).ready(function() {

@@ -8,7 +8,6 @@ import com.hiworld.minihp.vo.MiniHpBookReplyVO;
 import com.hiworld.minihp.vo.MiniHpBookVO;
 
 public interface MiniHpBookDAO {
-	// 게시판 관련--------------------------
 	//selectAll
 	List<MiniHpBookVO> getAll(@Param("userSerial") int userSerial, @Param("offset") int offset,@Param("size") int size);
 	//현재 로그인된 유저 미니미 가져오기
@@ -21,6 +20,8 @@ public interface MiniHpBookDAO {
 	int delete(int serial);
 	//update
 	int update(@Param("serial") int serial, @Param("content") String content);
+	//비밀로 하기
+	int changeSecret(@Param("serial") int serial,@Param("isSecret") int isSecret);
 	
 	//댓글
 	//selectAll
