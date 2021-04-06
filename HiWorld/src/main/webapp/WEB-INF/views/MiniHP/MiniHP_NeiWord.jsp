@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-				<div>
+				<div class="secondFont">
 						<c:forEach items="${list}" var="l">
 							<span id="reply-${l.serial}">
 								${l.writeUserName}: ${l.content}

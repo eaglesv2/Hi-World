@@ -6,7 +6,9 @@
 <head>
 <link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Hi-World</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <style type="text/css">
 body {
 	scrollbar-face-color: #FFFFFF;
@@ -36,7 +38,7 @@ $(document).ready(function() {
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_rightGuestMenu.do',
-		data : { OwnerID : '${OwnerID}'},
+		data : { OwnerSerial : '${OwnerSerial}'},
 		
 		success : function(result) {
 			$("#rightMenu").html(result);
@@ -44,8 +46,8 @@ $(document).ready(function() {
 	});
 	//right 불러오기
 	$.ajax({
-		type : 'get',
-		url : 'miniHp_rightGuest.do?OwnerID=${OwnerID}',
+		type : 'GET',
+		url : 'miniHp_rightGuest.do?OwnerSerial=${OwnerSerial}',
 		success : function(result) {
 			$("#bodyContents").html(result);
 		}
@@ -65,7 +67,7 @@ $(document).ready(function() {
 							<font><span style="font-size:8pt;">today <font color="red">${ownerintroVO.hpToday}</font> | total ${ownerintroVO.hpTotal}</span></font>
 						</td>
 						<td align="center" height="40">
-							<iframe frameborder="0" width="470" height="40" src="miniHp_topGuest.do?OwnerID=${OwnerID}"></iframe> 
+							<iframe frameborder="0" width="470" height="40" src="miniHp_topGuest.do?OwnerSerial=${OwnerSerial}"></iframe> 
 						</td>
 						<td></td>
 					</tr>
@@ -75,7 +77,7 @@ $(document).ready(function() {
 						<td align="center" width="178" height="448" background="${pageContext.request.contextPath}/resources/images/bg_left_rect.jpg">
 							<!-- 왼쪽 내용 부분 ----------------------------------------------------------- -->
 							<span id="sideContents">
-								<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerID=${OwnerID}"></iframe> 
+								<iframe frameborder="0" width="160" height="440" src="miniHp_leftGuest.do?OwnerSerial=${OwnerSerial}"></iframe> 
 							</span>
 							<!-- ---------------------------------------------------------------------------- -->
 

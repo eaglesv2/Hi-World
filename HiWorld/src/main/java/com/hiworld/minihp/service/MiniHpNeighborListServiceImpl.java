@@ -28,9 +28,9 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 	
 	/*이웃 신청 목록 불러오기*/
 	@Override
-	public List<MiniHpNeighborListVO> getRegisterList(String UserID) {
+	public List<MiniHpNeighborListVO> getRegisterList(int userSerial) {
 		
-		List<MiniHpNeighborListVO> list = neighborListDAO.getRegisterList(UserID);
+		List<MiniHpNeighborListVO> list = neighborListDAO.getRegisterList(userSerial);
 		
 		if(list.size() == 0) {
 			list = null;
@@ -43,9 +43,9 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 	
 	/*이웃 신청 정보 불러오기*/
 	@Override
-	public MiniHpNeighborListVO getRegisterCheck(String senderID, String receiverID) {
+	public MiniHpNeighborListVO getRegisterCheck(int senderSerial, int receiverSerial) {
 		
-		neighborListVO = neighborListDAO.getData(senderID, receiverID);
+		neighborListVO = neighborListDAO.getData(senderSerial, receiverSerial);
 		
 		return neighborListVO;
 	}

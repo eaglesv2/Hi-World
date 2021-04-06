@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 public interface NeighborService {
-	ArrayList<MiniHpIntroVO> getAllNeighbor(String UserID);
+	ArrayList<MiniHpIntroVO> getAllNeighbor();
 }

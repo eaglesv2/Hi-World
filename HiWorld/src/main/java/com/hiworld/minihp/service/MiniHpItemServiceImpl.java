@@ -41,7 +41,16 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		
 		return storyroomList;
 	}
-
+	
+	/*마우스 커서 커스텀 목록 가져오기*/
+	@Override
+	public List<MiniHpUserItemVO> getMouseList(int userSerial) {
+		String type = "마우스";
+		List<MiniHpUserItemVO> mouseList = itemDAO.getMouseList(userSerial, type);
+		
+		return mouseList;
+	}
+	
 	@Override
 	public void updateStoryRoom(int userSerial, String storyRoom) {
 		itemDAO.updateStoryRoom(userSerial, storyRoom);
@@ -53,7 +62,10 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		
 	}
 
-	
-	
+	@Override
+	public void updateMousePointer(int userSerial, String mousePointer) {
+		itemDAO.updateMousePointer(userSerial, mousePointer);
+		
+	}
 	
 }

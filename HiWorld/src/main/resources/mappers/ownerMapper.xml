@@ -5,7 +5,7 @@
 	<select id="getData" resultType="com.hiworld.minihp.vo.MiniHpOwnerVO">
 		SELECT UserSerial, UserName, UserID, UserBirth, UserTel, UserGender
 		FROM HW_USERLIST
-		WHERE UserID = #{OwnerID}
+		WHERE UserSerial = #{ownerSerial}
 	</select>
 	
 </mapper>

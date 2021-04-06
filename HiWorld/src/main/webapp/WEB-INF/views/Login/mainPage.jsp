@@ -1,25 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/mainPage.css?after">
-    <link rel="stylesheet" href="resources/css/reset.css">
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="resources/js/mainPage.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-    <link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <title>Document</title>
-    <script type="text/javascript">
-                
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="resources/css/mainPage.css?after">
+<link rel="stylesheet" href="resources/css/reset.css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/mainPage.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<title>Hi-World</title>
 
+<script type="text/javascript">
+                
 	 $(document).ready(function(){
 		 	var main = $('.bxslider').bxSlider({
 				       mode: 'fade',
@@ -27,12 +31,10 @@
 				       speed:500,
 				       controls: false,
 				       pager: false
-
 				   })
 				   
 						   
 			});
-
       
         function signUp(){
         	location.href="userInsertForm.do";
@@ -82,7 +84,6 @@
             		  $('#bodyContext').html(data);
             	  })
              };
-
              function board(Name){
             	 if(Name!="" && Name!=null){
             		 console.log("1234") 
@@ -105,7 +106,6 @@
 					alert("로그인하세요");
 				}
             	 
-
              };
              
              function question(Name){
@@ -247,7 +247,6 @@
 			}
 		});
 		}
-
         	function basket(ArticleName) {
     			var UserSerial = '${sessionVO.userSerial}';
     			$.ajax({
@@ -282,7 +281,6 @@
       			},
       			buttonsStyling: false
     		})
-
     		swalWithBootstrapButtons.fire({
     	  		title: '정말 구매하실껀가요??',
     			text: "구매 하신 후 환불은 어렵습니다.",
@@ -325,7 +323,6 @@
     		})
     	}
     	
-
     	/*  여기부터 userview */
     	   function updateName() {
     		   alert("버튼 눌렀어요");
@@ -350,7 +347,6 @@
     			});
     			}
     	
-
     	/* 어드민 회원관리 */
     	function Manage_Client(){
     		$.ajax({
@@ -388,6 +384,7 @@
     		})
     	}
     	
+
     	/* 홈페이지 즐겨찾기 */
     	function bookmark_add() {
     	     bookmark_url  = "도메인입력";
@@ -436,15 +433,74 @@
 		}
 		
       </style>
+
+    	$(document).ready(function() {
+			$.ajax({
+				type: 'get',
+				url: "boardPage.do",
+				dataType: "json",
+				//data: {"param":"param"},
+				success: function(data) {
+					console.log(data);
+    	                        	   	                        	
+					let source = $.map(data, function(item) { //json[i] 번째 에 있는게 item 임.
+						return {
+							label: item.hpTitle+"      "+item.userName+"("+item.userID+")",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
+							userID: item.userID, //그냥 사용자 설정값
+							userSerial: item.userSerial
+						}
+					});
+					
+					$("#searchInput").autocomplete({
+						source : source, // source 는 자동 완성 대상
+						select : function(event, ui) {    //아이템 선택시
+							console.log(ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+							console.log(ui.item.label);    //label
+							console.log(ui.item.userID);    //value
+							console.log(ui.item.test);    //김치 볶음밥test
+							
+							var userID = '${sessionVO.userID}';
+							
+							if(userID==''){
+								alert("로그인후 이용하실수 있습니다.")
+							}else{
+								var popupWidth = 880;
+								var popupHeight = 580;
+								var popupX = (window.screen.width/2)-(popupWidth/2);
+								var popupY = (window.screen.height/2)-(popupHeight/2);
+								window.open("miniHp_guestHome.do?OwnerSerial="+ui.item.userSerial,ui.item.userID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+							};
+						},
+						focus : function(event, ui) {    //포커스 가면
+							  return false;//한글 에러 잡기용도로 사용됨
+						},
+						minLength: 1,// 최소 글자수
+						autoFocus: true, //첫번째 항목 자동 포커스 기본값 false
+						classes: {    //잘 모르겠음
+							"ui-autocomplete": "highlight"
+						},
+						delay: 500,    //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+						disabled: false, //자동완성 기능 on,off
+						position: { my : "right top", at: "right bottom" },    //잘 모르겠음
+						close : function(event){    //자동완성창 닫아질때 호출
+							$(this).val('');
+						}
+					});
+				}
+			})
+		})
+    	
+      </script>
+
 </head>
 <body>
 	
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/로고1.png" alt="로고사진" />
+		    	<img src="resources/images/Logo.png" alt="로고사진" />
 		    		<div id="mainserch">
-			    		 <input type="text"  />
+			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
 		    		</div>
 		    		<div id="startpage">
@@ -499,10 +555,10 @@
           <div id="minimi">
 
 		    <c:choose>
-				
 					<c:when test="${sessionVO.userName != null}">
-					<c:if test="${sessionVO.userName != 'ADMIN'}">
+						<c:if test="${sessionVO.userName != 'ADMIN'}">
 							<div id="minimi">
+
 						        <div id="icon">
 						            <img src="bb.jpg" alt="">
 						            <div>
@@ -530,7 +586,7 @@
 								<div id="icon">
 									<img src="bb.jpg" alt="">
 									<div>
-										<div id="nickname">${sessionVO.userName} 님</div>
+										<div id="nickname">${sessionVO.userName}님</div>
 										<div id="haveCash">보유 밤톨: ${sessionVO.userCash}개</div>
 
 									</div>
@@ -547,69 +603,66 @@
 								</div>
 							</div>
 
-                  	</c:if>
+						</c:if>
 					</c:when>
-					
 
-					
-				<c:otherwise>
-					
+
+
+					<c:otherwise>
+
 						<!-- 기존 홈페이지를 통해 로그인한 사람이 로그인 할경우 -->
-					
+
 						<form action="checkClient.do" method="post">
-							
-								<table id="formtable">
-									<tr>
-										<td>
-											<input type="text" name="UserID" id="UserID" placeholder="아이디" required> <br>
-										</td>
-										 
-										<td rowspan="2" style="vertical-align:middle;">
-											<input type="submit" value="로그인" id="loginCheck" tabindex="-1">	
-										</td>
-									</tr>
-									<tr>
-										 <td>
-											 <input type="password" id="UserPW" name="UserPW" placeholder="비밀번호" required> <br>
-										 </td>
-									
-									</tr>							
-								</table>
+
+							<table id="formtable">
+								<tr>
+									<td><input type="text" name="UserID" id="UserID"
+										placeholder="아이디" required> <br></td>
+
+									<td rowspan="2" style="vertical-align: middle;"><input
+										type="submit" value="로그인" id="loginCheck" tabindex="-1">
+									</td>
+								</tr>
+								<tr>
+									<td><input type="password" id="UserPW" name="UserPW"
+										placeholder="비밀번호" required> <br></td>
+
+								</tr>
+							</table>
 							<input type="button" onclick="signUp()" value="회원가입" id="signup">
 						</form>
 						<div>
 							<input type="button" value="아이디 비빌먼호 찾기" id="find-id" />
 						</div>
-				
+
 						<!-- 네이버 로그인 창으로 이동 -->
 						<div id="naver_id_login" style="text-align: center">
-			
+
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="200px" height="33px" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}"> <img width="200px" height="33px"
+								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
 						</div>
-						
+
 						<div id="kakao_id_login" style="text-align: center">
-							<a id="kakao-login-btn" class="kakaobutton" ></a>
+							<a id="kakao-login-btn" class="kakaobutton"></a>
 						</div>
 						<br>
-						
-						</c:otherwise>
-					</c:choose>
-            </div>
-            	<c:if test="${sessionVO.userName != null}">
-                <div id="minihome">
-                    <a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
-                </div>
-				</c:if>
-                <div id="add">
-                  	  <img src="resources/images/mainadd.png" alt="" />
-                </div>
-        </div>
-    </div>
-    
-    <div id="footer">
-    	
-    </div>
+
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<c:if test="${sessionVO.userName != null}">
+				<div id="minihome">
+					<a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
+				</div>
+			</c:if>
+			<div id="add">
+				<img src="resources/images/mainadd.png" alt="" />
+			</div>
+		</div>
+	</div>
+
+	<div id="footer"></div>
 </body>
 <script>
 	Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');
@@ -633,6 +686,5 @@
 			alert(JSON.stringify(err)); 
 			} 
 		});
-
 </script>
 </html>

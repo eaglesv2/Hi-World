@@ -14,11 +14,11 @@ public interface MiniHpNeighborListDAO {
 	void insertNeighborList(MiniHpNeighborListVO neighborListVO);
 	
 	/*이웃 신청 목록 불러오기*/
-	List<MiniHpNeighborListVO> getRegisterList(String UserID);
+	List<MiniHpNeighborListVO> getRegisterList(int userSerial);
 	
 	/*이웃 신청 정보 불러오기*/
-	MiniHpNeighborListVO getData(@Param("senderID")String senderID, @Param("receiverID")String receiverID);
+	MiniHpNeighborListVO getData(@Param("senderSerial")int senderSerial, @Param("receiverSerial")int receiverSerial);
 	
 	/*이웃 신청 수락 or 거절 시 신청 정보 삭제*/
-	void deleteNeighborList(@Param("senderID")String senderID, @Param("receiverID")String receiverID);
+	void deleteNeighborList(@Param("senderSerial")int senderSerial, @Param("receiverSerial")int receiverSerial);
 }

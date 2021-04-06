@@ -249,7 +249,7 @@ function fn_paging(curPage) {
 					</c:if>
 					<tr>
 			 			<td>
-			 				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
+			 				<span class="secondFont" style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
 			 					${l.content}
 			 				</span>
 						</td>

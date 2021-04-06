@@ -139,7 +139,8 @@ function moveToUser(){
 				<!-- 유저 생일 표시 -->
 				<span id="userBirth">${ownerVO.userBirth}</span>
 					<br/>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerId=${ownerVO.userID}&OwnerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
+				<!-- 일촌 신청 버튼 -->
+				<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerSerial=${ownerVO.userSerial}&OwnerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</span>
 				
 				<select id="neighborSelect" onchange="moveToUser()">
@@ -147,7 +148,7 @@ function moveToUser(){
 					<!-- 일촌 목록 -->
 					<c:if test="${neighborList.size() != 0}">
 						<c:forEach var="neighborList" items="${neighborList}">
-							<option value="${neighborList.neighborID}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
+							<option value="${neighborList.neighborSerial}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
 						</c:forEach>
 					</c:if>
 					<c:if test="${neighborList.size() == 0}">

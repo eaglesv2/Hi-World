@@ -2,18 +2,18 @@ package com.hiworld.minihp.vo;
 
 public class MiniHpNeighborVO {
 
-	private String neighborID1;
+	private int neighborSerial1;
 	private String neighborName1;
 	private String neighborValue1;
-	private String neighborID2;
+	private int neighborSerial2;
 	private String neighborName2;
 	private String neighborValue2;
 	
-	public String getNeighborID1() {
-		return neighborID1;
+	public int getNeighborSerial1() {
+		return neighborSerial1;
 	}
-	public void setNeighborID1(String neighborID1) {
-		this.neighborID1 = neighborID1;
+	public void setNeighborSerial1(int neighborSerial1) {
+		this.neighborSerial1 = neighborSerial1;
 	}
 	public String getNeighborName1() {
 		return neighborName1;
@@ -27,11 +27,11 @@ public class MiniHpNeighborVO {
 	public void setNeighborValue1(String neighborValue1) {
 		this.neighborValue1 = neighborValue1;
 	}
-	public String getNeighborID2() {
-		return neighborID2;
+	public int getNeighborSerial2() {
+		return neighborSerial2;
 	}
-	public void setNeighborID2(String neighborID2) {
-		this.neighborID2 = neighborID2;
+	public void setNeighborSerial2(int neighborSerial2) {
+		this.neighborSerial2 = neighborSerial2;
 	}
 	public String getNeighborName2() {
 		return neighborName2;

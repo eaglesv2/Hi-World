@@ -20,6 +20,12 @@
 		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
 	</select>
 	
+	<select id="getMouseList" resultType="com.hiworld.minihp.vo.MiniHpUserItemVO">
+		SELECT *
+		FROM User_Article
+		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
+	</select>
+	
 	<update id="updateStoryRoom">
 		UPDATE UserSelect_Article
 		SET backgroundSrc = #{storyRoom}
@@ -29,6 +35,12 @@
 	<update id="updateMinimi">
 		UPDATE UserSelect_Article
 		SET characterSrc = #{minimi}, minimiX = #{minimiX}, minimiY = #{minimiY}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	<update id="updateMousePointer">
+		UPDATE UserSelect_Article
+		SET mouseSrc = #{mousePointer}
 		WHERE UserSerial = #{UserSerial}
 	</update>
 </mapper>

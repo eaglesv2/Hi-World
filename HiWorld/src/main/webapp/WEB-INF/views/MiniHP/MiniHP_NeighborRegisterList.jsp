@@ -32,13 +32,13 @@
 				<c:forEach var="vo" items="${registerList}">
 					<li id="li">
                             <c:if test="${vo.type eq 0}">
-                            	<a href="" onclick="window.open('miniHp_neighborRegisterCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
+                            	<a href="" onclick="window.open('miniHp_neighborRegisterCheck.do?senderSerial=${vo.senderSerial}','${vo.senderSerial}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
                            	 		<font color="Blue">${vo.senderName}</font>
                            				 님이 이웃 신청을 하셨습니다.
                            		</a>
                            	</c:if>
                            	<c:if test="${vo.type eq 1}">
-                           		<a href="" onclick="window.open('miniHp_neighborUpdateCheck.do?senderID=${vo.senderID}','${vo.senderID}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
+                           		<a href="" onclick="window.open('miniHp_neighborUpdateCheck.do?senderSerial=${vo.senderSerial}','${vo.senderSerial}memberCall','width=370,height=504,location=no,status=no,scrollbars=no');">
                            	 		<font color="Blue">${vo.senderName}</font>
                            				 님이 이웃명 수정을 신청하셨습니다.
                            		</a>

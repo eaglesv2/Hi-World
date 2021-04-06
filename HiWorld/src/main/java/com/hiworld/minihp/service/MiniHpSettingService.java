@@ -9,6 +9,6 @@ public interface MiniHpSettingService {
 
 	void updateMenuAvailable(MiniHpUserMenuVO userMenuVO);
 
-	MiniHpUserMenuVO getMenuAvailable(String userID);
+	MiniHpUserMenuVO getMenuAvailable(int userSerial);
 	
 }

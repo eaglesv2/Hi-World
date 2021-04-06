@@ -20,30 +20,25 @@ public interface ClientService {
 	String deleteClinet(ClientVO clientVO);
 	
 	/* 회원 정보 수정시작-------------------- */
-	/* 이름 수정*/
-	int updateName(ClientVO clientVO);
-	/* 이름 조회*/
-	ClientVO selectName(String id);
-	
+
 	/* 비밀번호 수정*/
 	int updatepw(ClientVO clientVO);
 	/* 비밀번호 조회*/
 	ClientVO selectpw(String clientVO);
 	
-	/* 생일 수정*/
-	String updateBirth(ClientVO clientVO);
-	/* 생일 조회*/
-	ClientVO selectBirth(ClientVO clientVO);
 	/* 연락처 수정*/
-	String updateTel(ClientVO clientVO);
+	int updateTel(ClientVO clientVO);
 	/* 연락처 조회*/
 	ClientVO selectTel(int clientVO);
 	/* 주소 수정*/
-	String updateAddress(ClientVO clientVO);
+	int updateAddress(ClientVO clientVO);
 	/* 주소 조회*/
-	ClientVO selectAddress(ClientVO clientVO);
+	ClientVO selectAddress(int clientVO);
 	/*-------------------회원수정 끝----------------- */
-	
+	/* 이름과 연락처로 조회*/
+	ClientVO selectFindId(String name, String tel);
+	/* 아이디와 연락처로 조회*/
+	ClientVO selectFindPw(String id, String tel);
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 기능 구현 완료
 	

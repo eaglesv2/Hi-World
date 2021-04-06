@@ -11,7 +11,7 @@ public interface MiniHpSettingDAO {
 	String getPw(String id);
 	
 	/*미니홈피 메뉴 설정 가져오기*/
-	MiniHpUserMenuVO getMenuAvailable(String UserID);
+	MiniHpUserMenuVO getMenuAvailable(int userSerial);
 	
 	/*미니홈피 메뉴 설정 수정*/
 	void updateMenuAvailable(MiniHpUserMenuVO userMenuVO);

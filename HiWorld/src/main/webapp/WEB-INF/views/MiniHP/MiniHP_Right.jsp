@@ -118,13 +118,14 @@
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
 			<td align="center"  colspan="2">  
-				<font><b>나의 미니미와 스토리룸을 소개합니다</b></font>	
+				<b>나의 미니미와 스토리룸을 소개합니다</b>	
 			</td>
 		</tr>
 		<tr bgcolor="#FFFFFF">
 			<td align="center" colspan="2">
-			<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center;"></div>
+			<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center; position: relative;">
 			<div style="background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX}"></div>
+			</div>
 	
 				<%-- <img src="${pageContext.request.contextPath}/${itemList.backgroundSrc}" alt="스토리룸" width="400px" height="200px" border="0">
 				<img src="${pageContext.request.contextPath}/${itemList.characterSrc}" alt="미니미" width="70px" height="60px" style="position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX};"/>
@@ -137,7 +138,7 @@
 			<div style="color: #1294AB; font-weight: bold; float: left; margin-left: 5px;">이웃평</div>
 			<!-- 일촌 관계만 보이게 하기 -->
 			<div style="float: none;">
-				<input id="neiWordContent" type="text" style="width: 330px;" >
+				<input id="neiWordContent" type="text" style="width: 330px;" onkeypress="if(event.keyCode==13){insertNeiWord();}">
 				<input class="neiWordBtn" type="button" value="등록" style="cursor: pointer;" onclick="insertNeiWord();">
 			</div>
 		</div>

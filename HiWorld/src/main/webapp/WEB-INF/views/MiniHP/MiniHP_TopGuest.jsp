@@ -14,7 +14,7 @@ function displayTitle(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_getGuestIntroTitle.do',
-		data : { OwnerID : '${OwnerID}'},
+		data : { OwnerSerial : '${OwnerSerial}'},
 		
 		success : function(result) {
 			console.log('ajax success4');

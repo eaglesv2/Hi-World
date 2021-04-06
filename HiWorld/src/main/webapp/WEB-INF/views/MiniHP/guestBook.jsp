@@ -127,6 +127,11 @@
 		background-color: #F2F2F2;
 		text-align: left;
 	}
+	#secretArea{
+		float: left;
+		margin-left: 10px;
+		font-size: 12px;
+	}
 </style>
 <input type="hidden" id="ownerSerial" value="${ownerSerial}">
 <div id="main">
@@ -137,52 +142,70 @@
 			</div>
 			<textarea class="ta" id="bookWriteContent"></textarea>
 		</div>
+		<span id="secretArea">
+			<input type="checkbox" name="secretCheck">
+			비밀로 하기
+		</span>
 		<input id="bookInsertBtn" class="bookBtns" type="button" value="확인">
 	</div>
 	
 	<c:forEach items="${list}" var="l">
-	<div class="books">
-		<div class="booksTop">
-			<span class="booksTop-left">
-				<span>${l.writeUserName}</span>
-				<span class="date">(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd HH:mm"/>)</span>
-			</span>
+	<c:if test="${l.isSecret==0 || l.writeUserSerial==sessionVO.userSerial}">
+		<div class="books">
+			<div class="booksTop" style='<c:if test="${l.isSecret==1}">background-color: #FAFABE;</c:if>'>
+				<span class="booksTop-left">
+					<span>${l.writeUserName}</span>
+					<span class="date">(<fmt:formatDate value="${l.uDate}" pattern="yyyy-MM-dd HH:mm"/>)</span>
+				</span>
+				<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
+				<span class="booksTop-right">
+					<c:if test="${l.isSecret==0}">
+						<span class="btns" onclick="changeSecret('${l.bookSerial}',1)">비밀로 하기</span>
+					</c:if>
+					<c:if test="${l.isSecret==1}">
+						<span class="btns" onclick="changeSecret('${l.bookSerial}',0)">공개로 하기</span>
+					</c:if>
+					<span class="btns" onclick="updateBookForm('${l.bookSerial}');">수정</span><!-- 글쓴이만 가능하게 -->
+					<span class="btns" onclick="deleteBook('${l.bookSerial}')">삭제</span><!-- 글쓴이+홈피주인 -->
+				</span>
+				</c:if>
+			</div>
+			<div class="booksMiddle">
+				<span class="bookMiniMeFrame">
+					<img class="bookMiniMe" alt="미니미" src="${l.miniMe}">
+				</span>
+				<span id="booksContent-${l.bookSerial}" class="booksContent">
+					<c:if test="${l.isSecret==1}">
+						<img alt="lock" src="resources/images/book-lock.png" width="10">
+						<font style="color: #FFC31F; font-weight: bold; font-size: 10px;">비밀이야</font>
+						<span style="color: #FFC31F; font-size: 10px;">(이 글은 홈주인과 작성자만 볼 수 있어요)</span>
+						<br>
+					</c:if>
+					${l.content}
+				</span>
+				<span id="booksContentUpdate-${l.bookSerial}" style="display: none;">
+					<textarea class="taUpdate" id="updateContent-${l.bookSerial}">${l.content}</textarea><br>
+					<input class="bookBtns" type="button" value="취소" onclick="updateBookForm('${l.bookSerial}');"><br>
+					<input class="bookBtns" type="button" value="수정" onclick="updateBook('${l.bookSerial}');">
+				</span>
+			</div>
+		</div>
+		<div class="booksReply">
+			<!-- 댓글 작성란, 주인 혹은 작성자만 작성 가능 -->
 			<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
-			<span class="booksTop-right">
-				<span class="btns" onclick="updateBookForm('${l.bookSerial}');">수정</span><!-- 글쓴이만 가능하게 -->
-				<span class="btns" onclick="deleteBook('${l.bookSerial}')">삭제</span><!-- 글쓴이+홈피주인 -->
-			</span>
+				<div class="insertReplyArea">
+					<textarea class="insertReplyForm" id="replyContent-${l.bookSerial}"></textarea>
+					<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
+				</div>
+			</c:if>
+			<!-- 댓글 있을경우 가져옴 -->
+			<c:if test="${l.replyCnt!=0}">
+				<%-- <iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="1" marginheight="0" marginwidth="0" width="100%" height="50%"></iframe> --%>
+				<script> $("#replySrc-"+'${l.bookSerial}').load("MiniHpBookReply.do?bookSerial=${l.bookSerial}");</script> 
+				<div id="replySrc-${l.bookSerial}" class="replySrc"></div> 
 			</c:if>
 		</div>
-		<div class="booksMiddle">
-			<span class="bookMiniMeFrame">
-				<img class="bookMiniMe" alt="미니미" src="${l.miniMe}">
-			</span>
-			<span id="booksContent-${l.bookSerial}" class="booksContent">
-				${l.content}
-			</span>
-			<span id="booksContentUpdate-${l.bookSerial}" style="display: none;">
-				<textarea class="taUpdate" id="updateContent-${l.bookSerial}">${l.content}</textarea><br>
-				<input class="bookBtns" type="button" value="취소" onclick="updateBookForm('${l.bookSerial}');"><br>
-				<input class="bookBtns" type="button" value="수정" onclick="updateBook('${l.bookSerial}');">
-			</span>
-		</div>
-	</div>
-	<div class="booksReply">
-		<!-- 댓글 작성란, 주인 혹은 작성자만 작성 가능 -->
-		<c:if test="${l.writeUserSerial==sessionVO.userSerial}">
-			<div class="insertReplyArea">
-				<textarea class="insertReplyForm" id="replyContent-${l.bookSerial}"></textarea>
-				<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
-			</div>
-		</c:if>
-		<!-- 댓글 있을경우 가져옴 -->
-		<c:if test="${l.replyCnt!=0}">
-			<%-- <iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="1" marginheight="0" marginwidth="0" width="100%" height="50%"></iframe> --%>
-			<script> $("#replySrc-"+'${l.bookSerial}').load("MiniHpBookReply.do?bookSerial=${l.bookSerial}");</script> 
-			<div id="replySrc-${l.bookSerial}" class="replySrc"></div> 
-		</c:if>
-	</div>
+	</c:if>
 	</c:forEach>
 	
 	<!-- 페이징 -->
@@ -225,15 +248,31 @@ $(function() {
 		this.style.color='black';
 	});
 });
-
+function changeSecret(bookSerial,isSecret) {
+	$.ajax({
+		type: 'POST',
+		url: 'miniHpBookSecret.do/'+bookSerial+'/'+isSecret,
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8'
+	}).done(function(data) {
+		getBook(ownerSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
 function insertBook() {
 	var content = $('#bookWriteContent').val();
 	if(content==="")
 		alert('내용을 입력하세요');
 	else{
+		//비밀로 하기 체크 여부 확인
+		var isSecret = 0;
+		if($("input:checkbox[name=secretCheck]").is(":checked") == true) {
+			isSecret = 1;
+		}
 		$.ajax({
 			type: 'POST',
-			url: 'miniHpBookGuest.do/'+ownerSerial+'/'+content,
+			url: 'miniHpBookGuest.do/'+ownerSerial+'/'+content+'/'+isSecret,
 			datatype: 'json',
 			contentType:'application/json; charset=utf-8'
 		}).done(function() {

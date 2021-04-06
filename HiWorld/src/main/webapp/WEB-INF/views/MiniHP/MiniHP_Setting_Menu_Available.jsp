@@ -153,24 +153,14 @@ input::placeholder {
 			var menuFontColor = $("#menuFontColor").val();
 			var menuBorderColor = $("#menuBorder").val();
 			
-			var allData = { "UserID" : '${sessionVO.userID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
+			var allData = { "UserSerial" : '${sessionVO.userSerial}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
 							"menuBGColor" : menuBGColor, "menuFontColor" : menuFontColor, "menuBorderColor" : menuBorderColor }
 			$.ajax({
 				type : "POST",
 				url : "miniHp_menuAvailable_ok.do",
 				data : allData,
 				success : function(result){
-					$.ajax({
-						type : "POST",
-						url : "miniHp_rightMenu.do",
-						data : { menu : menu7 },
-						success : function(result){
-							$("#rightMenu").html(result);
-						},
-						error:function(e){
-							alert(e.responseText);
-						}			 
-					 });
+					 window.parent.location.href = "MiniHP_Home.do";
 				},
 				error:function(e){
 					alert(e.responseText);

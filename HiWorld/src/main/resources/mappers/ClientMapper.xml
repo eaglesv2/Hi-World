@@ -18,20 +18,6 @@
 	
 	<!-- 회원 정보 수정 -->
 	
-	<!--  이름 수정 -->
-	<update id="updateName" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserName = #{UserName}
-		WHERE UserSerial = #{UserSerial}
-	</update>
-	
-	<!-- 이름 조회  -->
-	<select id="selectName" resultType="clientVO">
-	SELECT * FROM HW_USERLIST
-	where UserName = #{UserName}
-	</select>
-	
-	
 	<!--  비밀번호 수정 -->
 	<update id="updatepw" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
@@ -43,20 +29,7 @@
 	SELECT * FROM HW_USERLIST
 	where UserPW = #{UserPW}
 	</select>
-	
-	
-	<!--  생일 수정 -->
-	<update id="updateBirth" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserBirth = #{UserBirth}
-		WHERE UserBirth = #{UserBirth}
-	</update>
-	<!-- 생일수정 조회  -->
-	<select id="selectBirth" resultType="clientVO">
-	SELECT UserBirth FORM HW_USERLIST
-	WHERE UserBirth = #{UserBirth}
-	</select>
-	
+
 		<!--  연락처 수정 -->
 		<update id="updateTel" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
@@ -74,16 +47,27 @@
 	<update id="updateAddress" parameterType="clientVO">
 		UPDATE HW_USERLIST SET
 		UserAddress = #{UserAddress}
-		WHERE UserAddress = #{UserAddress}
+		WHERE UserSerial = #{UserSerial}
 	</update>
 	<!-- 주소 조회  -->
 	<select id="selectAddress" resultType="clientVO">
-	SELECT UserAddress FORM HW_USERLIST
-	WHERE UserAddress = #{UserAddress}
+	SELECT * FROM HW_USERLIST 
+	WHERE UserSerial = #{UserSerial}	
 	</select>
 	
-	
-		
+	<!--######################################회원아이디 비번 찾기-->
+	<!-- 아이디찾기  -->
+	<select id="selectFindId" resultType="clientVO">
+	SELECT UserID FROM HW_USERLIST 
+	WHERE UserName = #{UserName}
+	AND UserTel = #{UserTel}
+	</select>
+	<!-- 비밀번호 찾기  -->
+	<select id="selectFindPw" resultType="clientVO">
+	SELECT UserPW FROM HW_USERLIST 
+	WHERE UserID = #{UserID}
+	AND UserPW = #{UserTel}
+	</select>
 	
 	
 	<!-- ################################### 구현 완료  -->
