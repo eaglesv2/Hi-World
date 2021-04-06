@@ -166,7 +166,8 @@
 		</table>
 	
 	
-	<div>
+	<div style="text-align:center;">
+	
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
@@ -191,6 +192,7 @@
         <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
             <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
         </c:if>
+  
 	</div>
 </div>
 </div>

@@ -384,7 +384,6 @@
     		})
     	}
     	
-
     	/* 홈페이지 즐겨찾기 */
     	function bookmark_add() {
     	     bookmark_url  = "도메인입력";
@@ -397,9 +396,7 @@
     	      return false;
     	     }
     	 }
-
     	
-
       </script>
       <style>
 	      	.kakaobutton > img{

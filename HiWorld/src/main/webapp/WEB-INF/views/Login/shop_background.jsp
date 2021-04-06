@@ -33,7 +33,7 @@
 		</c:forEach>
 	</table>
 
-	<div>  
+	<div style="text-align:center;">  
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
