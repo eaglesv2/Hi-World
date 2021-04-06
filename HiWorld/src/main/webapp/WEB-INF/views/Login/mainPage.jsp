@@ -453,6 +453,10 @@
 			})
 		})	
     	
+		function Id_Pw_find(){
+    		location.href="pw_Id_find.do";
+		}
+		
       </script>
       <style>
 	      	.kakaobutton > img{
@@ -627,7 +631,7 @@
 							<input type="button" onclick="signUp()" value="회원가입" id="signup">
 						</form>
 						<div>
-							<input type="button" value="아이디 비빌먼호 찾기" id="find-id" />
+							<input type="button" onclick="Id_Pw_find()" value="아이디 비빌먼호 찾기" id="find-id" />
 						</div>
 
 						<!-- 네이버 로그인 창으로 이동 -->

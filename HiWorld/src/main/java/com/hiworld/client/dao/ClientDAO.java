@@ -48,7 +48,7 @@ public interface ClientDAO {
 	
 	/* ------------------회원정보 조회 끝------------------*/
 	/* 아이디 비번 찾기*/
-	ClientVO selectFindId(String name, String tel);
+	ClientVO selectFindId(@Param("name")String name, @Param("tel")String tel);
 	
 	ClientVO selectFindPw(String id, String tel);
 	

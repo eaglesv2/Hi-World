@@ -94,12 +94,14 @@ public class ClientServiceImpl implements ClientService {
 	public ClientVO selectFindId(String name, String tel) {
 		// TODO Auto-generated method stub
 		ClientVO id = dao.selectFindId(name, tel); 
+		System.out.println("안온거지?");
 		return id;
 	}
 	
 	@Override
 	public ClientVO selectFindPw(String id, String tel) {
 		// TODO Auto-generated method stub
+		System.out.println("서비스 들어 왓니?");
 		ClientVO pw = dao.selectFindPw(id, tel);
 		return pw;
 	}

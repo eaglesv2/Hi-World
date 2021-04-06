@@ -206,7 +206,46 @@ var address = false;
 			});
 		}
 	
+		function pwUpdate1() {
+			if($('#pwhiden').css('display') == 'none'){
+				$('#hiden1').hide();
+				$('#pwhiden').show();
+			}
+		}
+		function cancle2() {
+			if($('#hiden1').css('display') == 'none'){
+				$('#pwhiden').hide();
+				$('#hiden1').show();
+			}
+		}
+		
+		function telUpdate1() {
+			if($('#hiden_tel').css('display') == 'none'){
+				$('#hiden_tel').show();
+				$('#hiden2').hide();
+			}
+		}
+		function cancle3() {
+			if($('#hiden2').css('display') == 'none'){
+				$('#hiden2').show();
+				$('#hiden_tel').hide();
+			}
+		}
+		
+		function addressUpdate1() {
+			if($('.address_hiden').css('display') == 'none'){
+				$('.address_hiden').show();
+				$('.address_hiden1').hide();
+			}
+		}
+		function cancle5() {
+			if($('.address_hiden1').css('display') == 'none'){
+				$('.address_hiden1').show();
+				$('.address_hiden').hide();
+			}
+		}
 /* =================여기까지 입니다.=============================  */
+ 
 </script>
 <style type="text/css">
 #main {
@@ -216,13 +255,28 @@ var address = false;
 	border: 1px solid #999999;
 	text-align: justify;
 }
-
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+     font-family: 'SDSamliphopangche_Outline';
+     font-weight: 400;
+      }
+input{
+    font-family:'SDSamliphopangche_Outline';
+      }
 .fontsize{
-	float: inherit;
+	font-size: 45px;
+	font-family: 'SDSamliphopangche_Outline';
 }
 
 h3 {
 	color: #778899;
+	text-align: center;
+	margin-top: 8px;
 }
 
 div {
@@ -230,7 +284,7 @@ div {
 }
 
 #text {
-	margin-top: 60px;
+	margin-top: 30px;
 }
 
 .fontsize {
@@ -247,32 +301,38 @@ div {
 .userId1{
 float: left;
 width: 100px;
+text-align: center;
 }
 
 
 .userId2 {
-	margin-left: 150px;
+	margin-left: 219px;
 }
 
 #name_gender {
 	float: left;
+	position: absolute;
+	left: 21px;
 }
-
+.name{
+margin-left: 80px;
+}
 #few_id {
-	margin-left: 100px;
+	margin-left: 170px;
 }
 
 .Gender {
-	margin-left: 100px;
+	margin-left: 172px;
 }
 
 .name_gender1 {
 	margin-top: 20px;
-	margin-left: 150px;
+	margin-left: 132px;
 }
 
 #name_few {
-	margin-left: 115px;
+	margin-left: 183px;
+	
 }
 
 .gender {
@@ -282,21 +342,17 @@ width: 100px;
 }
 
 #gender1_few {
-	margin-left: 153px;
+	margin-left: 236px;
 }
 
 
 #hiden {
 	display: none;
 }
-#hiden1 {
-	display: none;
-}
-#hiden2{
-display: none;
-}
+
 .pw_tel_main{
 height: 180px;
+margin-left: 7px;
 }
 .pw_label{
 float: left;
@@ -310,14 +366,20 @@ width: 562px;
 
 .pw_tel2{
 height: 60px;
+margin-left: 84px;
 }
 .pw_few{
 width: 340px;
 float: right;
 margin-right: 25px;
 }
+#pw_text{
+margin-left: 139px;
+}
+
 .tel_tel1{
 height: 61px;
+margin-left: 80px;
 }
 .tel_label1{
  
@@ -329,9 +391,12 @@ float: right;
 .tel_tel1{
 float: left;
 }
+.address_hiden1{
+margin-top: 18px;
+}
 .birth_address_label1{
 float: left;
-margin-right: 119px;
+margin-right: 98px;
 }
 .birth_address_label{
 float: left;
@@ -344,7 +409,7 @@ height: 141px;
 margin-top: 17px;
 }
 #Bfew{
-margin-top: 22px;
+margin-top: 15px;
 }
 .address_label{
 margin-top: 55px;
@@ -361,22 +426,16 @@ height: 56px;
 }
 .cash_label{
 float: left;
-margin-right: 115px;
+margin-top: 8px;
 }
 .cash_label1{
-margin-right: 115;
+margin-right: 106px;
 }
 .cash_few{
-float: left;
-margin-right: 123px;
-margin-top: 20px;
+margin-right: 60px;
 }
-.cash_few1{
-height: 50px;
-margin-top: 20px;
-}
-#cashbut{
-
+.few1{
+margin-right: 5px;
 }
 </style>
 </head>
@@ -402,7 +461,7 @@ margin-top: 20px;
 				</div>
 				<div class="userId2">
 					User 아이디 
-					<span class="few" id="few_id">${clientVO.userID}아이디
+					<span class="few" id="few_id">${clientVO.userID}
 					</span>
 				</div>
 			</div>	
@@ -418,7 +477,7 @@ margin-top: 20px;
 
 						<div class="gender">
 								<span class="Gender">성별 
-									<span class="few" id="gender1_few">${clientVO.userGender}성별
+									<span class="few" id="gender1_few">${clientVO.userGender}
 									<br />
 									</span>
 								</span>
@@ -433,12 +492,12 @@ margin-top: 20px;
 					<div class="pw_tel2">
 						<span class="pw_label1">비밀번호
 						</span>
-						<div class="pw_few" id="pwhiden">
+						<div class="pw_few" id="pwhiden" style="display: none;">
 							<span class="few" id="pw_text">
-								<input type="text" name="userPW" class="Pwchc1" value="${clientVO.userPW}" />
+								<input type="password" name="userPW" class="Pwchc1" value="${clientVO.userPW}" />
 								<span class="message"></span>
 								<br />
-								<input type="text" name="userPW1" class="Pwchc2" value="${clientVO.userPW}" />
+								<input type="password" name="userPW1" class="Pwchc2" value="${clientVO.userPW}" />
 								<span class="message1"></span>
 								<br />
 								<input type="button" id="pwbut" style="margin-left: 50px;" value="완료" onclick="pwUpdate()" />
@@ -449,8 +508,8 @@ margin-top: 20px;
 							
 						</div>
 						<div class="pw_few" id="hiden1">
-							<span class="few">${clientVO.userPW}
-								<input type="button" id="pwbut" value="수정" onclick="pwUpdate()1" />
+							<span class="few" id="pw_text">${clientVO.userPW}
+								<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />
 							</span> 
 							<br />
 						</div>
@@ -458,7 +517,7 @@ margin-top: 20px;
 					<div class="tel_tel1">
 						<span class="tel_label1" id="Telhiden">연락처
 						</span>
-						<div class="Tel_few" id="hiden_tel">
+						<div class="Tel_few" id="hiden_tel" style="display: none;">
 							<span class="few">
 								<input type="text" name="userTel" value="${clientVO.userTel}" />
 								<br />
@@ -484,15 +543,15 @@ margin-top: 20px;
 					<span class="birth_label" style="display: inline-block;">생년월일
 					</span>
 					<br /> 
-					<span class="address_label" style="display: inline-block;">주소${clientVO.userAddress}!!
+					<span class="address_label" style="display: inline-block;">주소
 					</span>
 				</div>
 				<div class="birth_address_few">
-					<span class="few" id="Bfew" style="display: inline-block;">${clientVO.userBirth}생일
+					<span class="few" id="Bfew" style="display: inline-block;">${clientVO.userBirth}
 					</span>
 					<br />
 						<span class="few" id="address_few" style="display: inline-block;">
-							<div class="address_hiden">
+							<div class="address_hiden" style="display: none;">
 								<input type="text" name="useraddress" value="${clientVO.userAddress}"/>
 								<br />
 								<span class="message3"></span>
@@ -502,10 +561,9 @@ margin-top: 20px;
 							</div>
 						</span>
 						<span class="few" id="address_few" style="display: inline-block;">
-							<div class="address_hiden1" style="display: none;">
+							<div class="address_hiden1" >
 								${clientVO.userAddress}
-								<br />
-								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="addressUpdate()" />
+								<input type="button" id="telbut" value="수정" onclick="addressUpdate1()" />
 							</div>
 						</span>
 					
@@ -513,14 +571,10 @@ margin-top: 20px;
 			</div>
 			<div id="cash">
 				<div class="cash_label">
-					<span class="cash_label1">캐쉬
+					<span class="cash_label1" style="display: inline-block;">캐쉬
 					</span>
-				</div>
-				<div class="cash_label1">
-					<span class="cash_few">캐쉬라벨
+					<span class="cash_few" style="display: inline-block;">보유 캐시
 					</span>
-				</div>
-				<div class="cash_few1">보유 캐시
 					<span class="few"> ${clientVO.userCash}
 					</span>
 				</div>
