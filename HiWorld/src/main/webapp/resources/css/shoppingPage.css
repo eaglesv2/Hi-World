@@ -22,6 +22,7 @@ body{
     border-collapse: none;
 
 }
+
 tr#tablehead{
 	border-bottom:1px soild;
 }
@@ -40,4 +41,5 @@ tr#tablehead{
     width: 100px;
     height: 100px;
 }
+
 

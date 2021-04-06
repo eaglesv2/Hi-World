@@ -9,7 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Document</title>
-<link rel="stylesheet" href="noticePage.css">
+<link rel="stylesheet" href="resources/css/noticePage.css">
+<style>
+/* 	table{
+        border: 1px solid black;       
+        width: 100%;
+        height: 100%;   
+} */
+</style>
 </head>
 <body>
 
@@ -17,12 +24,13 @@
 		<c:choose>
 			<c:when test="${list != '[]'}">
 				<table>
-					<tr>
+					<tr style="border-top:none">
 						<td>NO.</td>
 						<td>제목</td>
 						<td>작성자</td>
 						<td>작성일</td>
 						<td>조회수</td>
+						<td></td>
 					</tr>
 					<c:set var="number" value="${number}"/>
 					<c:forEach var="kinds" items="${list}">
@@ -33,7 +41,7 @@
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
 							<c:if test="${sessionVO.userSerial eq kinds.userSerial}">
-								<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
+								<td><p onclick="deleteBoard('${kinds.boardSerial}')">삭제</p></td>
 							</c:if>
 						</tr>
 					<c:set var="number" value="${number+1}"/>
@@ -53,7 +61,7 @@
 		
 		
 		
-		<div>
+		<div style="text-align: center; margin-top: 10px;">
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
