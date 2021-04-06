@@ -11,7 +11,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 </script>
-
 <style type="text/css">
 @font-face {
 font-family: 'BMHANNAPro';
@@ -54,7 +53,6 @@ font-family:'BMHANNAPro';
  scrollbar-arrow-color: #9C92FF
  } */
 </style>
-
 <script type="text/javascript">
 $(document).ready(function() {
 	console.log('1');
@@ -75,6 +73,7 @@ $(document).ready(function() {
 		}
 	})
 });
+
 </script>
 
 </head>

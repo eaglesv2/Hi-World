@@ -75,6 +75,22 @@
 		})
 	}
 	
+	function setMousePointer(){
+		console.log('4444');
+		
+		$.ajax({
+			type : 'POST',
+			url: 'miniHp_mousePointer.do',
+			
+			success: function(result) {
+				console.log('44444');
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		})
+		<%-- var url="<%=cp%>/cy/setting/changeUsingFont.action"; --%>
+	}
+	
 	<%-- function setUsingBackGound(){
 		var url="<%=cp%>/cy/setting/usingBackGround.action";
 		  
@@ -91,16 +107,7 @@
 		$.post(url,{},function(args){
 			$("#browser").html(args); 
 		});
-	}
-	
-	function setUsingFont(){
-		var url="<%=cp%>/cy/setting/changeUsingFont.action";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
-	}
-	
+	}	
 	
 	 --%>
 </script>
@@ -190,13 +197,13 @@
 			</span>
 			<br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setUsingFont()">
-				글꼴 설정
+			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setStoryRoomMinimi()">
+				스토리룸,미니미 설정
 			</span>
 			<br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setStoryRoomMinimi()">
-				스토리룸,미니미 설정
+			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setMousePointer()">
+				마우스 설정
 			</span>
 			<br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">

@@ -6,18 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type>
-a:link {text-decoration: none; color: black;}
-a:visited {text-decoration: none; color: black;}
-a:active {text-decoration: none; color: grey;}
-a:hover {text-decoration: underline; color: red;}
- 	
+<style>
 input[type="radio"] {
 	margin-top: -1px;
 	vertical-align: middle;
 }
- 	
-body{
+
+body {
 	scrollbar-face-color: #FFFFFF;
 	scrollbar-highlight-color: #DBDBDB;
 	scrollbar-3dlight-color: #FFFFFF;
@@ -27,24 +22,73 @@ body{
 	scrollbar-arrow-color: #9C92FF
 }
 
-#container{
-	width: 420px; 
-	height:370px; 
+#container {
+	width: 410px;
+	height: 370px;
 	padding-left: 5px;
 	font: 굴림;
 	font-size: 10pt;
 	border: 0px solid black;
 }
-#storyImg{
-	width: 349px; 
+
+#storyImg {
+	width: 350px;
 	height: 142px;
 }
-.minimiImg {
-	position: absolute;
-	top: 185px; 
-	left: 390px;
+
+#storyImg2 {
+	background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); 
+	background-size: 400px 200px;
+	width: 410px; 
+	height: 200px;
+	display:flex; 
+	justify-content: center; 
+	align-items: center; 
+	position: relative; 
+	margin-bottom: 5px;
 }
 
+.minimiImg {
+	position: absolute;
+	background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); 
+	background-size: 70px 60px; 
+	width:70px; 
+	height: 60px; 
+	top: ${itemList.minimiY}; 
+	left: ${itemList.minimiX};
+}
+
+.wrap {
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#sendBtn {
+	width: 100px;
+	height: 30px;
+	font-family: 'Roboto', sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 2.5px;
+	font-weight: 500;
+	color: #000;
+	background-color: #e9e9e9;
+	border: none;
+	border-radius: 45px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+
+#sendBtn:hover {
+	background-color: #2EE59D;
+	box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	color: #fff;
+	transform: translateY(-7px);
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
@@ -57,8 +101,8 @@ var box = section.querySelector(".minimiImg");
 
 
 container.onclick = function(e){
-	box.style.left = (e.pageX-35)+"px";
-	box.style.top = (e.pageY-40)+"px";
+	box.style.left = (e.pageX-35-240)+"px";
+	box.style.top = (e.pageY-40-100)+"px";
 	boxXY = box.style.left+","+box.style.top;
 	console.log(boxXY);
 }
@@ -102,15 +146,16 @@ function saveStoryMinimi() {
 	</table>	
 	<div id="container" align="left">
 	<section id="section1" class="section1">
-	<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center;" id="storyImg2" class="storyImg2" >
-		<div border="0" id="storyImg" class="storyImg"></div>
-	</div>
-	<div style="background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; top: ${itemList.minimiY}; left: ${itemList.minimiX}" id="minimiImg" class="minimiImg"></div>
+		<div id="storyImg2" class="storyImg2" >
+			<div border="0" id="storyImg" class="storyImg"></div>
+			<div id="minimiImg" class="minimiImg"></div>
+		</div>
 	</section>
-	<table style="width: 420px; height:150px;">
+	
+	<table style="width: 400px; height:150px;">
 		<tr>								
-			<td style="width: 210px; height: 150px;">
-				<div style="overflow-y:scroll; width:210px;  height:150px; padding:0px">
+			<td style="width: 200px; height: 150px;">
+				<div style="overflow-y:scroll; width:200px;  height:150px; padding:0px">
 					<c:if test="${storySize ne 0 }">
 						<c:forEach var="storyList" items="${storyList}">
 							<c:if test="${storyList.articleImg eq itemList.backgroundSrc}">
@@ -124,8 +169,8 @@ function saveStoryMinimi() {
 				</div>
 			</td>
 			
-			<td style="width: 210px; height: 150px;">
-				<div style="overflow-y:scroll; width:210px;  height:150px; padding:0px">
+			<td style="width: 200px; height: 150px;">
+				<div style="overflow-y:scroll; width:200px;  height:150px; padding:0px">
 					<c:if test="${minimiSize ne 0 }">
 						<c:forEach var="minimiList" items="${minimiList}">
 							<c:if test="${minimiList.articleImg eq itemList.characterSrc}">
@@ -141,7 +186,9 @@ function saveStoryMinimi() {
 		<tr>
 	</table>		
 	</div>
-	<input type="button" id="sendBtn" value="저장" onclick="saveStoryMinimi()"/>
+	<div class="wrap">
+ 		<button id="sendBtn" onclick="saveStoryMinimi()">저장</button>
+	</div>
 	<table border="0" width="420" align="center" cellpadding="0" cellspacing="0">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table> 

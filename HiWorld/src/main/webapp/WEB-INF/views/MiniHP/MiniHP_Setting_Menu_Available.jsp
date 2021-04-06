@@ -160,17 +160,7 @@ input::placeholder {
 				url : "miniHp_menuAvailable_ok.do",
 				data : allData,
 				success : function(result){
-					$.ajax({
-						type : "POST",
-						url : "miniHp_rightMenu.do",
-						data : { menu : menu7 },
-						success : function(result){
-							$("#rightMenu").html(result);
-						},
-						error:function(e){
-							alert(e.responseText);
-						}			 
-					 });
+					 window.parent.location.href = "MiniHP_Home.do";
 				},
 				error:function(e){
 					alert(e.responseText);

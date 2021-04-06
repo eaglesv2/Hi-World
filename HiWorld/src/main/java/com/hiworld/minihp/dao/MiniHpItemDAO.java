@@ -20,10 +20,18 @@ public interface MiniHpItemDAO {
 	/*스토리룸 목록 가져오기*/
 	List<MiniHpUserItemVO> getStoryRoomList(@Param("UserSerial")int userSerial, @Param("type")String type);
 	
+	/*마우스 커서 커스텀 목록 가져오기*/
+	List<MiniHpUserItemVO> getMouseList(@Param("UserSerial")int userSerial, @Param("type")String type);
+	
 	/*스토리룸 수정*/
 	void updateStoryRoom(@Param("UserSerial")int userSerial, @Param("storyRoom")String storyRoom);
 	
 	/*미니미 수정*/
 	void updateMinimi(@Param("UserSerial")int userSerial, @Param("minimi")String minimi, @Param("minimiX")String minimiX,  @Param("minimiY")String minimiX2);
+	
+	/*마우스 커서 커스텀*/ 
+	void updateMousePointer(@Param("UserSerial")int userSerial, @Param("mousePointer")String mousePointer);
+	
+	
 	
 }
