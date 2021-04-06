@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 .MainContainer{
     border: 2px solid #dae1e6;
     width: 1080px;
@@ -7,7 +6,6 @@
     position: relative;
     border-radius: 10px;
     height: 1200px;
-    
 
 }
 
@@ -61,6 +59,14 @@ a{
     float: left;
     margin-top: 10px;
     margin-left:6px;
+}
+
+#startpage{
+	margin-top: 20px;
+    margin-left: 20px;
+    width: 200px;
+    float: right;
+    font-size: small;
 }
 .leftCon{
     margin-top:10px;
@@ -197,7 +203,6 @@ a{
 #Navmenu{
 	display: block;
     font-size: 20px;
-    font-weight:800;
     color:black;
     height: 20px;
     float: top;

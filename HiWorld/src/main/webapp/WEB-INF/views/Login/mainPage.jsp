@@ -387,6 +387,21 @@
     			}
     		})
     	}
+    	
+    	/* 홈페이지 즐겨찾기 */
+    	function bookmark_add() {
+    	     bookmark_url  = "도메인입력";
+    	     bookmark_name = "홈페이지 타이틀";
+    	    
+    	     try {
+    	      window.external.AddFavorite(bookmark_url,bookmark_name);
+    	     } catch(e) {
+    	      alert('이 브라우저는 즐겨찾기 추가 기능을 지원하지 않습니다.');
+    	      return false;
+    	     }
+    	 }
+
+    	
 
       </script>
       <style>
@@ -400,6 +415,26 @@
 			border:none;
 			margin-bottom:15px;
 		}
+/* 		@font-face {
+		    font-family: 'PFStardust';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/PFStardust.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		} */
+		@font-face {
+	    font-family: 'SDSamliphopangche_Outline';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		body{
+			 font-family: 'SDSamliphopangche_Outline';
+			 font-weight: 400;
+		}
+		input{
+			font-family:'SDSamliphopangche_Outline';
+		}
+		
       </style>
 </head>
 <body>
@@ -412,6 +447,11 @@
 			    		 <input type="text"  />
 			    		<img src="resources/images/돋보기.png" alt="" />
 		    		</div>
+		    		<div id="startpage">
+			    		<a href="#" onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('localhost:8081/hiworld/login.do');">Hi-World를 시작페이지로</a>
+			    		 <a href="javascript: bookmark_add();">즐겨찾기 추가</a>
+					</div>
+			    		
 		    </div>
 
 		<div id="Navmenu"> 
@@ -422,9 +462,9 @@
 		              <li id="shopping" onclick="shopping('쇼핑')">
 		              		    쇼핑
 		              </li>
-		              <li id="board" onclick="board('${sessionVO.userName}')">
+<%-- 		              <li id="board" onclick="board('${sessionVO.userName}')">
 		                               	이웃찾기
-		              </li>
+		              </li> --%>
 		               <li id="question" onclick="question('${sessionVO.userName}')">
 		                          	  문의
 		              </li>
