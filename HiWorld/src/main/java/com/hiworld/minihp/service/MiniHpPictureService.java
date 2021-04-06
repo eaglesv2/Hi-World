@@ -2,13 +2,15 @@ package com.hiworld.minihp.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.hiworld.minihp.vo.MiniHPPictureFolderVO;
 import com.hiworld.minihp.vo.MiniHpPictureReplyVO;
 import com.hiworld.minihp.vo.MiniHpPictureVO;
 
 public interface MiniHpPictureService {
 	int getFolderScope(int folderSerial);
-	int scrapePicture(int pictureSerial,int folderSerial);
+	int scrapePicture(int pictureSerial,int folderSerial,HttpServletRequest request);
 	
 	//폴더 관련-------
 	List<MiniHPPictureFolderVO> getAllFolder(int userSerial);

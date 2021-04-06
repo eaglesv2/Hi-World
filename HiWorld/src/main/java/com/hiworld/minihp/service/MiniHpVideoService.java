@@ -2,12 +2,15 @@ package com.hiworld.minihp.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.hiworld.minihp.vo.MiniHPVideoFolderVO;
 import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
 import com.hiworld.minihp.vo.MiniHpVideoVO;
 
 public interface MiniHpVideoService {
 	int getFolderScope(int folderSerial);
+	int scrapeVideo(int videoSerial,int folderSerial,HttpServletRequest request);
 	
 	//폴더 관련-------
 	List<MiniHPVideoFolderVO> getAllFolder(int userSerial);

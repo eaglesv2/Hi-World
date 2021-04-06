@@ -2,12 +2,15 @@ package com.hiworld.minihp.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.hiworld.minihp.vo.MiniHPBoardFolderVO;
 import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 public interface MiniHpBoardService {
 	int getFolderScope(int folderSerial);
+	int scrapeBoard(int boardSerial,int folderSerial,HttpServletRequest request);
 	
 	//폴더 관련-------
 	List<MiniHPBoardFolderVO> getAllFolder(int userSerial);
