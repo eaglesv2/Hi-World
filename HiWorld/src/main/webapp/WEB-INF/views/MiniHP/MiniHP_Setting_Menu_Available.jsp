@@ -153,7 +153,7 @@ input::placeholder {
 			var menuFontColor = $("#menuFontColor").val();
 			var menuBorderColor = $("#menuBorder").val();
 			
-			var allData = { "UserID" : '${sessionVO.userID}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
+			var allData = { "UserSerial" : '${sessionVO.userSerial}', "menu3" : menu3, "menu4" : menu4, "menu5" : menu5, "menu6" : menu6,
 							"menuBGColor" : menuBGColor, "menuFontColor" : menuFontColor, "menuBorderColor" : menuBorderColor }
 			$.ajax({
 				type : "POST",

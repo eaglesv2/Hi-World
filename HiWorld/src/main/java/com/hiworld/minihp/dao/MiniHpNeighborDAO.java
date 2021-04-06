@@ -12,17 +12,17 @@ import com.hiworld.minihp.vo.MiniHpNeighborVO;
 public interface MiniHpNeighborDAO {
 	
 	/*이웃 중복체크*/
-	MiniHpNeighborVO checkNeighbor(@Param("senderID")String senderID, @Param("receiverID")String receiverID);
+	MiniHpNeighborVO checkNeighbor(@Param("senderSerial")int senderSerial, @Param("receiverSerial")int receiverSerial);
 	
 	/*이웃 수락시 이웃 정보 입력*/
 	void insertNeighbor(MiniHpNeighborVO neighborVO);
 	
 	/*이웃명 수정시 이웃 정보 수정*/
-	void updateNeighbor(@Param("value1")String value1, @Param("value2")String value2);
+	void updateNeighbor(@Param("serial1")int serial1, @Param("value1")String value1, @Param("serial2")int serial2, @Param("value2")String value2);
 	
 	/*이웃 목록 불러오기*/
-	List<MiniHpNeighborVO> getNeighborList(String userID);
+	List<MiniHpNeighborVO> getNeighborList(int userSerial);
 	
 	/*이웃 끊기*/
-	void deleteNeighbor(@Param("userID")String userID, @Param("neighborID")String neighborID);
+	void deleteNeighbor(@Param("userSerial")int userSerial, @Param("neighborSerial")int neighborSerial);
 }

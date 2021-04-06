@@ -2,34 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpNeighborDAO">
 	
-	<select id="checkNeighbor" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+	<select id="checkNeighbor" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		SELECT *
 		FROM MiniHP_Neighbor
-		WHERE (neighborID1 = #{senderID} AND neighborID2 = #{receiverID})
-		   OR (neighborID1 = #{receiverID} AND neighborID2 = #{senderID})
+		WHERE (neighborSerial1 = #{senderSerial} AND neighborSerial2 = #{receiverSerial})
+		   OR (neighborSerial1 = #{receiverSerial} AND neighborSerial2 = #{senderSerial})
 	</select>
 	
 	<insert id="insertNeighbor" parameterType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		INSERT INTO MiniHP_Neighbor
-		VALUES (#{neighborID1}, #{neighborName1}, #{neighborValue1},
-			    #{neighborID2}, #{neighborName2}, #{neighborValue2})
+		VALUES (#{neighborSerial1}, #{neighborName1}, #{neighborValue1},
+			    #{neighborSerial2}, #{neighborName2}, #{neighborValue2})
 	</insert>
 	
-	<select id="getNeighborList" parameterType="String" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+	<select id="getNeighborList" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		SELECT *
 		FROM MiniHP_Neighbor
-		WHERE neighborID1 = #{userID} OR neighborID2 = #{userID}
+		WHERE neighborSerial1 = #{userSerial} OR neighborSerial2 = #{userSerial}
 	</select>
 	
-	<update id="updateNeighbor" parameterType="String">
+	<update id="updateNeighbor">
 		Update MiniHP_Neighbor
 		SET neighborValue1 = #{value1}, neighborValue2 = #{value2}
+		WHERE neighborSerial1 = #{serial1} AND neighborSerial2 = #{serial2}
 	</update>
 	
-	<delete id="deleteNeighbor" parameterType="String">
+	<delete id="deleteNeighbor" parameterType="int">
 		DELETE
 		FROM MiniHP_Neighbor
-		WHERE (neighborID1 = #{userID) AND neighborID2 = #{neighborID})
-		   OR (neighborID1 = #{neighborID} AND neighborID2 = #{userID})
+		WHERE (neighborSerial1 = #{userSerial) AND neighborSerial2 = #{neighborSerial})
+		   OR (neighborSerial1 = #{neighborSerial} AND neighborSerial2 = #{userSerial})
 	</delete>
 </mapper>

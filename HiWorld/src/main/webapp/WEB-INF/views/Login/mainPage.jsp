@@ -24,7 +24,6 @@
 
 <script type="text/javascript">
                 
-
 	 $(document).ready(function(){
 		 	var main = $('.bxslider').bxSlider({
 				       mode: 'fade',
@@ -32,12 +31,10 @@
 				       speed:500,
 				       controls: false,
 				       pager: false
-
 				   })
 				   
 						   
 			});
-
       
         function signUp(){
         	location.href="userInsertForm.do";
@@ -87,7 +84,6 @@
             		  $('#bodyContext').html(data);
             	  })
              };
-
              function board(Name){
             	 if(Name!="" && Name!=null){
             		 console.log("1234") 
@@ -110,7 +106,6 @@
 					alert("로그인하세요");
 				}
             	 
-
              };
              
              function question(Name){
@@ -252,7 +247,6 @@
 			}
 		});
 		}
-
         	function basket(ArticleName) {
     			var UserSerial = '${sessionVO.userSerial}';
     			$.ajax({
@@ -287,7 +281,6 @@
       			},
       			buttonsStyling: false
     		})
-
     		swalWithBootstrapButtons.fire({
     	  		title: '정말 구매하실껀가요??',
     			text: "구매 하신 후 환불은 어렵습니다.",
@@ -330,7 +323,6 @@
     		})
     	}
     	
-
     	/*  여기부터 userview */
     	   function updateName() {
     		   alert("버튼 눌렀어요");
@@ -355,7 +347,6 @@
     			});
     			}
     	
-
     	/* 어드민 회원관리 */
     	function Manage_Client(){
     		$.ajax({
@@ -405,7 +396,8 @@
 					let source = $.map(data, function(item) { //json[i] 번째 에 있는게 item 임.
 						return {
 							label: item.hpTitle+"      "+item.userName+"("+item.userID+")",    //UI 에서 보여지는 글자, 실제 검색어랑 비교 대상
-							userID: item.userID//그냥 사용자 설정값
+							userID: item.userID, //그냥 사용자 설정값
+							userSerial: item.userSerial
 						}
 					});
 					
@@ -426,7 +418,7 @@
 								var popupHeight = 580;
 								var popupX = (window.screen.width/2)-(popupWidth/2);
 								var popupY = (window.screen.height/2)-(popupHeight/2);
-								window.open("miniHp_guestHome.do?OwnerID="+ui.item.userID,ui.item.userID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+								window.open("miniHp_guestHome.do?OwnerSerial="+ui.item.userSerial,ui.item.userID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
 							};
 						},
 						focus : function(event, ui) {    //포커스 가면
@@ -448,7 +440,6 @@
 			})
 		})
     	
-
       </script>
 <style>
 .kakaobutton>img {
@@ -456,7 +447,6 @@
 	height: 33px;
 	vertical-align: middle;
 }
-
 .bx-wrapper {
 	margin-right: 15px;
 	border: none;
@@ -652,6 +642,5 @@
 			alert(JSON.stringify(err)); 
 			} 
 		});
-
 </script>
 </html>

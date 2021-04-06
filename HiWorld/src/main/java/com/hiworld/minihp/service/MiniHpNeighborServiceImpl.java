@@ -33,21 +33,21 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	@Override
 	public void registerCheck_ok(int type, MiniHpNeighborVO nVO) {
 
-		String senderID = nVO.getNeighborID1();
-		String receiverID = nVO.getNeighborID2();
-		System.out.println(senderID);
-		System.out.println(receiverID);
+		int senderSerial = nVO.getNeighborSerial1();
+		int receiverSerial = nVO.getNeighborSerial2();
+		System.out.println(senderSerial);
+		System.out.println(receiverSerial);
 		switch(type) {
 		case 0: //이웃 신청 거절
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			neighborListDAO.deleteNeighborList(senderSerial, receiverSerial);
 			break;
 			
 		case 1: //이웃 신청 수락
-			neighborVO = neighborDAO.checkNeighbor(senderID, receiverID);
+			neighborVO = neighborDAO.checkNeighbor(senderSerial, receiverSerial);
 			if(neighborVO == null) {
 				neighborDAO.insertNeighbor(nVO);
 			}
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			neighborListDAO.deleteNeighborList(senderSerial, receiverSerial);
 			break;
 		
 		case 2: //이웃 신청 보류
@@ -60,24 +60,24 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	@Override
 	public void updateCheck_ok(int type, MiniHpNeighborVO nVO) {
 		// TODO Auto-generated method stub
-		String senderID = nVO.getNeighborID1();
-		String receiverID = nVO.getNeighborID2();
+		int senderSerial = nVO.getNeighborSerial1();
+		int receiverSerial = nVO.getNeighborSerial2();
 		String senderValue = nVO.getNeighborValue1();
 		String receiverValue = nVO.getNeighborValue2();
 		
 		switch(type) {
 		case 0: //이웃 신청 거절
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			neighborListDAO.deleteNeighborList(senderSerial, receiverSerial);
 			break;
 			
 		case 1: //이웃 신청 수락
-			neighborVO = neighborDAO.checkNeighbor(senderID, receiverID);
-			if(neighborVO.getNeighborID1().equals(senderID)) {
-				neighborDAO.updateNeighbor(senderValue, receiverValue);
+			neighborVO = neighborDAO.checkNeighbor(senderSerial, receiverSerial);
+			if(neighborVO.getNeighborSerial1() == senderSerial) {
+				neighborDAO.updateNeighbor(senderSerial, senderValue, receiverSerial, receiverValue);
 			} else {
-				neighborDAO.updateNeighbor(receiverValue, senderValue);
+				neighborDAO.updateNeighbor(receiverSerial, receiverValue, senderSerial, senderValue);
 			}
-			neighborListDAO.deleteNeighborList(senderID, receiverID);
+			neighborListDAO.deleteNeighborList(senderSerial, receiverSerial);
 			break;
 		
 		case 2: //이웃 신청 보류
@@ -89,9 +89,9 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	/*이웃 목록 불러오기*/
 	@SuppressWarnings("null")
 	@Override
-	public List<MiniHpNeighborViewVO> getNeighborList(String UserID) {
+	public List<MiniHpNeighborViewVO> getNeighborList(int userSerial) {
 		
-		List<MiniHpNeighborVO> neighborList = neighborDAO.getNeighborList(UserID);
+		List<MiniHpNeighborVO> neighborList = neighborDAO.getNeighborList(userSerial);
 		Iterator<MiniHpNeighborVO> lit = neighborList.iterator();
 		List<MiniHpNeighborViewVO> neighborViewList = new ArrayList<MiniHpNeighborViewVO>();
 		/*System.out.println(neighborList);*/
@@ -103,18 +103,18 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 				/*System.out.println(neighborVO.getNeighborID1());
 				System.out.println(neighborVO.getNeighborID2());
 				System.out.println(neighborViewVO);*/
-				if(neighborVO.getNeighborID1().equals(UserID)) {
-					neighborViewVO.setUserID(neighborVO.getNeighborID1());
+				if(neighborVO.getNeighborSerial1() == userSerial) {
+					neighborViewVO.setUserSerial(neighborVO.getNeighborSerial1());
 					neighborViewVO.setUserName(neighborVO.getNeighborName1());
 					neighborViewVO.setUserValue(neighborVO.getNeighborValue1());
-					neighborViewVO.setNeighborID(neighborVO.getNeighborID2());
+					neighborViewVO.setNeighborSerial(neighborVO.getNeighborSerial2());
 					neighborViewVO.setNeighborName(neighborVO.getNeighborName2());
 					neighborViewVO.setNeighborValue(neighborVO.getNeighborValue2());
 				} else {
-					neighborViewVO.setUserID(neighborVO.getNeighborID2());
+					neighborViewVO.setUserSerial(neighborVO.getNeighborSerial2());
 					neighborViewVO.setUserName(neighborVO.getNeighborName2());
 					neighborViewVO.setUserValue(neighborVO.getNeighborValue2());
-					neighborViewVO.setNeighborID(neighborVO.getNeighborID1());
+					neighborViewVO.setNeighborSerial(neighborVO.getNeighborSerial1());
 					neighborViewVO.setNeighborName(neighborVO.getNeighborName1());
 					neighborViewVO.setNeighborValue(neighborVO.getNeighborValue1());
 				}
@@ -127,12 +127,10 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	
 	/*이웃 끊기*/
 	@Override
-	public void deleteNeighbor(String userID, String neighborID) {
+	public void deleteNeighbor(int userSerial, int neighborSerial) {
 		
-		neighborDAO.deleteNeighbor(userID, neighborID);
+		neighborDAO.deleteNeighbor(userSerial, neighborSerial);
 		
 	}
-
-
 
 }

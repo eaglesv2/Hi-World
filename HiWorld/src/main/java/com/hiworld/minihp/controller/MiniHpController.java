@@ -64,10 +64,12 @@ public class MiniHpController {
 	public String miniHp_Home(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		int UserSerial = vo.getUserSerial();
-		String UserID = vo.getUserID();
-		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
+		System.out.println(UserSerial);
+		introVO = introDAO.getData(UserSerial); //미니홈피 기본 정보 가져오기
 		itemVO = itemService.getItemList(UserSerial);
 		
+		System.out.println(introVO.getHpToday());
+		System.out.println(introVO.getHpTotal());
 		model.addAttribute("introVO", introVO);
 		model.addAttribute("itemList", itemVO);
 
@@ -83,10 +85,10 @@ public class MiniHpController {
 	@RequestMapping("/MiniHP_Left.do")
 	public String miniHp_Left(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
+		int UserSerial = vo.getUserSerial();
 		/*System.out.println(UserID);*/
-		introVO = introDAO.getData(UserID); //미니홈피 기본 정보 가져오기
-		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserID); //이웃 목록 불러오기
+		introVO = introDAO.getData(UserSerial); //미니홈피 기본 정보 가져오기
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserSerial); //이웃 목록 불러오기
 		
 		if(neighborList == null) {
 			model.addAttribute("listLength", 0);
@@ -117,9 +119,7 @@ public class MiniHpController {
 		//최근 게시물
 		model.addAttribute("today",rightService.countToday(userSerial));
 		//감춘 종목 숨기기
-		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String userId = vo.getUserID();
-		menuVO = settingService.getMenuAvailable(userId);
+		menuVO = settingService.getMenuAvailable(userSerial);
 		model.addAttribute("miniHpUserMenuVO", menuVO);
 		
 		return "MiniHP/MiniHP_Right";
@@ -202,8 +202,8 @@ public class MiniHpController {
 		/*System.out.println("메뉴불러오기");*/
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String userId = vo.getUserID();
-		menuVO = settingService.getMenuAvailable(userId);
+		int userSerial = vo.getUserSerial();
+		menuVO = settingService.getMenuAvailable(userSerial);
 		
 		model.addAttribute("miniHpUserMenuVO", menuVO);
 

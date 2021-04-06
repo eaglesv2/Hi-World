@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MiniHpIntroVO {
 	
+	private int userSerial;
 	private String userID;
 	private String userName;
 	private String hpTitle;
@@ -14,6 +15,12 @@ public class MiniHpIntroVO {
 	private int hpTotal;
 	
 	
+	public int getUserSerial() {
+		return userSerial;
+	}
+	public void setUserSerial(int userSerial) {
+		this.userSerial = userSerial;
+	}
 	public String getUserID() {
 		return userID;
 	}

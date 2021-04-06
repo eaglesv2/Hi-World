@@ -80,23 +80,21 @@ public class MiniHpGuestController {
 	/*게스트 미니홈피 메인*/
 	@GetMapping("/miniHp_guestHome.do")
 	public String homeGuest(HttpServletRequest request, Model model) {
-		/*System.out.println("미니홈피 게스트 컨트롤러");*/
+		System.out.println("미니홈피 게스트 컨트롤러");
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
-		String OwnerID = request.getParameter("OwnerID");
+		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
 		
-		
-		String GuestID = vo.getUserID();
-		System.out.println(OwnerID);
+		int GuestSerial = vo.getUserSerial();
 		
 		visitorVO = new MiniHpVisitorVO();
-		visitorVO.setOwnerID(OwnerID);
-		visitorVO.setGuestID(GuestID);
+		visitorVO.setOwnerSerial(OwnerSerial);
+		visitorVO.setGuestSerial(GuestSerial);
 		
 		introService.todayCheck(visitorVO);
-		introVO = introDAO.getData(OwnerID);
+		introVO = introDAO.getData(OwnerSerial);
 		
-		model.addAttribute("OwnerID", OwnerID);
+		model.addAttribute("OwnerSerial", OwnerSerial);
 		model.addAttribute("ownerintroVO", introVO);
 		
 		return "MiniHP/MiniHP_Home_Guest";
@@ -105,17 +103,17 @@ public class MiniHpGuestController {
 	@GetMapping("/miniHp_rightGuestMenu.do")
 	public String rightGuestMenu(HttpServletRequest request, Model model) {
 		System.out.println("게스트 메뉴 불러오기");
-		String OwnerID = request.getParameter("OwnerID");
-		System.out.println(OwnerID);
-		menuVO = settingService.getMenuAvailable(OwnerID);
+		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		System.out.println(OwnerSerial);
+		menuVO = settingService.getMenuAvailable(OwnerSerial);
 		/*introVO = introDAO.getData(OwnerID);*/
 		
-		model.addAttribute("OwnerID", OwnerID);
+		model.addAttribute("OwnerSerial", OwnerSerial);
 		model.addAttribute("ownermenuVO", menuVO);
 		/*request.setAttribute("ownerintroVO", introVO);*/
 		
 		//우측메뉴 갈때 주인 시리얼 전달
-		ownerVO = dao.getData(OwnerID);
+		ownerVO = dao.getData(OwnerSerial);
 		model.addAttribute("ownerSerial", ownerVO.getUserSerial());
 		
 		return "MiniHP/MiniHP_Right_Guest_Menu";
@@ -123,10 +121,10 @@ public class MiniHpGuestController {
 	
 	@GetMapping("/miniHp_leftGuest.do")
 	public String leftGuest(HttpServletRequest request, Model model) {
-		String OwnerID = request.getParameter("OwnerID");
-		introVO = introDAO.getData(OwnerID);
-		ownerVO = dao.getData(OwnerID);
-		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(OwnerID); //이웃 목록 불러오기
+		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		introVO = introDAO.getData(OwnerSerial);
+		ownerVO = dao.getData(OwnerSerial);
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(OwnerSerial); //이웃 목록 불러오기
 		
 		if(neighborList == null) {
 			model.addAttribute("listLength", 0);
@@ -147,22 +145,22 @@ public class MiniHpGuestController {
 	}
 	
 	@GetMapping("/miniHp_rightGuest.do")
-	public String rightGuest(String OwnerID,Model model,HttpSession session) {
+	public String rightGuest(Model model, HttpSession session, HttpServletRequest request) {
 		//주인 시리얼 전달
-		ownerVO = dao.getData(OwnerID);
-		int ownerSerial = ownerVO.getUserSerial();
+		
+		int ownerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
 		model.addAttribute("ownerSerial", ownerSerial);
 		
 		model.addAttribute("latestPosts", rightService.getLatestPosts(ownerSerial));
 		
 		model.addAttribute("today",rightService.countToday(ownerSerial));
-		menuVO = settingService.getMenuAvailable(OwnerID);
+		menuVO = settingService.getMenuAvailable(ownerSerial);
 		model.addAttribute("ownermenuVO", menuVO);
 		
 		//일촌 관계 전달
 		int isNeighbor = 0;
 		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
-		if(neighborDAO.checkNeighbor(vo.getUserID(), OwnerID)!=null)
+		if(neighborDAO.checkNeighbor(vo.getUserSerial(), ownerSerial)!=null)
 			isNeighbor = 1;
 		model.addAttribute("isNeighbor", isNeighbor);
 		
@@ -194,10 +192,10 @@ public class MiniHpGuestController {
 	/*게스트 미니홈피 제목 설정*/
 	@GetMapping("/miniHp_topGuest.do")
 	public String topGuest(HttpServletRequest request, Model model) {
-		String OwnerID = request.getParameter("OwnerID");
+		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
 		/*introVO = introDAO.getData(OwnerID);*/
 		
-		model.addAttribute("OwnerID", OwnerID);
+		model.addAttribute("OwnerSerial", OwnerSerial);
 		/*model.addAttribute("ownerintroVO", introVO);*/
 		
 		return "MiniHP/MiniHP_TopGuest";
@@ -206,8 +204,8 @@ public class MiniHpGuestController {
 	@ResponseBody
 	@GetMapping("/miniHp_getGuestIntroTitle.do")
 	public String getGuestTitle(HttpServletRequest request) {
-		String OwnerID = request.getParameter("OwnerID");
-		ownerVO = dao.getData(OwnerID);
+		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		ownerVO = dao.getData(OwnerSerial);
 		/*System.out.println(ownerVO.getUserName());*/
 		
 		return introService.getGuestTitle(ownerVO);

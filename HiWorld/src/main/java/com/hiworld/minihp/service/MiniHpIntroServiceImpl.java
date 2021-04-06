@@ -128,8 +128,8 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 
 		if(vo == null) {
 			introDAO.insertVisitor(visitorVO);
-			introDAO.updateToday(visitorVO.getOwnerID());
-			introDAO.updateTotal(visitorVO.getOwnerID());
+			introDAO.updateToday(visitorVO.getOwnerSerial());
+			introDAO.updateTotal(visitorVO.getOwnerSerial());
 		}
 	}
 	

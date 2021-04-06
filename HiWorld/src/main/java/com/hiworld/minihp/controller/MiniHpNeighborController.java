@@ -41,8 +41,8 @@ public class MiniHpNeighborController {
 	@GetMapping("/miniHp_neighborRegisterList.do")
 	public String neighborRegisterList(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
-		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserID);
+		int UserSerial = vo.getUserSerial();
+		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserSerial);
 
 		model.addAttribute("registerList", list);
 		
@@ -54,11 +54,11 @@ public class MiniHpNeighborController {
 	public String neighborRegisterCheck(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String senderID = request.getParameter("senderID");
-		String receiverID = vo.getUserID();
+		int senderSerial = Integer.parseInt(request.getParameter("senderSerial"));
+		int receiverSerial = vo.getUserSerial();
 		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
 		String minimiPath = vo.getOriginalFileName();*/
-		neighborListVO = neighborListService.getRegisterCheck(senderID, receiverID);
+		neighborListVO = neighborListService.getRegisterCheck(senderSerial, receiverSerial);
 		/*System.out.println(neighborListVO.getSenderValue());
 		System.out.println(neighborListVO.getReceiverValue());*/
 		
@@ -72,11 +72,11 @@ public class MiniHpNeighborController {
 	public String neighborUpdateCheck(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String senderID = request.getParameter("senderID");
-		String receiverID = vo.getUserID();
+		int senderSerial = Integer.parseInt(request.getParameter("senderSerial"));
+		int receiverSerial = vo.getUserSerial();
 		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
 		String minimiPath = vo.getOriginalFileName();*/
-		neighborListVO = neighborListService.getRegisterCheck(senderID, receiverID);
+		neighborListVO = neighborListService.getRegisterCheck(senderSerial, receiverSerial);
 		
 		model.addAttribute("neighborListVO", neighborListVO);
 		
@@ -115,15 +115,15 @@ public class MiniHpNeighborController {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String senderName = vo.getUserName(); //보내는이 이름
-		String receiverId = request.getParameter("OwnerId"); //받는이 아이디
-		System.out.println(receiverId);
+		int receiverSerial = Integer.parseInt(request.getParameter("OwnerSerial")); //받는이 시리얼
+		System.out.println(receiverSerial);
 		String receiverName = request.getParameter("OwnerName"); //받는이 이름
 		
        /* CyUsingItemDTO usingItem = cyUsingItemDAO.useMinimi(userId);
         String minimiPath = usingItem.getOriginalFileName();*/
        /* request.setAttribute("minimiPath", minimiPath); */
 		model.addAttribute("senderName", senderName);
-		model.addAttribute("receiverId", receiverId);
+		model.addAttribute("receiverSerial", receiverSerial);
 		model.addAttribute("receiverName", receiverName);
 		
 		return "MiniHP/MiniHP_NeighborRegister";
@@ -145,10 +145,10 @@ public class MiniHpNeighborController {
 	public String deleteNeighbor(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
-		String NeighborID = request.getParameter("NeighborID");
+		int UserSerial = vo.getUserSerial();
+		int NeighborSerial = Integer.parseInt(request.getParameter("NeighborID"));
 		
-		neighborService.deleteNeighbor(UserID, NeighborID);
+		neighborService.deleteNeighbor(UserSerial, NeighborSerial);
 		
 		return "";
 	}
@@ -156,17 +156,17 @@ public class MiniHpNeighborController {
 	/*이웃명 수정*/
 	@PostMapping("miniHp_updateNeighbor.do")
 	public String updateNeighbor(HttpServletRequest request, Model model) {
-		String userID = request.getParameter("userID");
+		int userSerial = Integer.parseInt(request.getParameter("userSerial"));
 		String userName = request.getParameter("userName");
 		String userValue = request.getParameter("userValue");
-		String neighborID = request.getParameter("neighborID");
+		int neighborSerial = Integer.parseInt(request.getParameter("neighborSerial"));
 		String neighborName = request.getParameter("neighborName");
 		String neighborValue = request.getParameter("neighborValue");
 		
-		model.addAttribute("userID", userID);
+		model.addAttribute("userSerial", userSerial);
 		model.addAttribute("userName", userName);
 		model.addAttribute("userValue", userValue);
-		model.addAttribute("neighborID", neighborID);
+		model.addAttribute("neighborSerial", neighborSerial);
 		model.addAttribute("neighborName", neighborName);
 		model.addAttribute("neighborValue", neighborValue);
 		

@@ -3,7 +3,6 @@ package com.hiworld.minihp.service;
 import java.util.List;
 
 import com.hiworld.minihp.vo.MiniHpNeighborListVO;
-import com.hiworld.minihp.vo.MiniHpNeighborVO;
 
 public interface MiniHpNeighborListService {
 	
@@ -11,9 +10,9 @@ public interface MiniHpNeighborListService {
 	void insertNeighborList(MiniHpNeighborListVO neighborListVO);
 	
 	/*이웃 신청 목록 불러오기*/
-	List<MiniHpNeighborListVO> getRegisterList(String userID);
+	List<MiniHpNeighborListVO> getRegisterList(int userSerial);
 	
 	/*이웃 신청 정보 불러오기*/
-	MiniHpNeighborListVO getRegisterCheck(String senderID, String receiverID);
+	MiniHpNeighborListVO getRegisterCheck(int senderSerial, int receiverSerial);
 
 }

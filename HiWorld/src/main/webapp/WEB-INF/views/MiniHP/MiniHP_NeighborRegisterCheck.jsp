@@ -135,10 +135,10 @@ function neighborRegister_no(){
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/admin/noBtn.jpg" onclick="neighborRegister_no()"/>
 		</span>	
 
-		<input type="hidden" name="neighborID1" value="${neighborListVO.senderID}">
+		<input type="hidden" name="neighborSerial1" value="${neighborListVO.senderSerial}">
 		<input type="hidden" name="neighborName1" value="${neighborListVO.senderName}">
 		<input type="hidden" name="neighborValue1" value="${neighborListVO.senderValue}">
-		<input type="hidden" name="neighborID2" value="${neighborListVO.receiverID}">
+		<input type="hidden" name="neighborSerial2" value="${neighborListVO.receiverSerial}">
 		<input type="hidden" name="neighborName2" value="${neighborListVO.receiverName}">
 		<input type="hidden" name="neighborValue2" value="${neighborListVO.receiverValue}">
 	</form>

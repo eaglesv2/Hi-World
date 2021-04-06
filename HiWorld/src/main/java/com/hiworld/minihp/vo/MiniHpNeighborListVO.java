@@ -2,20 +2,20 @@ package com.hiworld.minihp.vo;
 
 public class MiniHpNeighborListVO {
 
-	private String senderID;
+	private int senderSerial;
 	private String senderName;
 	private String senderValue;
-	private String receiverID;
+	private int receiverSerial;
 	private String receiverName;
 	private String receiverValue;
 	private String userMessage;
 	private int type;
 	
-	public String getSenderID() {
-		return senderID;
+	public int getSenderSerial() {
+		return senderSerial;
 	}
-	public void setSenderID(String senderID) {
-		this.senderID = senderID;
+	public void setSenderSerial(int senderSerial) {
+		this.senderSerial = senderSerial;
 	}
 	public String getSenderName() {
 		return senderName;
@@ -29,11 +29,11 @@ public class MiniHpNeighborListVO {
 	public void setSenderValue(String senderValue) {
 		this.senderValue = senderValue;
 	}
-	public String getReceiverID() {
-		return receiverID;
+	public int getReceiverSerial() {
+		return receiverSerial;
 	}
-	public void setReceiverID(String receiverID) {
-		this.receiverID = receiverID;
+	public void setReceiverSerial(int receiverSerial) {
+		this.receiverSerial = receiverSerial;
 	}
 	public String getReceiverName() {
 		return receiverName;
