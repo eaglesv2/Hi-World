@@ -33,7 +33,7 @@ public interface ClientDAO {
 	/* 패스워드 수정*/
 	int updatepw(ClientVO clientVO);
 	/* 패스워드 조회*/
-	ClientVO selectpw(String clientVO);
+	ClientVO selectpw(int clientVO);
 
 	/* 연락처 수정*/
 	int updateTel(ClientVO clientVO);
@@ -49,9 +49,10 @@ public interface ClientDAO {
 	/* ------------------회원정보 조회 끝------------------*/
 	/* 아이디 비번 찾기*/
 	ClientVO selectFindId(@Param("name")String name, @Param("tel")String tel);
-	
-	ClientVO selectFindPw(String id, String tel);
-	
+	/* 임시 비밀번호를 받기 위해서 씨리얼 번호를 받음*/
+	ClientVO selectuserInfo(@Param("id")String id, @Param("tel")String tel);
+	/* 시리얼 번호로 조회후 비번 수정*/
+	int updateFindPw(@Param("serial")int Serial, @Param("pw")String pw);
 	
 	
 	

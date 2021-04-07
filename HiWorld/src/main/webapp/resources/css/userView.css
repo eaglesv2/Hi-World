@@ -1,0 +1,205 @@
+#main {
+	width: 100%;
+	margin-top: -3px;
+	height: 100%;
+	border: 1px solid #999999;
+	text-align: justify;
+}
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+     font-family: 'SDSamliphopangche_Outline';
+     font-weight: 400;
+      }
+input{
+    font-family:'SDSamliphopangche_Outline';
+      }
+.fontsize{
+	font-size: 45px;
+	font-family: 'SDSamliphopangche_Outline';
+}
+
+h3 {
+	color: #778899;
+	text-align: center;
+	margin-top: 8px;
+}
+
+div {
+	
+}
+
+#text {
+	margin-top: 30px;
+}
+
+.fontsize {
+	font-family: sans-serif;
+}
+
+.fontcolor {
+	color: #00ced1;
+}
+
+.few {
+	color: red;
+}
+.userId1{
+float: left;
+width: 100px;
+text-align: center;
+}
+
+
+.userId2 {
+	margin-left: 219px;
+}
+
+#name_gender {
+	float: left;
+	position: absolute;
+	left: 21px;
+}
+.name{
+margin-left: 80px;
+}
+#few_id {
+	margin-left: 170px;
+}
+
+.Gender {
+	margin-left: 95px;
+}
+
+.name_gender1 {
+	margin-top: 20px;
+	margin-left: 60px;
+}
+
+#name_few {
+	margin-left: 183px;
+	
+}
+
+.gender {
+	margin-left: 48px;
+	margin-top: 31px;
+	margin-bottom: 30px;
+}
+
+#gender1_few {
+	margin-left: 236px;
+}
+
+
+#hiden {
+	display: none;
+}
+
+.pw_tel_main{
+height: 180px;
+margin-left: 7px;
+}
+.pw_label{
+float: left;
+}
+#pw_tel_body{
+float: left;
+margin-top: 19px;
+margin-left: 30px;
+width: 562px;
+}
+
+.pw_tel2{
+height: 60px;
+margin-left: 84px;
+}
+.pw_few{
+width: 340px;
+float: right;
+margin-right: -44px;
+}
+#pw_text{
+margin-left: 152px;
+}
+#pw_text1{
+margin-left: 63px;
+}
+.tel_tel1{
+height: 61px;
+margin-left: 80px;
+}
+.tel_label1{
+ 
+}
+.Tel_few{
+margin-left: 168px;
+float: right;
+}
+.tel_tel1{
+float: left;
+margin-top: 6px;
+}
+.address_hiden1{
+margin-top: 18px;
+}
+.birth_address_label1{
+float: left;
+margin-right: 187px;
+}
+.birth_address_label{
+float: left;
+margin-right: 128px;
+}
+.birth_address{
+height: 141px;
+}
+.birth_label{
+margin-top: 17px;
+}
+#Bfew{
+margin-top: 15px;
+}
+.address_label{
+margin-top: 55px;
+
+}
+#address_few{
+margin-top: 36px;
+}
+#few{
+margin-top: 13px;
+}
+.cash{
+height: 56px;
+}
+.cash_label{
+float: left;
+margin-top: 8px;
+}
+.cash_label1{
+margin-right: 184px;
+}
+.cash_few{
+margin-right: 215px;
+}
+.few1{
+margin-right: 5px;
+}
+.Pwchc1{
+position: absolute;
+left: 406px;
+top: 712px;
+}
+.Pwchc2{
+margin-top: 15px;
+}
+.message{
+position: absolute;
+top: 735px;
+left: 406px;
+}

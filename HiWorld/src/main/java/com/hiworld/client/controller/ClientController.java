@@ -504,7 +504,7 @@ public class ClientController {
 			vvo.setUserPW(Pw);
 			clientService.updatepw(vvo);
 			Pw = vvo.getUserPW();
-			ClientVO clientvo1 = clientService.selectpw(Pw);
+			ClientVO clientvo1 = clientService.selectpw(userial);
 			model.addAttribute("userView", clientvo1);
 			 break;
 		case "2":
@@ -547,8 +547,10 @@ public class ClientController {
 	@RequestMapping("find_id_pw.do")
 	@ResponseBody
 	public String find_id_pw(HttpServletRequest request,ClientVO clientvo, Model md)throws Exception{
+		System.out.println("콘트롤러들어 왔니?");
 		String find = request.getParameter("check");
 		String massege = "입력 하신 정보가 없습니다.";	
+		System.out.println(find);
 		switch (find) {
 		case "1":
 			String name = clientvo.getUserName();
@@ -560,8 +562,11 @@ public class ClientController {
 		case "2":
 			String Id = clientvo.getUserID();
 			String tel1 = clientvo.getUserTel();
+			System.out.println(Id);
+			System.out.println(tel1);
 			ClientVO vo1 = clientService.selectFindPw(Id, tel1);
-			return vo1.getUserID();
+			
+			return vo1.getUserPW();
 		default:
 			return massege;
 			
