@@ -103,13 +103,27 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 				}
 			}
 		}
-		
 		if(!nonPlayList[0].equals("")) {
 			for(int i=0; i<nonPlayList.length; i++) {
 				System.out.println(nonPlayList[i]);
 				itemDAO.removeFromPlayList(userSerial, nonPlayList[i]);
 			}
 		}
+
+	}	
+	
+	
+	@Override
+	public List<String> getAllSkin(int userSerial) {
+		return itemDAO.getAllSkin(userSerial);
+	}
+	@Override
+	public String getUsingSkin(int userSerial) {
+		return itemDAO.getUsingSkin(userSerial);
+	}
+	@Override
+	public int updateSkin(int userSerial, String src) {
+		return itemDAO.updateSkin(userSerial, src);
 	}
 
 }

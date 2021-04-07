@@ -71,6 +71,29 @@
 		WHERE musicTitle = #{musicTItle}
 	</select>
 	
+
+	<update id="updateMousePointer">
+		UPDATE UserSelect_Article
+		SET mouseSrc = #{mousePointer}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	
+	<select id="getAllSkin" resultType="String">
+		SELECT ArticleImg FROM User_Article
+		WHERE UserSerial=#{userSerial}
+		AND ArticleKinds = '스킨'
+	</select>
+	<select id="getUsingSkin" resultType="String">
+		SELECT skinSrc FROM UserSelect_Article
+		WHERE userSerial=#{userSerial}
+	</select>
+	<update id="updateSkin">
+		UPDATE UserSelect_Article
+		SET skinSrc=#{src}
+		WHERE userSerial=#{userSerial}
+	</update>
+
 	<insert id="addToPlayList">
 		INSERT INTO UserSelect_Music
 		VALUES (#{userSerial}, #{musicTitle}, #{musicSrc})
@@ -80,4 +103,5 @@
 		DELETE FROM UserSelect_Music
 		WHERE userSerial = #{userSerial} AND musicTitle = #{musicTitle}
 	</delete>
+
 </mapper>

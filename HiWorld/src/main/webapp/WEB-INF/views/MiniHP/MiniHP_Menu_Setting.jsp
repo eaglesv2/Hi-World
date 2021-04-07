@@ -108,19 +108,20 @@
 		}); --%>
 		
 	
-	<%-- function setUsingBackGound(){
-		var url="<%=cp%>/cy/setting/usingBackGround.action";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
+	function setUsingBackGound() {
+		console.log('2222');
+		
+		$.ajax({
+			type : 'GET',
+			url: 'miniHp_skin.do',
+			
+			success: function(result) {
+				console.log('22222');
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		})
 	}
-	
-	
-
-	
-	
-	 --%>
 </script>
 <style>
 #managerTitle{
@@ -203,7 +204,7 @@
 		</div>
 		<div id="menuItem">
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setUsingBackGound()">
+			<span class="subMenu" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setUsingBackGound()">
 				미니홈피 스킨 설정
 			</span>
 			<br/>

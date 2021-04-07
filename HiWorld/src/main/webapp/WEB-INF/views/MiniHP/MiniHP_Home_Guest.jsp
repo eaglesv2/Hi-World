@@ -34,7 +34,7 @@ body {
 body{
 	font-family:'SDSamliphopangche_Outline';
 	font-weight: 0;
-	background-image: url("resources/images/basic.jpg");
+	background-image: url("resources/images/bgImg/basic.jpg");
 	margin-left: 35px;
 }
 button{
