@@ -39,9 +39,11 @@ public class MiniHpSettingController {
 	@Autowired
 	MiniHpIntroDAO introDAO;
 	
+	MiniHpIntroVO introVO;
+	
 	MiniHpUserMenuVO menuVO;
 	
-	MiniHpIntroVO introVO;
+	MiniHpMusicVO musicVO;
 	
 	sessionVO sessionVO;
 	
@@ -186,8 +188,8 @@ public class MiniHpSettingController {
 	}
 	
 	@RequestMapping("miniHp_playList.do")
-	public String setPlayList(HttpSession session, Model model) {
-		System.out.println("미니홈피 마우스 배경음악 컨트롤러");
+	public String setplayList(HttpSession session, Model model) {
+		System.out.println("미니홈피 배경음악 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
 		int userSerial = sessionVO.getUserSerial();
 		
@@ -198,6 +200,22 @@ public class MiniHpSettingController {
 		model.addAttribute("playList", playList);
 				
 		return "MiniHP/MiniHP_Setting_PlayList";
+	}
+	
+	@ResponseBody
+	@PostMapping("miniHp_savePlayList.do")
+	public String savePlayList(HttpServletRequest request, HttpSession session) {
+		System.out.println("미니홈피 배경음악 저장 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int userSerial = sessionVO.getUserSerial();
+		String play = request.getParameter("playList");
+		String nonPlay = request.getParameter("nonPlayList");
+		String[] playList = play.split("&&");
+		String[] nonPlayList = nonPlay.split("&&");
+		
+		itemService.setPlayList(userSerial, playList, nonPlayList);
+		
+		return "";
 	}
 }
 

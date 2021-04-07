@@ -30,7 +30,6 @@ body{
 	 scrollbar-arrow-color: #9C92FF
 }
 </style>
-<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 

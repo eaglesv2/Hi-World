@@ -54,7 +54,6 @@ input[type="radio"] {
 #sendBtn {
 	width: 100px;
 	height: 30px;
-	font-family: 'Roboto', sans-serif;
 	font-size: 11px;
 	text-transform: uppercase;
 	letter-spacing: 2.5px;
@@ -77,7 +76,6 @@ input[type="radio"] {
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
-<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script>
 function changeMousePointer(src){
 	var mouse = document.setMousePointer.mouse.value;
