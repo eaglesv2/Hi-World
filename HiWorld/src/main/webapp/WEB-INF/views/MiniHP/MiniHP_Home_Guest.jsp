@@ -19,6 +19,36 @@ body {
 	scrollbar-track-color: #FFFFFF;
 	scrollbar-arrow-color: #9C92FF
 }
+@font-face {
+	font-family: 'BMHANNAPro';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+	font-family:'SDSamliphopangche_Outline';
+	font-weight: 0;
+	background-image: url("resources/images/basic.jpg");
+	margin-left: 35px;
+}
+button{
+	font-family:'SDSamliphopangche_Outline';
+}
+input{
+	font-family:'BMHANNAPro';
+}
+textarea{
+	font-family:'BMHANNAPro';
+}
+.secondFont{
+	font-family:'BMHANNAPro';
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">

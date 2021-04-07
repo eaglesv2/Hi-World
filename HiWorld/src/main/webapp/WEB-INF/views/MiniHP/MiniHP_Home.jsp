@@ -13,10 +13,10 @@
 </script>
 <style type="text/css">
 @font-face {
-font-family: 'BMHANNAPro';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
-font-weight: normal;
-font-style: normal;
+	font-family: 'BMHANNAPro';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -25,22 +25,22 @@ font-style: normal;
     font-style: normal;
 }
 body{
-font-family:'SDSamliphopangche_Outline';
-font-weight: 0;
-background-image: url("resources/images/basic.jpg");
-margin-left: 35px;
+	font-family:'SDSamliphopangche_Outline';
+	font-weight: 0;
+	background-image: url("resources/images/basic.jpg");
+	margin-left: 35px;
 }
 button{
-font-family:'SDSamliphopangche_Outline';
+	font-family:'SDSamliphopangche_Outline';
 }
 input{
-font-family:'BMHANNAPro';
+	font-family:'BMHANNAPro';
 }
 textarea{
-font-family:'BMHANNAPro';
+	font-family:'BMHANNAPro';
 }
 .secondFont{
-font-family:'BMHANNAPro';
+	font-family:'BMHANNAPro';
 }
 /* body
 {

@@ -79,6 +79,33 @@ function moveToUser(){
 	top:315pt; 
 	left:20pt;
 }
+@font-face {
+font-family: 'BMHANNAPro';
+src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+font-family:'SDSamliphopangche_Outline';
+}
+button{
+font-family:'SDSamliphopangche_Outline';
+}
+select{
+font-family:'SDSamliphopangche_Outline';
+}
+input{
+font-family:'BMHANNAPro';
+}
+textarea{
+font-family:'BMHANNAPro';
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
