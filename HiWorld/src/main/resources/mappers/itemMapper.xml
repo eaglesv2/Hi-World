@@ -58,4 +58,20 @@
 		SET mouseSrc = #{mousePointer}
 		WHERE UserSerial = #{UserSerial}
 	</update>
+	
+	
+	<select id="getAllSkin" resultType="String">
+		SELECT ArticleImg FROM User_Article
+		WHERE UserSerial=#{userSerial}
+		AND ArticleKinds = '스킨'
+	</select>
+	<select id="getUsingSkin" resultType="String">
+		SELECT skinSrc FROM UserSelect_Article
+		WHERE userSerial=#{userSerial}
+	</select>
+	<update id="updateSkin">
+		UPDATE UserSelect_Article
+		SET skinSrc=#{src}
+		WHERE userSerial=#{userSerial}
+	</update>
 </mapper>

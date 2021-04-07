@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -198,6 +199,25 @@ public class MiniHpSettingController {
 		model.addAttribute("playList", playList);
 				
 		return "MiniHP/MiniHP_Setting_PlayList";
+	}
+	
+	/*미니홈피 스킨 화면 불러오는 컨트롤러*/
+	@GetMapping("miniHp_skin.do")
+	public String getSkinPage(HttpSession session, Model model) {
+		System.out.println("미니홈피 배경화면 컨트롤러");
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("list",itemService.getAllSkin(userSerial));
+		model.addAttribute("usingSkin",itemService.getUsingSkin(userSerial));
+		
+		return "MiniHP/MiniHP_Setting_Skin";
+	}
+	/*미니홈피 스킨 화면 바꾸는 컨트롤러*/
+	@PostMapping("miniHp_skin.do")
+	@ResponseBody
+	public void changeSkin(HttpSession session,String src) {
+		System.out.println("미니홈피 배경화면 컨트롤러");
+		int userSerial = Utils.getSessionUser(session);
+		itemService.updateSkin(userSerial, src);
 	}
 }
 

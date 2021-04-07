@@ -29,7 +29,6 @@
 body{
 	font-family:'SDSamliphopangche_Outline';
 	font-weight: 0;
-	background-image: url("resources/images/basic.jpg");
 	margin-left: 35px;
 }
 button{
@@ -136,6 +135,10 @@ textarea{
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	//배경화면 설정
+	var skin = $("#skin").val();
+	$("body").css({"background":"url("+skin+")"});
+	
 	console.log('1');
 	$.ajax({
 		type : 'post',
@@ -156,7 +159,8 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<body>
+<body id="mainBody">
+<input type="hidden" id="skin" value="${skin}">
 	<table border="0" align="left" valign="top" width="1200" height="550" cellspacing="0" cellpadding="0">
 		<tr>
 			<td>

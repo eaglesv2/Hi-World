@@ -39,4 +39,10 @@ public interface MiniHpItemDAO {
 	/*마우스 커서 커스텀*/ 
 	void updateMousePointer(@Param("UserSerial")int userSerial, @Param("mousePointer")String mousePointer);
 	
+	/*가지고 있는 스킨 가져오기*/
+	List<String> getAllSkin(int userSerial);
+	/*사용중인 스킨 가져오기*/
+	String getUsingSkin(int userSerial);
+	/*사용중인 스킨 변경*/
+	int updateSkin(@Param("userSerial") int userSerial, @Param("src") String src);
 }

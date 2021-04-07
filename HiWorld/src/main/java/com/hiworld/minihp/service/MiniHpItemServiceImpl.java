@@ -84,5 +84,19 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		itemDAO.updateMousePointer(userSerial, mousePointer);
 		
 	}	
+	
+	
+	@Override
+	public List<String> getAllSkin(int userSerial) {
+		return itemDAO.getAllSkin(userSerial);
+	}
+	@Override
+	public String getUsingSkin(int userSerial) {
+		return itemDAO.getUsingSkin(userSerial);
+	}
+	@Override
+	public int updateSkin(int userSerial, String src) {
+		return itemDAO.updateSkin(userSerial, src);
+	}
 
 }
