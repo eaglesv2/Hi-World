@@ -192,7 +192,7 @@ function change_ok() {
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				
 					<font>
-						<span id="appendContent" align="center"></span>
+						<span class="secondFont" id="appendContent" align="center"></span>
 					</font>
 				
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">

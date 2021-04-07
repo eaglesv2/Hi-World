@@ -99,7 +99,7 @@ table.boardTable td {
 		</tr>
 	</tbody>
 	<c:if test="${board.replyCnt!=0}">
-	<tr style="background: #EBE9E9;">
+	<tr class="secondFont" style="background: #EBE9E9;">
 			<td scope="row">
 			<c:forEach items="${replyList}" var="r">
 				<span id="reply-${r.replySerial}">

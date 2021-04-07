@@ -111,7 +111,7 @@
 			</c:if>
 			<c:if test="${isNeighbor==0}"><br></c:if>
 		</div>
-		<div id="neiWord" style="width: 100%;background-color: #F2F2F2; text-align: left;">
+		<div class="secondFont" id="neiWord" style="width: 100%;background-color: #F2F2F2; text-align: left;">
 		
 		</div>
 </div>
