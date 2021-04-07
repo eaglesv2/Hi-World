@@ -4,28 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/css/questionDetailPage.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<table>
+	<table id="questionDtable">
 		<tr>
 			<td>${boardVO.title}${boardVO.cDate} ${boardVO.userName}</td>
 		</tr>
 		<tr>
-			<td><textarea rows="20" cols="80" readonly>${boardVO.content}</textarea></td>
+			<td><textarea rows="20" cols="80" readonly disabled="disabled">${boardVO.content}</textarea></td>
 		</tr>
 
 	</table>
 
 
-	<form name="reply">
-		<input type="text" placeholder="댓글 작성하세요" name="replyContent" id="replyContent" />
-		<input type="hidden" name="boardSerial" value="${boardVO.boardSerial}" />
-		<button type="button" onclick="replyInsert()">등록</button>
-	</form>
+
 
 
 
@@ -33,7 +30,10 @@
 
 	<table>
 		<tr id="replyTable">
-			<td>댓글</td>
+			<td id="dat">댓글</td>
+			<td>작성자</td>
+			<td>작성일</td>
+			<td></td>
 		</tr>
 		<c:choose>
 			<c:when test="${list != '[]'}">
@@ -56,7 +56,11 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-
+	<form name="reply" id="reply">
+		<input type="text" placeholder="댓글 작성하세요" name="replyContent" id="replyContent" />
+		<input type="hidden" name="boardSerial" value="${boardVO.boardSerial}" />
+		<button type="button" onclick="replyInsert()">등록</button>
+	</form>
 
 
 </body>

@@ -357,6 +357,16 @@ public class ClientController {
 
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자체 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+	/* 전체 회원 몇명인지 카운트 */
+	@GetMapping("/allClientCount.do")
+	@ResponseBody
+	public String allClientCount() {
+		String count = String.valueOf(clientService.allClientCount());
+		
+		return count;
+		
+	}
+	
 	/* 회원가입페이지로 이동 */
 	@GetMapping("/userInsertForm.do")
 	public String userInsertForm() {

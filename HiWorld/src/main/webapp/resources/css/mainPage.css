@@ -42,11 +42,14 @@ a{
 }
 
 #mainlogo img{
-	width: 299px;
-    height: 180px;
+    width: 250px;
+    height: 47px;
     display: block;
     float: left;
+    margin-bottom: 36px;
     overflow: hidden;
+    margin-top: 66px;
+    margin-right: 30px;
 }
 
 
@@ -66,15 +69,17 @@ a{
 	letter-spacing:-1px;
 	margin:12px 0 10px 10px;
 	border:none;
+	outline: none;
 }
 
 #mainserch img{
-	width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     display: block;
     float: left;
-    margin-top: 10px;
-    margin-left:6px;
+    margin-top: 7px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 #startpage{
@@ -116,6 +121,18 @@ a{
    margin-top: 40px;
    margin-bottom: 20px;
 }
+
+.rightCon #jang #jang-top2{
+	margin-top:20px;
+ 	margin-bottom: 20px;
+    float: left;
+    margin-left: 49px;
+}
+
+#article_manage{
+	margin-top: 20px
+}
+
 
 #jang-top div{
 	float:left;
@@ -314,4 +331,14 @@ a{
 	cursor: pointer;
 }
 
+#jang-bottom2{
+	width: 54px;
+    float: left;
+    margin-top: 20px;
+    margin-left: 60px;
+}
 
+#logout{
+	display:block;
+	margin-top: 20px
+}

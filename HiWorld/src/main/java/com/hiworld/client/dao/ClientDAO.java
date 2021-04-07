@@ -56,6 +56,8 @@ public interface ClientDAO {
 	
 	
 //	############################### 기능 구현 완료
+	/* 전체 회원 카운트 */
+	int allClientCount();
 	/* 로그인*/
 	int userLogin(ClientVO clientVO);
 	

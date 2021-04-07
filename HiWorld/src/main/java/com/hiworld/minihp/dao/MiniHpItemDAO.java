@@ -39,10 +39,28 @@ public interface MiniHpItemDAO {
 	/*마우스 커서 커스텀*/ 
 	void updateMousePointer(@Param("UserSerial")int userSerial, @Param("mousePointer")String mousePointer);
 	
+
 	/*가지고 있는 스킨 가져오기*/
 	List<String> getAllSkin(int userSerial);
 	/*사용중인 스킨 가져오기*/
 	String getUsingSkin(int userSerial);
 	/*사용중인 스킨 변경*/
 	int updateSkin(@Param("userSerial") int userSerial, @Param("src") String src);
+
+	/*노래 제목으로 노래 src 가져오기*/
+	String getMusicSrc(@Param("userSerial")int userSerial, @Param("musicTitle")String musicTitle);
+	
+	/*재생목록에 노래 있는지 확인*/
+	String getMusicTitle(String musicTitle);
+	
+	/*재생목록에 노래 추가하기*/
+	void addToPlayList(MiniHpMusicVO musicVO);
+	
+	/*재생목록에서 노래 제거하기*/
+	void removeFromPlayList(@Param("userSerial")int userSerial, @Param("musicTitle")String musicTitle);
+
+	
+			
+	
+
 }

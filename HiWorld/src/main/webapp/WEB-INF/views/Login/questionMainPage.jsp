@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/css/questionMainPage.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script
@@ -19,7 +20,7 @@
 		<div id="serchQuestion">
 			문의사항 혹은 이름을 검색하세요 <input type="text" id="search" />
 		</div>
-
+		
 		
 		<c:choose>
 			<c:when test="${list != '[]'}">
@@ -30,6 +31,9 @@
 						<td>작성자</td>
 						<td>작성일</td>
 						<td>조회수</td>
+						<td>답변여부</td>
+						<td></td>
+					
 					</tr>
 					<tbody id="tbody">
 						<c:set var="number" value="${number}"/>
@@ -38,20 +42,42 @@
 								<td>${number}</td>
 								<c:choose>
 									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
-										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> ${kinds.userName}</td>
+										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
 									<c:otherwise>
 										<td>비밀글입니다  ${kinds.userName}</td>
 									</c:otherwise>
 								</c:choose>
+								<td>${kinds.userName}</td>
 								<td>${kinds.cDate}</td>
 								<td>${kinds.lookUp}</td>
-								<c:if test="${kinds.adminReply > 0}">
+								
+								<c:choose>
+									<c:when test="${kinds.adminReply > 0}">
+										<td>관리자 답변완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>관리자 미답변</td>
+									</c:otherwise>
+								</c:choose>
+<%-- 								<c:if test="${kinds.adminReply > 0}">
 									<td>관리자 답변완료</td>
 								</c:if>
-								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-								</c:if>
+								<c:if test="${kinds.adminReply < 0}">
+									<td>관리자 미답변</td>
+								</c:if> --%>
+								<c:choose>
+									<c:when test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">
+										<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
+								
+								<%-- <c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+								</c:if> --%>
 								
 							</tr>
 						<c:set var="number" value="${number+1}"/>
@@ -65,7 +91,8 @@
 								<td>${number}</td>
 								<c:choose>
 									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
-										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> ${kinds.userName}</td>
+										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
+										<td>${kinds.userName}</td>
 									</c:when>
 									<c:otherwise>
 										<td>비밀글입니다  ${kinds.userName}</td>
@@ -73,12 +100,26 @@
 								</c:choose>
 								<td>${kinds.cDate}</td>
 								<td>${kinds.lookUp}</td>
-								<c:if test="${kinds.adminReply > 0}">
-									<td>관리자 답변완료</td>
-								</c:if>
-								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-								</c:if>
+									<c:choose>
+									<c:when test="${kinds.adminReply > 0}">
+										<td>관리자 답변완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>관리자 미답변</td>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">
+										<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+									</c:when>
+									<c:otherwise>
+										<td></td>
+									</c:otherwise>
+								</c:choose>
+
+						<%-- 		<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+								</c:if> --%>
 							</tr>
 						<c:set var="number" value="${number+1}"/>
 						</c:forEach>
@@ -111,12 +152,27 @@
 									</c:choose>
 									<td>${kinds.cDate}</td>
 									<td>${kinds.lookUp}</td>
-									<c:if test="${kinds.adminReply > 0}">
+									<td></td>
+								<c:choose>
+									<c:when test="${kinds.adminReply > 0}">
 										<td>관리자 답변완료</td>
-									</c:if>
-									<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-										<td><button onclick="deleteBoard('${kinds.boardSerial}')">삭제</button></td>
-									</c:if>
+									</c:when>
+									<c:otherwise>
+										<td>관리자 미답변</td>
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${kinds.adminReply > 0}">
+										<td>관리자 답변완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>관리자 미답변</td>
+									</c:otherwise>
+								</c:choose>
+
+								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
+									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+								</c:if>
 								</tr>
 							<c:set var="number" value="${number+1}"/>
 							</c:forEach>
@@ -148,7 +204,7 @@
 
 
 
-		<div>
+		<div id="paging">
 			<c:if test="${pagination.curRange ne 1 }">
 				<a href="#" onClick="fn_paging(1)">[처음]</a>
 			</c:if>
@@ -176,12 +232,11 @@
 				<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 			</c:if>
 		</div>
-
+		<a href="#" onclick="questionWrite()">문의사항 작성하기</a>
 
 	</div>
 
 
-	<a href="#" onclick="questionWrite()">문의사항 작성</a>
 
 
 </body>

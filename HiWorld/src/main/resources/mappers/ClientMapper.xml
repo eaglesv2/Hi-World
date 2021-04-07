@@ -56,6 +56,10 @@
 	</select>
 	
 	<!--######################################회원아이디 비번 찾기-->
+	<!-- 전체 회원 카운트 -->
+	<select id="allClientCount" resultType="int">
+		SELECT COUNT(*) FROM HW_USERLIST WHERE UserID!='ADMIN'
+	</select>
 	<!-- 아이디찾기  -->
 	<select id="selectFindId" resultType="clientVO">
 	SELECT UserID FROM HW_USERLIST 

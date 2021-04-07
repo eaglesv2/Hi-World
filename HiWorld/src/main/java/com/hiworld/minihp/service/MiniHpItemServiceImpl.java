@@ -16,13 +16,17 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 	@Autowired
 	private MiniHpItemDAO itemDAO;
 	
+	MiniHpSelectedItemVO itemListVO;
+	
+	MiniHpMusicVO musicVO;
+	
 	/*적용중인 아이템 목록 가져오기*/
 	@Override
 	public MiniHpSelectedItemVO getItemList(int userSerial) {
-		MiniHpSelectedItemVO itemList = new MiniHpSelectedItemVO();
-		itemList = itemDAO.getItemList(userSerial);
+		itemListVO = new MiniHpSelectedItemVO();
+		itemListVO = itemDAO.getItemList(userSerial);
 		
-		return itemList;
+		return itemListVO;
 	}
 	
 	/*미니미 목록 가져오기*/
@@ -75,14 +79,37 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 
 	@Override
 	public void updateMinimi(int userSerial, String minimi, String minimiX, String minimiY) {
-		itemDAO.updateMinimi(userSerial, minimi, minimiX, minimiY);
-		
+		itemDAO.updateMinimi(userSerial, minimi, minimiX, minimiY);	
 	}
 
 	@Override
 	public void updateMousePointer(int userSerial, String mousePointer) {
-		itemDAO.updateMousePointer(userSerial, mousePointer);
-		
+		itemDAO.updateMousePointer(userSerial, mousePointer);	
+	}
+
+	@Override
+	public void setPlayList(int userSerial, String[] playList, String[] nonPlayList) {
+		String songTitle = "";
+		if(!playList[0].equals("")) {
+			for(int i=0; i<playList.length; i++) {
+				System.out.println(playList[i]);
+				songTitle = itemDAO.getMusicTitle(playList[i]);
+				if(songTitle == null) {
+					musicVO = new MiniHpMusicVO();
+					musicVO.setUserSerial(userSerial);
+					musicVO.setMusicTitle(playList[i]);
+					musicVO.setMusicSrc(itemDAO.getMusicSrc(userSerial, playList[i]));
+					itemDAO.addToPlayList(musicVO);
+				}
+			}
+		}
+		if(!nonPlayList[0].equals("")) {
+			for(int i=0; i<nonPlayList.length; i++) {
+				System.out.println(nonPlayList[i]);
+				itemDAO.removeFromPlayList(userSerial, nonPlayList[i]);
+			}
+		}
+
 	}	
 	
 	

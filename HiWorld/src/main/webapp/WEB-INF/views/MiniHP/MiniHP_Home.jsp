@@ -242,23 +242,32 @@ $(document).ready(function() {
 					
 						<!-- 재생목록에 노래가 있을 경우 -->
 						<c:if test="${playListSize ne 0}">
-							<div class="audio-title-wrap">
-								<span id="audio-title">노래제목</span>
-							</div>
-							<div class="audio-control-btn btn-play">
-								<i class="fa fa-play"></i>
-							</div>
-							<div class="play-time start">00:00 </div>
-							<div class="play-progress-box">
-								<div class="play-progress-bar"></div>
-							</div>
-							<div class="play-time end"> 00:00 </div>
-							<div class="play-volume-box">
-								<div class="audio-control-btn btn-volume">
-									<i class="fa fa-volume-up"></i>
+							<c:forEach var="playList" items="${playList}" varStatus="status">
+							<c:set var="index" value="${status.index}" />
+								<div id="audioPlay${index}" style="display: none;">
+									<audio autoplay="autoplay" src="${playList.musicSrc}"></audio>
 								</div>
-								<div class="play-volume-slider"></div>
-							</div>
+							
+								<div class="audio-title-wrap">
+									<span id="audio-title">
+										<marquee direction="left">${playList.musicTitle}</marquee>
+									</span>
+								</div>
+								<div class="audio-control-btn btn-play">
+									<i class="fa fa-play"></i>
+								</div>
+								<div class="play-time start">00:00 </div>
+								<div class="play-progress-box">
+									<div class="play-progress-bar"></div>
+								</div>
+								<div class="play-time end"> 00:00 </div>
+								<div class="play-volume-box">
+									<div class="audio-control-btn btn-volume">
+										<i class="fa fa-volume-up"></i>
+									</div>
+									<div class="play-volume-slider"></div>
+								</div>
+							</c:forEach>
 						</c:if>	
 					
 					<div class="text-play-click">※ 재생 버튼을 눌러야 배경음이 재생됩니다.</div>

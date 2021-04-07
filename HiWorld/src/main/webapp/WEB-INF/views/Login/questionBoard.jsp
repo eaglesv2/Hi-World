@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/css/questionBoard.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -11,10 +12,10 @@
 <body>
 <div id="body">
 
-	<div id="board_con" style="text-align: center;padding-top: 150px;">
+	<div id="board_con">
 		<div id="boardheader">문의사항 등록하기</div>
 		<form name="BoardSubmit">
-			문의사항 제목 <input type="text" name="title"/>	<br /> 
+			<input type="text" name="title" placeholder="제목을 입력하세요."/>	<br /> 
 			<textarea rows="10" cols="30" name="content" placeholder="문의사항 내용을 입력하세요."></textarea> <br />
 		</form>
 		<button onclick="submit()">등록하기</button>

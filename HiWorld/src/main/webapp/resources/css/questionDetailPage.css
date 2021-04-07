@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#questionDtable textarea{
+	height:400px;
+	width: 780px;
+	border:none;
+	resize:none;
+}
+
+#replyTable{
+	border-top:none;
+}
+#replyTable #dat{
+	width: 500px;
+}
+
+#reply{
+	text-align: center;
+}
+#Context{
+	overflow: scroll;
+    overflow-x: hidden;
+}

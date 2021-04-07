@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function openOrCloseMenu(index){
@@ -102,11 +101,12 @@
 				$("#bodyContents").html(result);
 			}
 		})
+	}
 	<%-- 	var url="<%=cp%>/cy/setting/changeUsingSong.action";
 		$.post(url,{},function(args){
 			$("#browser").html(args); 
 		}); --%>
-	}	
+		
 	
 	function setUsingBackGound() {
 		console.log('2222');

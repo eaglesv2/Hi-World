@@ -20,6 +20,24 @@
 		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
 	</select>
 	
+	<update id="updateStoryRoom">
+		UPDATE UserSelect_Article
+		SET backgroundSrc = #{storyRoom}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	<update id="updateMinimi">
+		UPDATE UserSelect_Article
+		SET characterSrc = #{minimi}, minimiX = #{minimiX}, minimiY = #{minimiY}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
+	<update id="updateMousePointer">
+		UPDATE UserSelect_Article
+		SET mouseSrc = #{mousePointer}
+		WHERE UserSerial = #{UserSerial}
+	</update>
+	
 	<select id="getMouseList" resultType="com.hiworld.minihp.vo.MiniHpUserItemVO">
 		SELECT *
 		FROM User_Article
@@ -41,18 +59,19 @@
 							 	 WHERE userSerial = #{userSerial})
 	</select>
 	
-	<update id="updateStoryRoom">
-		UPDATE UserSelect_Article
-		SET backgroundSrc = #{storyRoom}
-		WHERE UserSerial = #{UserSerial}
-	</update>
+	<select id="getMusicSrc" resultType="String">
+		SELECT ArticleImg
+		FROM User_Article
+		WHERE ArticleName = #{musicTitle} AND ArticleKinds = '음악' AND UserSerial = #{userSerial}
+	</select>
 	
-	<update id="updateMinimi">
-		UPDATE UserSelect_Article
-		SET characterSrc = #{minimi}, minimiX = #{minimiX}, minimiY = #{minimiY}
-		WHERE UserSerial = #{UserSerial}
-	</update>
+	<select id="getMusicTitle" resultType="String">
+		SELECT musicTitle
+		FROM UserSelect_Music
+		WHERE musicTitle = #{musicTItle}
+	</select>
 	
+
 	<update id="updateMousePointer">
 		UPDATE UserSelect_Article
 		SET mouseSrc = #{mousePointer}
@@ -74,4 +93,15 @@
 		SET skinSrc=#{src}
 		WHERE userSerial=#{userSerial}
 	</update>
+
+	<insert id="addToPlayList">
+		INSERT INTO UserSelect_Music
+		VALUES (#{userSerial}, #{musicTitle}, #{musicSrc})
+	</insert>
+	
+	<delete id="removeFromPlayList">
+		DELETE FROM UserSelect_Music
+		WHERE userSerial = #{userSerial} AND musicTitle = #{musicTitle}
+	</delete>
+
 </mapper>
