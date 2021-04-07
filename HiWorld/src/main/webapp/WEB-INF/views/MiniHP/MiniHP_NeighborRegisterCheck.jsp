@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/><link rel="stylesheet" href="${resourcePath }/img${fontCss}"/>
+<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

@@ -32,8 +32,8 @@ function moveToUser(){
 	var OwnerID = $("#neighborSelect option:selected").val();
 	console.log(OwnerID);
 	
-	var popupWidth = 880;
-    var popupHeight = 580;
+	var popupWidth = 1080;
+    var popupHeight = 600;
 	var popupX = (window.screen.width/2)-(popupWidth/2);
     var popupY = (window.screen.height/2)-(popupHeight/2);
 	window.open("miniHp_guestHome.do?OwnerID="+OwnerID,OwnerID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);

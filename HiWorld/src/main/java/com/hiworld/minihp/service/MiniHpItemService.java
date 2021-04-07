@@ -2,6 +2,7 @@ package com.hiworld.minihp.service;
 
 import java.util.List;
 
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserItemVO;
 
@@ -19,6 +20,12 @@ public interface MiniHpItemService {
 	/*보유중인 마우스 커서 커스텀 가져오기*/
 	List<MiniHpUserItemVO> getMouseList(int userSerial);
 	
+	/*재생목록에 적용중인 노래 목록 가져오기*/
+	List<MiniHpMusicVO> getPlayList(int userSerial);
+	
+	/*사용중이지 않는 노래 목록*/
+	List<MiniHpMusicVO> getNotUsingSongList(int userSerial);
+	
 	/*스토리룸 수정*/
 	void updateStoryRoom(int userSerial, String storyRoom);
 	
@@ -28,8 +35,5 @@ public interface MiniHpItemService {
 	/*마우스 커서 커스텀 수정*/
 	void updateMousePointer(int userSerial, String mousePointer);
 
-	
-	
-	
 	
 }

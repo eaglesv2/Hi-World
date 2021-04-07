@@ -81,8 +81,11 @@ input[type="radio"] {
 <script>
 function changeMousePointer(src){
 	var mouse = document.setMousePointer.mouse.value;
-	var src = "url(${pageContext.request.contextPath}/"+mouse+")";
-	$("#changeImg").attr("src", src);
+	if(src == "기본") {
+		mouse = "resources/images/article/basicMouse.png";
+	}
+	var img = "${pageContext.request.contextPath}/" + mouse;
+	$("#changeImg").attr("src", img);
 }
 
 function saveMousePointer() {
@@ -144,7 +147,7 @@ function saveMousePointer() {
 					<!-- 구매한 마우스 커서가 없는 경우 -->
 					<c:if test="${mouseSize eq 0}">
 						<td width="110px">
-							<input type="radio" name="mouse" value="기본" checked="checked" onclick="changePonter(this.value)"> <br />
+							<input type="radio" name="mouse" value="기본" checked="checked" onclick="changeMousePointer(this.value)"> <br />
 							<img id="1" alt="" src="${pageContext.request.contextPath}/resources/images/article/basicMouse.png" class="img"> <br />
 							기본 <br />
 						</td>
@@ -154,19 +157,19 @@ function saveMousePointer() {
 						<!-- 기본 마우스 커서 사용하는 경우 -->
 						<c:if test="${empty itemList.mouseSrc}">
 							<td width="110px">
-								<input type="radio" name="mouse" value="기본" checked="checked" onclick="changePonter(this.value)"> <br />
+								<input type="radio" name="mouse" value="기본" checked="checked" onclick="changeMousePointer(this.value)"> <br />
 								<img id="2" alt="" src="${pageContext.request.contextPath}/resources/images/article/basicMouse.png" class="img"> <br />
 								기본 <br />
 							</td>
 							<c:forEach var="mouseList" items="${mouseList}">
 								<td width="110px">
 									<c:if test="${mouseList.articleImg eq itemList.mouseSrc}">
-										<input type="radio" name="mouse" value="${mouseList.articleImg}" checked="checked" onclick="changePonter(this.value)"> <br/>
+										<input type="radio" name="mouse" value="${mouseList.articleImg}" checked="checked" onclick="changeMousePointer(this.value)"> <br/>
 										<img alt="" src="${pageContext.request.contextPath}/${mouseList.articleImg}" class="img"> <br/>
 										${mouseList.articleName} <br />
 									</c:if>
 									<c:if test="${mouseList.articleImg ne itemList.mouseSrc}">
-										<input type="radio" name="mouse" value="${mouseList.articleImg}" onclick="changePonter(this.value)"> <br />
+										<input type="radio" name="mouse" value="${mouseList.articleImg}" onclick="changeMousePointer(this.value)"> <br />
 										<img alt="" src="${pageContext.request.contextPath}/${mouseList.articleImg}" class="img"><br/>
 										${mouseList.articleName} <br />
 									</c:if>
@@ -175,20 +178,20 @@ function saveMousePointer() {
 						</c:if>
 						<!-- 기분마우스커서 사용 안하는 경우 -->
 						<c:if test="${not empty itemList.mouseSrc}">
+							<td width="110px">
+								<input type="radio" name="mouse" value="기본" checked="checked" onclick="changeMousePointer(this.value)"> <br />
+								<img id="3"alt="" src="${pageContext.request.contextPath}/resources/images/article/basicMouse.png" class="img"> <br />
+								기본 <br />
+							</td>
 							<c:forEach var="mouseList" items="${mouseList}">
 								<td width="110px">
-									<input type="radio" name="mouse" value="기본" checked="checked" onclick="changePonter(this.value)"> <br />
-									<img id="3"alt="" src="${pageContext.request.contextPath}/resources/images/article/basicMouse.png" class="img"> <br />
-									기본 <br />
-								</td>
-								<td width="110px">
 									<c:if test="${mouseList.articleImg eq itemList.mouseSrc}">
-										<input type="radio" name="mouse" value="${mouseList.articleImg}" checked="checked" onclick="changePonter(this.value)"> <br/>
+										<input type="radio" name="mouse" value="${mouseList.articleImg}" checked="checked" onclick="changeMousePointer(this.value)"> <br/>
 										<img alt="" src="${pageContext.request.contextPath}/${mouseList.articleImg}" class="img" > <br/>
 										${mouseList.articleName} <br />
 									</c:if>
 									<c:if test="${mouseList.articleImg ne itemList.mouseSrc}">
-										<input type="radio" name="mouse" value="${mouseList.articleImg}" onclick="changePonter(this.value)"> <br />
+										<input type="radio" name="mouse" value="${mouseList.articleImg}" onclick="changeMousePointer(this.value)"> <br />
 										<img alt="" src="${pageContext.request.contextPath}/${mouseList.articleImg}" class="img"><br/>
 										${mouseList.articleName} <br />
 									</c:if>

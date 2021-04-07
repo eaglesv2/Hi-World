@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpNeighborDAO">
 	
-	<select id="checkNeighbor" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+	<select id="checkNeighbor" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		SELECT *
 		FROM MiniHP_Neighbor
 		WHERE (neighborSerial1 = #{senderSerial} AND neighborSerial2 = #{receiverSerial})
 		   OR (neighborSerial1 = #{receiverSerial} AND neighborSerial2 = #{senderSerial})
 	</select>
 	
-	<insert id="insertNeighbor" parameterType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+	<insert id="insertNeighbor">
 		INSERT INTO MiniHP_Neighbor
 		VALUES (#{neighborSerial1}, #{neighborName1}, #{neighborValue1},
 			    #{neighborSerial2}, #{neighborName2}, #{neighborValue2})
 	</insert>
 	
-	<select id="getNeighborList" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
+	<select id="getNeighborList" resultType="com.hiworld.minihp.vo.MiniHpNeighborVO">
 		SELECT *
 		FROM MiniHP_Neighbor
 		WHERE neighborSerial1 = #{userSerial} OR neighborSerial2 = #{userSerial}
@@ -27,7 +27,7 @@
 		WHERE neighborSerial1 = #{serial1} AND neighborSerial2 = #{serial2}
 	</update>
 	
-	<delete id="deleteNeighbor" parameterType="int">
+	<delete id="deleteNeighbor">
 		DELETE
 		FROM MiniHP_Neighbor
 		WHERE (neighborSerial1 = #{userSerial) AND neighborSerial2 = #{neighborSerial})

@@ -18,6 +18,7 @@ import com.hiworld.minihp.service.MiniHpItemService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserItemVO;
@@ -97,8 +98,8 @@ public class MiniHpSettingController {
 	public String setNeighborList(HttpSession session, Model model) {
 		System.out.println("미니홈피 이웃 목록 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int UserSerial = sessionVO.getUserSerial();
-		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserSerial); //이웃 목록 불러오기
+		int userSerial = sessionVO.getUserSerial();
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(userSerial); //이웃 목록 불러오기
 		if(neighborList == null) {
 			model.addAttribute("listLength", 0);
 		} else {
@@ -114,10 +115,10 @@ public class MiniHpSettingController {
 	public String setStoryRoomMinimi(HttpSession session, Model model) {
 		System.out.println("미니홈피 스토리룸 미니미 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int UserSerial = sessionVO.getUserSerial();
-		itemVO = itemService.getItemList(UserSerial);
-		List<MiniHpUserItemVO> minimiList = itemService.getMinimiList(UserSerial);
-		List<MiniHpUserItemVO> storyList = itemService.getStoryRoomList(UserSerial);
+		int userSerial = sessionVO.getUserSerial();
+		itemVO = itemService.getItemList(userSerial);
+		List<MiniHpUserItemVO> minimiList = itemService.getMinimiList(userSerial);
+		List<MiniHpUserItemVO> storyList = itemService.getStoryRoomList(userSerial);
 		
 		int minimiSize = minimiList.size();
 		int storySize = storyList.size();
@@ -136,7 +137,7 @@ public class MiniHpSettingController {
 	public String saveStoryRoomMinimi(HttpServletRequest request, HttpSession session) {
 		System.out.println("미니홈피 스토리룸 미니미 저장 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int UserSerial = sessionVO.getUserSerial();
+		int userSerial = sessionVO.getUserSerial();
 		String storyRoom = request.getParameter("storyRoom");
 		String minimi = request.getParameter("minimi");
 		String[] minimiXY = request.getParameter("xy").split(",");
@@ -145,8 +146,8 @@ public class MiniHpSettingController {
 		/*System.out.println(storyRoom);
 		System.out.println(minimi);
 		System.out.println(minimiX + ", " + minimiY);*/
-		itemService.updateStoryRoom(UserSerial, storyRoom);
-		itemService.updateMinimi(UserSerial, minimi, minimiX, minimiY);
+		itemService.updateStoryRoom(userSerial, storyRoom);
+		itemService.updateMinimi(userSerial, minimi, minimiX, minimiY);
 		
 		return "";
 	}
@@ -155,9 +156,9 @@ public class MiniHpSettingController {
 	public String setMousePointer(HttpSession session, Model model) {
 		System.out.println("미니홈피 마우스 커서 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int UserSerial = sessionVO.getUserSerial();
-		itemVO = itemService.getItemList(UserSerial);
-		List<MiniHpUserItemVO> mouseList = itemService.getMouseList(UserSerial);
+		int userSerial = sessionVO.getUserSerial();
+		itemVO = itemService.getItemList(userSerial);
+		List<MiniHpUserItemVO> mouseList = itemService.getMouseList(userSerial);
 		
 		int mouseSize = mouseList.size();
 		
@@ -174,14 +175,29 @@ public class MiniHpSettingController {
 	public String saveMousePointer(HttpServletRequest request, HttpSession session) {
 		System.out.println("미니홈피 마우스 커서 저장 컨트롤러");
 		sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int UserSerial = sessionVO.getUserSerial();
+		int userSerial = sessionVO.getUserSerial();
 		String mousePointer = request.getParameter("mousePointer");
 		if(mousePointer.equals("기본")) {
 			mousePointer = "";
 		}
-		itemService.updateMousePointer(UserSerial, mousePointer);
+		itemService.updateMousePointer(userSerial, mousePointer);
 		
 		return "";
+	}
+	
+	@RequestMapping("miniHp_playList.do")
+	public String setPlayList(HttpSession session, Model model) {
+		System.out.println("미니홈피 마우스 배경음악 컨트롤러");
+		sessionVO = (sessionVO)session.getAttribute("sessionVO");
+		int userSerial = sessionVO.getUserSerial();
+		
+		List<MiniHpMusicVO> notUsingSongList = itemService.getNotUsingSongList(userSerial);
+		List<MiniHpMusicVO> playList = itemService.getPlayList(userSerial);
+		
+		model.addAttribute("notUsingSongList",notUsingSongList);
+		model.addAttribute("playList", playList);
+				
+		return "MiniHP/MiniHP_Setting_PlayList";
 	}
 }
 

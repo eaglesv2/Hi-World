@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hiworld.minihp.dao.MiniHpItemDAO;
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserItemVO;
 
@@ -51,6 +52,22 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		return mouseList;
 	}
 	
+	/*노래 재생목록 가져오기*/
+	@Override
+	public List<MiniHpMusicVO> getPlayList(int userSerial) {
+		List<MiniHpMusicVO> playList = itemDAO.getPlayList(userSerial);
+		
+		return playList;
+	}
+	
+	/*사용중이지 않는 노래 목록*/
+	@Override
+	public List<MiniHpMusicVO> getNotUsingSongList(int userSerial) {
+		List<MiniHpMusicVO> notUsingSong = itemDAO.getNotUsingSongList(userSerial);
+		
+		return notUsingSong;
+	}
+	
 	@Override
 	public void updateStoryRoom(int userSerial, String storyRoom) {
 		itemDAO.updateStoryRoom(userSerial, storyRoom);
@@ -66,6 +83,6 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 	public void updateMousePointer(int userSerial, String mousePointer) {
 		itemDAO.updateMousePointer(userSerial, mousePointer);
 		
-	}
-	
+	}	
+
 }
