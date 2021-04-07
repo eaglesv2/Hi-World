@@ -41,6 +41,8 @@ public interface ClientService {
 	ClientVO selectFindPw(String id, String tel);
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 기능 구현 완료
+	/* 전체 회원 카운트 */
+	int allClientCount();
 	
 	/* 회원 정보 입력 */
 	String insertClient(ClientVO clientVO);

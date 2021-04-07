@@ -129,6 +129,11 @@ public class ClientServiceImpl implements ClientService {
 	
 	
 	/*############################################################################################# 기능구현 성공 한 곳 */
+	/* 전체 회원 카운트 */
+	@Override
+	public int allClientCount() {
+		return dao.allClientCount();
+	}
 	/* 회원 회원 가입 */
 	@Override
 	public String insertClient(ClientVO clientVO) {
