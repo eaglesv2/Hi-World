@@ -71,12 +71,6 @@
 		WHERE musicTitle = #{musicTItle}
 	</select>
 	
-
-	<update id="updateMousePointer">
-		UPDATE UserSelect_Article
-		SET mouseSrc = #{mousePointer}
-		WHERE UserSerial = #{UserSerial}
-	</update>
 	
 	
 	<select id="getAllSkin" resultType="String">

@@ -221,7 +221,7 @@ public class MiniHpSettingController {
 		System.out.println("미니홈피 배경화면 컨트롤러");
 		int userSerial = Utils.getSessionUser(session);
 		itemService.updateSkin(userSerial, src);
-
+	}
     
 	@ResponseBody
 	@PostMapping("miniHp_savePlayList.do")
