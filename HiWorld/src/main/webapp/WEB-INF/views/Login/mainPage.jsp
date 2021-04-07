@@ -15,9 +15,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <link href="jquery.bxslider/jquery.bxslider.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <title>Hi-World</title>
@@ -500,7 +500,7 @@
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/로고5.png" alt="로고사진" />
+		    	<img src="resources/images/로고7.png" alt="로고사진" />
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
@@ -592,13 +592,13 @@
 									</div>
 								</div>
 								<div id="jang">
-									<div id="jang-top">
+									<div id="jang-top2">
 										<div onclick="Manage_Client()">회원관리</div>
-										<div onclick="Manage_Article()">상품등록</div>
+										<div id="article_manage" onclick="Manage_Article()">상품등록</div>
 									</div>
-									<div id="jang-bottom">
+									<div id="jang-bottom2">
 										<div onclick="Manage_Board()">공지등록</div>
-										<a href="logout.do">로그아웃</a>
+										<a id="logout" href="logout.do">로그아웃</a>
 									</div>
 								</div>
 							</div>
