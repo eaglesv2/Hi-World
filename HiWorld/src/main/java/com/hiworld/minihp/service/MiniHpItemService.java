@@ -34,6 +34,8 @@ public interface MiniHpItemService {
 	
 	/*마우스 커서 커스텀 수정*/
 	void updateMousePointer(int userSerial, String mousePointer);
-
 	
+	/*미니홈피 배경음악 재생목록 설정하기*/
+	void setPlayList(int userSerial, String[] playList, String[] nonPlayList);
+
 }
