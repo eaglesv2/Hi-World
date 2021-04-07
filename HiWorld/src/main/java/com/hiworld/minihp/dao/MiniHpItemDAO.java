@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserItemVO;
 
@@ -23,6 +24,12 @@ public interface MiniHpItemDAO {
 	/*마우스 커서 커스텀 목록 가져오기*/
 	List<MiniHpUserItemVO> getMouseList(@Param("UserSerial")int userSerial, @Param("type")String type);
 	
+	/*노래 재생목록 가져오기*/
+	List<MiniHpMusicVO> getPlayList(int userSerial);
+	
+	/*사용중이지 않는 노래 목록*/
+	List<MiniHpMusicVO> getNotUsingSongList(int userSerial);
+	
 	/*스토리룸 수정*/
 	void updateStoryRoom(@Param("UserSerial")int userSerial, @Param("storyRoom")String storyRoom);
 	
@@ -31,7 +38,5 @@ public interface MiniHpItemDAO {
 	
 	/*마우스 커서 커스텀*/ 
 	void updateMousePointer(@Param("UserSerial")int userSerial, @Param("mousePointer")String mousePointer);
-	
-	
 	
 }

@@ -3,8 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head><link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
+<head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

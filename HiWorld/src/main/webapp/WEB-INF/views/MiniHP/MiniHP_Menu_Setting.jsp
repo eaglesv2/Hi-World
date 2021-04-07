@@ -3,7 +3,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -88,8 +87,26 @@
 				$("#bodyContents").html(result);
 			}
 		})
-		<%-- var url="<%=cp%>/cy/setting/changeUsingFont.action"; --%>
 	}
+	
+	function setPlayList(){
+		console.log('5555');
+		
+		$.ajax({
+			type : 'POST',
+			url: 'miniHp_playList.do',
+			
+			success: function(result) {
+				console.log('55555');
+				$("#bodyContents").children().remove();
+				$("#bodyContents").html(result);
+			}
+		})
+	<%-- 	var url="<%=cp%>/cy/setting/changeUsingSong.action";
+		$.post(url,{},function(args){
+			$("#browser").html(args); 
+		}); --%>
+	}	
 	
 	<%-- function setUsingBackGound(){
 		var url="<%=cp%>/cy/setting/usingBackGround.action";
@@ -101,13 +118,7 @@
 	
 	
 
-	function setUsingSong(){
-		var url="<%=cp%>/cy/setting/changeUsingSong.action";
-		  
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		});
-	}	
+	
 	
 	 --%>
 </script>
@@ -207,7 +218,7 @@
 			</span>
 			<br/>
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<span class="subMenu"  onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="javascript:setUsingSong()">
+			<span class="subMenu"  onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';" onclick="setPlayList()">
 				음악 설정
 			</span>
 			<br/><br/>

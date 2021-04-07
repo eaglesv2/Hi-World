@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hiworld.minihp.dao.MiniHpNeighborListDAO">
 	
-	<insert id="insertNeighborList" parameterType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
+	<insert id="insertNeighborList">
 		INSERT INTO MiniHP_NeighborList
 		VALUES (#{senderSerial}, #{senderName}, #{senderValue}, #{receiverSerial}, #{receiverName}, #{receiverValue}, #{userMessage}, #{type})
 	</insert>
 	
-	<select id="getRegisterList" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
+	<select id="getRegisterList" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		SELECT *
 		FROM MiniHP_NeighborList
 		WHERE receiverSerial = #{userSerial}
 	</select>
 	
-	<select id="getData" parameterType="int" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
+	<select id="getData" resultType="com.hiworld.minihp.vo.MiniHpNeighborListVO">
 		SELECT *
 		FROM MiniHP_NeighborList
 		WHERE senderSerial = #{senderSerial} AND receiverSerial = #{receiverSerial}

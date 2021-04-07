@@ -26,6 +26,21 @@
 		WHERE UserSerial = #{UserSerial} AND ArticleKinds = #{type}
 	</select>
 	
+	<select id="getPlayList" resultType="com.hiworld.minihp.vo.MiniHpMusicVO">
+		SELECT musicTitle, musicSrc
+		FROM UserSelect_Music
+		WHERE userSerial = #{userSerial}
+	</select>
+	
+	<select id="getNotUsingSongList" resultType="com.hiworld.minihp.vo.MiniHpMusicVO">
+		SELECT ArticleName AS musicTitle, ArticleImg AS musicSrc
+		FROM User_Article
+		WHERE UserSerial = #{userSerial} AND ArticleKinds = '음악'
+		  AND ArticleImg NOT IN (SELECT musicSrc 
+		  					 	 FROM UserSelect_Music
+							 	 WHERE userSerial = #{userSerial})
+	</select>
+	
 	<update id="updateStoryRoom">
 		UPDATE UserSelect_Article
 		SET backgroundSrc = #{storyRoom}

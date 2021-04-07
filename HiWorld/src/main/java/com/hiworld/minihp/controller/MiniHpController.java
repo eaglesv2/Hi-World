@@ -23,6 +23,7 @@ import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpRightService;
 import com.hiworld.minihp.service.MiniHpSettingService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpNeiWordVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
@@ -64,14 +65,17 @@ public class MiniHpController {
 	public String miniHp_Home(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		int UserSerial = vo.getUserSerial();
-		System.out.println(UserSerial);
+
 		introVO = introDAO.getData(UserSerial); //미니홈피 기본 정보 가져오기
 		itemVO = itemService.getItemList(UserSerial);
+		List<MiniHpMusicVO> playList = itemService.getPlayList(UserSerial);
+		int playListSize = playList.size();
+
 		
-		System.out.println(introVO.getHpToday());
-		System.out.println(introVO.getHpTotal());
 		model.addAttribute("introVO", introVO);
 		model.addAttribute("itemList", itemVO);
+		model.addAttribute("playList", playList);
+		model.addAttribute("playListSize", playListSize);
 
 		return "MiniHP/MiniHP_Home";
 	}

@@ -150,8 +150,8 @@
             	  })
              }
              function MiniHP() {
-            	var popupWidth = 880
-            	var popupHeight = 580
+            	var popupWidth = 1080
+            	var popupHeight = 600
             	var popupX = (window.screen.width/2)-(popupWidth/2);
             	var popupY = (window.screen.height/2)-(popupHeight/2);
             	window.open("MiniHP_Home.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
@@ -427,8 +427,8 @@
 							if(userID==''){
 								alert("로그인후 이용하실수 있습니다.")
 							}else{
-								var popupWidth = 880;
-								var popupHeight = 580;
+								var popupWidth = 1080;
+								var popupHeight = 600;
 								var popupX = (window.screen.width/2)-(popupWidth/2);
 								var popupY = (window.screen.height/2)-(popupHeight/2);
 								window.open("miniHp_guestHome.do?OwnerSerial="+ui.item.userSerial,ui.item.userID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
@@ -490,6 +490,7 @@
 		}
 		
       </style>
+
 
 
 
