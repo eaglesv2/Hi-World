@@ -11,60 +11,107 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script type="text/javascript">
+var pw = false;
+var pwc = false;
+var tel = false;
+var address = false;
 	$(document).ready(function() {
-		var idx = false;
-		var pw = false;
-		var pwc = false;
-		var tel = false;
-		var address = false;
-	/* 패스워드 정규규현식과 더불어 패스워드가 같은지 질문*/
-	  
-	 $("input[class=Pwchc1]").blur(function() {
-				var userpw = $("input[name=userPW]").val();
-				var pwCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
-				if (userpw.search(/\s/) != -1) {
-					pw = false;
-					var html = "<tr><td colspan='3' style='color: red'>공백없이 작성 하세요</td></tr>";
-					$('.message').empty();
-					$('.message').html(html);
-					$("input[class=Pwchc1]").focus();
-				} else if (userpw == "") {
-					pw = false;
-					var html = "<tr><td colspan='3' style='color: red'>필수 사항 입니다.</td></tr>";
-					$('.message').empty();
-					$('.message').html(html);
-					$("input[class=Pwchc1]").focus();
-				} else if (!pwCheck.test(userpw)) {
-					pw = false;
-					var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 비밀번호 입니다.</td></tr>";
-					$('.message').empty();
-					$('.message').html(html);
-					$("input[class=Pwchc1]").focus();
-				} else {
-					pw = true;
-					var html = "<tr><td colspan='3' style='color: green'>사용가능한 비밀번호입니다.</td></tr>";
-					$('.message').empty();
-					$('.message').append(html);
-				}
-			});
-			//패스워드 확인
-			$("input[name=userPW1]").blur(function() {
-				if ($("input[name=userPW1]").val() != $("input[class=Pwchc1]").val()) {
-					pwc = false;
-					var html = "<tr><td colspan='3' style='color: red'>비밀번호가 다릅니다.</td></tr>";
-					$('.message1').empty();
-					$('.message1').append(html);
-					$("input[name=userPW1]").focus();
-				}
-				//같을 경우
-				else{
-					pwc = true;
-					$('.message1').empty();
+			
+		/* 패스워드 정규규현식과 더불어 패스워드가 같은지 질문*/
+		  
+		 $("input[class=Pwchc1]").blur(function() {
+					var userpw = $("input[name=userPW]").val();
+					var pwCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
+					if (userpw.search(/\s/) != -1) {
+						pw = false;
+						var html = "<tr><td colspan='3' style='color: red'>공백없이 작성 하세요</td></tr>";
+						$('.message').empty();
+						$('.message').html(html);
+						$("input[class=Pwchc1]").focus();
+					} else if (userpw == "") {
+						pw = false;
+						var html = "<tr><td colspan='3' style='color: red'>필수 사항 입니다.</td></tr>";
+						$('.message').empty();
+						$('.message').html(html);
+						$("input[class=Pwchc1]").focus();
+					} else if (!pwCheck.test(userpw)) {
+						pw = false;
+						var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 비밀번호 입니다.</td></tr>";
+						$('.message').empty();
+						$('.message').html(html);
+						$("input[class=Pwchc1]").focus();
+					} else {
+						pw = true;
+						var html = "<tr><td colspan='3' style='color: green'>사용가능한 비밀번호입니다.</td></tr>";
+						$('.message').empty();
+						$('.message').html(html);
 					}
-			});
-	      
-	      
-	      
+				});
+				//패스워드 확인
+				$("input[name=userPW1]").blur(function() {
+					if ($("input[name=userPW1]").val() != $("input[class=Pwchc1]").val()) {
+						pwc = false;
+						var html = "<tr><td colspan='3' style='color: red'>비밀번호가 다릅니다.</td></tr>";
+						$('.message1').empty();
+						$('.message1').html(html);
+						$("input[name=userPW1]").focus();
+					}
+					//같을 경우
+					else{
+						pwc = true;
+						$('.message1').empty();
+						}
+				});
+				
+				//연락처 정규식 및 안적었을때 기능
+				$('input[name=userTel').blur(function() {
+					var phone = RegExp(/^[0-9]{3}(-)[0-9]{4}(-)[0-9]{4}$/);
+					var phone1 = $('input[name=userTel').val();
+					if(phone1 .search(/\s/) != -1){
+						$('input[name=userTel').focus();
+						tel = false;
+						var html = "<tr><td colspan='3' style='color: red'>공백 없이 작성 하세요</td></tr>";
+						$('.message2').empty();
+						$('.message2').html(html);
+						
+					} else if(phone1 == ''){
+						tel = false;
+						var html = "<tr><td colspan='3' style='color: red'>필수사항 입니다.</td></tr>";
+						$('.message2').empty();
+						$('.message2').html(html);
+						$('input[name=userTel').focus();
+					} else if(phone.test(phone1)){
+						tel = true;
+						$('.message2').empty();
+					}	else {
+						tel = false;
+						var html = "<tr><td colspan='3' style='color: red'>예)0000-0000 처럼 적어주세요</td></tr>";
+						$('.message2').empty();
+						$('.message2').html(html);
+						$('input[name=userTel').focus();
+					}
+				});
+				
+	
+				//주소 정규식과 기능 구현
+				$('input[name=useraddress]').blur(function() {
+					var add = /^[가-힣]|[a-zA-Z]|[1-9]$/;
+					var add1 = $('input[name=useraddress]').val();
+					if(!add.test(add1)){
+						address = false;
+						var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 주소입니다.</td></tr>";
+						$('.message3').empty();
+						$('.message3').append(html);
+						add1.focus();
+					}
+					
+					else{
+						address = true;
+						$('.message3').empty();
+						}
+				});	
+	 
+	});
 	      
 	      
 	      
@@ -77,6 +124,11 @@
 
 			function pwUpdate() {
 				alert("비밀번호 버튼 눌렀니?")
+				if (pw != true && pwc!=true) {
+				$("input[name=userPW]").focus()
+				return false;
+				}
+				else{
 				var ajaxPW = $('input[name=userPW]').val();
 				var upDatech = 1;
 				alert("비밀번호 여기까지 왔니?")
@@ -87,7 +139,7 @@
 					success: function(data) {
 						
 						if($('#hiden1').css('display') == 'none'){
-							$('#hiden1').html(ajaxPW).html('<input type="button" id="pwbut" value="수정" onclick="pwUpdate()1" />');
+							$('#hiden1').html(ajaxPW).css('color','red').append('</br><input type="button" id="pwbut" value="수정" onclick="pwUpdate()1" />');
 							$('#hiden1').show();
 							$('#pwhiden').hide();
 							}
@@ -97,11 +149,16 @@
 					}
 				});
 			}
-      
+		}
 		function telUpdate() {
 			alert("연락처 버튼 눌렀니?")
+			if (tel != true) {
+				$("input[name=userTel]").focus()
+				return false;
+				}
+			alert("여기 안왔어?")
 			var ajaxTel = $('input[name=userTel]').val();
-			var upDatech = 3;
+			var upDatech = 2;
 			alert("연락처 여기까지 왔니?")
 			$.ajax({
 				url : "UserUpdate.do",
@@ -110,8 +167,9 @@
 				success: function(data) {
 					
 					if($('#hiden2').css('display') == 'none'){
+						$('#hiden2').html(ajaxTel).css('color','red').append('</br><input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
 						$('#hiden2').show();
-						$('#Telhiden').hide();
+						$('#hiden_tel').hide();
 						}
 					},
 				   			error : function () {
@@ -119,14 +177,38 @@
 				}
 			});
 		}
-	});
+
+		
+		function addressUpdate() {
+			alert("주소 버튼 눌렀니?")
+			if (address != true) {
+				$("input[name=useraddress]").focus()
+				return false;
+				}
+			var ajaxaddress = $('input[name=useraddress]').val();
+			var upDatech = 3;
+			alert("연락처 여기까지 왔니?")
+			$.ajax({
+				url : "UserUpdate.do",
+				type:"POST",
+				data : {"userDate" : ajaxaddress, "upDatech":upDatech},
+				success: function(data) {
+					
+					if($('.address_hiden1').css('display') == 'none'){
+						$('.address_hiden1').html(ajaxaddress).css('color','red').append('</br><input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
+						$('.address_hiden1').show();
+						$('.address_hiden').hide();
+						}
+					},
+				   			error : function () {
+								alert("error")
+				}
+			});
+		}
+	
 /* =================여기까지 입니다.=============================  */
 </script>
 <style type="text/css">
-#main div{
-border: 1px solid #999999;
-}
-
 #main {
 	width: 100%;
 	margin-top: 70px;
@@ -144,7 +226,7 @@ h3 {
 }
 
 div {
-
+	
 }
 
 #text {
@@ -162,11 +244,11 @@ div {
 .few {
 	color: red;
 }
-
 .userId1{
 float: left;
 width: 100px;
 }
+
 
 .userId2 {
 	margin-left: 150px;
@@ -197,7 +279,6 @@ width: 100px;
 	margin-left: 48px;
 	margin-top: 31px;
 	margin-bottom: 30px;
-
 }
 
 #gender1_few {
@@ -263,14 +344,14 @@ height: 141px;
 margin-top: 17px;
 }
 #Bfew{
-margin-top: 10px;
+margin-top: 22px;
 }
 .address_label{
 margin-top: 55px;
 
 }
 #address_few{
-margin-top: 28px;
+margin-top: 36px;
 }
 #few{
 margin-top: 13px;
@@ -294,8 +375,8 @@ margin-top: 20px;
 height: 50px;
 margin-top: 20px;
 }
-#cashbut{
-
+.few1{
+margin-top: 16px;
 }
 </style>
 </head>
@@ -354,10 +435,10 @@ margin-top: 20px;
 						</span>
 						<div class="pw_few" id="pwhiden">
 							<span class="few" id="pw_text">
-								<input type="text" name="userPW" class="Pwchc1" value="${clientVO.userPW}" />
+								<input type="password" name="userPW" class="Pwchc1" value="${clientVO.userPW}" />
 								<span class="message"></span>
 								<br />
-								<input type="text" name="userPW1" class="Pwchc2" value="${clientVO.userPW}" />
+								<input type="password" name="userPW1" class="Pwchc2" value="${clientVO.userPW}" />
 								<span class="message1"></span>
 								<br />
 								<input type="button" id="pwbut" style="margin-left: 50px;" value="완료" onclick="pwUpdate()" />
@@ -375,10 +456,13 @@ margin-top: 20px;
 						</div>
 					</div>
 					<div class="tel_tel1">
-						<span class="tel_label1" id="Telhiden">연락처</span>
-						<div class="Tel_few">
+						<span class="tel_label1" id="Telhiden">연락처
+						</span>
+						<div class="Tel_few" id="hiden_tel">
 							<span class="few">
 								<input type="text" name="userTel" value="${clientVO.userTel}" />
+								<br />
+								<span class="message2"></span>
 								<br /> 
 								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="telUpdate()" />
 								<input type="button" value="취소" onclick="cancle3()" /> 
@@ -389,10 +473,9 @@ margin-top: 20px;
 							<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />
 							</span>
 						</div>
+						
 					</div>
 				</div>
-				</div>
-				
 			</div>
 			<div class="birth_address">
 				<div class="birth_address_label">생년월일/주소
@@ -401,19 +484,31 @@ margin-top: 20px;
 					<span class="birth_label" style="display: inline-block;">생년월일
 					</span>
 					<br /> 
-					<span class="address_label" style="display: inline-block;">주소
+					<span class="address_label" style="display: inline-block;">주소${clientVO.userAddress}!!
 					</span>
 				</div>
 				<div class="birth_address_few">
 					<span class="few" id="Bfew" style="display: inline-block;">${clientVO.userBirth}생일
 					</span>
 					<br />
-					<span class="few" id="address_few" style="display: inline-block;">
-						<input type="text" value="${clientVO.userAddress}"/>
-						<br />
-						<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="addressUpdate()" />
-						<input type="button" value="취소" onclick="cancle5()" />
-					</span>
+						<span class="few" id="address_few" style="display: inline-block;">
+							<div class="address_hiden">
+								<input type="text" name="useraddress" value="${clientVO.userAddress}"/>
+								<br />
+								<span class="message3"></span>
+								<br />
+								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="addressUpdate()" />
+								<input type="button" value="취소" onclick="cancle5()" />
+							</div>
+						</span>
+						<span class="few" id="address_few" style="display: inline-block;">
+							<div class="address_hiden1" style="display: none;">
+								${clientVO.userAddress}
+								<br />
+								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="addressUpdate1()" />
+							</div>
+						</span>
+					
 				</div>
 			</div>
 			<div id="cash">
@@ -425,8 +520,9 @@ margin-top: 20px;
 					<span class="cash_few">캐쉬라벨
 					</span>
 				</div>
-				<div class="cash_few1">보유 캐시
-					<span class="few"> ${clientVO.userCash}
+				<div class="cash_few1">
+					<span class="few1" style="display: inline-block;">보유 캐시</span>
+					<span class="few"> ${clientVO.userCash}캐시
 					</span>
 				</div>
 			</div>

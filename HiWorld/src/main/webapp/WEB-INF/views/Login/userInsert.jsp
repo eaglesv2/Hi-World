@@ -8,7 +8,7 @@
 <title>Hi-World</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
 <link rel="icon" href="${pageContext.request.contextPath}/resources/images/파비콘.png" type="image/x-icon">
-<link rel="stylesheet" href="resources/css/UserInsert.css">
+<link rel="stylesheet" href="resources/css/UserInsert.css?after">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
@@ -70,7 +70,7 @@
 					</h3>
 					<span class="box int_tel"> <input name="userTel1"
 						id="userTel1" value="010" readonly style=" width:30px; height: 100%; border: none;">
-					- &nbsp;<input type="text" id="userTel2" name="userTel2" maxlength="9" style=" width:80%; height:68%; border:none; position: absolute; "/>
+					- &nbsp;<input type="text" id="userTel2" name="userTel2" maxlength="9" style=" width:80%; height:68%; border:none; position: absolute; top:7px;  "/>
 					</span> <span id="error_next_box6" class="error"></span>
 					<!-- 주소  -->
 					<h3>

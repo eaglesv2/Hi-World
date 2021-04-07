@@ -121,7 +121,8 @@
 		$('.price1').css({'border':'1px solid red'});
 		$('.price2').css({'border':'1px solid #b5b5b5'});
 		$('.price3').css({'border':'1px solid #b5b5b5'});
-		$('.price4').css({'border':'1px solid #b5b5b5'});		
+		$('.price4').css({'border':'1px solid #b5b5b5'});	
+		$("#imgID").attr("src", "resources/images/admin/밤톨.png");
 	}
 	function price2(){
 		$('#chargeEX').val('충전 예정금액 : 28000원')
@@ -129,7 +130,7 @@
 		$('.price2').css({'border':'1px solid red'});
 		$('.price3').css({'border':'1px solid #b5b5b5'});
 		$('.price4').css({'border':'1px solid #b5b5b5'});	
-	
+		$("#imgID").attr("src", "resources/images/admin/밤톨3.png");
 	}
 	function price3(){
 		$('#chargeEX').val('충전 예정금액 : 45000원');
@@ -137,7 +138,7 @@
 		$('.price2').css({'border':'1px solid #b5b5b5'});
 		$('.price3').css({'border':'1px solid red'});
 		$('.price4').css({'border':'1px solid #b5b5b5'});	
-
+		$("#imgID").attr("src", "resources/images/admin/밤톨5.png");
 	}
 	function price4(){
 		$('#chargeEX').val('충전 예정금액 : 90000원')
@@ -145,6 +146,7 @@
 		$('.price2').css({'border':'1px solid #b5b5b5'});
 		$('.price3').css({'border':'1px solid #b5b5b5'});
 		$('.price4').css({'border':'1px solid red'});	
+		$("#imgID").attr("src", "resources/images/admin/밤톨10.png");
 	}
 	
 
@@ -158,7 +160,7 @@
 		<div id="leftCon">
 			<div id="logo">
 				<div>
-					<img src="resources/images/미니미.jpg" alt="이미지가 들어갑니다." />
+					<img id="imgID" src="resources/images/admin/밤톨메인.png" alt="이미지가 들어갑니다." />
 				</div>
 			</div>
 			

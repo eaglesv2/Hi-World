@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+body, input, textarea, select, button{
+	 font-family: 'SDSamliphopangche_Outline';
+	 font-weight: 400;
+}
+
 #chargeContainer {
 	
 	height: 580px;
@@ -31,8 +42,8 @@
 
 #logo img {
 	border: 1px solid #b5b5b5;
-	width: 50%;
-	height: 100%;
+	width: 200px;
+	height: 150px;
 }
 
 .chargeEX {

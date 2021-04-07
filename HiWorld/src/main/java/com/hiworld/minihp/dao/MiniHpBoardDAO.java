@@ -9,6 +9,8 @@ import com.hiworld.minihp.vo.MiniHpBoardReplyVO;
 import com.hiworld.minihp.vo.MiniHpBoardVO;
 
 public interface MiniHpBoardDAO {
+	int getFolderScope(int folderSerial);
+	
 	//폴더 부분
 	//select all
 	List<MiniHPBoardFolderVO> getAllFolder(int userSerial);

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -140,8 +141,8 @@ public class MiniHpGuestController {
 	}
 	@ResponseBody
 	@GetMapping("/MiniHpGuestDefaultSide.do")
-	public String miniHpGuestDefaultSide(String OwnerID) {
-		return "miniHp_leftGuest.do?OwnerID="+OwnerID;
+	public String miniHpGuestDefaultSide(int OwnerSerial) {
+		return "miniHp_leftGuest.do?OwnerSerial="+OwnerSerial;
 	}
 	
 	@GetMapping("/miniHp_rightGuest.do")
@@ -159,8 +160,8 @@ public class MiniHpGuestController {
 		
 		//일촌 관계 전달
 		int isNeighbor = 0;
-		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
-		if(neighborDAO.checkNeighbor(vo.getUserSerial(), ownerSerial)!=null)
+		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial)!=null)
 			isNeighbor = 1;
 		model.addAttribute("isNeighbor", isNeighbor);
 		
@@ -222,9 +223,29 @@ public class MiniHpGuestController {
 	@GetMapping("/miniHpGuestPicture.do")
 	public String miniHpPicture(int ownerSerial, Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("miniHpPicture.do");
-		model.addAttribute("ownerSerial",ownerSerial);
 		if(folderSerial==null)
 			folderSerial = pictureService.getFirstFolderSerial(ownerSerial);
+		
+		//폴더 공개 여부
+		int scope = pictureService.getFolderScope(folderSerial);
+		
+		//비공개 일 경우
+		if(scope==0)
+			return "MiniHP/scopePrivatePage";
+		
+		//일촌 관계 체크
+		int isNeighbor = 0;
+		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial)!=null)
+			isNeighbor = 1;
+		
+		if(scope==1 && isNeighbor==0)
+			return "MiniHP/scopeNeighborPage";
+		
+		//일촌 여부 전달
+		model.addAttribute("isNeighbor", isNeighbor);
+		
+		model.addAttribute("ownerSerial",ownerSerial);
 		
 		//페이징처리-----------------------------------------------------------------------------------------------------
 		int listCnt = pictureService.countInsideFolder(folderSerial);//총 게시글 수
@@ -238,6 +259,22 @@ public class MiniHpGuestController {
 		model.addAttribute("currentFolderSerial", folderSerial);
 		return "MiniHP/guestPicture";
 	}
+	//스크랩
+	@GetMapping("/scrapePicture.do")
+	public String scrapePicturePage(int pictureSerial, Model model, HttpSession session) {
+		//자신의 모든 폴더 불러오기
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("folderList",pictureService.getAllFolder(userSerial));
+		
+		//스크랩할 데이터
+		model.addAttribute("pictureSerial", pictureSerial);
+		return "MiniHP/scrapePicture";
+	}
+	@PostMapping("/scrapePicture.do/{pictureSerial}/{folderSerial}")
+	@ResponseBody
+	public void scrapePicture(@PathVariable int pictureSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		pictureService.scrapePicture(pictureSerial, folderSerial,request);
+	}
 	
 	// 게시판 -------------------------------------
 	@GetMapping("/MiniHpBoardGuestSide.do")
@@ -250,14 +287,31 @@ public class MiniHpGuestController {
 	@GetMapping("/miniHpBoardGuest.do")
 	public String miniHpBoard(int ownerSerial, Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("게시판 main");
-		model.addAttribute("ownerSerial",ownerSerial);
 		if(folderSerial==null)
 			folderSerial = boardService.getFirstFolderSerial(ownerSerial);
+		
+		//폴더 공개 여부
+		int scope = boardService.getFolderScope(folderSerial);
+		
+		//비공개 일 경우
+		if(scope==0)
+			return "MiniHP/scopePrivatePage";
+		
+		//일촌 관계 체크
+		int isNeighbor = 0;
+		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial)!=null)
+			isNeighbor = 1;
+		
+		if(scope==1 && isNeighbor==0)
+			return "MiniHP/scopeNeighborPage";
+		
+		
+		model.addAttribute("ownerSerial",ownerSerial);
 		
 		//전체 리스트 개수
 		int listCnt = boardService.countInsideFolder(folderSerial);
 		MiniHpBoardPagingVO pagingVO = new MiniHpBoardPagingVO(listCnt, curPage);
-		
 		
 		model.addAttribute("list",boardService.getAll(folderSerial, curPage, pagingVO.getPageSize()));
 		model.addAttribute("listCnt",listCnt);
@@ -269,14 +323,39 @@ public class MiniHpGuestController {
 	}
 	//자세한 페이지 이동
 	@GetMapping("/MiniHpBoardGuestDetail.do")
-	public String miniHpBoardDetail(int ownerSerial, int serial, Model model) {
+	public String miniHpBoardDetail(int ownerSerial, int serial, Model model, HttpSession session) {
 		System.out.println("게시판 detail 화면");
 		model.addAttribute("ownerSerial",ownerSerial);
 		model.addAttribute("board",boardService.get(serial));
 		boardService.updateHit(serial);
 		//댓글 추가
 		model.addAttribute("replyList", boardService.getAllReply(serial));
+		
+		//일촌 관계 체크
+		int isNeighbor = 0;
+		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial)!=null)
+			isNeighbor = 1;
+		
+		//일촌 여부 전달
+		model.addAttribute("isNeighbor", isNeighbor);
 		return "MiniHP/guestBoard_Detail";
+	}
+	//스크랩
+	@GetMapping("/scrapeBoard.do")
+	public String scrapeBoardPage(int boardSerial, Model model, HttpSession session) {
+		//자신의 모든 폴더 불러오기
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("folderList",boardService.getAllFolder(userSerial));
+		
+		//스크랩할 데이터
+		model.addAttribute("boardSerial", boardSerial);
+		return "MiniHP/scrapeBoard";
+	}
+	@PostMapping("/scrapeBoard.do/{boardSerial}/{folderSerial}")
+	@ResponseBody
+	public void scrapeBoard(@PathVariable int boardSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		boardService.scrapeBoard(boardSerial, folderSerial,request);
 	}
 	
 	// 동영상 -------------------------------------
@@ -290,9 +369,29 @@ public class MiniHpGuestController {
 	@GetMapping("/miniHpVideoGuest.do")
 	public String miniHpVideo(int ownerSerial, Model model, HttpSession session,@RequestParam(required=false) Integer folderSerial,@RequestParam(defaultValue="1") int curPage) {
 		System.out.println("miniHpVideo.do");
-		model.addAttribute("ownerSerial",ownerSerial);
 		if(folderSerial==null)
 			folderSerial = videoService.getFirstFolderSerial(ownerSerial);
+		
+		//폴더 공개 여부
+		int scope = videoService.getFolderScope(folderSerial);
+		
+		//비공개 일 경우
+		if(scope==0)
+			return "MiniHP/scopePrivatePage";
+		
+		//일촌 관계 체크
+		int isNeighbor = 0;
+		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial)!=null)
+			isNeighbor = 1;
+		
+		if(scope==1 && isNeighbor==0)
+			return "MiniHP/scopeNeighborPage";
+		
+		//일촌 여부 전달
+		model.addAttribute("isNeighbor", isNeighbor);
+		
+		model.addAttribute("ownerSerial",ownerSerial);
 		
 		//페이징처리-----------------------------------------------------------------------------------------------------
 		int listCnt = videoService.countInsideFolder(folderSerial);//총 게시글 수
@@ -305,6 +404,22 @@ public class MiniHpGuestController {
 		model.addAttribute("currentFolderName", videoService.getFolderName(folderSerial));
 		model.addAttribute("currentFolderSerial", folderSerial);
 		return "MiniHP/guestVideo";
+	}
+	//스크랩
+	@GetMapping("/scrapeVideo.do")
+	public String scrapeVideoPage(int videoSerial, Model model, HttpSession session) {
+		//자신의 모든 폴더 불러오기
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("folderList",videoService.getAllFolder(userSerial));
+		
+		//스크랩할 데이터
+		model.addAttribute("videoSerial", videoSerial);
+		return "MiniHP/scrapeVideo";
+	}
+	@PostMapping("/scrapeVideo.do/{videoSerial}/{folderSerial}")
+	@ResponseBody
+	public void scrapeVideo(@PathVariable int videoSerial,@PathVariable int folderSerial,HttpServletRequest request) {
+		videoService.scrapeVideo(videoSerial, folderSerial,request);
 	}
 	
 	// 방명록 -------------------------------------

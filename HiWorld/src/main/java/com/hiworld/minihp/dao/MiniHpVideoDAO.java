@@ -10,6 +10,8 @@ import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
 import com.hiworld.minihp.vo.MiniHpVideoVO;
 
 public interface MiniHpVideoDAO {
+	int getFolderScope(int folderSerial);
+	
 	//폴더 부분
 	//select all
 	List<MiniHPVideoFolderVO> getAllFolder(int userSerial);

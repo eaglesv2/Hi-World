@@ -239,7 +239,7 @@ public class ClientController {
 	//스프링 컨트롤러 부분
 	@RequestMapping(value = "/boardPage.do", method = RequestMethod.GET, produces="text/plain;charset=UTF-8")
 	@ResponseBody
-	public String json(Locale locale, Model model) {    
+	public String boardPage(Locale locale, Model model) {    
 		
 		/* 모든 정보 가져오기 */
 		ArrayList<MiniHpIntroVO> MiniVO = neighborService.getAllNeighbor();
@@ -547,26 +547,23 @@ public class ClientController {
 	@RequestMapping("find_id_pw.do")
 	@ResponseBody
 	public String find_id_pw(HttpServletRequest request,ClientVO clientvo, Model md)throws Exception{
-		System.out.println("아이디 비밀번호를 찾을거야");
-		String find = request.getParameter("");
-		String check = null;
+		String find = request.getParameter("check");
+		String massege = "입력 하신 정보가 없습니다.";	
 		switch (find) {
 		case "1":
-
 			String name = clientvo.getUserName();
+			System.out.println(name);
 			String tel = clientvo.getUserTel();
 			ClientVO vo = clientService.selectFindId(name, tel);
+			return vo.getUserID();
 			
-			return "find_id";
 		case "2":
 			String Id = clientvo.getUserID();
 			String tel1 = clientvo.getUserTel();
 			ClientVO vo1 = clientService.selectFindPw(Id, tel1);
-			return "find_pw";
-			
-			
+			return vo1.getUserID();
 		default:
-			return "";
+			return massege;
 			
 		}
 	}

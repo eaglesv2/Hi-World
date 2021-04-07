@@ -5,7 +5,16 @@
 	height: 100%;
 	
 }
-
+@font-face {
+	font-family: 'SDSamliphopangche_Outline';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+body, input, textarea, select, button{
+	 font-family: 'SDSamliphopangche_Outline';
+	 font-weight: 400;
+}
 
 
 #article_box {
@@ -15,6 +24,7 @@
     padding-top: 100px;
     padding-left: 30px;
 }
+
 
 #article_box .uploadDiv,input,textarea,select, h1{
 	margin-bottom:10px;

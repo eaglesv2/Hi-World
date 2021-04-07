@@ -18,6 +18,10 @@
 	textarea{
 	    width: 279px;
     	height: 163px;
+    	font-family:'SDSamliphopangche_Outline';
+	}
+	button {
+		font-family:'SDSamliphopangche_Outline';
 	}
 	
 	

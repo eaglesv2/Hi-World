@@ -124,6 +124,28 @@ function fn_paging(curPage) {
 	    $('#bodyContents').html(data);
 	});
 }
+function scrapeVideo(videoSerial) {
+	window.open("scrapeVideo.do?videoSerial="+videoSerial, "스크랩하기", "width=400, height=300, left=100, top=50");
+}
+function insertScrapeReply(videoSerial) {
+	var replyContent = '퍼가요~섩';
+	var data = {
+		replyContent : replyContent,
+		videoSerial : videoSerial
+	}
+	console.log(JSON.stringify(data));
+	$.ajax({
+		type: 'POST',
+		url: 'MiniHpVideoReply.do',
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8',
+		data: JSON.stringify(data)
+	}).done(function() {
+		$("#replyTbody-"+videoSerial).load("MiniHpVideoReply.do?videoSerial="+videoSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
 </script>
 <input type="hidden" id="ownerSerial" value="${ownerSerial}">
 <form name="poto">
@@ -144,7 +166,14 @@ function fn_paging(curPage) {
 				<tbody>
 					<tr style=" border-bottom: none;">
 				  		<th>
-				  			<font style="font-weight: bold;">${l.title}</font>
+				  			<div style="display: inline;">
+					  			<font style="font-weight: bold; float: left;">${l.title}</font>
+					  			<c:if test="${isNeighbor==1}">
+						  			<span onclick="scrapeVideo('${l.videoSerial}');" style="float: right; font-weight: normal;" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+						  				스크랩
+						  			</span>		  			
+					  			</c:if>
+				  			</div>
 				  		</th>
 					</tr>
 				</tbody>

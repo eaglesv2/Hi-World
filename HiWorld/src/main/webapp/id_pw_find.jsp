@@ -6,10 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디/비밀번호 찾기 폼</title>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script type="text/javascript">
 function findId() {
 	var check = 1;
@@ -26,7 +22,7 @@ function findId() {
 		$('.findIdview').html(find);
 		},
 		error: function() {
-			alert("오류났다.")
+			
 		}
 	});
 }
@@ -49,6 +45,7 @@ display: none;
 			<div class="">
 				<div class="">
 					<h3>아이디/비밀번호 찾기</h3>
+					<p>인증된 이메일만 정보 찾기가 가능합니다 :)</p>
 				</div>
 				<div style="margin-bottom: 10px;"
 					class="">

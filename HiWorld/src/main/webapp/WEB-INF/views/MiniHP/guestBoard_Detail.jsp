@@ -45,6 +45,11 @@ table.boardTable td {
 	  			<font style="font-weight: bold;">${board.title}</font>
 	  			<span style="float: right;">
 	  				<span onclick="goToFolder('${board.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">목록</span>
+  					<c:if test="${isNeighbor==1}">
+			  			<span onclick="scrapeBoard('${board.boardSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+			  				스크랩
+		  				</span>				  			
+		  			</c:if>
   				</span>
 	  		</th>
 		</tr>
@@ -227,5 +232,27 @@ function updateReply(serial) {
 			alert(JSON.stringify(error));
 		});
 	}
+}
+function scrapeBoard(boardSerial) {
+	window.open("scrapeBoard.do?boardSerial="+boardSerial, "스크랩하기", "width=400, height=300, left=100, top=50");
+}
+function insertScrapeReply(boardSerial) {
+	var replyContent = '퍼가요~섩';
+	var data = {
+		replyContent : replyContent,
+		boardSerial : boardSerial
+	}
+	console.log(JSON.stringify(data));
+	$.ajax({
+		type: 'POST',
+		url: 'MiniHpBoardReply.do',
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8',
+		data: JSON.stringify(data)
+	}).done(function() {
+		refresh(boardSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
 }
 </script>

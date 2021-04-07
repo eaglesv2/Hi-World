@@ -1,11 +1,21 @@
 package com.hiworld.minihp.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.controller.Utils;
 import com.hiworld.minihp.dao.MiniHpVideoDAO;
 import com.hiworld.minihp.vo.MiniHPVideoFolderVO;
 import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
@@ -15,6 +25,65 @@ public class MiniHpVideoServiceImpl implements MiniHpVideoService {
 	
 	@Autowired
 	private MiniHpVideoDAO dao;
+
+	@Override
+	public int getFolderScope(int folderSerial) {
+		return dao.getFolderScope(folderSerial);
+	}
+	@Override
+	public int scrapeVideo(int videoSerial, int folderSerial,HttpServletRequest request) {
+		// 1. 스크랩할 데이터 가져오기
+		MiniHpVideoVO oriVO = dao.get(videoSerial);
+		
+		// 2. 파일 복사
+		MiniHpVideoVO newVO = new MiniHpVideoVO();
+		
+		//기존 파일
+		String oriFileName = oriVO.getFile();
+		if(oriFileName!=null) {
+			String savePath = request.getRealPath("/resources/upload/");
+	  		//파일 이름 변경
+	  		String cutFileName = oriFileName.substring(oriFileName.lastIndexOf("_")+1);
+	  		String newFileName = Utils.getUuidFileName(cutFileName);
+	  		//파일 저장
+	  		//파일객체생성
+	        File oriFile = new File(savePath+oriFileName);
+	        //복사파일객체생성
+	        File copyFile = new File(savePath+newFileName);
+	        
+	        try {
+	            
+	            FileInputStream fis = new FileInputStream(oriFile); //읽을파일
+	            FileOutputStream fos = new FileOutputStream(copyFile); //복사할파일
+	            
+	            int fileByte = 0; 
+	            // fis.read()가 -1 이면 파일을 다 읽은것
+	            while((fileByte = fis.read()) != -1) {
+	                fos.write(fileByte);
+	            }
+	            //자원사용종료
+	            fis.close();
+	            fos.close();
+	            
+	        } catch (FileNotFoundException e) {
+	            e.printStackTrace();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	        newVO.setFile(newFileName);
+		}
+        
+        // 3. 데이터 insert
+        HttpSession session = request.getSession();
+        sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+        newVO.setUserSerial(vo.getUserSerial());
+        
+        newVO.setFolderSerial(folderSerial);
+        newVO.setTitle("[스크랩] "+oriVO.getTitle());
+        newVO.setContent(oriVO.getContent());
+		
+		return dao.insert(newVO);
+	}
 	
 	//폴더 관련------------
 	//폴더 selectAll

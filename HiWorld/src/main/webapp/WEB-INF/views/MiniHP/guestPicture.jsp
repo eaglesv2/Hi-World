@@ -118,6 +118,28 @@ function fn_paging(curPage) {
 	    $('#bodyContents').html(data);
 	});
 }
+function scrapePicture(pictureSerial) {
+	window.open("scrapePicture.do?pictureSerial="+pictureSerial, "스크랩하기", "width=400, height=300, left=100, top=50");
+}
+function insertScrapeReply(pictureSerial) {
+	var replyContent = '퍼가요~섩';
+	var data = {
+		replyContent : replyContent,
+		pictureSerial : pictureSerial
+	}
+	console.log(JSON.stringify(data));
+	$.ajax({
+		type: 'POST',
+		url: 'MiniHpPictureReply.do',
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8',
+		data: JSON.stringify(data)
+	}).done(function() {
+		$("#replyTbody-"+pictureSerial).load("MiniHpPictureReply.do?pictureSerial="+pictureSerial);
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
+}
 </script>
 <input type="hidden" id="ownerSerial" value="${ownerSerial}">
 <form name="poto">
@@ -136,9 +158,17 @@ function fn_paging(curPage) {
 			<table class="pictureTable">
 				<c:forEach items="${list}" var="l">
 				<thead>
-					<tr style=" border-bottom: none;">
+					<tr style=" border-bottom: none;background: #EBE9E9;">
 				  		<th>
-				  			<font style="font-weight: bold;">${l.title}</font>
+				  		<div style="display: inline;">
+				  			<font style="font-weight: bold; float: left;">${l.title}</font>
+				  			<c:if test="${isNeighbor==1}">
+					  			<span onclick="scrapePicture('${l.pictureSerial}');" style="float: right;" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
+					  				스크랩
+					  			</span>				  			
+				  			</c:if>
+				  		</div>
+			  			<br>
 				  		</th>
 					</tr>
 				</thead>

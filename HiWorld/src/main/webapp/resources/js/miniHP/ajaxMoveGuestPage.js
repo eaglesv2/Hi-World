@@ -1,10 +1,10 @@
 //홈 이동
-function moveHome(OwnerID) {
+function moveHome(ownerSerial) {
 	//사이드 불러오기
-	getProfileSide(OwnerID);
+	getProfileSide(ownerSerial);
 	// 메인 불러오기
     var ajaxMain = {
-            url : 'miniHp_rightGuest.do?OwnerID='+OwnerID,
+            url : 'miniHp_rightGuest.do?OwnerSerial='+ownerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -51,9 +51,9 @@ function movePicture(ownerSerial){
 }
 
 //프로필 사이드 불러오기
-function getProfileSide(OwnerID) {
+function getProfileSide(OwnerSerial) {
 	var ajaxSide = {
-            url : "MiniHpGuestDefaultSide.do?OwnerID="+OwnerID,
+            url : "MiniHpGuestDefaultSide.do?OwnerSerial="+OwnerSerial,
             async : true,
             type : "GET",
             dataType : "html",
@@ -164,9 +164,9 @@ function moveVideo(ownerSerial){
 }
 
 //방명록 이동
-function moveBook(OwnerID,ownerSerial){
+function moveBook(ownerSerial){
 	//사이드 불러오기
-	getProfileSide(OwnerID);
+	getProfileSide(ownerSerial);
     // 메인 불러오기
 	getBook(ownerSerial);
 }

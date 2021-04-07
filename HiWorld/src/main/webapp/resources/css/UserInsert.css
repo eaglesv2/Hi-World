@@ -3,11 +3,21 @@ html{
 	height:100%;
 }
 
+
+@font-face {
+	    font-family: 'SDSamliphopangche_Outline';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+}
+
+
 body{
 	margin: 0;
 	height: 100%;
 	background: #f5f6f7;
-	font-family: Dotum,'돋움',Helvetica,sans-serif;
+	font-family: 'SDSamliphopangche_Outline';
+	font-weight: 400;
 }
 
 #header{
@@ -62,8 +72,8 @@ h3{
 	font-size: 15px;
 }
 
-input{
-	font-family: Dotum,'돋움',Helvetica,sans-serif;
+input, select{
+	font-family:'SDSamliphopangche_Outline';
 }
 
 .box int_id{
@@ -90,6 +100,7 @@ input{
 #userTel1{
 	width:100px;
 }
+
 .btn_area{
 	margin: 30px 0 91px;
 }
@@ -103,8 +114,6 @@ input{
 	border: 0;
 	cursor: pointer;
 	color: #fff;
-	background-color: #08f0f0;
+	background-color: rgb(243,105,4);
 	font-size: 20px;
-	font-weight: 400;
-	font-family: Dotum, '돋움',Helvetica,sans-serif;
 }
