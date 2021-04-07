@@ -1,6 +1,7 @@
 package com.hiworld.client.service;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,7 +52,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 	/* 비밀번호 조회*/
 	@Override
-	public ClientVO selectpw(String clientVO) {
+	public ClientVO selectpw(int clientVO) {
 		// TODO Auto-generated method stub
 		ClientVO vo = dao.selectpw(clientVO);
 		return vo;
@@ -90,20 +91,33 @@ public class ClientServiceImpl implements ClientService {
 	
 	/* 회원가입 수정 끝-------------------------------------------------*/
     /*회원 아이디 비번 조회	*/
+	/* 회원 아이디 조회*/
 	@Override
 	public ClientVO selectFindId(String name, String tel) {
 		// TODO Auto-generated method stub
 		ClientVO id = dao.selectFindId(name, tel); 
-		System.out.println("안온거지?");
 		return id;
 	}
-	
+	/* 회원 비번 임시 번호 수정후 임시 번호 리턴*/
 	@Override
 	public ClientVO selectFindPw(String id, String tel) {
 		// TODO Auto-generated method stub
-		System.out.println("서비스 들어 왓니?");
-		ClientVO pw = dao.selectFindPw(id, tel);
-		return pw;
+		System.out.println("비밀번호 임시 번호 왔지?");
+		ClientVO userInfo = dao.selectuserInfo(id, tel);
+		/* 널이 아닐경우 임시 비밀번호를 넣어 준다*/
+		if(userInfo != null) {
+			/* 문자도 도 넣기 위해 UUID를 이용 했음*/
+			String pw = UUID.randomUUID().toString().replace("-", "");//-를 제거 하기 휘한것
+			pw = pw.substring(0, 10);//많은 문자들이 저장 되어서 10번째까지 잘르기 위함
+			System.out.println(pw);
+			userInfo.setUserPW(pw);
+		}
+		System.out.println(userInfo.getUserSerial());
+		System.out.println(userInfo.getUserPW());
+		dao.updateFindPw(userInfo.getUserSerial(),userInfo.getUserPW());
+		System.out.println("띠발");
+		userInfo = dao.selectpw(userInfo.getUserSerial());
+		return userInfo;
 	}
 	
 	

@@ -24,7 +24,7 @@ public interface ClientService {
 	/* 비밀번호 수정*/
 	int updatepw(ClientVO clientVO);
 	/* 비밀번호 조회*/
-	ClientVO selectpw(String clientVO);
+	ClientVO selectpw(int clientVO);
 	
 	/* 연락처 수정*/
 	int updateTel(ClientVO clientVO);
@@ -37,7 +37,7 @@ public interface ClientService {
 	/*-------------------회원수정 끝----------------- */
 	/* 이름과 연락처로 조회*/
 	ClientVO selectFindId(String name, String tel);
-	/* 아이디와 연락처로 조회*/
+	/* */
 	ClientVO selectFindPw(String id, String tel);
 	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 기능 구현 완료

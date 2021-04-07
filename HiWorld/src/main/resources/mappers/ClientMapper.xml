@@ -27,7 +27,7 @@
 	<!-- 비밀번호 조회  -->
 	<select id="selectpw" resultType="clientVO">
 	SELECT * FROM HW_USERLIST
-	where UserPW = #{UserPW}
+	where UserSerial = #{UserSerial}
 	</select>
 
 		<!--  연락처 수정 -->
@@ -66,12 +66,18 @@
 	WHERE UserName = #{name} AND UserTel = #{tel}
 	</select>
 	
-	<!-- 비밀번호 찾기  -->
-	<select id="selectFindPw" resultType="clientVO">
-	SELECT UserPW FROM HW_USERLIST 
-	WHERE UserID = #{UserID} AND UserPW = #{UserTel}
+	<!-- 임시비밀번호 발급 받기 위해서 정보 받기-->
+	<select id="selectuserInfo" resultType="clientVO">
+	SELECT * FROM HW_USERLIST 
+	WHERE UserID = #{id} AND UserTel = #{tel}
 	</select>
 	
+	<!-- 임시비밀번호로 수정  -->
+	<update id="updateFindPw">
+		UPDATE HW_USERLIST 
+		SET UserPW = #{pw}
+		WHERE UserSerial = #{serial}
+	</update>
 	
 	<!-- ################################### 구현 완료  -->
 	<!-- 회원 회원 가입 -->

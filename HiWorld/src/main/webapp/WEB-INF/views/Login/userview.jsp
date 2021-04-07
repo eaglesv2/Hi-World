@@ -6,438 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="resources/css/userView.css?after">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<script type="text/javascript">
-var pw = false;
-var pwc = false;
-var tel = false;
-var address = false;
-	$(document).ready(function() {
-			
-		/* 패스워드 정규규현식과 더불어 패스워드가 같은지 질문*/
-		  
-		 $("input[class=Pwchc1]").blur(function() {
-					var userpw = $("input[name=userPW]").val();
-					var pwCheck = RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()\-_=+\\\|\[\]{};:\'",.<>\/?]).{8,16}$/);
-					if (userpw.search(/\s/) != -1) {
-						pw = false;
-						var html = "<tr><td colspan='3' style='color: red'>공백없이 작성 하세요</td></tr>";
-						$('.message').empty();
-						$('.message').html(html);
-						$("input[class=Pwchc1]").focus();
-					} else if (userpw == "") {
-						pw = false;
-						var html = "<tr><td colspan='3' style='color: red'>필수 사항 입니다.</td></tr>";
-						$('.message').empty();
-						$('.message').html(html);
-						$("input[class=Pwchc1]").focus();
-					} else if (!pwCheck.test(userpw)) {
-						pw = false;
-						var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 비밀번호 입니다.</td></tr>";
-						$('.message').empty();
-						$('.message').html(html);
-						$("input[class=Pwchc1]").focus();
-					} else {
-						pw = true;
-						var html = "<tr><td colspan='3' style='color: green'>사용가능한 비밀번호입니다.</td></tr>";
-						$('.message').empty();
-						$('.message').html(html);
-					}
-				});
-				//패스워드 확인
-				$("input[name=userPW1]").blur(function() {
-					if ($("input[name=userPW1]").val() != $("input[class=Pwchc1]").val()) {
-						pwc = false;
-						var html = "<tr><td colspan='3' style='color: red'>비밀번호가 다릅니다.</td></tr>";
-						$('.message1').empty();
-						$('.message1').html(html);
-						$("input[name=userPW1]").focus();
-					}
-					//같을 경우
-					else{
-						pwc = true;
-						$('.message1').empty();
-						}
-				});
-				
-				//연락처 정규식 및 안적었을때 기능
-				$('input[name=userTel').blur(function() {
-					var phone = RegExp(/^[0-9]{3}(-)[0-9]{4}(-)[0-9]{4}$/);
-					var phone1 = $('input[name=userTel').val();
-					if(phone1 .search(/\s/) != -1){
-						$('input[name=userTel').focus();
-						tel = false;
-						var html = "<tr><td colspan='3' style='color: red'>공백 없이 작성 하세요</td></tr>";
-						$('.message2').empty();
-						$('.message2').html(html);
-						
-					} else if(phone1 == ''){
-						tel = false;
-						var html = "<tr><td colspan='3' style='color: red'>필수사항 입니다.</td></tr>";
-						$('.message2').empty();
-						$('.message2').html(html);
-						$('input[name=userTel').focus();
-					} else if(phone.test(phone1)){
-						tel = true;
-						$('.message2').empty();
-					}	else {
-						tel = false;
-						var html = "<tr><td colspan='3' style='color: red'>예)0000-0000 처럼 적어주세요</td></tr>";
-						$('.message2').empty();
-						$('.message2').html(html);
-						$('input[name=userTel').focus();
-					}
-				});
-				
-	
-				//주소 정규식과 기능 구현
-				$('input[name=useraddress]').blur(function() {
-					var add = /^[가-힣]|[a-zA-Z]|[1-9]$/;
-					var add1 = $('input[name=useraddress]').val();
-					if(!add.test(add1)){
-						address = false;
-						var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 주소입니다.</td></tr>";
-						$('.message3').empty();
-						$('.message3').append(html);
-						add1.focus();
-					}
-					
-					else{
-						address = true;
-						$('.message3').empty();
-						}
-				});	
-	 
-	});
-	      
-	      
-	      
-	/* +++++++++++++++++++++++++++++++++++++++++++++  */
-
-
-
-
-/*  여기부터 userview Update */
-
-			function pwUpdate() {
-				alert("비밀번호 버튼 눌렀니?")
-				if (pw != true && pwc!=true) {
-				$("input[name=userPW]").focus()
-				return false;
-				}
-				else{
-				var ajaxPW = $('input[name=userPW]').val();
-				var upDatech = 1;
-				alert("비밀번호 여기까지 왔니?")
-				$.ajax({
-					url : "UserUpdate.do",
-					type:"POST",
-					data : {"userDate" : ajaxPW, "upDatech":upDatech},
-					success: function(data) {
-						
-						if($('#hiden1').css('display') == 'none'){
-							$('#hiden1').html(ajaxPW).css('color','red').append('</br><input type="button" id="pwbut" value="수정" onclick="pwUpdate()1" />');
-							$('#hiden1').show();
-							$('#pwhiden').hide();
-							}
-						},
-					   			error : function () {
-									alert("error")
-					}
-				});
-			}
-		}
-		function telUpdate() {
-			alert("연락처 버튼 눌렀니?")
-			if (tel != true) {
-				$("input[name=userTel]").focus()
-				return false;
-				}
-			alert("여기 안왔어?")
-			var ajaxTel = $('input[name=userTel]').val();
-			var upDatech = 2;
-			alert("연락처 여기까지 왔니?")
-			$.ajax({
-				url : "UserUpdate.do",
-				type:"POST",
-				data : {"userDate" : ajaxTel, "upDatech":upDatech},
-				success: function(data) {
-					
-					if($('#hiden2').css('display') == 'none'){
-						$('#hiden2').html(ajaxTel).css('color','red').append('</br><input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
-						$('#hiden2').show();
-						$('#hiden_tel').hide();
-						}
-					},
-				   			error : function () {
-								alert("error")
-				}
-			});
-		}
-
-		
-		function addressUpdate() {
-			alert("주소 버튼 눌렀니?")
-			if (address != true) {
-				$("input[name=useraddress]").focus()
-				return false;
-				}
-			var ajaxaddress = $('input[name=useraddress]').val();
-			var upDatech = 3;
-			alert("연락처 여기까지 왔니?")
-			$.ajax({
-				url : "UserUpdate.do",
-				type:"POST",
-				data : {"userDate" : ajaxaddress, "upDatech":upDatech},
-				success: function(data) {
-					
-					if($('.address_hiden1').css('display') == 'none'){
-						$('.address_hiden1').html(ajaxaddress).css('color','red').append('</br><input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
-						$('.address_hiden1').show();
-						$('.address_hiden').hide();
-						}
-					},
-				   			error : function () {
-								alert("error")
-				}
-			});
-		}
-	
-		function pwUpdate1() {
-			if($('#pwhiden').css('display') == 'none'){
-				$('#hiden1').hide();
-				$('#pwhiden').show();
-			}
-		}
-		function cancle2() {
-			if($('#hiden1').css('display') == 'none'){
-				$('#pwhiden').hide();
-				$('#hiden1').show();
-			}
-		}
-		
-		function telUpdate1() {
-			if($('#hiden_tel').css('display') == 'none'){
-				$('#hiden_tel').show();
-				$('#hiden2').hide();
-			}
-		}
-		function cancle3() {
-			if($('#hiden2').css('display') == 'none'){
-				$('#hiden2').show();
-				$('#hiden_tel').hide();
-			}
-		}
-		
-		function addressUpdate1() {
-			if($('.address_hiden').css('display') == 'none'){
-				$('.address_hiden').show();
-				$('.address_hiden1').hide();
-			}
-		}
-		function cancle5() {
-			if($('.address_hiden1').css('display') == 'none'){
-				$('.address_hiden1').show();
-				$('.address_hiden').hide();
-			}
-		}
-/* =================여기까지 입니다.=============================  */
- 
-</script>
-<style type="text/css">
-#main {
-	width: 100%;
-	margin-top: 70px;
-	height: 100%;
-	border: 1px solid #999999;
-	text-align: justify;
-}
-@font-face {
-    font-family: 'SDSamliphopangche_Outline';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-body{
-     font-family: 'SDSamliphopangche_Outline';
-     font-weight: 400;
-      }
-input{
-    font-family:'SDSamliphopangche_Outline';
-      }
-.fontsize{
-	font-size: 45px;
-	font-family: 'SDSamliphopangche_Outline';
-}
-
-h3 {
-	color: #778899;
-	text-align: center;
-	margin-top: 8px;
-}
-
-div {
-	
-}
-
-#text {
-	margin-top: 30px;
-}
-
-.fontsize {
-	font-family: sans-serif;
-}
-
-.fontcolor {
-	color: #00ced1;
-}
-
-.few {
-	color: red;
-}
-.userId1{
-float: left;
-width: 100px;
-text-align: center;
-}
-
-
-.userId2 {
-	margin-left: 219px;
-}
-
-#name_gender {
-	float: left;
-	position: absolute;
-	left: 21px;
-}
-.name{
-margin-left: 80px;
-}
-#few_id {
-	margin-left: 170px;
-}
-
-.Gender {
-	margin-left: 172px;
-}
-
-.name_gender1 {
-	margin-top: 20px;
-	margin-left: 132px;
-}
-
-#name_few {
-	margin-left: 183px;
-	
-}
-
-.gender {
-	margin-left: 48px;
-	margin-top: 31px;
-	margin-bottom: 30px;
-}
-
-#gender1_few {
-	margin-left: 236px;
-}
-
-
-#hiden {
-	display: none;
-}
-
-.pw_tel_main{
-height: 180px;
-margin-left: 7px;
-}
-.pw_label{
-float: left;
-}
-#pw_tel_body{
-float: left;
-margin-top: 19px;
-margin-left: 30px;
-width: 562px;
-}
-
-.pw_tel2{
-height: 60px;
-margin-left: 84px;
-}
-.pw_few{
-width: 340px;
-float: right;
-margin-right: 25px;
-}
-#pw_text{
-margin-left: 139px;
-}
-
-.tel_tel1{
-height: 61px;
-margin-left: 80px;
-}
-.tel_label1{
- 
-}
-.Tel_few{
-margin-left: 146px;
-float: right;
-}
-.tel_tel1{
-float: left;
-}
-.address_hiden1{
-margin-top: 18px;
-}
-.birth_address_label1{
-float: left;
-margin-right: 98px;
-}
-.birth_address_label{
-float: left;
-margin-right: 45px;
-}
-.birth_address{
-height: 141px;
-}
-.birth_label{
-margin-top: 17px;
-}
-#Bfew{
-margin-top: 15px;
-}
-.address_label{
-margin-top: 55px;
-
-}
-#address_few{
-margin-top: 36px;
-}
-#few{
-margin-top: 13px;
-}
-.cash{
-height: 56px;
-}
-.cash_label{
-float: left;
-margin-top: 8px;
-}
-.cash_label1{
-margin-right: 106px;
-}
-.cash_few{
-margin-right: 60px;
-}
-.few1{
-margin-right: 5px;
-}
-</style>
 </head>
 <body>
 
@@ -474,18 +47,28 @@ margin-right: 5px;
 								</span>
 							</span>
 						</div>
-
+				<c:choose>
+					<c:when test="${clientVO.userGender == 'M'}">
 						<div class="gender">
-								<span class="Gender">성별 
-									<span class="few" id="gender1_few">${clientVO.userGender}
-									<br />
-									</span>
+							<span class="Gender">성별 
+								<span class="few" id="gender1_few">남성
+								<br />
 								</span>
+							</span>
 						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="gender">
+							<span class="Gender">성별 
+								<span class="few" id="gender1_few">여성
+								<br />
+								</span>
+							</span>
+						</div>
+					</c:otherwise>
+				</c:choose>		
 					</div>
 				</div>
-			
-
 			<div class="pw_tel_main">
 				<span class="pw_label">비밀번호/연락처</span>
 				<div id="pw_tel_body">
@@ -494,13 +77,14 @@ margin-right: 5px;
 						</span>
 						<div class="pw_few" id="pwhiden" style="display: none;">
 							<span class="few" id="pw_text">
-								<input type="password" name="userPW" class="Pwchc1" value="${clientVO.userPW}" />
+								<input type="password" name="userPW" class="Pwchc1" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userPW}" />
 								<span class="message"></span>
 								<br />
-								<input type="password" name="userPW1" class="Pwchc2" value="${clientVO.userPW}" />
+								<input type="password" name="userPW1" class="Pwchc2" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userPW}" />
+								<br />
 								<span class="message1"></span>
 								<br />
-								<input type="button" id="pwbut" style="margin-left: 50px;" value="완료" onclick="pwUpdate()" />
+								<input type="button" id="pwbut" style="margin-left: 50px; margin-top: 7px;" value="완료" onclick="pwUpdate()" />
 								<input type="button" value="취소" onclick="cancle2()" />
 							</span> 
 							
@@ -508,7 +92,7 @@ margin-right: 5px;
 							
 						</div>
 						<div class="pw_few" id="hiden1">
-							<span class="few" id="pw_text">${clientVO.userPW}
+							<span class="few" id="pw_text1">********
 								<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />
 							</span> 
 							<br />
@@ -519,11 +103,11 @@ margin-right: 5px;
 						</span>
 						<div class="Tel_few" id="hiden_tel" style="display: none;">
 							<span class="few">
-								<input type="text" name="userTel" value="${clientVO.userTel}" />
+								<input type="text" name="userTel" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userTel}" />
 								<br />
 								<span class="message2"></span>
 								<br /> 
-								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="telUpdate()" />
+								<input type="button" id="telbut" style="margin-left: 50px; margin-top: 7px;" value="완료" onclick="telUpdate()" />
 								<input type="button" value="취소" onclick="cancle3()" /> 
 							</span>
 						</div>
@@ -552,11 +136,11 @@ margin-right: 5px;
 					<br />
 						<span class="few" id="address_few" style="display: inline-block;">
 							<div class="address_hiden" style="display: none;">
-								<input type="text" name="useraddress" value="${clientVO.userAddress}"/>
+								<input type="text" name="useraddress" style="position: absolute; bottom: 214px; right: 481px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userAddress}"/>
 								<br />
-								<span class="message3"></span>
+								<span class="message3" style="position: absolute;bottom: 195px; right: 500px;"></span>
 								<br />
-								<input type="button" id="telbut" style="margin-left: 50px;" value="완료" onclick="addressUpdate()" />
+								<input type="button" id="telbut" style="margin-left: -1px; margin-top: 24px;" value="완료" onclick="addressUpdate()" />
 								<input type="button" value="취소" onclick="cancle5()" />
 							</div>
 						</span>
@@ -582,4 +166,8 @@ margin-right: 5px;
 		</div>
 	</div>
 </body>
+<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/client/userView.js">
+ 
+</script>
 </html>

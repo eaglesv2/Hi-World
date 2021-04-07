@@ -6,104 +6,94 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디/비밀번호 찾기 폼</title>
+<link rel="stylesheet" href="resources/css/id_pw_find.css?after">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<script type="text/javascript">
-function findId() {
-	var check = 1;
-	var UserName = $('input[name=username]').val();
-	var UserTel = $('input[name=userTel]').val();
-	$.ajax({
-		type:"post",
-		url:"find_id_pw.do",
-		data:{'check' : check, 'UserName' : UserName,'UserTel' : UserTel},
-		success: function (find) {
-			console.log(find);
-		$('.main').hide();
-		$('.main2').show();
-		$('.findIdview').html(find);
-		},
-		error: function() {
-			alert("오류났다.")
-		}
-	});
-}
-
-
-</script>
-<style type="text/css">
-body div{
-border: 1px solid #999999;
-}
-.main2{
-display: none;
-}
-</style>
-
 </head>
 <body>
 	<div class="main">
-		<div class="">
-			<div class="">
-				<div class="">
-					<h3>아이디/비밀번호 찾기</h3>
+		<div>
+			<div>
+				<div class="ID_PW_Find">
+					<h3 style="font-size:41px; ">아이디/비밀번호 찾기</h3>
 				</div>
-				<div style="margin-bottom: 10px;"
-					class="">
-					<input type="radio" class="" id="" name="" onclick="" checked="checked">
-					<label class=""	for="search_1">아이디 찾기</label>
+				<div style="margin-bottom: 10px;" class="if_find_fom">
+					<input type="radio" name="radio" onclick="idFind()" checked="checked">
+					<label for="search_1">아이디 찾기</label>
 				</div>
-				<div class="">
-					<input type="radio" class="" id="" name="" onclick=""> 
-					<label class="" for="search_2">비밀번호 찾기</label>
+				<div class="pw_find_fom">
+					<input type="radio" name="radio1" onclick="pwFind()"> 
+					<label for="search_2">비밀번호 찾기</label>
 				</div>
-				<div id="">
-					<div class="">
-						<label class="" for="inputName_1">이름</label>
+				<div id="hide">
+					<div class="margin_fome">
+						<label for="inputName_1">이름</label>
 						<div>
-							<input type="text" class="" id="" name="username" placeholder="ex) 갓형배">
+							<input type="text" name="username" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" placeholder="ex) 갓형배">
 						</div>
 					</div>
-					<div class="">
-						<label class="" for="inputPhone_1">휴대폰번호</label>
+					<div class="margin_fome1">
+						<label for="inputPhone_1">휴대폰번호</label>
 						<div>
-							<input type="text" class="" id="" name="userTel" placeholder="ex) 010-7777-9999">
+							<input type="text" name="userTel" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" placeholder="ex) 010-7777-9999">
 						</div>
 					</div>
-					<div class="">
-						<button id="" type="button" onclick="findId()" class="">확인</button>
-					<a class=""	href="">취소</a>
+					<div class="buttonOK">
+						<a href="#" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" onclick="findId()">확인</a>
+						<a href="#" onclick="Close()">취소</a>
 					</div>
 				</div>
-				<div id="" style="display: ">
-					<div class="">
-						<label class="" for="inputId">아이디</label>
+				<div id="hide1" style="display: none;">
+					<div class="margin_fome">
+						<label for="inputId">아이디</label>
 						<div>
-							<input type="text" class="" id="" name="" placeholder="ex) ccangse">
+							<input type="text" name="userId" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" placeholder="ex) ccangse">
 						</div>
 					</div>
-					<div class="">
-						<label class="" for="inputEmail_2">이메일</label>
+					<div class="margin_fome1">
+						<label for="inputEmail_2">휴대폰번호</label>
 						<div>
-							<input type="email" class="" id=""	name="" placeholder="ex) E-mail@gmail.com">
+							<input type="text" name="userTel1" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" placeholder="ex) 010-7777-9999">
 						</div>
 					</div>
-					<div class="">
-						<button id="" type="button" class="">확인</button>
-					<a class=""	href="">취소</a>
+					<div class="buttonOK">
+						<a href="#" onclick="Pw_Find()" >확인</a>
+						<a href="#" onclick="Close()">취소</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="main2">
+	<div class="main2" id="ImMassege">
 		<div class="findview">
 			<div class="view">
+				<span class="findIdview1">당신의 아이디는</span>
+				<br />
 				<span class="findIdview"></span>
+				<br />
+				<span class="findIdview2">입니다.</span>
+				<br />
+				<br />
+				<a href="#" onclick="Close()" style="font-size: 33px;">확인</a>
+			</div>
+		</div>
+	</div>
+	<div class="main2" id="ImMassege1">
+		<div class="findview">
+			<div class="view">
+				<span class="findIdview1">비밀 번호는</span>
+				<br />
+				<span class="findIdview"></span>
+				<br />
+				<span class="findIdview2">입니다.</span>
+				<br />
+				<br />
+				<a href="#" onclick="Close()" style="font-size: 33px;">확인</a>
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/client/id_pw_find.js"></script>
 </html>

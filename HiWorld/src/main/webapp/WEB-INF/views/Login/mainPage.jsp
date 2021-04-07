@@ -454,7 +454,8 @@
 		})	
     	
 		function Id_Pw_find(){
-    		location.href="pw_Id_find.do";
+    		
+    		window.open('pw_Id_find.do','_blank','top=80,left=20,width=550, height=500');
 		}
 		
       </script>
