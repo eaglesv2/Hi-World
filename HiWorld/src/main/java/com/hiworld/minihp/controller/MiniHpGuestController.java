@@ -23,6 +23,7 @@ import com.hiworld.minihp.dao.MiniHpNeighborDAO;
 import com.hiworld.minihp.service.MiniHpBoardService;
 import com.hiworld.minihp.service.MiniHpBookService;
 import com.hiworld.minihp.service.MiniHpIntroService;
+import com.hiworld.minihp.service.MiniHpItemService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.service.MiniHpPictureService;
 import com.hiworld.minihp.service.MiniHpRightService;
@@ -54,6 +55,8 @@ public class MiniHpGuestController {
 	private MiniHpBookService bookService;
 	@Autowired
 	MiniHpNeighborDAO neighborDAO;
+	@Autowired
+	MiniHpItemService itemService;
 	
 	@Autowired
 	MiniHpSettingService settingService;
@@ -97,7 +100,9 @@ public class MiniHpGuestController {
 		
 		model.addAttribute("OwnerSerial", OwnerSerial);
 		model.addAttribute("ownerintroVO", introVO);
-		
+		//사용중인 배경화면 전달
+		model.addAttribute("skin", itemService.getUsingSkin(OwnerSerial));
+
 		return "MiniHP/MiniHP_Home_Guest";
 	}
 	/*게스트 미니홈피 메뉴설정*/

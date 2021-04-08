@@ -34,7 +34,6 @@ body {
 body{
 	font-family:'SDSamliphopangche_Outline';
 	font-weight: 0;
-	background-image: url("resources/images/bgImg/basic.jpg");
 	margin-left: 35px;
 }
 button{
@@ -53,6 +52,10 @@ textarea{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+	//배경화면 설정
+	var skin = $("#skin").val();
+	$("body").css({"background":"url("+skin+")"});
+	
 	console.log('1');
 	/* $.ajax({
 		type : 'GET',
@@ -86,6 +89,7 @@ $(document).ready(function() {
 </script>
  </head>
 <body topmargin="0" leftmargin="0">
+<input type="hidden" id="skin" value="${skin}">
 <form name="guestHome">
 	<table border="0" align="left" valign="top" width="850" height="550" cellspacing="0" cellpadding="0">
 		<tr>
