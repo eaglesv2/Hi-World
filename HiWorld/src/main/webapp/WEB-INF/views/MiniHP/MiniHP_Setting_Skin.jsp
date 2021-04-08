@@ -47,7 +47,7 @@ function changeSkin() {
 		data: {src:src}
 	}).done(function() {
 		$("#mainBody").css({"background":"url("+src+")"});
-		setUsingBackGound();
+		//setUsingBackGound();
 	}).fail(function(error) {
 		alert(JSON.stringify(error));
 	});
