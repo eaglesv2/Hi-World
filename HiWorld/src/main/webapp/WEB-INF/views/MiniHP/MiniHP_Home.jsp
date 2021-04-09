@@ -102,6 +102,7 @@ textarea{
 }
 .bgm-wrap .audio-box .volume-control-btn {
 	display: inline-block;
+ 	width: 12px;
 	font-size: 12px;
 	cursor: pointer;
 }
@@ -134,7 +135,6 @@ textarea{
 	width: 30px;
 	height:4px;
 	vertical-align: middle;
-	margin-left: 3px;
 }
 .bgm-wrap .audio-box .play-volume-slider .ui-slider-handle.ui-state-active {
 	border: 1px solid #c5c5c5;
@@ -146,7 +146,6 @@ textarea{
 	border-radius: 15px;
 }
 </style>
-<script src="//cdn.jsdelivr.net/npm/jquery.marquee@1.6.0/jquery.marquee.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	//배경화면 설정
@@ -175,14 +174,13 @@ $(document).ready(function() {
 
 
 function pausePlay(index) {
-	
-	console.log(index);
 
 	if($(".audio-control-btn").hasClass("btn-play")) {
 		// 재생 -> 일시정지
 		$(".audio-control-btn").addClass("btn-pause");
 		$(".audio-control-btn").removeClass("btn-play");
 		$(".audio-control-btn").find("i").attr("class", "fa fa-pause");
+		console.log(document.getElementById("audio"+index).volume);
 		document.getElementById("audio"+index).play();
 		startAudioTimer(index);
 	} else if($(".audio-control-btn").hasClass("btn-pause")) {
@@ -191,7 +189,6 @@ function pausePlay(index) {
 		$(".audio-control-btn").removeClass("btn-pause");
 		$(".audio-control-btn").find("i").attr("class", "fa fa-play");
 		document.getElementById("audio"+index).pause();
-		/* stopAudioTimer(); */
 	}
 }
 
@@ -209,6 +206,7 @@ function nextLoad(index) {
 		var firstAudio = document.getElementById("audio0");
 		
 		firstAudioDiv.style.display = "block";
+		
 		firstAudio.play();
 		stopAudioTimer();
 		startAudioTimer(0);
@@ -344,40 +342,48 @@ function setTimeFormat(sec_time){
     return minutes + ":" + seconds;
 }
 
-function volumeMute() {
+function volumeMute(index) {
+	var bgm_player = document.getElementById("audio"+index);
     if($(".volume-control-btn").hasClass('btn-volume')) {
     	// 볼륨 -> 음소거
     	$(".volume-control-btn").addClass('btn-mute');
        	$(".volume-control-btn").removeClass('btn-volume');
       	$(".volume-control-btn").find('i').attr('class','fa fa-volume-off');
+      	bgm_player.muted = true;  	
     } else if($(".volume-control-btn").hasClass('btn-mute')){
     	// 음소거 -> 볼륨
        	$(".volume-control-btn").addClass('btn-volume');
       	$(".volume-control-btn").removeClass('btn-mute');
       	$(".volume-control-btn").find('i').attr('class','fa fa-volume-up');
+      	bgm_player.muted = false;
     }
-    
 }
 
-function volumeControl() {
+function volumeControl(index) {
 	// jQuery slider
     $(".play-volume-slider").slider({
+    	value: 50,
         slide: function(event,ui){
             var volume = ui.value;
             if(volume > 0){ // 볼륨 up
-				var bgm_player = document.getElementById("audio"+index);
+            	var bgm_player = document.getElementById("audio"+index);
 				volume = volume/100;
 				volume = volume.toFixed(1);
-				console.log(volume);
+				/* console.log(volume); */
 				bgm_player.muted = false;
 				bgm_player.volume = volume;
+				console.log(bgm_player.volume);
                 // 음소거 아이콘 토글
-				/* volumeControl(); */
+				$(".volume-control-btn").addClass('btn-volume');
+		      	$(".volume-control-btn").removeClass('btn-mute');
+		      	$(".volume-control-btn").find('i').attr('class','fa fa-volume-up');
             } else {	// 음소거
 				var bgm_player = document.getElementById("audio"+index);
 				bgm_player.muted = true;
                 // 음소거 아이콘 토글
-                /* volumeControl(); */
+				$(".volume-control-btn").addClass('btn-mute');
+		       	$(".volume-control-btn").removeClass('btn-volume');
+		      	$(".volume-control-btn").find('i').attr('class','fa fa-volume-off');
             }
         }
     });
@@ -475,7 +481,7 @@ function volumeControl() {
 								<div id="audio-player${index}">
 									<div class="audio-box">	
 										<div id="audioPlay${index}" style="display: none;">
-											<audio id="audio${index}" onended="nextPlay(${index})" src="${playList.musicSrc}"></audio>
+											<audio id="audio${index}" class="audio" onended="nextPlay(${index})" src="${playList.musicSrc}"></audio>
 										</div>
 							
 										<div class="audio-title-wrap">
@@ -498,10 +504,10 @@ function volumeControl() {
 										</div>
 										<div id="endTime"class="play-time end">00:00</div>
 										<div class="play-volume-box">
-											<div class="volume-control-btn btn-volume" onclick="volumeMute()" onmouseover="volumeControl()">
+											<div class="volume-control-btn btn-volume" onclick="volumeMute(${index})">
 												<i class="fa fa-volume-up"></i>
 											</div>
-											<div class="play-volume-slider"></div>
+											<div class="play-volume-slider" onmouseup="volumeControl(${index})"></div>
 										</div>
 									</div>
 								</div>
@@ -510,7 +516,7 @@ function volumeControl() {
 								<div id="audio-player${index}" style="display: none">
 									<div class="audio-box">	
 										<div id="audioPlay${index}" style="display: none;">
-											<audio id="audio${index}" onended="nextLoad(${index})" src="${playList.musicSrc}"></audio>
+											<audio id="audio${index}" class="audio" onended="nextLoad(${index})" src="${playList.musicSrc}"></audio>
 										</div>
 							
 										<div class="audio-title-wrap">
@@ -533,10 +539,10 @@ function volumeControl() {
 										</div>
 										<div id="endTime"class="play-time end">00:00</div>
 										<div class="play-volume-box">
-											<div class="volume-control-btn btn-volume" onclick="volumeMute()" onmouseover="volumeControl()">
+											<div class="volume-control-btn btn-volume" onclick="volumeMute(${index})">
 												<i class="fa fa-volume-up"></i>
 											</div>
-											<div class="play-volume-slider"></div>
+											<div class="play-volume-slider" onmouseup="volumeControl(${index})"></div>
 										</div>
 									</div>
 								</div>

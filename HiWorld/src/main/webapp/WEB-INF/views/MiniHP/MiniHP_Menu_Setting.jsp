@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 	function openOrCloseMenu(index){
-
 		var menu = document.getElementById("menu"+index);
 
 		if(menu.style.display=="none"){
@@ -17,8 +18,7 @@
 		}
 	}
 	
-	function setBasicInformation(){
-		
+	function setBasicInformation(){	
 		$.ajax({
 			type : 'POST',
 			url : 'miniHp_setBasicInformation_pw.do',
@@ -31,7 +31,6 @@
 	}
 	
 	function setMenuAvailable(){
-
 		$.ajax({
 			type : 'POST',
 			url : 'miniHp_menuAvailable.do',
@@ -101,12 +100,7 @@
 				$("#bodyContents").html(result);
 			}
 		})
-	}
-	<%-- 	var url="<%=cp%>/cy/setting/changeUsingSong.action";
-		$.post(url,{},function(args){
-			$("#browser").html(args); 
-		}); --%>
-		
+	}	
 	
 	function setUsingBackGound() {
 		console.log('2222');
@@ -223,60 +217,6 @@
 			</span>
 			<br/><br/>
 		</div>
-		
-		<div class="menuTitle">
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_3lines.png" height="13px" width="13px">
-			<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="javascript:openOrCloseMenu('4')">
-				관리자 정보
-			</span>
-		</div>
-		<%-- 
-		<div id="menu4" style="border: 0px solid black;width: 100%;padding-left: 4px;display: none;">
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-				onclick="javascript:swal('지켜본다', '', '<%=cp %>/resources/images/developer.png')">
-					여승현
-				</span>
-			</font><br/>
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-					onclick="javascript:swal('의빈아 밥먹자', '', '<%=cp %>/resources/images/developer.png')">
-					임의빈
-				</span>
-			</font><br/>
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-					onclick="javascript:swal('현종씨 계신가요. 현종씨', '', '<%=cp %>/resources/images/developer.png')">
-					유현종
-				</span>
-			</font><br/>
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-					onclick="javascript:swal('누나 놀지말고 코딩해라', '', '<%=cp %>/resources/images/developer.png')">
-					이예리
-				</span>
-			</font><br/>
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-					onclick="javascript:swal('형 그것 좀 해주세요', '', '<%=cp %>/resources/images/developer.png')">
-					최원석
-				</span>
-			</font><br/>
-			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_direction.png" height="10px" width="10px">
-			<font  style="font-size:9pt;font-weight: bold;color: #1294AB;">
-				<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='#1294AB';"
-					onclick="javascript:swal('재진아 던파하니', '', '<%=cp %>/resources/images/developer.png')">
-					이재진
-				</span>
-			</font><br/>
-		</div>
-		 --%>
 	</div>
-
 </body>
 </html>
