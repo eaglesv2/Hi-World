@@ -62,7 +62,7 @@ public class WeatherController {
 		rd.close();
 		conn.disconnect();
 		String result = sb.toString();
-//		System.out.println(result);
+		System.out.println(result);
 		
 		
 		return result;
@@ -199,7 +199,7 @@ public class WeatherController {
 		
 		String hour = "";
 		
-		if(hours==24 && hours<=5) {
+		if(hours<=5) {
 			// 오전 5시이전은 어제 날짜로 잡혀야함
 			day.setDate(day.getDate()-1);
 			hour = "2300";
@@ -217,6 +217,8 @@ public class WeatherController {
 			hour = "2000";
 		}
 		String today = format.format(day);
+		
+		System.out.println(hour);
 		
 		String kinds = request.getParameter("kind");
 		// 홈페이지에서 받은 키
