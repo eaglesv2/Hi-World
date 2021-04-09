@@ -34,6 +34,17 @@ public class COVID19Controller {
         
         String today = format.format(day);
         
+        
+        int hours = day.getHours();
+				
+        System.out.println(hours);
+		if(hours<12) {
+			// 오전 5시이전은 어제 날짜로 잡혀야함
+			day.setDate(day.getDate()-1);
+			today = format.format(day);
+		}
+        
+        
         /* 어제 날짜 가져오기 */
         day.setDate(day.getDate()-1);
         String yesterday = format.format(day);
@@ -75,10 +86,14 @@ public class COVID19Controller {
         first = totalClear.indexOf("<clearCnt>")+10;
         last = totalClear.indexOf("</clearCnt>");
         totalClear = totalClear.substring(first,last); 
-//        System.out.println(todayclear);
+        System.out.println(totalClear);
         
 //      어제 완치자
         String yesterDayClear = sb.toString();
+        System.out.println(today);
+        System.out.println(yesterday);
+        System.out.println(yesterDayClear.indexOf(today));
+        System.out.println(yesterDayClear.indexOf(yesterday));
         yesterDayClear = yesterDayClear.substring(yesterDayClear.indexOf(today),yesterDayClear.indexOf(yesterday));
         first = yesterDayClear.indexOf("<clearCnt>")+10;
         last = yesterDayClear.indexOf("</clearCnt>");
