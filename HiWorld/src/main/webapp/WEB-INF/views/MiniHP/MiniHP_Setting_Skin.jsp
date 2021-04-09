@@ -26,10 +26,10 @@
 		<c:forEach items="${list}" var="l">
 			<c:choose>
 				<c:when test="${l eq usingSkin}">
-					<input type="radio" name="skin" value="${l}" checked>
+					<input type="radio" name="skin" value="${l}" checked onclick="preview();">
 				</c:when>
 				<c:otherwise>
-					<input type="radio" name="skin" value="${l}">
+					<input type="radio" name="skin" value="${l}" onclick="preview();">
 				</c:otherwise>
 			</c:choose>
 			<img alt="no found" src="${l}" class="skinImg">
@@ -39,6 +39,11 @@
 	<input id="exeBtn" type="button" value="적용" onclick="changeSkin();">
 </body>
 <script>
+function preview() {
+	var src = $('input[name="skin"]:checked').val();
+	$("#mainBody").css({"background":"url("+src+")"});
+}
+
 function changeSkin() {
 	var src = $('input[name="skin"]:checked').val();
 	$.ajax({
@@ -46,8 +51,7 @@ function changeSkin() {
 		url: 'miniHp_skin.do/',
 		data: {src:src}
 	}).done(function() {
-		$("#mainBody").css({"background":"url("+src+")"});
-		//setUsingBackGound();
+		alert('스킨이 변경되었습니다.');
 	}).fail(function(error) {
 		alert(JSON.stringify(error));
 	});

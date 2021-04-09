@@ -29,15 +29,23 @@ function displayInfo(){
 }
 
 function moveToUser(){
-	var OwnerID = $("#neighborSelect option:selected").val();
-	console.log(OwnerID);
+	var OwnerSerial = $("#neighborSelect option:selected").val();
+	console.log(OwnerSerial);
 	
-	var popupWidth = 1080;
-    var popupHeight = 600;
-	var popupX = (window.screen.width/2)-(popupWidth/2);
-    var popupY = (window.screen.height/2)-(popupHeight/2);
-	window.open("miniHp_guestHome.do?OwnerID="+OwnerID,OwnerID,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
-	parent.window.close();
+	//본인한테 바람타기가는지 체크
+	var userSerial = $("#userSerial").val();
+	if(userSerial===OwnerSerial){
+		window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
+		parent.window.close();
+	}
+	else{
+		var popupWidth = 1080;
+	    var popupHeight = 600;
+		var popupX = (window.screen.width/2)-(popupWidth/2);
+	    var popupY = (window.screen.height/2)-(popupHeight/2);
+	    window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+		parent.window.close();
+	}
 } 
 
 </script>
@@ -109,7 +117,8 @@ font-family:'BMHANNAPro';
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<body bgcolor="#FFFFFF">	
+<body bgcolor="#FFFFFF">
+<input type="hidden" value="${userSerial}" id="userSerial">	
 	<table border="0" width="130" bgcolor="#FFFFFF">
 		<tr >
 			<td bgcolor="#FFFFFF" align="center">
