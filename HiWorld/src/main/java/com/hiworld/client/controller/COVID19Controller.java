@@ -68,21 +68,28 @@ public class COVID19Controller {
         int first = 0;
         int last = 0;
         
-        System.out.println(today);
-        System.out.println(yesterday);
+//        System.out.println(today);
+//        System.out.println(yesterday);
 //      현재 완치자
-        String todayclear = sb.toString();
-        first = todayclear.indexOf("<clearCnt>")+10;
-        last = todayclear.indexOf("</clearCnt>");
-        todayclear = todayclear.substring(first,last); 
-        System.out.println(todayclear);
+        String totalClear = sb.toString();
+        first = totalClear.indexOf("<clearCnt>")+10;
+        last = totalClear.indexOf("</clearCnt>");
+        totalClear = totalClear.substring(first,last); 
+//        System.out.println(todayclear);
         
-//      현재 확진자  
+//      어제 완치자
+        String yesterDayClear = sb.toString();
+        yesterDayClear = yesterDayClear.substring(yesterDayClear.indexOf(today),yesterDayClear.indexOf(yesterday));
+        first = yesterDayClear.indexOf("<clearCnt>")+10;
+        last = yesterDayClear.indexOf("</clearCnt>");
+        yesterDayClear = yesterDayClear.substring(first,last);
+        
+//      전체 확진자  
         String totalCovid = sb.toString();
         first = totalCovid.indexOf("<decideCnt>")+11;
         last = totalCovid.indexOf("</decideCnt>");
         totalCovid = totalCovid.substring(first, last);
-        System.out.println(totalCovid);
+//        System.out.println(totalCovid);
         
 //      어제 확진자
         String yesterDayCovid = sb.toString();
@@ -90,17 +97,20 @@ public class COVID19Controller {
         first = yesterDayCovid.indexOf("<decideCnt>")+11;
         last = yesterDayCovid.indexOf("</decideCnt>");
         yesterDayCovid = yesterDayCovid.substring(first, last);
-        System.out.println(yesterDayCovid);
+//        System.out.println(yesterDayCovid);
         
-//      오늘 확진자 수
+//      오늘 확진자 수  오늘 완치자 수
         String todayCovid = String.valueOf(Integer.parseInt(totalCovid)-Integer.parseInt(yesterDayCovid));
-        System.out.println(todayCovid);
+        String todayClear = String.valueOf(Integer.parseInt(totalClear)-Integer.parseInt(yesterDayClear));
+//        System.out.println(todayCovid);
+        
         
         ArrayList<String> Covid19 = new ArrayList<String>();
-        Covid19.add(todayclear);
         Covid19.add(totalCovid);
         Covid19.add(todayCovid);
-        Covid19.add(today);
+        Covid19.add(totalClear);
+        Covid19.add(todayClear);
+        
         
         Gson gson = new Gson();
         return gson.toJson(Covid19);
