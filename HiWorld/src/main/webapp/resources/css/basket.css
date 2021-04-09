@@ -27,3 +27,11 @@ body{
 #tbody tr,th{
 	vertical-align: middle;
 }
+.baskethover{
+	cursor: pointer;
+}
+
+.baskethover:hover{
+	color:red;
+	
+}

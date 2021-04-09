@@ -39,7 +39,7 @@
 					<c:forEach var="kinds" items="${list}">
 						<tr id="${kinds.boardSerial}">
 							<td>${number}</td>
-							<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a></td>
+							<td><a href="#" class="noticemainhover" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a></td>
 							<td>${kinds.userName}</td>
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
@@ -66,26 +66,26 @@
 		
 		<div style="text-align: center; margin-top: 10px;">
         <c:if test="${pagination.curRange ne 1 }">
-            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+            <a href="#" class="noticehover" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
         <c:if test="${pagination.curPage ne 1}">
-            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+            <a href="#" class="noticehover" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
         </c:if>
         <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
             <c:choose>
                 <c:when test="${pageNum eq  pagination.curPage}">
-                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                    <span style="font-weight: bold;"><a href="#" class="noticehover" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
                 </c:when>
                 <c:otherwise>
-                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                    <a href="#" class="noticehover" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+            <a href="#" class="noticehover" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
         </c:if>
         <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+            <a href="#" class="noticehover" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
         </c:if>
 		</div>
 		

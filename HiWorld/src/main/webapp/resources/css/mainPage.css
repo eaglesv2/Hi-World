@@ -52,7 +52,12 @@ a {
 	margin-top: 63px;
 	height: 50px;
 	width: 491px;;
-	border: 1px solid;
+	border: 1px solid #FB8C00;
+}
+#mainserch i{
+	margin-top: 9px;
+    margin-left: 7px;
+    color:#FB8C00;
 }
 
 #mainserch input {
@@ -138,7 +143,7 @@ a {
 
 #jang-top a {
 	float: left;
-	margin-left: 45px;
+	margin-left: 57px;
 }
 
 .rightCon #minimi {
@@ -370,7 +375,43 @@ a {
     margin-top: 40px;
     text-align: center;
 }
+#footer_con{
+	width: 900px;
+    height: 150px;
+    margin-left: 20px;
+    margin-top: 40px;
+}
 
-#footer-top{
+#footer_top{
 	    margin-top: 40px;
+}
+
+#footerText p{
+	color:#FB8C00;
+	display: inline;
+}
+#footer_img{
+	float:left;
+	width: 150px;
+    height: 150px;
+}
+
+#footer_img img{
+	width: 150px;
+    height: 150px;
+}
+
+#weather{
+	width: 280px;
+    float: right;
+	
+}
+
+#startpage1{
+	float: right;
+	margin-bottom:5px;
+}
+
+#startpage2{
+	float: right;
 }

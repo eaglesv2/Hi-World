@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="resources/css/mainPage.css">
 <link rel="stylesheet" href="resources/css/reset.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/mainPage.js"></script>
@@ -20,6 +21,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
 <link rel="icon" href="${pageContext.request.contextPath}/resources/images/Favicon.png" type="image/x-icon">
+<script src="https://kit.fontawesome.com/9fa8ba39be.js" crossorigin="anonymous"></script>
 <title>Hi-World</title>
 
 <script type="text/javascript">
@@ -27,14 +29,25 @@
 	 $(document).ready(function(){
 		 	var main = $('.bxslider').bxSlider({
 				       mode: 'fade',
-				       auto:false,
+				       auto:true,
 				       speed:500,
 				       controls: false,
 				       pager: false
 				   })
 				   
-						   
-			});
+	$.ajax({
+			url : "allClientCount.do",
+			type : "GET",
+			success : function(data) {
+				console.log(data);
+				let text = 'Hi-World에 오신것을 환영합니다';
+				let text2 = '총 가입자수 : '+data;
+				 $('#startpage1').append(text);
+				 $('#startpage2').append(text2);
+				 
+				}
+			})			   
+	});
       
         function signUp(){
         	location.href="userInsertForm.do";
@@ -469,6 +482,202 @@
     		
     		window.open('pw_Id_find.do','_blank','top=80,left=20,width=550, height=500');
 		}
+    	
+    	
+    	$().ready(function() {
+    		$.ajax({
+    			url : "weather.do",
+    			type : "GET",
+    			dataType : "json",
+    			async : true,
+    			cache : false,
+    			success : function(data) {
+    				
+    				// 서울
+    				// 비올확률 %
+    				//console.log(data[0])
+    				// 현재 온도
+    				//console.log(data[1])
+    				
+    				// 부산
+    				// 비올확률 %
+    				//console.log(data[2])
+    				// 현재 온도
+    				//console.log(data[3])
+    				
+    				// 대구
+    				// 비올확률 %
+    				//console.log(data[4])
+    				// 현재 온도
+    				//console.log(data[5])
+    				
+    				// 인천
+    				// 비올확률 %
+    				//console.log(data[6])
+    				// 현재 온도
+    				//console.log(data[7])
+    				
+    				// 광주
+    				// 비올확률 %
+    				//console.log(data[8])
+    				// 현재 온도
+    				//console.log(data[9])
+    				
+    				// 대전
+    				// 비올확률 %
+    				//console.log(data[10])
+    				// 현재 온도
+    				//console.log(data[11])
+    				
+    				// 울산
+    				// 비올확률 %
+    				//console.log(data[12])
+    				// 현재 온도
+    				//console.log(data[13])
+    				
+    				// 수원
+    				// 비올확률 %
+    				//console.log(data[14])
+    				// 현재 온도
+    				//console.log(data[15])
+    				
+    				const seoul = '서울 온도 : '+data[1]+'℃ 비올 확률 : '+data[0]+'%<br>';
+    				const busan = '부산 온도 : '+data[3]+'℃ 비올 확률 : '+data[2]+'%<br>';
+    				const daegu = '대구 온도 : '+data[5]+'℃ 비올 확률 : '+data[4]+'%<br>';
+    				const incheon = '인천 온도 : '+data[7]+'℃ 비올 확률 : '+data[6]+'%<br>';
+    				const gwangju = '광주 온도 : '+data[9]+'℃ 비올 확률 : '+data[8]+'%<br>';
+    				const daejeon = '대전 온도 : '+data[11]+'℃ 비올 확률 : '+data[10]+'%<br>';
+    				const ulsan = '울산 온도 : '+data[13]+'℃ 비올 확률 : '+data[12]+'%<br>';
+    				const suwon = '수원 온도 : '+data[15]+'℃ 비올 확률 : '+data[14]+'%<br>';
+    				
+    				$('#seoul').html(seoul);
+    				$('#busan').html(busan);
+    				$('#daegu').html(daegu);
+    				$('#incheon').html(incheon);
+    				$('#gawngju').html(gwangju);
+    				$('#daejeon').html(daejeon);
+    				$('#ulsan').html(ulsan);
+    				$('#suwon').html(suwon);
+    			}
+    		})
+    		
+    		
+    		
+    		$.ajax({
+    			type: "GET",
+    			url: "covid19.do",
+    			dataType: "json",
+    			async:true,
+                cache:false,
+                success: function(data) {            	
+                	// 코로나 완치 수
+    				//console.log(data[0])
+    				
+    				// 코로나 확진자 수 전체
+    				//console.log(data[1])
+    				
+    				// 오늘 코로나 확진자 수
+    				//console.log(data[2])
+    				
+    				// 오늘 날짜
+    				//console.log(data[3])
+    				
+    				/* 전체완치 오늘완치 전체확진 오늘확진 */
+    				
+                	const allCovid = '현재 확진자 수 : '+data[0]+'명('+data[1]+'↑)';
+        			const clearCovid = '현재 완치자 수 : '+data[2]+'명('+data[3]+'↑)';
+                	
+    				$('#allCovid').html(allCovid);
+    				$('#clearCovid').html(clearCovid);
+    			}
+    		})
+    		
+    		
+    		/* $('#seoul').hide();
+    		$('#busan').hide();
+    		$('#daegu').hide();
+    		$('#incheon').hide();
+    		
+    		$('#daejeon').hide();
+    		$('#ulsan').hide();
+    		$('#suwon').hide(); */
+    		
+    		
+    		let count = 1;
+    		
+    		setInterval(function() {
+    			switch (count) {
+    			case 1:
+    				$('#allCovid').slideUp();
+    				setTimeout(function() {		
+    					$('#clearCovid').slideDown()					
+    				}, 400)
+    				break;
+    			case 2:
+    				$('#clearCovid').slideUp();
+    				setTimeout(function() {		
+    					$('#seoul').slideDown();
+    				}, 400)
+    				break;
+    			case 3:
+    				$('#seoul').slideUp();
+    				setTimeout(function() {		
+    					$('#busan').slideDown();
+    				}, 400)
+    				break;
+    			case 4:
+    				$('#busan').slideUp();
+    				setTimeout(function() {		
+    					$('#daegu').slideDown();
+    				}, 400)
+    				break;
+    			case 5:
+    				$('#daegu').slideUp();
+    				setTimeout(function() {		
+    					$('#incheon').slideDown();
+    				}, 400)
+    				break;
+    			case 6:
+    				$('#incheon').slideUp();
+    				setTimeout(function() {		
+    					$('#gawngju').slideDown();
+    				}, 400)
+    				break;
+    			case 7:
+    				$('#gawngju').slideUp();
+    				setTimeout(function() {		
+    					$('#daejeon').slideDown();
+    				}, 400)
+    				break;
+    			case 8:
+    				$('#daejeon').slideUp();
+    				setTimeout(function() {		
+    					$('#ulsan').slideDown();
+    				}, 400)
+    				break;
+    			case 9:
+    				$('#ulsan').slideUp();
+    				setTimeout(function() {		
+    					$('#suwon').slideDown();
+    				}, 400)
+    				break;
+    			case 10:
+    				$('#suwon').slideUp();
+    				setTimeout(function() {		
+    					$('#allCovid').slideDown();
+    				}, 400)
+    				count = 0;
+    				break;
+    			default:
+    				break;
+    			}
+
+    			console.log(count);
+    			count += 1;
+    		}, 5000)
+    	})
+    	
+
 		
       </script>
       <style>
@@ -516,11 +725,11 @@
 		    	<img src="resources/images/로고7.png" alt="로고사진" />
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput" placeholder="이웃검색하기"/>
-			    		<img src="resources/images/돋보기.png" alt="" />
+			    		<i class="fas fa-search fa-2x"></i>
 		    		</div>
 		    		<div id="startpage">
-			    		<a href="#" onClick="this.style.behavior='url(#default#homepage)';this.setHomePage('localhost:8081/hiworld/login.do');">Hi-World를 시작페이지로</a>
-			    		 <a href="javascript: bookmark_add();">즐겨찾기 추가</a>
+		    			<div id="startpage1"></div>
+			    		<div id="startpage2"></div>
 					</div>
 			    		
 		    </div>
@@ -546,6 +755,20 @@
 		              <li id="bamtolcharge" onclick="bamTol()">
 		              		밤톨충전
 		              </li>
+	           </div>
+	           <div id="weather">
+	           		<div id="menu_slider">
+						<div id="allCovid"></div>
+						<div id="clearCovid" style="display: none;"></div>
+						<div id="seoul" style="display: none;"></div>
+						<div id="busan" style="display: none;"></div>
+						<div id="daegu" style="display: none;"></div>
+						<div id="incheon" style="display: none;"></div>
+						<div id="gawngju" style="display: none;"></div>
+						<div id="daejeon" style="display: none;"></div>
+						<div id="ulsan" style="display: none;"></div>
+						<div id="suwon" style="display: none;"></div>
+					</div>
 	           </div>   
          </div>
          <hr />
@@ -555,6 +778,7 @@
                 <div id="bx_div">
                 	<ul class="bxslider">
 				        <li><img src="resources/images/mainbanner.png" alt="사진"></li>
+				        <li><img src="resources/images/메인배너2.png" alt="" /></li>
 		    		</ul>
 
                 </div>
@@ -681,10 +905,15 @@
 			</c:choose>
 		</div>
 		<div id="footer">
-			<div id="footer-top">누구든지 정보통신망을 통하여 음란물, 지적 재산권/저작권 침해 자료, 선거법에 어긋나는 자료, 타인의 명예를 훼손하는 자료,</div>
-			<div>청소년 유해자료, 기타 위법 자료 등을 게시하거나 전송하는 경우 게시물은 경고없이 삭제되며,</div>
-			<div>게시자는 각 해당 법률에 따라 민·형사상의 책임을 질 수 있습니다.</div>
-			<div>Copyright © HI-WORLD. All rights reserved.</div>
+			<div id="footer_img">
+				<img src="resources/images/로고4.png" alt="" />
+			</div>
+			<div id="footer_con">
+				<div id="footer_top">누구든지 정보통신망을 통하여 음란물, 지적 재산권/저작권 침해 자료, 선거법에 어긋나는 자료, 타인의 명예를 훼손하는 자료,</div>
+				<div>청소년 유해자료, 기타 위법 자료 등을 게시하거나 전송하는 경우 게시물은 경고없이 삭제되며,</div>
+				<div>게시자는 각 해당 법률에 따라 민·형사상의 책임을 질 수 있습니다.</div>
+				<div id="footerText">Copyright © <p>HI-WORLD</p>. All rights reserved.</div>
+			</div>
 		</div>
 	</div>
 
