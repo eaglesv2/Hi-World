@@ -159,7 +159,7 @@
 	<div id="chargeContainer">
 		<div id="leftCon">
 			<div id="logo">
-				<div>
+				<div id="logoimg">
 					<img id="imgID" src="resources/images/admin/밤톨메인.png" alt="이미지가 들어갑니다." />
 				</div>
 			</div>

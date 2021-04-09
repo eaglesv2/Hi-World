@@ -43,4 +43,6 @@ tr#tablehead{
     height: 100px;
 }
 
-
+.shoppinghover:hover{
+	color:red;
+}

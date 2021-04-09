@@ -2,9 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="resources/css/basket.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
@@ -82,21 +84,21 @@ th img{
 								<th style="width: 50px;">${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
 								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 							</c:if>
 							<c:if test="${fn:contains(check,'.jsp')}">
 								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px;/></th>
 								<th>${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
 								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 							</c:if>
 							<c:if test="${fn:contains(check, '.mp3')}">
 								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px; /></th>
 								<th>${kinds.articleKinds}</th>
 								<th>${kinds.articleName}</th>
 								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
 								<%-- <td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td> --%>
 							</c:if>
 							<c:set var="total" value="${total+kinds.articlePrice}" />

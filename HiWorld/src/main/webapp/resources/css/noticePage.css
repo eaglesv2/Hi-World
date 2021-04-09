@@ -15,8 +15,17 @@
 	        
 }
 
+.noticemainhover:hover{
+	text-decoration: underline;
+}
 
 #noticetitle{
 	text-align: center;
 	margin-bottom:10px;
+}
+
+
+.noticehover:hover{
+	color:red;
+	
 }
