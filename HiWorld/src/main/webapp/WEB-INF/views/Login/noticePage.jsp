@@ -21,6 +21,9 @@
 <body>
 
 	<div id="Context">
+		<div id="noticetitle">
+			<p>공지사항</p>	
+		</div>
 		<c:choose>
 			<c:when test="${list != '[]'}">
 				<table>

@@ -30,6 +30,7 @@ body{
 	font-family:'SDSamliphopangche_Outline';
 	font-weight: 0;
 	margin-left: 35px;
+	cursor: url('${itemList.mouseSrc}'), auto;
 }
 button{
 	font-family:'SDSamliphopangche_Outline';

@@ -503,7 +503,7 @@
 		    <div id="mainlogo">
 		    	<img src="resources/images/로고7.png" alt="로고사진" />
 		    		<div id="mainserch">
-			    		 <input type="text" id="searchInput"/>
+			    		 <input type="text" id="searchInput" placeholder="이웃검색하기"/>
 			    		<img src="resources/images/돋보기.png" alt="" />
 		    		</div>
 		    		<div id="startpage">
@@ -561,7 +561,7 @@
 							<div id="minimi">
 
 						        <div id="icon">
-						            <img src="bb.jpg" alt="">
+						            <img src="${itemList.characterSrc}" alt="미니미">
 						            <div>
 						               <div id="nickname">
 						              		 ${sessionVO.userName} 님
@@ -574,8 +574,8 @@
 						        </div>
 						        <div id="jang">
 						            <div id="jang-top">
-						                <div onclick="myinfo()">내정보보기</div>
-						                <a href="logout.do">로그아웃</a>
+						                <div onclick="myinfo()" id="myinfo">내정보보기</div>
+						                <a href="logout.do" id="logoutbutton">로그아웃</a>
 						            </div>
 						        </div>
 						    </div>
@@ -655,7 +655,7 @@
 			<c:choose>
 				<c:when test="${sessionVO.userName != null}">
 					<div id="minihome">
-						<a href="#" onclick="MiniHP()">미니홈피 들어가기</a>
+						<a href="#" onclick="MiniHP()" id="joinminihome">미니홈피 들어가기</a>
 					</div>
 					<div id="add">
 						<img src="resources/images/mainadd.png" alt="" />
@@ -668,9 +668,15 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<div id="footer">
+			<div id="footer-top">누구든지 정보통신망을 통하여 음란물, 지적 재산권/저작권 침해 자료, 선거법에 어긋나는 자료, 타인의 명예를 훼손하는 자료,</div>
+			<div>청소년 유해자료, 기타 위법 자료 등을 게시하거나 전송하는 경우 게시물은 경고없이 삭제되며,</div>
+			<div>게시자는 각 해당 법률에 따라 민·형사상의 책임을 질 수 있습니다.</div>
+			<div>Copyright © HI-WORLD. All rights reserved.</div>
+		</div>
 	</div>
 
-	<div id="footer"></div>
+
 </body>
 <script>
 	Kakao.init('f5c86bb2fcdff7b7a5ee465e8109c2a1');

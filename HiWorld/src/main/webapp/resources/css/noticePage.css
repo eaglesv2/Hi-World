@@ -9,8 +9,14 @@
 }
 #Context table tr, #Context table td{
 	        border-bottom: 1px solid black;
-	        height: 33px;
+	        height: 32px;
 			vertical-align: middle;	   
 			border-top: 1px solid black;
 	        
+}
+
+
+#noticetitle{
+	text-align: center;
+	margin-bottom:10px;
 }

@@ -166,7 +166,7 @@
 		</table>
 	
 	
-	<div style="text-align:center;">
+	<div style="text-align:center; border:1px solid; border-top:none;">
 	
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
