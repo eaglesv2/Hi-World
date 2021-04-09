@@ -40,6 +40,9 @@ input{
 textarea{
 	font-family:'BMHANNAPro';
 }
+pre{
+	font-family:'BMHANNAPro';
+}
 .secondFont{
 	font-family:'BMHANNAPro';
 }

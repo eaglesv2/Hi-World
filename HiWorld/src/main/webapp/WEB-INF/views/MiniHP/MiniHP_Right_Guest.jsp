@@ -29,7 +29,7 @@
 						<c:if test="${p.boardSerial!=0}"><img alt="not found" src="resources/images/title-board.png" width="25"></c:if>
 						<c:if test="${p.pictureSerial!=0}"><img alt="not found" src="resources/images/title-picture.png" width="25"></c:if>
 						<c:if test="${p.videoSerial!=0}"><img alt="not found" src="resources/images/title-video.png" width="25"></c:if>
-						<span>${p.title}<br/></span>
+						<c:out value="${p.title}" /><br/>
 					</c:forEach>
 				</c:if>
 			</td>
@@ -39,7 +39,7 @@
 					<tr>
 						<td>
 							<c:if test="${ownermenuVO.menu3==1}">
-								<span onclick="movePicture();" style="cursor: pointer;">사진첩</span>
+								<span onclick="movePicture('${ownerSerial}');" style="cursor: pointer;">사진첩</span>
 								${today.pictureCntToday}/${today.pictureCnt}
 								<c:if test="${today.pictureCntToday>0}">
 									<img alt="new" src="resources/images/title-new.png">
@@ -48,7 +48,7 @@
 						</td>
 						<td>
 							<c:if test="${ownermenuVO.menu4==1}">
-								<span onclick="moveBoard();" style="cursor: pointer;">게시판</span>
+								<span onclick="moveBoard('${ownerSerial}');" style="cursor: pointer;">게시판</span>
 								${today.boardCntToday}/${today.boardCnt}
 								<c:if test="${today.boardCntToday>0}">
 									<img alt="new" src="resources/images/title-new.png">
@@ -59,7 +59,7 @@
 					<tr>
 						<td>
 							<c:if test="${ownermenuVO.menu5==1}">
-								<span onclick="moveVideo();" style="cursor: pointer;">비디오</span>
+								<span onclick="moveVideo('${ownerSerial}');" style="cursor: pointer;">비디오</span>
 								${today.videoCntToday}/${today.videoCnt}
 								<c:if test="${today.videoCntToday>0}">
 									<img alt="new" src="resources/images/title-new.png">
@@ -68,7 +68,7 @@
 						</td>
 						<td>
 							<c:if test="${ownermenuVO.menu6==1}">
-								<span onclick="moveBook();" style="cursor: pointer;">방명록</span>
+								<span onclick="moveBook('${ownerSerial}');" style="cursor: pointer;">방명록</span>
 								${today.bookCntToday}/${today.bookCnt}
 								<c:if test="${today.bookCntToday>0}">
 									<img alt="new" src="resources/images/title-new.png">

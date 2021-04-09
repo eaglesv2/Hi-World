@@ -23,7 +23,7 @@
 						<td scope="row" class="secondFont">
 						<c:forEach items="${replyList}" var="r">
 							<span id="reply-${r.replySerial}">
-								${r.userName}: ${r.replyContent}
+								${r.userName}: <c:out value="${r.replyContent}" />
 								<span style="font-size: 5px; padding-top: 5px; color: gray;">
 								(<fmt:formatDate value="${r.cDate}" pattern="yyyy-MM-dd"/>)
 								</span>

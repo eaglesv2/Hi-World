@@ -42,7 +42,7 @@ table.boardTable td {
 	<thead>
 		<tr>
 	  		<th>
-	  			<font style="font-weight: bold;">${board.title}</font>
+	  			<font style="font-weight: bold;"><c:out value="${board.title}" /></font>
 	  			<span style="float: right;">
 	  				<span onclick="goToFolder('${board.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">목록</span>
   					<c:if test="${isNeighbor==1}">
@@ -77,7 +77,7 @@ table.boardTable td {
 		<tr>
  			<td style="height: 200px;">
  				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
- 					${board.content}
+ 					<pre><c:out value="${board.content}" /></pre>
  				</span>
 			</td>
 		</tr>
@@ -103,7 +103,7 @@ table.boardTable td {
 			<td scope="row">
 			<c:forEach items="${replyList}" var="r">
 				<span id="reply-${r.replySerial}">
-					${r.userName}: ${r.replyContent}
+					${r.userName}: <c:out value="${r.replyContent}" />
 					<span style="font-size: 5px; padding-top: 5px; color: gray;">
 					(<fmt:formatDate value="${r.cDate}" pattern="yyyy-MM-dd"/>)
 					</span>

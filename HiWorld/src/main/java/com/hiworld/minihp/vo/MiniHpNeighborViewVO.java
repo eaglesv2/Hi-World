@@ -45,4 +45,11 @@ public class MiniHpNeighborViewVO {
 	public void setNeighborValue(String neighborValue) {
 		this.neighborValue = neighborValue;
 	}
+	@Override
+	public String toString() {
+		return "MiniHpNeighborViewVO [userSerial=" + userSerial + ", userName=" + userName + ", userValue=" + userValue
+				+ ", neighborSerial=" + neighborSerial + ", neighborName=" + neighborName + ", neighborValue="
+				+ neighborValue + "]";
+	}
+	
 }

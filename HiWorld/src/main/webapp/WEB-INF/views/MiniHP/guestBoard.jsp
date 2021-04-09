@@ -38,7 +38,7 @@
 				<tr>
 					<td style="width: 30%; height: 5px;word-break:break-all;" >
 						<span onclick="moveDetailPage('${l.boardSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" >
-						${l.title}
+						<c:out value="${l.title}" />
 						<!-- 댓글 개수 출력 -->
 						[${l.replyCnt}]
 						</span>

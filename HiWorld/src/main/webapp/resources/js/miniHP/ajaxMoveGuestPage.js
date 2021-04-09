@@ -68,13 +68,13 @@ function getProfileSide(OwnerSerial) {
 	 });
 }
 
-/*function moveProfile() {
+function moveProfile(ownerID,ownerSerial) {
 	//사이드 불러오기
-	getProfileSide();
+	getProfileSide(ownerSerial);
 	
 	// 메인 불러오기
     var ajaxMain = {
-            url : 'miniHpProfile.do',
+            url : 'miniHpProfileGuest.do?ownerID='+ownerID,
             async : true,
             type : "GET",
             dataType : "html",
@@ -87,7 +87,7 @@ function getProfileSide(OwnerSerial) {
         // Contents 영역 교체
         $("#bodyContents").html(result);
     });
-}*/
+}
 
 //게시판 사이드 불러오기
 function getBoardSide(ownerSerial) {

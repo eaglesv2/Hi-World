@@ -6,7 +6,7 @@
 				<div>
 						<c:forEach items="${list}" var="l">
 							<span id="reply-${l.serial}">
-								${l.writeUserName}: ${l.content}
+								${l.writeUserName}: <c:out value="${l.content}" />
 								<span style="font-size: 5px; padding-top: 5px; color: gray;">
 								(<fmt:formatDate value="${l.cDate}" pattern="yyyy-MM-dd"/>)
 								</span>

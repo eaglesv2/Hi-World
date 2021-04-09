@@ -60,7 +60,7 @@
 						<c:if test="${p.boardSerial!=0}"><img alt="not found" src="resources/images/title-board.png" width="25"></c:if>
 						<c:if test="${p.pictureSerial!=0}"><img alt="not found" src="resources/images/title-picture.png" width="25"></c:if>
 						<c:if test="${p.videoSerial!=0}"><img alt="not found" src="resources/images/title-video.png" width="25"></c:if>
-						<span>${p.title}<br/></span>
+						<c:out value="${p.title}" /><br/>
 					</c:forEach>
 				</c:if>
 			</td>
@@ -159,9 +159,8 @@
 		else{
 			$.ajax({
 				type: 'POST',
-				url: 'MiniHP_NeiWord.do/'+content,
-				datatype: 'json',
-				contentType:'application/json; charset=utf-8'
+				url: 'MiniHP_NeiWord.do',
+				data: {content:content}
 			}).done(function() {
 				$('#neiWord').load("MiniHP_NeiWord.do");
 				$('#neiWordContent').val("");

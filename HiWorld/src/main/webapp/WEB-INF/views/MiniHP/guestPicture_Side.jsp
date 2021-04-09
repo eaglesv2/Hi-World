@@ -15,7 +15,7 @@
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/folder_icon.png" height="13px" width="13px" style="float: left;">
 			<span id="folder-${i.serial}">
 				<span class="folderNames" onclick="goToFolder('${i.serial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
-					${i.folderName}
+					<c:out value="${i.folderName}" />
 				</span>
 			</span><br>
 			</div>

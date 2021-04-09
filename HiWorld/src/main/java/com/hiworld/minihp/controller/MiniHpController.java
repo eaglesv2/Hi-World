@@ -142,9 +142,9 @@ public class MiniHpController {
 		return "MiniHP/MiniHP_NeiWord";
 	}
 	//insert
-	@PostMapping("/MiniHP_NeiWord.do/{content}")
+	@PostMapping("/MiniHP_NeiWord.do")
 	@ResponseBody
-	public void insertNeiWord(@PathVariable String content,HttpSession session) {
+	public void insertNeiWord(String content,HttpSession session) {
 		System.out.println("MiniHP_NeiWord.do");
 		MiniHpNeiWordVO vo = new MiniHpNeiWordVO();
 		vo.setContent(content);

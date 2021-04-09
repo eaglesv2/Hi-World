@@ -214,7 +214,7 @@ function fn_paging(curPage) {
 				<thead>
 					<tr style=" border-bottom: none;">
 				  		<th>
-				  			<font style="font-weight: bold;">${l.title}</font>
+				  			<font style="font-weight: bold;"><c:out value="${l.title}" /></font>
 				  			<span style="float: right;">
 				  				<span onclick="showPopup('${l.pictureSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">이동</span>
 				  				<span onclick="deletePicture('${l.pictureSerial}','${l.file}','${l.folderSerial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">삭제</span>
@@ -242,7 +242,7 @@ function fn_paging(curPage) {
 					<tr>
 			 			<td>
 			 				<span class="secondFont" style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
-			 					${l.content}
+			 					<pre><c:out value="${l.content}" /></pre>
 			 				</span>
 						</td>
 					</tr>

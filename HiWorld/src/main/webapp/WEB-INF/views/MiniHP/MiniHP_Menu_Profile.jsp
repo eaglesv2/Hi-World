@@ -80,14 +80,19 @@ function displayProfile() {
 		type : 'GET',
 		url : 'miniHp_get_profile.do',
 		/* userId session 받기 */
-		data : { UserID : '${sessionVO.userID}' },
+		data : { UserID : '${sessionVO.userID}' }
 		
-		success : function(result) {
+		/* success : function(result) {
 			console.log('ajax success');
 			console.log(result);
 			content = result;
-			$("#appendContent").html(content);
-		}
+			$("#appendContent").text(content);
+		} */
+	}).done(function(result) {
+		console.log('ajax success');
+		console.log(result);
+		content = result;
+		$("#appendContent").text(content);
 	});
 }
 
@@ -107,15 +112,11 @@ function insert_ok() {
 		/* user serial userId session 받기 */
 		data : { UserSerial : '${sessionVO.userSerial}', UserID : '${sessionVO.userID}', ProfileContent : content },
 		
-		success : function(result) {
-			if(result == success) {
-				/* $("#appendContent").innerHTML = content; */
-				displayProfile();
-			} else {
-				alert("다시 한 번 시도해주세요");
-			}
-		},
-		error : function(){
+		
+	}).done(function(result) {
+		if(result == 'success') {
+			displayProfile();
+		} else {
 			alert("다시 한 번 시도해주세요");
 		}
 	});
@@ -124,6 +125,7 @@ function insert_ok() {
 function change() {
 	$("#change").hide();
 	$("#change_ok").show();
+	$("#textContent").val($("#appendContent").text());
 }
 
 function change_ok() {
@@ -164,11 +166,11 @@ function change_ok() {
 					</div>
 				
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				
-					<font>
-						<span id="noContent" align="center"></span>
-					</font>
-				
+					<div style="height: 310px; white-space: pre-line;">
+						<font>
+							<span id="noContent" align="center"></span>
+						</font>
+					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
 				
@@ -179,7 +181,7 @@ function change_ok() {
 				
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 							
-					<textarea id="insertContent" rows="50" cols="30" > </textarea>
+					<textarea id="insertContent" rows="50" cols="30" ></textarea>
 				
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
@@ -190,11 +192,11 @@ function change_ok() {
 					</div>
 				
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
-				
-					<font>
-						<span class="secondFont" id="appendContent" align="center"></span>
-					</font>
-				
+					<div style="height: 310px; white-space: pre-line;">
+						<font>
+							<span class="secondFont" id="appendContent" align="center"></span>
+						</font>
+					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">
 				</div>
 				
