@@ -33,10 +33,11 @@ public class MiniHpProfileServiceImpl implements MiniHpProfileService {
 		System.out.println("프로필 가져오기 서비스");
 		System.out.println(userId);
 		profileVO = profileDAO.getProfile(userId);
-		String content = profileVO.getProfileContent();
-		if(content == null) {
+		String content = "";
+		if(profileVO!=null)
+			content = profileVO.getProfileContent();
+		else
 			content = "작성된 프로필이 없습니다";
-		}
 		System.out.println(content);
 		return content;
 	}

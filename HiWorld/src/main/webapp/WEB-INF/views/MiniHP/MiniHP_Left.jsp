@@ -92,19 +92,7 @@ function displayInfo(){
 	});
 }
 
-/* function random(){
-	sendRequest("random.action",null,sendRandom,"GET");
-}
 
-function sendRandom(){
-	if(httpRequest.readyState==4){
-		if(httpRequest.status==200){
-			var userId = httpRequest.responseText;
-			window.open("user_main.action?userId="+userId,userId,"width=1090,height=600,location=no,status=no,scrollbars=no");
-		}
-	}
-}
-*/
 
 function moveToUser() {
 	console.log('홈피 이동');
@@ -249,7 +237,7 @@ font-family:'BMHANNAPro';
 					<!-- 이웃 목록 -->
 					<c:if test="${listLength != 0}">
 					<c:forEach var="neighborList" items="${neighborList}">
-						<option value="${neighborList.neighborSerial}">${neighborList.neighborName} (${neighborList.neighborValue})</option>
+						<option value="${neighborList.neighborSerial}" class="neighbors">${neighborList.neighborName} (${neighborList.neighborValue})</option>
 					</c:forEach>
 					</c:if>
 					<c:if test="${listLength == 0}">
@@ -261,4 +249,31 @@ font-family:'BMHANNAPro';
 		</tr>
 	</table>	
  </body>
+<script>
+//alert($('.neighbors').val());
+function random() {
+	//var neighbors = $('.neighbors');
+	var neighbors = document.getElementsByClassName("neighbors");
+	var max = neighbors.length;
+	
+	if(max<1)
+		alert('이웃이 없습니다');
+	else{
+		//랜덤값 생성
+		var ranIdx = Math.floor((Math.random()*(max+1-1)+1))-1;
+		//console.log(neighbors[ranIdx].value);
+		
+		var OwnerSerial = neighbors[ranIdx].value;
+		console.log(OwnerSerial);
+		
+		var popupWidth = 1080;
+	    var popupHeight = 600;
+		var popupX = (window.screen.width/2)-(popupWidth/2);
+	    var popupY = (window.screen.height/2)-(popupHeight/2);
+		window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+		
+	}
+	
+}
+</script>
 </html>

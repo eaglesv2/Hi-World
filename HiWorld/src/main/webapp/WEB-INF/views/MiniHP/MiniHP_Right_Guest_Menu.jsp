@@ -51,7 +51,7 @@ $('.menu').click(function(){
 	$(this).css('background-color', '#FFFFFF');
 });
 </script>
-<script src="resources/js/miniHP/ajaxMoveGuestPage.js?ver=5"></script>
+<script src="resources/js/miniHP/ajaxMoveGuestPage.js?ver=1"></script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -60,7 +60,7 @@ $('.menu').click(function(){
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu2==1}">
-		<div align="center" id="menu2" class="menu" onclick="moveProfile()">프로필</div>
+		<div align="center" id="menu2" class="menu" onclick="moveProfile('${ownerID}','${ownerSerial}')">프로필</div>
 	</c:if>
 	
 	<c:if test="${ownermenuVO.menu3==1}">

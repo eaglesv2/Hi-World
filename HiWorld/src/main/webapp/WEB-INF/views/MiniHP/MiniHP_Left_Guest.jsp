@@ -48,6 +48,10 @@ function moveToUser(){
 	}
 } 
 
+function goBack() {
+	window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
+	parent.window.close();
+}
 </script>
 <style>
 #profile_info {
@@ -193,7 +197,8 @@ font-family:'BMHANNAPro';
 				</select>
 				
 				<!-- 내 미니홈피로 이동 -->
-				<img id="meBtn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" onclick="window.open('MiniHP_Home.do','${sessionVO.userID}','width=1090,height=600,location=no,status=no,scrollbars=no')"/>
+				<%-- <img id="meBtn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" onclick="window.open('MiniHP_Home.do','${sessionVO.userID}','width=1090,height=600,location=no,status=no,scrollbars=no')"/> --%>
+				<img id="meBtn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" onclick="goBack();"/>
 			</td>
 		</tr>
 	</table>	

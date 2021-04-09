@@ -26,7 +26,7 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	
 	MiniHpNeighborVO neighborVO;
 	
-	MiniHpNeighborViewVO neighborViewVO = new MiniHpNeighborViewVO();
+	MiniHpNeighborViewVO neighborViewVO;
 
 	
 	/*이웃 신청 결과 처리*/
@@ -100,6 +100,7 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 		} else {	
 			while(lit.hasNext()) {
 				neighborVO = lit.next();
+				neighborViewVO = new MiniHpNeighborViewVO();
 				/*System.out.println(neighborVO.getNeighborID1());
 				System.out.println(neighborVO.getNeighborID2());
 				System.out.println(neighborViewVO);*/

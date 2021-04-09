@@ -167,7 +167,7 @@ function insertScrapeReply(videoSerial) {
 					<tr style=" border-bottom: none;">
 				  		<th>
 				  			<div style="display: inline;">
-					  			<font style="font-weight: bold; float: left;">${l.title}</font>
+					  			<font style="font-weight: bold; float: left;"><c:out value="${l.title}" /></font>
 					  			<c:if test="${isNeighbor==1}">
 						  			<span onclick="scrapeVideo('${l.videoSerial}');" style="float: right; font-weight: normal;" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">
 						  				스크랩
@@ -198,7 +198,7 @@ function insertScrapeReply(videoSerial) {
 					<tr>
 			 			<td>
 			 				<span style="width: 400px; text-overflow: ellipsis; overflow: hidden;">
-			 					${l.content}
+			 					<pre><c:out value="${l.content}" /></pre>
 			 				</span>
 						</td>
 					</tr>

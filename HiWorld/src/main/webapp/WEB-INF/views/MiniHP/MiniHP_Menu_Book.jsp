@@ -170,7 +170,7 @@
 					<span style="color: #FFC31F; font-size: 12px;">(이 글은 홈주인과 작성자만 볼 수 있어요)</span>
 					<br>
 				</c:if>
-				<span class="secondFont" style="height: 80px;display: flex;align-items: center;">${l.content}</span>
+				<span class="secondFont" style="height: 80px;display: flex;align-items: center;overflow: hidden;"><c:out value="${l.content}" /></span>
 			</span>
 			<span id="booksContentUpdate-${l.bookSerial}" style="display: none;">
 				<textarea class="taUpdate" id="updateContent-${l.bookSerial}">${l.content}</textarea><br>

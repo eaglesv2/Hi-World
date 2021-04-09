@@ -121,6 +121,7 @@ public class MiniHpGuestController {
 		//우측메뉴 갈때 주인 시리얼 전달
 		ownerVO = dao.getData(OwnerSerial);
 		model.addAttribute("ownerSerial", ownerVO.getUserSerial());
+		model.addAttribute("ownerID", ownerVO.getUserID());
 		
 		return "MiniHP/MiniHP_Right_Guest_Menu";
 	}
@@ -219,6 +220,13 @@ public class MiniHpGuestController {
 		/*System.out.println(ownerVO.getUserName());*/
 		
 		return introService.getGuestTitle(ownerVO);
+	}
+	
+	// 프로필 -------------------------------------
+	@GetMapping("/miniHpProfileGuest.do")
+	public String miniHpProfileGuest(String ownerID, Model model) {
+		model.addAttribute("ownerID", ownerID);
+		return "MiniHP/guestProfile";
 	}
 	
 	// 사진첩 -------------------------------------

@@ -14,7 +14,7 @@
 			<div>
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/folder_icon.png" height="13px" width="13px">
 			<span id="folder-${i.serial}">
-				<span class="folderNames" onclick="goToFolder('${i.serial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;">${i.folderName}</span>
+				<span class="folderNames" onclick="goToFolder('${i.serial}');" onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" style="font-size:10pt;"><c:out value="${i.folderName}" /></span>
 				<img src="resources/images/folder_edit.png" width="10px" height="10px" style="cursor:pointer;" onclick="updateForm('${i.serial}');">
 				<img src="resources/images/folder_deleted.png" width="10px" height="10px" style="cursor:pointer;" onclick="deletedFolder('${i.serial}');">
 			</span>
