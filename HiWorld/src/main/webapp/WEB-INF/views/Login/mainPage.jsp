@@ -159,11 +159,17 @@
     	
              
             function bamTol(){
-            	var popupWidth =880
-            	var popupHeight =580
-            	var popupX = (window.screen.width/2)-(popupWidth/2);
-            	var popupY = (window.screen.height/2)-(popupHeight/2);
-            	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	let userSerial = '${sessionVO.userSerail}';
+            	if(userSerial!=''){
+            		var popupWidth =880
+                	var popupHeight =580
+                	var popupX = (window.screen.width/2)-(popupWidth/2);
+                	var popupY = (window.screen.height/2)-(popupHeight/2);
+                	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+            	}else{
+            		alert("로그인하세요.");
+            	}
+            	
             }
 	
             function kaja2(){
@@ -206,22 +212,28 @@
             
             function shoppingcart(){
             	console.log("1234") 
-                var ajaxOption={
-               		 type: "GET",
-                        url : "basketJoin.do",
-                        dataType : "html", 
-                        async:true,
-                        cache:false
-               		 
-                }
-           	  $.ajax(ajaxOption).done(function(data){
-           		  //Contents 영역삭제
-           		  console.log('adfdasf')
-           		  $('#bodyContext').children().remove();
-           		  console.log("1111") 
-           		  //Contents 영역 교체
-           		  $('#bodyContext').html(data);
-           	  })
+            	let serial = '${sessionVO.userSerial}';
+            	if(serial==''){
+            		alert("로그인하세요")
+            	}else{
+            		var ajaxOption={
+                      		 type: "GET",
+                               url : "basketJoin.do",
+                               dataType : "html", 
+                               async:true,
+                               cache:false
+                      		 
+                       }
+                  	  $.ajax(ajaxOption).done(function(data){
+                  		  //Contents 영역삭제
+                  		  console.log('adfdasf')
+                  		  $('#bodyContext').children().remove();
+                  		  console.log("1111") 
+                  		  //Contents 영역 교체
+                  		  $('#bodyContext').html(data);
+                  	  })
+            	}
+                
             }
             
             /*  여기부터 userview */

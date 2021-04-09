@@ -157,6 +157,8 @@ public class ClientController {
 		model.addAttribute("list",clientService.getQuestionList(curPage,pagingVO.getPageSize()));
 		model.addAttribute("listCnt",listCnt);
 		model.addAttribute("pagination",pagingVO);
+		
+		//공지전부
 		model.addAttribute("alist",clientService.getAllQuestionList());
 		
 		model.addAttribute("number",curPage*15-14);
