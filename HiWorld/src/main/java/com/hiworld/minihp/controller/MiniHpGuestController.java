@@ -126,7 +126,7 @@ public class MiniHpGuestController {
 	}
 	
 	@GetMapping("/miniHp_leftGuest.do")
-	public String leftGuest(HttpServletRequest request, Model model) {
+	public String leftGuest(HttpServletRequest request, Model model,HttpSession session) {
 		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
 		introVO = introDAO.getData(OwnerSerial);
 		ownerVO = dao.getData(OwnerSerial);
@@ -141,6 +141,10 @@ public class MiniHpGuestController {
 		model.addAttribute("ownerintroVO", introVO);
 		model.addAttribute("ownerVO", ownerVO);
 		model.addAttribute("neighborList", neighborList);
+		
+		//현재 로그인된 유저 정보 전달(바람타기 본인으로 오는지 확인 용도)
+		int userSerial = Utils.getSessionUser(session);
+		model.addAttribute("userSerial", userSerial);
 		
 		return "MiniHP/MiniHP_Left_Guest";
 	}
