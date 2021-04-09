@@ -94,6 +94,7 @@ public class MiniHpController {
 		int UserSerial = vo.getUserSerial();
 		/*System.out.println(UserID);*/
 		introVO = introDAO.getData(UserSerial); //미니홈피 기본 정보 가져오기
+		itemVO = itemService.getItemList(UserSerial);
 		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(UserSerial); //이웃 목록 불러오기
 		
 		if(neighborList == null) {

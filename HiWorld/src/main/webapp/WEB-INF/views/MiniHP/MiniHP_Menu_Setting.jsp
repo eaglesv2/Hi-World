@@ -7,9 +7,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function openOrCloseMenu(index){
-		
+
 		var menu = document.getElementById("menu"+index);
-		
+
 		if(menu.style.display=="none"){
 			menu.style.display="block";
 		}else{
@@ -156,7 +156,6 @@
 	border: 0px solid black;
 	width: 100%;
 	padding-left: 4px;
-	display: none;
 }
 .subMenu{
 	font-size: 9pt;
@@ -198,7 +197,7 @@
 				
 		<div class="menuTitle">
 			<img alt="no found" src="${pageContext.request.contextPath}/resources/images/setting_menu_3lines.png" height="13px" width="13px">
-			<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="javascript:openOrCloseMenu('Item')">
+			<span onmouseover="this.style.color='#FF5E00'; this.style.cursor='pointer';" onmouseout="this.style.color='black';" onclick="openOrCloseMenu('Item')">
 				아이템 설정관리
 			</span>
 		</div>

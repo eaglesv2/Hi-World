@@ -54,9 +54,13 @@ h1{
     font-weight: 800;
     font-size: xx-large;
     text-align: center;
-	
+}	
 th img{
 	border:1px solid;
+}
+
+#paybutton:hover{
+	color:red;
 }
 
 </style>
@@ -111,7 +115,7 @@ th img{
 			</div>
 			<div class="total">
 				<div>
-					<a href="#" onclick="totalBay()">결제하기</a>
+					<a href="#" onclick="totalBay()" id="paybutton">결제하기</a>
 				</div>
 			</div>
 

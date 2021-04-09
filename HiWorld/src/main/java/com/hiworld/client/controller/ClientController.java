@@ -39,7 +39,9 @@ import com.hiworld.client.vo.BoardVO;
 import com.hiworld.client.vo.ClientVO;
 import com.hiworld.client.vo.MainBoardPagingVO;
 import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.service.MiniHpItemService;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 
 @Controller
 public class ClientController {
@@ -55,7 +57,10 @@ public class ClientController {
 	/* ArticleService를 부르기 위해 정의 */
 	@Autowired
 	private ArticleService articleService;
-
+	
+	@Autowired
+	private MiniHpItemService itemService;
+	
 	@Autowired
 	private NeighborService neighborService;
 
@@ -432,6 +437,8 @@ public class ClientController {
 			} else {
 				/* 이름하고 아이디를 세션 화 */
 				session.setAttribute("sessionVO", vo);
+				MiniHpSelectedItemVO itemList = itemService.getItemList(vo.getUserSerial());
+				session.setAttribute("itemList", itemList);
 				return "redirect:/login.do";
 			}
 		} else {

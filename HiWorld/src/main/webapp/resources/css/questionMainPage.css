@@ -28,8 +28,12 @@
 	margin-top:0px;
 	text-align: center;
 }
-
+#paging{
+	text-align: center;
+	margin-top:10px;
+}
 #paging a{
 	text-align: center;
 	display:inline;
+	
 }

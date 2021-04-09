@@ -159,6 +159,7 @@ font-style: normal;
 }
 body{
 font-family:'SDSamliphopangche_Outline';
+cursor: url('${itemList.mouseSrc}'), auto;
 }
 button{
 font-family:'SDSamliphopangche_Outline';
