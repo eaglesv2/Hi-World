@@ -91,14 +91,15 @@
 								<td>${number}</td>
 								<c:choose>
 									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
+										<td style="display: none;">${kinds.title} ${kinds.userName}</td>
 										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
-										<td>${kinds.userName}</td>
 									</c:when>
 									<c:otherwise>
+										<td style="display: none;">비밀글입니다 ${kinds.userName}</td>
 										<td>비밀글입니다 </td>
-										<td>${kinds.userName}</td>
 									</c:otherwise>
 								</c:choose>
+								<td>${kinds.userName}</td>
 								<td>${kinds.cDate}</td>
 								<td>${kinds.lookUp}</td>
 									<c:choose>
@@ -137,6 +138,8 @@
 							<td>작성자</td>
 							<td>작성일</td>
 							<td>조회수</td>
+							<td>답변여부</td>
+							<td></td>
 						</tr>
 						<tbody id="tbody">
 							<c:set var="number" value="${number}"/>
@@ -261,18 +264,8 @@
 					$("#tbody>tr").hide();
 
 					var writer = $("#tfoot>tr>td:nth-child(2):contains('" + key + "')");
-					var writer2 = $("#tfoot>tr>td:nth-child(3):contains('" + key + "')");
-					console.log(writer[0]);
-					let test = writer[0].indexOf('<td>');
-					console.log(test);
-					if(writer[0].indexOf('<td>')>0){
-						$("#tfoot").show();
-						$(writer).parent().show();
-					}else if(writer2[0].indexOf('<td>')>0){
-						$("#tfoot").show();
-						$(writer).parent().show();
-					}
-					
+					$("#tfoot").show();
+					$(writer).parent().show();
 				}
 
 			})
