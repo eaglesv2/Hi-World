@@ -45,7 +45,7 @@
 										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
 									<c:otherwise>
-										<td>비밀글입니다  ${kinds.userName}</td>
+										<td>비밀글입니다</td>
 									</c:otherwise>
 								</c:choose>
 								<td>${kinds.userName}</td>
@@ -95,7 +95,8 @@
 										<td>${kinds.userName}</td>
 									</c:when>
 									<c:otherwise>
-										<td>비밀글입니다  ${kinds.userName}</td>
+										<td>비밀글입니다 </td>
+										<td>${kinds.userName}</td>
 									</c:otherwise>
 								</c:choose>
 								<td>${kinds.cDate}</td>
@@ -260,8 +261,18 @@
 					$("#tbody>tr").hide();
 
 					var writer = $("#tfoot>tr>td:nth-child(2):contains('" + key + "')");
-					$("#tfoot").show();
-					$(writer).parent().show();
+					var writer2 = $("#tfoot>tr>td:nth-child(3):contains('" + key + "')");
+					console.log(writer[0]);
+					let test = writer[0].indexOf('<td>');
+					console.log(test);
+					if(writer[0].indexOf('<td>')>0){
+						$("#tfoot").show();
+						$(writer).parent().show();
+					}else if(writer2[0].indexOf('<td>')>0){
+						$("#tfoot").show();
+						$(writer).parent().show();
+					}
+					
 				}
 
 			})

@@ -727,7 +727,7 @@
     <div class="MainContainer">
 	   
 		    <div id="mainlogo">
-		    	<img src="resources/images/로고7.png" alt="로고사진" />
+		    	<a href="#" onclick="location.href='login.do'"><img src="resources/images/로고7.png" alt="로고사진"/></a>
 		    		<div id="mainserch">
 			    		 <input type="text" id="searchInput" placeholder="이웃검색하기"/>
 			    		<i class="fas fa-search fa-2x"></i>
@@ -788,8 +788,10 @@
 
                 </div>
                 <div id="bodyContext">
-
-                </div>
+                	<img src="resources/images/miniHPImg.png" alt="" width="795px" height="300px" style="margin-bottom: 30px;"/>
+					<video src="resources/images/videoSub.mp4" width="396" autoplay muted loop ></video>               
+					<video src="resources/images/videoMain.mp4" width="396" autoplay muted loop ></video>               
+				</div>
             </div>
         </div>
 
