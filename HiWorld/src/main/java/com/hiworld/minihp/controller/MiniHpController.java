@@ -74,6 +74,7 @@ public class MiniHpController {
 		
 		model.addAttribute("introVO", introVO);
 		model.addAttribute("itemList", itemVO);
+		//재생목록 전달
 		model.addAttribute("playList", playList);
 		model.addAttribute("playListSize", playListSize);
 		//사용중인 배경화면 전달
