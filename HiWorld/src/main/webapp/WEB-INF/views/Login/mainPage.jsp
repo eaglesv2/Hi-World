@@ -172,7 +172,7 @@
     	
              
             function bamTol(){
-            	let userSerial = '${sessionVO.userSerail}';
+            	let userSerial = '${sessionVO.userSerial}';
             	if(userSerial!=''){
             		var popupWidth =880
                 	var popupHeight =580
