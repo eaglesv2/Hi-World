@@ -194,10 +194,10 @@ function fn_paging(curPage) {
 }
 </script>
 <form name="poto">
-	<div id="nowFolder" style="float: left; padding-left: 20px; font-size: 15px; font-weight: bold;color: #1294AB;">
+	<div id="nowFolder" style="float: left; padding-left: 30px; font-size: 15px; font-weight: bold;color: #1294AB;">
 		${currentFolderName}
 	</div>
-	<div id="write-btn" style="float: right; padding-right: 20px;">
+	<div id="write-btn" style="float: right; padding-right: 30px;">
 		<button type="button" onclick="moveInsertPage();"><img alt="" src="resources/images/reply-pen.png" width="10px">사진올리기</button>
 	</div>
 	<img src="${pageContext.request.contextPath}/resources/images/bar.jpg" width="420" height="6" border="0" alt="">

@@ -44,7 +44,7 @@
 			<tbody>
 				<tr height="20">
 					<th width="20%" scope="row">제목</th>
-					<td><input type="text" name="title" id="title" style="width: 300px"></td>
+					<td><input type="text" name="title" id="title" style="width: 300px; outline: none;"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -55,7 +55,7 @@
 				<tr>
 					<!-- 사진만 업로드 -->
 					<th scope="row">사진</th>
-					<td>&nbsp;<input type="file" name="file1" id="file" onchange="fileCheck(this)" accept="image/gif,image/jpeg,image/png"></td>
+					<td>&nbsp;<input type="file" name="file1" id="file" onchange="fileCheck(this)" accept="image/gif,image/jpeg,image/png" style="margin-top: 5px;"></td>
 				</tr>
 				<tr style="text-align: right">
 					<td colspan="2">
@@ -74,41 +74,48 @@ function fileCheck(obj) {
 	pathpoint = obj.value.lastIndexOf('.');
 	filepoint = obj.value.substring(pathpoint+1,obj.length);
 	filetype = filepoint.toLowerCase();
-	if(filetype!='jpg' && filetype!='gif' && filetype!='png' && filetype!='jpeg'){
+	if(filetype!='jpg' && filetype!='gif' && filetype!='png' && filetype!='jpeg' && filetype!=''){
 		alert('이미지 파일만 선택할 수 있습니다.');
 		$("#file").val("");
 	}
 }
 
 function insertPicture(){
+	if($('#title').val()==="")
+		alert('제목을 입력하세요');
+	else if($('#content').val()==="")
+		alert('내용을 입력하세요');
+	else if($('#file').val()==="")
+		alert('업로드할 사진을 선택해주세요');
+	else{
+		 var form = $("form")[0];       
+	     var formData = new FormData(form);
 	
-	 var form = $("form")[0];       
-     var formData = new FormData(form);
-
-     $.ajax({
-         cache : false,
-         url : "MiniHpPictureInsert.do", // 요기에
-         processData: false,
-         contentType: false,
-         type : 'POST', 
-         data : formData, 
-         success : function(data) {
-       			var ajaxMain = {
-       		            url : 'miniHpPicture.do?folderSerial='+data,
-       		            async : true,
-       		            type : "GET",
-       		            dataType : "html",
-       		            cache : false
-       		    };
-       		    
-       		    $.ajax(ajaxMain).done(function(data){
-       		        $('#bodyContents').children().remove();
-       		        $('#bodyContents').html(data);
-       		    });
-         }, 
-         error : function(xhr, status) {
-             alert(xhr + " : " + status);
-         }
-     });
+	     $.ajax({
+	         cache : false,
+	         url : "MiniHpPictureInsert.do", // 요기에
+	         processData: false,
+	         contentType: false,
+	         type : 'POST', 
+	         data : formData, 
+	         success : function(data) {
+	       			var ajaxMain = {
+	       		            url : 'miniHpPicture.do?folderSerial='+data,
+	       		            async : true,
+	       		            type : "GET",
+	       		            dataType : "html",
+	       		            cache : false
+	       		    };
+	       		    
+	       		    $.ajax(ajaxMain).done(function(data){
+	       		        $('#bodyContents').children().remove();
+	       		        $('#bodyContents').html(data);
+	       		    });
+	         }, 
+	         error : function(xhr, status) {
+	             alert(xhr + " : " + status);
+	         }
+	     });
+	}
 }
 </script>

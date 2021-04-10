@@ -12,7 +12,7 @@
 				<tr>
 					<td>
 					<span id="replyInsertForm-${serial}" style="display: none;">
-						<textarea id="replyContent-${serial}" style="resize: none; width: 390px; height: 100px;"></textarea><br>
+						<textarea id="replyContent-${serial}" style="resize: none; width: 405px; height: 100px;"></textarea><br>
 						<input type="button" value="취소" style="float: right" onclick="showReplyForm('${serial}');">
 						<input type="button" value="입력" style="float: right" onclick="insertReply('${serial}');">
 					</span>

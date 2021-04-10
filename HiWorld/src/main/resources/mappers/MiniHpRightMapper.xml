@@ -54,4 +54,9 @@
 		SET content=#{content}
 		WHERE serial=#{serial}
 	</update>
+	
+	<select id="random" resultType="Integer">
+		SELECT UserSerial FROM HW_USERLIST
+		WHERE UserSerial>1 AND BAN=0 AND UserSerial!=#{userSerial}
+	</select>
 </mapper>

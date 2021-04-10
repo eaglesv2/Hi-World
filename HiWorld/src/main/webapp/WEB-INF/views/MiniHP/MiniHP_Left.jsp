@@ -100,27 +100,28 @@ function moveToUser() {
 	
 	var OwnerSerial = $("#neighborSelect option:selected").val();
 	console.log(OwnerSerial);
-	
-	/* if(OwnerID == "") {
-		return;
-	}  */
-	/* $("#neighborSelect option:eq(0)").attr("selected", "selected"); */
-	
-	/* $.ajax({
-		type : 'GET',
-		url : 'miniHp_guestHome.do',
-		data : { OwnerID : OwnerID },
+	if(OwnerSerial>0){
+		/* if(OwnerID == "") {
+			return;
+		}  */
+		/* $("#neighborSelect option:eq(0)").attr("selected", "selected"); */
 		
-		success : function() {
-			console.log('홈피 이동');
-		}
-	}) */
-	var popupWidth = 1080;
-    var popupHeight = 600;
-	var popupX = (window.screen.width/2)-(popupWidth/2);
-    var popupY = (window.screen.height/2)-(popupHeight/2);
-	window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
-	/* parent.window.close(); */
+		/* $.ajax({
+			type : 'GET',
+			url : 'miniHp_guestHome.do',
+			data : { OwnerID : OwnerID },
+			
+			success : function() {
+				console.log('홈피 이동');
+			}
+		}) */
+		var popupWidth = 1080;
+	    var popupHeight = 600;
+		var popupX = (window.screen.width/2)-(popupWidth/2);
+	    var popupY = (window.screen.height/2)-(popupHeight/2);
+		window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+		parent.window.close();
+	}
 }
 
 </script>
@@ -239,7 +240,7 @@ font-family:'BMHANNAPro';
 					</c:forEach>
 					</c:if>
 					<c:if test="${listLength == 0}">
-						<option value="">이웃이 없습니다</option>
+						<option value="-1">이웃이 없습니다</option>
 					</c:if>
 				</select>
 				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="random()"/>
@@ -250,28 +251,24 @@ font-family:'BMHANNAPro';
 <script>
 //alert($('.neighbors').val());
 function random() {
-	//var neighbors = $('.neighbors');
-	var neighbors = document.getElementsByClassName("neighbors");
-	var max = neighbors.length;
 	
-	if(max<1)
-		alert('이웃이 없습니다');
-	else{
-		//랜덤값 생성
-		var ranIdx = Math.floor((Math.random()*(max+1-1)+1))-1;
-		//console.log(neighbors[ranIdx].value);
-		
-		var OwnerSerial = neighbors[ranIdx].value;
+	$.ajax({
+		type: 'GET',
+		url: 'random.do',
+		datatype: 'json',
+		contentType:'application/json; charset=utf-8'
+	}).done(function(result) {
+		var OwnerSerial = result;
 		console.log(OwnerSerial);
-		
 		var popupWidth = 1080;
 	    var popupHeight = 600;
 		var popupX = (window.screen.width/2)-(popupWidth/2);
 	    var popupY = (window.screen.height/2)-(popupHeight/2);
 		window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
-		
-	}
-	
+		parent.window.close();
+	}).fail(function(error) {
+		alert(JSON.stringify(error));
+	});
 }
 </script>
 </html>

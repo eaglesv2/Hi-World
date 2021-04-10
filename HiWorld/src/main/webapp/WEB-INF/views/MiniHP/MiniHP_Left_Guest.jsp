@@ -33,20 +33,21 @@ function displayInfo(){
 function moveToUser(){
 	var OwnerSerial = $("#neighborSelect option:selected").val();
 	console.log(OwnerSerial);
-	
-	//본인한테 바람타기가는지 체크
-	var userSerial = $("#userSerial").val();
-	if(userSerial===OwnerSerial){
-		window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
-		parent.window.close();
-	}
-	else{
-		var popupWidth = 1080;
-	    var popupHeight = 600;
-		var popupX = (window.screen.width/2)-(popupWidth/2);
-	    var popupY = (window.screen.height/2)-(popupHeight/2);
-	    window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
-		parent.window.close();
+	if(OwnerSerial>0){
+		//본인한테 바람타기가는지 체크
+		var userSerial = $("#userSerial").val();
+		if(userSerial===OwnerSerial){
+			window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
+			parent.window.close();
+		}
+		else{
+			var popupWidth = 1080;
+		    var popupHeight = 600;
+			var popupX = (window.screen.width/2)-(popupWidth/2);
+		    var popupY = (window.screen.height/2)-(popupHeight/2);
+		    window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
+			parent.window.close();
+		}
 	}
 } 
 
@@ -194,7 +195,7 @@ font-family:'BMHANNAPro';
 						</c:forEach>
 					</c:if>
 					<c:if test="${neighborList.size() == 0}">
-						<option value="">이웃이 없습니다</option>
+						<option value="-1">이웃이 없습니다</option>
 					</c:if>
 				</select>
 				

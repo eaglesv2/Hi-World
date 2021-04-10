@@ -44,7 +44,7 @@
 			<tbody>
 				<tr height="20">
 					<th width="20%" scope="row">제목</th>
-					<td><input type="text" name="title" id="title" style="width: 300px"></td>
+					<td><input type="text" name="title" id="title" style="width: 300px; outline: none;"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -55,7 +55,7 @@
 				<tr>
 					<!-- 파일 업로드 -->
 					<th scope="row">파일</th>
-					<td>&nbsp;<input type="file" name="file1" id="file"></td>
+					<td>&nbsp;<input type="file" name="file1" id="file" style="margin-top: 5px;"></td>
 				</tr>
 				<tr style="text-align: right">
 					<td colspan="2">
@@ -70,36 +70,41 @@
 </body>
 <script>
 function insertBoard(){
+	if($('#title').val()==="")
+		alert('제목을 입력하세요');
+	else if($('#content').val()==="")
+		alert('내용을 입력하세요');
+	else{
+		 var form = $("form")[0];       
+	     var formData = new FormData(form);
 	
-	 var form = $("form")[0];       
-     var formData = new FormData(form);
-
-     $.ajax({
-         cache : false,
-         url : "MiniHpBoardInsert.do", // 요기에
-         processData: false,
-         contentType: false,
-         type : 'POST', 
-         data : formData, 
-         success : function(data) {
-       			var ajaxMain = {
-       		            url : 'miniHpBoard.do?folderSerial='+data,
-       		            async : true,
-       		            type : "GET",
-       		            dataType : "html",
-       		            cache : false
-       		    };
-       		    
-       		    $.ajax(ajaxMain).done(function(data){
-       		        // Contents 영역 삭제
-       		        $('#bodyContents').children().remove();
-       		        // Contents 영역 교체
-       		        $('#bodyContents').html(data);
-       		    });
-         }, 
-         error : function(xhr, status) {
-             alert(xhr + " : " + status);
-         }
-     });
+	     $.ajax({
+	         cache : false,
+	         url : "MiniHpBoardInsert.do", // 요기에
+	         processData: false,
+	         contentType: false,
+	         type : 'POST', 
+	         data : formData, 
+	         success : function(data) {
+	       			var ajaxMain = {
+	       		            url : 'miniHpBoard.do?folderSerial='+data,
+	       		            async : true,
+	       		            type : "GET",
+	       		            dataType : "html",
+	       		            cache : false
+	       		    };
+	       		    
+	       		    $.ajax(ajaxMain).done(function(data){
+	       		        // Contents 영역 삭제
+	       		        $('#bodyContents').children().remove();
+	       		        // Contents 영역 교체
+	       		        $('#bodyContents').html(data);
+	       		    });
+	         }, 
+	         error : function(xhr, status) {
+	             alert(xhr + " : " + status);
+	         }
+	     });
+	}
 }
 </script>

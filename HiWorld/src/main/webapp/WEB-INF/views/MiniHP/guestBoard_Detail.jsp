@@ -92,7 +92,7 @@ table.boardTable td {
 	<tbody id="replyForm" style="display: none;">
 		<tr>
 			<td scope="row">
-				<textarea id="replyContent" style="resize: none; width: 390px; height: 100px;"></textarea><br>
+				<textarea id="replyContent" style="resize: none; width: 405px; height: 100px;"></textarea><br>
 				<input type="button" value="취소" style="float: right" onclick="showReplyForm();">
 				<input type="button" value="입력" style="float: right" onclick="insertReply('${board.boardSerial}');">
 			</td>
