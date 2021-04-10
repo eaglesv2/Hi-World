@@ -45,7 +45,7 @@
 			<tbody>
 				<tr height="20">
 					<th width="20%" scope="row">제목</th>
-					<td><input type="text" name="title" id="title" value="${board.title}"></td>
+					<td><input type="text" name="title" id="title" value="${board.title}" style="outline: none;"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -65,7 +65,7 @@
 								<!-- <input type="button" value="삭제" onclick="deleteFile();"> -->
 							</c:when>
 							<c:otherwise>
-								<input type="file" name="file1" id="file">
+								<input type="file" name="file1" id="file" style="margin-top: 5px;">
 							</c:otherwise>
 						</c:choose>
 						</div>
@@ -84,25 +84,30 @@
 </body>
 <script>
 function updateBoard(){
+	if($('#title').val()==="")
+		alert('제목을 입력하세요');
+	else if($('#content').val()==="")
+		alert('내용을 입력하세요');
+	else{
+		 var form = $("form")[0];       
+	     var formData = new FormData(form);
 	
-	 var form = $("form")[0];       
-     var formData = new FormData(form);
-
-     $.ajax({
-         cache : false,
-         url : "MiniHpBoardUpdate.do", // 요기에
-         processData: false,
-         contentType: false,
-         type : 'POST', 
-         data : formData, 
-         success : function(data) {
-        	 $('#bodyContents').children().remove();
-	        $('#bodyContents').html(data);
-         }, 
-         error : function(xhr, status) {
-             alert(xhr + " : " + status);
-         }
-     });
+	     $.ajax({
+	         cache : false,
+	         url : "MiniHpBoardUpdate.do", // 요기에
+	         processData: false,
+	         contentType: false,
+	         type : 'POST', 
+	         data : formData, 
+	         success : function(data) {
+	        	 $('#bodyContents').children().remove();
+		        $('#bodyContents').html(data);
+	         }, 
+	         error : function(xhr, status) {
+	             alert(xhr + " : " + status);
+	         }
+	     });
+	}
 }
 function deleteFile() {
 	if(confirm("정말 파일을 삭제하시겠습니까?"))

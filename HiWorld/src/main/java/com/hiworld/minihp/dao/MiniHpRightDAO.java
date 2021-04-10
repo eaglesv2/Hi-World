@@ -24,4 +24,7 @@ public interface MiniHpRightDAO {
 	int insert(MiniHpNeiWordVO vo);
 	int delete(int serial);
 	int update(@Param("serial") int serial,@Param("content") String content);
+	
+	//랜덤미니홈피
+	List<Integer> random(int userSerial);
 }

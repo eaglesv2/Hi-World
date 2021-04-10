@@ -15,4 +15,6 @@ public interface MiniHpRightService {
 	int insert(MiniHpNeiWordVO vo);
 	int delete(int serial);
 	int update(int serial, String content);
+	
+	int random(int userSerial);
 }
