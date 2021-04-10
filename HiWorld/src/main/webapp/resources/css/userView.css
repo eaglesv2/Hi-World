@@ -154,7 +154,8 @@ margin-right: 187px;
 }
 .birth_address_label{
 float: left;
-margin-right: 128px;
+margin-right: 118px;
+margin-left: 10px;
 }
 .birth_address{
 height: 141px;
@@ -181,9 +182,11 @@ height: 56px;
 .cash_label{
 float: left;
 margin-top: 8px;
+
 }
 .cash_label1{
-margin-right: 184px;
+margin-right: 144px;
+margin-left: 37px;
 }
 .cash_few{
 margin-right: 215px;
