@@ -93,7 +93,7 @@
 						</div>
 						<div class="pw_few" id="hiden1">
 							<span class="few" id="pw_text1">
-								<input type="password" style="border: none; outline: none; width: 180px; text-align: center; color: red;" value="${clientVO.userPW}" readonly/>
+								<input type="password" id="pw_input" style="border: none; outline: none; width: 180px; text-align: center; color: red;" value="${clientVO.userPW}" readonly/>
 								<br />
 								<br />
 								<input type="button" id="pwbut" style="margin-left: 71px;" value="수정" onclick="pwUpdate1()" />

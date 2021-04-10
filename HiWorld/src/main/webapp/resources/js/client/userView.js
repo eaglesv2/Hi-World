@@ -124,7 +124,7 @@ var address = false;
 					success: function(data) {
 						
 						if($('#hiden1').css('display') == 'none'){
-							$('#hiden1').html('********').css('color','red').append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
+							$('#pw_input').val(ajaxPW).append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
 							$('#hiden1').show();
 							$('#pwhiden').hide();
 							}
