@@ -130,8 +130,6 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 	@Override
 	public void deleteNeighbor(int userSerial, int neighborSerial) {
 		
-		neighborDAO.deleteNeighbor(userSerial, neighborSerial);
-		
+		neighborDAO.deleteNeighbor(userSerial, neighborSerial);	
 	}
-
 }

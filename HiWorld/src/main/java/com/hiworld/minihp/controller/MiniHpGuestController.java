@@ -33,6 +33,7 @@ import com.hiworld.minihp.vo.MiniHpBoardPagingVO;
 import com.hiworld.minihp.vo.MiniHpBookPagingVO;
 import com.hiworld.minihp.vo.MiniHpBookVO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
+import com.hiworld.minihp.vo.MiniHpMusicVO;
 import com.hiworld.minihp.vo.MiniHpNeiWordVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
@@ -97,9 +98,14 @@ public class MiniHpGuestController {
 		
 		introService.todayCheck(visitorVO);
 		introVO = introDAO.getData(OwnerSerial);
+		List<MiniHpMusicVO> playList = itemService.getPlayList(OwnerSerial);
+		int playListSize = playList.size();
 		
 		model.addAttribute("OwnerSerial", OwnerSerial);
 		model.addAttribute("ownerintroVO", introVO);
+		//재생목록 전달
+		model.addAttribute("playList", playList);
+		model.addAttribute("playListSize", playListSize);
 		//사용중인 배경화면 전달
 		model.addAttribute("skin", itemService.getUsingSkin(OwnerSerial));
 

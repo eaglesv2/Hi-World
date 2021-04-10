@@ -51,10 +51,101 @@ pre{
 .secondFont{
 	font-family:'BMHANNAPro';
 }
+.bgm-wrap {
+	position: absolute;
+	top:20px; 
+	left:780px; 
+	height:60px
+}
+.bgm-wrap .audio-box {
+	width: 250px;
+	height: 31px;
+	background: #efefef; 
+	padding:5px 0px 5px 15px;
+	border-radius: 15px; 
+	color: gray;
+	border: solid 0.5px #ddd
+}
+.bgm-wrap .text-play-click {
+	margin-top: 10px; 
+	font-size: 11pt;
+	text-align: center;
+}
+.bgm-wrap .audio-title-wrap {
+	margin-bottom: -3px;
+	margin-top: 3px;
+	width: 235px;
+	font-size: 11pt;
+	font-weight: 500;
+	color: #999;
+}
+.bgm-wrap .audio-box .audio-control-btn {
+	display: inline-block;
+	width: 10px;
+	font-size: 12px;
+	cursor:pointer;
+}
+.bgm-wrap .audio-box .audio-prev-btn {
+	display: inline-block;
+	font-size: 12px;
+	cursor:pointer;
+}
+.bgm-wrap .audio-box .audio-next-btn {
+	display: inline-block;
+	font-size: 12px;
+	cursor:pointer;
+}
+.bgm-wrap .audio-box .volume-control-btn {
+	display: inline-block;
+ 	width: 12px;
+	font-size: 12px;
+	cursor: pointer;
+}
+.bgm-wrap .play-time {
+	display: inline-block; 
+	margin: 2px;
+	font-size: 10pt;
+	width: 35px;
+}
+.bgm-wrap .audio-box .play-progress-box {
+	display: inline-block;
+	font-size: 14pt;
+	background: #fff;
+	width:60px;
+	height: 4px;
+	border: solid 0.5px #ddd;
+	vertical-align: middle
+}
+.bgm-wrap .audio-box .play-progress-bar {
+	width:0;
+	height: 100%;
+	background: gray;
+}
+.bgm-wrap .audio-box .play-volume-box {
+	display: inline-block;
+	margin-left: 3px;
+}
+.bgm-wrap .audio-box .play-volume-slider { 
+	display:inline-block;
+	width: 30px;
+	height:4px;
+	vertical-align: middle;
+}
+.bgm-wrap .audio-box .play-volume-slider .ui-slider-handle.ui-state-active {
+	border: 1px solid #c5c5c5;
+	background: gray;
+}
+.bgm-wrap .audio-box .play-volume-slider .ui-slider-handle {
+	width: 10px; 
+	height:10px; 
+	border-radius: 15px;
+}
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="resources/js/miniHP/miniHpBGM.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	//배경화면 설정
@@ -143,6 +234,116 @@ $(document).ready(function() {
 					</tr>
 				</table>
 				<!-- ------------------------ -->
+				<div class="bgm-wrap">
+					<input type="hidden" id="listSize" value="${playListSize}">
+					<!-- 재생목록에 노래가 없을 경우 -->
+					<c:if test="${playListSize eq 0}">
+						<div id="audio-player">
+							<div class="audio-box">
+								<div class="audio-title-wrap">
+									<span id="audio-title">
+										<marquee direction="left">재생할 음악이 없습니다</marquee>
+									</span>
+								</div>
+								<div class="audio-control-btn btn-play">
+									<i class="fa fa-play"></i>
+								</div>
+								<div class="play-time start">00:00</div>
+								<div class="play-progress-box">
+									<div class="play-progress-bar"></div>
+								</div>
+								<div class="play-time end">00:00</div>
+								<div class="play-volume-box">
+									<div class="audio-control-btn btn-volume">
+										<i class="fa fa-volume-up"></i>
+									</div>
+									<div class="play-volume-slider"></div>
+								</div>
+							</div>
+						</div>
+					</c:if>	
+					
+					<!-- 재생목록에 노래가 있을 경우 -->
+					<c:if test="${playListSize ne 0}">
+						<c:forEach var="playList" items="${playList}" varStatus="status">
+						<c:set var="index" value="${status.index}" />
+							<c:if test="${index eq 0}">
+								<div id="audio-player${index}">
+									<div class="audio-box">	
+										<div id="audioPlay${index}" style="display: none;">
+											<audio id="audio${index}" class="audio" onended="nextPlay(${index})" src="${playList.musicSrc}"></audio>
+										</div>
+							
+										<div class="audio-title-wrap">
+											<span id="audio-title">
+												<marquee direction="left">${playList.musicTitle}</marquee>
+											</span>
+											<input type="hidden" id="audio-title${index}" value="${playList.musicTitle}">
+										</div>
+										<div id="pausePlayBtn" class="audio-control-btn btn-play" onclick="pausePlay(${index})">
+											<i class="fa fa-play"></i>
+										</div>
+										<div id="prevPlayBtn" class="audio-prev-btn" onclick="prevPlay(${index})">
+											<i class="fa fa-backward"></i>
+										</div>
+										<div id="nextPlayBtn" class="audio-next-btn" onclick="nextPlay(${index})">
+											<i class="fa fa-forward"></i>
+										</div>
+										<div id="startTime" class="play-time start">00:00</div>
+										<div id="progressBar" class="play-progress-box">
+											<div class="play-progress-bar"></div>
+										</div>
+										<div id="endTime"class="play-time end">00:00</div>
+										<div class="play-volume-box">
+											<div class="volume-control-btn btn-volume" onclick="volumeMute(${index})">
+												<i class="fa fa-volume-up"></i>
+											</div>
+											<div class="play-volume-slider" onmouseup="volumeControl(${index})"></div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${index ne 0}">
+								<div id="audio-player${index}" style="display: none">
+									<div class="audio-box">	
+										<div id="audioPlay${index}" style="display: none;">
+											<audio id="audio${index}" class="audio" onended="nextLoad(${index})" src="${playList.musicSrc}"></audio>
+										</div>
+							
+										<div class="audio-title-wrap">
+											<span id="audio-title">
+												<marquee direction="left">${playList.musicTitle}</marquee>											
+											</span>
+											<input type="hidden" id="audio-title${index}" value="${playList.musicTitle}">
+										</div>
+										<div id="pausePlayBtn" class="audio-control-btn btn-play" onclick="pausePlay(${index})">
+											<i class="fa fa-play"></i>
+										</div>
+										<div id="prevPlayBtn" class="audio-prev-btn" onclick="prevPlay(${index})">
+											<i class="fa fa-backward"></i>
+										</div>
+										<div id="nextPlayBtn" class="audio-next-btn" onclick="nextPlay(${index})">
+											<i class="fa fa-forward"></i>
+										</div>
+										<div id="startTime" class="play-time start">00:00</div>
+										<div id="progressBar" class="play-progress-box">
+											<div class="play-progress-bar"></div>
+										</div>
+										<div id="endTime"class="play-time end">00:00</div>
+										<div class="play-volume-box">
+											<div class="volume-control-btn btn-volume" onclick="volumeMute(${index})">
+												<i class="fa fa-volume-up"></i>
+											</div>
+											<div class="play-volume-slider" onmouseup="volumeControl(${index})"></div>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							</c:forEach>
+						</c:if>	
+					
+					<div class="text-play-click">※ 재생 버튼을 눌러야 배경음이 재생됩니다</div>
+				</div>
 			</td>
 		</tr>
 	</table>
