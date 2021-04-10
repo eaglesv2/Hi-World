@@ -26,13 +26,13 @@
 			<c:when test="${list != '[]'}">
 				<table>
 					<tr>
-						<td>NO.</td>
-						<td>제목</td>
-						<td>작성자</td>
-						<td>작성일</td>
-						<td>조회수</td>
-						<td>답변여부</td>
-						<td></td>
+						<td style="width:95px; ">NO.</td>
+						<td style="width:95px; ">제목</td>
+						<td style="width:95px; ">작성자</td>
+						<td style="width:95px; ">작성일</td>
+						<td style="width:95px; ">조회수</td>
+						<td style="width:95px; ">답변여부</td>
+						<td style="width:95px; "></td>
 					
 					</tr>
 					<tbody id="tbody">
@@ -257,8 +257,8 @@
 
 				if (key == '') {
 					$("#tbody>tr").show();
-					$("#tfoot").hide();
-					$("#tfoot>tr").hide();
+					/* $("#tfoot").hide();
+					$("#tfoot>tr").hide(); */
 				} else {
 					/* 일단 검색시 목록 전체안보이게 */
 					$("#tbody>tr").hide();
