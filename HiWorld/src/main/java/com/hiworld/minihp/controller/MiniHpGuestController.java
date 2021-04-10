@@ -209,23 +209,13 @@ public class MiniHpGuestController {
 	/*게스트 미니홈피 제목 설정*/
 	@GetMapping("/miniHp_topGuest.do")
 	public String topGuest(HttpServletRequest request, Model model) {
-		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		int ownerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
 		/*introVO = introDAO.getData(OwnerID);*/
 		
-		model.addAttribute("OwnerSerial", OwnerSerial);
+		model.addAttribute("ownerSerial", ownerSerial);
 		/*model.addAttribute("ownerintroVO", introVO);*/
 		
 		return "MiniHP/MiniHP_TopGuest";
-	}
-	
-	@ResponseBody
-	@GetMapping("/miniHp_getGuestIntroTitle.do")
-	public String getGuestTitle(HttpServletRequest request) {
-		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
-		ownerVO = dao.getData(OwnerSerial);
-		/*System.out.println(ownerVO.getUserName());*/
-		
-		return introService.getGuestTitle(ownerVO);
 	}
 	
 	// 프로필 -------------------------------------

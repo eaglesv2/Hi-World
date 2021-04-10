@@ -11,37 +11,43 @@
 	<select id="getInfo" resultType="String">
 		SELECT hpInfo
 		FROM MiniHP_Intro
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</select>
 	
 	<update id="updateInfo">
 		UPDATE MiniHP_Intro
 		SET hpInfo = #{hpInfo}
-		WHERE UserID = #{UserID}
+		WHERE UserID = #{userSerial}
 	</update>
 	
 	<select id="getTitle" resultType="String">
 		SELECT hpTitle
 		FROM MiniHP_Intro
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</select>
 	
 	<update id="updateTitle">
 		UPDATE MiniHP_Intro
 		SET hpTitle = #{hpTitle}
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
 	</update>
 	
 	<select id="getPicture" resultType="java.util.Map">
 		SELECT hpPicture
 		FROM MiniHP_Intro
-		WHERE UserID = #{UserID}
+		WHERE UserSerial = #{userSerial}
+	</select>
+	
+	<select id="getFileName" resultType="String">
+		SELECT fileName
+		FROM MiniHP_Intro
+		WHERE UserSerial = #{userSerial}
 	</select>
 	
 	<update id="updatePicture">
 		UPDATE MiniHP_Intro
-		SET hpPicture = #{hpPicture}
-		WHERE UserID = #{UserID}
+		SET fileName = #{fileName}, hpPicture = #{hpPicture} 
+		WHERE UserSerial = #{userSerial}
 	</update>
 	
 	<select id="checkVisitor" resultType="com.hiworld.minihp.vo.MiniHpVisitorVO">

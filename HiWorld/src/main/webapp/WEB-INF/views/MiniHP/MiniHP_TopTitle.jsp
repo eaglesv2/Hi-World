@@ -29,7 +29,7 @@ function change_ok(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_updateIntroTitle.do',
-		data : { UserID : '${sessionVO.userID}', hpTitle : newTitle },
+		data : { userSerial : '${sessionVO.userSerial}', hpTitle : newTitle },
 		
 		success : function(result) {
 			console.log('ajax success3');
@@ -44,7 +44,7 @@ function displayTitle(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_getIntroTitle.do',
-		data : { UserID : '${sessionVO.userID}'},
+		data : { userSerial : '${sessionVO.userSerial}'},
 		
 		success : function(result) {
 			console.log('ajax success4');

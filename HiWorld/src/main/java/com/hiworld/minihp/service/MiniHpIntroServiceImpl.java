@@ -24,14 +24,14 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	
 	/*소개글 가져오기*/
 	@Override
-	public String getIntroInfo(String UserID) {
+	public String getIntroInfo(int userSerial) {
 		/*System.out.println("미니홈피 인트로 가져오기 서비스");*/
 		String info = "";
 		
-		if(introDAO.getInfo(UserID) == null) {
+		if(introDAO.getInfo(userSerial) == null) {
 			info = "소개글이 없습니다";
 		} else {
-			info = introDAO.getInfo(UserID);
+			info = introDAO.getInfo(userSerial);
 		}
 		
 		/*System.out.println(info);*/
@@ -48,35 +48,11 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	
 	/*제목 가져오기*/
 	@Override
-	public String getIntroTitle(sessionVO vo) {
+	public String getIntroTitle(int userSerial) {
 		/*System.out.println("미니홈피 타이틀 가져오기 서비스");*/
-		String title = "";
-		String UserID = vo.getUserID();
-		
-		
-		if(introDAO.getTitle(UserID) == null) {
-			title = vo.getUserName() + "님의 미니홈피";
-		} else {
-			title = introDAO.getTitle(UserID);
-		}
+		String title = introDAO.getTitle(userSerial);
 		
 		/*System.out.println(title);*/
-		
-		return title;
-	}
-	
-	/*게스트 제목 가져오기*/
-	@Override
-	public String getGuestTitle(MiniHpOwnerVO ownerVO) {
-		String title = "";
-		String OwnerID = ownerVO.getUserID();
-		
-		
-		if(introDAO.getTitle(OwnerID) == null) {
-			title = ownerVO.getUserName() + "님의 미니홈피";
-		} else {
-			title = introDAO.getTitle(OwnerID);
-		}
 		
 		return title;
 	}
@@ -90,14 +66,23 @@ public class MiniHpIntroServiceImpl implements MiniHpIntroService {
 	
 	/*프로필 사진 가져오기*/
 	@Override
-	public ResponseEntity<byte[]> getIntroPicture(String UserID) {
+	public ResponseEntity<byte[]> getIntroPicture(int userSerial) {
 		/*System.out.println("미니홈피 프로필 사진 가져오기 서비스");*/
-		Map<String, Object> map = introDAO.getPicture(UserID);
+		Map<String, Object> map = introDAO.getPicture(userSerial);
 		byte[] hpPicture = (byte[])map.get("hpPicture");
+		String fileName = introDAO.getFileName(userSerial);
 		/*System.out.println(hpPicture);*/
+		System.out.println(fileName);
+		System.out.println(fileName.lastIndexOf("."));
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
+		if(fileName.substring(fileName.lastIndexOf(".")).equals("png")) {
+			headers.setContentType(MediaType.IMAGE_PNG);
+		} else if(fileName.substring(fileName.lastIndexOf(".")).equals("gif")) {
+			headers.setContentType(MediaType.IMAGE_GIF);
+		} else {
+			headers.setContentType(MediaType.IMAGE_JPEG);
+		}
 		
 		/*System.out.println(new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK));*/
 		return new ResponseEntity<byte[]>(hpPicture, headers, HttpStatus.OK);
