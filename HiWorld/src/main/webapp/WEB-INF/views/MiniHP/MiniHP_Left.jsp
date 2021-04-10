@@ -18,7 +18,6 @@ $(document).ready(function(){
 	displayInfo();
 })
 
-
 function change_i(){
 	var info = $("#infoTxt").val();
 	$("#profile_info").hide();
@@ -125,10 +124,7 @@ function moveToUser() {
 }
 
 </script>
-<style type="text/css">
-</style>
 <style>
-
 #profile_info {
 overflow-y:scroll; 
 width:140px;  
