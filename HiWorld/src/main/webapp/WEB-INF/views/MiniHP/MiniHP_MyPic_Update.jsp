@@ -90,10 +90,12 @@ function upload() {
 </head>
 <form action="miniHp_updateIntroPicture.do" method="post" id="uploadForm" enctype="multipart/form-data">
 	<!--input box-->
+	<br>
 	<div align="center">
-		<img alt="" src="" style="width: 30%;"><br />
+		<img alt="" src="resources/images/로고7.png" style="width: 30%;"><br />
 	</div>
-	<input type="text" class="upload_text" readonly="readonly" placeholder=".jpg , .png , .gif 파일만 업로드 할 수 있습니다.">
+	<br><br>
+	<input type="text" class="upload_text" name="fileName" readonly="readonly" placeholder=".jpg , .png , .gif 파일만 업로드 할 수 있습니다.">
 	<!--button-->
 	<div class="upload-btn_wrap">
 		<button type="button" title="파일찾기">

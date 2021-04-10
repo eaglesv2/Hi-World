@@ -8,6 +8,7 @@ public class MiniHpIntroVO {
 	private String userID;
 	private String userName;
 	private String hpTitle;
+	private String fileName;
 	private MultipartFile hpPicture_imgFile;
 	private byte[] hpPicture;
 	private String hpInfo;
@@ -38,6 +39,12 @@ public class MiniHpIntroVO {
 	}
 	public void setHpTitle(String hpTitle) {
 		this.hpTitle = hpTitle;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public MultipartFile getHpPicture_imgFile() {
 		return hpPicture_imgFile;

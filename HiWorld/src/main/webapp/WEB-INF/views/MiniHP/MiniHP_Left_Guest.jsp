@@ -20,7 +20,7 @@ function displayInfo(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_getIntroInfo.do',
-		data : { UserID : '${ownerVO.userID}'},
+		data : { userSerial : '${ownerVO.userSerial}'},
 		
 		success : function(result) {
 			console.log('ajax success2');
@@ -145,7 +145,7 @@ font-family:'BMHANNAPro';
 							</c:if>
 						</c:if>
 						<c:if test ="${!empty ownerintroVO.hpPicture}">
-							<img id="profileImage" src="miniHp_getIntroPicture.do?UserID=${ownerVO.userID}" width="128" height="128" border="0" alt=""/>
+							<img id="profileImage" src="miniHp_getIntroPicture.do?userSerial=${ownerVO.userSerial}" width="128" height="128" border="0" alt=""/>
 						</c:if>
 						</td>
 					</tr>

@@ -13,19 +13,22 @@ import com.hiworld.minihp.vo.MiniHpVisitorVO;
 public interface MiniHpIntroDAO {
 	
 	/*미니홈피 소개글 가져오기*/
-	String getInfo(String UserID);
+	String getInfo(int userSerial);
 	
 	/*미니홈피 소개글 수정*/
 	void updateInfo(MiniHpIntroVO introVO);
 	
 	/*미니홈피 타이틀 가져오기*/
-	String getTitle(String UserID);
+	String getTitle(int userSerial);
 	
 	/*미니홈피 타이틀 수정*/
 	void updateTitle(MiniHpIntroVO introVO);
 	
 	/*미니홈피 프로필 사진 가져오기*/
-	Map<String, Object> getPicture(String UserID);
+	Map<String, Object> getPicture(int userSerial);
+	
+	/*미니홈피 프로필 사진 이름 가져오기*/
+	String getFileName(int userSerial);
 	
 	/*미니홈피 프로필 사진 수정*/
 	void updatePicture(MiniHpIntroVO introVO);
@@ -53,4 +56,6 @@ public interface MiniHpIntroDAO {
 	
 	/*전체 정보 가져오기*/
 	ArrayList<MiniHpIntroVO> getAllNeighbor();
+
+	
 }

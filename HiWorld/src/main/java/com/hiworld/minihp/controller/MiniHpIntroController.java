@@ -22,7 +22,7 @@ import com.hiworld.minihp.vo.MiniHpIntroVO;
 public class MiniHpIntroController {
 	
 	@Autowired
-	MiniHpIntroService service;
+	MiniHpIntroService introService;
 	
 	sessionVO sessionVO;
 	
@@ -30,11 +30,11 @@ public class MiniHpIntroController {
 	@GetMapping(value = "/miniHp_getIntroInfo.do", produces ="application/text;charset=utf8")
 	public String miniHpGetIntroInfo(HttpServletRequest request) {
 		/*System.out.println("미니홈피 인트로 가져오기 컨트롤러");*/
-		String UserID = request.getParameter("UserID");
+		int userSerial = Integer.parseInt(request.getParameter("userSerial"));
 		/*System.out.println(UserID);*/
 
 		
-		return service.getIntroInfo(UserID);
+		return introService.getIntroInfo(userSerial);
 	}
 	
 	@GetMapping("/miniHp_updateIntroInfo.do")
@@ -42,7 +42,7 @@ public class MiniHpIntroController {
 		/*System.out.println("미니홈피 인트로 수정 컨트롤러");*/
 		/*System.out.println(introVO.getUserID());
 		System.out.println(introVO.getHpInfo());*/
-		service.updateIntroInfo(introVO);
+		introService.updateIntroInfo(introVO);
 		
 		/*System.out.println("미니홈피 인트로 수정 서비스 갔다옴");*/
 		return "MiniHP/MiniHP_Left";
@@ -52,15 +52,14 @@ public class MiniHpIntroController {
 	@GetMapping(value = "/miniHp_getIntroTitle.do", produces ="application/text;charset=utf8")
 	public String miniHpGetIntroTitle(HttpServletRequest request) {
 		/*System.out.println("미니홈피 타이틀 가져오기 컨트롤러");*/
-		HttpSession session = request.getSession();
-		sessionVO = (sessionVO) session.getAttribute("sessionVO");
+		int userSerial = Integer.parseInt(request.getParameter("userSerial"));
 		/*String UserID = sessionVO.getUserID();
 		String UserName = sessionVO.getUserName();
 		System.out.println(UserID);
 		System.out.println(UserName);*/
 
 		
-		return service.getIntroTitle(sessionVO);
+		return introService.getIntroTitle(userSerial);
 	}
 	
 	@GetMapping("/miniHp_updateIntroTitle.do")
@@ -69,7 +68,7 @@ public class MiniHpIntroController {
 		System.out.println(introVO.getUserID());
 		System.out.println(introVO.getHpTitle());*/
 		
-		service.updateIntroTitle(introVO);
+		introService.updateIntroTitle(introVO);
 		
 		/*System.out.println("미니홈피 타이틀 수정 서비스 갔다옴");*/
 		
@@ -86,28 +85,29 @@ public class MiniHpIntroController {
 	@GetMapping("/miniHp_getIntroPicture.do")
 	public ResponseEntity<byte[]> miniHpGetIntroPicture(HttpServletRequest request) {
 		/*System.out.println("미니홈피 프로필 사진 가져오기 컨트롤러");*/
-		String UserID = request.getParameter("UserID");
+		int userSerial = Integer.parseInt(request.getParameter("userSerial"));
 		/*System.out.println(UserID);*/
 		
-		return service.getIntroPicture(UserID);
+		return introService.getIntroPicture(userSerial);
 	}
 	
 	@RequestMapping(value = "miniHp_updateIntroPicture.do", method = RequestMethod.POST)
 	public String miniHpUpdateIntroPicture(MultipartHttpServletRequest request, HttpSession session, MiniHpIntroVO introVO) {
 		System.out.println("미니홈피 프로필 사진 수정 컨트롤러");
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		String UserID = vo.getUserID();
+		int userSerial = vo.getUserSerial();
 		MultipartFile file = request.getFile("uploadFile");
 		
-		introVO.setUserID(UserID);
+		introVO.setUserSerial(userSerial);
 		introVO.setHpPicture_imgFile(file);
 		
 		/*System.out.println(file);*/
 		
 		System.out.println(introVO.getUserID());
+		System.out.println(introVO.getFileName());
 		System.out.println(introVO.getHpPicture_imgFile());
 		System.out.println(introVO.getHpPicture_imgFile().getOriginalFilename());
-		service.updateIntroPicture(introVO);
+		introService.updateIntroPicture(introVO);
 		
 		return "MiniHP/MiniHP_Left"; 
 	}

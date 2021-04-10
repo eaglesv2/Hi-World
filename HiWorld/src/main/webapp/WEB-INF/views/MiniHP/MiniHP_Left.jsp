@@ -34,7 +34,7 @@ function change_i_ok(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_updateIntroInfo.do',
-		data : { UserID : '${sessionVO.userID}', hpInfo : newInfo },
+		data : { userSerial : '${sessionVO.userSerial}', hpInfo : newInfo },
 		
 		success : function(result) {
 			console.log('ajax success');
@@ -83,7 +83,7 @@ function displayInfo(){
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_getIntroInfo.do',
-		data : { UserID : '${sessionVO.userID}'},
+		data : { userSerial : '${sessionVO.userSerial}'},
 		
 		success : function(result) {
 			console.log('ajax success2');
@@ -184,7 +184,7 @@ font-family:'BMHANNAPro';
 							</c:if>
 						</c:if>
 						<c:if test ="${!empty introVO.hpPicture}">
-							<img id="profileImage" src="miniHp_getIntroPicture.do?UserID=${sessionVO.userID}" width="128" height="128" border="0" alt=""/>
+							<img id="profileImage" src="miniHp_getIntroPicture.do?userSerial=${sessionVO.userSerial}" width="128" height="128" border="0" alt=""/>
 						</c:if>
 						</td>
 					</tr>
