@@ -559,7 +559,6 @@ public class ClientController {
 	public String find_id_pw(HttpServletRequest request,ClientVO clientvo, Model md)throws Exception{
 		System.out.println("콘트롤러들어 왔니?");
 		String find = request.getParameter("check");
-		String massege = "입력 하신 정보가 없습니다.";	
 		System.out.println(find);
 		switch (find) {
 		case "1":
@@ -578,7 +577,7 @@ public class ClientController {
 			
 			return vo1.getUserPW();
 		default:
-			return massege;
+			return "입력 하신 정보가 없습니다.";
 			
 		}
 	}

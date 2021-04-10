@@ -84,7 +84,7 @@
 								<br />
 								<span class="message1"></span>
 								<br />
-								<input type="button" id="pwbut" style="margin-left: 50px; margin-top: 7px;" value="완료" onclick="pwUpdate()" />
+								<input type="button" id="pwbut" style="margin-left: 64px; margin-top: 0px;" value="완료" onclick="pwUpdate()" />
 								<input type="button" value="취소" onclick="cancle2()" />
 							</span> 
 							
@@ -92,8 +92,11 @@
 							
 						</div>
 						<div class="pw_few" id="hiden1">
-							<span class="few" id="pw_text1">********
-								<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />
+							<span class="few" id="pw_text1">
+								<input type="password" style="border: none; outline: none; width: 180px; text-align: center; color: red;" value="${clientVO.userPW}" readonly/>
+								<br />
+								<br />
+								<input type="button" id="pwbut" style="margin-left: 71px;" value="수정" onclick="pwUpdate1()" />
 							</span> 
 							<br />
 						</div>
@@ -135,10 +138,10 @@
 					</span>
 					<br />
 						<span class="few" id="address_few" style="display: inline-block;">
-							<div class="address_hiden" style="display: none;">
-								<input type="text" name="useraddress" style="position: absolute; bottom: 214px; right: 481px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userAddress}"/>
+							<div class="address_hiden" style="display: none; position: static;">
+								<input type="text" name="useraddress" style="position: absolute; bottom: 250px; right: 484px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userAddress}"/>
 								<br />
-								<span class="message3" style="position: absolute;bottom: 195px; right: 500px;"></span>
+								<span class="message3" style="position: absolute;bottom: 230px; right: 481px;"></span>
 								<br />
 								<input type="button" id="telbut" style="margin-left: -1px; margin-top: 24px;" value="완료" onclick="addressUpdate()" />
 								<input type="button" value="취소" onclick="cancle5()" />

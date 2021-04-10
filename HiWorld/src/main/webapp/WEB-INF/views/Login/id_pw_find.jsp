@@ -41,8 +41,8 @@
 						</div>
 					</div>
 					<div class="buttonOK">
-						<a href="#" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" onclick="findId()">확인</a>
-						<a href="#" onclick="Close()">취소</a>
+						<a href="#" style="text-decoration: none;" onclick="findId()" >확인</a>
+						<a href="#" onclick="Close()" style="text-decoration: none;">취소</a>
 					</div>
 				</div>
 				<div id="hide1" style="display: none;">
@@ -59,8 +59,8 @@
 						</div>
 					</div>
 					<div class="buttonOK">
-						<a href="#" onclick="Pw_Find()" >확인</a>
-						<a href="#" onclick="Close()">취소</a>
+						<a href="#" onclick="Pw_Find()" style="text-decoration: none;">확인</a>
+						<a href="#" onclick="Close()" style="text-decoration: none;">취소</a>
 					</div>
 				</div>
 			</div>
@@ -71,12 +71,15 @@
 			<div class="view">
 				<span class="findIdview1">당신의 아이디는</span>
 				<br />
-				<span class="findIdview"></span>
+				<span class="findIdview">
+					<input type="text" id="myinput1" style="border: none; outline: none;" value="" readonly/>
+					<a href="#" style="text-decoration: none; font-size: 33px; position: absolute; right: -44px; top: 52px;" onclick="copy1()">복사</a>
+				</span>
 				<br />
 				<span class="findIdview2">입니다.</span>
 				<br />
 				<br />
-				<a href="#" onclick="Close()" style="font-size: 33px;">확인</a>
+				<a href="#" onclick="Close()" style="font-size: 33px; text-decoration: none;">확인</a>
 			</div>
 		</div>
 	</div>
@@ -85,15 +88,19 @@
 			<div class="view">
 				<span class="findIdview1">비밀 번호는</span>
 				<br />
-				<span class="findIdview"></span>
+				<span class="findIdview" >
+					<input type="text" id="myinput2" style="border: none; outline: none;" value="" readonly/>
+					<a href="#" style="text-decoration: none; font-size: 33px; position: absolute; right: -44px; top: 52px;" onclick="copy2()">복사</a>
+				</span> 
 				<br />
 				<span class="findIdview2">입니다.</span>
 				<br />
 				<br />
-				<a href="#" onclick="Close()" style="font-size: 33px;">확인</a>
+				<a href="#" onclick="Close()" style="font-size: 33px; text-decoration: none;" >확인</a>
 			</div>
 		</div>
 	</div>
 </body>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/client/id_pw_find.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/client/id_pw_find.js">
+</script>
 </html>

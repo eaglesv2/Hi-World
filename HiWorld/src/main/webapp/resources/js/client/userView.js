@@ -72,7 +72,7 @@ var address = false;
 						$('.message2').empty();
 					}	else {
 						tel = false;
-						var html = "<tr><td colspan='3' style='color: red'>예)0000-0000 처럼 적어주세요</td></tr>";
+						var html = "<tr><td colspan='3' style='color: red'>예)010-0000-0000 처럼 적어주세요</td></tr>";
 						$('.message2').empty();
 						$('.message2').html(html);
 						$('input[name=userTel').focus();
@@ -82,13 +82,13 @@ var address = false;
 	
 				//주소 정규식과 기능 구현
 				$('input[name=useraddress]').blur(function() {
-					var add = /^[가-힣]|[a-zA-Z]|[1-9]$/;
+					var add = /^[가-힣a-zA-Z0-9]*$/;
 					var add1 = $('input[name=useraddress]').val();
 					if(!add.test(add1)){
 						address = false;
 						var html = "<tr><td colspan='3' style='color: red'>사용 불가능한 주소입니다.</td></tr>";
 						$('.message3').empty();
-						$('.message3').append(html);
+						$('.message3').html(html);
 						add1.focus();
 					}
 					
@@ -124,7 +124,7 @@ var address = false;
 					success: function(data) {
 						
 						if($('#hiden1').css('display') == 'none'){
-							$('#hiden1').html('********').css('color','red').append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate()1" />');
+							$('#hiden1').html('********').css('color','red').append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
 							$('#hiden1').show();
 							$('#pwhiden').hide();
 							}
@@ -168,7 +168,6 @@ var address = false;
 				}
 			var ajaxaddress = $('input[name=useraddress]').val();
 			var upDatech = 3;
-			alert("연락처 여기까지 왔니?")
 			$.ajax({
 				url : "UserUpdate.do",
 				type:"POST",
@@ -193,6 +192,7 @@ var address = false;
 				$('#pwhiden').show();
 			}
 		}
+		
 		function cancle2() {
 			if($('#hiden1').css('display') == 'none'){
 				$('#pwhiden').hide();

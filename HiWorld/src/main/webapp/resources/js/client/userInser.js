@@ -61,26 +61,7 @@
 		$("input[name=userID]").blur(function() {
 			var userid = $("input[name=userID]").val();
 			var idReg = /^[A-Za-z0-9_\-]{5,20}$/;
-			if (userid.search(/\s/) != -1) {
-				$("input[name=userID]").focus();
-				id = false;
-				var html = "<tr><td colspan='3' style='color: red'>아이디를 공백없이 입력해 주세요</td></tr>";
-				$('#error_next_box').empty();
-				$('#error_next_box').append(html);
-			}else if(userid == ''){
-				$("input[name=userID]").focus();
-				id = false;
-				var html = "<tr><td colspan='3' style='color: red'>필수사항입니다.</td></tr>";
-				$('#error_next_box').empty();
-				$('#error_next_box').append(html);
-			} 
-			else if (!idReg.test(userid)) {
-				$("input[name=userID]").focus();
-				id = false;
-				var html = "<tr><td colspan='3' style='color: red'>아이디는 영문대.소문자, 숫자_,-만 입력가능하고5에서 20자리이하로 입력 바랍니다.</td></tr>";
-				$('#error_next_box').empty();
-				$('#error_next_box').append(html);
-			}else{
+			
 			$.ajax({
 				url : "idCheck.do",
 				type : "POST",
@@ -92,7 +73,27 @@
 						var html = "<tr><td colspan='3' style='color: green'>사용 가능한 아이디입니다.</td></tr>";
 						$('#error_next_box').empty();
 						$('#error_next_box').append(html);
-					}else {
+					}else if (userid.search(/\s/) != -1) {
+						$("input[name=userID]").focus();
+						id = false;
+						var html = "<tr><td colspan='3' style='color: red'>아이디를 공백없이 입력해 주세요</td></tr>";
+						$('#error_next_box').empty();
+						$('#error_next_box').append(html);
+					}else if(userid == ''){
+						$("input[name=userID]").focus();
+						id = false;
+						var html = "<tr><td colspan='3' style='color: red'>필수사항입니다.</td></tr>";
+						$('#error_next_box').empty();
+						$('#error_next_box').append(html);
+					} 
+					else if (!idReg.test(userid)) {
+						$("input[name=userID]").focus();
+						id = false;
+						var html = "<tr><td colspan='3' style='color: red'>아이디는 영문대.소문자, 숫자_,-만 입력가능하고5에서 20자리이하로 입력 바랍니다.</td></tr>";
+						$('#error_next_box').empty();
+						$('#error_next_box').append(html);
+					}			 
+					 else {
 						$("input[name=userID]").focus();
 						idx = false;
 						id = false;
@@ -105,7 +106,6 @@
 					alert("서버에러");
 				}
 			});
-			}
 		});
 		// 이름 정규표현문 체크
 		$("input[name=userName]").blur(
