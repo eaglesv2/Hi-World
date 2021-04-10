@@ -186,7 +186,9 @@ a {
 }
 
 .rightCon #minimi #icon {
-	border: 1px solid #dae1e6;
+	border-right: none;
+    border-left: none;
+    border-top: 1px solid #dae1e6;
 	height: 50%;
 }
 
@@ -403,8 +405,10 @@ a {
 }
 
 #weather{
-	width: 280px;
+	width: 250px;
     float: right;
+    font-size: smaller;
+    margin-top: 3px;
 	
 }
 
@@ -416,3 +420,4 @@ a {
 #startpage2{
 	float: right;
 }
+

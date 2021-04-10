@@ -546,14 +546,14 @@
     				// 현재 온도
     				//console.log(data[15])
     				
-    				const seoul = '서울 온도 : '+data[1]+'℃ 비올 확률 : '+data[0]+'%<br>';
-    				const busan = '부산 온도 : '+data[3]+'℃ 비올 확률 : '+data[2]+'%<br>';
-    				const daegu = '대구 온도 : '+data[5]+'℃ 비올 확률 : '+data[4]+'%<br>';
-    				const incheon = '인천 온도 : '+data[7]+'℃ 비올 확률 : '+data[6]+'%<br>';
-    				const gwangju = '광주 온도 : '+data[9]+'℃ 비올 확률 : '+data[8]+'%<br>';
-    				const daejeon = '대전 온도 : '+data[11]+'℃ 비올 확률 : '+data[10]+'%<br>';
-    				const ulsan = '울산 온도 : '+data[13]+'℃ 비올 확률 : '+data[12]+'%<br>';
-    				const suwon = '수원 온도 : '+data[15]+'℃ 비올 확률 : '+data[14]+'%<br>';
+    				const seoul = '서울 온도 : '+'<font style="color:red">'+data[1]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[0]+'%'+'</font>'+'<br>';
+    				const busan = '부산 온도 : '+'<font style="color:red">'+data[3]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[2]+'%'+'</font>'+'<br>';
+    				const daegu = '대구 온도 : '+'<font style="color:red">'+data[5]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[4]+'%'+'</font>'+'<br>';
+    				const incheon = '인천 온도 : '+'<font style="color:red">'+data[7]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[6]+'%'+'</font>'+'<br>';
+    				const gwangju = '광주 온도 : '+'<font style="color:red">'+data[9]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[8]+'%'+'</font>'+'<br>';
+    				const daejeon = '대전 온도 : '+'<font style="color:red">'+data[11]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[10]+'%'+'</font>'+'<br>';
+    				const ulsan = '울산 온도 : '+'<font style="color:red">'+data[13]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[12]+'%'+'</font>'+'<br>';
+    				const suwon = '수원 온도 : '+'<font style="color:red">'+data[15]+'℃ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+'</font>'+'비올 확률 : '+'<font style="color:royalblue">'+data[14]+'%'+'</font>'+'<br>';
     				
     				$('#seoul').html(seoul);
     				$('#busan').html(busan);
@@ -589,8 +589,8 @@
     				
     				/* 전체완치 오늘완치 전체확진 오늘확진 */
     				
-                	const allCovid = '현재 확진자 수 : '+data[0]+'명('+data[1]+'↑)';
-        			const clearCovid = '현재 완치자 수 : '+data[2]+'명('+data[3]+'↑)';
+                	const allCovid = '현재 확진자 수 : '+'<font style="color:red">'+data[0]+'</font>'+'명 ('+'<font style="color:red">'+data[1]+'</font>'+'↑)';
+        			const clearCovid = '현재 완치자 수 : '+'<font style="color:red">'+data[2]+'</font>'+'명 ('+'<font style="color:red">'+data[3]+'</font>'+'↑)';
                 	
     				$('#allCovid').html(allCovid);
     				$('#clearCovid').html(clearCovid);
@@ -783,14 +783,15 @@
                 <div id="bx_div">
                 	<ul class="bxslider">
 				        <li><img src="resources/images/mainbanner.png" alt="사진"></li>
-				        <li><img src="resources/images/메인배너2.png" alt="" /></li>
+				         <li><img src="resources/images/메인배너2.png" alt="" /></li>			       
 		    		</ul>
 
                 </div>
                 <div id="bodyContext">
-                	<img src="resources/images/miniHPImg.png" alt="" width="795px" height="300px" style="margin-bottom: 30px;"/>
+           			<li><img src="resources/images/miniHPImg.png" alt="" width="795px" height="300px" style="margin-bottom: 30px;"/></li>
 					<video src="resources/images/videoSub.mp4" width="396" autoplay muted loop ></video>               
-					<video src="resources/images/videoMain.mp4" width="396" autoplay muted loop ></video>               
+					<video src="resources/images/videoMain.mp4" width="396" autoplay muted loop ></video>
+					              
 				</div>
             </div>
         </div>
