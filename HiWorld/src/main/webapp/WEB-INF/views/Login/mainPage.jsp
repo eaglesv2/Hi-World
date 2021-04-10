@@ -479,8 +479,13 @@
 		})	
     	
 		function Id_Pw_find(){
-    		
-    		window.open('pw_Id_find.do','_blank','top=80,left=20,width=550, height=500');
+        	var _width = '550';
+    	    var _height = '500';
+    	 
+    	    var _left = Math.ceil(( window.screen.width - _width )/2);
+    	    var _top = Math.ceil(( window.screen.height - _height )/2); 
+	    	 
+    	    window.open('pw_Id_find.do', 'find-popup', 'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top );
 		}
     	
     	

@@ -3,7 +3,7 @@
 	margin-top: -3px;
 	height: 100%;
 	border: 1px solid #999999;
-	text-align: justify;
+	
 }
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -42,7 +42,7 @@ div {
 }
 
 .fontcolor {
-	color: #00ced1;
+	color: rgb(243,105,4);
 }
 
 .few {
@@ -92,7 +92,7 @@ margin-left: 80px;
 }
 
 #gender1_few {
-	margin-left: 236px;
+	margin-left: 223px;
 }
 
 
@@ -121,13 +121,14 @@ margin-left: 84px;
 .pw_few{
 width: 340px;
 float: right;
-margin-right: -44px;
+margin-right: -40px;
+position: static;
 }
 #pw_text{
 margin-left: 152px;
 }
 #pw_text1{
-margin-left: 63px;
+
 }
 .tel_tel1{
 height: 61px;
@@ -192,14 +193,21 @@ margin-right: 5px;
 }
 .Pwchc1{
 position: absolute;
-left: 406px;
-top: 712px;
+left: 402px;
+top: 664px;
 }
 .Pwchc2{
-margin-top: 15px;
+position: absolute;
+top: 704px;
+left: 403px;
 }
 .message{
 position: absolute;
-top: 735px;
+top: 685px;
 left: 406px;
+}
+.message1{
+	position: absolute;
+	top: 728px;
+	left: 432px;
 }

@@ -28,7 +28,8 @@ function findId() {
 			console.log(find);
 		$('.main').hide();
 		$('#ImMassege').show();
-		$('.findIdview').html(find);
+		$('#myinput1').val(find);
+
 		},
 		error: function(find) {
 			alert(find);
@@ -48,7 +49,7 @@ function Pw_Find() {
 			console.log(find);
 			$('.main').hide();
 			$('#ImMassege1').show();
-			$('.findIdview').html(find);
+			$('#myinput2').val(find);
 		},
 		error: function (find) {
 			alert(find);
@@ -56,6 +57,30 @@ function Pw_Find() {
 		}
 	});
 }
+function copy1() {
+	var copyText = document.getElementById('myinput1')
+	copyText.select();
+	copyText.setSelectionRange(0,99999);
+	document.execCommand("copy");
+	alert('복사 되었니?')
+}
+
+function copy1() {
+	var copyText = document.getElementById('myinput1')
+	copyText.select();
+	copyText.setSelectionRange(0,99999);
+	document.execCommand("copy");
+	alert('복사 되었니?')
+}
+
+function copy2() {
+	var copyText = document.getElementById('myinput2')
+	copyText.select();
+	copyText.setSelectionRange(0,99999);
+	document.execCommand("copy");
+	alert('복사 되었니?')
+}
+
 
 function Close() {
 	window.close();
