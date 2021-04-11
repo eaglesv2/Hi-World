@@ -113,10 +113,10 @@
 
 <div id="Context">
 	<div class="Navi">
-		<div onclick="shop_character('캐릭터')">캐릭터</div>
-		<div onclick="shop_background('배경')">배경화면</div>
-		<div onclick="shop_music('음악')">음악</div>
-		<div onclick="shop_mouse('마우스')">마우스모양</div>
+		<div class="Navihover" onclick="shop_character('캐릭터')">캐릭터</div>
+		<div class="Navihover" onclick="shop_background('배경')">배경화면</div>
+		<div class="Navihover" onclick="shop_music('음악')">음악</div>
+		<div class="Navihover" onclick="shop_mouse('마우스')">마우스모양</div>
 	</div>
 
 	<div class="sangpum">
@@ -166,7 +166,7 @@
 		</table>
 	
 	
-	<div style="text-align:center; border:1px solid; border-top:none;">
+	<div style="text-align:center; margin-top:5px;">
 	
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" class="shoppinghover" onClick="fn_paging(1)">[처음]</a> 

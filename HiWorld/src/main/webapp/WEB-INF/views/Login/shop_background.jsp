@@ -26,37 +26,37 @@
 				<th>${kinds.articleKinds}화</th>
 				<th>${kinds.articleName}</th>
 				<th>${kinds.articlePrice}</th>
-				<th><a href="#"
+				<th><a href="#"  class="shoppinghover"
 					onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
-				<th><a href="#" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
+				<th><a href="#"  class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 			</tr>
 		</c:forEach>
 	</table>
 
 	<div style="text-align:center;">  
         <c:if test="${pagination.curRange ne 1 }">
-            <a href="#" onClick="fn_paging(1)">[처음]</a> 
+            <a href="#"  class="shoppinghover" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
         <c:if test="${pagination.curPage ne 1}">
-            <a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
+            <a href="#"  class="shoppinghover" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
         </c:if>
         <c:if test="${listCnt > 4}">
         <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
             <c:choose>
                 <c:when test="${pageNum eq  pagination.curPage}">
-                    <span style="font-weight: bold;"><a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
+                    <span style="font-weight: bold;"><a href="#"  class="shoppinghover" onClick="fn_paging('${pageNum }')">${pageNum }</a></span> 
                 </c:when>
                 <c:otherwise>
-                    <a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
+                    <a href="#"  class="shoppinghover" onClick="fn_paging('${pageNum }')">${pageNum }</a> 
                 </c:otherwise>
             </c:choose>
         </c:forEach>
         </c:if>
         <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-            <a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
+            <a href="#"  class="shoppinghover" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
         </c:if>
         <c:if test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-            <a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
+            <a href="#"  class="shoppinghover" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a> 
         </c:if>
 	</div>
 </div>

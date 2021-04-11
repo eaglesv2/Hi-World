@@ -7,20 +7,19 @@ body{
     border: 1px solid black;
     display: flex;
     justify-content: space-around;
-    height: 10%;
+    height: 30px;
     align-items: center;
 }
 
 .sangpum table{
     border:1px solid black;
-    width: 100%;
+	width: 798px;
     height: 80%;
     text-align: center;
     display: table;
     border-spacing: 0 17px;
     border-collapse: separate;
     border-collapse: none;
-    border-bottom: none;
 
 }
 
@@ -45,4 +44,10 @@ tr#tablehead{
 
 .shoppinghover:hover{
 	color:red;
+	cursor:pointer;
+}
+
+.Navihover:hover{
+	cursor:pointer;
+	color:royalblue;
 }

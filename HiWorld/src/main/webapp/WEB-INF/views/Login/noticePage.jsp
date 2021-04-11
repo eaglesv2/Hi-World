@@ -44,7 +44,7 @@
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
 							<c:if test="${sessionVO.userSerial eq kinds.userSerial}">
-								<td><p onclick="deleteBoard('${kinds.boardSerial}')">삭제</p></td>
+								<td><p  id="deletenotice" onclick="deleteBoard('${kinds.boardSerial}')">삭제</p></td>
 							</c:if>
 						</tr>
 					<c:set var="number" value="${number+1}"/>

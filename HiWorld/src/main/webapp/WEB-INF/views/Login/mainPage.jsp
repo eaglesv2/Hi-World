@@ -838,11 +838,11 @@
 								</div>
 								<div id="jang">
 									<div id="jang-top2">
-										<div onclick="Manage_Client()">회원관리</div>
+										<div id="client_manage" onclick="Manage_Client()">회원관리</div>
 										<div id="article_manage" onclick="Manage_Article()">상품등록</div>
 									</div>
 									<div id="jang-bottom2">
-										<div onclick="Manage_Board()">공지등록</div>
+										<div id="Board_manage" onclick="Manage_Board()">공지등록</div>
 										<a id="logout" href="logout.do">로그아웃</a>
 									</div>
 								</div>
@@ -884,10 +884,10 @@
 						<div id="naver_id_login" style="text-align: center">
 
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="200px" height="33px"
-								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}" style="width:200px; height:33px;"> <img width="200px" height="33px"
+								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+							</a>
 						</div>
-
 						<div id="kakao_id_login" style="text-align: center">
 							<a id="kakao-login-btn" class="kakaobutton"></a>
 						</div>
