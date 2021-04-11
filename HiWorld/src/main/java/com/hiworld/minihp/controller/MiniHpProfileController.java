@@ -1,20 +1,14 @@
 package com.hiworld.minihp.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hiworld.client.vo.sessionVO;
-import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.service.MiniHpProfileService;
 import com.hiworld.minihp.vo.MiniHpProfileVO;
-import com.hiworld.minihp.vo.MiniHpIntroVO;
 
 @Controller
 public class MiniHpProfileController {

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -36,17 +35,17 @@
 			var textarea = $("#textarea").val();
 			
 			if(title=='' || title == null){
-				alert("제목을 작성하세요.");
+				Swal.fire("제목을 작성해주세요");
 			}else{
 				if(textarea=='' || textarea == null){
-					alert("내용을 작성하세요");
+					Swal.fire("내용을 작성해주세요");
 				}else{
 					$.ajax({
 						url : "BoardSubmit.do",
 						type : "GET",
 						data : BoardSubmit,
 						success : function(data) {
-							alert("등록되었습니다.");
+							Swal.fire("문의가 등록되었습니다");
 							var ajaxOption3={
 		                   		 type: "GET",
 		                            url : "questionPage.do",

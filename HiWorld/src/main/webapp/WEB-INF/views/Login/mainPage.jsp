@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +26,15 @@
 <script type="text/javascript">
                 
 	 $(document).ready(function(){
-		 	var main = $('.bxslider').bxSlider({
-				       mode: 'fade',
-				       auto:true,
-				       speed:500,
-				       controls: false,
-				       pager: false
-				   })
+		 var main = $('.bxslider').bxSlider({
+				   mode: 'fade',
+				   auto:true,
+				   speed:500,
+				   controls: false,
+				   pager: false
+			 })
 				   
-	$.ajax({
+		$.ajax({
 			url : "allClientCount.do",
 			type : "GET",
 			success : function(data) {
@@ -43,10 +42,9 @@
 				let text = 'Hi-World에 오신것을 환영합니다';
 				let text2 = '총 가입자수 : '+data;
 				 $('#startpage1').append(text);
-				 $('#startpage2').append(text2);
-				 
-				}
-			})			  
+				 $('#startpage2').append(text2);		 
+			}
+		})			  
 			
 			var msg = '${msg}';
 			if(msg=='밴'){
@@ -128,7 +126,7 @@
                 		  $('#bodyContext').html(data);
                 	  })
             	 }else {
-					alert("로그인하세요");
+            		 Swal.fire("로그인 후 이용해 주세요");
 				}
             	 
              };
@@ -188,7 +186,7 @@
                 	var popupY = (window.screen.height/2)-(popupHeight/2);
                 	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
             	}else{
-            		alert("로그인하세요.");
+            		Swal.fire("로그인 후 이용해 주세요");
             	}
             	
             }
@@ -224,7 +222,7 @@
     					}
     				},
                   error: function(){
-                	  alert("에러입니다.")
+                	  Swal.fire("에러입니다");
                  		 }
                 	})
            
@@ -235,7 +233,7 @@
             	console.log("1234") 
             	let serial = '${sessionVO.userSerial}';
             	if(serial==''){
-            		alert("로그인하세요")
+            		Swal.fire("로그인 후 이용해주세요");
             	}else{
             		var ajaxOption={
                       		 type: "GET",
@@ -259,12 +257,9 @@
             
             /*  여기부터 userview */
    function updateName() {
-	   alert("버튼 눌렀어요");
 		var ajaxData = $('input[name=username]').val();
-		alert("여기가 오류난거야?")
 		var upDatech = 1;
 		console.log("여기 왔니?")
-		alert(ajaxData)
 		$.ajax({
 			url : "UserUpdate.do",
 			type:"POST",
@@ -291,70 +286,18 @@
     				},
     				success : function (data) {
     					if(data==1){
-    						alert("성공")
+    						Swal.fire("장바구니에 담겼습니다");
     					}else if(data==0){
-    						alert("이미 구매한 상품")
+    						Swal.fire("이미 구매한 상품입니다");
     					}else if(data==-1){
-    						alert("실패")
+    						Swal.fire("장바구니 담기에 실패하셨습니다");
     					}else if(data==-2){
-    						alert("이미 장바구니 들어감")
+    						Swal.fire("이미 장바구니에 들어가있습니다.");
     					}
     				}
     			})
     	}
     	
-    	function bay(ArticleName) {
-    		var UserSerial = '${sessionVO.userSerial}';
-    		
-    		/* alert 창 */
-    		const swalWithBootstrapButtons = Swal.mixin({
-     			customClass: {
-        		cancelButton: 'btn btn-danger',
-        		confirmButton: 'btn btn-success'
-      			},
-      			buttonsStyling: false
-    		})
-    		swalWithBootstrapButtons.fire({
-    	  		title: '정말 구매하실껀가요??',
-    			text: "구매 하신 후 환불은 어렵습니다.",
-    			icon: 'warning',
-    			showCancelButton: true,
-    			confirmButtonText: '구매 하지 않겠습니다.',
-    			cancelButtonText: '구매 하겠습니다.',
-    			reverseButtons: true
-    		}).then((result) => {
-    			
-    			if (result.isConfirmed) {
-    				swalWithBootstrapButtons.fire(
-    	 				      '취소 하였습니다.'
-    	 				    )
-     		} else if (result.dismiss === Swal.DismissReason.cancel) {
-     			$.ajax({
-    					type: "GET",
-    					url: "bay.do",
-    					data:{
-    						"UserSerial" : UserSerial,
-    						"ArticleName" : ArticleName
-    					},
-    					success: function (data) {
-    						if(data==1){
-    							swalWithBootstrapButtons.fire(
-    							     '결제 성공 하였습니다.'
-    			    			)
-    						}else if(data==0){
-    							swalWithBootstrapButtons.fire(
-    							     '밤톨이 부족합니다'
-    			    				)
-    						}else if(data==-1){
-    							swalWithBootstrapButtons.fire(
-    						    	 '이미 구매한 상품입니다.'
-    			    			)
-    						}
-    					}
-    				})
-    		}
-    		})
-    	}
     	
     	/*  여기부터 userview */
     	   function updateName() {
@@ -418,18 +361,6 @@
     	}
     	
 
-    	/* 홈페이지 즐겨찾기 */
-    	function bookmark_add() {
-    	     bookmark_url  = "도메인입력";
-    	     bookmark_name = "홈페이지 타이틀";
-    	    
-    	     try {
-    	      window.external.AddFavorite(bookmark_url,bookmark_name);
-    	     } catch(e) {
-    	      alert('이 브라우저는 즐겨찾기 추가 기능을 지원하지 않습니다.');
-    	      return false;
-    	     }
-    	 }
     	$(document).ready(function() {
 			$.ajax({
 				type: 'get',
@@ -755,9 +686,7 @@
 		              <li id="shopping" onclick="shopping('쇼핑')">
 		              		    쇼핑
 		              </li>
-<%-- 		              <li id="board" onclick="board('${sessionVO.userName}')">
-		                               	이웃찾기
-		              </li> --%>
+
 		               <li id="question" onclick="question()">
 		                          	  문의
 		              </li>

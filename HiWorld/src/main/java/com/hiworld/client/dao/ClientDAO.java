@@ -2,7 +2,6 @@ package com.hiworld.client.dao;
 
 import java.util.ArrayList;
 
-import javax.print.DocFlavor.STRING;
 
 import org.apache.ibatis.annotations.Param;
 

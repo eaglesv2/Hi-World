@@ -38,13 +38,15 @@
 
 	<!-- 물품 등록 -->
 	<insert id="insert">
-		INSERT INTO User_Article
+		INSERT 
+		INTO User_Article
 		VALUES(#{ArticleSerial},#{ArticleImg},#{ArticleKinds},#{ArticleName},#{UserSerial})
 	</insert>
 
 	<!-- 장바구니 -->
 	<insert id="basket">
-		INSERT INTO Shop_Basket
+		INSERT 
+		INTO Shop_Basket
 		VALUES(#{UserSerial},#{ArticleSerial})
 	</insert>
 	
@@ -85,7 +87,8 @@
 
 	<!-- 장바구니 한번에 결제 -->
 	<insert id="totalBay">
-		INSERT INTO User_Article
+		INSERT 
+		INTO User_Article
 		SELECT DISTINCT sa.ArticleSerial, sa.ArticleImg, sa.ArticleKinds, sa.ArticleName, sb.UserSerial
 		FROM Shop_Article sa, Shop_Basket sb
 		WHERE sa.ArticleSerial in (SELECT ArticleSerial FROM Shop_Basket WHERE UserSerial = #{UserSerial}) AND sb.UserSerial = #{UserSerial}
@@ -93,13 +96,15 @@
 	
 	<!-- 장바구니 전부 삭제 -->
 	<delete id="delAllBasket">
-		DELETE FROM Shop_Basket
+		DELETE 
+		FROM Shop_Basket
 		WHERE UserSerial = #{UserSerial}
 	</delete>
 	
 	<!-- 관리자 물품 등록 -->
 	<insert id="insertArticle">
-		INSERT INTO Shop_Article(ArticleImg, ArticleKinds, ArticleName, ArticlePrice, ArticleContent)
+		INSERT 
+		INTO Shop_Article(ArticleImg, ArticleKinds, ArticleName, ArticlePrice, ArticleContent)
 		VALUES (#{ArticleImg},#{ArticleKinds},#{ArticleName},#{ArticlePrice},#{ArticleContent})
 	</insert>
 </mapper>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -105,78 +104,67 @@
 				},
 				success : function (data) {
 					if(data==1){
-						alert("성공")
+						Swal.fire("구매에 성공하셨습니다");
 					}else if(data==0){
-						alert("이미 구매한 상품")
+						Swal.fire("이미 구매한 상품입니다");
 					}else if(data==-1){
-						alert("실패")
+						Swal.fire("구매에 실패하셨습니다");
 					}else if(data==-2){
-						alert("이미 장바구니 들어감")
+						Swal.fire("이미 장바구니에 들어가있습니다");
 					}
 				}
 			})
 		}else{
-			alert("로그인하세요");
+			Swal.fire("로그인 후 이용해주세요");
 		}
-}
-
-function bay(ArticleName) {
-	var UserSerial = '${sessionVO.userSerial}';
-	
-	if(UserSerial!=''&&UserSerial!=null){
-		/* alert 창 */
-		const swalWithBootstrapButtons = Swal.mixin({
- 			customClass: {
-    		cancelButton: 'btn btn-danger',
-    		confirmButton: 'btn btn-success'
-  			},
-  			buttonsStyling: false
-		})
-
-		swalWithBootstrapButtons.fire({
-	  		title: '정말 구매하실껀가요??',
-			text: "구매 하신 후 환불은 어렵습니다.",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: '구매 하지 않겠습니다.',
-			cancelButtonText: '구매 하겠습니다.',
-			reverseButtons: true
-		}).then((result) => {
-			
-			if (result.isConfirmed) {
-				swalWithBootstrapButtons.fire(
-	 				      '취소 하였습니다.'
-	 				    )
- 		} else if (result.dismiss === Swal.DismissReason.cancel) {
- 			$.ajax({
-					type: "GET",
-					url: "bay.do",
-					data:{
-						"UserSerial" : UserSerial,
-						"ArticleName" : ArticleName
-					},
-					success: function (data) {
-						if(data==1){
-							swalWithBootstrapButtons.fire(
-							     '결제 성공 하였습니다.'
-			    			)
-						}else if(data==0){
-							swalWithBootstrapButtons.fire(
-							     '밤톨이 부족합니다'
-			    				)
-						}else if(data==-1){
-							swalWithBootstrapButtons.fire(
-						    	 '이미 구매한 상품입니다.'
-			    			)
-						}
-					}
-				})
-		}
-		})
-	}else{
-		alert("로그인하세요");
 	}
-	
-}
+
+	function bay(ArticleName) {
+		var UserSerial = '${sessionVO.userSerial}';
+		
+		/* alert 창 */
+		if(UserSerial != ''){
+			Swal.fire({
+			  title: '정말 구매하시겠습니까??',
+			  text: "구매 하신 후 환불은 어렵습니다",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'yes'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+			    Swal.fire(
+			    	$.ajax({
+						type: "GET",
+						url: "bay.do",
+						data:{
+							"UserSerial" : UserSerial,
+							"ArticleName" : ArticleName
+						},
+						success: function (data) {
+							if(data==1){
+								Swal.fire('결제 성공 하였습니다.')
+							}else if(data==0){
+								Swal.fire('밤톨이 부족합니다 5초뒤 충전페이지가 열립니다');
+								setTimeout(() => {
+									var popupWidth =880
+				                	var popupHeight =580
+				                	var popupX = (window.screen.width/2)-(popupWidth/2);
+				                	var popupY = (window.screen.height/2)-(popupHeight/2);
+				                	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+								}, 5000);
+							}else if(data==-1){
+								Swal.fire('이미 구매한 상품입니다.')
+							}
+						}
+					})
+			    )
+			  }
+		  })
+		}else{
+			Swal.fire("로그인 후 이용해주세요");
+		}
+	}
 </script>
 </html>

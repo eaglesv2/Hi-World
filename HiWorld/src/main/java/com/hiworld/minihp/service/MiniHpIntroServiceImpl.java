@@ -10,10 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.dao.MiniHpIntroDAO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
-import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 @Service

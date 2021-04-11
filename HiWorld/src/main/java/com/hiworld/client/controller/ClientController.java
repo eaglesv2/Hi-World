@@ -2,7 +2,6 @@ package com.hiworld.client.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,6 +69,13 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
+// @@@@@@@@@@@@@@@ 페이지 시작 @@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/")
+	public String start() {
+		return "redirect:/login.do";
+	}
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
@@ -137,9 +143,6 @@ public class ClientController {
 			userName = vo.getUserName();
 		}
 		
-		 
-		
-		
 		boardVO.setUserSerial(userSerial);
 		boardVO.setUserName(userName);
 		boardVO.setBanUser(banUser);
@@ -200,7 +203,6 @@ public class ClientController {
 		
 		/* 댓글정보 가져오기 */
 		ArrayList<BoardReplyVO> list = clientService.getBoardReply(boardVO);
-		
 		
 		model.addAttribute("boardVO",boardVO);
 		model.addAttribute("list",list);
@@ -295,7 +297,6 @@ public class ClientController {
 		} else {
 			int listCnt = clientService.countBoardBanPage();
 			MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
-			
 			model.addAttribute("alist",clientService.getAllBanClientData());
 			model.addAttribute("list",clientService.getAllBanClient(curPage,pagingVO.getPageSize()));
 			model.addAttribute("listCnt",listCnt);
