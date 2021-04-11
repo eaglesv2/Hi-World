@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hiworld.minihp.vo.MiniHPVideoFolderVO;
-import com.hiworld.minihp.vo.MiniHpPictureVO;
 import com.hiworld.minihp.vo.MiniHpVideoReplyVO;
 import com.hiworld.minihp.vo.MiniHpVideoVO;
 
