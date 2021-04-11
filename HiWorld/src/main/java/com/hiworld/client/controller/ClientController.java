@@ -239,13 +239,13 @@ public class ClientController {
 		}
 		/* 정보 등록 */
 		clientService.insertReply(boardVO);
-		
+		String Serial = clientService.getBoardReplySerial(boardVO);
 		/* 리턴값 등록 */
-		String data = "<tr>";
+		String data = "<tr id='"+Serial+"'>";
 		data += "<td>"+boardVO.getReplyContent()+"</td>";
 		data += "<td>"+userName+"("+userID+")"+"</td>";
 		data += "<td>"+date+"</td>";
-		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td style='width: 50px;'><div onclick=\"deleteReply(${kinds.replySerial})\">삭제</div></td> </c:if>";
+		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td style='width: 50px;'><div class=\"noticehover\" onclick=\"deleteReply('"+Serial+"')\">삭제</div></td> </c:if>";
 		data += "</tr>";
 
 		

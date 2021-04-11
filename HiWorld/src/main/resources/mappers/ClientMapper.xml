@@ -247,6 +247,13 @@
 		ORDER BY replySerial DESC
 	</select>
 	
+	<!-- 댓글 시리얼번호 -->
+	<select id="getBoardReplySerial" resultType="String">
+		SELECT replySerial
+		FROM HW_Board_Reply
+		WHERE userSerial = #{userSerial} AND userName = #{userName} AND boardSerial = #{boardSerial} AND replyContent = #{replyContent}
+	</select>
+	
 	<!-- 게시판 조회 1올리기 -->
 	<update id="lookUp">
 		UPDATE HW_Board
