@@ -18,6 +18,7 @@
 
 	IMP.init('imp97557890');
 
+
 	// 로그인한사람 정보
 	var id = "${sessionVO.userID}"
 	var name = "${sessionVO.userName}"
@@ -34,6 +35,7 @@
 			var sell
 			var count
 			var check = $('#chargeEX').val();
+
 			if (check == '충전 예정금액 : 10000원') {
 				bamTol = '밤톨10개'
 				sell = 10000;
