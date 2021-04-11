@@ -67,26 +67,28 @@ function updateNeighbor(neighborID){
 </head>
 <body>
 <form name="neighborSetting">
-	<h3>이웃 관리</h3>
-	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
+	<h3 style="margin-bottom: 0px; text-align: left; margin-left: 10px;">이웃 관리</h3>
+	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0" style="margin-top: 0px;">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
 	
-	<div align ="left" valign="top" id="infoTxt" class="infoTxt">
+	<div align ="left" valign="top" id="infoTxt" class="infoTxt" style="height: 355px;">
 		<c:if test="${listLength != 0}">
 			<c:forEach var="neighborList" items="${neighborList}">
-				<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
-				<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborSerial}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborSerial}');"/><br/>
-				<input type="hidden" name="userSerial" value="${neighborList.userSerial}">
-				<input type="hidden" name="userName" value="${neighborList.userName}">
-				<input type="hidden" name="userValue" value="${neighborList.userValue}">
-				<input type="hidden" name="neighborSerial" value="${neighborList.neighborSerial}">
-				<input type="hidden" name="neighborName" value="${neighborList.neighborName}">
-				<input type="hidden" name="neighborValue" value="${neighborList.neighborValue}">
+				<div style="padding-bottom: 10px;">
+					<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
+					<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborSerial}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborSerial}');"/><br/>
+					<input type="hidden" name="userSerial" value="${neighborList.userSerial}">
+					<input type="hidden" name="userName" value="${neighborList.userName}">
+					<input type="hidden" name="userValue" value="${neighborList.userValue}">
+					<input type="hidden" name="neighborSerial" value="${neighborList.neighborSerial}">
+					<input type="hidden" name="neighborName" value="${neighborList.neighborName}">
+					<input type="hidden" name="neighborValue" value="${neighborList.neighborValue}">
+				</div>
 			</c:forEach>
 		</c:if>
 		<c:if test="${listLength == 0}">
-			<option value="">이웃이 없습니다</option>
+			<option value="" style="margin-left: 10px; text-align: center; padding-top: 100px;">이웃이 없습니다</option>
 		</c:if>
 	</div>
 	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
