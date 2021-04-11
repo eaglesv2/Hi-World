@@ -69,6 +69,13 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
+// @@@@@@@@@@@@@@@ 페이지 시작 @@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/")
+	public String start() {
+		return "redirect:/login.do";
+	}
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
