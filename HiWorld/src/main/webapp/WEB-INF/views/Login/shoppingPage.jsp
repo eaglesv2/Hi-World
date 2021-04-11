@@ -260,6 +260,12 @@
 	
 	function bay(ArticleName) {
 		var UserSerial = '${sessionVO.userSerial}';
+
+		var ArticleArr = ArticleName.split(',');
+		var ArticlePrice = ArticleArr[1];
+		console.log(ArticlePrice)
+		
+		
 		
 		if(UserSerial!=''&&UserSerial!=null){
 			/* alert 창 */
@@ -282,9 +288,7 @@
 			}).then((result) => {
 				
 				if (result.isConfirmed) {
-					swalWithBootstrapButtons.fire(
-		 				      '취소 하였습니다.'
-		 				    )
+					swalWithBootstrapButtons.fire('취소 하였습니다.')
 	 		} else if (result.dismiss === Swal.DismissReason.cancel) {
 	 			$.ajax({
 						type: "GET",
@@ -295,17 +299,27 @@
 						},
 						success: function (data) {
 							if(data==1){
-								swalWithBootstrapButtons.fire(
-								     '결제 성공 하였습니다.'
-				    			)
+								swalWithBootstrapButtons.fire('결제 성공 하였습니다.');
+								let UserCashList = $('#haveCash').text();
+								let first = UserCashList.indexOf(': ');
+								let last = UserCashList.indexOf('개');
+								let UserCash = UserCashList.substring(first+2, last);
+								console.log(UserCash);
+								UserCash = UserCash-ArticlePrice;
+								$('#haveCash').html('보유 밤톨: '+UserCash+'개');
 							}else if(data==0){
-								swalWithBootstrapButtons.fire(
-								     '밤톨이 부족합니다'
-				    				)
+								swalWithBootstrapButtons.fire('밤톨이 부족합니다');
+
+								setTimeout(function() {
+									var popupWidth =880
+				                	var popupHeight =580
+				                	var popupX = (window.screen.width/2)-(popupWidth/2);
+				                	var popupY = (window.screen.height/2)-(popupHeight/2);
+				                	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)
+								}, 3000)
+								  
 							}else if(data==-1){
-								swalWithBootstrapButtons.fire(
-							    	 '이미 구매한 상품입니다.'
-				    			)
+								swalWithBootstrapButtons.fire('이미 구매한 상품입니다.');
 							}
 						}
 					})

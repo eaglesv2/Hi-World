@@ -79,6 +79,7 @@ public class ClientController {
 		
 		
 		/* 페이징 처리 */
+		// 총 페이지 개수를 카운트
 		int listCnt = clientService.countNoticePage();
 		MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
 		
@@ -908,7 +909,7 @@ public class ClientController {
 				int cal = clientPrice - articlePrice;
 				vo.setArticlePrice(cal);
 				articleService.cash(vo);
-				sessionVO.setUserSerial(cal);
+				sessionVO.setUserCash(cal);
 
 				/* 구매한 상품 장바구니 삭제 */
 				articleService.delBasket(vo);
