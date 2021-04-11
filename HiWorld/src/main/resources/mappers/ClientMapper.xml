@@ -203,8 +203,8 @@
 	
 	<!-- 게시판 업로드 -->
 	<insert id="BoardSubmit">
-		INSERT INTO HW_Board (userSerial, title, content, lookUp, userName)
-		VALUES (#{userSerial},#{title},#{content}, 0, #{userName})
+		INSERT INTO HW_Board (userSerial, title, content, lookUp, userName, banUser)
+		VALUES (#{userSerial},#{title},#{content}, 0, #{userName}, #{banUser})
 	</insert>
 	
 	<!-- 게시판 갯수 가져오기 -->

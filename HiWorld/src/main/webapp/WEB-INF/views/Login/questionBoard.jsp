@@ -15,8 +15,8 @@
 	<div id="board_con">
 		<div id="boardheader">문의사항 등록하기</div>
 		<form name="BoardSubmit">
-			<input type="text" name="title" placeholder="제목을 입력하세요."/>	<br /> 
-			<textarea rows="10" cols="30" name="content" placeholder="문의사항 내용을 입력하세요."></textarea> <br />
+			<input id="title" type="text" name="title" placeholder="제목을 입력하세요."/>	<br /> 
+			<textarea id="textarea" rows="10" cols="30" name="content" placeholder="문의사항 내용을 입력하세요. [% 밴을먹은 회원시 아이디 입력은 필수사항 입니다!!]"></textarea> <br />
 		</form>
 		<button onclick="submit()">등록하기</button>
 	</div>
@@ -28,26 +28,38 @@
 		function submit() {
 			
 			var BoardSubmit = $("form[name=BoardSubmit]").serialize();
+			var title = $("#title").val();
+			var textarea = $("#textarea").val();
 			
-			$.ajax({
-				url : "BoardSubmit.do",
-				type : "GET",
-				data : BoardSubmit,
-				success : function(data) {
-					alert("등록되었습니다.");
-					var ajaxOption3={
-                   		 type: "GET",
-                            url : "questionPage.do",
-                            dataType : "html", 
-                            async:true,
-                            cache:false
-                    	}
-               	 	$.ajax(ajaxOption3).done(function(data){
-               		  //Contents 영역 교체
-               		  	$('#bodyContext').html(data);
-               	 	 })
+			if(title=='' || title == null){
+				alert("제목을 작성하세요.");
+			}else{
+				if(textarea=='' || textarea == null){
+					alert("내용을 작성하세요");
+				}else{
+					$.ajax({
+						url : "BoardSubmit.do",
+						type : "GET",
+						data : BoardSubmit,
+						success : function(data) {
+							alert("등록되었습니다.");
+							var ajaxOption3={
+		                   		 type: "GET",
+		                            url : "questionPage.do",
+		                            dataType : "html", 
+		                            async:true,
+		                            cache:false
+		                    	}
+		               	 	$.ajax(ajaxOption3).done(function(data){
+		               		  //Contents 영역 교체
+		               		  	$('#bodyContext').html(data);
+		               	 	 })
+						}
+					})
 				}
-			})
+			}
+			
+			
 			
 		}
 </script>

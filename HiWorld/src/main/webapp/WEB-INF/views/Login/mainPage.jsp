@@ -46,7 +46,19 @@
 				 $('#startpage2').append(text2);
 				 
 				}
-			})			   
+			})			  
+			
+			var msg = '${msg}';
+			if(msg=='밴'){
+				Swal.fire({
+					  icon: 'error',
+					  title: '당신은 밴을 먹었습니다',
+					  text: '문의사항 혹은 고객센터로 문의하세요',
+					  footer: '<a href="#" onclick="question()">문의사항으로 이동하시려면 <text style="color:blue;">여기</text>를 누르세요</a>'
+					})
+			}else if(msg=='틀림'){
+				Swal.fire('아이디 혹은 비밀번호를 틀렸습니다.');
+			}
 	});
       
         function signUp(){
@@ -121,8 +133,8 @@
             	 
              };
              
-             function question(Name){
-            	 if(Name!="" && Name!=null){
+             function question(){
+            	 
              	 console.log("1234") 
                  var ajaxOption4={
                 		 type: "GET",
@@ -130,7 +142,6 @@
                          dataType : "html", 
                          async:true,
                          cache:false
-                		 
                  }
             	  $.ajax(ajaxOption4).done(function(data){
             		  //Contents 영역삭제
@@ -139,9 +150,6 @@
             		  //Contents 영역 교체
             		  $('#bodyContext').html(data);
             	  })
-            	 }else{
-            		 alert("로그인하세요");
-            	 }
              };
              
              function myinfo(){
@@ -750,7 +758,7 @@
 <%-- 		              <li id="board" onclick="board('${sessionVO.userName}')">
 		                               	이웃찾기
 		              </li> --%>
-		               <li id="question" onclick="question('${sessionVO.userName}')">
+		               <li id="question" onclick="question()">
 		                          	  문의
 		              </li>
 		              
@@ -776,6 +784,7 @@
 					</div>
 	           </div>   
          </div>
+         
          <hr />
         <div class="leftCon">
             <div id="Nav">
@@ -850,7 +859,6 @@
 
 						</c:if>
 					</c:when>
-
 
 
 					<c:otherwise>

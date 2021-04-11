@@ -41,7 +41,7 @@
 							<tr id="${kinds.boardSerial}">
 								<td>${number}</td>
 								<c:choose>
-									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
+									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1 || kinds.banUser == 1}">
 										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
 									<c:otherwise>
@@ -90,7 +90,7 @@
 							<tr id="${kinds.boardSerial}">
 								<td>${number}</td>
 								<c:choose>
-									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
+									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1 || kinds.banUser == 1}">
 										<td style="display: none;">${kinds.title} ${kinds.userName}</td>
 										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
@@ -128,62 +128,6 @@
 					</tfoot>
 
 				</table>
-
-
-				<div style="display: none;">
-					<table id="adclient">
-						<tr>
-							<td>NO.</td>
-							<td>제목</td>
-							<td>작성자</td>
-							<td>작성일</td>
-							<td>조회수</td>
-							<td>답변여부</td>
-							<td></td>
-						</tr>
-						<tbody id="tbody">
-							<c:set var="number" value="${number}"/>
-							<c:forEach var="kinds" items="${list}">
-								<tr id="${kinds.boardSerial}">
-									<td>${number}</td>
-									<c:choose>
-										<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1}">
-											<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> ${kinds.userName}</td>
-										</c:when>
-										<c:otherwise>
-											<td>비밀글입니다  ${kinds.userName}</td>
-										</c:otherwise>
-									</c:choose>
-									<td>${kinds.cDate}</td>
-									<td>${kinds.lookUp}</td>
-									<td></td>
-								<c:choose>
-									<c:when test="${kinds.adminReply > 0}">
-										<td>관리자 답변완료</td>
-									</c:when>
-									<c:otherwise>
-										<td>관리자 미답변</td>
-									</c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${kinds.adminReply > 0}">
-										<td>관리자 답변완료</td>
-									</c:when>
-									<c:otherwise>
-										<td>관리자 미답변</td>
-									</c:otherwise>
-								</c:choose>
-
-								<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
-								</c:if>
-								</tr>
-							<c:set var="number" value="${number+1}"/>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-
 
 
 			</c:when>
@@ -236,6 +180,8 @@
 				<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 			</c:if>
 		</div>
+		
+		
 		<a href="#" onclick="questionWrite()">문의사항 작성하기</a>
 
 	</div>
@@ -257,12 +203,14 @@
 
 				if (key == '') {
 					$("#tbody>tr").show();
-					/* $("#tfoot").hide();
-					$("#tfoot>tr").hide(); */
+					$("#tfoot").hide();
+					$("#tfoot>tr").hide();
+					$("#paging").show();
 				} else {
 					/* 일단 검색시 목록 전체안보이게 */
 					$("#tbody>tr").hide();
-
+					$("tfoot>tr").hide();
+					$("#paging").hide();
 					var writer = $("#tfoot>tr>td:nth-child(2):contains('" + key + "')");
 					$("#tfoot").show();
 					$(writer).parent().show();
