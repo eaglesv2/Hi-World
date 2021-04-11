@@ -9,13 +9,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <link rel="stylesheet" href="resources/css/reset.css">
 <link rel="stylesheet" href="resources/css/BamTolCharge.css">
 <script type="text/javascript">
 	//생략가능
 	var IMP = window.IMP;
 
-	IMP.init('imp19609949');
+	IMP.init('imp97557890');
 
 	// 로그인한사람 정보
 	var id = "${sessionVO.userID}"
@@ -32,7 +33,7 @@
 			var bamTol
 			var sell
 			var count
-			console.log(check);
+			var check = $('#chargeEX').val();
 			if (check == '충전 예정금액 : 10000원') {
 				bamTol = '밤톨10개'
 				sell = 10000;
@@ -75,34 +76,20 @@
 								"UserCash" : userCash
 							},
 							success : function(data) {
-								alert("결제 성공")
+								Swal.fire("결제 성공")
 								opener.document.location.reload();
 								self.close();
 							}
 						})
 
 					} else {
-						alert("결제 실패")
+						Swal.fire("결제 실패")
 						// 결제 실패 시 로직,
-						$.ajax({
-							type : "GET",
-							url : "userCash.do",
-							data : {
-								"count" : count,
-								"UserCash" : userCash
-							},
-							success : function(data) {
-								alert("결제 성공")
-								opener.document.location.reload();
-								self.close();
-							}
-						})
-
 					}
 				});
 			}
 		}else if ($('#checkbox').is(':checked')==false) {
-			alert('동의에 수락하세요')
+			Swal.fire('동의에 수락하세요')
 		}
 		
 
@@ -158,6 +145,9 @@
 <body>
 	<div id="chargeContainer">
 		<div id="leftCon">
+			<div id="mainlogo">
+				<img src="resources/images/로고7.png" alt="사진" />
+			</div>
 			<div id="logo">
 				<div id="logoimg">
 					<img id="imgID" src="resources/images/admin/밤톨메인.png" alt="이미지가 들어갑니다." />

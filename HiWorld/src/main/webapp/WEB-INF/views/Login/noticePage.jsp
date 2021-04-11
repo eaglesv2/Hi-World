@@ -71,6 +71,7 @@
         <c:if test="${pagination.curPage ne 1}">
             <a href="#" class="noticehover" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
         </c:if>
+        <c:if test="${listCnt > 15}">
         <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
             <c:choose>
                 <c:when test="${pageNum eq  pagination.curPage}">
@@ -81,6 +82,7 @@
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+        </c:if>
         <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
             <a href="#" class="noticehover" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
         </c:if>

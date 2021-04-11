@@ -486,6 +486,7 @@
 			})
 		})	
     	
+		
 		function Id_Pw_find(){
         	var _width = '550';
     	    var _height = '500';
@@ -892,7 +893,7 @@
 						<div id="naver_id_login" style="text-align: center">
 
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}" style="width:200px; height:33px;"> <img width="200px" height="33px"
+							<a href="${url}" style=" display: block;margin-bottom: -3px;width: 200px;margin-left: 35px;"> <img width="200px" height="33px"
 								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
 							</a>
 						</div>
@@ -957,5 +958,7 @@
 			alert(JSON.stringify(err)); 
 			} 
 		});
+	
+	
 </script>
 </html>

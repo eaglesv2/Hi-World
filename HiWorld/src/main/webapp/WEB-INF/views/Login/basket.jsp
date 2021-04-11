@@ -128,7 +128,9 @@ th img{
 	
 	
 			<c:otherwise>
+			<div style="text-align: center">
 				장바구니에 담은 목록이 아무것도 없습니다.
+			</div>
 			</c:otherwise>
 	
 	
