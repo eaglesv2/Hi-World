@@ -126,6 +126,9 @@ public interface ClientDAO {
 	/* 게시판 댓글 */
 	ArrayList<BoardReplyVO> getBoardReply(BoardVO boardVO);
 	
+	/* 댓글 시리얼번호 */
+	String getBoardReplySerial(BoardVO boardVO);
+	
 	/* 조회 1 올리기 */
 	void lookUp(BoardVO boardVO);
 	

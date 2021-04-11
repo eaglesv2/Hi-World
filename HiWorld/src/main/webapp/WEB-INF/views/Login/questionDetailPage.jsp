@@ -88,7 +88,7 @@
 			type : "GET",
 			data : {"replySerial":replySerial},
 			success : function(data) {
-				$('#replySerial').remove();
+				$('#'+replySerial).remove();
 			}
 		})
 	}

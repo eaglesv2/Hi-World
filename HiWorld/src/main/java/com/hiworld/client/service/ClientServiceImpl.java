@@ -354,6 +354,12 @@ public class ClientServiceImpl implements ClientService {
 		return dao.getBoardReply(boardVO);
 	}
 	
+	/* 댓글 시리얼 번호 */
+	@Override
+	public String getBoardReplySerial(BoardVO boardVO) {
+		return dao.getBoardReplySerial(boardVO);
+	}
+	
 	/* 조회 1 올리기 */
 	@Override
 	public void lookUp(BoardVO boardVO) {

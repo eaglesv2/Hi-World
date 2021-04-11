@@ -120,6 +120,9 @@ public interface ClientService {
 	/* 댓글 등록 */
 	void insertReply(BoardVO boardVO);
 	
+	/* 댓글 시리얼번호 */
+	String getBoardReplySerial(BoardVO boardVO);
+	
 	/* 댓글 삭제 */
 	void ReplyDelete(BoardReplyVO boardReplyVO);
 	
