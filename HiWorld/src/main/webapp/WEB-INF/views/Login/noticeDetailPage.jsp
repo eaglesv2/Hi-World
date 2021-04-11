@@ -35,7 +35,7 @@
 						<td>${kinds.userName}(${kinds.userID})</td>
 						<td>${kinds.cDate}</td>
 						<c:if test="${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}">
-							<td style="width:50px;"><div onclick="deleteReply('${kinds.replySerial}')">삭제</div></td>
+							<td style="width:50px;"><div class="noticehover" onclick="deleteReply('${kinds.replySerial}')">삭제</div></td>
 						</c:if>
 					</tr>
 				</c:forEach>

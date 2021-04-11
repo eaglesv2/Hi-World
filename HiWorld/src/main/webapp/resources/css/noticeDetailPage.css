@@ -20,3 +20,8 @@
 	overflow: scroll;
     overflow-x: hidden;
 }
+
+.noticehover:hover{
+	color:red;
+	cursor: pointer;
+}
