@@ -29,7 +29,7 @@
 				<th>${kinds.articlePrice}</th>
 				<th><a href="#"  class="shoppinghover"	onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
 				<th><a href="#"  class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
-				<th><input type="button" value="10초 미리듣기"  class="shoppinghover" onclick="PLAY('${kinds.articleImg}')"/></th>
+				<th><div class="shoppinghover" onclick="PLAY('${kinds.articleImg}')">10초 미리듣기</div></th>
 			</tr>
 		</c:forEach>
 	</table>
