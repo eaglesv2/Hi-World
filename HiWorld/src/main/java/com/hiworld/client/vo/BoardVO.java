@@ -14,9 +14,16 @@ public class BoardVO {
 	private String replyContent;
 	private Date cDate;
 	private int lookUp;
+	private int banUser;
 	
 	
 	
+	public int getBanUser() {
+		return banUser;
+	}
+	public void setBanUser(int banUser) {
+		this.banUser = banUser;
+	}
 	public int getAdminReply() {
 		return adminReply;
 	}

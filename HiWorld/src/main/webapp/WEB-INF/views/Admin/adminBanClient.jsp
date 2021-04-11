@@ -127,7 +127,7 @@
 		}else{
 			/* 일단 검색시 목록 전체안보이게 */
 			$("#tbody>tr").hide();
-		
+			$('#tfoot>tr').hide();
 			var writer = $("#tfoot>tr>td:nth-child(2):contains('"+key+"')");
 			$("#tfoot").show();
 			$(writer).parent().show();

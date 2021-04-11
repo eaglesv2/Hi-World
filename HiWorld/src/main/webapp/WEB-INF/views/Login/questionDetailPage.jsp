@@ -40,7 +40,7 @@
 				<c:forEach var="kinds" items="${list}">
 					<tr id="${kinds.replySerial}">
 						<td>${kinds.replyContent}</td>
-						<td>${kinds.userName}(${kinds.userID})</td>
+						<td>${kinds.userName}</td>
 						<td>${kinds.cDate}</td>
 						<c:if test="${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}">
 							<td><button onclick="deleteReply('${kinds.replySerial}')">삭제</button></td>
@@ -67,8 +67,6 @@
 
 <script>
 	function replyInsert() {
-		var userSerial = '${sessionVO.userSerial}';
-		if(userSerial!=''){
 			var reply = $("form[name=reply]").serialize();
 			$.ajax({
 				url : 'replyInsert.do',
@@ -81,9 +79,6 @@
 					$('#replyContent').val('');
 				}
 			})
-		}else{
-			alert("로그인하세요");
-		}
 	}
 	
 	function deleteReply(replySerial) {
