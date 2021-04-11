@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -67,7 +66,7 @@
 					<tr id="${kinds.userSerial}">
 						<td style="width:150px;text-align: center;">${kinds.userSerial}</td>
 						<td>${kinds.userName}(${kinds.userID})</td>
-						<td><input type="button" value="Ban" onclick="UserBan(${kinds.userSerial})" /></td>
+						<td><input type="button" value="unBan" onclick="UserBan(${kinds.userSerial})" /></td>
 					</tr>
 				</c:forEach>
 		</tfoot>

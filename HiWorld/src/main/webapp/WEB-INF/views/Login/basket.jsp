@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
@@ -181,14 +180,14 @@ th img{
 			success : function(data) {
 				if (data === 1) {
 					/* 결제 성공 */
-					alert("결제성공")
+					Swal.fire("결제성공");
 					$(tr).remove();
 					$(totalTr).remove();
 					var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
 					$('#tbody').append(innerHtml);
 				} else {
 					/* 밤톨부족 결제 실패 */
-					alert("결제실패")
+					Swal.fire("결제실패");
 				}
 			}
 		})

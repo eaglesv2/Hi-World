@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,12 +6,9 @@
 <link rel="stylesheet" href="resources/css/questionMainPage.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-
-
 
 
 	<div id="Context">
@@ -60,12 +56,7 @@
 										<td>관리자 미답변</td>
 									</c:otherwise>
 								</c:choose>
-<%-- 								<c:if test="${kinds.adminReply > 0}">
-									<td>관리자 답변완료</td>
-								</c:if>
-								<c:if test="${kinds.adminReply < 0}">
-									<td>관리자 미답변</td>
-								</c:if> --%>
+
 								<c:choose>
 									<c:when test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">
 										<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
@@ -74,11 +65,7 @@
 										<td></td>
 									</c:otherwise>
 								</c:choose>
-								
-								<%-- <c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
-								</c:if> --%>
-								
+
 							</tr>
 						<c:set var="number" value="${number+1}"/>
 						</c:forEach>
@@ -119,9 +106,7 @@
 									</c:otherwise>
 								</c:choose>
 
-						<%-- 		<c:if test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">	
-									<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
-								</c:if> --%>
+
 							</tr>
 						<c:set var="number" value="${number+1}"/>
 						</c:forEach>
@@ -133,11 +118,6 @@
 			</c:when>
 
 
-
-
-
-
-
 		<c:otherwise>
 			등록된 문의사항이 없습니다.
 		</c:otherwise>
@@ -145,9 +125,6 @@
 
 
 		</c:choose>
-
-
-
 
 
 
@@ -181,9 +158,9 @@
 			</c:if>
 		</div>
 		
-		
-		<a href="#" onclick="questionWrite()">문의사항 작성하기</a>
-
+		<c:if test="${sessionVO.userSerial != 1}">
+			<a href="#" onclick="questionWrite()">문의사항 작성하기</a>
+		</c:if>
 	</div>
 
 

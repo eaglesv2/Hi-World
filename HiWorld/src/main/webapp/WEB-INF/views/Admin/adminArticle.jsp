@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,22 +16,22 @@
 	
 		<div class="uploadDiv">
 			사진  <input type="file" name="uploadFile" multiple id="uploadFile" />
+			</div>
+				상품 종류 : <select name="ArticleKinds">
+							<option value="">종류를 선택하세요</option>
+							<option value="캐릭터">캐릭터</option>
+							<option value="배경화면">배경화면</option>
+							<option value="배경음악">배경음악</option>
+							<option value="마우스">마우스모양</option>
+				 		 </select> <br /> 
+				상품 이름 : <input type="text" name="ArticleName" id="ArticleFile" />	<br /> 
+				상품 가격 : <input type="number" name="ArticlePrice" /> <br />
+				<textarea rows="10" cols="30" name="ArticleContent"	placeholder="상품 설명을 간단히 작성하세요"></textarea>
+		
+		
+				<button id="uploadBtn">업로드</button>
+			</div>
 		</div>
-			상품 종류 : <select name="ArticleKinds">
-					<option value="">종류를 선택하세요</option>
-					<option value="캐릭터">캐릭터</option>
-					<option value="배경화면">배경화면</option>
-					<option value="배경음악">배경음악</option>
-					<option value="마우스">마우스모양</option>
-			   </select> <br /> 
-			상품 이름 : <input type="text" name="ArticleName" id="ArticleFile" />	<br /> 
-			상품 가격 : <input type="number" name="ArticlePrice" /> <br />
-		<textarea rows="10" cols="30" name="ArticleContent"	placeholder="상품 설명을 간단히 작성하세요"></textarea>
-	
-	
-		<button id="uploadBtn">업로드</button>
-	</div>
-</div>
 </body>
 
 <script>
@@ -69,7 +68,7 @@
 			formData.append("uploadFile", files[i]);
 		}
 		if(ArticleKinds==''){
-			alert("종류를 선택하세요");
+			Swal.fire("종류를 선택하세요");
 		}else{
 			$.ajax({
 				url : 'ArticleUpload.do',
@@ -96,7 +95,7 @@
 							success : function(result){
 								/* 성공 */
 								console.log('성공');
-								alert("등록되었습니다");
+								Swal.fire("등록되었습니다")
 								
 								var ajaxOption2={
 				                		 type: "GET",
@@ -106,8 +105,7 @@
 				                         async:true,
 				                         cache:false
 				                 }
-				                 
-				                 
+
 				            	  $.ajax(ajaxOption2).done(function(data){
 				            		  //Contents 영역삭제
 				            		  $('#bodyContext').children().remove();
@@ -121,6 +119,7 @@
 					} else {
 						/* 업로드 실패 */
 						console.log('실패');
+						Swal.fire("등록실패")
 					}
 				}
 			})
