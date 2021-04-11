@@ -42,7 +42,7 @@
 								<td>${number}</td>
 								<c:choose>
 									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1 || kinds.banUser == 1}">
-										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
+										<td><a href="#" class="questionhover3" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
 									<c:otherwise>
 										<td>비밀글입니다</td>
@@ -68,7 +68,7 @@
 								</c:if> --%>
 								<c:choose>
 									<c:when test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">
-										<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+										<td><div class="questionhover" onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
 									</c:when>
 									<c:otherwise>
 										<td></td>
@@ -92,7 +92,7 @@
 								<c:choose>
 									<c:when	test="${kinds.userSerial eq sessionVO.userSerial || sessionVO.userSerial == 1 || kinds.banUser == 1}">
 										<td style="display: none;">${kinds.title} ${kinds.userName}</td>
-										<td><a href="#" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
+										<td><a href="#" class="questionhover3" onclick="boardView('${kinds.boardSerial}')">${kinds.title}</a> </td>
 									</c:when>
 									<c:otherwise>
 										<td style="display: none;">비밀글입니다 ${kinds.userName}</td>
@@ -112,7 +112,7 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${sessionVO.userSerial eq kinds.userSerial || sessionVO.userSerial == 1}">
-										<td><div onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
+										<td><div class="questionhover" onclick="deleteBoard('${kinds.boardSerial}')">삭제</div></td>
 									</c:when>
 									<c:otherwise>
 										<td></td>
@@ -154,35 +154,35 @@
 
 		<div id="paging">
 			<c:if test="${pagination.curRange ne 1 }">
-				<a href="#" onClick="fn_paging(1)">[처음]</a>
+				<a href="#" class="questionhover" onClick="fn_paging(1)">[처음]</a>
 			</c:if>
 			<c:if test="${pagination.curPage ne 1}">
-				<a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a>
+				<a href="#" class="questionhover" onClick="fn_paging('${pagination.prevPage }')">[이전]</a>
 			</c:if>
 			<c:forEach var="pageNum" begin="${pagination.startPage}"
 				end="${pagination.endPage }">
 				<c:choose>
 					<c:when test="${pageNum eq  pagination.curPage}">
-						<span style="font-weight: bold;"><a href="#"
+						<span style="font-weight: bold;"><a href="#" class="questionhover"
 							onClick="fn_paging('${pageNum }')">${pageNum }</a></span>
 					</c:when>
 					<c:otherwise>
-						<a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a>
+						<a href="#" class="questionhover" onClick="fn_paging('${pageNum }')">${pageNum }</a>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			<c:if
 				test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
-				<a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a>
+				<a href="#" class="questionhover" onClick="fn_paging('${pagination.nextPage }')">[다음]</a>
 			</c:if>
 			<c:if
 				test="${pagination.curRange ne pagination.rangeCnt && pagination.rangeCnt > 0}">
-				<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
+				<a href="#" class="questionhover" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
 			</c:if>
 		</div>
 		
 		
-		<a href="#" onclick="questionWrite()">문의사항 작성하기</a>
+		<a href="#" class="questionhover2" onclick="questionWrite()">문의사항 작성하기</a>
 
 	</div>
 

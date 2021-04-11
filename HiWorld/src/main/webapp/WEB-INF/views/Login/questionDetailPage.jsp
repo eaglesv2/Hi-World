@@ -9,11 +9,17 @@
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<style>
+	#none{
+		text-align: center;
+	}	
+</style>
 </head>
 <body>
 	<table id="questionDtable">
 		<tr>
-			<td>${boardVO.title}${boardVO.cDate} ${boardVO.userName}</td>
+			<td>${boardVO.title}</td>
 		</tr>
 		<tr>
 			<td><textarea rows="20" cols="80" readonly disabled="disabled">${boardVO.content}</textarea></td>
@@ -31,8 +37,8 @@
 	<table>
 		<tr id="replyTable">
 			<td id="dat">댓글</td>
-			<td>작성자</td>
-			<td>작성일</td>
+			<td style="width:270px;font-weight: 600;color:orangered;">작성자</td>
+			<td style="width:400px;font-weight: 600;color:orangered;">작성일</td>
 			<td></td>
 		</tr>
 		<c:choose>
@@ -40,10 +46,10 @@
 				<c:forEach var="kinds" items="${list}">
 					<tr id="${kinds.replySerial}">
 						<td>${kinds.replyContent}</td>
-						<td>${kinds.userName}</td>
+						<td>${kinds.userName}(${kinds.userID})</td>
 						<td>${kinds.cDate}</td>
 						<c:if test="${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}">
-							<td><button onclick="deleteReply('${kinds.replySerial}')">삭제</button></td>
+							<td style="width:50px;"><div onclick="deleteReply('${kinds.replySerial}')">삭제</div></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -51,7 +57,7 @@
 
 			<c:otherwise>
 				<tr id="none">
-					<td>등록된 댓글이 없습니다.</td>
+					<td colspan=3>등록된 댓글이 없습니다.</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

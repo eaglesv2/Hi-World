@@ -13,7 +13,11 @@
 <div id="body">
 
 	<div id="board_con">
-		<div id="boardheader">문의사항 등록하기</div>
+		<div id="boardheader">
+			<div id="headertitle">
+				문의사항 등록하기
+			</div>
+		</div>
 		<form name="BoardSubmit">
 			<input id="title" type="text" name="title" placeholder="제목을 입력하세요."/>	<br /> 
 			<textarea id="textarea" rows="10" cols="30" name="content" placeholder="문의사항 내용을 입력하세요. [% 밴을먹은 회원시 아이디 입력은 필수사항 입니다!!]"></textarea> <br />
