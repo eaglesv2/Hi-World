@@ -12,7 +12,7 @@
 <style>
 	@charset "UTF-8";
 
-body{
+#basketCon{
 	width:100%;
 	height: 100%;
 	overflow-y:scroll;
@@ -68,70 +68,71 @@ th img{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-
-	<h1>장바구니 목록</h1>
-	<c:choose>
-		<c:when test="${ArticleList != '[]'}">
-			<table class="sangpum" style="width:70%;border-collapse: separate;margin-left:100px;border-spacing:0 20px;">
-				<tbody id="tbody">
-
-					<c:forEach var="kinds" items="${ArticleList}">
-						<tr class="${kinds.articleSerial}">
-							<c:set var="check" value="${kinds.articleImg}" />
-							<c:if test="${fn:contains(check,'.png')}">
-								<th style="width: 27%;"><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:100px;height:100px; /></th>
-								<th style="width: 50px;">${kinds.articleKinds}</th>
-								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
-							</c:if>
-							<c:if test="${fn:contains(check,'.jsp')}">
-								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px;/></th>
-								<th>${kinds.articleKinds}</th>
-								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
-							</c:if>
-							<c:if test="${fn:contains(check, '.mp3')}">
-								<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px; /></th>
-								<th>${kinds.articleKinds}</th>
-								<th>${kinds.articleName}</th>
-								<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
-								<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
-								<%-- <td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td> --%>
-							</c:if>
-							<c:set var="total" value="${total+kinds.articlePrice}" />
-						</tr>
-					</c:forEach>
-				
-
-				</tbody>
-				
-			</table>
-
-			<div class="total">
-				<div>
-					총금액 : <b id="totalPrice"></b>BT 입니다.
+	<div id="basketCon">
+		<h1>장바구니 목록</h1>
+		<c:choose>
+			<c:when test="${ArticleList != '[]'}">
+				<table class="sangpum" style="width:70%;border-collapse: separate;margin-left:100px;border-spacing:0 20px;">
+					<tbody id="tbody">
+	
+						<c:forEach var="kinds" items="${ArticleList}">
+							<tr class="${kinds.articleSerial}">
+								<c:set var="check" value="${kinds.articleImg}" />
+								<c:if test="${fn:contains(check,'.png')}">
+									<th style="width: 27%;"><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:100px;height:100px; /></th>
+									<th style="width: 50px;">${kinds.articleKinds}</th>
+									<th>${kinds.articleName}</th>
+									<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+									<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+								</c:if>
+								<c:if test="${fn:contains(check,'.jsp')}">
+									<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px;/></th>
+									<th>${kinds.articleKinds}</th>
+									<th>${kinds.articleName}</th>
+									<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+									<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+								</c:if>
+								<c:if test="${fn:contains(check, '.mp3')}">
+									<th><img style="width: 100px;height: 100px;border:1px solid;" src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" style= width:150px;height:100px; /></th>
+									<th>${kinds.articleKinds}</th>
+									<th>${kinds.articleName}</th>
+									<th id="${kinds.articleSerial}">${kinds.articlePrice}BT</th>
+									<th class="baskethover" onclick="deleteArticle('${kinds.articleSerial}')">취소</th>
+									<%-- <td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td> --%>
+								</c:if>
+								<c:set var="total" value="${total+kinds.articlePrice}" />
+							</tr>
+						</c:forEach>
+					
+	
+					</tbody>
+					
+				</table>
+	
+				<div class="total">
+					<div>
+						총금액 : <b id="totalPrice"></b>BT 입니다.
+					</div>
 				</div>
-			</div>
-			<div class="total">
-				<div>
-					<a href="#" onclick="totalBay()" id="paybutton">결제하기</a>
+				<div class="total">
+					<div>
+						<a href="#" onclick="totalBay()" id="paybutton">결제하기</a>
+					</div>
 				</div>
-			</div>
-
-
-
-
-		</c:when>
-
-
-		<c:otherwise>
-			장바구니에 담은 목록이 아무것도 없습니다.
-		</c:otherwise>
-
-
-	</c:choose>
+	
+	
+	
+	
+			</c:when>
+	
+	
+			<c:otherwise>
+				장바구니에 담은 목록이 아무것도 없습니다.
+			</c:otherwise>
+	
+	
+		</c:choose>
+	</div>
 
 </body>
 

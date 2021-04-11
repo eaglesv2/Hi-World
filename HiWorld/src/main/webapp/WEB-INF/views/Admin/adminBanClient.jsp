@@ -30,9 +30,13 @@
 		width:190px;
 	}
 	#clientlist{
-		margin-left:320px;
+		margin-left:330px;
 		width: 120px;
 		background: gray;
+	}
+	
+	#Context{
+		overflow-y:scroll;
 	}
 </style>	
 </head>
@@ -81,7 +85,7 @@
 	
 	
 	
-	<div>
+	<div style="text-align: center; margin-top:5px;">
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>

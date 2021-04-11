@@ -13,9 +13,12 @@
 	height: 41px;
 	border: 1px solid;
 	text-align: center;
-	vertical-align: middle;
+	margin-left: 4px;
 }
 
+#headertitle{
+	margin-top:14px;
+}
 #board_con input{
 	width: 781px;
 	height: 41px;

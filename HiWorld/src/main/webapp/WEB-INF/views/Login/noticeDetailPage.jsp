@@ -22,9 +22,9 @@
 
 	<table >
 		<tr id="replyTable">
-			<td style="width: 400px;font-weight: 600;color: orangered;">댓글</td>
-			<td style="width: 270px;font-weight: 600;color: orangered;">작성자</td>
-			<td style="width: 400px;font-weight: 600;color: orangered;">작성일</td>
+			<td style="width: 400px;font-weight: 600;color:orangered;">댓글</td>
+			<td style="width: 270px;font-weight: 600;color:orangered;">작성자</td>
+			<td style="width: 400px;font-weight: 600;color:orangered;">작성일</td>
 			<td></td>
 		</tr>
 		<c:choose>
@@ -35,7 +35,7 @@
 						<td>${kinds.userName}(${kinds.userID})</td>
 						<td>${kinds.cDate}</td>
 						<c:if test="${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}">
-							<td style="width: 50px;"><div onclick="deleteReply('${kinds.replySerial}')">삭제</div></td>
+							<td style="width:50px;"><div onclick="deleteReply('${kinds.replySerial}')">삭제</div></td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -43,7 +43,7 @@
 		
 			<c:otherwise>
 				<tr id="none">
-					<td>등록된 댓글이 없습니다.</td>
+					<td colspan="3">등록된 댓글이 없습니다.</td>
 				</tr>
 			</c:otherwise>
 		</c:choose>

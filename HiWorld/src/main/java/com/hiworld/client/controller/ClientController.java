@@ -245,7 +245,7 @@ public class ClientController {
 		data += "<td>"+boardVO.getReplyContent()+"</td>";
 		data += "<td>"+userName+"("+userID+")"+"</td>";
 		data += "<td>"+date+"</td>";
-		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td><button onclick=\"deleteReply('${kinds.replySerial}')\">삭제</button></td> </c:if>";
+		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td style='width: 50px;'><div onclick=\"deleteReply(${kinds.replySerial})\">삭제</div></td> </c:if>";
 		data += "</tr>";
 
 		
