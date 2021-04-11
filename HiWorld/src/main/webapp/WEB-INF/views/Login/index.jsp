@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -58,11 +57,11 @@
 
 			// 입력 값 체크
 			if($.trim($('#userId').val()) == ''){
-				alert("아이디를 입력해 주세요.");
+				Swal.fire("아이디를 입력해 주세요");
 				$('#userId').focus();
 				return;
 			}else if($.trim($('#passwd').val()) == ''){
-				alert("패스워드를 입력해 주세요.");
+				Swal.fire("패스워드를 입력해 주세요");
 				$('#passwd').focus();
 				return;
 			}

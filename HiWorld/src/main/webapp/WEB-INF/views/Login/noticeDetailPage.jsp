@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -23,8 +22,7 @@
 
 	<table >
 		<tr id="replyTable">
-			<td style="width: 400px;font-weight: 600;color: orangered;
-}">댓글</td>
+			<td style="width: 400px;font-weight: 600;color: orangered;">댓글</td>
 			<td style="width: 270px;font-weight: 600;color: orangered;">작성자</td>
 			<td style="width: 400px;font-weight: 600;color: orangered;">작성일</td>
 			<td></td>
@@ -78,11 +76,12 @@
 				}
 			})
 		}else{
-			alert("로그인하세요");
+			Swal.fire("로그인 후 이용해주세요");
 		}
 	}
 	
 	function deleteReply(replySerial) {
+		console.log(replySerial);
 		$.ajax({
 			url : "deleteReply.do",
 			type : "GET",

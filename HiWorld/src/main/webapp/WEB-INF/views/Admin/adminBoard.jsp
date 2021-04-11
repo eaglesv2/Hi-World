@@ -48,17 +48,17 @@
 			var textarea = $("#textarea").val();
 			
 			if(title=='' || title == null){
-				alert("제목을 작성하세요.");
+				Swal.fire("제목을 작성하세요");
 			}else{
 				if(textarea=='' || textarea == null){
-					alert("내용을 작성하세요");
+					Swal.fire("내용을 작성하세요");
 				}else{
 					$.ajax({
 						url : "BoardSubmit.do",
 						type : "GET",
 						data : BoardSubmit,
 						success : function(data) {
-							alert("등록되었습니다.");
+							Swal.fire("등록되었습니다");
 							var ajaxOption3={
 		                   		 type: "GET",
 		                            url : "noticePage.do",
