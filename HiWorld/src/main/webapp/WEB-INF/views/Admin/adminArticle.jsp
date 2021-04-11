@@ -68,41 +68,64 @@
 		for (var i = 0; i < files.length; i++) {
 			formData.append("uploadFile", files[i]);
 		}
-
-		$.ajax({
-			url : 'ArticleUpload.do',
-			processData : false,
-			contentType : false,
-			data : formData,
-			type : 'POST',
-			success : function(result) {
-				if (result === 1) {
-					/* 업로드 성공 */
-					
-					
-					/* 디비 등록 */
-					$.ajax({
-						type : "GET",
-						url : "ArticleEnroll.do",
-						data : {
-							"ArticleImg":ArticleImg,
-							"ArticleName":ArticleName,
-							"ArticlePrice":ArticlePrice,
-							"ArticleKinds":ArticleKinds,
-							"ArticleContent":ArticleContent,
-						},
-						success : function(result){
-							/* 성공 */
-							console.log('성공');
-						}
-					})
-					
-				} else {
-					/* 업로드 실패 */
-					console.log('실패');
+		if(ArticleKinds==''){
+			alert("종류를 선택하세요");
+		}else{
+			$.ajax({
+				url : 'ArticleUpload.do',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				success : function(result) {
+					if (result == 1) {
+						/* 업로드 성공 */
+						
+						
+						/* 디비 등록 */
+						$.ajax({
+							type : "GET",
+							url : "ArticleEnroll.do",
+							data : {
+								"ArticleImg":ArticleImg,
+								"ArticleName":ArticleName,
+								"ArticlePrice":ArticlePrice,
+								"ArticleKinds":ArticleKinds,
+								"ArticleContent":ArticleContent,
+							},
+							success : function(result){
+								/* 성공 */
+								console.log('성공');
+								alert("등록되었습니다");
+								
+								var ajaxOption2={
+				                		 type: "GET",
+				                         url : "sangpoom.do",
+				                         data: {"list":"쇼핑"},
+				                         dataType : "html", 
+				                         async:true,
+				                         cache:false
+				                 }
+				                 
+				                 
+				            	  $.ajax(ajaxOption2).done(function(data){
+				            		  //Contents 영역삭제
+				            		  $('#bodyContext').children().remove();
+				            		  console.log("1111") 
+				            		  //Contents 영역 교체
+				            		  $('#bodyContext').html(data);
+				            	  })
+							}
+						})
+						
+					} else {
+						/* 업로드 실패 */
+						console.log('실패');
+					}
 				}
-			}
-		})
+			})
+		}
+		
 	})
 </script>
 
