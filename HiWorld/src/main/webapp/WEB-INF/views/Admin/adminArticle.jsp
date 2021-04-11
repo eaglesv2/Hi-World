@@ -93,12 +93,13 @@
 						},
 						success : function(result){
 							/* 성공 */
-							
+							console.log('성공');
 						}
 					})
 					
 				} else {
 					/* 업로드 실패 */
+					console.log('실패');
 				}
 			}
 		})

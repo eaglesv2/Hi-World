@@ -138,55 +138,57 @@ th img{
 
 <script>
 	$().ready(function() {
-		var total = ${total}
-		;
+		var total = ${total};
 		$("#totalPrice").html(total);
 	})
 	function deleteArticle(articleSerial) {
 		var tr = document.getElementsByClassName(articleSerial);
 		var totalTr = $(".total");
-		var price = $("#" + articleSerial).text();
+		var priceText = $("#" + articleSerial).text();
+		var last = priceText.indexOf('B');
+		var price = priceText.substring(0, last);
+		
 		var total = $("#totalPrice").text();
-		console.log(price);
-		console.log(total);
-		$
-				.ajax({
-					type : "GET",
-					url : "delArticle.do",
-					data : {
-						"ArticleSerial" : articleSerial
-					},
-					success : function(data) {
-						total = total - price;
-						if (total === 0) {
-							$(tr).remove();
-							$(totalTr).remove();
-							var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
-							$('#tbody').append(innerHtml);
-						} else {
-							$("#totalPrice").html(total);
-							$(tr).remove();
-						}
-					}
-				})
+		$.ajax({
+			type : "GET",
+			url : "delArticle.do",
+			data : {
+				"ArticleSerial" : articleSerial
+			},
+			success : function(data) {
+				total = total - price;
+				if (total === 0) {
+					$(tr).remove();
+					$(totalTr).remove();
+					var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
+					$('#tbody').append(innerHtml);
+				} else {
+					$("#totalPrice").html(total);
+					$(tr).remove();
+				}
+			}
+		})
 
 	}
 
 	function totalBay() {
-		var total = $("#total").text();
+		var total = $("#totalPrice").text();
+		
 		$.ajax({
 			type : "GET",
 			url : "totalBay.do",
-			data : {
-				"total" : total
-			},
+			data : {"total" : total},
 			success : function(data) {
 				if (data === 1) {
 					/* 결제 성공 */
-					alert("성공")
+					alert("결제성공")
+					$(tr).remove();
+					$(totalTr).remove();
+					var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
+					$('#tbody').append(innerHtml);
 				} else {
 					/* 밤톨부족 결제 실패 */
-					alert("실패")
+					alert("결제실패")
 				}
 			}
 		})

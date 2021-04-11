@@ -39,7 +39,7 @@
 	<!-- 물품 등록 -->
 	<insert id="insert">
 		INSERT INTO User_Article
-		VALUES(#{ArticleSerial},#{UserSerial},#{ArticleKinds},#{ArticleName},#{ArticleImg},#{ArticleContent})
+		VALUES(#{ArticleSerial},#{ArticleImg},#{ArticleKinds},#{ArticleName},#{UserSerial})
 	</insert>
 
 	<!-- 장바구니 -->
