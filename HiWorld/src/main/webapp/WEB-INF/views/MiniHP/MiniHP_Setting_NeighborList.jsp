@@ -87,7 +87,7 @@ function updateNeighbor(neighborSerial){
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
 	
-	<div align ="left" valign="top" id="infoTxt" class="infoTxt">
+	<div align ="left" valign="top" id="infoTxt" class="infoTxt" style="height: 355px;">
 		<c:if test="${listLength ne 0}">
 			<c:forEach var="neighborList" items="${neighborList}" varStatus="status">
 			<c:set var="index" value="${status.index}" />
@@ -98,7 +98,7 @@ function updateNeighbor(neighborSerial){
 			</c:forEach>
 		</c:if>
 		<c:if test="${listLength eq 0}">
-			<option value="">이웃이 없습니다</option>
+			<option value="" style="margin-left: 10px; text-align: center; padding-top: 100px;">이웃이 없습니다</option>
 		</c:if>
 	</div>
 	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
