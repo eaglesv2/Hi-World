@@ -106,6 +106,32 @@
 		            console.log("에러를 찾자");
 		        });
 		      };
+		      
+		      
+		      function shop_skin(list){
+			        //ajax option
+			        console.log("1234") 
+				       var ajaxOption5={
+				      		 type: "GET",
+				               url : "sangpoom.do",
+				               dataType : "html", 
+				               data: {"list":list},
+				               async:true,
+				               cache:false
+			      		 
+			       }
+			  	  $.ajax(ajaxOption5).done(function(data){
+			  		  //Contents 영역삭제
+			  		  $('.sangpum').children().remove();
+			  		  console.log("1111") 
+			  		  //Contents 영역 교체
+			  		  $('.sangpum').html(data);
+			  	  }).fail(function(error) {
+			            alert(JSON.stringify(error));
+			            console.log("에러를 찾자");
+			        });
+			      };
+		      
     </script>
 </head>
 <body>
