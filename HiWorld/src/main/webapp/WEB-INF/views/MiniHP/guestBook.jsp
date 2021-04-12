@@ -320,7 +320,7 @@ function updateBook(serial) {
 //페이징
 function fn_paging(curPage) {
 	var ajaxMain = {
-	        url : 'miniHpBook.do?curPage=' + curPage,
+	        url : 'miniHpBookGuest.do?curPage=' + curPage+'&ownerSerial='+ownerSerial,
 	        async : true,
 	        type : "GET",
 	        dataType : "html",

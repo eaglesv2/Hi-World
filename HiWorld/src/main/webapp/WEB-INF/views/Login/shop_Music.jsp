@@ -104,11 +104,11 @@
 				},
 				success : function (data) {
 					if(data==1){
-						Swal.fire("구매에 성공하셨습니다");
+						Swal.fire("장바구니에 들어갔습니다");
 					}else if(data==0){
 						Swal.fire("이미 구매한 상품입니다");
 					}else if(data==-1){
-						Swal.fire("구매에 실패하셨습니다");
+						Swal.fire("장바구니 담기 실패했습니다");
 					}else if(data==-2){
 						Swal.fire("이미 장바구니에 들어가있습니다");
 					}
@@ -131,7 +131,7 @@
 			  showCancelButton: true,
 			  confirmButtonColor: '#3085d6',
 			  cancelButtonColor: '#d33',
-			  confirmButtonText: 'yes'
+			  confirmButtonText: 'Yes'
 			}).then((result) => {
 			  if (result.isConfirmed) {
 			    Swal.fire(
@@ -144,7 +144,16 @@
 						},
 						success: function (data) {
 							if(data==1){
-								Swal.fire('결제 성공 하였습니다.')
+								Swal.fire({
+									  position: 'center',
+									  icon: 'success',
+									  title: '결제성공 잠시후 메인페이지로 이동합니다',
+									  showConfirmButton: false,
+									  timer: 1500
+									})							
+								setTimeout(() => {
+									location.reload();						
+								}, 1500);
 							}else if(data==0){
 								Swal.fire('밤톨이 부족합니다 5초뒤 충전페이지가 열립니다');
 								setTimeout(() => {
