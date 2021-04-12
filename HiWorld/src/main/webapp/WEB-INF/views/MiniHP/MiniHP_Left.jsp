@@ -162,6 +162,67 @@ font-family:'BMHANNAPro';
 .btn {
 cursor: pointer;
 }
+#profile_info {
+	overflow-y: scroll; 
+	width: 140px;  
+	height: 100px;
+	padding: 0px
+}
+#infoTxt{
+	font-size:13px;
+}
+#editBtn{
+	position: absolute; 
+	top: 215pt; 
+	left: 5pt;
+}
+#infoTxt_ok{
+	font-size:8pt; 
+	resize: none;
+}
+#editOkBtn{
+	position: absolute; 
+	top: 215pt; 
+	left: 5pt;
+}
+#info_bar{
+	position: absolute; 
+	top: 235pt; 
+	left: 5pt;
+}
+#userName{
+	font-size: 10pt; 
+	position: absolute; 
+	top: 260pt; 
+	left: 5pt;
+	color: #0f3073;
+}
+#userBirth{
+	font-size: 7pt;
+}
+#neighborCheckBtn{
+    position: absolute;
+    top: 275pt;
+    left: 63pt;
+    width: 65px;
+    height: 20px;
+}
+#neighborSelect{
+	background-color: #9cbde7; 
+	width: 140px; 
+	height: 18px; 
+	position: absolute; 
+	top: 294pt; 
+	left: 5pt;
+	outline: none;
+}
+#randomBtn{
+	position: absolute;
+    top: 275pt;
+    left: 4pt;
+    width: 75px;
+    height: 20px;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -205,35 +266,36 @@ cursor: pointer;
 				<!-- 미니홈피 소개글 -->
 				<font>
 					<div id="profile_info">
-						<span id="infoTxt" style="font-size:13px;"></span>
-						<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" class="btn" style="position: absolute; top:235pt; left:5pt;" onclick="change_i();"/>
+						<span id="infoTxt"></span>
+						<img id="editBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="change_i();"/>
 					</div>
 					<div id="profile_info_ok">
-						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;"></textarea>
-						<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" class="btn" style="position: absolute; top:235pt; left:5pt;" onclick="change_i_ok();"/>
+						<textarea rows="7" cols="20" id="infoTxt_ok"></textarea>
+						<img id="editOkBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" onclick="change_i_ok();"/>
 					</div>
-					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
+					<img id="info_bar" src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" />
 				</font>
 				
 				<!-- 미니홈피 주인 이름 -->
-				<font style="font-size:10pt; position: absolute; top:270pt; left:5pt;" color="#0f3073"><b>${sessionVO.userName}</b>
+				<span id="userName"><b>${sessionVO.userName}</b>
 				
-				<!-- 성별에 따름 성별표시 마크 --> 
-				<c:if test="${sessionVO.userGender eq 'M'}">
-					<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
-				</c:if>
-				<c:if test="${sessionVO.userGender eq 'F'}">
-					<img src="${pageContext.request.contextPath}/resources/images/admin/female.jpg">
-				</c:if>
+					<!-- 성별에 따름 성별표시 마크 --> 
+					<c:if test="${sessionVO.userGender eq 'M'}">
+						<img src="${pageContext.request.contextPath}/resources/images/admin/male.jpg">
+					</c:if>
+					<c:if test="${sessionVO.userGender eq 'F'}">
+						<img src="${pageContext.request.contextPath}/resources/images/admin/female.jpg">
+					</c:if>
 				
-				<!-- 유저 생일 표시 -->
-				<font style="font-size: 7pt;">${sessionVO.userBirth}</font>
-					<br/>
-				<!-- 일촌 신청 확인 버튼 -->
-				<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" class="btn" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
-				</font>
+					<!-- 유저 생일 표시 -->
+					<span id="userBirth">${sessionVO.userBirth}</span>
+				</span>
 				
-				<select id="neighborSelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser()">
+				<!-- 이웃 신청 확인 버튼 -->
+				<img id="neighborCheckBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/member_Check_Btn.png" class="btn" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
+				
+				
+				<select id="neighborSelect" onchange="moveToUser()">
 					<option value="">★이웃 바람타기</option>
 					<!-- 이웃 목록 -->
 					<c:if test="${listLength != 0}">
@@ -245,7 +307,7 @@ cursor: pointer;
 						<option value="-1">이웃이 없습니다</option>
 					</c:if>
 				</select>
-				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" class="btn" style="position: absolute; top:315pt; left:20pt;" onclick="random()"/>
+				<img id="randomBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.png" onclick="random()"/>
 			</td>
 		</tr>
 	</table>	

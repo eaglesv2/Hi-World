@@ -32,19 +32,19 @@ function displayInfo(){
 
 function moveToUser(){
 	var OwnerSerial = $("#neighborSelect option:selected").val();
+	var popupWidth = 1080;
+    var popupHeight = 600;
+	var popupX = (window.screen.width/2)-(popupWidth/2);
+    var popupY = (window.screen.height/2)-(popupHeight/2);
 	console.log(OwnerSerial);
 	if(OwnerSerial>0){
 		//본인한테 바람타기가는지 체크
 		var userSerial = $("#userSerial").val();
 		if(userSerial===OwnerSerial){
-			window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
+			window.open('MiniHP_Home.do','Hi-World','status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
 			parent.window.close();
 		}
 		else{
-			var popupWidth = 1080;
-		    var popupHeight = 600;
-			var popupX = (window.screen.width/2)-(popupWidth/2);
-		    var popupY = (window.screen.height/2)-(popupHeight/2);
 		    window.open("miniHp_guestHome.do?OwnerSerial="+OwnerSerial,OwnerSerial,'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
 			parent.window.close();
 		}
@@ -52,7 +52,11 @@ function moveToUser(){
 } 
 
 function goBack() {
-	window.open('MiniHP_Home.do','Hi-World','width=1090,height=600,location=no,status=no,scrollbars=no');
+	var popupWidth = 1080;
+    var popupHeight = 600;
+	var popupX = (window.screen.width/2)-(popupWidth/2);
+    var popupY = (window.screen.height/2)-(popupHeight/2);
+	window.open('MiniHP_Home.do','Hi-World','status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY);
 	parent.window.close();
 }
 </script>
@@ -68,37 +72,50 @@ function goBack() {
 }
 #info_bar{
 	position: absolute; 
-	top:250pt; 
-	left:5pt;
+	top: 235pt; 
+	left: 5pt;
 }
 #userName{
 	font-size: 10pt; 
 	position: absolute; 
-	top: 270pt; 
+	top: 260pt; 
 	left: 5pt;
 	color: #0f3073;
 }
 #userBirth{
 	font-size: 7pt;
 }
+#neighborRegisterBtn{
+	position: absolute;
+    top: 275pt;
+    left: 61pt;
+    width: 65px;
+    height: 20px;
+}
 #neighborSelect{
 	background-color: #9cbde7; 
-	width:140px; 
-	heigt:5px; 
+	width: 140px; 
+	height: 18px; 
 	position: absolute; 
-	top:300pt; 
-	left:5pt;
+	top: 294pt; 
+	left: 5pt;
+	outline: none;
 }
 #meBtn{
-	position: absolute; 
-	top:315pt; 
-	left:20pt;
+	position: absolute;
+    top: 275pt;
+    left: 4pt;
+    width: 70px;
+    height: 20px;
+}
+.btn {
+	cursor: pointer;
 }
 @font-face {
-font-family: 'BMHANNAPro';
-src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
-font-weight: normal;
-font-style: normal;
+	font-family: 'BMHANNAPro';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.0/BMHANNAPro.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
 }
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -166,7 +183,7 @@ font-family:'BMHANNAPro';
 					<span id="infoTxt"></span>
 				</div>
 				
-				<img id="info_bar" src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
+				<img id="info_bar" src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" />
 				
 				<!-- 미니홈피 주인 이름 -->
 				<span id="userName"><b>${ownerVO.userName}</b>
@@ -184,7 +201,7 @@ font-family:'BMHANNAPro';
 				</span>
 				<!-- 일촌 신청 버튼 -->
 				<c:if test="${isNeighbor eq 0 }">
-					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?ownerSerial=${ownerVO.userSerial}&ownerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
+					<img id="neighborRegisterBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/member_Register_Btn.png" onclick="window.open('miniHp_neighborRegister.do?ownerSerial=${ownerVO.userSerial}&ownerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</c:if>
 				
 				
@@ -203,7 +220,7 @@ font-family:'BMHANNAPro';
 				
 				<!-- 내 미니홈피로 이동 -->
 				<%-- <img id="meBtn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" onclick="window.open('MiniHP_Home.do','${sessionVO.userID}','width=1090,height=600,location=no,status=no,scrollbars=no')"/> --%>
-				<img id="meBtn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.jpg" onclick="goBack();"/>
+				<img id="meBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/meBtn.png" onclick="goBack();"/>
 			</td>
 		</tr>
 	</table>	
