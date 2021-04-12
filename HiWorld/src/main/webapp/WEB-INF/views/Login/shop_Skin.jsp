@@ -130,16 +130,17 @@
 							"ArticleName" : ArticleName
 						},
 						success: function (data) {
-							Swal.fire({
-								  position: 'center',
-								  icon: 'success',
-								  title: '결제성공 잠시후 메인페이지로 이동합니다',
-								  showConfirmButton: false,
-								  timer: 1500
-								})							
-							setTimeout(() => {
-								location.reload();						
-							}, 1500);
+							if(data==1){
+								Swal.fire({
+									  position: 'center',
+									  icon: 'success',
+									  title: '결제성공 잠시후 메인페이지로 이동합니다',
+									  showConfirmButton: false,
+									  timer: 1500
+									})							
+								setTimeout(() => {
+									location.reload();						
+								}, 1500);
 							}else if(data==0){
 								Swal.fire('밤톨이 부족합니다 5초뒤 충전페이지가 열립니다');
 								setTimeout(() => {

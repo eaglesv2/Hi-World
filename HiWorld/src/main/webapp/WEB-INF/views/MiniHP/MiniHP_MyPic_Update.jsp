@@ -81,7 +81,8 @@ function upload() {
 		contentType : false,
 		
 		success: function(result) {
-			window.close();	
+			window.close();
+			parent.window.reload();
 		}
 	})
 }

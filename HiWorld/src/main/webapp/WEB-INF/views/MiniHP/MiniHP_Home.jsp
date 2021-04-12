@@ -52,6 +52,7 @@ pre{
 .secondFont{
 	font-family:'BMHANNAPro';
 }
+a { text-decoration:none } 
 /* body
 {
  scrollbar-face-color: #000000;
