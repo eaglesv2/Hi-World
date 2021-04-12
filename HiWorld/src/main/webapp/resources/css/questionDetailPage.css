@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+#questionDCon{
+	height: 580px;
+}
+
+
 #questionDtable textarea{
 	height:400px;
 	width: 780px;
@@ -21,8 +26,7 @@
 	text-align: center;
 }
 #Context{
-	overflow: scroll;
-    overflow-x: hidden;
+	overflow-y:scroll;
 }
 
 .noticehover:hover{

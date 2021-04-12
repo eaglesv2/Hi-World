@@ -198,9 +198,11 @@ a {
 }
 
 .rightCon #minimi #icon img {
-	height: 100%;
-	width: 100px;
-	float: left;
+    height: 80%;
+    width: 100px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .rightCon  #minihome {

@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#noticeDCon{
+	height: 580px;
+}
+
 #noticeDtable textarea{
 	height:400px;
 	width: 780px;

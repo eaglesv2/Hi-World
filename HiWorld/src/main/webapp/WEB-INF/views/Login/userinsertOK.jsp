@@ -39,7 +39,7 @@ color: #8e8e8c;
 					<h1>Hi- Worder <span id="span">회원가입이 완료</span>되었습니다.</h1>
 					<h3>회원님은 Hi - Worder의 기능을 사용하실수 있습니다 회원접속 후 이용 가능합니다.</h3>
 					<div>
-						<button onclick="login.do">메인페이지로 이동</button>
+						<button onclick="location.href='login.do'">메인페이지로 이동</button>
 					</div>
 				</div>
 			</div>
