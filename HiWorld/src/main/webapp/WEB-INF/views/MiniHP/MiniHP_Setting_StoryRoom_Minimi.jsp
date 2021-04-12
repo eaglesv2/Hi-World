@@ -32,8 +32,8 @@ body {
 }
 
 #storyImg {
-	width: 350px;
-	height: 142px;
+	width: 300px;
+	height: 130px;
 }
 
 #storyImg2 {

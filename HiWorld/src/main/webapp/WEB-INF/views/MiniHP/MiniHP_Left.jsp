@@ -179,6 +179,7 @@ cursor: pointer;
 #infoTxt_ok{
 	font-size:8pt; 
 	resize: none;
+    width: 125px;
 }
 #editOkBtn{
 	position: absolute; 
