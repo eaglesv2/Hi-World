@@ -110,8 +110,11 @@ var address = false;
 /*  여기부터 userview Update */
 
 			function pwUpdate() {
-				if (pw != true && pwc!=true) {
+				if (pw != true) {
 				$("input[name=userPW]").focus()
+				return false;
+				}else if(pwc !=true){
+				$("input[name=userPW1]").focus()
 				return false;
 				}
 				else{
@@ -187,29 +190,29 @@ var address = false;
 		}
 	
 		function pwUpdate1() {
-			if($('#pwhiden').css('display') == 'none'){
-				$('#hiden1').hide();
-				$('#pwhiden').show();
+			if($('.pwhiden').css('display') == 'none'){
+				$('.hiden1').hide();
+				$('.pwhiden').show();
 			}
 		}
 		
 		function cancle2() {
-			if($('#hiden1').css('display') == 'none'){
-				$('#pwhiden').hide();
-				$('#hiden1').show();
+			if($('.hiden1').css('display') == 'none'){
+				$('.pwhiden').hide();
+				$('.hiden1').show();
 			}
 		}
 		
 		function telUpdate1() {
-			if($('#hiden_tel').css('display') == 'none'){
-				$('#hiden_tel').show();
-				$('#hiden2').hide();
+			if($('.telhiden1').css('display') == 'none'){
+				$('.telhiden1').show();
+				$('.telhiden').hide();
 			}
 		}
 		function cancle3() {
-			if($('#hiden2').css('display') == 'none'){
-				$('#hiden2').show();
-				$('#hiden_tel').hide();
+			if($('.telhiden').css('display') == 'none'){
+				$('.telhiden').show();
+				$('.telhiden1').hide();
 			}
 		}
 		

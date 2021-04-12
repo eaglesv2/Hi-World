@@ -13,8 +13,11 @@
 </head>
 <body>
 	<div id="header">
+		
 		<div id="wrapper">
 			<div id="content">
+				<img id="img_hade" alt="로고사진" src="resources/images/로고7.png">
+				<!--  로고 -->
 				<form action="insertClient.do" id="userinsert" name="userinsert"
 					method="post">
 					<!-- 아이디  -->

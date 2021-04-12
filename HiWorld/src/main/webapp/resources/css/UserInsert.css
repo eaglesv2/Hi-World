@@ -70,6 +70,7 @@ h3{
 	border: none;
 	background: #fff;
 	font-size: 15px;
+	outline: none;
 }
 
 input, select{
@@ -116,4 +117,9 @@ input, select{
 	color: #fff;
 	background-color: rgb(243,105,4);
 	font-size: 20px;
+}
+
+#img_hade{
+	width: 344px;
+	margin-left: 16%;
 }
