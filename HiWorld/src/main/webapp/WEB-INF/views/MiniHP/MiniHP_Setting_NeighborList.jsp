@@ -64,7 +64,6 @@ function listCheck(neighborSerial) {
 			}
 		}
 	})
-	
 }
 
 function updateNeighbor(neighborSerial){

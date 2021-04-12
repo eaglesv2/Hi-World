@@ -177,8 +177,7 @@ font-family:'BMHANNAPro';
 		</tr>
 		<tr>
 			<td> 
-				<!-- 미니홈피 소개글 -->
-				
+				<!-- 미니홈피 소개글 -->		
 				<div id="profile_info">
 					<span id="infoTxt"></span>
 				</div>
@@ -200,7 +199,7 @@ font-family:'BMHANNAPro';
 				<span id="userBirth">${ownerVO.userBirth}</span>
 				</span>
 				<!-- 일촌 신청 버튼 -->
-				<c:if test="${isNeighbor eq 0 }">
+				<c:if test="${isNeighbor eq 0}">
 					<img id="neighborRegisterBtn" class="btn" src="${pageContext.request.contextPath}/resources/images/admin/member_Register_Btn.png" onclick="window.open('miniHp_neighborRegister.do?ownerSerial=${ownerVO.userSerial}&ownerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</c:if>
 				

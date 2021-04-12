@@ -259,7 +259,6 @@ cursor: pointer;
 					</tr>
 				</table>
 			</td>
-
 		</tr>
 		<tr>
 			<td> 
