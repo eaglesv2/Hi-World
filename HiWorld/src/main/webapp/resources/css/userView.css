@@ -1,9 +1,8 @@
 table {
-	width: 100%;
+	width: 70%;
 	margin-top: 10px;
 	height: 93%;
-	
-	
+	margin-left: 140px;
 }
 @font-face {
     font-family: 'SDSamliphopangche_Outline';
@@ -40,4 +39,21 @@ h3 {
 
 .fontcolor {
 	color: rgb(243,105,4);
+}
+#telbut{
+	margin-top: 5px;	
+	margin-left: 55px;
+}
+.Pwchc1{
+	margin-bottom: 5px;
+}
+#pwbut{
+	margin-top: 5px;
+}
+#addressbut{
+	margin-top: 5px;
+	margin-left: 55px;
+}
+tr td{
+border: 1px solid;	
 }

@@ -1,3 +1,21 @@
+$(document).ready(function() {
+	  $('#myinput1').click(function() {
+		  var copyText = document.getElementById('myinput1')
+			copyText.select();
+			copyText.setSelectionRange(0,99999);
+			document.execCommand("copy");
+			Swal.fire("입력한 정보의 ID가 Ctrl + C 되었습니다.")
+	});
+	  
+	  $('#myinput2').click(function() {
+		  var copyText = document.getElementById('myinput2')
+			copyText.select();
+			copyText.setSelectionRange(0,99999);
+			document.execCommand("copy");
+			Swal.fire("입력한 정보의 입시 비밀번호가 Ctrl + C 되었습니다.")
+	  });
+	  
+  });
 	function pwFind() {
 		if($('#hide1').css('display') == 'none'){
 			$('#hide').hide();
@@ -32,7 +50,7 @@ function findId() {
 
 		},
 		error: function(find) {
-			alert(find);
+			Swal.fire("입력한 정보가 없습니다.")
 		}
 	});
 }
@@ -52,33 +70,10 @@ function Pw_Find() {
 			$('#myinput2').val(find);
 		},
 		error: function (find) {
-			alert(find);
+			Swal.fire('입력한 정보가 없습니다.');
 			
 		}
 	});
-}
-function copy1() {
-	var copyText = document.getElementById('myinput1')
-	copyText.select();
-	copyText.setSelectionRange(0,99999);
-	document.execCommand("copy");
-	alert('복사 되었니?')
-}
-
-function copy1() {
-	var copyText = document.getElementById('myinput1')
-	copyText.select();
-	copyText.setSelectionRange(0,99999);
-	document.execCommand("copy");
-	alert('복사 되었니?')
-}
-
-function copy2() {
-	var copyText = document.getElementById('myinput2')
-	copyText.select();
-	copyText.setSelectionRange(0,99999);
-	document.execCommand("copy");
-	alert('복사 되었니?')
 }
 
 
@@ -97,3 +92,4 @@ function zoomIn(event) {
     event.target.style.zIndex = 0;
     event.target.style.transition = "all 0.5s";
   }
+  

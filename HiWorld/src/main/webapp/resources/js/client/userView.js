@@ -126,10 +126,10 @@ var address = false;
 					data : {"userDate" : ajaxPW, "upDatech":upDatech},
 					success: function(data) {
 						
-						if($('#hiden1').css('display') == 'none'){
-							$('#pw_input').val(ajaxPW).append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
-							$('#hiden1').show();
-							$('#pwhiden').hide();
+						if($('.hiden1').css('display') == 'none'){
+							$('.hiden1').val(ajaxPW).append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
+							$('.hiden1').show();
+							$('.pwhiden').hide();
 							}
 						},
 					   			error : function () {
@@ -151,10 +151,10 @@ var address = false;
 				data : {"userDate" : ajaxTel, "upDatech":upDatech},
 				success: function(data) {
 					
-					if($('#hiden2').css('display') == 'none'){
-						$('#hiden2').html(ajaxTel).css('color','red').append('<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
-						$('#hiden2').show();
-						$('#hiden_tel').hide();
+					if($('.telhiden').css('display') == 'none'){
+						$('.telhiden').html(ajaxTel).css('color','red').append('<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
+						$('.telhiden').show();
+						$('.telhiden1').hide();
 						}
 					},
 				   			error : function () {
