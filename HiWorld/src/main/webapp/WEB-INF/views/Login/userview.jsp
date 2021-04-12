@@ -52,7 +52,7 @@
 			<td rowspan="2" class="">비밀번호/연락처</td>
 			<td class="">비밀번호</td>
 			<td class="hiden1" style="color: red; height: 100px; width: 300px;">
-				<input type="password" id="pw_input" style="border: none; outline: none; text-align: left; color: red; width: 110px;" value="${clientVO.userPW}" readonly/>
+				<input type="password" id="pw_input" style="border: none; outline: none; text-align: left; color: red; width: 107px;" value="${clientVO.userPW}" readonly/>
 				<input type="button" id="pwbut" style="" value="수정" onclick="pwUpdate1()" />
 			</td>
 			<td class="pwhiden" style=" display: none; color: red; height: 100px; width: 300px;">
@@ -71,7 +71,7 @@
 			<td class="">연락처</td>
 			<td class="telhiden" style="color: red; height: 73px; width: 300px;">
 				${clientVO.userTel}
-				<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />
+				<input type="button" id="telbut1" value="수정" onclick="telUpdate1()" />
 			</td>
 			<td class="telhiden1"  style="color: red; display: none; height: 73px; width: 300px;">
 				<input type="text" name="userTel" style="margin-top: 5px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userTel}" />
