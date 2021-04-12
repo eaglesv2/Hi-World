@@ -51,6 +51,7 @@ pre{
 .secondFont{
 	font-family:'BMHANNAPro';
 }
+a { text-decoration:none } 
 .bgm-wrap {
 	position: absolute;
 	top:20px; 
