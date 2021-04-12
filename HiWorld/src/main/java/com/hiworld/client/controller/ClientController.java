@@ -822,6 +822,16 @@ public class ClientController {
 			model.addAttribute("pagination",pagingVO);
 			
 			return "Login/shop_Mouse";
+		case "스킨":
+			/* 페이징 처리 */
+			listCnt = articleService.countArticlePage(list);
+			pagingVO = new MainShoppingPagingVO(listCnt, curPage);
+			
+			model.addAttribute("ArticleList",articleService.getSelectArticle(list,curPage,pagingVO.getPageSize()));
+			model.addAttribute("listCnt",listCnt);
+			model.addAttribute("pagination",pagingVO);
+			
+			return "Login/shop_Skin";
 		/* 에러 */
 		default:
 			return "error";

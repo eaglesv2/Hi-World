@@ -159,7 +159,7 @@ th img{
 			},
 			success : function(data) {
 				total = total - price;
-				if (total === 0) {
+				if (total == 0) {
 					$(tr).remove();
 					$(totalTr).remove();
 					var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
@@ -181,16 +181,16 @@ th img{
 			url : "totalBay.do",
 			data : {"total" : total},
 			success : function(data) {
-				if (data === 1) {
+				if (data == 1) {
 					/* 결제 성공 */
-					Swal.fire("결제성공");
-					$(tr).remove();
-					$(totalTr).remove();
-					var innerHtml = "<tr><td>장바구니에 담은 목록이 아무것도 없습니다.</td></tr>";
-					$('#tbody').append(innerHtml);
+					Swal.fire("결제성공 5초후 메인페이지로 이동합니다");
+					
+					setTimeout(() => {
+						location.reload();						
+					}, 5000);
 				} else {
 					/* 밤톨부족 결제 실패 */
-					Swal.fire("결제실패");
+					Swal.fire("결제실패 밤톨이 부족합니다");
 				}
 			}
 		})
