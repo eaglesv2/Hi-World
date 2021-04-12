@@ -705,6 +705,8 @@ public class ClientController {
 			}
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("sessionVO", vo);
+			MiniHpSelectedItemVO itemList = itemService.getItemList(vo.getUserSerial());
+			session.setAttribute("itemList", itemList);
 			return "redirect:/login.do";
 
 		} else {
@@ -740,6 +742,8 @@ public class ClientController {
 			}
 			/* 이름하고 아이디를 세션 화 */
 			session.setAttribute("sessionVO", vo);
+			MiniHpSelectedItemVO itemList = itemService.getItemList(vo.getUserSerial());
+			session.setAttribute("itemList", itemList);
 			return "redirect:/login.do";
 		} else {
 			model.addAttribute("UserID", checkID);
