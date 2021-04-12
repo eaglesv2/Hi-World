@@ -85,7 +85,7 @@
 	
 	
 	
-	<div style="text-align: center; margin-top:5px;">
+	<div id="pagingid" style="text-align: center; margin-top:5px;">
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
@@ -125,12 +125,14 @@
 		
 		if(key==''){
 			$("#tbody>tr").show();
+			$("#pagingid").show();
 			$("#tfoot").hide();
 			$("#tfoot>tr").hide();
 		}else{
 			/* 일단 검색시 목록 전체안보이게 */
 			$("#tbody>tr").hide();
 			$('#tfoot>tr').hide();
+			$("#pagingid").hide();
 			var writer = $("#tfoot>tr>td:nth-child(2):contains('"+key+"')");
 			$("#tfoot").show();
 			$(writer).parent().show();

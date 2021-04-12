@@ -51,3 +51,7 @@ tr#tablehead{
 	cursor:pointer;
 	color:royalblue;
 }
+
+.Navihover{
+	font-size: larger;
+}

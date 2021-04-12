@@ -126,7 +126,9 @@ $('.fun-btn').on('click', function(event) {
 					<h1>Hi - World <span id="span">회원가입이 완료</span>되었습니다.</h1>
 					<h3>회원님은 Hi - World의 기능을 사용하실수 있습니다. 로그인 후 이용 가능합니다.</h3>
 					<div>
-						<button class="fun-btn">Hi - World로 가기</button>
+
+						<button class="fun-btn" onclick="location.href='login.do'">Hi - World로 가기</button>
+
 					</div>
 				</div>
 			</div>
