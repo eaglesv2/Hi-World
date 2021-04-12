@@ -163,7 +163,7 @@ public class ClientServiceImpl implements ClientService {
 			checkJoin = "error";
 		}else {
 			/* 성공했을떄 이동할 페이지 */
-			checkJoin = "redirect:/login.do";
+			checkJoin = "Login/userinsertOK";
 		}
 		
 		return checkJoin;

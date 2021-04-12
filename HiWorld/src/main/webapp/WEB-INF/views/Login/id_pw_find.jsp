@@ -72,7 +72,6 @@
 				<br />
 				<span class="findIdview">
 					<input type="text" id="myinput1" style="border: none; outline: none;" value="" readonly/>
-					<a href="#" style="text-decoration: none; font-size: 33px; position: absolute; right: -44px; top: 52px;" onclick="copy1()">복사</a>
 				</span>
 				<br />
 				<span class="findIdview2">입니다.</span>
@@ -89,7 +88,6 @@
 				<br />
 				<span class="findIdview" >
 					<input type="text" id="myinput2" style="border: none; outline: none;" value="" readonly/>
-					<a href="#" style="text-decoration: none; font-size: 33px; position: absolute; right: -44px; top: 52px;" onclick="copy2()">복사</a>
 				</span> 
 				<br />
 				<span class="findIdview2">입니다.</span>
