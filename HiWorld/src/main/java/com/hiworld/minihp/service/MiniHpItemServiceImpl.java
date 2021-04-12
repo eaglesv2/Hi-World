@@ -93,12 +93,13 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 		if(!playList[0].equals("")) {
 			for(int i=0; i<playList.length; i++) {
 				System.out.println(playList[i]);
-				songTitle = itemDAO.getMusicTitle(playList[i]);
+				songTitle = itemDAO.getMusicTitle(userSerial, playList[i]);
 				if(songTitle == null) {
 					musicVO = new MiniHpMusicVO();
 					musicVO.setUserSerial(userSerial);
 					musicVO.setMusicTitle(playList[i]);
 					musicVO.setMusicSrc(itemDAO.getMusicSrc(userSerial, playList[i]));
+					System.out.println(musicVO.getMusicSrc());
 					itemDAO.addToPlayList(musicVO);
 				}
 			}
@@ -109,9 +110,7 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 				itemDAO.removeFromPlayList(userSerial, nonPlayList[i]);
 			}
 		}
-
 	}	
-	
 	
 	@Override
 	public List<String> getAllSkin(int userSerial) {
@@ -125,5 +124,4 @@ public class MiniHpItemServiceImpl implements MiniHpItemService {
 	public int updateSkin(int userSerial, String src) {
 		return itemDAO.updateSkin(userSerial, src);
 	}
-
 }

@@ -36,6 +36,7 @@ import com.hiworld.minihp.vo.MiniHpNeiWordVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
 import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpPicturePagingVO;
+import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 import com.hiworld.minihp.vo.MiniHpUserMenuVO;
 import com.hiworld.minihp.vo.MiniHpVideoPagingVO;
 import com.hiworld.minihp.vo.MiniHpVisitorVO;
@@ -132,10 +133,10 @@ public class MiniHpGuestController {
 	
 	@GetMapping("/miniHp_leftGuest.do")
 	public String leftGuest(HttpServletRequest request, Model model,HttpSession session) {
-		int OwnerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
-		introVO = introDAO.getData(OwnerSerial);
-		ownerVO = dao.getData(OwnerSerial);
-		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(OwnerSerial); //이웃 목록 불러오기
+		int ownerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		introVO = introDAO.getData(ownerSerial);
+		ownerVO = dao.getData(ownerSerial);
+		List<MiniHpNeighborViewVO> neighborList = neighborService.getNeighborList(ownerSerial); //이웃 목록 불러오기
 		
 		if(neighborList == null) {
 			model.addAttribute("listLength", 0);
@@ -147,8 +148,14 @@ public class MiniHpGuestController {
 		model.addAttribute("ownerVO", ownerVO);
 		model.addAttribute("neighborList", neighborList);
 		
-		//현재 로그인된 유저 정보 전달(바람타기 본인으로 오는지 확인 용도)
+		//일촌 관계 전달
+		int isNeighbor = 0;
 		int userSerial = Utils.getSessionUser(session);
+		if(neighborDAO.checkNeighbor(userSerial, ownerSerial) != null) {
+			isNeighbor = 1;
+		}
+		model.addAttribute("isNeighbor", isNeighbor);
+		//현재 로그인된 유저 정보 전달(바람타기 본인으로 오는지 확인 용도)
 		model.addAttribute("userSerial", userSerial);
 		
 		return "MiniHP/MiniHP_Left_Guest";
@@ -164,7 +171,9 @@ public class MiniHpGuestController {
 		//주인 시리얼 전달
 		
 		int ownerSerial = Integer.parseInt(request.getParameter("OwnerSerial"));
+		MiniHpSelectedItemVO ownerItemList = itemService.getItemList(ownerSerial);
 		model.addAttribute("ownerSerial", ownerSerial);
+		model.addAttribute("ownerItemList", ownerItemList);
 		
 		model.addAttribute("latestPosts", rightService.getLatestPosts(ownerSerial));
 		

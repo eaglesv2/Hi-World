@@ -9,54 +9,61 @@
 <style>
 #sender_name{
 	position: absolute; 
-	top:87px; 
-	left:85px; 
+	top: 87px; 
+	left: 85px; 
 	font-size: 9pt;
 	color: blue;
 }
+#minimi{
+	position: absolute; 
+	top: 105px; 
+	left: 30px; 
+	width: 85px;
+	height: 98px;
+}
 #msg1{
 	position: absolute; 
-	top:134px; 
-	left:138px; 
-	font-size:9pt;
+	top: 134px; 
+	left: 138px; 
+	font-size: 9pt;
 }
 #msg2{
 	position: absolute; 
-	top:155px; 
-	left:138px; 
-	font-size:9pt;
+	top: 155px; 
+	left: 138px; 
+	font-size: 9pt;
 }
 #msg_area{
 	position: absolute;
-	top:210px; 
- 	left:36px; 
+	top: 210px; 
+ 	left: 36px; 
  	width: 290px; 
 	height: 70px; 
-	font-size:9pt;
+	font-size: 9pt;
 }
 #msg3{
 	position: absolute; 
-	top:310px;
-	left:34px; 
-	font-size:9pt;
+	top: 310px;
+	left: 34px; 
+	font-size: 9pt;
 }
 #yesBtn{
 	position: absolute; 
-	top:420px; 
-	left:115px; 
-	font-size:8pt;
+	top: 420px; 
+	left: 115px; 
+	font-size: 8pt;
 }
 #nextBtn{
 	position: absolute;
-	top:420px;
-	left:155px; 
-	font-size:8pt;
+	top: 420px;
+	left: 155px; 
+	font-size: 8pt;
 }
 #noBtn{
 	position: absolute; 
-	top:420px; 
-	left:205px; 
-	font-size:8pt;
+	top: 420px; 
+	left: 205px; 
+	font-size: 8pt;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -71,6 +78,7 @@ function neighborRegister_ok(){
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -83,6 +91,7 @@ function neighborRegister_next(){
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -95,6 +104,7 @@ function neighborRegister_no(){
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -106,7 +116,7 @@ function neighborRegister_no(){
 			${neighborListVO.senderName}
 		</span>
 		
-		<img alt="미니미" src="${resoucePath}/img/${minimiPath}" style="position: absolute; top:105px; left:30px;" width="98px" height="98">
+		<img id="minimi" alt="미니미" src="${senderItem.characterSrc}">
 		
 		<span id="msg1">
 			<font color="Blue">${neighborListVO.senderName}</font>님께서 

@@ -12,7 +12,7 @@
 [id*='selectable'] .ui-selecting { background: #FECA40; }
 [id*='selectable'] .ui-selected { background: #FF6600; color: white; }
 [id*='selectable'] { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-[id*='selectable'] li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 13px; font-size: 10px; font: 굴림; overflow: hidden;}
+[id*='selectable'] li { margin: 3px; padding: 0.4em; height: 13px; font-size: 12px; overflow: hidden;}
 
 #container {
 	border: 0px solid black;
@@ -137,7 +137,7 @@
 		console.log(array);
 		
 		for(var i=0; i<array.length; i++){
-			jQuery("#selectableUsingSong").append("<li class='i-widget-content'>"+array[i]+"</li>");
+			jQuery("#selectableUsingSong").append("<li class='ui-widget-content'>"+array[i]+"</li>");
 			jQuery("#selectableNotUsingSong li:contains("+array[i]+")").remove();
 		}
 		notUsingSong = null;

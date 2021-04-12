@@ -14,5 +14,8 @@ public interface MiniHpNeighborListService {
 	
 	/*이웃 신청 정보 불러오기*/
 	MiniHpNeighborListVO getRegisterCheck(int senderSerial, int receiverSerial);
+	
+	/*이웃 신청 여부 확인*/
+	int neighborListCheck(int userSerial, int neighborSerial);
 
 }

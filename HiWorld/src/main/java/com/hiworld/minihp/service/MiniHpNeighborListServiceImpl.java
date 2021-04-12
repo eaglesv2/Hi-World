@@ -48,4 +48,18 @@ public class MiniHpNeighborListServiceImpl implements MiniHpNeighborListService 
 		
 		return neighborListVO;
 	}
+	
+	/*이웃 신청 여부 확인*/
+	@Override
+	public int neighborListCheck(int userSerial, int neighborSerial) {
+		int result = 0;
+		int check = neighborListDAO.listCheck(userSerial, neighborSerial);
+		
+		if(check == 0) {
+			result = 0;
+		} else {
+			result = 1;
+		}
+		return result;
+	}
 }

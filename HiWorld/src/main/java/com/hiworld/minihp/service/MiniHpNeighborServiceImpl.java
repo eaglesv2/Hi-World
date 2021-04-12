@@ -101,9 +101,6 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 			while(lit.hasNext()) {
 				neighborVO = lit.next();
 				neighborViewVO = new MiniHpNeighborViewVO();
-				/*System.out.println(neighborVO.getNeighborID1());
-				System.out.println(neighborVO.getNeighborID2());
-				System.out.println(neighborViewVO);*/
 				if(neighborVO.getNeighborSerial1() == userSerial) {
 					neighborViewVO.setUserSerial(neighborVO.getNeighborSerial1());
 					neighborViewVO.setUserName(neighborVO.getNeighborName1());
@@ -119,17 +116,39 @@ public class MiniHpNeighborServiceImpl implements MiniHpNeighborService {
 					neighborViewVO.setNeighborName(neighborVO.getNeighborName1());
 					neighborViewVO.setNeighborValue(neighborVO.getNeighborValue1());
 				}
-				/*System.out.println(neighborViewVO.getUserID());*/
 				neighborViewList.add(neighborViewVO);
 			}	
 			return neighborViewList;
 		}
 	}
 	
+	/*이웃 정보 불러오기*/
+	@Override
+	public MiniHpNeighborViewVO getNeighborList(int userSerial, int neighborSerial) {
+		neighborVO = neighborDAO.getNeighborListInfo(userSerial, neighborSerial);
+		neighborViewVO = new MiniHpNeighborViewVO();
+		if(neighborVO.getNeighborSerial1() == userSerial) {
+			neighborViewVO.setUserSerial(neighborVO.getNeighborSerial1());
+			neighborViewVO.setUserName(neighborVO.getNeighborName1());
+			neighborViewVO.setUserValue(neighborVO.getNeighborValue1());
+			neighborViewVO.setNeighborSerial(neighborVO.getNeighborSerial2());
+			neighborViewVO.setNeighborName(neighborVO.getNeighborName2());
+			neighborViewVO.setNeighborValue(neighborVO.getNeighborValue2());
+		} else {
+			neighborViewVO.setUserSerial(neighborVO.getNeighborSerial2());
+			neighborViewVO.setUserName(neighborVO.getNeighborName2());
+			neighborViewVO.setUserValue(neighborVO.getNeighborValue2());
+			neighborViewVO.setNeighborSerial(neighborVO.getNeighborSerial1());
+			neighborViewVO.setNeighborName(neighborVO.getNeighborName1());
+			neighborViewVO.setNeighborValue(neighborVO.getNeighborValue1());
+		}
+		
+		return neighborViewVO;
+	}
 	/*이웃 끊기*/
 	@Override
-	public void deleteNeighbor(int userSerial, int neighborSerial) {
-		
+	public void deleteNeighbor(int userSerial, int neighborSerial) {	
 		neighborDAO.deleteNeighbor(userSerial, neighborSerial);	
 	}
+
 }

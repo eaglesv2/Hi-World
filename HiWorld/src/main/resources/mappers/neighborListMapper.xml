@@ -19,6 +19,12 @@
 		WHERE senderSerial = #{senderSerial} AND receiverSerial = #{receiverSerial}
 	</select>
 	
+	<select id="listCheck" resultType="int">
+		SELECT COUNT(*)
+		FROM MiniHP_NeighborList
+		WHERE senderSerial = #{userSerial} AND receiverSerial = #{neighborSerial}
+	</select>
+	
 	<delete id="deleteNeighborList">
 		DELETE
 		FROM MiniHP_NeighborList

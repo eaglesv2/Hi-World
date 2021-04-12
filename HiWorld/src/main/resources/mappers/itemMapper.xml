@@ -68,18 +68,20 @@
 	<select id="getMusicTitle" resultType="String">
 		SELECT musicTitle
 		FROM UserSelect_Music
-		WHERE musicTitle = #{musicTItle}
+		WHERE musicTitle = #{musicTitle} AND userSerial = #{userSerial}
 	</select>
 	
 	
 	
 	<select id="getAllSkin" resultType="String">
-		SELECT ArticleImg FROM User_Article
+		SELECT ArticleImg 
+		FROM User_Article
 		WHERE UserSerial=#{userSerial}
 		AND ArticleKinds = '스킨'
 	</select>
 	<select id="getUsingSkin" resultType="String">
-		SELECT skinSrc FROM UserSelect_Article
+		SELECT skinSrc 
+		FROM UserSelect_Article
 		WHERE userSerial=#{userSerial}
 	</select>
 	<update id="updateSkin">

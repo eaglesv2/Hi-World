@@ -21,4 +21,7 @@ public interface MiniHpNeighborListDAO {
 	
 	/*이웃 신청 수락 or 거절 시 신청 정보 삭제*/
 	void deleteNeighborList(@Param("senderSerial")int senderSerial, @Param("receiverSerial")int receiverSerial);
+	
+	/*이웃 신청 여부 확인*/
+	int listCheck(@Param("userSerial")int userSerial, @Param("neighborSerial")int neighborSerial);
 }

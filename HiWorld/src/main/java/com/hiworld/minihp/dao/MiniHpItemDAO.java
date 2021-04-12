@@ -51,7 +51,7 @@ public interface MiniHpItemDAO {
 	String getMusicSrc(@Param("userSerial")int userSerial, @Param("musicTitle")String musicTitle);
 	
 	/*재생목록에 노래 있는지 확인*/
-	String getMusicTitle(String musicTitle);
+	String getMusicTitle(@Param("userSerial")int userSerial, @Param("musicTitle")String musicTitle);
 	
 	/*재생목록에 노래 추가하기*/
 	void addToPlayList(MiniHpMusicVO musicVO);

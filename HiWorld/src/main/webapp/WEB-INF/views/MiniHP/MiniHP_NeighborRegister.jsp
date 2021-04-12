@@ -17,8 +17,8 @@
 	position: absolute; 
 	top: 65px; 
 	left: 30px; 
-	width: 98px;
-	height: 98px;
+	width: 85px;
+	height: 85px;
 }
 #msg1{
 	position: absolute; 
@@ -88,7 +88,7 @@ function registerSend(){
 	<form action="" name="neighborRegisterForm" method="post">
 		<span id="sender_name">${senderName}</span>
 		
-		<img id="minimi" alt="상대방의 미니미" src="${resoucePath}/img/${minimiPath}">
+		<img id="minimi" alt="상대방의 미니미" src="${recevierItem.characterSrc}">
 		
 		<span id="msg1">
 			<font color="Blue">${receiverName}</font>님께 이웃을 신청합니다.

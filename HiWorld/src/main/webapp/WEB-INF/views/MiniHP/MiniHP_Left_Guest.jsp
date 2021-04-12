@@ -181,10 +181,12 @@ font-family:'BMHANNAPro';
 				
 				<!-- 유저 생일 표시 -->
 				<span id="userBirth">${ownerVO.userBirth}</span>
-					<br/>
-				<!-- 일촌 신청 버튼 -->
-				<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?OwnerSerial=${ownerVO.userSerial}&OwnerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
 				</span>
+				<!-- 일촌 신청 버튼 -->
+				<c:if test="${isNeighbor eq 0 }">
+					<img src="${pageContext.request.contextPath}/resources/images/admin/member_btn.jpg" onclick="window.open('miniHp_neighborRegister.do?ownerSerial=${ownerVO.userSerial}&ownerName=${ownerVO.userName}','${ownerVO.userID}memberCall','width=312,height=380,location=no,status=no,scrollbars=no')" />
+				</c:if>
+				
 				
 				<select id="neighborSelect" onchange="moveToUser()">
 					<option value="">★이웃 바람타기</option>

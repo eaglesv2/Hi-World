@@ -105,7 +105,6 @@ function moveToUser() {
 			return;
 		}  */
 		/* $("#neighborSelect option:eq(0)").attr("selected", "selected"); */
-		
 		/* $.ajax({
 			type : 'GET',
 			url : 'miniHp_guestHome.do',
@@ -160,6 +159,9 @@ font-family:'BMHANNAPro';
 textarea{
 font-family:'BMHANNAPro';
 }
+.btn {
+cursor: pointer;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -191,7 +193,7 @@ font-family:'BMHANNAPro';
 					</tr>
 					<tr bgcolor="#FFFFFF">
 						<td>
-							<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" onclick="window.open('miniHp_uploadIntroPicture.do','','width=400,height=200,location=no,status=no,scrollbars=no');">
+							<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" class="btn" onclick="window.open('miniHp_uploadIntroPicture.do','','width=400,height=200,location=no,status=no,scrollbars=no');">
 						</td>
 					</tr>
 				</table>
@@ -204,11 +206,11 @@ font-family:'BMHANNAPro';
 				<font>
 					<div id="profile_info">
 						<span id="infoTxt" style="font-size:13px;"></span>
-						<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i();"/>
+						<img src="${pageContext.request.contextPath}/resources/images/admin/editBtn.jpg" class="btn" style="position: absolute; top:235pt; left:5pt;" onclick="change_i();"/>
 					</div>
 					<div id="profile_info_ok">
 						<textarea rows="7" cols="20" id="infoTxt_ok" style="font-size:8pt; resize: none;"></textarea>
-						<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" style="position: absolute; top:235pt; left:5pt;"onclick="change_i_ok();"/>
+						<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" class="btn" style="position: absolute; top:235pt; left:5pt;" onclick="change_i_ok();"/>
 					</div>
 					<img src="${pageContext.request.contextPath}/resources/images/admin/bar.jpg" alt="" style="position: absolute; top:250pt; left:5pt;" />
 				</font>
@@ -228,7 +230,7 @@ font-family:'BMHANNAPro';
 				<font style="font-size: 7pt;">${sessionVO.userBirth}</font>
 					<br/>
 				<!-- 일촌 신청 확인 버튼 -->
-				<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
+				<img src="${pageContext.request.contextPath}/resources/images/admin/member_check_btn.jpg" class="btn" onclick="window.open('miniHp_neighborRegisterList.do','${sessionVO.userID}memberCheck','width=312,height=380,location=no,status=no,scrollbars=no');" />
 				</font>
 				
 				<select id="neighborSelect" style="background-color: #9cbde7; width:140px; heigt:5px; position: absolute; top:300pt; left:5pt;" onchange="moveToUser()">
@@ -243,7 +245,7 @@ font-family:'BMHANNAPro';
 						<option value="-1">이웃이 없습니다</option>
 					</c:if>
 				</select>
-				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" style="position: absolute; top:315pt; left:20pt;" onclick="random()"/>
+				<img src="${pageContext.request.contextPath}/resources/images/admin/randomBtn.jpg" class="btn" style="position: absolute; top:315pt; left:20pt;" onclick="random()"/>
 			</td>
 		</tr>
 	</table>	

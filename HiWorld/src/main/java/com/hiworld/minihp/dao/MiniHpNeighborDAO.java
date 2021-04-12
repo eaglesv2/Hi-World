@@ -23,6 +23,9 @@ public interface MiniHpNeighborDAO {
 	/*이웃 목록 불러오기*/
 	List<MiniHpNeighborVO> getNeighborList(int userSerial);
 	
+	/*이웃 정보 불러오기*/
+	MiniHpNeighborVO getNeighborListInfo(@Param("userSerial")int userSerial, @Param("neighborSerial")int neighborSerial);
+
 	/*이웃 끊기*/
 	void deleteNeighbor(@Param("userSerial")int userSerial, @Param("neighborSerial")int neighborSerial);
 }
