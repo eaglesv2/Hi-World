@@ -23,8 +23,14 @@
 					<h3>
 						<label for="id">아이디</label>
 					</h3>
-					<span class="box int_id"> <input type="text" id="userID"
-						name="userID" class="int" maxlength="20" />
+					<span class="box int_id"> 
+					<c:if test="${UserID != ''}">
+						<input type="text" id="userID" name="userID" class="int" maxlength="20" value="자동 설정 되었습니다." readonly/>
+						<input type="hidden" id="userID" name="userID" class="int" maxlength="20" value="${UserID}" readonly/>
+					</c:if>
+					<c:if test="${UserID == ''}">
+						<input type="text" id="userID" name="userID" class="int" maxlength="20"/>
+					</c:if>
 					</span> <span id="error_next_box" class="error"></span>
 					<!-- 패스워드  -->
 					<h3 class="join_title">
@@ -44,8 +50,13 @@
 					<h3>
 						<label for="name">이름</label>
 					</h3>
-					<span class="box int_name"> <input type="text" id="userName"
-						name="userName" class="int" maxlength="20" />
+					<span class="box int_name"> 
+					<c:if test="${UserID != ''}">
+						<input type="text" id="userName" name="userName" class="int" maxlength="20" value="${UserName}" readonly/>
+					</c:if>
+					<c:if test="${UserID == ''}">
+						<input type="text" id="userName" name="userName" class="int" maxlength="20"/>
+					</c:if>
 					</span> <span id="error_next_box3" class="error"></span>
 					<!--  성별 -->
 					<h3>
