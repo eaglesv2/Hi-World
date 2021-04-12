@@ -81,8 +81,8 @@ function upload() {
 		contentType : false,
 		
 		success: function(result) {
+			window.opener.location.reload();
 			window.close();
-			parent.window.reload();
 		}
 	})
 }
@@ -102,7 +102,7 @@ function upload() {
 		<button type="button" title="파일찾기">
 			<span style="font-size: 8pt;">파일찾기</span>
 		</button>
-		<input type="file" name="uploadFile" class="input_file" title="파일찾기">
+		<input type="file" accept="image/gif, image/jpeg, image/png" name="uploadFile" class="input_file" title="파일찾기">
 	</div>
 	<div class="upload-btn_wrap">
 		<button type="button" title="업로드" onclick="upload();">

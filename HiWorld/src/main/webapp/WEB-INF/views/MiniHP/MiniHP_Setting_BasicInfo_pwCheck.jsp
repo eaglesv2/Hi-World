@@ -74,7 +74,7 @@ input::placeholder {
 				<input type="password" id="userPw" placeholder="비밀번호 입력" style="width: 100%; font-family: none;">
 			</div>
 			<div style="float: left;margin-left:10px;border: 0px solid black;">
-				<input type="button" id="send" value="확인" onclick="sendPw()" style="height: 20px;">
+				<input type="button" id="send" value="확인" onclick="sendPw()" style="height: 24px;">
 			</div>
 		</div>
 		<div>
@@ -89,7 +89,6 @@ input::placeholder {
 	</table>
 	
 	<div style="height: 30px;border: 0px solid black;"></div>
-	
 </form>
 </body>
 </html>
