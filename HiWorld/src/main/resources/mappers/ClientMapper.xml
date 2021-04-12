@@ -7,9 +7,8 @@
 	
 	<!-- 회원 정보 수정 -->
 	<update id="updateClient">
-		UPDATE CLIENT SET
-		NAME = #{name},
-		TEL = #{tel}
+		UPDATE CLIENT 
+		SET	NAME = #{name},	TEL = #{tel}
 		WHERE ID = #{id}
 	</update>
 	
@@ -20,55 +19,62 @@
 	
 	<!--  비밀번호 수정 -->
 	<update id="updatepw" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserPW = #{UserPW}
+		UPDATE HW_USERLIST 
+		SET	UserPW = #{UserPW}	
 		WHERE UserSerial = #{UserSerial}
 	</update>
 	<!-- 비밀번호 조회  -->
 	<select id="selectpw" resultType="clientVO">
-	SELECT * FROM HW_USERLIST
-	where UserSerial = #{UserSerial}
+	SELECT * 
+	FROM HW_USERLIST
+	WHERE UserSerial = #{UserSerial}
 	</select>
 
 		<!--  연락처 수정 -->
 		<update id="updateTel" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserTel = #{UserTel}
+		UPDATE HW_USERLIST 
+		SET	UserTel = #{UserTel}
 		WHERE UserSerial = #{UserSerial}
 		</update>
 			<!-- 연락처 조회  -->
 		<select id="selectTel" resultType="clientVO">
-		SELECT * FROM HW_USERLIST
-		where UserSerial = #{UserSerial}
+		SELECT * 
+		FROM HW_USERLIST
+		WHERE UserSerial = #{UserSerial}
 		</select>
 	
 	
 		<!-- 주소 수정  --> 
 	<update id="updateAddress" parameterType="clientVO">
-		UPDATE HW_USERLIST SET
-		UserAddress = #{UserAddress}
+		UPDATE HW_USERLIST 
+		SET	UserAddress = #{UserAddress}
 		WHERE UserSerial = #{UserSerial}
 	</update>
 	<!-- 주소 조회  -->
 	<select id="selectAddress" resultType="clientVO">
-	SELECT * FROM HW_USERLIST 
+	SELECT * 
+	FROM HW_USERLIST 
 	WHERE UserSerial = #{UserSerial}	
 	</select>
 	
 	<!--######################################회원아이디 비번 찾기-->
 	<!-- 전체 회원 카운트 -->
 	<select id="allClientCount" resultType="int">
-		SELECT COUNT(*) FROM HW_USERLIST WHERE UserID!='ADMIN'
+		SELECT COUNT(*) 
+		FROM HW_USERLIST 
+		WHERE UserID!='ADMIN'
 	</select>
 	<!-- 아이디찾기  -->
 	<select id="selectFindId" resultType="clientVO">
-	SELECT UserID FROM HW_USERLIST 
+	SELECT UserID 
+	FROM HW_USERLIST 
 	WHERE UserName = #{name} AND UserTel = #{tel}
 	</select>
 	
 	<!-- 임시비밀번호 발급 받기 위해서 정보 받기-->
 	<select id="selectuserInfo" resultType="clientVO">
-	SELECT * FROM HW_USERLIST 
+	SELECT * 
+	FROM HW_USERLIST 
 	WHERE UserID = #{id} AND UserTel = #{tel}
 	</select>
 	
@@ -83,13 +89,15 @@
 	<!-- 회원 회원 가입 -->
 	<!-- parameterType 값은 자동으로 설정됨? 아마 아닐경우 직접 써주기 -->
 	<insert id="insertClient" parameterType="clientVO">
-		INSERT INTO HW_USERLIST (UserName, UserID, UserPW, UserGender, UserBirth, UserTel, UserAddress)
+		INSERT 
+		INTO HW_USERLIST (UserName, UserID, UserPW, UserGender, UserBirth, UserTel, UserAddress)
 		VALUES(#{UserName}, #{UserID}, #{UserPW}, #{UserGender}, #{UserBirth}, #{UserTel}, #{UserAddress})
 	</insert>
 	
 	<!-- 회원가입시 미니홈피 기본값 등록 -->
 	<insert id="insertMiniHP">
-		INSERT INTO MiniHP_UserMenu (UserSerial, UserID)
+		INSERT 
+		INTO MiniHP_UserMenu (UserSerial, UserID)
 		VALUES(#{UserSerial},#{UserID})
 	</insert>
 	
@@ -203,8 +211,9 @@
 	
 	<!-- 게시판 업로드 -->
 	<insert id="BoardSubmit">
-		INSERT INTO HW_Board (userSerial, title, content, lookUp, userName)
-		VALUES (#{userSerial},#{title},#{content}, 0, #{userName})
+		INSERT 
+		INTO HW_Board (userSerial, title, content, lookUp, userName, banUser)
+		VALUES (#{userSerial},#{title},#{content}, 0, #{userName}, #{banUser})
 	</insert>
 	
 	<!-- 게시판 갯수 가져오기 -->
@@ -216,7 +225,8 @@
 	
 	<!-- 게시판 가져오기 -->
 	<select id="getBoardList" resultType="boardVO">
-		SELECT * FROM HW_Board 
+		SELECT * 
+		FROM HW_Board 
 		WHERE userSerial = 1 
 		ORDER BY boardSerial DESC
 		LIMIT #{offset}, #{size}
@@ -235,6 +245,13 @@
 		FROM HW_Board_Reply 
 		WHERE boardSerial = #{boardSerial} 
 		ORDER BY replySerial DESC
+	</select>
+	
+	<!-- 댓글 시리얼번호 -->
+	<select id="getBoardReplySerial" resultType="String">
+		SELECT replySerial
+		FROM HW_Board_Reply
+		WHERE userSerial = #{userSerial} AND userName = #{userName} AND boardSerial = #{boardSerial} AND replyContent = #{replyContent}
 	</select>
 	
 	<!-- 게시판 조회 1올리기 -->
@@ -260,7 +277,8 @@
 	
 	<!-- 댓글 등록  -->
 	<insert id="insertReply" parameterType="boardReplyVO">
-		INSERT INTO HW_Board_Reply(userSerial, userName, userID, boardSerial, replyContent)
+		INSERT 
+		INTO HW_Board_Reply(userSerial, userName, userID, boardSerial, replyContent)
 		VALUES (#{userSerial},#{userName},#{userID},#{boardSerial},#{replyContent})
 	</insert>
 	
@@ -281,7 +299,8 @@
 	
 	<!-- 문의사항 가져오기 -->
 	<select id="getQuestionList" resultType="boardVO">
-		SELECT * FROM HW_Board 
+		SELECT * 
+		FROM HW_Board 
 		WHERE userSerial != 1 
 		ORDER BY boardSerial DESC
 		LIMIT #{offset}, #{size}
@@ -290,7 +309,8 @@
 	<!-- 문의사항 전부 가져오기 -->
 	<!-- 게시판 가져오기 -->
 	<select id="getAllQuestionList" resultType="boardVO">
-		SELECT * FROM HW_Board 
+		SELECT * 
+		FROM HW_Board 
 		WHERE userSerial != 1 
 		ORDER BY boardSerial DESC
 	</select>

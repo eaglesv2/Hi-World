@@ -26,3 +26,7 @@
 .updateFolder-radio input[type="radio"]:checked + span{
   color:#FF5E00;
 }
+
+input{
+	font-family:'SDSamliphopangche_Outline';
+}

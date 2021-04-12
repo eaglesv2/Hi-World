@@ -44,27 +44,36 @@
 		function submit() {
 			
 			var BoardSubmit = $("form[name=BoardSubmit]").serialize();
+			var title = $("#title").val();
+			var textarea = $("#textarea").val();
 			
-			$.ajax({
-				url : "BoardSubmit.do",
-				type : "GET",
-				data : BoardSubmit,
-				success : function(data) {
-					alert("등록되었습니다.");
-					var ajaxOption3={
-                   		 type: "GET",
-                            url : "noticePage.do",
-                            dataType : "html", 
-                            async:true,
-                            cache:false
-                    	}
-               	 	$.ajax(ajaxOption3).done(function(data){
-               		  //Contents 영역 교체
-               		  	$('#bodyContext').html(data);
-               	 	 })
+			if(title=='' || title == null){
+				Swal.fire("제목을 작성하세요");
+			}else{
+				if(textarea=='' || textarea == null){
+					Swal.fire("내용을 작성하세요");
+				}else{
+					$.ajax({
+						url : "BoardSubmit.do",
+						type : "GET",
+						data : BoardSubmit,
+						success : function(data) {
+							Swal.fire("등록되었습니다");
+							var ajaxOption3={
+		                   		 type: "GET",
+		                            url : "noticePage.do",
+		                            dataType : "html", 
+		                            async:true,
+		                            cache:false
+		                    	}
+		               	 	$.ajax(ajaxOption3).done(function(data){
+		               		  //Contents 영역 교체
+		               		  	$('#bodyContext').html(data);
+		               	 	 })
+						}
+					})
 				}
-			})
-			
+			}
 		}
 	</script>
 

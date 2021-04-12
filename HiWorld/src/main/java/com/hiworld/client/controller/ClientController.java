@@ -2,7 +2,6 @@ package com.hiworld.client.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -70,6 +69,13 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 
+// @@@@@@@@@@@@@@@ 페이지 시작 @@@@@@@@@@@@@@@@@@@@@@@@
+	@GetMapping("/")
+	public String start() {
+		return "redirect:/login.do";
+	}
+	
+	
 //	@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 공지사항 및 문의사항 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/* 공지 사항 */
 	@GetMapping("/noticePage.do")
@@ -79,6 +85,7 @@ public class ClientController {
 		
 		
 		/* 페이징 처리 */
+		// 총 페이지 개수를 카운트
 		int listCnt = clientService.countNoticePage();
 		MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
 		
@@ -124,12 +131,21 @@ public class ClientController {
 	@ResponseBody
 	public int BoardSubmit(BoardVO boardVO,HttpSession session) {
 		System.out.println("공지 사항 등록");
-		sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
-		int userSerial = vo.getUserSerial();
-		String userName = vo.getUserName();
+		int userSerial = 0;
+		String userName = "";
+		int banUser = 0;
+		if(session.getAttribute("sessionVO")==null) {
+			userName = "게스트";
+			banUser = 1;
+		}else {
+			sessionVO vo = (sessionVO)session.getAttribute("sessionVO");
+			userSerial = vo.getUserSerial();
+			userName = vo.getUserName();
+		}
 		
 		boardVO.setUserSerial(userSerial);
 		boardVO.setUserName(userName);
+		boardVO.setBanUser(banUser);
 		
 		clientService.BoardSubmit(boardVO);
 		
@@ -188,7 +204,6 @@ public class ClientController {
 		/* 댓글정보 가져오기 */
 		ArrayList<BoardReplyVO> list = clientService.getBoardReply(boardVO);
 		
-		
 		model.addAttribute("boardVO",boardVO);
 		model.addAttribute("list",list);
 		
@@ -201,12 +216,16 @@ public class ClientController {
 	@ResponseBody
 	public String replyInsert(BoardVO boardVO,HttpSession session) {
 		System.out.println("댓글 등록");
-		sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
-		int userSerial = sessionVO.getUserSerial();
+		int userSerial = 0;
+		String userName = "게스트";
+		String userID = "게스트";
+		if(session.getAttribute("sessionVO")!=null) {
+			sessionVO sessionVO = (sessionVO)session.getAttribute("sessionVO");
+			userSerial = sessionVO.getUserSerial();
+			userName = sessionVO.getUserName();
+			userID = sessionVO.getUserID();
+		}
 		
-		
-		String userName = sessionVO.getUserName();
-		String userID = sessionVO.getUserID();
 		boardVO.setUserSerial(userSerial);
 		boardVO.setUserName(userName);
 		boardVO.setUserID(userID);
@@ -220,13 +239,13 @@ public class ClientController {
 		}
 		/* 정보 등록 */
 		clientService.insertReply(boardVO);
-		
+		String Serial = clientService.getBoardReplySerial(boardVO);
 		/* 리턴값 등록 */
-		String data = "<tr>";
+		String data = "<tr id='"+Serial+"'>";
 		data += "<td>"+boardVO.getReplyContent()+"</td>";
 		data += "<td>"+userName+"("+userID+")"+"</td>";
 		data += "<td>"+date+"</td>";
-		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td><button onclick=\"deleteReply('${kinds.replySerial}')\">삭제</button></td> </c:if>";
+		data += "<c:if test=\"${sessionVO.userSerial == kinds.userSerial || sessionVO.userSerial == 1}\"> <td style='width: 50px;'><div class=\"noticehover\" onclick=\"deleteReply('"+Serial+"')\">삭제</div></td> </c:if>";
 		data += "</tr>";
 
 		
@@ -278,7 +297,6 @@ public class ClientController {
 		} else {
 			int listCnt = clientService.countBoardBanPage();
 			MainBoardPagingVO pagingVO = new MainBoardPagingVO(listCnt, curPage);
-			
 			model.addAttribute("alist",clientService.getAllBanClientData());
 			model.addAttribute("list",clientService.getAllBanClient(curPage,pagingVO.getPageSize()));
 			model.addAttribute("listCnt",listCnt);
@@ -420,7 +438,7 @@ public class ClientController {
 
 	/* 로그인 */
 	@PostMapping("/checkClient.do")
-	public String checkClient(ClientVO clientVO, HttpSession session, HttpServletResponse res) throws Exception {
+	public String checkClient(Model model, ClientVO clientVO, HttpSession session, HttpServletResponse res) throws Exception {
 		System.out.println("로그인");
 		sessionVO vo = clientService.checkClient(clientVO);
 
@@ -431,10 +449,7 @@ public class ClientController {
 			System.out.println(test);
 			if (test != 0) {
 				/* 1은 밴 먹음 */
-				res.setContentType("text/html;charset=UTF-8");
-				PrintWriter writer = res.getWriter();
-				writer.println("<script>alert('밴을 먹은 아이디입니다 문의게시판이나 고객센터를 통해 문의주세요')</script>");
-				writer.flush();
+				model.addAttribute("msg", "밴");
 				return "Login/mainPage";
 			} else {
 				/* 이름하고 아이디를 세션 화 */
@@ -444,11 +459,8 @@ public class ClientController {
 				return "redirect:/login.do";
 			}
 		} else {
-			res.setContentType("text/html;charset=UTF-8");
-			PrintWriter writer = res.getWriter();
-			writer.println("<script>alert('아이디 또는 패스워드를 확인하세요.')</script>");
-			writer.flush();
-
+			
+			model.addAttribute("msg","틀림");
 			return "Login/mainPage";
 
 		}
@@ -686,10 +698,7 @@ public class ClientController {
 			System.out.println(test);
 			if (test != 0) {
 				/* 1은 밴 먹음 */
-				res.setContentType("text/html;charset=UTF-8");
-				PrintWriter writer = res.getWriter();
-				writer.println("<script>alert('밴을 먹은 아이디입니다 문의게시판이나 고객센터를 통해 문의주세요')</script>");
-				writer.flush();
+				model.addAttribute("msg", "밴");
 				return "Login/mainPage";
 			}
 			/* 이름하고 아이디를 세션 화 */
@@ -724,10 +733,7 @@ public class ClientController {
 			System.out.println(test);
 			if (test != 0) {
 				/* 1은 밴 먹음 */
-				res.setContentType("text/html;charset=UTF-8");
-				PrintWriter writer = res.getWriter();
-				writer.println("<script>alert('밴을 먹은 아이디입니다 문의게시판이나 고객센터를 통해 문의주세요')</script>");
-				writer.flush();
+				model.addAttribute("msg", "밴");
 				return "Login/mainPage";
 			}
 			/* 이름하고 아이디를 세션 화 */
@@ -908,7 +914,7 @@ public class ClientController {
 				int cal = clientPrice - articlePrice;
 				vo.setArticlePrice(cal);
 				articleService.cash(vo);
-				sessionVO.setUserSerial(cal);
+				sessionVO.setUserCash(cal);
 
 				/* 구매한 상품 장바구니 삭제 */
 				articleService.delBasket(vo);

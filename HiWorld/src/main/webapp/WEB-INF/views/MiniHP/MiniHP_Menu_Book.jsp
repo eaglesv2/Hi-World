@@ -185,11 +185,8 @@
 			<input class="bookBigBtns" type="button" value="확인" onclick="insertReply('${l.bookSerial}');">
 		</div>
 		<!-- 댓글 있을경우 가져옴 -->
-		<c:if test="${l.replyCnt!=0}">
-			<%-- <iframe class="replys" src="MiniHpBookReply.do?bookSerial=${l.bookSerial}" frameborder="1" marginheight="0" marginwidth="0" width="100%" height="50%"></iframe> --%>
-			<script> $("#replySrc-"+'${l.bookSerial}').load("MiniHpBookReply.do?bookSerial=${l.bookSerial}");</script> 
-			<div id="replySrc-${l.bookSerial}" class="replySrc"></div> 
-		</c:if>
+		<div id="replySrc-${l.bookSerial}" class="replySrc"></div> 
+		<script> $("#replySrc-"+'${l.bookSerial}').load("MiniHpBookReply.do?bookSerial=${l.bookSerial}");</script> 
 	</div>
 	</c:forEach>
 	

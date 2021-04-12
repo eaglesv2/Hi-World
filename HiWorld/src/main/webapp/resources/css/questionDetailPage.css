@@ -11,7 +11,10 @@
 	border-top:none;
 }
 #replyTable #dat{
-	width: 500px;
+    width: 400px;
+    font-weight: 600;
+    color:orangered;
+    
 }
 
 #reply{
@@ -20,4 +23,9 @@
 #Context{
 	overflow: scroll;
     overflow-x: hidden;
+}
+
+.noticehover:hover{
+	color:red;
+	cursor:pointer;
 }

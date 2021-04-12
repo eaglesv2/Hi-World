@@ -82,8 +82,8 @@ function updateNeighbor(neighborSerial){
 </head>
 <body>
 <form name="neighborSetting">
-	<h3>이웃 관리</h3>
-	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
+	<h3 style="margin-bottom: 0px; text-align: left; margin-left: 10px;">이웃 관리</h3>
+	<table border="0" width="100%" align="center" cellpadding="0" cellspacing="0" style="margin-top: 0px;">
 		<tr height="5px"></tr><tr height="2"><td align="right" colspan="3" bgcolor="#EBEBEB"></td></tr><tr height="10px"></tr>
 	</table>
 	

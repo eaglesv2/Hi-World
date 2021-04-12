@@ -6,8 +6,8 @@
 	text-align: center;
 }
 #Context table tr,#Context table td{
-	border-top:1px solid;
-	border-bottom:1px solid;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
 	height: 29px;
 	vertical-align:middle;
 }
@@ -38,4 +38,14 @@
 	
 }
 
-questionhover:hover{}
+.questionhover:hover{
+	color:red;
+	cursor:pointer;
+}
+.questionhover2:hover{
+	color:royalblue;
+	cursor:pointer;
+}
+.questionhover3:hover{
+	text-decoration: underline;
+}

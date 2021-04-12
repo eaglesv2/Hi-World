@@ -2,9 +2,7 @@ package com.hiworld.minihp.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.hiworld.client.vo.sessionVO;
 import com.hiworld.minihp.vo.MiniHpIntroVO;
-import com.hiworld.minihp.vo.MiniHpOwnerVO;
 import com.hiworld.minihp.vo.MiniHpVisitorVO;
 
 public interface MiniHpIntroService {

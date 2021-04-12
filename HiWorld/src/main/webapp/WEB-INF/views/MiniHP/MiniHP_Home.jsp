@@ -34,12 +34,14 @@ body{
 	font-weight: 0;
 	margin-left: 35px;
 	cursor: url('${itemList.mouseSrc}'), auto;
+	overflow: hidden;
 }
 button{
 	font-family:'SDSamliphopangche_Outline';
 }
 input{
 	font-family:'BMHANNAPro';
+	outline: none;
 }
 textarea{
 	font-family:'BMHANNAPro';

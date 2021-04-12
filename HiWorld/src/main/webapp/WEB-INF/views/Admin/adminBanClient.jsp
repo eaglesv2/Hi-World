@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -31,9 +30,13 @@
 		width:190px;
 	}
 	#clientlist{
-		margin-left:320px;
+		margin-left:330px;
 		width: 120px;
 		background: gray;
+	}
+	
+	#Context{
+		overflow-y:scroll;
 	}
 </style>	
 </head>
@@ -67,7 +70,7 @@
 					<tr id="${kinds.userSerial}">
 						<td style="width:150px;text-align: center;">${kinds.userSerial}</td>
 						<td>${kinds.userName}(${kinds.userID})</td>
-						<td><input type="button" value="Ban" onclick="UserBan(${kinds.userSerial})" /></td>
+						<td><input type="button" value="unBan" onclick="UserBan(${kinds.userSerial})" /></td>
 					</tr>
 				</c:forEach>
 		</tfoot>
@@ -82,7 +85,7 @@
 	
 	
 	
-	<div>
+	<div style="text-align: center; margin-top:5px;">
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" onClick="fn_paging(1)">[처음]</a> 
         </c:if>
@@ -127,7 +130,7 @@
 		}else{
 			/* 일단 검색시 목록 전체안보이게 */
 			$("#tbody>tr").hide();
-		
+			$('#tfoot>tr').hide();
 			var writer = $("#tfoot>tr>td:nth-child(2):contains('"+key+"')");
 			$("#tfoot").show();
 			$(writer).parent().show();

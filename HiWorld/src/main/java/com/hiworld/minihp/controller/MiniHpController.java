@@ -115,6 +115,14 @@ public class MiniHpController {
 		return "MiniHP_Left.do";
 	}
 	
+	//랜덤 미니홈피 가기 처리
+	@ResponseBody
+	@GetMapping("/random.do")
+	public int random(HttpSession session) {
+		int userSerial = Utils.getSessionUser(session);
+		return rightService.random(userSerial);
+	}
+	
 	@RequestMapping("/MiniHP_Right.do")
 	public String miniHp_Right(Model model, HttpSession session) {
 		//최근 게시물 표시

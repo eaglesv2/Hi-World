@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +26,15 @@
 <script type="text/javascript">
                 
 	 $(document).ready(function(){
-		 	var main = $('.bxslider').bxSlider({
-				       mode: 'fade',
-				       auto:true,
-				       speed:500,
-				       controls: false,
-				       pager: false
-				   })
+		 var main = $('.bxslider').bxSlider({
+				   mode: 'fade',
+				   auto:true,
+				   speed:500,
+				   controls: false,
+				   pager: false
+			 })
 				   
-	$.ajax({
+		$.ajax({
 			url : "allClientCount.do",
 			type : "GET",
 			success : function(data) {
@@ -43,10 +42,21 @@
 				let text = 'Hi-World에 오신것을 환영합니다';
 				let text2 = '총 가입자수 : '+data;
 				 $('#startpage1').append(text);
-				 $('#startpage2').append(text2);
-				 
-				}
-			})			   
+				 $('#startpage2').append(text2);		 
+			}
+		})			  
+			
+			var msg = '${msg}';
+			if(msg=='밴'){
+				Swal.fire({
+					  icon: 'error',
+					  title: '당신은 밴을 먹었습니다',
+					  text: '문의사항 혹은 고객센터로 문의하세요',
+					  footer: '<a href="#" onclick="question()">문의사항으로 이동하시려면 <text style="color:blue;">여기</text>를 누르세요</a>'
+					})
+			}else if(msg=='틀림'){
+				Swal.fire('아이디 혹은 비밀번호를 틀렸습니다.');
+			}
 	});
       
         function signUp(){
@@ -116,13 +126,13 @@
                 		  $('#bodyContext').html(data);
                 	  })
             	 }else {
-					alert("로그인하세요");
+            		 Swal.fire("로그인 후 이용해 주세요");
 				}
             	 
              };
              
-             function question(Name){
-            	 if(Name!="" && Name!=null){
+             function question(){
+            	 
              	 console.log("1234") 
                  var ajaxOption4={
                 		 type: "GET",
@@ -130,7 +140,6 @@
                          dataType : "html", 
                          async:true,
                          cache:false
-                		 
                  }
             	  $.ajax(ajaxOption4).done(function(data){
             		  //Contents 영역삭제
@@ -139,9 +148,6 @@
             		  //Contents 영역 교체
             		  $('#bodyContext').html(data);
             	  })
-            	 }else{
-            		 alert("로그인하세요");
-            	 }
              };
              
              function myinfo(){
@@ -180,7 +186,7 @@
                 	var popupY = (window.screen.height/2)-(popupHeight/2);
                 	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
             	}else{
-            		alert("로그인하세요.");
+            		Swal.fire("로그인 후 이용해 주세요");
             	}
             	
             }
@@ -216,7 +222,7 @@
     					}
     				},
                   error: function(){
-                	  alert("에러입니다.")
+                	  Swal.fire("에러입니다");
                  		 }
                 	})
            
@@ -227,7 +233,7 @@
             	console.log("1234") 
             	let serial = '${sessionVO.userSerial}';
             	if(serial==''){
-            		alert("로그인하세요")
+            		Swal.fire("로그인 후 이용해주세요");
             	}else{
             		var ajaxOption={
                       		 type: "GET",
@@ -251,12 +257,9 @@
             
             /*  여기부터 userview */
    function updateName() {
-	   alert("버튼 눌렀어요");
 		var ajaxData = $('input[name=username]').val();
-		alert("여기가 오류난거야?")
 		var upDatech = 1;
 		console.log("여기 왔니?")
-		alert(ajaxData)
 		$.ajax({
 			url : "UserUpdate.do",
 			type:"POST",
@@ -283,70 +286,18 @@
     				},
     				success : function (data) {
     					if(data==1){
-    						alert("성공")
+    						Swal.fire("장바구니에 담겼습니다");
     					}else if(data==0){
-    						alert("이미 구매한 상품")
+    						Swal.fire("이미 구매한 상품입니다");
     					}else if(data==-1){
-    						alert("실패")
+    						Swal.fire("장바구니 담기에 실패하셨습니다");
     					}else if(data==-2){
-    						alert("이미 장바구니 들어감")
+    						Swal.fire("이미 장바구니에 들어가있습니다.");
     					}
     				}
     			})
     	}
     	
-    	function bay(ArticleName) {
-    		var UserSerial = '${sessionVO.userSerial}';
-    		
-    		/* alert 창 */
-    		const swalWithBootstrapButtons = Swal.mixin({
-     			customClass: {
-        		cancelButton: 'btn btn-danger',
-        		confirmButton: 'btn btn-success'
-      			},
-      			buttonsStyling: false
-    		})
-    		swalWithBootstrapButtons.fire({
-    	  		title: '정말 구매하실껀가요??',
-    			text: "구매 하신 후 환불은 어렵습니다.",
-    			icon: 'warning',
-    			showCancelButton: true,
-    			confirmButtonText: '구매 하지 않겠습니다.',
-    			cancelButtonText: '구매 하겠습니다.',
-    			reverseButtons: true
-    		}).then((result) => {
-    			
-    			if (result.isConfirmed) {
-    				swalWithBootstrapButtons.fire(
-    	 				      '취소 하였습니다.'
-    	 				    )
-     		} else if (result.dismiss === Swal.DismissReason.cancel) {
-     			$.ajax({
-    					type: "GET",
-    					url: "bay.do",
-    					data:{
-    						"UserSerial" : UserSerial,
-    						"ArticleName" : ArticleName
-    					},
-    					success: function (data) {
-    						if(data==1){
-    							swalWithBootstrapButtons.fire(
-    							     '결제 성공 하였습니다.'
-    			    			)
-    						}else if(data==0){
-    							swalWithBootstrapButtons.fire(
-    							     '밤톨이 부족합니다'
-    			    				)
-    						}else if(data==-1){
-    							swalWithBootstrapButtons.fire(
-    						    	 '이미 구매한 상품입니다.'
-    			    			)
-    						}
-    					}
-    				})
-    		}
-    		})
-    	}
     	
     	/*  여기부터 userview */
     	   function updateName() {
@@ -410,18 +361,6 @@
     	}
     	
 
-    	/* 홈페이지 즐겨찾기 */
-    	function bookmark_add() {
-    	     bookmark_url  = "도메인입력";
-    	     bookmark_name = "홈페이지 타이틀";
-    	    
-    	     try {
-    	      window.external.AddFavorite(bookmark_url,bookmark_name);
-    	     } catch(e) {
-    	      alert('이 브라우저는 즐겨찾기 추가 기능을 지원하지 않습니다.');
-    	      return false;
-    	     }
-    	 }
     	$(document).ready(function() {
 			$.ajax({
 				type: 'get',
@@ -478,6 +417,7 @@
 			})
 		})	
     	
+		
 		function Id_Pw_find(){
         	var _width = '550';
     	    var _height = '500';
@@ -747,10 +687,8 @@
 		              <li id="shopping" onclick="shopping('쇼핑')">
 		              		    쇼핑
 		              </li>
-<%-- 		              <li id="board" onclick="board('${sessionVO.userName}')">
-		                               	이웃찾기
-		              </li> --%>
-		               <li id="question" onclick="question('${sessionVO.userName}')">
+
+		               <li id="question" onclick="question()">
 		                          	  문의
 		              </li>
 		              
@@ -776,6 +714,7 @@
 					</div>
 	           </div>   
          </div>
+         
          <hr />
         <div class="leftCon">
             <div id="Nav">
@@ -838,11 +777,11 @@
 								</div>
 								<div id="jang">
 									<div id="jang-top2">
-										<div onclick="Manage_Client()">회원관리</div>
+										<div id="client_manage" onclick="Manage_Client()">회원관리</div>
 										<div id="article_manage" onclick="Manage_Article()">상품등록</div>
 									</div>
 									<div id="jang-bottom2">
-										<div onclick="Manage_Board()">공지등록</div>
+										<div id="Board_manage" onclick="Manage_Board()">공지등록</div>
 										<a id="logout" href="logout.do">로그아웃</a>
 									</div>
 								</div>
@@ -850,7 +789,6 @@
 
 						</c:if>
 					</c:when>
-
 
 
 					<c:otherwise>
@@ -884,10 +822,10 @@
 						<div id="naver_id_login" style="text-align: center">
 
 							<!-- 네아 확인 url주소가 넘어옴 -->
-							<a href="${url}"> <img width="200px" height="33px"
-								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" /></a>
+							<a href="${url}" style=" display: block;margin-bottom: -3px;width: 200px;margin-left: 35px;"> <img width="200px" height="33px"
+								src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" />
+							</a>
 						</div>
-
 						<div id="kakao_id_login" style="text-align: center">
 							<a id="kakao-login-btn" class="kakaobutton"></a>
 						</div>
@@ -949,5 +887,7 @@
 			alert(JSON.stringify(err)); 
 			} 
 		});
+	
+	
 </script>
 </html>

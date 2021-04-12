@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +9,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Document</title>
 <link rel="stylesheet" href="resources/css/noticePage.css">
-<style>
-/* 	table{
-        border: 1px solid black;       
-        width: 100%;
-        height: 100%;   
-} */
-</style>
 </head>
 <body>
 
@@ -44,7 +36,7 @@
 							<td>${kinds.cDate}</td>
 							<td>${kinds.lookUp}</td>
 							<c:if test="${sessionVO.userSerial eq kinds.userSerial}">
-								<td><p onclick="deleteBoard('${kinds.boardSerial}')">삭제</p></td>
+								<td><p  id="deletenotice" onclick="deleteBoard('${kinds.boardSerial}')">삭제</p></td>
 							</c:if>
 						</tr>
 					<c:set var="number" value="${number+1}"/>
@@ -71,6 +63,7 @@
         <c:if test="${pagination.curPage ne 1}">
             <a href="#" class="noticehover" onClick="fn_paging('${pagination.prevPage }')">[이전]</a> 
         </c:if>
+        <c:if test="${listCnt > 15}">
         <c:forEach var="pageNum" begin="${pagination.startPage}" end="${pagination.endPage }">
             <c:choose>
                 <c:when test="${pageNum eq  pagination.curPage}">
@@ -81,6 +74,7 @@
                 </c:otherwise>
             </c:choose>
         </c:forEach>
+        </c:if>
         <c:if test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
             <a href="#" class="noticehover" onClick="fn_paging('${pagination.nextPage }')">[다음]</a> 
         </c:if>

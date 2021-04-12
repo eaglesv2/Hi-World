@@ -78,4 +78,11 @@ public class MiniHpRightServiceImpl implements MiniHpRightService {
 	public int update(int serial, String content) {
 		return dao.update(serial, content);
 	}
+	
+	@Override
+	public int random(int userSerial) {
+		List<Integer> userList = dao.random(userSerial);
+		int ranIdx = (int)(Math.random()*userList.size());
+		return userList.get(ranIdx);
+	}
 }

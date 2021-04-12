@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -113,10 +112,10 @@
 
 <div id="Context">
 	<div class="Navi">
-		<div onclick="shop_character('캐릭터')">캐릭터</div>
-		<div onclick="shop_background('배경')">배경화면</div>
-		<div onclick="shop_music('음악')">음악</div>
-		<div onclick="shop_mouse('마우스')">마우스모양</div>
+		<div class="Navihover" onclick="shop_character('캐릭터')">캐릭터</div>
+		<div class="Navihover" onclick="shop_background('배경')">배경화면</div>
+		<div class="Navihover" onclick="shop_music('음악')">음악</div>
+		<div class="Navihover" onclick="shop_mouse('마우스')">마우스포인터</div>
 	</div>
 
 	<div class="sangpum">
@@ -157,7 +156,6 @@
 					<th>${kinds.articlePrice}</th>
 					<th><a href="#" class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
 					<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
-					<%-- <td><input type="button" value="10초 미리듣기"	onclick="PLAY('${kinds.articleImg}')" /></td> --%>
 				</c:if>
 			</tr>
 
@@ -166,7 +164,7 @@
 		</table>
 	
 	
-	<div style="text-align:center; border:1px solid; border-top:none;">
+	<div style="text-align:center; margin-top:5px;">
 	
         <c:if test="${pagination.curRange ne 1 }">
             <a href="#" class="shoppinghover" onClick="fn_paging(1)">[처음]</a> 
@@ -215,78 +213,52 @@
 	        $('#Context').html(data);
     });
 	}
-	function PLAY(mp3) {
-		var audio = new Audio(mp3);
-		/* 노래 시작 */
-		audio.play();
-	
-		/* Timeout을 이용해서 10초후 노래 정지*/
-		setTimeout(function() {
-			audio.pause();
-		}, 10000)
-		
-	}
-
-
 
 	function basket(ArticleName) {
-			var UserSerial = '${sessionVO.userSerial}';
-			
-			if(UserSerial!=''&&UserSerial!=null){
-				$.ajax({
-					type: "GET",
-					url: "basket.do",
-					data: {
-						"UserSerial" : UserSerial,
-						"ArticleName" : ArticleName
-					},
-					success : function (data) {
-						if(data==1){
-							alert("성공")
-						}else if(data==0){
-							alert("이미 구매한 상품")
-						}else if(data==-1){
-							alert("실패")
-						}else if(data==-2){
-							alert("이미 장바구니 들어감")
-						}
-					}
-				})
-			}else{
-				alert("로그인하세요!!");
-			}
-			
-	}
-	
-	function bay(ArticleName) {
 		var UserSerial = '${sessionVO.userSerial}';
 		
 		if(UserSerial!=''&&UserSerial!=null){
-			/* alert 창 */
-			const swalWithBootstrapButtons = Swal.mixin({
-	 			customClass: {
-	    		cancelButton: 'btn btn-danger',
-	    		confirmButton: 'btn btn-success'
-	  			},
-	  			buttonsStyling: false
+			$.ajax({
+				type: "GET",
+				url: "basket.do",
+				data: {
+					"UserSerial" : UserSerial,
+					"ArticleName" : ArticleName
+				},
+				success : function (data) {
+					if(data==1){
+						Swal.fire("구매에 성공하셨습니다");
+					}else if(data==0){
+						Swal.fire("이미 구매한 상품입니다");
+					}else if(data==-1){
+						Swal.fire("구매에 실패하셨습니다");
+					}else if(data==-2){
+						Swal.fire("이미 장바구니에 들어가있습니다");
+					}
+				}
 			})
+		}else{
+			Swal.fire("로그인 후 이용해주세요");
+		}
+	}
 
-			swalWithBootstrapButtons.fire({
-		  		title: '정말 구매하실껀가요??',
-				text: "구매 하신 후 환불은 어렵습니다.",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonText: '구매 하지 않겠습니다.',
-				cancelButtonText: '구매 하겠습니다.',
-				reverseButtons: true
+	function bay(ArticleName) {
+		var UserSerial = '${sessionVO.userSerial}';
+		
+		/* alert 창 */
+		if(UserSerial != ''){
+			Swal.fire({
+			  title: '정말 구매하시겠습니까??',
+			  text: "구매 하신 후 환불은 어렵습니다",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: 'yes'
 			}).then((result) => {
-				
-				if (result.isConfirmed) {
-					swalWithBootstrapButtons.fire(
-		 				      '취소 하였습니다.'
-		 				    )
-	 		} else if (result.dismiss === Swal.DismissReason.cancel) {
-	 			$.ajax({
+			  if (result.isConfirmed) {
+			    Swal.fire(
+			    	$.ajax({
 						type: "GET",
 						url: "bay.do",
 						data:{
@@ -295,27 +267,27 @@
 						},
 						success: function (data) {
 							if(data==1){
-								swalWithBootstrapButtons.fire(
-								     '결제 성공 하였습니다.'
-				    			)
+								Swal.fire('결제 성공 하였습니다.')
 							}else if(data==0){
-								swalWithBootstrapButtons.fire(
-								     '밤톨이 부족합니다'
-				    				)
+								Swal.fire('밤톨이 부족합니다 5초뒤 충전페이지가 열립니다');
+								setTimeout(() => {
+									var popupWidth =880
+				                	var popupHeight =580
+				                	var popupX = (window.screen.width/2)-(popupWidth/2);
+				                	var popupY = (window.screen.height/2)-(popupHeight/2);
+				                	window.open("BamTolCharge.do","미니홈페이지",'status=no, scrollbars=no, menubar=no, toolbar=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY)  
+								}, 5000);
 							}else if(data==-1){
-								swalWithBootstrapButtons.fire(
-							    	 '이미 구매한 상품입니다.'
-				    			)
+								Swal.fire('이미 구매한 상품입니다.')
 							}
 						}
 					})
-			}
-			})
+			    )
+			  }
+		  })
 		}else{
-			alert("로그인하세요!!");
+			Swal.fire("로그인 후 이용해주세요");
 		}
-		
-		
 	}
 </script>
 </html>

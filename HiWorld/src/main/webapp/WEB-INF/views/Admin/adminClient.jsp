@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -35,9 +34,12 @@
 }
 
 #Benclient {
-	margin-left: 320px;
+	margin-left: 330px;
 	width: 120px;
 	background: gray;
+}
+#Context{
+	overflow-y:scroll;
 }
 </style>
 </head>
@@ -82,27 +84,8 @@
 			<a href="#" onclick="Manage_Ban()">밴한 회원 보기</a>
 		</div>
 
-		<div style="display: none;">
-			<table border="1" id="adclient">
-				<tr>
-					<td style="text-align: center;">유저번호</td>
-					<td>유저이름(아이디)</td>
-					<td>유저밴</td>
-				</tr>
-				<tbody id="tbody">
-					<c:forEach var="kinds" items="${alist}">
-						<!-- 벤안되었을때 -->
-						<tr id="${kinds.userSerial}">
-							<td style="width: 150px; text-align: center;">${kinds.userSerial}</td>
-							<td>${kinds.userName}(${kinds.userID})</td>
-							<td><input type="button" value="Ban" onclick="UserBan(${kinds.userSerial})" /></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
 
-		<div>
+		<div style="text-align: center; margin-top:5px;">
 			<c:if test="${pagination.curRange ne 1 }">
 				<a href="#" onClick="fn_paging(1)">[처음]</a>
 			</c:if>
@@ -162,8 +145,9 @@
 		}else{
 			/* 일단 검색시 목록 전체안보이게 */
 			$("#tbody>tr").hide();
-		
-			var writer = $("#tfoot>tr>td:nth-child(2):contains('"+key+"')");
+			$("#tfoot>tr").hide();
+			var writer = $("#tfoot>tr>td:nth-child(2):contains("+key+")");
+			console.log(writer);
 			$("#tfoot").show();
 			$(writer).parent().show();
 		}

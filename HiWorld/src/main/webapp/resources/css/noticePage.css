@@ -29,3 +29,8 @@
 	color:red;
 	
 }
+
+#deletenotice:hover{
+	color:red;
+	cursor:pointer;
+}

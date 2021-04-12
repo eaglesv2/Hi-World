@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hiworld.minihp.dao.MiniHpNeighborDAO;
 import com.hiworld.minihp.dao.MiniHpNeighborListDAO;
 import com.hiworld.minihp.vo.MiniHpNeighborListVO;
 import com.hiworld.minihp.vo.MiniHpNeighborVO;
