@@ -15,14 +15,15 @@
 		<h1>상품 업로드 관리자용</h1>
 	
 		<div class="uploadDiv">
-			사진  <input type="file" name="uploadFile" multiple id="uploadFile" />
+			사진  <input type="file" name="uploadFile" multiple id="uploadFile" accept="image/gif,image/jpeg,image/png,audio.*" />
 			</div>
 				상품 종류 : <select name="ArticleKinds">
 							<option value="">종류를 선택하세요</option>
 							<option value="캐릭터">캐릭터</option>
-							<option value="배경화면">배경화면</option>
-							<option value="배경음악">배경음악</option>
-							<option value="마우스">마우스모양</option>
+							<option value="배경">배경화면</option>
+							<option value="음악">배경음악</option>
+							<option value="마우스">마우스</option>
+							<option value="스킨">스킨</option>
 				 		 </select> <br /> 
 				상품 이름 : <input type="text" name="ArticleName" id="ArticleFile" />	<br /> 
 				상품 가격 : <input type="number" name="ArticlePrice" /> <br />

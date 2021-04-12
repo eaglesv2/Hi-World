@@ -3,7 +3,7 @@ package com.hiworld.article.vo;
 public class MainShoppingPagingVO {
 
 	/** 한 페이지당 게시글 수 **/
-    private int pageSize = 5;
+    private int pageSize = 4;
     /** 한 블럭(range)당 페이지 수 **/
     private int rangeSize = 5;
     /** 현재 페이지 **/
