@@ -82,7 +82,7 @@ var address = false;
 	
 				//주소 정규식과 기능 구현
 				$('input[name=useraddress]').blur(function() {
-					var add = /^[가-힣a-zA-Z0-9]*$/;
+					var add = /^[가-힣a-zA-Z0-9\s]*$/;
 					var add1 = $('input[name=useraddress]').val();
 					if(!add.test(add1)){
 						address = false;
@@ -127,7 +127,7 @@ var address = false;
 					success: function(data) {
 						
 						if($('.hiden1').css('display') == 'none'){
-							$('.hiden1').val(ajaxPW).append('<input type="button" id="pwbut" value="수정" onclick="pwUpdate1()" />');
+							$('.hiden1').val(ajaxPW);
 							$('.hiden1').show();
 							$('.pwhiden').hide();
 							}
@@ -152,7 +152,7 @@ var address = false;
 				success: function(data) {
 					
 					if($('.telhiden').css('display') == 'none'){
-						$('.telhiden').html(ajaxTel).css('color','red').append('<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />');
+						$('.telhiden').html(ajaxTel).css('color','red').append('<input type="button" id="telbut1" value="수정" onclick="telUpdate1()" />');
 						$('.telhiden').show();
 						$('.telhiden1').hide();
 						}
@@ -178,7 +178,7 @@ var address = false;
 				success: function(data) {
 					
 					if($('.address_hiden1').css('display') == 'none'){
-						$('.address_hiden1').html(ajaxaddress).css('color','red').append('<input type="button" id="telbut" value="수정" onclick="addressUpdate1()" />');
+						$('.address_hiden1').html(ajaxaddress).css('color','red').append('<input type="button" id="addressBut" value="수정" onclick="addressUpdate1()" />');
 						$('.address_hiden1').show();
 						$('.address_hiden').hide();
 						}
