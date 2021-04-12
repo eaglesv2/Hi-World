@@ -56,7 +56,7 @@
 				<input type="button" id="pwbut" style="" value="수정" onclick="pwUpdate1()" />
 			</td>
 			<td class="pwhiden" style=" display: none; color: red; height: 100px; width: 300px;">
-				<input type="password" name="userPW" class="Pwchc1" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userPW}" />
+				<input type="password" name="userPW" class="Pwchc1" style="margin-top: 3px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userPW}" />
 				<p class="message"> </p>
 				<input type="password" name="userPW1" class="Pwchc2" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userPW}" />
 				<p class="message1"></p>			
@@ -69,12 +69,12 @@
 		<tr>
 			
 			<td class="">연락처</td>
-			<td class="telhiden" style="color: red; height: 100px; width: 300px;">
+			<td class="telhiden" style="color: red; height: 73px; width: 300px;">
 				${clientVO.userTel}
 				<input type="button" id="telbut" value="수정" onclick="telUpdate1()" />
 			</td>
-			<td class="telhiden1"  style="color: red; display: none; height: 100px; width: 300px;">
-				<input type="text" name="userTel" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userTel}" />
+			<td class="telhiden1"  style="color: red; display: none; height: 73px; width: 300px;">
+				<input type="text" name="userTel" style="margin-top: 5px;" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userTel}" />
 				<p class="message2"></p>
 				<input type="button" id="telbut" style="" value="완료" onclick="telUpdate()" />
 				<input type="button" value="취소" onclick="cancle3()" /> 
@@ -90,12 +90,12 @@
 			<td class="">주소</td>
 			<td class="address_hiden1" style="color: red; height: 70px; width: 300px;">
 				${clientVO.userAddress}
-				<input type="button" id="telbut" value="수정" onclick="addressUpdate1()" />
+				<input type="button" id="addressBut" value="수정" onclick="addressUpdate1()" />
 			</td>
 			<td class="address_hiden" style="color: red; display: none; height: 70px; width: 300px;">
-				<input type="text" name="useraddress" style="" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userAddress}"/>
+				<input type="text" name="useraddress" style="margin-top: 0px;" style="" onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)" value="${clientVO.userAddress}"/>
 				<p class="message3"></p>
-				<input type="button" id="telbut" style="" value="완료" onclick="addressUpdate()" />
+				<input type="button" id="addressbut" style="" value="완료" onclick="addressUpdate()" />
 				<input type="button" value="취소" onclick="cancle5()" />
 			</td>
 		</tr>

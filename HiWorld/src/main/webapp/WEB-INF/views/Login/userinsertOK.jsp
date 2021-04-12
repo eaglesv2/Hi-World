@@ -123,6 +123,7 @@ $('.fun-btn').on('click', function(event) {
 			<div>
 				<div>
 					<img id="img_hade" alt="로고사진" src="resources/images/로고7.png">
+
 					<h1>Hi - World <span id="span">회원가입이 완료</span>되었습니다.</h1>
 					<h3>회원님은 Hi - World의 기능을 사용하실수 있습니다. 로그인 후 이용 가능합니다.</h3>
 					<div>

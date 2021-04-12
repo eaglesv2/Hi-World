@@ -14,9 +14,10 @@
 <body>
 	<div class="main">
 		<div>
+			<img id="img_hade" alt="로고사진" style="width: 200px; margin-left: 144px;" src="resources/images/로고7.png">
 			<div>
 				<div class="ID_PW_Find">
-					<h3 style="font-size:41px; ">아이디/비밀번호 찾기</h3>
+					<h3 style="font-size:41px; margin-top: 10px; margin-bottom: 20px;">아이디/비밀번호 찾기</h3>
 				</div>
 				<div style="margin-bottom: 10px;" class="if_find_fom">
 					<input type="radio" name="radio" onclick="idFind()" checked="checked">
