@@ -71,7 +71,7 @@ input::placeholder {
 		</div>
 		<div>
 			<div style="float: left;margin-left:100px;border: 0px solid black;width: 40%;">
-				<input type="password" id="userPw" placeholder="비밀번호 입력" style="width: 100%; font-family: none;">
+				<input type="password" id="userPw" placeholder="비밀번호 입력" style="width: 100%; font-family: none;" onKeypress="javascript:if(event.keyCode==13){ event.preventDefault(); sendPw();}">
 			</div>
 			<div style="float: left;margin-left:10px;border: 0px solid black;">
 				<input type="button" id="send" value="확인" onclick="sendPw()" style="height: 20px;">
