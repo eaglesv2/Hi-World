@@ -239,7 +239,7 @@ $(document).ready(function() {
 							<div class="audio-box">
 								<div class="audio-title-wrap">
 									<span id="audio-title">
-										<marquee direction="left">재생할 음악이 없습니다</marquee>
+										<marquee behavior="scroll" direction="left" scrollamount="3">재생할 음악이 없습니다</marquee>
 									</span>
 								</div>
 								<div class="audio-control-btn btn-play">
@@ -273,7 +273,7 @@ $(document).ready(function() {
 							
 										<div class="audio-title-wrap">
 											<span id="audio-title">
-												<marquee direction="left">${playList.musicTitle}</marquee>
+												<marquee behavior="scroll" direction="left" scrollamount="3">${playList.musicTitle}</marquee>
 											</span>
 											<input type="hidden" id="audio-title${index}" value="${playList.musicTitle}">
 										</div>
@@ -309,7 +309,7 @@ $(document).ready(function() {
 							
 										<div class="audio-title-wrap">
 											<span id="audio-title">
-												<marquee direction="left">${playList.musicTitle}</marquee>											
+												<marquee behavior="scroll" direction="left" scrollamount="3">${playList.musicTitle}</marquee>											
 											</span>
 											<input type="hidden" id="audio-title${index}" value="${playList.musicTitle}">
 										</div>

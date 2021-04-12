@@ -101,7 +101,7 @@ var box = section.querySelector(".minimiImg");
 
 
 container.onclick = function(e){
-	box.style.left = (e.pageX-35-240)+"px";
+	box.style.left = (e.pageX-35-270)+"px";
 	box.style.top = (e.pageY-40-100)+"px";
 	boxXY = box.style.left+","+box.style.top;
 	console.log(boxXY);

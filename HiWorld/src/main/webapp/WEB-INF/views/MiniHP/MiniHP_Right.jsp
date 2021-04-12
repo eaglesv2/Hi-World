@@ -13,38 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
- 
- /* $(document).ready(function(){
-	    initSet();
-	});
- 
- function initSet(){
-		sendRequest("my_get_MemberBoard.action",null,displayInfo,"GET");
-}
- 
-
- function displayInfo(){
- 	if(httpRequest.readyState==4){
- 		if(httpRequest.status==200){
- 			str_i = httpRequest.responseText;
- 			var memberBoard = document.getElementById("memberBoard");
- 			memberBoard.innerHTML = str_i;	
- 		}
- 	}
- }
- 
- function deleteComment(userId){
-	 var params = "userId="+userId;
-	 sendRequest("my_get_MemberBoard_delete.action",params,displayInfo,"GET");
- }
- 
- 
- function moveToUser(userId){
-	 window.open("user_main.action?userId="+userId,userId,"width=1090,height=600,location=no,status=no,scrollbars=no");
- } */
-
  </script>
-
  <body>
  <div style="width: 465px; height: 430px; overflow-x: hidden;">
  <div>
@@ -125,13 +94,10 @@
 		</tr>
 		<tr bgcolor="#FFFFFF">
 			<td align="center" colspan="2">
-			<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center; position: relative;">
-			<div style="background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX}"></div>
-			</div>
-	
-				<%-- <img src="${pageContext.request.contextPath}/${itemList.backgroundSrc}" alt="스토리룸" width="400px" height="200px" border="0">
-				<img src="${pageContext.request.contextPath}/${itemList.characterSrc}" alt="미니미" width="70px" height="60px" style="position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX};"/>
-			 --%></td>
+				<div style="background-image: url('${pageContext.request.contextPath}/${itemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center; position: relative;">
+					<div style="background-image:url('${pageContext.request.contextPath}/${itemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; position: absolute; top: ${itemList.minimiY}; left: ${itemList.minimiX}"></div>
+				</div>
+			</td>
 		</tr>
 	</table><br/>
 		

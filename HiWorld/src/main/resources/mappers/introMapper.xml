@@ -17,7 +17,7 @@
 	<update id="updateInfo">
 		UPDATE MiniHP_Intro
 		SET hpInfo = #{hpInfo}
-		WHERE UserID = #{userSerial}
+		WHERE UserSerial = #{userSerial}
 	</update>
 	
 	<select id="getTitle" resultType="String">

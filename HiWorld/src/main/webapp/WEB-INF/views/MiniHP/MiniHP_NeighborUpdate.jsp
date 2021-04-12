@@ -33,8 +33,8 @@ function updateSend(){
 	position: absolute; 
 	top: 65px; 
 	left: 30px; 
-	width: 98px;
-	height: 98px;
+	width: 85px;
+	height: 85px;
 }
 #msg1{
 	position: absolute; 
@@ -79,12 +79,12 @@ function updateSend(){
 </style>
  <body background="${pageContext.request.contextPath}/resources/images/admin/member_call.png">
 	<form action="" name="updateNeighbor" method="post">
-		<span id="sender_name">${neighborName}</span>
-		<img id="minimi" alt="상대방의 미니미" src="">
+		<span id="sender_name">${neighborInfo.userName}</span>
+		<img id="minimi" alt="상대방의 미니미" src="${neighborItem.characterSrc}">
 		
-		<span id="msg1"><font color="Blue">${neighborName}</font>님께 이웃명을 변경합니다..</span>
-		<span id="msg2"><font color="Blue">${neighborName}</font>님을 <font color="Blue">${userName}</font>님의 <input type="text" style="width:50px; height:10px;" name="senderValue" value="${userValue}"/>으로</span>
-		<span id="msg3"><font color="Blue">${userName}</font>님을 <font color="Blue">${neighborName}</font>님의 <input type="text" style="width:50px; height:10px;" name="receiverValue" value="${neighborValue}"/>으로</span>
+		<span id="msg1"><font color="Blue">${neighborInfo.neighborName}</font>님께 이웃명을 변경합니다..</span>
+		<span id="msg2"><font color="Blue">${neighborInfo.neighborName}</font>님을 <font color="Blue">${neighborInfo.userName}</font>님의 <input type="text" style="width:50px; height:10px;" name="senderValue" value="${neighborInfo.userValue}"/>으로</span>
+		<span id="msg3"><font color="Blue">${neighborInfo.userName}</font>님을 <font color="Blue">${neighborInfo.neighborName}</font>님의 <input type="text" style="width:50px; height:10px;" name="receiverValue" value="${neighborInfo.neighborValue}"/>으로</span>
 		<span id="msg4">
 			<textarea id="msg_area" rows="3" cols="32" name="userMessage"></textarea>
 		</span>
@@ -96,10 +96,10 @@ function updateSend(){
 			<img alt="취소" src="${pageContext.request.contextPath}/resources/images/admin/cancelBtn.jpg" onclick="window.close()"/>
 		</span>
 		
-		<input type="hidden" name="senderSerial" value="${userSerial}">
-		<input type="hidden" name="senderName" value="${userName}">
-		<input type="hidden" name="receiverSerial" value="${neighborSerial}">
-		<input type="hidden" name="receiverName" value="${neighborName}">
+		<input type="hidden" name="senderSerial" value="${neighborInfo.userSerial}">
+		<input type="hidden" name="senderName" value="${neighborInfo.userName}">
+		<input type="hidden" name="receiverSerial" value="${neighborInfo.neighborSerial}">
+		<input type="hidden" name="receiverName" value="${neighborInfo.neighborName}">
 		<input type="hidden" name="type" value="1">
 	</form>
  </body>

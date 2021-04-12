@@ -70,6 +70,7 @@ function neighborUpdate_ok(){
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -78,10 +79,11 @@ function neighborUpdate_next(){
 	var ajaxData = $("form[name=neighborUpdateCheck]").serialize();
 	$.ajax({
 		type : 'POST',
-		url : 'miniHp_neighborRegisterUpdate_ok.do?type=2',
+		url : 'miniHp_neighborUpdateCheck_ok.do?type=2',
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -90,10 +92,11 @@ function neighborUpdate_no(){
 	var ajaxData = $("form[name=neighborUpdateCheck]").serialize();
 	$.ajax({
 		type : 'POST',
-		url : 'miniHp_neighborRegisterUpdate_ok.do?type=0',
+		url : 'miniHp_neighborUpdateCheck_ok.do?type=0',
 		data : ajaxData,
 		
 		success : function(result) {
+			opener.location.reload();
 			window.close();
 		}
 	});
@@ -105,7 +108,7 @@ function neighborUpdate_no(){
 			${neighborListVO.senderName}
 		</span>
 		
-		<img alt="미니미" src="${resoucePath}/img/${minimiPath}" style="position: absolute; top:105px; left:30px;" width="98px" height="98">
+		<img alt="미니미" src="${senderItem.characterSrc}" style="position: absolute; top:105px; left:30px;" width="98px" height="98">
 		
 		<span id="msg1">
 			<font color="Blue">${neighborListVO.senderName}</font>님께서 

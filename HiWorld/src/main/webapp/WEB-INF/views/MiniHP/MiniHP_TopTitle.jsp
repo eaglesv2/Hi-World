@@ -59,9 +59,9 @@ function displayTitle(){
 	<div id="titleName" style="padding-top:12px;">
 		<span style="font-weight:bold; font-size: 15px; color: #4B9687; cursor: pointer;" id="inText" onclick="change()"></span>
 	</div>
-	<div id="titleName_alter">
+	<div id="titleName_alter" style="margin-top: 15px">
 		<input type="text" id="title_Txt" />
-		<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" onclick="change_ok()"/>
+		<img src="${pageContext.request.contextPath}/resources/images/admin/editOkBtn.jpg" style="cursor: pointer; vertical-align: middle" onclick="change_ok()"/>
 	</div>
 </body>
 </html>

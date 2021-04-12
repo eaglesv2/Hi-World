@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- <body>
- <input type="hidden" id="ownerSerial" value="${ownerSerial}">
- <div style="width: 465px; height: 430px; overflow-x: hidden;">
- <div>
+<body>
+<input type="hidden" id="ownerSerial" value="${ownerSerial}">
+<div style="width: 465px; height: 430px; overflow-x: hidden;">
+<div>
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
 			<td colspan="2"><font class="updateBoard" style="color: #1294AB; font-weight: 900;">Updated News</font></td>
@@ -78,7 +78,6 @@
 						</td>
 					</tr>
 				</table>
-
 			</td>
 		</tr>
 	</table>
@@ -89,32 +88,33 @@
 	<table bgcolor="#DBDBDB" width="440" cellpadding="1" cellspacing="1">
 		<tr bgcolor="#FFFFFF" >
 			<td align="center"  colspan="2">  
-				<font><b>나의 미니미와 스토리룸을 소개합니다.</b></font>	
+				<font><b>나의 미니미와 스토리룸을 소개합니다</b></font>	
 			</td>
 		</tr>
 		<tr bgcolor="#FFFFFF">
 			<td align="center" colspan="2">  
-				<img <%-- src="${resourcePath}/img${useStoryRoom}" --%> src= "${pageContext.request.contextPath}/resources/images/r_myhome.gif" width="389" height="192" border="0" alt="">
-				<img src="${resourcePath}/img${useMinimi.getOriginalFileName()}" alt="" style="position: absolute; top :${useMinimi.getImgY()}; left : ${useMinimi.getImgX()};"/>
+				<div style="background-image: url('${pageContext.request.contextPath}/${ownerItemList.backgroundSrc}'); background-size: 400px 200px; width: 400px; height: 200px; display:flex; justify-content: center; align-items: center; position: relative;">
+					<div style="background-image:url('${pageContext.request.contextPath}/${ownerItemList.characterSrc}'); background-size: 70px 60px; width:70px; height: 60px; position: absolute; top: ${ownerItemList.minimiY}; left: ${ownerItemList.minimiX}"></div>
+				</div>
 			</td>
 		</tr>
 	</table><br/>
 		
 		
-		<div style="background-color: #F2F2F2;">
-			<div style="color: #1294AB; font-weight: bold; float: left; margin-left: 5px;">이웃평</div>
-			<!-- 일촌 관계만 보이게 하기 -->
-			<c:if test="${isNeighbor==1}">
-				<div style="float: none;">
-					<input id="neiWordContent" type="text" style="width: 330px;" onkeypress="if(event.keyCode==13){insertNeiWord();}" >
-					<input class="neiWordBtn" type="button" value="등록" style="cursor: pointer;" onclick="insertNeiWord();">
-				</div>
-			</c:if>
-			<c:if test="${isNeighbor==0}"><br></c:if>
-		</div>
-		<div class="secondFont" id="neiWord" style="width: 100%;background-color: #F2F2F2; text-align: left;">
+	<div style="background-color: #F2F2F2;">
+		<div style="color: #1294AB; font-weight: bold; float: left; margin-left: 5px;">이웃평</div>
+		<!-- 일촌 관계만 보이게 하기 -->
+		<c:if test="${isNeighbor==1}">
+			<div style="float: none;">
+				<input id="neiWordContent" type="text" style="width: 330px;" onkeypress="if(event.keyCode==13){insertNeiWord();}" >
+				<input class="neiWordBtn" type="button" value="등록" style="cursor: pointer;" onclick="insertNeiWord();">
+			</div>
+		</c:if>
+		<c:if test="${isNeighbor==0}"><br></c:if>
+	</div>
+	<div class="secondFont" id="neiWord" style="width: 100%;background-color: #F2F2F2; text-align: left;">
 		
-		</div>
+	</div>
 </div>
 </div>
 </body>

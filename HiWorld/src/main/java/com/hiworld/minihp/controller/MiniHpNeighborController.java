@@ -13,14 +13,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hiworld.client.vo.sessionVO;
+import com.hiworld.minihp.service.MiniHpItemService;
 import com.hiworld.minihp.service.MiniHpNeighborListService;
 import com.hiworld.minihp.service.MiniHpNeighborService;
 import com.hiworld.minihp.vo.MiniHpNeighborListVO;
 import com.hiworld.minihp.vo.MiniHpNeighborVO;
 import com.hiworld.minihp.vo.MiniHpNeighborViewVO;
+import com.hiworld.minihp.vo.MiniHpSelectedItemVO;
 
 @Controller
 public class MiniHpNeighborController {
+	
+	@Autowired
+	MiniHpItemService itemService;
 	
 	@Autowired
 	MiniHpNeighborService neighborService;
@@ -34,6 +39,8 @@ public class MiniHpNeighborController {
 	
 	MiniHpNeighborViewVO neighborViewVO;
 	
+	MiniHpSelectedItemVO itemVO;
+	
 	
 	// @@@@@@@@@@@@@@@@ 이웃 신청 @@@@@@@@@@@@@@@@
 	
@@ -41,8 +48,8 @@ public class MiniHpNeighborController {
 	@GetMapping("/miniHp_neighborRegisterList.do")
 	public String neighborRegisterList(HttpSession session, Model model) {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		int UserSerial = vo.getUserSerial();
-		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(UserSerial);
+		int userSerial = vo.getUserSerial();
+		List<MiniHpNeighborListVO> list = neighborListService.getRegisterList(userSerial);
 
 		model.addAttribute("registerList", list);
 		
@@ -56,12 +63,10 @@ public class MiniHpNeighborController {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		int senderSerial = Integer.parseInt(request.getParameter("senderSerial"));
 		int receiverSerial = vo.getUserSerial();
-		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
-		String minimiPath = vo.getOriginalFileName();*/
+		itemVO = itemService.getItemList(senderSerial);
 		neighborListVO = neighborListService.getRegisterCheck(senderSerial, receiverSerial);
-		/*System.out.println(neighborListVO.getSenderValue());
-		System.out.println(neighborListVO.getReceiverValue());*/
 		
+		model.addAttribute("senderItem", itemVO);
 		model.addAttribute("neighborListVO", neighborListVO);
 		
 		return "MiniHP/MiniHP_NeighborRegisterCheck";
@@ -74,10 +79,10 @@ public class MiniHpNeighborController {
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		int senderSerial = Integer.parseInt(request.getParameter("senderSerial"));
 		int receiverSerial = vo.getUserSerial();
-		/*CyUsingItemDTO vo = cyUsingItemDAO.useMinimi(userId1);
-		String minimiPath = vo.getOriginalFileName();*/
+		itemVO = itemService.getItemList(senderSerial);
 		neighborListVO = neighborListService.getRegisterCheck(senderSerial, receiverSerial);
 		
+		model.addAttribute("senderItem", itemVO);
 		model.addAttribute("neighborListVO", neighborListVO);
 		
 		return "MiniHP/MiniHP_NeighborUpdateCheck";
@@ -115,16 +120,15 @@ public class MiniHpNeighborController {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
 		String senderName = vo.getUserName(); //보내는이 이름
-		int receiverSerial = Integer.parseInt(request.getParameter("OwnerSerial")); //받는이 시리얼
+		int receiverSerial = Integer.parseInt(request.getParameter("ownerSerial")); //받는이 시리얼
 		System.out.println(receiverSerial);
-		String receiverName = request.getParameter("OwnerName"); //받는이 이름
+		String receiverName = request.getParameter("ownerName"); //받는이 이름
+		itemVO = itemService.getItemList(receiverSerial);
 		
-       /* CyUsingItemDTO usingItem = cyUsingItemDAO.useMinimi(userId);
-        String minimiPath = usingItem.getOriginalFileName();*/
-       /* request.setAttribute("minimiPath", minimiPath); */
 		model.addAttribute("senderName", senderName);
 		model.addAttribute("receiverSerial", receiverSerial);
 		model.addAttribute("receiverName", receiverName);
+		model.addAttribute("recevierItem", itemVO);
 		
 		return "MiniHP/MiniHP_NeighborRegister";
 	}
@@ -140,35 +144,31 @@ public class MiniHpNeighborController {
 	}
 	
 	/*이웃 끊기*/
-	@ResponseBody
 	@GetMapping("/miniHp_deleteNeighbor.do")
 	public String deleteNeighbor(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
-		int UserSerial = vo.getUserSerial();
-		int NeighborSerial = Integer.parseInt(request.getParameter("NeighborID"));
+		int userSerial = vo.getUserSerial();
+		int neighborSerial = Integer.parseInt(request.getParameter("neighborSerial"));
 		
-		neighborService.deleteNeighbor(UserSerial, NeighborSerial);
+		neighborService.deleteNeighbor(userSerial, neighborSerial);
 		
-		return "";
+		return "MiniHP/MiniHP_Setting_NeighborList";
 	}
 	
 	/*이웃명 수정*/
-	@PostMapping("miniHp_updateNeighbor.do")
+	@GetMapping("miniHp_updateNeighbor.do")
 	public String updateNeighbor(HttpServletRequest request, Model model) {
-		int userSerial = Integer.parseInt(request.getParameter("userSerial"));
-		String userName = request.getParameter("userName");
-		String userValue = request.getParameter("userValue");
+		HttpSession session = request.getSession();
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		int userSerial = vo.getUserSerial();
 		int neighborSerial = Integer.parseInt(request.getParameter("neighborSerial"));
-		String neighborName = request.getParameter("neighborName");
-		String neighborValue = request.getParameter("neighborValue");
-		
-		model.addAttribute("userSerial", userSerial);
-		model.addAttribute("userName", userName);
-		model.addAttribute("userValue", userValue);
-		model.addAttribute("neighborSerial", neighborSerial);
-		model.addAttribute("neighborName", neighborName);
-		model.addAttribute("neighborValue", neighborValue);
+
+		itemVO = itemService.getItemList(neighborSerial);
+		neighborViewVO = neighborService.getNeighborList(userSerial, neighborSerial); //이웃 정보 불러오기
+
+		model.addAttribute("neighborInfo", neighborViewVO);
+		model.addAttribute("neighborItem", itemVO);
 		
 		return "MiniHP/MiniHP_NeighborUpdate"; 
 	}
@@ -179,5 +179,19 @@ public class MiniHpNeighborController {
 		neighborListService.insertNeighborList(neighborListVO);
 		
 		return "";
+	}
+	
+	@ResponseBody
+	@GetMapping("miniHp_neighborListCheck.do")
+	public int neighborListCheck(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		sessionVO vo = (sessionVO) session.getAttribute("sessionVO");
+		int userSerial = vo.getUserSerial();
+		int neighborSerial = Integer.parseInt(request.getParameter("neighborSerial"));
+
+		int result = neighborListService.neighborListCheck(userSerial, neighborSerial);
+		System.out.println(result);
+		
+		return result;
 	}
 }

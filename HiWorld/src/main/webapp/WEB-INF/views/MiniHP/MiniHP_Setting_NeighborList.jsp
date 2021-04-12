@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="${resourcePath}/img${fontCss}"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -35,32 +34,48 @@ body{
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
-function deleteNeighbor(neighborID){
+function deleteNeighbor(neighborSerial, index){
 	var flag = confirm("이웃을 끊겠습니까?");
 	
 	if(flag) {
 		$.ajax({
 			type : 'GET',
 			url : 'miniHp_deleteNeighbor.do',
-			data : { NeighborSerial : neighborSerial },
+			data : { neighborSerial : neighborSerial },
 			
 			success : function() {
-				loacation.reload();
+				$("#neighborList"+index).remove();
 			}
 		});
 	}
 }
 
-function updateNeighbor(neighborID){
-      var url    ="miniHp_updateNeighbor.do";
-      var title  = "updateNeighbor";
-      var status = 'width=312,height=380,location=no,status=no,scrollbars=no';
+function listCheck(neighborSerial) {
+	$.ajax({
+		type : 'GET',
+		url : 'miniHp_neighborListCheck.do',
+		data : { neighborSerial : neighborSerial },
+		
+		success : function(result) {
+			if(result == 1) {
+				alert('이미 이웃명 수정을 신청하셨습니다');
+			} else {
+				updateNeighbor(neighborSerial);
+			}
+		}
+	})
+	
+}
+
+function updateNeighbor(neighborSerial){
+	
+	var popupWidth = 312;
+    var popupHeight = 380;
+	var popupX = (window.screen.width/2)-(popupWidth/2);
+    var popupY = (window.screen.height/2)-(popupHeight/2);
+    var status = 'status=no, scrollbars=no, menubar=no, toolbar=no, height='+popupHeight +',width='+popupWidth +',left='+popupX+',top='+popupY;
       
-      window.open("",title,status);
-      neighborSetting.target = title;                   
-      neighborSetting.action = url;                   
-      neighborSetting.method = "POST";
-      neighborSetting.submit();     
+    window.open("miniHp_updateNeighbor.do?neighborSerial="+neighborSerial,"updateNeighbor",status); 
 }
 
 </script>
@@ -73,19 +88,16 @@ function updateNeighbor(neighborID){
 	</table>
 	
 	<div align ="left" valign="top" id="infoTxt" class="infoTxt">
-		<c:if test="${listLength != 0}">
-			<c:forEach var="neighborList" items="${neighborList}">
-				<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
-				<input type="button" value="이웃명 변경" onclick="updateNeighbor('${neighborList.neighborSerial}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborSerial}');"/><br/>
-				<input type="hidden" name="userSerial" value="${neighborList.userSerial}">
-				<input type="hidden" name="userName" value="${neighborList.userName}">
-				<input type="hidden" name="userValue" value="${neighborList.userValue}">
-				<input type="hidden" name="neighborSerial" value="${neighborList.neighborSerial}">
-				<input type="hidden" name="neighborName" value="${neighborList.neighborName}">
-				<input type="hidden" name="neighborValue" value="${neighborList.neighborValue}">
+		<c:if test="${listLength ne 0}">
+			<c:forEach var="neighborList" items="${neighborList}" varStatus="status">
+			<c:set var="index" value="${status.index}" />
+				<div id="neighborList${index}">
+					<font style="margin-left: 10px;">나(${neighborList.userValue}) - <a href="#"><font color="blue">${neighborList.neighborName}</font></a>(${neighborList.neighborValue})</font>
+					<input type="button" value="이웃명 변경" onclick="listCheck('${neighborList.neighborSerial}')"/>&nbsp;<input type="button" value="이웃끊기" onclick="deleteNeighbor('${neighborList.neighborSerial}', ${index});"/><br/>
+				</div>
 			</c:forEach>
 		</c:if>
-		<c:if test="${listLength == 0}">
+		<c:if test="${listLength eq 0}">
 			<option value="">이웃이 없습니다</option>
 		</c:if>
 	</div>
