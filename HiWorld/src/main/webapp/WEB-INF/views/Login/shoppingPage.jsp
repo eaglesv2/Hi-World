@@ -149,6 +149,7 @@
 
 		
 		<table>
+
 		<tr id="tablehead">
 				<td>상품</td>
 				<td>종류</td>
@@ -184,10 +185,39 @@
 					<th><a href="#" class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
 					<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 				</c:if>
-			</tr>
 
-		</c:forEach>
-			
+			</tr>
+			<c:forEach var="kinds" items="${ArticleList}">
+				<tr>
+					<c:set var="check" value="${kinds.articleImg}" />
+					<c:if test="${fn:contains(check,'.png')}">
+						<th style="width: 27%"><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
+						<th>${kinds.articleKinds}</th>
+						<th>${kinds.articleName}</th>
+						<th>${kinds.articlePrice}</th>
+						<th><a href="#" class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+						<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
+					</c:if>
+					<c:if test="${fn:contains(check,'.jsp')}">
+						<th><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
+						<th>${kinds.articleKinds}</th>
+						<th>${kinds.articleName}</th>
+						<th>${kinds.articlePrice}</th>
+						<th><a href="#"	class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+						<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
+					</c:if>
+					<c:if test="${fn:contains(check, '.mp3')}">
+						<th><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
+						<th>${kinds.articleKinds}</th>
+						<th>${kinds.articleName}</th>
+						<th>${kinds.articlePrice}</th>
+						<th><a href="#" class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
+						<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
+					</c:if>
+				</tr>
+	
+			</c:forEach>
+				
 		</table>
 	
 	

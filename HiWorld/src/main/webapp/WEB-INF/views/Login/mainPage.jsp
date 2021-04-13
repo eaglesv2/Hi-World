@@ -745,6 +745,7 @@
 
 						        <div id="icon">
 						            <img src="${itemList.characterSrc}" alt="미니미">
+
 						            <div>
 						               <div id="nickname">
 						              		 ${sessionVO.userName} 님
