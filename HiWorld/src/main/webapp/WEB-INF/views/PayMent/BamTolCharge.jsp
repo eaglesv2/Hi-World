@@ -31,27 +31,27 @@
 	
 		// 체크박스 체크여부
 		if($('#checkbox').is(':checked')==true){
-			var bamTol
-			var sell
-			var count
+			var bamTol = "";
+			var sell = 0;
+			var count = 0;
 			var check = $('#chargeEX').val();
 
 			if (check == '충전 예정금액 : 10000원') {
 				bamTol = '밤톨100개'
 				sell = 10000;
-				count = 10
+				count = 100;
 			} else if (check == '충전 예정금액 : 28000원') {
 				bamTol = '밤톨300개'
 				sell = 29900;
-				count = 30
+				count = 300;
 			} else if (check == '충전 예정금액 : 45000원') {
 				bamTol = '밤톨500개'
 				sell = 48900;
-				count = 50
+				count = 500;
 			} else if (check == '충전 예정금액 : 90000원') {
 				bamTol = '밤톨1000개'
 				sell = 90000;
-				count = 100
+				count = 1000;
 			} else {
 				sell = 0;
 			}
