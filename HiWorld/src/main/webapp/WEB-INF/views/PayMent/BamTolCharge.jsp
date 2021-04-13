@@ -211,10 +211,16 @@
 					
 					<div >
 						<div id="agreetext">
-							<input type="text" id="agreeinput" value="안녕하세요 회원 약관입니다. 문진이형은 20만원을 가져오시오" readonly disabled="disabled"/>
+							<textarea name="" id="agreeinput" cols="30" rows="10" readonly disabled style="outline:none;">1. 접근매체의 양도∙양수, 대여∙사용위임, 질권설정 기타 담보 제공 및 이의알선과 접근매체를 제3자에게 누설∙노출, 방치하는 것은 금지됨	(제17조, 제21조, 제23조)  
+
+2. 소비자가 재화 등을 공급받은 날부터 3영업일이 지나도록 정당한 사유의 제시 없이 그 공급받은 사실을 통보하지 않는 경우 소비자의 동의 없이 판매자에게 결제대금을 지급할 수 있으며, 회사가 결제대금을 지급하기 전에 소비자가 그 결제대금을 환급 받을 사유가 발생한 경우 이를 소비자에게 환급함. (제19조) 
+								
+3. 이용자의 선불전자지급수단 잔액이 구매 취소 등의 사유 발생으로 회사가 이용자로부터 환수해야 하는 환수대상액보다 작을 경우 회사는 당해 이용자의 선불전자지급수단을 마이너스로 처리할 수 있음.(제27조)
+							
+							</textarea>
 						</div>
 						<div id="selectinfo">
-							<input type="text" id="checkinput" value="상품 가격을 확인하였으며 , 계약 관련 고지사항 및 BT정책 및 결제 진행에 동의합니다."/>
+							<input type="text" id="checkinput" value="상품 가격을 확인하였으며 , 계약 관련 고지사항 및 BT정책 및 결제 진행에 동의합니다." readonly disabled style="outline:none;"/>
 							<input type="checkbox" id="checkbox" />
 						</div>
 					</div>
