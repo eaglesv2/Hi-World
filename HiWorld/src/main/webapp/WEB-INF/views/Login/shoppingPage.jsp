@@ -168,7 +168,7 @@
 					<th><a href="#" class="shoppinghover" onclick="bay('${kinds.articleName}'+','+'${kinds.articlePrice}')">구매하기</a></th>
 					<th><a href="#" class="shoppinghover" onclick="basket('${kinds.articleName}')">장바구니담기</a></th>
 				</c:if>
-				<c:if test="${fn:contains(check,'.jsp')}">
+				<c:if test="${fn:contains(check,'.jpg')}">
 					<th><img src="${kinds.articleImg}" onerror="this.src='resources/images/article/music.png'" /></th>
 					<th>${kinds.articleKinds}</th>
 					<th>${kinds.articleName}</th>
@@ -271,8 +271,6 @@
 
 	function bay(ArticleName) {
 		var UserSerial = '${sessionVO.userSerial}';
-		var UserCash = ${sessionVO.userCash};
-		var ArticlePrice
 		
 		/* alert 창 */
 		if(UserSerial != ''){
