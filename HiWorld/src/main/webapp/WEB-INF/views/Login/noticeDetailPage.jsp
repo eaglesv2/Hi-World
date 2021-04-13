@@ -46,7 +46,7 @@
 			
 				<c:otherwise>
 					<tr id="none">
-						<td colspan="3">등록된 댓글이 없습니다.</td>
+						<td colspan="4">등록된 댓글이 없습니다.</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
