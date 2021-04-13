@@ -37,19 +37,19 @@
 			var check = $('#chargeEX').val();
 
 			if (check == '충전 예정금액 : 10000원') {
-				bamTol = '밤톨10개'
+				bamTol = '밤톨100개'
 				sell = 10000;
 				count = 10
 			} else if (check == '충전 예정금액 : 28000원') {
-				bamTol = '밤톨30개'
+				bamTol = '밤톨300개'
 				sell = 29900;
 				count = 30
 			} else if (check == '충전 예정금액 : 45000원') {
-				bamTol = '밤톨50개'
+				bamTol = '밤톨500개'
 				sell = 48900;
 				count = 50
 			} else if (check == '충전 예정금액 : 90000원') {
-				bamTol = '밤톨100개'
+				bamTol = '밤톨1000개'
 				sell = 90000;
 				count = 100
 			} else {
@@ -170,7 +170,7 @@
 					</div>
 					<div class="price1" onclick="price1()" onfocus="focus()" onblur="blur()">
 						<div id="price1_1">
-							밤톨 10개
+							밤톨 100개
 						</div>
 						<div id="price1_2">
 							10,000원
@@ -178,7 +178,7 @@
 					</div>
 					<div class="price2" onclick="price2()">
 						<div id="price2_1">
-							밤톨 30개
+							밤톨 300개
 						</div>
 						<div id="price2_2">
 							28,000원
@@ -186,7 +186,7 @@
 					</div>
 					<div class="price3" onclick="price3()">
 						<div id="price3_1">
-							밤톨 50개
+							밤톨 500개
 						</div>
 						<div id="price3_2">
 							45,000원
@@ -194,7 +194,7 @@
 					</div>
 					<div class="price4" onclick="price4()">
 						<div id="price4_1">
-							밤톨 100개
+							밤톨 1000개
 						</div>
 						<div id="price4_2">
 							90,000원
