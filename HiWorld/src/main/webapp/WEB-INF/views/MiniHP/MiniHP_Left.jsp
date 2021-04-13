@@ -46,37 +46,6 @@ function change_i_ok(){
 	})
 }
 
-/* function displayProfile(){
-	console.log('display profile');
-	
-	var xhr= new XMLHttpRequest();
-	var UserID = '${sessionVO.userID}';
-	console.log(UserID);
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState === xhr.DONE) {
-			if(xhr.status === 200) {
-				console.log(xhr.response, typeof xhr.response);
-				document.getElementById("profileImage").src = xhr.responsetText;
-			}	
-		}
-	};
-	xhr.open('GET','miniHp_getIntroPicture.do?UserID='+UserID);
-	xhr.responseType = 'text';
-	xhr.send(null); */
-	
-	/* $.ajax({
-		type : 'POST',
-		url : 'miniHp_getIntroPicture.do',
-		data : { UserID : '${sessionVO.userID}'},
-	
-		success : function(result) {
-			console.log('image ajax success');
-			console.log(result);
-			$("#profileImage").attr("src",result);
-		}
-	}) 
-}*/ //file은 ajax로 안불러와짐;;;;;;;;;;;;;;;;;;
-
 function displayInfo(){
 	console.log('display info');
 	
@@ -101,19 +70,6 @@ function moveToUser() {
 	var OwnerSerial = $("#neighborSelect option:selected").val();
 	console.log(OwnerSerial);
 	if(OwnerSerial>0){
-		/* if(OwnerID == "") {
-			return;
-		}  */
-		/* $("#neighborSelect option:eq(0)").attr("selected", "selected"); */
-		/* $.ajax({
-			type : 'GET',
-			url : 'miniHp_guestHome.do',
-			data : { OwnerID : OwnerID },
-			
-			success : function() {
-				console.log('홈피 이동');
-			}
-		}) */
 		var popupWidth = 1080;
 	    var popupHeight = 600;
 		var popupX = (window.screen.width/2)-(popupWidth/2);
