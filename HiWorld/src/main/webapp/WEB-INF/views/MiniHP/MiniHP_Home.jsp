@@ -53,16 +53,6 @@ pre{
 	font-family:'BMHANNAPro';
 }
 a { text-decoration:none } 
-/* body
-{
- scrollbar-face-color: #000000;
- scrollbar-highlight-color: #DBDBDB;
- scrollbar-3dlight-color: #FFFFFF;
- scrollbar-shadow-color: #9C92FF;
- scrollbar-darkshadow-color: #FFFFFF;
- scrollbar-track-color: #FFFFFF;
- scrollbar-arrow-color: #9C92FF
- } */
 .bgm-wrap {
 	position: absolute;
 	top:20px; 
@@ -218,22 +208,18 @@ $(document).ready(function() {
 							<!-- ---------------------------------------------------------------------------- -->
 							
 						</td>
-						<!-- 오른쪽 메뉴 부분 이걸 for문 돌려서 메뉴 선택한거 다보여주게 하기 ---------------------------------------------- -->
+						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
 						<td valign="top" style="padding-top: 20px; bor">
 						<!-- Setting menu beginning -->
-							<span id="rightMenu">
-							</span>
-						
+							<span id="rightMenu"></span>
 						<!-- Setting menu ending -->	
-						</td>
-						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
+						</td>			
 					</tr>
-
 					<tr>
 						<td ></td>
 					</tr>
 				</table>
-				<!-- ------------------------ -->
+				<!-- BGM 부분------------------------ -->
 				<div class="bgm-wrap">
 					<input type="hidden" id="listSize" value="${playListSize}">
 					<!-- 재생목록에 노래가 없을 경우 -->

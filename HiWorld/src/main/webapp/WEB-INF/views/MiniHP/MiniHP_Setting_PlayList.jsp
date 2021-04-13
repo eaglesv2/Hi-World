@@ -152,7 +152,6 @@
 		}
 		usingSong = null;
 	 });
-	 
 
 	function savePlayList() {
 		var playList = "";

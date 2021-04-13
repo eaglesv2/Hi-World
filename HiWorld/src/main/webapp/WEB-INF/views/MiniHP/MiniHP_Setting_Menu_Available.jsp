@@ -124,7 +124,6 @@ input::placeholder {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-
 	$(function(){	
 		var menu3 = $("#menu3-${miniHpUserMenuVO.menu3}");
 		menu3.prop("checked",true);
@@ -269,7 +268,6 @@ input::placeholder {
 	</table>
 	
 	<div style="height: 200px;"></div>
-	
 </form>
 </body>
 </html>
