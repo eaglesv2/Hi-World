@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style type="text/css">
- .neiWordBtn{
+.neiWordBtn{
  	background-color: white;
 	border: 1px solid gray;
 	border-radius: 5px;

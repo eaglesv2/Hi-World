@@ -25,11 +25,10 @@ function displayTitle(){
 		}
 	})
 }
-
 </script>
 <body style="overflow:hidden;">
 	<div id="titleName" style="padding-top:12px;">
-		<span style="font-weight:bold; font-size: 15px; color: #4B9687; cursor: pointer;" id="inText"></span>
+		<span style="font-weight:bold; font-size: 15px; color: #4B9687;" id="inText"></span>
 	</div>
 </body>
 </html>

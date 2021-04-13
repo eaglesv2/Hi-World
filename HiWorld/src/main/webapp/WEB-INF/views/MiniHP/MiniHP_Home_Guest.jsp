@@ -153,18 +153,7 @@ $(document).ready(function() {
 	var skin = $("#skin").val();
 	$("body").css({"background":"url("+skin+")"});
 	
-	console.log('1');
-	/* $.ajax({
-		type : 'GET',
-		url: 'miniHp_todayCheck.do',
-		data : { OwnerID : '${OwnerID}', GuestID : '${sessionVO.userID}'},
-		
-		success : function() {
-			console.log('방문자체크 성공')
-		}
-	}); */
-	
-	console.log('2222');
+	//rightMenu 불러오기
 	$.ajax({
 		type : 'GET',
 		url : 'miniHp_rightGuestMenu.do',
@@ -223,18 +212,16 @@ $(document).ready(function() {
 						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
 						<td valign="top" style="padding-top: 20px;">
 						<!-- Setting menu beginning -->
-							<span id="rightMenu"></span>
-									
+							<span id="rightMenu"></span>				
 						<!-- Setting menu ending -->	
 						</td>
-						<!-- 오른쪽 메뉴 부분 ----------------------------------------------------------- -->
 					</tr>
 
 					<tr>
 						<td ></td>
 					</tr>
 				</table>
-				<!-- ------------------------ -->
+				<!-- BGM 부분------------------------ -->
 				<div class="bgm-wrap">
 					<input type="hidden" id="listSize" value="${playListSize}">
 					<!-- 재생목록에 노래가 없을 경우 -->

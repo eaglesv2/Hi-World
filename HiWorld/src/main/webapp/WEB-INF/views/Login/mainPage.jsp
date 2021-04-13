@@ -769,7 +769,7 @@
 					<!-- 어드민이 들어왔을 경우 -->
 							<div id="minimi">
 								<div id="icon">
-									<img src="bb.jpg" alt="">
+									<img src="${itemList.characterSrc}" alt="">
 									<div>
 										<div id="nickname">${sessionVO.userName}님</div>
 										<div id="haveCash">보유 밤톨: ${sessionVO.userCash}개</div>

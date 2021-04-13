@@ -1,5 +1,4 @@
 function pausePlay(index) {
-
 	if($(".audio-control-btn").hasClass("btn-play")) {
 		// 재생 -> 일시정지
 		$(".audio-control-btn").addClass("btn-pause");

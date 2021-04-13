@@ -159,10 +159,10 @@ function saveStoryMinimi() {
 					<c:if test="${storySize ne 0 }">
 						<c:forEach var="storyList" items="${storyList}">
 							<c:if test="${storyList.articleImg eq itemList.backgroundSrc}">
-								<input type="radio" name="storyRoom" value="${storyList.articleImg}" checked="checked" onclick="changeStory(this.value)"><img alt="" src="${pageContext.request.contextPath}/${storyList.articleImg}" width="120px" ><br/>&nbsp;&nbsp;&nbsp;${storyList.articleName}<br/>
+								<input type="radio" name="storyRoom" value="${storyList.articleImg}" checked="checked" onclick="changeStory(this.value)"><img alt="" src="${pageContext.request.contextPath}/${storyList.articleImg}" width="120px" height="75px"><br/>&nbsp;&nbsp;&nbsp;${storyList.articleName}<br/>
 							</c:if>
 							<c:if test="${storyList.articleImg ne itemList.backgroundSrc}">
-								<input type="radio" name="storyRoom" value="${storyList.articleImg}" onclick="changeStory(this.value)"><img alt="" src="${pageContext.request.contextPath}/${storyList.articleImg}" width="120px" ><br/>&nbsp;&nbsp;&nbsp;${storyList.articleName}<br/>
+								<input type="radio" name="storyRoom" value="${storyList.articleImg}" onclick="changeStory(this.value)"><img alt="" src="${pageContext.request.contextPath}/${storyList.articleImg}" width="120px" height="75px"><br/>&nbsp;&nbsp;&nbsp;${storyList.articleName}<br/>
 							</c:if>		
 						</c:forEach>	
 					</c:if>

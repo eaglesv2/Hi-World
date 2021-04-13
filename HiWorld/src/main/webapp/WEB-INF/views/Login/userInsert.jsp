@@ -25,8 +25,7 @@
 					</h3>
 					<span class="box int_id"> 
 					<c:if test="${UserID != ''}">
-						<input type="text" id="userID" name="userID" class="int" maxlength="20" value="자동 설정 되었습니다." readonly/>
-						<input type="hidden" id="userID" name="userID" class="int" maxlength="20" value="${UserID}" readonly/>
+						<input type="text" id="userID" name="userID" class="int" maxlength="20" value="${UserID}" readonly/>
 					</c:if>
 					<c:if test="${UserID == ''}">
 						<input type="text" id="userID" name="userID" class="int" maxlength="20"/>
