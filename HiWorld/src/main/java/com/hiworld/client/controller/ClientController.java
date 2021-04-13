@@ -340,7 +340,7 @@ public class ClientController {
 
 		/* 현재 내 프로젝트 경로(개인마다달라서 자름) + 이미지 경로 */
 		String url = request.getSession().getServletContext().getRealPath("");
-		url = url + "resources\\images\\article";
+		url = url + "resources/images/article";
 		System.out.println(url);
 
 		for (MultipartFile file : uploadFile) {
@@ -350,7 +350,8 @@ public class ClientController {
 
 			/* 업로드될 파일 명 */
 			String uploadFileName = file.getOriginalFilename();
-			File saveFile = new File(url, uploadFileName);
+			url += File.separator + uploadFileName;
+			File saveFile = new File(url);
 			try {
 				/* 파일 업로드 */
 				file.transferTo(saveFile);
