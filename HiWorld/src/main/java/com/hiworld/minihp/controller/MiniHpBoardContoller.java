@@ -233,9 +233,6 @@ public class MiniHpBoardContoller {
 	//게시글 수정
 	@PostMapping("/MiniHpBoardUpdate.do")
 	public String MiniHpBoardUpdate(MultipartFile file1, MiniHpBoardVO vo, HttpServletRequest request, Model model) {
-		System.out.println("게시판 update");
-		System.out.println(vo);
-		
 		if(file1==null) {//첨부파일 기존 파일 그대로
 			service.update(vo);
 		} else {

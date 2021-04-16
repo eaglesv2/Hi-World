@@ -14,19 +14,14 @@ import com.hiworld.client.vo.sessionVO;
 public class Utils {
 	//세션에서 현재 유저 정보 가져오기 메소드
 	public static int getSessionUser(HttpSession session) {
-		//세션에서 현재 유저 가져오기
 		sessionVO sessionUser = (sessionVO)session.getAttribute("sessionVO"); 
 		int userSerial = sessionUser.getUserSerial();
-//		//임시로 7로 지정
-//		int userSerial = 7;
 		return userSerial;
 	}
-	
 	// 파일명 중복방지 처리
 	public static String getUuidFileName(String originalFileName) {
     	 return UUID.randomUUID().toString() + "_" + originalFileName;
     }
-	
     //파일 저장 로직
 	public static void saveFile(MultipartFile file1,String fileName, HttpServletRequest request) {
   		//업로드된 파일을 서버에 저장
@@ -51,7 +46,6 @@ public class Utils {
   			e.printStackTrace();
   		}
   	}
-	
   	//파일 삭제 로직
 	public static void deleteFile(String fileName,HttpServletRequest request) {
   		String savePath = request.getRealPath("/resources/upload/");
