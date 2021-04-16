@@ -37,11 +37,11 @@ public class MiniHpRightServiceImpl implements MiniHpRightService {
 		for(MiniHpVideoVO vo : videoList)
 			latestPosts.add(new MiniHpLatestPostsVO(vo));
 		
-		//게시글이 하나도 없을 경우 null 반환
+		// 3. 게시글이 하나도 없을 경우 null 반환
 		if(latestPosts.size()==0)
 			return null;
 		
-		// 3. 날짜순으로 정렬
+		// 4. 날짜순으로 정렬
 		Collections.sort(latestPosts, new Comparator<MiniHpLatestPostsVO>() {
 			@Override
 			public int compare(MiniHpLatestPostsVO o1, MiniHpLatestPostsVO o2) {
@@ -50,7 +50,7 @@ public class MiniHpRightServiceImpl implements MiniHpRightService {
 		});
 		Collections.reverse(latestPosts);
 		
-		// 4. 최신 5개만 담아서 반환
+		// 5. 최신 5개만 담아서 반환
 		if(latestPosts.size()>5)
 			return latestPosts.subList(0, 5);
 		else

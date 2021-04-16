@@ -3,16 +3,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<context:property-placeholder location="config.properties"/>
 
 	<!-- DB연결하는 커넥트 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mariadb://hi-world.cvlf2noxnadn.ap-northeast-2.rds.amazonaws.com:3306/Hi_World"></property>
-		<property name="username" value="Hi_World"></property>
-		<property name="password" value="Hi_World"></property>
+		<property name="driverClass" value="${spring.datasource.driverClass}"></property>
+		<property name="url" value="${spring.datasource.url}" />
+		<property name="username" value="${spring.datasource.username}" />
+		<property name="password" value="${spring.datasource.password}" />
 	</bean>
 
 	<!-- SqlSessionFactory(자바와 마이바티스를 연결해주며 환결설정파일 등록하는 곳) -->

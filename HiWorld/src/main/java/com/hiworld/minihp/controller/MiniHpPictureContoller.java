@@ -165,9 +165,6 @@ public class MiniHpPictureContoller {
 	@PostMapping("/MiniHpPictureUpdate.do")
 	@ResponseBody
 	public void MiniHpPictureUpdate(MultipartFile file1, MiniHpPictureVO vo, HttpServletRequest request, Model model) {
-		System.out.println("MiniHpPictureUpdate.do");
-		System.out.println(vo);
-		
 		if(file1==null) {//첨부파일 기존 파일 그대로
 			service.update(vo);
 		} else {

@@ -59,4 +59,5 @@
 		SELECT UserSerial FROM HW_USERLIST
 		WHERE UserSerial>1 AND BAN=0 AND UserSerial!=#{userSerial}
 	</select>
+	
 </mapper>
